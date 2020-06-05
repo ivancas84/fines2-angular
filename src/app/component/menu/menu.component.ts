@@ -8,7 +8,7 @@ export class MenuComponent {
 
   public isCollapsed = true;
 
- toggleMenu() {
+  toggleMenu() {
     this.isCollapsed = !this.isCollapsed;
   }
 
