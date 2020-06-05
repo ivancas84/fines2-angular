@@ -123,6 +123,9 @@ import { TelefonoGridComponent } from '@component/persona-admin/telefono-grid/te
 import { TelefonoAdminComponent } from '@component/telefono-admin/telefono-admin/telefono-admin.component';
 import { TelefonoFieldsetComponent } from '@component/telefono-admin/telefono-fieldset/telefono-fieldset.component';
 import { ConsolidadoSearchParamsComponent } from '@component/consolidado/consolidado-search/consolidado-search-params/consolidado-search-params.component';
+import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
+import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-fieldset.component';
+
 
 @NgModule({
   declarations: [
@@ -164,7 +167,8 @@ import { ConsolidadoSearchParamsComponent } from '@component/consolidado/consoli
     SedeAdminComponent, SedeFieldsetComponent, DomicilioSedeFieldsetComponent, DesignacionTableComponent,
     TipoSedeAdminComponent, TipoSedeFieldsetComponent,
     TipoSedeShowComponent, TipoSedeTableComponent,
-    TelefonoAdminComponent, TelefonoFieldsetComponent
+    TelefonoAdminComponent, TelefonoFieldsetComponent,
+    TomaAdminComponent, TomaFieldsetComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, HttpClientModule,

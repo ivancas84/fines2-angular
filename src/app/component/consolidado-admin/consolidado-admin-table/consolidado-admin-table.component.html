@@ -4,7 +4,7 @@
 <div *ngIf="comisiones$ | async as comisiones else loading">
   <div *ngFor="let c of comisiones; let i = index" class="row align-items-center border">
     <div class="col-4">
-      <h5>{{c.id | label:'comision'}} <span *ngIf="c.apertura">(APERTURA)</span></h5>              
+      <h5>{{c.id | label:'comision'}}</h5>              
       <p>{{c.sede | label:'sede'}}</p>
       <br><small>{{c.plan | label:'plan'}}</small>
     </div>

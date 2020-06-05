@@ -29,6 +29,7 @@ import { HorarioAdminComponent } from '@component/horario-admin/horario-admin/ho
 import { DivisionShowComponent } from '@component/division-show/division-show/division-show.component';
 import { CrearHorariosComponent } from '@component/crear-horarios/crear-horarios.component';
 import { TelefonoAdminComponent } from '@component/telefono-admin/telefono-admin/telefono-admin.component';
+import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
 
 const routes: Routes = [
   { path: 'asignatura-show', component: AsignaturaShowComponent, pathMatch: 'full' },
@@ -60,6 +61,7 @@ const routes: Routes = [
   { path: 'telefono-admin', component: TelefonoAdminComponent, pathMatch: 'full' },
   { path: 'tipo-sede-show', component: TipoSedeShowComponent, pathMatch: 'full' },
   { path: 'tipo-sede-admin', component: TipoSedeAdminComponent, pathMatch: 'full' },
+  { path: 'toma-admin', component: TomaAdminComponent, pathMatch: 'full' },
 ];
  
 @NgModule({

@@ -1,0 +1,43 @@
+<div class="container">
+<div *ngIf="data$ | async as data" class="card">
+  <div class="card-header">
+    Curso {{data.id | label:"curso"}}
+  </div>
+
+  <div class="card-body">
+    <dl class="row">
+      <dt class="col-sm-3">Horas Catedra</dt>
+      <dd class="col-sm-9">{{data.horas_catedra}}</dd>
+
+      <dt class="col-sm-3">Alta</dt>
+      <dd class="col-sm-9">{{data.alta}}</dd>
+
+    </dl>
+
+    <ng-template #loadingComision>
+      <dl class="row">
+        <dt class="col-sm-3">Comision</dt>
+        <dd class="col-sm-9">No se han encontrado registros</dd>
+      </dl>
+    </ng-template>
+
+    <dl class="row" *ngIf="comision$ | async as comision; else loadingComision">
+      <dt class="col-sm-3">Comision</dt>
+      <dd class="col-sm-9"><a [routerLink]="['/comision-detail']" [queryParams]="{id:data.comision}" >{{comision.id | label:'comision'}}</a></dd>
+    </dl>
+
+    <ng-template #loadingAsignatura>
+      <dl class="row">
+        <dt class="col-sm-3">Asignatura</dt>
+        <dd class="col-sm-9">No se han encontrado registros</dd>
+      </dl>
+    </ng-template>
+
+    <dl class="row" *ngIf="asignatura$ | async as asignatura; else loadingAsignatura">
+      <dt class="col-sm-3">Asignatura</dt>
+      <dd class="col-sm-9"><a [routerLink]="['/asignatura-detail']" [queryParams]="{id:data.asignatura}" >{{asignatura.id | label:'asignatura'}}</a></dd>
+    </dl>
+
+  </div>
+</div>
+</div>
