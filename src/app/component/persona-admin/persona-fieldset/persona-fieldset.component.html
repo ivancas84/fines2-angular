@@ -1,0 +1,99 @@
+<fieldset [formGroup]="fieldset">
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Nombres</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" formControlName="nombres"  [ngClass]="{'is-invalid':(nombres.invalid && (nombres.dirty || nombres.touched))}">
+      <div class="text-danger" *ngIf="(nombres.touched || nombres.dirty) && nombres.invalid">
+        <div *ngIf="nombres.errors.required">Debe completar valor</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Apellidos</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" formControlName="apellidos"  [ngClass]="{'is-invalid':(apellidos.invalid && (apellidos.dirty || apellidos.touched))}">
+      <div class="text-danger" *ngIf="(apellidos.touched || apellidos.dirty) && apellidos.invalid">
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Fecha nacimiento</label>
+    <div class="col-sm-10">
+      <div class="input-group">
+        <input class="form-control" placeholder="dd/mm/yyyy" ngbDatepicker #fechaNacimiento_="ngbDatepicker" formControlName="fecha_nacimiento" [ngClass]="{'is-invalid':(fechaNacimiento.invalid && (fechaNacimiento.dirty || fechaNacimiento.touched))}">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" (click)="fechaNacimiento_.toggle()" type="button">
+            <span title="Calendario" class="oi oi-calendar"></span>
+          </button>
+          <button class="btn btn-outline-secondary" (click)="fechaNacimiento.setValue(null)" type="button">
+            <span title="Limpiar" class="oi oi-reload"></span>
+          </button>
+        </div>
+      </div>
+      <div class="text-danger" *ngIf="(fechaNacimiento.touched || fechaNacimiento.dirty) && fechaNacimiento.invalid">
+        <div *ngIf="fechaNacimiento.errors.ngbDate">Ingrese una fecha válida</div>
+        <div *ngIf="fechaNacimiento.errors.required">Debe completar valor</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Numero documento</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" formControlName="numero_documento"  [ngClass]="{'is-invalid':(numeroDocumento.invalid && (numeroDocumento.dirty || numeroDocumento.touched))}">
+      <div class="text-danger" *ngIf="(numeroDocumento.touched || numeroDocumento.dirty) && numeroDocumento.invalid">
+        <div *ngIf="numeroDocumento.errors.required">Debe completar valor</div>
+        <div *ngIf="numeroDocumento.errors.notUnique">El valor ya se encuentra utilizado: <a routerLink="/persona-admin" [queryParams]="{'numero_documento':numeroDocumento.value}">Cargar</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Cuil</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" formControlName="cuil"  [ngClass]="{'is-invalid':(cuil.invalid && (cuil.dirty || cuil.touched))}">
+      <div class="text-danger" *ngIf="(cuil.touched || cuil.dirty) && cuil.invalid">
+        <div *ngIf="cuil.errors.notUnique">El valor ya se encuentra utilizado: <a routerLink="/persona-admin" [queryParams]="{'cuil':cuil.value}">Cargar</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" formControlName="email"  [ngClass]="{'is-invalid':(email.invalid && (email.dirty || email.touched))}">
+      <div class="text-danger" *ngIf="(email.touched || email.dirty) && email.invalid">
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Genero:</label>
+    <div class="col-sm-10">
+      <select class="form-control" formControlName="genero" [ngClass]="{'is-invalid':(genero.invalid && (genero.dirty || genero.touched))}">
+        <option [ngValue]="null">--Genero--</option>
+            <option value="Femenino">Femenino</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Otro">Otro</option>
+      </select>
+      <div class="text-danger" *ngIf="(genero.touched || genero.dirty) && genero.invalid">
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Apodo</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" formControlName="apodo"  [ngClass]="{'is-invalid':(apodo.invalid && (apodo.dirty || apodo.touched))}">
+      <div class="text-danger" *ngIf="(apodo.touched || apodo.dirty) && apodo.invalid">
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Archivo</label>
+    <div class="col-sm-10">
+      <app-upload [fieldset]="fieldset" [fieldName]="'archivo'"></app-upload>
+      <app-download [fieldset]="fieldset" [fieldName]="'archivo'"></app-download>
+
+      <div class="text-danger" *ngIf="(archivo.touched || archivo.dirty) && archivo.invalid">
+      </div>
+    </div>
+  </div>
+  
+
+</fieldset>

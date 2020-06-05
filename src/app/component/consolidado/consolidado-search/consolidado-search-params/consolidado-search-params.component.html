@@ -1,0 +1,96 @@
+<fieldset [formGroup]="fieldset">
+  <div class="form-inline">
+    <div class="form-group mb-2">
+      <label class="col-form-label">Fecha anio</label>
+      <input class="form-control" placeholder="yyyy" type="text" formControlName="cal_anio">
+    </div>
+    <div class="form-group mb-2">
+      <label class="col-form-label">Fecha Semestre:</label>
+      <select class="form-control" formControlName="cal_semestre">
+        <option [ngValue]="null">--Fecha Semestre--</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+      </select>
+    </div>
+    <div class="form-group mb-2">
+      <label class="col-form-label">Centro Educativo:</label>
+      <select class="form-control" formControlName="sed_centro_educativo">
+        <option [ngValue]="null">--Centro Educativo--</option>
+        <option *ngFor="let option of (optCentroEducativo$ | async)" [value]="option.id" >{{option.id | label:"centro_educativo"}}</option>
+      </select>
+    </div>
+    <div class="form-group mb-2">
+      <label class="col-form-label">Modalidad:</label>
+      <select class="form-control" formControlName="modalidad">
+        <option [ngValue]="null">--Modalidad--</option>
+        <option *ngFor="let option of (optModalidad$ | async)" [value]="option.id" >{{option.id | label:"modalidad"}}</option>
+      </select>
+    </div>
+    <div class="form-group mb-2">
+      <label class="col-form-label">Número sede</label>
+      <input class="form-control" type="text" formControlName="sed_numero_trim">
+    </div>
+    <div class="form-group mb-2">
+      <label class="col-form-label">Sede</label>
+      <app-fieldset-typeahead [data$]="params$" [fieldset]="fieldset" [entityName]="'sede'" [fieldName]="'sede'"></app-fieldset-typeahead>
+    </div>
+    <div class="form-group mb-2">
+      <label class="col-form-label">Plan:</label>
+      <select class="form-control" formControlName="pla_plan">
+        <option [ngValue]="null">--Plan--</option>
+        <option *ngFor="let option of (optPlan$ | async)" [value]="option.id" >{{option.id | label:"plan"}}</option>
+      </select>
+    </div>
+    <div class="form-group mb-2">
+      <label class="col-form-label">Año:</label>
+      <select class="form-control" formControlName="pla_anio">
+        <option [ngValue]="null">--Año--</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+      </select>
+    </div>
+    <div class="form-group mb-2">
+      <label class="col-form-label">Semestre:</label>
+      <select class="form-control" formControlName="pla_semestre">
+        <option [ngValue]="null">--Semestre--</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+      </select>
+    </div>
+    <div class="form-group mb-2">
+      <label class="col-form-label">Turno:</label>
+      <select class="form-control" formControlName="turno">
+        <option [ngValue]="null">--Turno--</option>
+            <option value="Mañana">Mañana</option>
+            <option value="Tarde">Tarde</option>
+            <option value="Noche">Noche</option>
+      </select>
+    </div>
+    <div class="form-group mb-2">
+      <label class="col-form-label">Autorizada</label>
+      <select class="form-control" formControlName="autorizada">
+        <option [ngValue]="null">--Todos--</option>
+        <option [ngValue]="'true'">Sí</option>
+        <option [ngValue]="'false'">No</option>
+      </select>
+    </div>
+    <div class="form-group mb-2">
+      <label class="col-form-label">Apertura</label>
+      <select class="form-control" formControlName="apertura">
+        <option [ngValue]="null">--Todos--</option>
+        <option [ngValue]="'true'">Sí</option>
+        <option [ngValue]="'false'">No</option>
+      </select>
+    </div>
+    <div class="form-group mb-2">
+      <label class="col-form-label">Publicada</label>
+      <select class="form-control" formControlName="publicada">
+        <option [ngValue]="null">--Todos--</option>
+        <option [ngValue]="'true'">Sí</option>
+        <option [ngValue]="'false'">No</option>
+      </select>
+    </div>
+      </div>
+</fieldset>
+

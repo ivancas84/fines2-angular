@@ -1,0 +1,53 @@
+<fieldset [formGroup]="fieldset">
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Anio</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" formControlName="anio"  [ngClass]="{'is-invalid':(anio.invalid && (anio.dirty || anio.touched))}">
+      <div class="text-danger" *ngIf="(anio.touched || anio.dirty) && anio.invalid">
+        <div *ngIf="anio.errors.required">Debe completar valor</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Semestre</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" formControlName="semestre"  [ngClass]="{'is-invalid':(semestre.invalid && (semestre.dirty || semestre.touched))}">
+      <div class="text-danger" *ngIf="(semestre.touched || semestre.dirty) && semestre.invalid">
+        <div *ngIf="semestre.errors.required">Debe completar valor</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Horas catedra</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" formControlName="horas_catedra"  [ngClass]="{'is-invalid':(horasCatedra.invalid && (horasCatedra.dirty || horasCatedra.touched))}">
+      <div class="text-danger" *ngIf="(horasCatedra.touched || horasCatedra.dirty) && horasCatedra.invalid">
+        <div *ngIf="horasCatedra.errors.required">Debe completar valor</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Plan</label>
+    <div class="col-sm-10">
+      <select class="form-control" formControlName="plan" [ngClass]="{'is-invalid':(plan.invalid && (plan.dirty || plan.touched))}">
+        <option [ngValue]="null">--Plan--</option>
+        <option *ngFor="let option of (options | async)?.plan" [value]="option.id" >{{option.id | label:"plan"}}</option>
+      </select>
+      <div class="text-danger" *ngIf="(plan.touched || plan.dirty) && plan.invalid">
+        <div *ngIf="plan.errors.required">Debe completar valor</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Asignatura</label>
+    <div class="col-sm-10">
+      <select class="form-control" formControlName="asignatura" [ngClass]="{'is-invalid':(asignatura.invalid && (asignatura.dirty || asignatura.touched))}">
+        <option [ngValue]="null">--Asignatura--</option>
+        <option *ngFor="let option of (options | async)?.asignatura" [value]="option.id" >{{option.id | label:"asignatura"}}</option>
+      </select>
+      <div class="text-danger" *ngIf="(asignatura.touched || asignatura.dirty) && asignatura.invalid">
+        <div *ngIf="asignatura.errors.required">Debe completar valor</div>
+      </div>
+    </div>
+  </div>
+</fieldset>

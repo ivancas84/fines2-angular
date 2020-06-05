@@ -1,0 +1,8 @@
+
+<ng-template #loading>No se han encontrado registros...</ng-template>
+
+<div *ngIf="((data$ | async) && (data$ | async).length) ; else loading" class="container">
+  <div *ngFor="let row of (data$ | async); let i = index" class="row align-items-center border" [ngClass]="{'table-success':row.autorizada, 'table-danger':!row.autorizada}">
+    <h5><a [routerLink]="['/comision-show']" [queryParams]="{division:row.division, sede:row.sede}" >{{row.sed_nombre}}, {{row.division}}</a></h5>
+  </div>
+</div>

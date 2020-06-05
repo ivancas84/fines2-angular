@@ -1,0 +1,24 @@
+
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th><button type="button" class="btn btn-link text-dark font-weight-bold" (click)="order(['nombre'])">Nombre</button></th>
+            <th><button type="button" class="btn btn-link text-dark font-weight-bold" (click)="order(['cue'])">Cue</button></th>
+            <th><button type="button" class="btn btn-link text-dark font-weight-bold" (click)="order(['dom_calle', 'dom_numero', 'dom_barrio'])">Domicilio</button></th>
+            <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of (data$ | async); let i = index">
+              <td><div>{{row.nombre}}</div></td>
+              <td><div>{{row.cue}}</div></td>
+              <td><a [routerLink]="['/domicilio-show']" [queryParams]="{id:row.domicilio}" >{{row.domicilio | label:'domicilio'}}</a></td>
+              <td>
+              <a class="btn btn-warning btn-sm" [routerLink]="['/centro-educativo-admin']" [queryParams]="{id:row.id}" ><span class="oi oi-pencil" title="Modificar"></span></a>
+              <button class="btn btn-danger btn-sm" type="button" ><span class="oi oi-trash" title="Eliminar"></span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>

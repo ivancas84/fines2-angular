@@ -1,0 +1,2 @@
+<app-carga-horaria-table [data$]="data$" (changeData)="orderChange($event)"></app-carga-horaria-table>
+<app-pagination [page]="display.getPage()" [size]="display.getSize()" [collectionSize$]="collectionSize$" (pageChange)="pageChange($event)"></app-pagination>

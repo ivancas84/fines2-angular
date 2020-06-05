@@ -1,0 +1,67 @@
+<div class="jumbotron">
+  <h3>Crear comisiones de grupo</h3>
+  <p class="lead">Complete el formulario para generar las comisiones del grupo</p>
+  <hr class="my-4">
+  <ul>
+    <li>Para crear las comisiones del grupo, se consultan el período anterior</li>
+    <li>Si el grupo posee al menos una comisión creada, no se generará ninguna comisión</li>
+    <li>Si no existen cargas horarias asociadas a una comisión, no se generará ninguna comisión</li>
+    <li>No se cargan los horarios de los cursos</li>
+    <li>No se almacenan los logs de la ejecución</li>
+  </ul>
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Fecha anio</label>
+    <div class="col-sm-10">
+      <input class="form-control" placeholder="yyyy" type="text" formControlName="fecha_anio"  [ngClass]="{'is-invalid':(fechaAnio.invalid && (fechaAnio.dirty || fechaAnio.touched))}">
+      <div class="text-danger" *ngIf="(fechaAnio.touched || fechaAnio.dirty) && fechaAnio.invalid">
+        <div *ngIf="fechaAnio.errors.nonNumeric">Ingrese sólo números</div>
+        <div *ngIf="fechaAnio.errors.notYear">No es un año válido</div>    
+        <div *ngIf="fechaAnio.errors.minYear">Valor no permitido</div>
+        <div *ngIf="fechaAnio.errors.required">Debe completar valor</div>
+
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Fecha Semestre:</label>
+    <div class="col-sm-10">
+      <select class="form-control" formControlName="fecha_semestre" [ngClass]="{'is-invalid':(fechaSemestre.invalid && (fechaSemestre.dirty || fechaSemestre.touched))}">
+        <option [ngValue]="null">--Fecha Semestre--</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+      </select>
+      <div class="text-danger" *ngIf="(fechaSemestre.touched || fechaSemestre.dirty) && fechaSemestre.invalid">
+        <div *ngIf="fechaSemestre.errors.required">Debe completar valor</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Modalidad</label>
+    <div class="col-sm-10">
+      <select class="form-control" formControlName="modalidad" [ngClass]="{'is-invalid':(modalidad.invalid && (modalidad.dirty || modalidad.touched))}">
+        <option [ngValue]="null">--Modalidad--</option>
+        <option *ngFor="let option of (options | async)?.modalidad" [value]="option.id" >{{option.id | label:"modalidad"}}</option>
+      </select>
+      <div class="text-danger" *ngIf="(modalidad.touched || modalidad.dirty) && modalidad.invalid">
+        <div *ngIf="modalidad.errors.required">Debe completar valor</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Centro Educativo</label>
+    <div class="col-sm-10">
+      <app-fieldset-typeahead [fieldset]="form" [entityName]="'centro_educativo'" [fieldName]="'sed_centro_educativo'"></app-fieldset-typeahead>
+      <div class="text-danger" *ngIf="(centroEducativo.touched || centroEducativo.dirty) && centroEducativo.invalid">
+        <div *ngIf="centroEducativo.errors.required">Debe completar valor</div>
+        <div *ngIf="(centroEducativo.touched && centroEducativo.errors.unselected)">Valor no seleccionado</div>
+      </div>
+    </div>
+  </div>
+  <button [disabled]="form.pending" type="submit" class="btn btn-primary">Aceptar</button>&nbsp;
+  <button type="button" class="btn btn-secondary" (click)="back()"><span class="oi oi-arrow-thick-left" title="Volver"></span></button>
+
+  <!--p>Debug Form value: {{ adminForm.value | json }}</p>
+  <p>Debug Form status: {{ adminForm.status | json }}</p-->
+</form>

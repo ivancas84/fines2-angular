@@ -1,0 +1,3 @@
+<app-sede-search [condition$]="condition$" [params$]="params$" (searchChange)="searchChange($event)"></app-sede-search>
+<app-sede-table [data$]="data$" (orderChange)="orderChange($event)"></app-sede-table>
+<app-pagination [page]="display.getPage()" [size]="display.getSize()" [collectionSize$]="collectionSize$" (pageChange)="pageChange($event)"></app-pagination>

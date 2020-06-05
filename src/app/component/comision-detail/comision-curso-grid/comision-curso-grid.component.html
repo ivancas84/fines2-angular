@@ -1,0 +1,13 @@
+
+<div *ngIf="cursos$ | async as data" class="container">
+<div *ngIf="data.length" class="container">
+  
+  <div *ngFor="let row of data; let i = index" class="row align-items-center border">
+    <div class="col-md-4">
+      <h5>{{row.asignatura_.nombre}}</h5>
+      <small>{{row.horas_catedra}} horas cátedra</small>
+      <br><small>{{row.comision_.anio}}/{{row.comision_.semestre}} {{row.comision_.plan_.orientacion}} {{row.comision_.plan_.resolucion}}</small>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,136 @@
+
+<fieldset [formGroup]="form">
+
+  <div formArrayName="filters">
+    <div class="form-row align-items-center" *ngFor="let filter of filters.controls; let i=index" [formGroupName]="i">
+      <div class="col-xs-4">
+        <select class="form-control form-control-sm" formControlName="field">
+          <option value="">--Campo--</option>
+          <option value="_search">Todos</option>
+          <option value="id">Sede</option>
+          <option value="numero">Numero</option>
+          <option value="nombre">Nombre</option>
+          <option value="observaciones">Observaciones</option>
+          <option value="baja">Baja</option>
+          <option value="domicilio">Domicilio</option>
+          <option value="tipo_sede">Tipo Sede</option>
+          <option value="centro_educativo">Centro Educativo</option>
+        </select>
+      </div>
+
+
+      <div class="col-xs-2" [ngSwitch]="f(i)" >   
+        <!-- todos -->
+        <select *ngSwitchCase="'_search'" class="form-control form-control-sm" formControlName="option">
+          <option value="=~">&cong;</option>
+        </select>
+
+        <!-- id -->
+        <select *ngSwitchCase="'id'" class="form-control form-control-sm" formControlName="option">
+          <option value="=">=</option>
+          <option value="!=">&ne;</option>
+        </select>
+
+        <!-- numero -->
+        <select *ngSwitchCase="'numero'" class="form-control form-control-sm" formControlName="option">
+          <option value="=~">&cong;</option>
+          <option value="!=~">&#8775;</option>
+          <option value="=">=</option>
+          <option value="!=">&ne;</option>
+          <option value="<=">&le;</option>
+          <option value=">=">&ge;</option>
+        </select>
+
+        <!-- nombre -->
+        <select *ngSwitchCase="'nombre'" class="form-control form-control-sm" formControlName="option">
+          <option value="=~">&cong;</option>
+          <option value="!=~">&#8775;</option>
+          <option value="=">=</option>
+          <option value="!=">&ne;</option>
+          <option value="<=">&le;</option>
+          <option value=">=">&ge;</option>
+        </select>
+
+        <!-- observaciones -->
+        <select *ngSwitchCase="'observaciones'" class="form-control form-control-sm" formControlName="option">
+          <option value="=~">&cong;</option>
+          <option value="!=~">&#8775;</option>
+          <option value="=">=</option>
+          <option value="!=">&ne;</option>
+          <option value="<=">&le;</option>
+          <option value=">=">&ge;</option>
+        </select>
+
+        <!-- baja -->
+        <select *ngSwitchCase="'baja'" class="form-control form-control-sm" formControlName="option">
+          <option value="=~">&cong;</option>
+          <option value="!=~">&#8775;</option>
+          <option value="=">=</option>
+          <option value="!=">&ne;</option>
+          <option value="<=">&le;</option>
+          <option value=">=">&ge;</option>
+        </select>
+
+        <!-- domicilio -->
+        <select *ngSwitchCase="'domicilio'" class="form-control form-control-sm" formControlName="option">
+          <option value="=">=</option>
+          <option value="!=">&ne;</option>
+        </select>
+
+        <!-- tipo_sede -->
+        <select *ngSwitchCase="'tipo_sede'" class="form-control form-control-sm" formControlName="option">
+          <option value="=">=</option>
+          <option value="!=">&ne;</option>
+        </select>
+
+        <!-- centro_educativo -->
+        <select *ngSwitchCase="'centro_educativo'" class="form-control form-control-sm" formControlName="option">
+          <option value="=">=</option>
+          <option value="!=">&ne;</option>
+        </select>
+
+      </div>
+
+      <div class="col-xs-4" [ngSwitch]="f(i)" >
+        <!-- todos -->
+        <input *ngSwitchCase="'_search'" class="form-control form-control-sm" formControlName="value">
+
+        <!-- id -->
+        <app-filter-typeahead *ngSwitchCase="'id'" [entityName]="'sede'" [filter]="filter" ></app-filter-typeahead>
+
+        <!-- numero -->
+        <input *ngSwitchCase="'numero'" class="form-control form-control-sm" formControlName="value">
+
+        <!-- nombre -->
+        <input *ngSwitchCase="'nombre'" class="form-control form-control-sm" formControlName="value">
+
+        <!-- observaciones -->
+        <input *ngSwitchCase="'observaciones'" class="form-control form-control-sm" formControlName="value">
+
+        <!-- baja -->
+        <input *ngSwitchCase="'baja'" class="form-control form-control-sm" formControlName="value">
+
+        <!-- domicilio -->
+        <app-filter-typeahead *ngSwitchCase="'domicilio'" [entityName]="'domicilio'" [filter]="filter" ></app-filter-typeahead>
+
+        <!-- tipo_sede -->
+        <app-filter-typeahead *ngSwitchCase="'tipo_sede'" [entityName]="'tipo_sede'" [filter]="filter" ></app-filter-typeahead>
+
+        <!-- centro_educativo -->
+        <app-filter-typeahead *ngSwitchCase="'centro_educativo'" [entityName]="'centro_educativo'" [filter]="filter" ></app-filter-typeahead>
+
+        <div *ngSwitchDefault>Seleccione campo</div>
+      </div>
+      <div class="col-xs-2">
+        <button type="button" class="btn btn-danger btn-sm" (click)="removeFilter(i)"><span class="oi oi-x"></span></button>
+        <button *ngIf="(filters.controls.length == (i+1))" type="button" class="btn btn-info btn-sm" (click)="addFilter()"><span class="oi oi-layers"></span></button>
+      </div>
+    </div>
+  </div> <!-- formArrayName="filters" -->
+
+  <div *ngIf="(filters.controls.length == 0)"  class="form-row">
+    <div class="col">
+      <button type="button" class="btn btn-info btn-sm" (click)="addFilter()"><span class="oi oi-layers"></span></button>
+    </div>
+  </div>
+</fieldset>

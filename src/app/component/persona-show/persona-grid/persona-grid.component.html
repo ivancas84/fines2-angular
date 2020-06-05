@@ -1,0 +1,16 @@
+
+<ng-template #loading>No se han encontrado registros...</ng-template>
+
+<div *ngIf="data$ | async as data; else loading" class="container">
+  <div *ngIf="data.length"> 
+    <div *ngFor="let row of data; let i = index" class="row align-items-center border">
+      <div class="col-md-4">
+        <h5>{{row.id | label:'persona'}} <a [routerLink]="['/persona-admin']" [queryParams]="{id:row.id}" ><span class="oi oi-pencil"></span></a></h5>
+        <small><a [routerLink]="['/domicilio-show']" [queryParams]="{id:row.domicilio}" >{{row.domicilio | label:'domicilio'}}</a></small>
+      </div>
+      <div class="col-md">
+{{row.nombres}} {{row.apellidos}} {{row.fecha_nacimiento | toDate | date:'dd/MM/yyyy'}} {{row.numero_documento}} {{row.cuil}} {{row.email}} {{row.genero}} {{row.apodo}} {{row.alta}} 
+      </div>
+    </div>
+  </div>
+</div>

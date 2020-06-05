@@ -1,0 +1,16 @@
+
+<form [formGroup]="adminForm" (ngSubmit)="onSubmit()" novalidate class="container">
+  <app-persona-fieldset [form]="adminForm" [data$]="data$"></app-persona-fieldset>
+  <app-telefono-grid [data$]="data$"></app-telefono-grid>
+  
+
+  <button [disabled]="adminForm.pending" type="submit" class="btn btn-primary">Aceptar</button>&nbsp;
+  <button type="button" class="btn btn-secondary" (click)="back()"><span class="oi oi-arrow-thick-left" title="Volver"></span></button>
+  <button type="button" (click)="reset()" class="btn btn-secondary" ><span class="oi oi-reload" title="Restablecer"></span></button>
+  <button type="button" (click)="clear()" class="btn btn-secondary" ><span title="Nuevo" class="oi oi-plus"></span></button>
+  
+  <p>Debug Form value: {{ adminForm.value | json }}</p>
+  <p>Debug Form status: {{ adminForm.status | json }}</p>
+</form>
+
+

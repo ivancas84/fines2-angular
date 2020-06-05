@@ -1,0 +1,33 @@
+
+<ng-template #loading>No se han encontrado registros...</ng-template>
+
+<div *ngIf="comisiones$ | async as comisiones else loading">
+  <div *ngFor="let c of comisiones; let i = index" class="row align-items-center border">
+    <div class="col-4">
+      <h5>{{c.id | label:'comision'}}</h5>              
+      <p>{{c.sede | label:'sede'}}</p>
+      <br><small>{{c.plan | label:'plan'}}</small>
+    </div>
+    <div class="col-8">
+      <ng-template #sincursos>Sin cursos</ng-template>
+
+      <div *ngIf="c.cursos.length; else sincursos">
+
+      <ul class="list-group">
+        <div class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let cu of c.cursos; let j = index">
+          <div>
+            <b>{{cu.asignatura_.nombre}}</b>&nbsp;<small>{{cu.horario}}</small>
+          </div>
+          <ng-template #sintomas><small>Sin Tomas</small></ng-template>
+          
+          <div *ngIf="cu.tomas.length; else sintomas">                    
+            <div *ngFor="let t of cu.tomas; let k = index">
+              <small *ngIf="t.docente_">{{t.docente_.apellidos}} {{t.docente_.nombres}}</small>
+              <small *ngIf="t.observaciones">({{t.observaciones}})</small>                                                                 
+            </div>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>

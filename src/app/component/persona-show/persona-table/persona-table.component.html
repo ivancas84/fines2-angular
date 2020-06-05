@@ -1,0 +1,34 @@
+
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th><button type="button" class="btn btn-link text-dark font-weight-bold" (click)="order(['nombres'])">Nombres</button></th>
+            <th><button type="button" class="btn btn-link text-dark font-weight-bold" (click)="order(['apellidos'])">Apellidos</button></th>
+            <th><button type="button" class="btn btn-link text-dark font-weight-bold" (click)="order(['apodo'])">Apodo</button></th>
+            <th><button type="button" class="btn btn-link text-dark font-weight-bold" (click)="order(['numero_documento'])">Numero Documento</button></th>
+            <th><button type="button" class="btn btn-link text-dark font-weight-bold" (click)="order(['cuil'])">Cuil</button></th>
+            <th><button type="button" class="btn btn-link text-dark font-weight-bold" (click)="order(['email'])">Email</button></th>
+            <th><button type="button" class="btn btn-link text-dark font-weight-bold" (click)="order(['genero'])">Genero</button></th>
+            <th><button type="button" class="btn btn-link text-dark font-weight-bold" (click)="order(['alta'])">Alta</button></th>
+            <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of (data$ | async); let i = index">
+              <td><div>{{row.nombres}}</div></td>
+              <td><div>{{row.apellidos}}</div></td>
+              <td><div>{{row.apodo}}</div></td>
+              <td><div>{{row.numero_documento}}</div></td>
+              <td><div>{{row.cuil}}</div></td>
+              <td><div>{{row.email}}</div></td>
+              <td><div>{{row.genero}}</div></td>
+              <td><div>{{row.alta}}</div></td>
+              <td>
+              <a class="btn btn-warning btn-sm" [routerLink]="['/persona-admin']" [queryParams]="{id:row.id}" ><span class="oi oi-pencil" title="Modificar"></span></a>
+              <button class="btn btn-danger btn-sm" type="button" ><span class="oi oi-trash" title="Eliminar"></span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>

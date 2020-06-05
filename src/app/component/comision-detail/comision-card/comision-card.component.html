@@ -1,0 +1,98 @@
+<div *ngIf="data$ | async as data" class="card">
+  <div class="card-header">
+    Comision {{data.id | label:"comision"}}
+  </div>
+
+  <div class="card-body">
+    <dl class="row">
+      <dt class="col-sm-3">Turno</dt>
+      <dd class="col-sm-9">{{data.turno}}</dd>
+
+      <dt class="col-sm-3">Division</dt>
+      <dd class="col-sm-9">{{data.division}}</dd>
+
+      <dt class="col-sm-3">Anio</dt>
+      <dd class="col-sm-9">{{data.anio}}</dd>
+
+      <dt class="col-sm-3">Semestre</dt>
+      <dd class="col-sm-9">{{data.semestre}}</dd>
+
+      <dt class="col-sm-3">Comentario</dt>
+      <dd class="col-sm-9">{{data.comentario}}</dd>
+
+      <dt class="col-sm-3">Autorizada</dt>
+      <dd class="col-sm-9">{{data.autorizada | siNo}}</dd>
+
+      <dt class="col-sm-3">Apertura</dt>
+      <dd class="col-sm-9">{{data.apertura | siNo}}</dd>
+
+      <dt class="col-sm-3">Publicada</dt>
+      <dd class="col-sm-9">{{data.publicada | siNo}}</dd>
+
+      <dt class="col-sm-3">Fecha Anio</dt>
+      <dd class="col-sm-9">{{data.fecha_anio}}</dd>
+
+      <dt class="col-sm-3">Fecha Semestre</dt>
+      <dd class="col-sm-9">{{data.fecha_semestre}}</dd>
+
+      <dt class="col-sm-3">Observaciones</dt>
+      <dd class="col-sm-9">{{data.observaciones}}</dd>
+
+      <dt class="col-sm-3">Alta</dt>
+      <dd class="col-sm-9">{{data.alta}}</dd>
+
+    </dl>
+
+    <ng-template #loadingSede>
+      <dl class="row">
+        <dt class="col-sm-3">Sede</dt>
+        <dd class="col-sm-9">No se han encontrado registros</dd>
+      </dl>
+    </ng-template>
+
+    <dl class="row" *ngIf="sede$ | async as sede; else loadingSede">
+      <dt class="col-sm-3">Sede</dt>
+      <dd class="col-sm-9"><a [routerLink]="['/sede-detail']" [queryParams]="{id:data.sede}" >{{sede.id | label:'sede'}}</a></dd>
+    </dl>
+
+    <ng-template #loadingPlan>
+      <dl class="row">
+        <dt class="col-sm-3">Plan</dt>
+        <dd class="col-sm-9">No se han encontrado registros</dd>
+      </dl>
+    </ng-template>
+
+    <dl class="row" *ngIf="plan$ | async as plan; else loadingPlan">
+      <dt class="col-sm-3 ">Plan (resolución)</dt>
+      <dd class="col-sm-9">{{plan.resolucion}}</dd>
+
+      <dt class="col-sm-3 ">Plan (distribución horaria)</dt>
+      <dd class="col-sm-9">{{plan.distribucion_horaria}}</dd>
+    </dl>
+
+    <ng-template #loadingModalidad>
+      <dl class="row">
+        <dt class="col-sm-3">Modalidad</dt>
+        <dd class="col-sm-9">No se han encontrado registros</dd>
+      </dl>
+    </ng-template>
+
+    <dl class="row" *ngIf="modalidad$ | async as modalidad; else loadingModalidad">
+      <dt class="col-sm-3">Modalidad</dt>
+      <dd class="col-sm-9"><a [routerLink]="['/modalidad-detail']" [queryParams]="{id:data.modalidad}" >{{modalidad.id | label:'modalidad'}}</a></dd>
+    </dl>
+
+    <ng-template #loadingComisionSiguiente>
+      <dl class="row">
+        <dt class="col-sm-3">Comision Siguiente</dt>
+        <dd class="col-sm-9">No se han encontrado registros</dd>
+      </dl>
+    </ng-template>
+
+    <dl class="row" *ngIf="comisionSiguiente$ | async as comisionSiguiente; else loadingComisionSiguiente">
+      <dt class="col-sm-3">Comision Siguiente</dt>
+      <dd class="col-sm-9"><a [routerLink]="['/comision-detail']" [queryParams]="{id:data.comision_siguiente}" >{{comisionSiguiente.id | label:'comision'}}</a></dd>
+    </dl>
+
+  </div>
+</div>
