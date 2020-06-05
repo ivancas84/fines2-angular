@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "fines2-administracion": {
+    "fines2-angular": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/fines2-administracion",
+            "outputPath": "dist/fines2-angular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "fines2-administracion:build"
+            "browserTarget": "fines2-angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "fines2-administracion:build:production"
+              "browserTarget": "fines2-angular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "fines2-administracion:build"
+            "browserTarget": "fines2-angular:build"
           }
         },
         "test": {
@@ -110,15 +110,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "fines2-administracion:serve"
+            "devServerTarget": "fines2-angular:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "fines2-administracion:serve:production"
+              "devServerTarget": "fines2-angular:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "fines2-administracion"
+  "defaultProject": "fines2-angular"
 }
