@@ -7,5 +7,3 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
   templateUrl: './centro-educativo-table.component.html',
 })
 export class CentroEducativoTableComponent extends ShowElementComponent {}
-}
-
