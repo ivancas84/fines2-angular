@@ -6,9 +6,6 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
   selector: 'app-centro-educativo-table',
   templateUrl: './centro-educativo-table.component.html',
 })
-export class CentroEducativoTableComponent extends ShowElementComponent {
-
-  readonly entity = 'centro_educativo';
-
+export class CentroEducativoTableComponent extends ShowElementComponent {}
 }
 
