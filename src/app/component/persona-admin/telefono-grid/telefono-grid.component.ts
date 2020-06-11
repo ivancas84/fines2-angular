@@ -4,6 +4,7 @@ import { ReplaySubject } from 'rxjs';
 import { isEmptyObject } from '@function/is-empty-object.function';
 import { Display } from '@class/display';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
+import { Router } from '@angular/router';
     
 @Component({
   selector: 'app-telefono-grid',
@@ -19,9 +20,9 @@ export class TelefonoGridComponent extends ShowElementComponent implements OnIni
    * por eso telefonos$ se define como ReplaySubject.
    */
   constructor(
-    protected dd: DataDefinitionService, 
+    protected dd: DataDefinitionService, protected router: Router
   ) {
-    super();
+    super(router);
   }
 
   ngOnInit(): void {

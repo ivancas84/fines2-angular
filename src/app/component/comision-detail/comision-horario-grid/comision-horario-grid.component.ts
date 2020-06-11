@@ -5,6 +5,7 @@ import { mergeMap } from 'rxjs/operators';
 import { isEmptyObject } from '@function/is-empty-object.function';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { Display } from '@class/display';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comision-horario-grid',
@@ -14,9 +15,9 @@ export class ComisionHorarioGridComponent extends ShowElementComponent implement
   cursos$: Observable<any>;
  
   constructor(
-    protected dd: DataDefinitionService,
+    protected dd: DataDefinitionService, protected router: Router
   ) {
-    super();
+    super(router);
   }
 
   ngOnInit(): void {

@@ -6,6 +6,7 @@ import { mergeMap } from 'rxjs/operators';
 import { isEmptyObject } from '@function/is-empty-object.function';
 import { Display } from '@class/display';
 import { arrayColumn } from '@function/array-column';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comision-curso-grid',
@@ -15,10 +16,12 @@ export class ComisionCursoGridComponent extends ShowElementComponent {
   cursos$: Observable<any>;
  
   constructor(
-    protected dd: DataDefinitionService,
+    protected dd: DataDefinitionService, protected router: Router
   ) {
-    super();
+    super(router);
   }
+
+  
 
   ngOnInit(): void {
     this.cursos$ = this.data$.pipe(mergeMap(

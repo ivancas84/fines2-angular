@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { ShowElementComponent } from '@component/show-element/show-element.component';
-import { DataDefinitionService } from '@service/data-definition/data-definition.service';
-import { isEmptyObject } from '@function/is-empty-object.function';
-import { forkJoin } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sede-table',
@@ -10,10 +8,7 @@ import { forkJoin } from 'rxjs';
 })
 export class SedeTableComponent extends ShowElementComponent {
 
-  readonly entityName = 'sede';
-
-  constructor(protected dd: DataDefinitionService) {
-    super();
+  constructor(protected router: Router) { 
+    super(router);
   }
-
 }
