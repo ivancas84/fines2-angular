@@ -1,30 +1,26 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
-import { isEmptyObject } from '@function/is-empty-object.function';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { SearchParamsComponent } from '@component/search-params/search-params.component';
-import { forkJoin, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Display } from '@class/display';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-consolidado-admin-search-params',
   templateUrl: './consolidado-admin-search-params.component.html',
 })
 export class ConsolidadoAdminSearchParamsComponent extends SearchParamsComponent {
-  readonly entityName = 'comision';
+
   optPlan$: Observable<any>;
   optModalidad$: Observable<any>;
   optCentroEducativo$: Observable<any>;
 
   constructor(
     protected fb: FormBuilder, 
-    protected dd: DataDefinitionService, 
-    protected validators: ValidatorsService) 
+    protected dd: DataDefinitionService) 
   {
-    super(fb, dd, validators); 
-  
+    super(fb); 
   }
 
   initOptions(): void {

@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
-import { isEmptyObject } from '@function/is-empty-object.function';
-import { ValidatorsService } from '@service/validators/validators.service';
 import { SearchParamsComponent } from '@component/search-params/search-params.component';
-import { forkJoin, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Display } from '@class/display';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-consolidado-search-params',
