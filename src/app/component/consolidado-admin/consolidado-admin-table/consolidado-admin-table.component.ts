@@ -5,6 +5,7 @@ import { Display } from '@class/display';
 import { arrayColumn } from '@function/array-column';
 import { ShowElementComponent } from '@component/show-element/show-element.component';
 import { tap, mergeMap, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-consolidado-admin-table',
@@ -15,9 +16,10 @@ export class ConsolidadoAdminTableComponent extends ShowElementComponent impleme
   readonly entityName = 'comision';
   comisiones$: Observable<any>;
 
-  constructor(protected dd: DataDefinitionService) {
-    super();
+  constructor(protected dd: DataDefinitionService, protected router: Router) {
+    super(router);
   }
+
 
   asignarTomasACursosYComisiones(comisiones:any, cursos:any): Observable<any>{
     var ids = arrayColumn(cursos,"id");

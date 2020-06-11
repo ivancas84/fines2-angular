@@ -93,7 +93,6 @@ import { ModalidadFieldsetComponent } from '@component/modalidad-admin/modalidad
 import { ComisionCursoAdminComponent } from '@component/comision-admin/comision-curso-admin/comision-curso-admin.component';
 import { CursoShowComponent } from '@component/curso-show/curso-show/curso-show.component';
 import { CursoTableComponent } from '@component/curso-show/curso-table/curso-table.component';
-import { SedeSearchConditionComponent } from '@component/sede-show/sede-search/sede-search-condition/sede-search-condition.component';
 import { SedeSearchParamsComponent } from '@component/sede-show/sede-search/sede-search-params/sede-search-params.component';
 import { SedeSearchComponent } from '@component/sede-show/sede-search/sede-search/sede-search.component';
 import { AsignaturaSearchComponent } from '@component/asignatura-show/asignatura-search/asignatura-search.component';
@@ -156,7 +155,7 @@ import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-
     PlanShowComponent, PlanTableComponent,
     PersonaShowComponent, PersonaSearchComponent, PersonaGridComponent,
     PersonaAdminComponent, PersonaFieldsetComponent, TelefonoGridComponent,
-    SedeShowComponent, SedeTableComponent, SedeSearchComponent, SedeSearchParamsComponent, SedeSearchConditionComponent,
+    SedeShowComponent, SedeTableComponent, SedeSearchComponent, SedeSearchParamsComponent,
     SedeAdminComponent, SedeFieldsetComponent, DomicilioSedeFieldsetComponent, DesignacionTableComponent,
     TipoSedeAdminComponent, TipoSedeFieldsetComponent,
     TipoSedeShowComponent, TipoSedeTableComponent,
