@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { ShowElementComponent } from '@component/show-element/show-element.component';
-import { DataDefinitionService } from '@service/data-definition/data-definition.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-plan-table',
   templateUrl: './plan-table.component.html',
 })
-export class PlanTableComponent extends ShowElementComponent {
-
-  readonly entity = 'plan';
+export class PlanTableComponent extends ShowElementComponent { 
+  
+  constructor(protected router: Router) { 
+    super(router);
+  }
 
 }
-
