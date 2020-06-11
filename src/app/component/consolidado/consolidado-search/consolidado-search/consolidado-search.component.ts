@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { SearchComponent } from '@component/search/search.component';
-import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { Router } from '@angular/router';
 
 @Component({
