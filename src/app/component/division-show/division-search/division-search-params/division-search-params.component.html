@@ -1,4 +1,4 @@
-<fieldset [formGroup]="fieldset">
+<fieldset *ngIf="display$ | async as display" [formGroup]="fieldset">
   <div class="form-inline">
     <div class="form-group mb-2">
       <label class="col-form-label">Número sede</label>
@@ -38,14 +38,14 @@
       <label class="col-form-label">Plan:</label>
       <select class="form-control" formControlName="plan">
         <option [ngValue]="null">--Plan--</option>
-        <option *ngFor="let option of (options | async)?.plan" [value]="option.id" >{{option.id | label:"plan"}}</option>
+        <option *ngFor="let option of (optPlan$ | async)" [value]="option.id" >{{option.id | label:"plan"}}</option>
       </select>
     </div>
     <div class="form-group mb-2">
       <label class="col-form-label">Modalidad:</label>
       <select class="form-control" formControlName="modalidad">
         <option [ngValue]="null">--Modalidad--</option>
-        <option *ngFor="let option of (options | async)?.modalidad" [value]="option.id" >{{option.id | label:"modalidad"}}</option>
+        <option *ngFor="let option of (optModalidad$ | async)" [value]="option.id" >{{option.id | label:"modalidad"}}</option>
       </select>
     </div>
   </div>

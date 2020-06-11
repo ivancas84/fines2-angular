@@ -4,7 +4,7 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
 import { isEmptyObject } from '@function/is-empty-object.function';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { SearchParamsComponent } from '@component/search-params/search-params.component';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { Display } from '@class/display';
 import { map } from 'rxjs/operators';
 
@@ -13,57 +13,18 @@ import { map } from 'rxjs/operators';
   templateUrl: './division-search-params.component.html',
 })
 export class DivisionSearchParamsComponent extends SearchParamsComponent {
-  readonly entityName = 'comision';
 
-  constructor(
+  optPlan$: Observable<any>;
+  optModalidad$: Observable<any>;
+  constructor (
     protected fb: FormBuilder, 
-    protected dd: DataDefinitionService, 
-    protected validators: ValidatorsService) 
-  { super(fb, dd, validators); }
+    protected dd: DataDefinitionService
+  ) { super(fb); }
+
 
   initOptions(): void {
-    let obs = [];      
-
-    var ob = this.dd.all('plan', new Display);
-    obs.push(ob);
-
-    var ob = this.dd.all('modalidad', new Display);
-    obs.push(ob);
-
-    this.options = forkJoin(obs).pipe(
-      map(
-        options => {
-          var o = {};
-          o['plan'] = options[0];
-          o['modalidad'] = options[1];
-          return o;
-        }
-      )
-    );
-  }
-
-  initData(): void {
-    this.params$.subscribe(
-      response => {
-
-        if(!isEmptyObject(response)) {
-          var obs = [];
-
-          if(response.sede) {
-            var ob = this.dd.getOrNull("sede",response.sede);
-            obs.push(ob);
-          }
-
-          if(response.comision_siguiente) {
-            var ob = this.dd.getOrNull("comision",response.comision_siguiente);
-            obs.push(ob);
-          }
-
-          if(obs.length){ forkJoin(obs).subscribe( () => this.fieldset.reset(response) ); } 
-          else { this.fieldset.reset(response); }
-        }
-      }
-    );
+    this.optPlan$ = this.dd.all('plan', new Display);
+    this.optModalidad$ = this.dd.all('modalidad', new Display);
   }
 
   formGroup(): FormGroup {
