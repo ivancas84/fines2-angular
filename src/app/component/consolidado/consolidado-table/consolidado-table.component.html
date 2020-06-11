@@ -6,7 +6,8 @@
     <div class="col-4">
       <h5>{{c.id | label:'comision'}} <span *ngIf="c.apertura">(APERTURA)</span></h5>              
       <p>{{c.sede | label:'sede'}}</p>
-      <br><small>{{c.plan | label:'plan'}}</small>
+      <div><small>{{c.planificacion_.plan | label:'plan'}}</small></div>
+      <div><small>{{c.calendario_.anio}}-{{c.calendario_.semestre}}</small></div> 
     </div>
     <div class="col-8">
       <ng-template #sincursos>Sin cursos</ng-template>

@@ -1,4 +1,4 @@
-<fieldset [formGroup]="fieldset">
+<fieldset *ngIf="display$ | async as display" [formGroup]="fieldset">
   <div class="form-inline">
     <div class="form-group mb-2">
       <label class="col-form-label">Fecha anio</label>

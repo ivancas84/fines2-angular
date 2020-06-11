@@ -24,17 +24,15 @@ export class ConsolidadoComponent extends ShowComponent {
     super(dd, route, router);
   }
 
-  initDisplay(params){
-    this.display = new Display();
-    this.display.setConditionByQueryParams(params);
-    console.log(this.display.describe());
-    if(isEmptyObject(this.display.getOrder())) 
-      this.display.setOrder({"sed_numero":"asc", "pla_anio":"asc", "pla_semestre":"asc"});
-    this.condition$.next(this.display.getCondition());
-    this.params$.next(this.display.getParams());
-  }
-
   
-
+  initDisplay(params): void{
+    let display = new Display();
+    display = new Display();
+    display.setSize(100);
+    display.setParamsByQueryParams(params);
+    if(isEmptyObject(display.getOrder())) 
+      display.setOrder({"sed_numero":"asc", "pla_anio":"asc", "pla_semestre":"asc"});
+    this.display$.next(display);
+  }
 }
 

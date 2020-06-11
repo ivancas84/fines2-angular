@@ -1,2 +1,3 @@
-<app-consolidado-search [params$]="params$" (searchChange)="searchChange($event)"></app-consolidado-search>
-<app-consolidado-table [data$]="data$" (orderChange)="orderChange($event)"></app-consolidado-table>
+<app-consolidado-search [display$]="display$"></app-consolidado-search>
+<app-consolidado-table [data$]="data$"></app-consolidado-table>
+<app-pagination [display$]="display$" [collectionSize$]="collectionSize$"></app-pagination>

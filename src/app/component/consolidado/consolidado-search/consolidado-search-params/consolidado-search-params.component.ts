@@ -13,18 +13,16 @@ import { map } from 'rxjs/operators';
   templateUrl: './consolidado-search-params.component.html',
 })
 export class ConsolidadoSearchParamsComponent extends SearchParamsComponent {
-  readonly entityName = 'comision';
+
   optPlan$: Observable<any>;
   optModalidad$: Observable<any>;
   optCentroEducativo$: Observable<any>;
 
   constructor(
     protected fb: FormBuilder, 
-    protected dd: DataDefinitionService, 
-    protected validators: ValidatorsService) 
+    protected dd: DataDefinitionService) 
   {
-    super(fb, dd, validators); 
-  
+    super(fb); 
   }
 
   initOptions(): void {
