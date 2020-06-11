@@ -2,11 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { ShowComponent } from '@component/show/show.component';
-import { first } from 'rxjs/operators';
 import { Display } from '@class/display';
 import { isEmptyObject } from '@function/is-empty-object.function';
-import { getSemester } from '@function/get-semester';
-
 
 @Component({
   selector: 'app-consolidado',
@@ -23,9 +20,8 @@ export class ConsolidadoComponent extends ShowComponent {
   ) {
     super(dd, route, router);
   }
-
   
-  initDisplay(params): void{
+  initDisplay(params: { [x: string]: any; }): void {
     let display = new Display();
     display = new Display();
     display.setSize(100);
