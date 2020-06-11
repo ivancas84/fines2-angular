@@ -1,2 +1,3 @@
-<app-consolidado-admin-search [params$]="params$" (searchChange)="searchChange($event)"></app-consolidado-admin-search>
-<app-consolidado-admin-table [data$]="data$" (orderChange)="orderChange($event)"></app-consolidado-admin-table>
+<app-consolidado-admin-search [display$]="display$"></app-consolidado-admin-search>
+<app-consolidado-admin-table [data$]="data$"></app-consolidado-admin-table>
+<app-pagination [display$]="display$" [collectionSize$]="collectionSize$"></app-pagination>
