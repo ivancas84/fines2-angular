@@ -69,7 +69,6 @@ import { DomicilioSedeFieldsetComponent } from '@component/sede-admin/domicilio-
 import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/persona-admin.component';
 import { PersonaFieldsetComponent } from '@component/persona-admin/persona-fieldset/persona-fieldset.component';
 import { PersonaShowComponent } from '@component/persona-show/persona-show/persona-show.component';
-import { PersonaTableComponent } from '@component/persona-show/persona-table/persona-table.component';
 import { CargoAdminComponent } from '@component/cargo-admin/cargo-admin/cargo-admin.component';
 import { CargoFieldsetComponent } from '@component/cargo-admin/cargo-fieldset/cargo-fieldset.component';
 import { DesignacionAdminComponent } from '@component/designacion-admin/designacion-admin/designacion-admin.component';
@@ -82,13 +81,9 @@ import { PlanTableComponent } from '@component/plan-show/plan-table/plan-table.c
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin/comision-admin.component';
 import { ComisionFieldsetComponent } from '@component/comision-admin/comision-fieldset/comision-fieldset.component';
 import { ComisionShowComponent } from '@component/comision-show/comision-show/comision-show.component';
-import { CargaHorariaAdminComponent } from '@component/carga-horaria-admin/carga-horaria-admin/carga-horaria-admin.component';
-import { CargaHorariaFieldsetComponent } from '@component/carga-horaria-admin/carga-horaria-fieldset/carga-horaria-fieldset.component';
 import { PersonaSearchComponent } from '@component/persona-show/persona-search/persona-search.component';
 import { AsignaturaShowComponent } from '@component/asignatura-show/asignatura-show/asignatura-show.component';
 import { AsignaturaTableComponent } from '@component/asignatura-show/asignatura-table/asignatura-table.component';
-import { CargaHorariaShowComponent } from '@component/carga-horaria-show/carga-horaria-show/carga-horaria-show.component';
-import { CargaHorariaTableComponent } from '@component/carga-horaria-show/carga-horaria-table/carga-horaria-table.component';
 import { CursoAdminComponent } from '@component/curso-admin/curso-admin/curso-admin.component';
 import { CursoFieldsetComponent } from '@component/curso-admin/curso-fieldset/curso-fieldset.component';
 import { ComisionCardComponent } from '@component/comision-detail/comision-card/comision-card.component';
@@ -143,8 +138,6 @@ import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-
 
     AsignaturaAdminComponent, AsignaturaFieldsetComponent,
     AsignaturaShowComponent, AsignaturaTableComponent, AsignaturaSearchComponent,
-    CargaHorariaShowComponent, CargaHorariaTableComponent, 
-    CargaHorariaAdminComponent, CargaHorariaFieldsetComponent,
     CargoAdminComponent, CargoFieldsetComponent,
     CentroEducativoAdminComponent, CentroEducativoFieldsetComponent, DomicilioCeFieldsetComponent,
     CentroEducativoShowComponent, CentroEducativoTableComponent,
@@ -161,7 +154,7 @@ import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-
     ModalidadAdminComponent, ModalidadFieldsetComponent,
     PlanAdminComponent, PlanFieldsetComponent,
     PlanShowComponent, PlanTableComponent,
-    PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent, PersonaGridComponent,
+    PersonaShowComponent, PersonaSearchComponent, PersonaGridComponent,
     PersonaAdminComponent, PersonaFieldsetComponent, TelefonoGridComponent,
     SedeShowComponent, SedeTableComponent, SedeSearchComponent, SedeSearchParamsComponent, SedeSearchConditionComponent,
     SedeAdminComponent, SedeFieldsetComponent, DomicilioSedeFieldsetComponent, DesignacionTableComponent,

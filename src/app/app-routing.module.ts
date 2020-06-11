@@ -16,9 +16,7 @@ import { PlanShowComponent } from '@component/plan-show/plan-show/plan-show.comp
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin/comision-admin.component';
 import { ComisionShowComponent } from '@component/comision-show/comision-show/comision-show.component';
 import { AsignaturaAdminComponent } from '@component/asignatura-admin/asignatura-admin/asignatura-admin.component';
-import { CargaHorariaAdminComponent } from '@component/carga-horaria-admin/carga-horaria-admin/carga-horaria-admin.component';
 import { AsignaturaShowComponent } from '@component/asignatura-show/asignatura-show/asignatura-show.component';
-import { CargaHorariaShowComponent } from '@component/carga-horaria-show/carga-horaria-show/carga-horaria-show.component';
 import { CursoAdminComponent } from '@component/curso-admin/curso-admin/curso-admin.component';
 import { ComisionDetailComponent } from '@component/comision-detail/comision-detail/comision-detail.component';
 import { ModalidadAdminComponent } from '@component/modalidad-admin/modalidad-admin/modalidad-admin.component';
@@ -34,8 +32,6 @@ import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.
 const routes: Routes = [
   { path: 'asignatura-show', component: AsignaturaShowComponent, pathMatch: 'full' },
   { path: 'asignatura-admin', component: AsignaturaAdminComponent, pathMatch: 'full' },
-  { path: 'carga-horaria-admin', component: CargaHorariaAdminComponent, pathMatch: 'full' },
-  { path: 'carga-horaria-show', component: CargaHorariaShowComponent, pathMatch: 'full' },
   { path: 'cargo-admin', component: CargoAdminComponent, pathMatch: 'full' },
   { path: 'centro-educativo-admin', component: CentroEducativoAdminComponent, pathMatch: 'full' },
   { path: 'centro-educativo-show', component: CentroEducativoShowComponent, pathMatch: 'full' },

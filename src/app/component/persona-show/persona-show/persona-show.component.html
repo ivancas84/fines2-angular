@@ -1,3 +1,3 @@
-<app-persona-search [condition$]="condition$" [params$]="params$" (searchChange)="searchChange($event)"></app-persona-search>
-<app-persona-grid [data$]="data$" (orderChange)="orderChange($event)"></app-persona-grid>
-<app-pagination [page]="display.getPage()" [size]="display.getSize()" [collectionSize$]="collectionSize$" (pageChange)="pageChange($event)"></app-pagination>
+<app-persona-search [display$]="display$"></app-persona-search>
+<app-persona-grid [data$]="data$"></app-persona-grid>
+<app-pagination [display$]="display$" [collectionSize$]="collectionSize$"></app-pagination>
