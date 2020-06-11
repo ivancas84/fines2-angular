@@ -1,3 +1,3 @@
-<!-- app-tipo-sede-search [display]="display" (changeSearch)="changeSearch($event)"></app-tipo-sede-search -->
-<app-tipo-sede-table [data$]="data$" (changeData)="orderChange($event)"></app-tipo-sede-table>
-<app-pagination [page]="display.getPage()" [size]="display.getSize()" [collectionSize$]="collectionSize$" (pageChange)="pageChange($event)"></app-pagination>
+<!-- app-tipo-sede-search [display$]="display$"></app-tipo-sede-search -->
+<app-tipo-sede-tabñe [data$]="data$"></app-tipo-sede-table>
+<app-pagination [display$]="display$" [collectionSize$]="collectionSize$"></app-pagination>

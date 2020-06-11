@@ -1,33 +1,35 @@
+<fieldset *ngIf="display$ | async as display" [formGroup]="fieldset">
+    <div class="form-inline">
+      <div class="form-group mb-2">
+        <label class="col-form-label">Numero</label>
+        <input class="form-control" type="text" formControlName="numero">
+      </div>
+      <div class="form-group mb-2">
+        <label class="col-form-label">Nombre</label>
+        <input class="form-control" type="text" formControlName="nombre">
+      </div>
+      <div class="form-group mb-2">
+        <label class="col-form-label">Domicilio</label>
+        <app-fieldset-typeahead [fieldName]="'domicilio'" [entityName]="'domicilio'" [fieldset]="fieldset" [data$]="params$"></app-fieldset-typeahead>
+      </div>
+      <div class="form-group mb-2">
+        <label class="col-form-label">Tipo Sede:</label>
+        <select class="form-control" formControlName="tipo_sede">
+          <option [ngValue]="null">--Tipo Sede--</option>
+          <option *ngFor="let option of (optTipoSede$ | async)" [value]="option.id" >{{option.id | label:"tipo_sede"}}</option>
+        </select>
+      </div>
+      <div class="form-group mb-2">
+        <label class="col-form-label">Centro Educativo:</label>
+        <select class="form-control" formControlName="centro_educativo">
+          <option [ngValue]="null">--Centro Educativo--</option>
+          <option *ngFor="let option of (optCentroEducativo$ | async)" [value]="option.id" >{{option.id | label:"centro_educativo"}}</option>
+        </select>
+      </div>
+      <div class="form-group mb-2">
+        <label class="col-form-label">Coordinador</label>
+        <app-fieldset-typeahead [fieldName]="'coordinador'" [entityName]="'persona'" [fieldset]="fieldset" [data$]="params$"></app-fieldset-typeahead>
+      </div>
+    </div>
+  </fieldset>
   
-        <fieldset [formGroup]="fieldset">
-          <div class="form-inline">
-              <div class="form-group mb-2">
-                <label for="anio">Año</label>
-                <select class="form-control" formControlName="anio">
-                    <option [ngValue]="null">--Anio--</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-              </div>
-              <div class="form-group mb-2">
-                  <label for="anio">Semestre</label>
-                  <select class="form-control" formControlName="semestre">
-                      <option [ngValue]="null">--Semestre--</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                  </select>
-              </div>
-              <div class="form-group mb-2">
-                  <label for="anio">Modalidad</label>
-                  <select class="form-control" formControlName="modalidad">
-                      <option [ngValue]="null">--Modalidad--</option>
-                      <option *ngFor="let option of (options | async)?.modalidad" [value]="option.id" >{{option.id | label:"modalidad"}}</option>
-                  </select>
-              </div>
-              <div class="form-group mb-2">
-                  <label for="anio">Centro educativo</label>
-                  <app-fieldset-typeahead [fieldset]="fieldset" [entityName]="'centro_educativo'" [fieldName]="'centro_educativo'"></app-fieldset-typeahead>
-              </div>            
-          </div>
-        </fieldset>
