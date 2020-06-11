@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { SearchComponent } from '@component/search/search.component';
 
 @Component({
@@ -7,10 +9,12 @@ import { SearchComponent } from '@component/search/search.component';
   templateUrl: './asignatura-search.component.html',
 })
 export class AsignaturaSearchComponent extends SearchComponent {
-  readonly entityName = 'asignatura';
 
-  constructor(protected fb: FormBuilder) {
-    super(fb);
+  constructor(
+    protected fb: FormBuilder,
+    protected router: Router,
+  ) {
+    super(fb, router);
   }
 
 }

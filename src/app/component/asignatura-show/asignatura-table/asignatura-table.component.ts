@@ -6,9 +6,5 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
   selector: 'app-asignatura-table',
   templateUrl: './asignatura-table.component.html',
 })
-export class AsignaturaTableComponent extends ShowElementComponent {
-
-  readonly entityName: string = "asignatura";
-
-}
+export class AsignaturaTableComponent extends ShowElementComponent { }
 
