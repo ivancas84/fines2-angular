@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { SearchComponent } from '@component/search/search.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comision-search',
@@ -9,8 +10,12 @@ import { SearchComponent } from '@component/search/search.component';
 export class ComisionSearchComponent extends SearchComponent {
   readonly entityName = 'comision';
 
-  constructor(protected fb: FormBuilder) {
-    super(fb);
+  constructor(
+    protected fb: FormBuilder,
+    protected router: Router,
+  ) {
+    super(fb, router);
   }
+
 
 }

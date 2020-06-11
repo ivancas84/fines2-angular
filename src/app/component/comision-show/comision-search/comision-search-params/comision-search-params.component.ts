@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
-import { isEmptyObject } from '@function/is-empty-object.function';
-import { ValidatorsService } from '@service/validators/validators.service';
 import { SearchParamsComponent } from '@component/search-params/search-params.component';
-import { forkJoin, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Display } from '@class/display';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-comision-search-params',
@@ -19,19 +16,16 @@ export class ComisionSearchParamsComponent extends SearchParamsComponent {
   optModalidad$: Observable<any>;
   optCentroEducativo$: Observable<any>;
 
-  constructor(
+  constructor (
     protected fb: FormBuilder, 
-    protected dd: DataDefinitionService, 
-    protected validators: ValidatorsService) 
-  { super(fb, dd, validators); }
+    protected dd: DataDefinitionService
+  ) { super(fb); }
 
   initOptions(): void {
     this.optPlan$ = this.dd.all('plan', new Display);
     this.optModalidad$ = this.dd.all('modalidad', new Display);
     this.optCentroEducativo$ = this.dd.all('centro_educativo', new Display);
   }
-
-
 
   formGroup(): FormGroup {
     let fg: FormGroup = this.fb.group({

@@ -1,23 +1,25 @@
+<ng-template #empty>
+  <div>No se han encontrado registros.</div>
+</ng-template>
 
-<ng-template #loading>No se han encontrado registros...</ng-template>
-
-<div *ngIf="((data$ | async) && (data$ | async).length) ; else loading" class="container">
-  <div *ngFor="let row of (data$ | async); let i = index" class="row align-items-center border" [ngClass]="{'table-success':row.autorizada, 'table-danger':!row.autorizada}">
-    <div class="col-md-4">
-      <h5>{{row.id | label:'comision'}} <span *ngIf="row.apertura">(APERTURA)</span><a [routerLink]="['/comision-detail']" [queryParams]="{id:row.id}" ><span class="oi oi-magnifying-glass"></span></a><a [routerLink]="['/comision-admin']" [queryParams]="{id:row.id}" ><span class="oi oi-pencil"></span></a></h5>
-      <span *ngIf="horario_$[row.id] | async as h">
-        {{h.dias_dias}} {{h.hora_inicio | toTime | date:"HH:mm"}} a {{h.hora_fin | toTime | date:"HH:mm"}}
-      </span>
-      <br><small><a [routerLink]="['/sede-show']" [queryParams]="{id:row.sede}" >{{row.sede | label:'sede'}}</a></small>
-      <br><small><a [routerLink]="['/plan-show']" [queryParams]="{id:row.plan}" >{{row.plan | label:'plan'}}</a></small>
-      <br><small><a [routerLink]="['/comision-show']" [queryParams]="{id:row.comision_siguiente}" >{{row.comision_siguiente | label:'comision'}}</a></small>
+<div *ngIf="data$ | async as data; else empty">
+  <div *ngIf="data && data.length"> 
+      <div *ngFor="let row of data; let i = index" class="row align-items-center border">
+        <div class="col-md-4">
+        <h5>{{row.id | label:'comision'}} <span *ngIf="row.apertura">(APERTURA)</span><a [routerLink]="['/comision-detail']" [queryParams]="{id:row.id}" ><span class="oi oi-magnifying-glass"></span></a><a [routerLink]="['/comision-admin']" [queryParams]="{id:row.id}" ><span class="oi oi-pencil"></span></a></h5>
+        <span *ngIf="horario_$[row.id] | async as h">
+          {{h.dias_dias}} {{h.hora_inicio | toTime | date:"HH:mm"}} a {{h.hora_fin | toTime | date:"HH:mm"}}
+        </span>
+        <br><small><a [routerLink]="['/sede-show']" [queryParams]="{id:row.sede}" >{{row.sede | label:'sede'}}</a></small>
+        <br><small><a [routerLink]="['/plan-show']" [queryParams]="{id:row.plan}" >{{row.plan | label:'plan'}}</a></small>
+        <br><small><a [routerLink]="['/comision-show']" [queryParams]="{id:row.comision_siguiente}" >{{row.comision_siguiente | label:'comision'}}</a></small>
+      </div>
+      <div class="col-md d-none d-lg-block d-xl-block">
+        <strong>{{row.fecha_anio}}-{{row.fecha_semestre}} <span *ngIf="!row.publicada">(SIN PUBLICAR)</span></strong>
+        <div *ngIf="row.turno"><strong>Turno:</strong> {{row.turno}}</div>
+        <div *ngIf="row.observaciones">{{row.observaciones}}</div>
+        <div *ngIf="row.comentario">{{row.comentario}}</div>
+      </div>
     </div>
-    <div class="col-md d-none d-lg-block d-xl-block">
-      <strong>{{row.fecha_anio}}-{{row.fecha_semestre}} <span *ngIf="!row.publicada">(SIN PUBLICAR)</span></strong>
-      <div *ngIf="row.turno"><strong>Turno:</strong> {{row.turno}}</div>
-      <div *ngIf="row.observaciones">{{row.observaciones}}</div>
-      <div *ngIf="row.comentario">{{row.comentario}}</div>
-    </div>
-  </div>
-  
+  </div>  
 </div>

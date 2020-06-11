@@ -3,6 +3,7 @@ import { ShowElementComponent } from '@component/show-element/show-element.compo
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { BehaviorSubject } from 'rxjs';
 import { arrayColumn } from '@function/array-column';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comision-grid',
@@ -13,8 +14,8 @@ export class ComisionGridComponent extends ShowElementComponent implements OnIni
   readonly entityName = 'comision';
   horario_$ = {};
 
-  constructor(protected dd: DataDefinitionService) {
-    super(); 
+  constructor(protected dd: DataDefinitionService, protected router: Router) { 
+    super(router);
   }
 
   horario(idComision){

@@ -22,16 +22,15 @@ export class ComisionShowComponent extends ShowComponent {
   }
 
   initDisplay(params){
-    this.display = new Display();
-    this.display.setSize(100);
-    this.display.setConditionByQueryParams(params);
-    this.display.addParamIfNot("autorizada", "true");
-    this.display.addParamIfNot("cal_anio", new Date().getFullYear());
-    this.display.addParamIfNot("cal_semestre", getSemester());
-    this.display.addParamIfNot("sed_centro_educativo", "1");
-    this.display.addParamIfNot("modalidad", "1");
-    this.condition$.next(this.display.getCondition());
-    this.params$.next(this.display.getParams());
+    var display = new Display();
+    display.setSize(100);
+    display.setParamsByQueryParams(params);
+    display.addParamIfNot("autorizada", "true");
+    display.addParamIfNot("cal_anio", new Date().getFullYear());
+    display.addParamIfNot("cal_semestre", getSemester());
+    display.addParamIfNot("sed_centro_educativo", "1");
+    display.addParamIfNot("modalidad", "1");
+    this.display$.next(display);
   }
 
 
