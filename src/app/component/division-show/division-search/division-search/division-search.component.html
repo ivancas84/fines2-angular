@@ -2,7 +2,7 @@
   <div class="card-header" (click)="optCard = !optCard">Opciones</div>
   <div class="card-body" [hidden]="!optCard">
     <form [formGroup]="searchForm" novalidate (ngSubmit)="onSubmit()">       
-      <app-division-search-params [form]="searchForm" [params$]="params$"></app-division-search-params>
+      <app-division-search-params [form]="searchForm" [display$]="display$"></app-division-search-params>
       <!--app-sede-search-params [form]="searchForm" [data$]="params$"></app-sede-search-params-->
       <!--app-sede-search-condition [form]="searchForm" [data$]="condition$"></app-sede-search-condition-->
       <div class="ml-5">

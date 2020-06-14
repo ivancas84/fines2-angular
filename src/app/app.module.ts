@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { 
   NgbModule,
@@ -31,12 +31,12 @@ import { SearchAllComponent } from '@component/search-all/search-all.component';
 import { PaginationComponent } from '@component/pagination/pagination.component';
 import { MessagesComponent } from '@component/messages/messages.component';
 import { FilterTypeaheadComponent } from '@component/filter-typeahead/filter-typeahead.component';
-import { FieldsetTypeaheadComponent } from '@component/fieldset-typeahead/fieldset-typeahead.component';
 import { ModalConfirmComponent } from '@component/modal-confirm/modal-confirm.component';
 import { ToastsComponent } from '@component/toasts/toasts.component';
 import { MessageService } from '@service/message/message.service';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
+import { TypeaheadComponent } from '@component/typeahead/typeahead.component';
 import { ToastService } from '@service/ng-bootstrap/toast.service';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { NgbIsoDateAdapter } from '@service/ng-bootstrap/ngb-iso-date-adapter';
@@ -129,7 +129,7 @@ import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-
     SearchAllComponent,
     PaginationComponent,
     MessagesComponent,
-    FilterTypeaheadComponent, FieldsetTypeaheadComponent,
+    FilterTypeaheadComponent, TypeaheadComponent,
     ModalConfirmComponent,
     ToastsComponent,
     UploadComponent,
@@ -164,7 +164,7 @@ import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-
   ],
   imports: [
     BrowserModule, AppRoutingModule, HttpClientModule,
-    ReactiveFormsModule,
+    FormsModule, ReactiveFormsModule,
     NgbModule
     //NgbToastModule, NgbCollapseModule, NgbDropdownModule, NgbPaginationModule, NgbAccordionModule, NgbTypeaheadModule, NgbDatepickerModule, NgbTimepickerModule
   ],

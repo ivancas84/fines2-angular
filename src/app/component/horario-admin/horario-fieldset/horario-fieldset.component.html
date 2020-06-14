@@ -2,7 +2,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Curso</label>
     <div class="col-sm-10">
-      <app-fieldset-typeahead [readonly]="true" [fieldset]="fieldset" [entityName]="'curso'" [fieldName]="'curso'"></app-fieldset-typeahead>
+      <app-typeahead [readonly]="true" [entityName]="'curso'" [field]="curso"></app-typeahead>
       <div class="text-danger" *ngIf="(curso.touched || curso.dirty) && curso.invalid">
         <div *ngIf="curso.errors.required">Debe completar valor</div>
         <div *ngIf="(curso.touched && curso.errors.unselected)">Valor no seleccionado</div>

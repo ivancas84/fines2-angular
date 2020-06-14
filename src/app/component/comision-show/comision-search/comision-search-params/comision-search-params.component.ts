@@ -47,4 +47,7 @@ export class ComisionSearchParamsComponent extends SearchParamsComponent {
     return fg;
   }
 
+
+  get sede() { return this.form.get('sede')}
+
 }

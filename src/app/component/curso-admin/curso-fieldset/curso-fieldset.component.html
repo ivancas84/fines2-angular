@@ -10,7 +10,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Comision</label>
     <div class="col-sm-10">
-      <app-fieldset-typeahead [fieldset]="fieldset" [entityName]="'comision'" [fieldName]="'comision'"></app-fieldset-typeahead>
+      <app-typeahead [entityName]="'comision'" [field]="comision"></app-typeahead>
       <div class="text-danger" *ngIf="(comision.touched || comision.dirty) && comision.invalid">
         <div *ngIf="comision.errors.required">Debe completar valor</div>
         <div *ngIf="(comision.touched && comision.errors.unselected)">Valor no seleccionado</div>
@@ -20,7 +20,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Carga Horaria</label>
     <div class="col-sm-10">
-      <app-fieldset-typeahead [fieldset]="fieldset" [entityName]="'carga_horaria'" [fieldName]="'carga_horaria'"></app-fieldset-typeahead>
+      <app-typeahead [entityName]="'carga_horaria'" [field]="cargaHoraria"></app-typeahead>
       <div class="text-danger" *ngIf="(cargaHoraria.touched || cargaHoraria.dirty) && cargaHoraria.invalid">
         <div *ngIf="cargaHoraria.errors.required">Debe completar valor</div>
         <div *ngIf="(cargaHoraria.touched && cargaHoraria.errors.unselected)">Valor no seleccionado</div>

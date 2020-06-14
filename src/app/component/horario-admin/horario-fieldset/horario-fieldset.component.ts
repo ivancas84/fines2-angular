@@ -40,27 +40,6 @@ export class HorarioFieldsetComponent extends FieldsetComponent {
     );
   }
 
-  initData(): void {
-    this.data$.subscribe(
-      response => {
-        this.setDefaultValues();
-
-        if(!isEmptyObject(response)) {
-          var obs = [];
-
-          if(response.curso)
-            obs.push( this.dd.get("curso",response.curso) );
-          
-          if(response.dia)
-            obs.push( this.dd.get("dia",response.dia) );
-          
-          if(obs.length){ forkJoin(obs).subscribe( () => this.fieldset.reset(response) ); }
-          else { this.fieldset.reset(response); }
-        }
-      }
-    );
-  }
-
   formGroup(): FormGroup {
     let fg: FormGroup = this.fb.group({
       id:null,

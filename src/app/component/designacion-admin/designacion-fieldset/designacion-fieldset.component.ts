@@ -41,30 +41,6 @@ export class DesignacionFieldsetComponent extends FieldsetComponent {
     );
   }
 
-  initData(): void {
-    this.data$.subscribe(
-      response => {
-        this.setDefaultValues();
-
-        if(!isEmptyObject(response)) {
-          var obs = [];
-
-          if(response.sede) {
-            var ob = this.dd.getOrNull("sede",response.sede);
-            obs.push(ob);
-          }
-
-          if(response.persona) {
-            var ob = this.dd.getOrNull("persona",response.persona);
-            obs.push(ob);
-          }
-
-          if(obs.length){ forkJoin(obs).subscribe( () => this.fieldset.reset(response) ); } 
-          else { this.fieldset.reset(response); }
-        }
-      }
-    );
-  }
 
   formGroup(): FormGroup {
     let fg: FormGroup = this.fb.group({

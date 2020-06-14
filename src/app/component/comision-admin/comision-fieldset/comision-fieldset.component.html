@@ -22,31 +22,6 @@
     </div>
   </div>
   <div class="form-group form-row">
-    <label class="col-sm-2 col-form-label">Anio:</label>
-    <div class="col-sm-10">
-      <select class="form-control" formControlName="anio" [ngClass]="{'is-invalid':(anio.invalid && (anio.dirty || anio.touched))}">
-        <option [ngValue]="null">--Anio--</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-      </select>
-      <div class="text-danger" *ngIf="(anio.touched || anio.dirty) && anio.invalid">
-      </div>
-    </div>
-  </div>
-  <div class="form-group form-row">
-    <label class="col-sm-2 col-form-label">Semestre:</label>
-    <div class="col-sm-10">
-      <select class="form-control" formControlName="semestre" [ngClass]="{'is-invalid':(semestre.invalid && (semestre.dirty || semestre.touched))}">
-        <option [ngValue]="null">--Semestre--</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-      </select>
-      <div class="text-danger" *ngIf="(semestre.touched || semestre.dirty) && semestre.invalid">
-      </div>
-    </div>
-  </div>
-  <div class="form-group form-row">
     <label class="col-sm-2 col-form-label">Comentario</label>
     <div class="col-sm-10">
       <textarea class="form-control" type="text" formControlName="comentario"  [ngClass]="{'is-invalid':(comentario.invalid && (comentario.dirty || comentario.touched))}"></textarea>
@@ -76,29 +51,6 @@
       </div>
   </div>
   <div class="form-group form-row">
-    <label class="col-sm-2 col-form-label">Fecha anio</label>
-    <div class="col-sm-10">
-      <input class="form-control" placeholder="yyyy" type="text" formControlName="fecha_anio"  [ngClass]="{'is-invalid':(fechaAnio.invalid && (fechaAnio.dirty || fechaAnio.touched))}">
-      <div class="text-danger" *ngIf="(fechaAnio.touched || fechaAnio.dirty) && fechaAnio.invalid">
-        <div *ngIf="fechaAnio.errors.nonNumeric">Ingrese sólo números</div>
-        <div *ngIf="fechaAnio.errors.notYear">No es un año válido</div>    
-        <div *ngIf="fechaAnio.errors.minYear">Valor no permitido</div>
-      </div>
-    </div>
-  </div>
-  <div class="form-group form-row">
-    <label class="col-sm-2 col-form-label">Fecha Semestre:</label>
-    <div class="col-sm-10">
-      <select class="form-control" formControlName="fecha_semestre" [ngClass]="{'is-invalid':(fechaSemestre.invalid && (fechaSemestre.dirty || fechaSemestre.touched))}">
-        <option [ngValue]="null">--Fecha Semestre--</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-      </select>
-      <div class="text-danger" *ngIf="(fechaSemestre.touched || fechaSemestre.dirty) && fechaSemestre.invalid">
-      </div>
-    </div>
-  </div>
-  <div class="form-group form-row">
     <label class="col-sm-2 col-form-label">Observaciones</label>
     <div class="col-sm-10">
       <textarea class="form-control" type="text" formControlName="observaciones"  [ngClass]="{'is-invalid':(observaciones.invalid && (observaciones.dirty || observaciones.touched))}"></textarea>
@@ -109,22 +61,10 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Sede</label>
     <div class="col-sm-10">
-      <app-fieldset-typeahead [data$]="data$" [fieldset]="fieldset" [entityName]="'sede'" [fieldName]="'sede'"></app-fieldset-typeahead>
+      <app-typeahead [field]="sede" [entityName]="'sede'"></app-typeahead>
       <div class="text-danger" *ngIf="(sede.touched || sede.dirty) && sede.invalid">
         <div *ngIf="sede.errors.required">Debe completar valor</div>
         <div *ngIf="(sede.touched && sede.errors.unselected)">Valor no seleccionado</div>
-      </div>
-    </div>
-  </div>
-  <div class="form-group form-row">
-    <label class="col-sm-2 col-form-label">Plan</label>
-    <div class="col-sm-10">
-      <select class="form-control" formControlName="plan" [ngClass]="{'is-invalid':(plan.invalid && (plan.dirty || plan.touched))}">
-        <option [ngValue]="null">--Plan--</option>
-        <option *ngFor="let option of (optPlan$ | async)" [value]="option.id" >{{option.id | label:"plan"}}</option>
-      </select>
-      <div class="text-danger" *ngIf="(plan.touched || plan.dirty) && plan.invalid">
-        <div *ngIf="plan.errors.required">Debe completar valor</div>
       </div>
     </div>
   </div>
@@ -141,15 +81,30 @@
     </div>
   </div>
   <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Planificacion</label>
+    <div class="col-sm-10">
+      <app-typeahead [field]="planificacion" [entityName]="'planificacion'"></app-typeahead>
+      <div class="text-danger" *ngIf="(planificacion.touched || planificacion.dirty) && planificacion.invalid">
+        <div *ngIf="(planificacion.touched && planificacion.errors.unselected)">Valor no seleccionado</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
     <label class="col-sm-2 col-form-label">Comision Siguiente</label>
     <div class="col-sm-10">
-      <app-fieldset-typeahead  [data$]="data$" [fieldset]="fieldset" [entityName]="'comision'" [fieldName]="'comision_siguiente'"></app-fieldset-typeahead>
+      <app-typeahead [field]="comisionSiguiente" [entityName]="'comision'"></app-typeahead>
       <div class="text-danger" *ngIf="(comisionSiguiente.touched || comisionSiguiente.dirty) && comisionSiguiente.invalid">
         <div *ngIf="(comisionSiguiente.touched && comisionSiguiente.errors.unselected)">Valor no seleccionado</div>
       </div>
     </div>
   </div>
-  <div class="text-danger" *ngIf="fieldset.errors">
-    <div *ngIf="fieldset.errors.notUnique">El valor ya se encuentra utilizado: <a routerLink="/comision-admin" [queryParams]="{'id':fieldset.errors.notUnique}">Cargar</a></div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Calendario</label>
+    <div class="col-sm-10">
+      <app-typeahead [field]="calendario" [entityName]="'calendario'"></app-typeahead>
+      <div class="text-danger" *ngIf="(calendario.touched || calendario.dirty) && calendario.invalid">
+        <div *ngIf="(calendario.touched && calendario.errors.unselected)">Valor no seleccionado</div>
+      </div>
+    </div>
   </div>
 </fieldset>

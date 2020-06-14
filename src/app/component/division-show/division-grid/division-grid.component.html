@@ -1,7 +1,7 @@
 
 <ng-template #loading>No se han encontrado registros...</ng-template>
 
-<div *ngIf="data$ | async as data; else empty">
+<div *ngIf="data$ | async as data; else loading">
   <div *ngIf="data && data.length"> 
     <div *ngFor="let row of data; let i = index" class="row align-items-center border">
       <h5><a [routerLink]="['/comision-show']" [queryParams]="{division:row.division, sede:row.sede}" >{{row.sed_nombre}}, {{row.division}}</a></h5>

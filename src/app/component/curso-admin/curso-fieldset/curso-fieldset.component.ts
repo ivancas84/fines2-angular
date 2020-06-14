@@ -24,30 +24,7 @@ export class CursoFieldsetComponent extends FieldsetComponent {
     super(fb, dd, validators);
   }
 
-  initData(): void {
-    this.data$.subscribe(
-      response => {
-        this.setDefaultValues();
 
-        if(!isEmptyObject(response)) {
-          var obs = [];
-
-          if(response.comision) {
-            var ob = this.dd.getOrNull("comision",response.comision);
-            obs.push(ob);
-          }
-
-          if(response.carga_horaria) {
-            var ob = this.dd.getOrNull("carga_horaria",response.carga_horaria);
-            obs.push(ob);
-          }
-
-          if(obs.length){ forkJoin(obs).subscribe( () => this.fieldset.reset(response) ); } 
-          else { this.fieldset.reset(response); }
-        }
-      }
-    );
-  }
 
   formGroup(): FormGroup {
     let fg: FormGroup = this.fb.group({
