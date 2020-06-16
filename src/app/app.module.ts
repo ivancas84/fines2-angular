@@ -12,7 +12,7 @@ import {
   // NgbAccordionModule,
   // NgbTypeaheadModule,
   // NgbToastModule,
-  NgbDatepickerModule,
+  // NgbDatepickerModule,
   NgbDateParserFormatter,
   // NgbTimepickerModule,
   NgbTimeAdapter,
