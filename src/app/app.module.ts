@@ -30,7 +30,6 @@ import { SummaryPipe } from '@pipe/summary.pipe';
 import { SearchAllComponent } from '@component/search-all/search-all.component';
 import { PaginationComponent } from '@component/pagination/pagination.component';
 import { MessagesComponent } from '@component/messages/messages.component';
-import { FilterTypeaheadComponent } from '@component/filter-typeahead/filter-typeahead.component';
 import { ModalConfirmComponent } from '@component/modal-confirm/modal-confirm.component';
 import { ToastsComponent } from '@component/toasts/toasts.component';
 import { MessageService } from '@service/message/message.service';
@@ -129,7 +128,7 @@ import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-
     SearchAllComponent,
     PaginationComponent,
     MessagesComponent,
-    FilterTypeaheadComponent, TypeaheadComponent,
+    TypeaheadComponent,
     ModalConfirmComponent,
     ToastsComponent,
     UploadComponent,
