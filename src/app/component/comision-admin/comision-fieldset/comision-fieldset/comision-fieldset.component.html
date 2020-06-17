@@ -83,7 +83,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Planificacion</label>
     <div class="col-sm-10">
-      <app-typeahead [field]="planificacion" [entityName]="'planificacion'"></app-typeahead>
+      <app-planificacion-form-pick [field]="planificacion"></app-planificacion-form-pick>
       <div class="text-danger" *ngIf="(planificacion.touched || planificacion.dirty) && planificacion.invalid">
         <div *ngIf="(planificacion.touched && planificacion.errors.unselected)">Valor no seleccionado</div>
       </div>
