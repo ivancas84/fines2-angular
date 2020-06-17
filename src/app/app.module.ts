@@ -78,7 +78,7 @@ import { PlanFieldsetComponent } from '@component/plan-admin/plan-fieldset/plan-
 import { PlanShowComponent } from '@component/plan-show/plan-show/plan-show.component';
 import { PlanTableComponent } from '@component/plan-show/plan-table/plan-table.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin/comision-admin.component';
-import { ComisionFieldsetComponent } from '@component/comision-admin/comision-fieldset/comision-fieldset.component';
+import { ComisionFieldsetComponent } from '@component/comision-admin/comision-fieldset/comision-fieldset/comision-fieldset.component';
 import { ComisionShowComponent } from '@component/comision-show/comision-show/comision-show.component';
 import { PersonaSearchComponent } from '@component/persona-show/persona-search/persona-search.component';
 import { AsignaturaShowComponent } from '@component/asignatura-show/asignatura-show/asignatura-show.component';
@@ -118,6 +118,7 @@ import { TelefonoFieldsetComponent } from '@component/telefono-admin/telefono-fi
 import { ConsolidadoSearchParamsComponent } from '@component/consolidado/consolidado-search/consolidado-search-params/consolidado-search-params.component';
 import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
 import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-fieldset.component';
+import { PlanificacionFormPickComponent } from '@component/comision-admin/comision-fieldset/planificacion-form-pick/planificacion-form-pick.component';
 
 
 @NgModule({
@@ -139,7 +140,7 @@ import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-
     CargoAdminComponent, CargoFieldsetComponent,
     CentroEducativoAdminComponent, CentroEducativoFieldsetComponent, DomicilioCeFieldsetComponent,
     CentroEducativoShowComponent, CentroEducativoTableComponent,
-    ComisionAdminComponent, ComisionFieldsetComponent, ComisionCursoAdminComponent,
+    ComisionAdminComponent, ComisionFieldsetComponent, ComisionCursoAdminComponent, PlanificacionFormPickComponent,
     ComisionShowComponent, ComisionGridComponent, ComisionSearchComponent, ComisionSearchParamsComponent, 
     ComisionDetailComponent, ComisionCardComponent, ComisionHorarioGridComponent, ComisionCursoGridComponent, CrearHorariosComisionComponent,
     ConsolidadoComponent, ConsolidadoTableComponent, ConsolidadoSearchComponent, ConsolidadoSearchParamsComponent,
