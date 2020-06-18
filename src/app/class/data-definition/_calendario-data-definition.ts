@@ -21,6 +21,8 @@ export class _CalendarioDataDefinition extends DataDefinition {
 
     if (row["fin"]) ret = ret.trim() + " " + this.parser.dateFormat(this.parser.date(row["fin"]), 'd/m/Y');
 
+    if (row["anio"]) ret = ret.trim() + " " + row["anio"];
+
     if (row["semestre"]) ret = ret.trim() + " " + row["semestre"];
 
     return ret.trim();
