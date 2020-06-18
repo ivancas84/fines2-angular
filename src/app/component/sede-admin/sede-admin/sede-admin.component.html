@@ -1,5 +1,5 @@
 
-<form [formGroup]="adminForm" (ngSubmit)="onSubmit()" novalidate>
+<form *ngIf="params$ | async" [formGroup]="adminForm" (ngSubmit)="onSubmit()" novalidate>
 
   <app-sede-fieldset [form]="adminForm" [data$]="data$"></app-sede-fieldset>
   <app-domicilio-sede-fieldset [form]="adminForm" [data$]="domicilio$"></app-domicilio-sede-fieldset>

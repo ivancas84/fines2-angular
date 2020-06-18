@@ -1,5 +1,5 @@
 import { AdminComponent } from '@component/admin/admin.component';
-import { OnInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -37,7 +37,6 @@ export class SedeAdminComponent extends AdminComponent {
 
   ngOnInit() {
     this.storageValueChanges();
-    this.subscribeQueryParams();   
     this.initData();
     this.initDesignaciones();
   }

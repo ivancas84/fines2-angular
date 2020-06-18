@@ -3,10 +3,9 @@ import { FieldsetComponent } from '@component/fieldset/fieldset.component';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { ValidatorsService } from '@service/validators/validators.service';
-import { forkJoin, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Display } from '@class/display';
-import { isEmptyObject } from '@function/is-empty-object.function';
+import { arrayColumn } from '@function/array-column';
 
 @Component({
   selector: 'app-comision-fieldset',
@@ -17,12 +16,48 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
   readonly entityName: string = 'comision';
 
   optModalidad$: Observable<Array<any>>;
+  divisiones: Array<any>;
 
   constructor(
     protected fb: FormBuilder, 
     protected dd: DataDefinitionService, 
     protected validators: ValidatorsService) {
     super(fb, dd, validators);
+  }
+
+  initForm(): void {
+    this.fieldset = this.formGroup();
+    this.form.addControl(this.entityName, this.fieldset);
+    
+    /**
+     * Si se desea suscribirse a los cambios de sede en el template 
+     * debe agregarse un nuevo div y hacerlo previamente a "load$"
+     * ya que no se cargaran los cambios iniciales 
+     */
+    this.sede.valueChanges.subscribe(
+      value => {
+        if(!value) {
+          this.divisiones = [];
+          Object.keys(this.fieldset.controls).forEach(key => {
+            console.log("estoy");
+            if(key != "sede") this.fieldset.controls[key].disable();
+          });
+          return;
+        }
+        
+        Object.keys(this.fieldset.controls).forEach(key => {
+          if(key != "sede") this.fieldset.controls[key].enable();
+        });
+
+        var display = new Display
+        display.addParam("sede",value)
+        this.dd.data("division", display).subscribe(
+          divisiones => {
+            this.divisiones = arrayColumn(divisiones, "division");
+          }
+        );
+      }
+    );
   }
 
   initOptions(): void {

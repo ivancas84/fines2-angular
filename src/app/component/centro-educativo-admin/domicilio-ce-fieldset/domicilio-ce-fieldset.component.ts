@@ -16,7 +16,6 @@ import { FieldsetComponent } from '@component/fieldset/fieldset.component';
 export class DomicilioCeFieldsetComponent extends FieldsetOptionalComponent {
 
   entityName: string = 'domicilio';
-  fieldsetName: string = 'domicilio';
 
   constructor(
     protected fb: FormBuilder, 

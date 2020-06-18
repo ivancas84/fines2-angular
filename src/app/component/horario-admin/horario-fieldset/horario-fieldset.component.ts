@@ -3,10 +3,8 @@ import { FieldsetComponent } from '@component/fieldset/fieldset.component';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { ValidatorsService } from '@service/validators/validators.service';
-import { forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Display } from '@class/display';
-import { isEmptyObject } from '@function/is-empty-object.function';
 
 @Component({
   selector: 'app-horario-fieldset',
@@ -16,6 +14,7 @@ export class HorarioFieldsetComponent extends FieldsetComponent {
 
   readonly entityName: string = 'horario';
 
+  optDia$: Observable<any>;
   constructor(
     protected fb: FormBuilder, 
     protected dd: DataDefinitionService, 
@@ -24,20 +23,7 @@ export class HorarioFieldsetComponent extends FieldsetComponent {
   }
 
   initOptions(): void {
-    let obs = [];      
-
-    var ob = this.dd.all('dia', new Display);
-    obs.push(ob);
-
-    this.options = forkJoin(obs).pipe(
-      map(
-        options => {
-          var o = {};
-          o['dia'] = options[0];
-          return o;
-        }
-      )
-    );
+    this.optDia$ = this.dd.all('dia', new Display);
   }
 
   formGroup(): FormGroup {

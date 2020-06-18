@@ -3,10 +3,8 @@ import { FieldsetComponent } from '@component/fieldset/fieldset.component';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { ValidatorsService } from '@service/validators/validators.service';
-import { forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Display } from '@class/display';
-import { isEmptyObject } from '@function/is-empty-object.function';
 
 @Component({
   selector: 'app-designacion-fieldset',
@@ -17,6 +15,8 @@ export class DesignacionFieldsetComponent extends FieldsetComponent {
   entityName: string = 'designacion';
   fieldsetName: string = 'designacion';
 
+  optCargo$: Observable<Array<any>>;
+
   constructor(
     protected fb: FormBuilder, 
     protected dd: DataDefinitionService, 
@@ -25,22 +25,8 @@ export class DesignacionFieldsetComponent extends FieldsetComponent {
   }
 
   initOptions(): void {
-    let obs = [];      
-
-    var ob = this.dd.all('cargo', new Display);
-    obs.push(ob);
-
-    this.options = forkJoin(obs).pipe(
-      map(
-        options => {
-          var o = {};
-          o['cargo'] = options[0];
-          return o;
-        }
-      )
-    );
+    this.optCargo$ = this.dd.all('cargo', new Display);
   }
-
 
   formGroup(): FormGroup {
     let fg: FormGroup = this.fb.group({
