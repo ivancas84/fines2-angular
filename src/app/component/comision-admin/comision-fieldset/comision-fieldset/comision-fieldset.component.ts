@@ -3,10 +3,11 @@ import { FieldsetComponent } from '@component/fieldset/fieldset.component';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { ValidatorsService } from '@service/validators/validators.service';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Display } from '@class/display';
 import { isEmptyObject } from '@function/is-empty-object.function';
+import { arrayColumn } from '@function/array-column';
 
 @Component({
   selector: 'app-comision-fieldset',
@@ -17,7 +18,7 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
   readonly entityName: string = 'comision';
 
   optModalidad$: Observable<Array<any>>;
-  designaciones$: Observable<any>;
+  divisiones: Array<any>;
 
   constructor(
     protected fb: FormBuilder, 
@@ -27,16 +28,26 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
   }
 
   initForm(): void {
-    console.log("estoy");
     this.fieldset = this.formGroup();
     this.form.addControl(this.entityName, this.fieldset);
-    this.designaciones$ = this.sede.valueChanges.pipe(map(
-      value => {
-        console.log(value);
-        return value;
-      }
-    ))
     
+    /**
+     * Si se desea suscribirse a los cambios de sede en el template 
+     * debe agregarse un nuevo div y hacerlo previamente a "load$"
+     * ya que no se cargaran los cambios iniciales 
+     */
+    this.sede.valueChanges.subscribe(
+      value => {
+        if(!value) this.divisiones = [];
+        var display = new Display
+        display.addParam("sede",value)
+        this.dd.data("division", display).subscribe(
+          divisiones => {
+            this.divisiones = arrayColumn(divisiones, "division");
+          }
+        );
+      }
+    );
   }
 
   initOptions(): void {

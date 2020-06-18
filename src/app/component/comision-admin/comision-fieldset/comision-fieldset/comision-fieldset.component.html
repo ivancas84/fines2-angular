@@ -1,4 +1,24 @@
 <fieldset *ngIf="load$ | async" [formGroup]="fieldset">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Sede</label>
+    <div class="col-sm-10">
+      <app-typeahead [field]="sede" [entityName]="'sede'"></app-typeahead>
+      <div class="text-danger" *ngIf="(sede.touched || sede.dirty) && sede.invalid">
+        <div *ngIf="sede.errors.required">Debe completar valor</div>
+        <div *ngIf="(sede.touched && sede.errors.unselected)">Valor no seleccionado</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Division</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" formControlName="division"  [ngClass]="{'is-invalid':(division.invalid && (division.dirty || division.touched))}">
+      <div class="text-danger" *ngIf="(division.touched || division.dirty) && division.invalid">
+        <div *ngIf="division.errors.required">Debe completar valor</div>
+      </div>
+      <div>Divisiones existentes: {{divisiones}}</div>
+    </div>
+  </div>
   <div class="form-group form-row">
     <label class="col-sm-2 col-form-label">Turno:</label>
     <div class="col-sm-10">
@@ -12,16 +32,7 @@
       </div>
     </div>
   </div>
-  <div class="form-group form-row">
-    <label class="col-sm-2 col-form-label">Division</label>
-    <div class="col-sm-10">
-      <input class="form-control" type="text" formControlName="division"  [ngClass]="{'is-invalid':(division.invalid && (division.dirty || division.touched))}">
-      <div class="text-danger" *ngIf="(division.touched || division.dirty) && division.invalid">
-        <div *ngIf="division.errors.required">Debe completar valor</div>
-      </div>
-      <div *ngIf="(designaciones$ | async) as designaciones">{{designaciones}}</div>
-    </div>
-  </div>
+  
   <div class="form-group form-row">
     <label class="col-sm-2 col-form-label">Comentario</label>
     <div class="col-sm-10">
@@ -59,16 +70,7 @@
       </div>
     </div>
   </div>
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Sede</label>
-    <div class="col-sm-10">
-      <app-typeahead [field]="sede" [entityName]="'sede'"></app-typeahead>
-      <div class="text-danger" *ngIf="(sede.touched || sede.dirty) && sede.invalid">
-        <div *ngIf="sede.errors.required">Debe completar valor</div>
-        <div *ngIf="(sede.touched && sede.errors.unselected)">Valor no seleccionado</div>
-      </div>
-    </div>
-  </div>
+  
   <div class="form-group form-row">
     <label class="col-sm-2 col-form-label">Modalidad</label>
     <div class="col-sm-10">
