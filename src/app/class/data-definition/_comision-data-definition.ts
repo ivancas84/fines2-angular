@@ -1,4 +1,6 @@
 import { SedeDataDefinition } from '@class/data-definition/sede-data-definition';
+import { PlanificacionDataDefinition } from '@class/data-definition/planificacion-data-definition';
+import { CalendarioDataDefinition } from '@class/data-definition/calendario-data-definition';
 import { DataDefinition } from 'src/app/core/class/data-definition';
 
 export class _ComisionDataDefinition extends DataDefinition {
@@ -82,9 +84,19 @@ export class _ComisionDataDefinition extends DataDefinition {
     if(!row) return null;
 
     let ret = "";
+    if (row["division"]) ret = ret.trim() + " " + row["division"];
+
     if(row.sede) {
       var e = new SedeDataDefinition(this.stg, this.parser);
       ret = ret.trim() + " " + e.label(row.sede);
+    }
+    if(row.planificacion) {
+      var e = new PlanificacionDataDefinition(this.stg, this.parser);
+      ret = ret.trim() + " " + e.label(row.planificacion);
+    }
+    if(row.calendario) {
+      var e = new CalendarioDataDefinition(this.stg, this.parser);
+      ret = ret.trim() + " " + e.label(row.calendario);
     }
     return ret.trim();
   }

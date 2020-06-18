@@ -1,3 +1,4 @@
+import { PlanDataDefinition } from '@class/data-definition/plan-data-definition';
 import { DataDefinition } from 'src/app/core/class/data-definition';
 
 export class _PlanificacionDataDefinition extends DataDefinition {
@@ -22,12 +23,14 @@ export class _PlanificacionDataDefinition extends DataDefinition {
     if(!row) return null;
 
     let ret = "";
-    if (row["id"]) ret = ret.trim() + " " + row["id"];
-
     if (row["anio"]) ret = ret.trim() + " " + row["anio"];
 
     if (row["semestre"]) ret = ret.trim() + " " + row["semestre"];
 
+    if(row.plan) {
+      var e = new PlanDataDefinition(this.stg, this.parser);
+      ret = ret.trim() + " " + e.label(row.plan);
+    }
     return ret.trim();
   }
 }

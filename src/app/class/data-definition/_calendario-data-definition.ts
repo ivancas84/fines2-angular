@@ -12,4 +12,17 @@ export class _CalendarioDataDefinition extends DataDefinition {
     this.stg.setItem("calendario" + rowCloned.id, rowCloned);
   }
 
+  label (id: string | number): string {
+    var row = this.stg.getItem(this.entity + id);
+    if(!row) return null;
+
+    let ret = "";
+    if (row["inicio"]) ret = ret.trim() + " " + this.parser.dateFormat(this.parser.date(row["inicio"]), 'd/m/Y');
+
+    if (row["fin"]) ret = ret.trim() + " " + this.parser.dateFormat(this.parser.date(row["fin"]), 'd/m/Y');
+
+    if (row["semestre"]) ret = ret.trim() + " " + row["semestre"];
+
+    return ret.trim();
+  }
 }
