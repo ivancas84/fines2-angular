@@ -36,7 +36,19 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
      */
     this.sede.valueChanges.subscribe(
       value => {
-        if(!value) this.divisiones = [];
+        if(!value) {
+          this.divisiones = [];
+          Object.keys(this.fieldset.controls).forEach(key => {
+            console.log("estoy");
+            if(key != "sede") this.fieldset.controls[key].disable();
+          });
+          return;
+        }
+        
+        Object.keys(this.fieldset.controls).forEach(key => {
+          if(key != "sede") this.fieldset.controls[key].enable();
+        });
+
         var display = new Display
         display.addParam("sede",value)
         this.dd.data("division", display).subscribe(
