@@ -1,3 +1,4 @@
+<div *ngIf="load$ | async">
 
 <h3>Domicilio
     <button *ngIf="fieldset.enabled" type="button" class="btn btn-success" (click)="fieldset.disable()">SI</button>
@@ -5,7 +6,7 @@
   
   </h3>
 
-<fieldset *ngIf="fieldset.enabled" [formGroup]="fieldset">
+<fieldset  *ngIf="fieldset.enabled" [formGroup]="fieldset">
 
     <div class="form-group form-row">
       <label class="col-sm-2 col-form-label">Calle</label>
@@ -68,3 +69,4 @@
     </div>
   </fieldset>
   
+</div>

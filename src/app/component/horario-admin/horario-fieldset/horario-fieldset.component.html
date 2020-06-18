@@ -1,4 +1,4 @@
-<fieldset [formGroup]="fieldset">
+<fieldset *ngIf="load$ | async" [formGroup]="fieldset">
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Curso</label>
     <div class="col-sm-10">
@@ -14,7 +14,7 @@
     <div class="col-sm-10">
       <select class="form-control" formControlName="dia" [ngClass]="{'is-invalid':(dia.invalid && (dia.dirty || dia.touched))}">
         <option [ngValue]="null">--Dia--</option>
-        <option *ngFor="let option of (options | async)?.dia" [value]="option.id" >{{option.id | label:"dia"}}</option>
+        <option *ngFor="let option of (optDia$ | async)" [value]="option.id" >{{option.id | label:"dia"}}</option>
       </select>
       <div class="text-danger" *ngIf="(dia.touched || dia.dirty) && dia.invalid">
         <div *ngIf="dia.errors.required">Debe completar valor</div>

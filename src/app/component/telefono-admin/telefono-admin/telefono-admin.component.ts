@@ -1,5 +1,5 @@
 import { AdminComponent } from '@component/admin/admin.component';
-import { OnInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -34,7 +34,6 @@ export class TelefonoAdminComponent extends AdminComponent {
      * Se desactiva el registro de valores del formulario en el storage
      * Utilizar el storage dificulta el hecho de agregar mas de un telefono a la misma persona
      */
-    this.subscribeQueryParams();
     this.initData();   
   }
 }
