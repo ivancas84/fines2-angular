@@ -8,6 +8,8 @@ import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { AdminComponent } from '@component/admin/admin.component';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { emptyUrl } from '@function/empty-url.function';
 
 @Component({
   selector: 'app-comision-detail',
@@ -36,12 +38,17 @@ export class ComisionDetailComponent extends AdminComponent {
   }
 
   ngOnInit() {
-    this.subscribeQueryParams();   
     this.initData();
   }
 
   initData(){
-    this.setDataFromParams(this.params$.value);
+    this.params$ = this.route.queryParams.pipe(map(
+      params => {
+        this.setDataFromParams(params);
+        return true;
+      },
+      error => { this.toast.showDanger(JSON.stringify(error)); }
+    ))
   }
 
   persist(): Observable<any> {
@@ -71,7 +78,10 @@ export class ComisionDetailComponent extends AdminComponent {
               element => this.storage.removeItem(element)
             );
           }
-          this.params$.next({id:this.getProcessedId(response)}); 
+
+          let route = emptyUrl(this.router.url) + "?id="+this.getProcessedId(response);
+          if(route != this.router.url)  this.router.navigateByUrl('/' + route);
+          else this.setData(this.route.snapshot.queryParams)
           /**
            * por mas que sea el mismo valor, se vuelve a asignar y se recarga el formulario
            */

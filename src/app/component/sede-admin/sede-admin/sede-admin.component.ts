@@ -37,7 +37,6 @@ export class SedeAdminComponent extends AdminComponent {
 
   ngOnInit() {
     this.storageValueChanges();
-    this.subscribeQueryParams();   
     this.initData();
     this.initDesignaciones();
   }
