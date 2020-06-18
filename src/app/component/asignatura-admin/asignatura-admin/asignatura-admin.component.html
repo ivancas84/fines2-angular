@@ -1,5 +1,5 @@
 
-<form [formGroup]="adminForm" (ngSubmit)="onSubmit()" novalidate>
+<form *ngIf="params$ | async" [formGroup]="adminForm" (ngSubmit)="onSubmit()" novalidate>
   <app-asignatura-fieldset [form]="adminForm" [data$]="data$"></app-asignatura-fieldset>
   <button type="submit" class="btn btn-primary">Aceptar</button>&nbsp;
   <button type="button" class="btn btn-secondary" (click)="back()"><span class="oi oi-arrow-thick-left" title="Volver"></span></button>
