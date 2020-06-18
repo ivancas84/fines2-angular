@@ -17,12 +17,26 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
   readonly entityName: string = 'comision';
 
   optModalidad$: Observable<Array<any>>;
+  designaciones$: Observable<any>;
 
   constructor(
     protected fb: FormBuilder, 
     protected dd: DataDefinitionService, 
     protected validators: ValidatorsService) {
     super(fb, dd, validators);
+  }
+
+  initForm(): void {
+    console.log("estoy");
+    this.fieldset = this.formGroup();
+    this.form.addControl(this.entityName, this.fieldset);
+    this.designaciones$ = this.sede.valueChanges.pipe(map(
+      value => {
+        console.log(value);
+        return value;
+      }
+    ))
+    
   }
 
   initOptions(): void {
