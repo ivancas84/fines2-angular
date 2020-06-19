@@ -1,5 +1,5 @@
 
-<form class="container" [formGroup]="adminForm" (ngSubmit)="onSubmit()" novalidate>
+<form class="container" [formGroup]="adminForm" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
   <app-comision-fieldset [form]="adminForm" [data$]="data$"></app-comision-fieldset>
   <button [disabled]="adminForm.pending" type="submit" class="btn btn-primary">Aceptar</button>&nbsp;
   <button type="button" class="btn btn-secondary" (click)="back()"><span class="oi oi-arrow-thick-left" title="Volver"></span></button>
