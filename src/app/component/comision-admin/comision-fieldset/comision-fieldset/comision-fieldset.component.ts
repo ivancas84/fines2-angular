@@ -97,7 +97,7 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
         validators: [],
       }],
       calendario: [null, {
-        validators: [],
+        validators: [Validators.required],
       }],
     });
     return fg;

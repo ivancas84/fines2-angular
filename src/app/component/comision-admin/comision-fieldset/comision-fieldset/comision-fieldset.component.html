@@ -106,6 +106,7 @@
     <div class="col-sm-10">
       <app-typeahead [field]="calendario" [entityName]="'calendario'"></app-typeahead>
       <div class="text-danger" *ngIf="(calendario.touched || calendario.dirty) && calendario.invalid">
+        <div *ngIf="calendario.errors.required">Debe completar valor</div>
         <div *ngIf="(calendario.touched && calendario.errors.unselected)">Valor no seleccionado</div>
       </div>
     </div>
