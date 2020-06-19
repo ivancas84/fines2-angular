@@ -26,7 +26,7 @@ export class TomaAdminComponent extends AdminComponent {
     protected validators: ValidatorsService,
     protected storage: SessionStorageService, 
   ) {
-    super(fb, route, router, location, dd, toast, validators, storage);
+    super(fb, route, router, location, dd, toast, storage);
   }
 }
 

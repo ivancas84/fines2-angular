@@ -34,7 +34,7 @@ export class ComisionDetailComponent extends AdminComponent {
     protected validators: ValidatorsService,
     protected storage: SessionStorageService, 
   ) {
-    super(fb, route, router, location, dd, toast, validators, storage);
+    super(fb, route, router, location, dd, toast, storage);
   }
 
   ngOnInit() {
@@ -44,7 +44,7 @@ export class ComisionDetailComponent extends AdminComponent {
   initData(){
     var s = this.route.queryParams.subscribe(
       params => {
-        this.setDataFromParams(params);
+        this.setData(params);
         return true;
       },
       error => { this.toast.showDanger(JSON.stringify(error)); }

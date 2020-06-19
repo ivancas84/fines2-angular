@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { FieldsetOptionalComponent } from '@component/fieldset-optional/fieldset-optional.component';
+import { Router } from '@angular/router';
+import { SessionStorageService } from '@service/storage/session-storage.service';
 
 @Component({
   selector: 'app-domicilio-sede-fieldset',
@@ -15,8 +17,11 @@ export class DomicilioSedeFieldsetComponent extends FieldsetOptionalComponent {
   constructor(
     protected fb: FormBuilder, 
     protected dd: DataDefinitionService, 
-    protected validators: ValidatorsService) {
-    super(fb, dd, validators);
+    protected validators: ValidatorsService,
+    protected router: Router, 
+    protected storage: SessionStorageService, 
+  ) {
+    super(router, storage);
   }
 
   formGroup(): FormGroup {

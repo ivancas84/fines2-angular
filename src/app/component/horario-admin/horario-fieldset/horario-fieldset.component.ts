@@ -5,6 +5,8 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
 import { ValidatorsService } from '@service/validators/validators.service';
 import { Observable } from 'rxjs';
 import { Display } from '@class/display';
+import { Router } from '@angular/router';
+import { SessionStorageService } from '@service/storage/session-storage.service';
 
 @Component({
   selector: 'app-horario-fieldset',
@@ -15,13 +17,17 @@ export class HorarioFieldsetComponent extends FieldsetComponent {
   readonly entityName: string = 'horario';
 
   optDia$: Observable<any>;
+  
   constructor(
     protected fb: FormBuilder, 
     protected dd: DataDefinitionService, 
-    protected validators: ValidatorsService) {
-    super(fb, dd, validators);
+    protected validators: ValidatorsService,
+    protected router: Router, 
+    protected storage: SessionStorageService, 
+  ) {
+    super(router, storage);
   }
-
+  
   initOptions(): void {
     this.optDia$ = this.dd.all('dia', new Display);
   }
