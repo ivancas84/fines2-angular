@@ -6,6 +6,8 @@ import { ValidatorsService } from '@service/validators/validators.service';
 import { Observable } from 'rxjs';
 import { Display } from '@class/display';
 import { arrayColumn } from '@function/array-column';
+import { Router } from '@angular/router';
+import { SessionStorageService } from '@service/storage/session-storage.service';
 
 @Component({
   selector: 'app-comision-fieldset',
@@ -21,8 +23,11 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
   constructor(
     protected fb: FormBuilder, 
     protected dd: DataDefinitionService, 
-    protected validators: ValidatorsService) {
-    super(fb, dd, validators);
+    protected validators: ValidatorsService,
+    protected router: Router, 
+    protected storage: SessionStorageService, 
+) {
+    super(router, storage);
   }
 
   initForm(): void {
@@ -38,16 +43,16 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
       value => {
         if(!value) {
           this.divisiones = [];
-          Object.keys(this.fieldset.controls).forEach(key => {
+          /*Object.keys(this.fieldset.controls).forEach(key => {
             console.log("estoy");
             if(key != "sede") this.fieldset.controls[key].disable();
-          });
+          });*/
           return;
         }
         
-        Object.keys(this.fieldset.controls).forEach(key => {
+        /*Object.keys(this.fieldset.controls).forEach(key => {
           if(key != "sede") this.fieldset.controls[key].enable();
-        });
+        });*/
 
         var display = new Display
         display.addParam("sede",value)
