@@ -42,13 +42,15 @@ export class ComisionDetailComponent extends AdminComponent {
   }
 
   initData(){
-    this.params$ = this.route.queryParams.pipe(map(
+    var s = this.route.queryParams.subscribe(
       params => {
         this.setDataFromParams(params);
         return true;
       },
       error => { this.toast.showDanger(JSON.stringify(error)); }
-    ))
+    )
+
+    this.subscriptions.add(s);
   }
 
   persist(): Observable<any> {

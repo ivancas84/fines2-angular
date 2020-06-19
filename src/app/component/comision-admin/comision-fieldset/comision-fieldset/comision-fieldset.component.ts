@@ -80,19 +80,19 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
       observaciones: [null, {
       }],
       sede: [null, {
-        validators: [this.validators.typeaheadSelection('sede'), Validators.required],
+        validators: [Validators.required],
       }],
       modalidad: [null, {
         validators: [Validators.required],
       }],
       planificacion: [null, {
-        validators: [this.validators.typeaheadSelection('planificacion')],
+        validators: [],
       }],
       comision_siguiente: [null, {
-        validators: [this.validators.typeaheadSelection('comision')],
+        validators: [],
       }],
       calendario: [null, {
-        validators: [this.validators.typeaheadSelection('calendario')],
+        validators: [],
       }],
     });
     return fg;

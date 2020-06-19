@@ -1,5 +1,5 @@
 
-<form *ngIf="params$ | async" class="container" [formGroup]="adminForm" (ngSubmit)="onSubmit()" novalidate>
+<form class="container" [formGroup]="adminForm" (ngSubmit)="onSubmit()" novalidate>
   <app-toma-fieldset [form]="adminForm" [data$]="data$"></app-toma-fieldset>
   <button [disabled]="adminForm.pending" type="submit" class="btn btn-primary">Aceptar</button>&nbsp;
   <button type="button" class="btn btn-secondary" (click)="back()"><span class="oi oi-arrow-thick-left" title="Volver"></span></button>
