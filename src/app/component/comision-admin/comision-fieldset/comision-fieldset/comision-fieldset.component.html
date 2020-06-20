@@ -111,4 +111,9 @@
       </div>
     </div>
   </div>
+  <div class="text-danger" *ngIf="fieldset.errors">
+    <div *ngIf="fieldset.errors.multiple">Existen múltiples valores para sede / modalidad / año / tramo</div>
+    <div *ngIf="fieldset.errors.planificacion">Debe definirse la planificación para la modalidad indicada</div>
+    <div *ngIf="fieldset.errors.notUnique">El valor ya se encuentra utilizado: <a routerLink="/comision-admin" [queryParams]="{'id':fieldset.errors.notUnique}">Cargar</a></div>
+  </div>
 </fieldset>

@@ -8,6 +8,7 @@ import { Display } from '@class/display';
 import { arrayColumn } from '@function/array-column';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@service/storage/session-storage.service';
+import { LocalValidatorsService } from '@service/local-validators.service';
 
 @Component({
   selector: 'app-comision-fieldset',
@@ -20,13 +21,14 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
   optModalidad$: Observable<Array<any>>;
   divisiones: Array<any>;
 
-  constructor(
+  constructor (
     protected fb: FormBuilder, 
     protected dd: DataDefinitionService, 
     protected validators: ValidatorsService,
     protected router: Router, 
-    protected storage: SessionStorageService, 
-) {
+    protected storage: SessionStorageService,
+    protected localValidators: LocalValidatorsService,
+  ) {
     super(router, storage);
   }
 
@@ -99,6 +101,8 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
       calendario: [null, {
         validators: [Validators.required],
       }],
+    }, {
+      asyncValidators: [this.localValidators.uniqueComision()],
     });
     return fg;
   }
