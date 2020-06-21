@@ -17,12 +17,7 @@
   <div *ngIf="data && data.length; else empty"> 
     <div *ngFor="let row of data; let i = index" class="row align-items-center border">
       <div class="col-md-4">
-        <h5 >{{row.id | label:'telefono'}}</h5>
-          <small><a [routerLink]="['/persona-show']" [queryParams]="{id:row.persona}" >{{row.persona | label:'persona'}}</a></small>
-      </div>
-      <div class="col-md">
-{{row.tipo}} {{row.prefijo}} {{row.numero}} {{row.insertado}} {{row.eliminado}} 
-      </div>
+        {{row.tipo}} {{row.prefijo}} {{row.numero}}
     </div>
   </div>
 </div>
