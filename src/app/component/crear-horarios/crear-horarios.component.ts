@@ -66,7 +66,7 @@ export class CrearHorariosComponent implements OnInit{
         validators: [Validators.required],
       }],
       sed_centro_educativo: [null, {
-        validators: [this.validators.typeaheadSelection('centro_educativo'), Validators.required],
+        validators: [Validators.required],
       }],
     });
   }

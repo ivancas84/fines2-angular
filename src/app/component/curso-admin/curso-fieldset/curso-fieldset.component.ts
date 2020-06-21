@@ -33,10 +33,10 @@ export class CursoFieldsetComponent extends FieldsetComponent {
       observaciones: [null, {
       }],
       comision: [null, {
-        validators: [Validators.required, this.validators.typeaheadSelection('comision')],
+        validators: [Validators.required],
       }],
       carga_horaria: [null, {
-        validators: [Validators.required, this.validators.typeaheadSelection('carga_horaria')],
+        validators: [Validators.required],
       }],
     });
     return fg;

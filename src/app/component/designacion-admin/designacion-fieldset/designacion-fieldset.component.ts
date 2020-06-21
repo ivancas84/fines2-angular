@@ -44,10 +44,10 @@ export class DesignacionFieldsetComponent extends FieldsetComponent {
         validators: Validators.required,
       }],
       sede: [null, {
-        validators: [Validators.required, this.validators.typeaheadSelection('sede')],
+        validators: [Validators.required],
       }],
       persona: [null, {
-        validators: [Validators.required, this.validators.typeaheadSelection('persona')],
+        validators: [Validators.required],
       }],
     });
     return fg;

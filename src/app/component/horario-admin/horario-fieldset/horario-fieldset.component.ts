@@ -42,10 +42,10 @@ export class HorarioFieldsetComponent extends FieldsetComponent {
         validators: [Validators.required],
       }],
       curso: [null, {
-        validators: [this.validators.typeaheadSelection('curso'), Validators.required],
+        validators: [Validators.required],
       }],
       dia: [null, {
-        validators: [this.validators.typeaheadSelection('dia'), Validators.required],
+        validators: [Validators.required],
       }],
     });
     return fg;

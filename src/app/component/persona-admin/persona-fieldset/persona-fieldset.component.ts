@@ -41,8 +41,6 @@ export class PersonaFieldsetComponent extends FieldsetComponent {
       cuil: [null, {
         asyncValidators: [this.validators.unique('cuil', 'persona')],
       }],
-      email: [null, {
-      }],
       genero: [null, {
       }],
       apodo: [null, {
