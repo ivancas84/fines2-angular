@@ -52,7 +52,7 @@ export class CentroEducativoFieldsetComponent extends FieldsetComponent {
       cue: ['', {
       }],
       // domicilio: ['', {
-      //   validators: [Validators.required, this.validators.typeaheadSelection('domicilio')],
+      //   validators: [Validators.required],
       // }],
     });
     return fg;
