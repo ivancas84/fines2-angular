@@ -72,6 +72,9 @@ import { PersonaDomicilioFieldsetComponent } from '@component/persona-admin/pers
 import { TelefonoGridComponent } from '@component/persona-admin/telefono-grid/telefono-grid.component';
 import { DetallePersonaGridComponent } from '@component/persona-admin/detalle-persona-grid/detalle-persona-grid.component';
 
+import { DetallePersonaAdminComponent } from '@component/detalle-persona-admin/detalle-persona-admin/detalle-persona-admin.component';
+import { DetallePersonaFieldsetComponent } from '@component/detalle-persona-admin/detalle-persona-fieldset/detalle-persona-fieldset.component';
+
 import { PersonaShowComponent } from '@component/persona-show/persona-show/persona-show.component';
 import { CargoAdminComponent } from '@component/cargo-admin/cargo-admin/cargo-admin.component';
 import { CargoFieldsetComponent } from '@component/cargo-admin/cargo-fieldset/cargo-fieldset.component';
@@ -152,6 +155,7 @@ import { PlanificacionFormPickComponent } from '@component/comision-admin/comisi
     CursoAdminComponent, CursoFieldsetComponent,
     CursoShowComponent, CursoTableComponent,
     DesignacionAdminComponent, DesignacionFieldsetComponent,
+    DetallePersonaAdminComponent, DetallePersonaFieldsetComponent,
     DivisionShowComponent, DivisionGridComponent, DivisionSearchComponent, DivisionSearchParamsComponent,
     HorarioAdminComponent, HorarioFieldsetComponent,
     ModalidadAdminComponent, ModalidadFieldsetComponent,

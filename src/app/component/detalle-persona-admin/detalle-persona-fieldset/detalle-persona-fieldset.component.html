@@ -1,0 +1,28 @@
+<fieldset [formGroup]="fieldset">
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Descripcion</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" formControlName="descripcion"  [ngClass]="{'is-invalid':(descripcion.invalid && (descripcion.dirty || descripcion.touched))}">
+      <div class="text-danger" *ngIf="(descripcion.touched || descripcion.dirty) && descripcion.invalid">
+        <div *ngIf="descripcion.errors.required">Debe completar valor</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">File</label>
+    <div class="col-sm-10">
+      <app-upload [field]="file"></app-upload>
+      <div class="text-danger" *ngIf="(file.touched || file.dirty) && file.invalid">
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Persona</label>
+    <div class="col-sm-10">
+      <app-typeahead [field]="persona" [entityName]="'persona'"></app-typeahead>
+      <div class="text-danger" *ngIf="(persona.touched || persona.dirty) && persona.invalid">
+        <div *ngIf="persona.errors.required">Debe completar valor</div>
+      </div>
+    </div>
+  </div>
+</fieldset>
