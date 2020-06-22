@@ -7,6 +7,7 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
 import { ToastService } from '@service/ng-bootstrap/toast.service';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
+import { emptyUrl } from '@function/empty-url.function';
 
 @Component({
   selector: 'app-telefono-admin',
@@ -35,6 +36,11 @@ export class TelefonoAdminComponent extends AdminComponent {
      * Utilizar el storage dificulta el hecho de agregar mas de un telefono a la misma persona
      */
     this.initData();   
+  }
+
+  reload(response){
+    this.toast.showSuccess("Registro realizado");
+    this.back();
   }
 }
 
