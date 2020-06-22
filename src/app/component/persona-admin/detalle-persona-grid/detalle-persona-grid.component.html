@@ -1,0 +1,29 @@
+<h3>Detalle 
+  <span *ngIf="data$ | async as persona; else disableAdd">
+    <span *ngIf="persona && persona.id; else disableAdd">
+      <a class="btn btn-info" role="button" [routerLink]="['/detalle-persona-admin']" [queryParams]="{persona:persona.id}" ><span class="oi oi-plus"></span></a>
+    </span>
+  </span>
+  <ng-template #disableAdd>
+    <a class="btn btn-info disabled" role="button"><span class="oi oi-plus"></span></a>
+  </ng-template>
+</h3>
+
+<ng-template #empty>
+  <div>No se han encontrado registros.</div>
+</ng-template>
+  
+<div *ngIf="data$ | async as data; else empty">
+  <div *ngIf="data && data.length"> 
+    <div *ngFor="let row of data; let i = index" class="row align-items-center border">
+      <div class="col-md-4">
+        <h5>{{row.id | label:'detalle_persona'}}</h5>
+          <small><a [routerLink]="['/file-show']" [queryParams]="{id:row.file}" >{{row.file | label:'file'}}</a></small>
+          <br><small><a [routerLink]="['/persona-show']" [queryParams]="{id:row.persona}" >{{row.persona | label:'persona'}}</a></small>
+      </div>
+      <div class="col-md">
+{{row.descripcion}} {{row.creado}} 
+      </div>
+    </div>
+  </div>
+</div>

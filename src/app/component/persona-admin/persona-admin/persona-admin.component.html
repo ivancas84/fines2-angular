@@ -3,7 +3,8 @@
   <app-persona-domicilio-fieldset [form]="adminForm" [data$]="data$"></app-persona-domicilio-fieldset>
   
   <app-telefono-grid [data$]="data$"></app-telefono-grid>
-  
+  <app-detalle-persona-grid [data$]="data$"></app-detalle-persona-grid>
+
 
   <button [disabled]="adminForm.pending" type="submit" class="btn btn-primary">Aceptar</button>&nbsp;
   <button type="button" class="btn btn-secondary" (click)="back()"><span class="oi oi-arrow-thick-left" title="Volver"></span></button>
