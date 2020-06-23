@@ -1,10 +1,11 @@
 <form class="container" [formGroup]="adminForm" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
   <app-persona-fieldset [form]="adminForm" [data$]="data$"></app-persona-fieldset>
-  <app-persona-domicilio-fieldset [form]="adminForm" [data$]="data$"></app-persona-domicilio-fieldset>
   
   <app-telefono-grid [data$]="data$"></app-telefono-grid>
   <app-email-grid [data$]="data$"></app-email-grid>
   <app-detalle-persona-grid [data$]="data$"></app-detalle-persona-grid>
+
+  <app-persona-domicilio-fieldset [form]="adminForm" [data$]="data$"></app-persona-domicilio-fieldset>
 
 
   <button [disabled]="adminForm.pending" type="submit" class="btn btn-primary">Aceptar</button>&nbsp;
