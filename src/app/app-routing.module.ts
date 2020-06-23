@@ -29,6 +29,7 @@ import { CrearHorariosComponent } from '@component/crear-horarios/crear-horarios
 import { TelefonoAdminComponent } from '@component/telefono-admin/telefono-admin/telefono-admin.component';
 import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
 import { DetallePersonaAdminComponent } from '@component/detalle-persona-admin/detalle-persona-admin/detalle-persona-admin.component';
+import { EmailAdminComponent } from '@component/email-admin/email-admin/email-admin.component';
 
 const routes: Routes = [
   { path: 'asignatura-show', component: AsignaturaShowComponent, pathMatch: 'full' },
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: 'curso-show', component: CursoShowComponent, pathMatch: 'full' },
   { path: 'designacion-admin', component: DesignacionAdminComponent, pathMatch: 'full' },
   { path: 'detalle-persona-admin', component: DetallePersonaAdminComponent, pathMatch: 'full' },
+  { path: 'email-admin', component: EmailAdminComponent, pathMatch: 'full' },
   { path: 'division-show', component: DivisionShowComponent, pathMatch: 'full' },
   { path: 'horario-admin', component: HorarioAdminComponent, pathMatch: 'full' },
   { path: 'modalidad-admin', component: ModalidadAdminComponent, pathMatch: 'full' },

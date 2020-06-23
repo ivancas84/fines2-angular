@@ -9,12 +9,12 @@ import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 
 @Component({
-  selector: 'app-detalle-persona-admin',
-  templateUrl: './detalle-persona-admin.component.html',
+  selector: 'app-email-admin',
+  templateUrl: './email-admin.component.html',
 })
-export class DetallePersonaAdminComponent extends AdminComponent {
+export class EmailAdminComponent extends AdminComponent {
 
-  readonly entityName: string = "detalle_persona";
+  readonly entityName: string = "email";
 
   constructor(
     protected fb: FormBuilder, 
@@ -34,6 +34,5 @@ export class DetallePersonaAdminComponent extends AdminComponent {
     this.toast.showSuccess("Registro realizado");
     this.back();
   }
-
 }
 
