@@ -12,4 +12,13 @@ export class _FileDataDefinition extends DataDefinition {
     this.stg.setItem("file" + rowCloned.id, rowCloned);
   }
 
+  label (id: string | number): string {
+    var row = this.stg.getItem(this.entity + id);
+    if(!row) return null;
+
+    let ret = "";
+    if (row["name"]) ret = ret.trim() + " " + row["name"];
+
+    return ret.trim();
+  }
 }
