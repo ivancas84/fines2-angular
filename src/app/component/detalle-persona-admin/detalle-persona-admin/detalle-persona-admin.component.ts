@@ -28,5 +28,11 @@ export class DetallePersonaAdminComponent extends AdminComponent {
   ) {
     super(fb, route, router, location, dd, toast, storage);
   }
+
+  reload(response){
+    this.toast.showSuccess("Registro realizado");
+    this.back();
+  }
+
 }
 
