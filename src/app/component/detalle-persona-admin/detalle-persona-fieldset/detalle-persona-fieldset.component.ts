@@ -33,7 +33,7 @@ export class DetallePersonaFieldsetComponent extends FieldsetComponent {
       descripcion: [null, {
         validators: [Validators.required],
       }],
-      file: [null, {
+      archivo: [null, {
       }],
       persona: [null, {
         validators: [Validators.required],
@@ -45,7 +45,7 @@ export class DetallePersonaFieldsetComponent extends FieldsetComponent {
   get id() { return this.fieldset.get('id')}
   get descripcion() { return this.fieldset.get('descripcion')}
   get creado() { return this.fieldset.get('creado')}
-  get file() { return this.fieldset.get('file')}
+  get archivo() { return this.fieldset.get('archivo')}
   get persona() { return this.fieldset.get('persona')}
 
 }
