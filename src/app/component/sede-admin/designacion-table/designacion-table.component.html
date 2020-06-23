@@ -1,7 +1,7 @@
 
 <ng-template #loading>No se han encontrado registros...</ng-template>
 
-<div *ngIf="data$ | async as data; else loading" class="container">
+<div *ngIf="designaciones$ | async as data; else loading" class="container">
 
 <div *ngIf="data.length; else loading" class="table-responsive">
   <table class="table table-striped table-bordered table-hover">
