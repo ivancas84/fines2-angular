@@ -9,10 +9,10 @@ export class _DetallePersonaDataDefinition extends DataDefinition {
     /**
      * se realiza un 'deep clone' del objeto para poder eliminar atributos a medida que se procesa y no alterar la referencia original
      */
-    if(('file_' in rowCloned)
+    if(('archivo_' in rowCloned)
     ){
-      this.stg.setItem('file' + rowCloned['file_'].id, rowCloned['file_']);
-      delete rowCloned['file_'];
+      this.stg.setItem('file' + rowCloned['archivo_'].id, rowCloned['archivo_']);
+      delete rowCloned['archivo_'];
     }
     if(('persona_' in rowCloned)
     && ('domicilio_' in rowCloned['persona_'])
