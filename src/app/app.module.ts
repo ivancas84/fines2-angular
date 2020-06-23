@@ -65,8 +65,20 @@ import { DomicilioCeFieldsetComponent } from '@component/centro-educativo-admin/
 import { CentroEducativoShowComponent } from '@component/centro-educativo-show/centro-educativo-show/centro-educativo-show.component';
 import { CentroEducativoTableComponent } from '@component/centro-educativo-show/centro-educativo-table/centro-educativo-table.component';
 import { DomicilioSedeFieldsetComponent } from '@component/sede-admin/domicilio-sede-fieldset/domicilio-sede-fieldset.component';
+
 import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/persona-admin.component';
 import { PersonaFieldsetComponent } from '@component/persona-admin/persona-fieldset/persona-fieldset.component';
+import { PersonaDomicilioFieldsetComponent } from '@component/persona-admin/persona-domicilio-fieldset/persona-domicilio-fieldset.component';
+import { TelefonoGridComponent } from '@component/persona-admin/telefono-grid/telefono-grid.component';
+import { DetallePersonaGridComponent } from '@component/persona-admin/detalle-persona-grid/detalle-persona-grid.component';
+import { EmailGridComponent } from '@component/persona-admin/email-grid/email-grid.component';
+
+import { DetallePersonaAdminComponent } from '@component/detalle-persona-admin/detalle-persona-admin/detalle-persona-admin.component';
+import { DetallePersonaFieldsetComponent } from '@component/detalle-persona-admin/detalle-persona-fieldset/detalle-persona-fieldset.component';
+
+import { EmailAdminComponent } from '@component/email-admin/email-admin/email-admin.component';
+import { EmailFieldsetComponent } from '@component/email-admin/email-fieldset/email-fieldset.component';
+
 import { PersonaShowComponent } from '@component/persona-show/persona-show/persona-show.component';
 import { CargoAdminComponent } from '@component/cargo-admin/cargo-admin/cargo-admin.component';
 import { CargoFieldsetComponent } from '@component/cargo-admin/cargo-fieldset/cargo-fieldset.component';
@@ -112,7 +124,6 @@ import { DivisionSearchComponent } from '@component/division-show/division-searc
 import { DivisionSearchParamsComponent } from '@component/division-show/division-search/division-search-params/division-search-params.component';
 import { CrearHorariosComisionComponent } from '@component/comision-detail/crear-horarios-comision/crear-horarios-comision.component';
 import { PersonaGridComponent } from '@component/persona-show/persona-grid/persona-grid.component';
-import { TelefonoGridComponent } from '@component/persona-admin/telefono-grid/telefono-grid.component';
 import { TelefonoAdminComponent } from '@component/telefono-admin/telefono-admin/telefono-admin.component';
 import { TelefonoFieldsetComponent } from '@component/telefono-admin/telefono-fieldset/telefono-fieldset.component';
 import { ConsolidadoSearchParamsComponent } from '@component/consolidado/consolidado-search/consolidado-search-params/consolidado-search-params.component';
@@ -148,13 +159,15 @@ import { PlanificacionFormPickComponent } from '@component/comision-admin/comisi
     CursoAdminComponent, CursoFieldsetComponent,
     CursoShowComponent, CursoTableComponent,
     DesignacionAdminComponent, DesignacionFieldsetComponent,
+    DetallePersonaAdminComponent, DetallePersonaFieldsetComponent,
+    EmailAdminComponent, EmailFieldsetComponent,
     DivisionShowComponent, DivisionGridComponent, DivisionSearchComponent, DivisionSearchParamsComponent,
     HorarioAdminComponent, HorarioFieldsetComponent,
     ModalidadAdminComponent, ModalidadFieldsetComponent,
     PlanAdminComponent, PlanFieldsetComponent,
     PlanShowComponent, PlanTableComponent,
     PersonaShowComponent, PersonaSearchComponent, PersonaGridComponent,
-    PersonaAdminComponent, PersonaFieldsetComponent, TelefonoGridComponent,
+    PersonaAdminComponent, PersonaFieldsetComponent, TelefonoGridComponent, PersonaDomicilioFieldsetComponent, DetallePersonaGridComponent, EmailGridComponent,
     SedeShowComponent, SedeTableComponent, SedeSearchComponent, SedeSearchParamsComponent,
     SedeAdminComponent, SedeFieldsetComponent, DomicilioSedeFieldsetComponent, DesignacionTableComponent,
     TipoSedeAdminComponent, TipoSedeFieldsetComponent,

@@ -8,43 +8,33 @@ import { Display } from '@class/display';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 
+
 @Component({
-  selector: 'app-horario-fieldset',
-  templateUrl: './horario-fieldset.component.html',
+  selector: 'app-email-fieldset',
+  templateUrl: './email-fieldset.component.html',
 })
-export class HorarioFieldsetComponent extends FieldsetComponent {
+export class EmailFieldsetComponent extends FieldsetComponent {
 
-  readonly entityName: string = 'horario';
+  readonly entityName: string = 'email';
 
-  optDia$: Observable<any>;
-  
   constructor(
     protected fb: FormBuilder, 
     protected dd: DataDefinitionService, 
     protected validators: ValidatorsService,
     protected router: Router, 
-    protected storage: SessionStorageService, 
+    protected storage: SessionStorageService 
   ) {
     super(router, storage);
-  }
-  
-  initOptions(): void {
-    this.optDia$ = this.dd.all('dia', new Display);
   }
 
   formGroup(): FormGroup {
     let fg: FormGroup = this.fb.group({
       id:null,
-      hora_inicio: [null, {
+      email: [null, {
         validators: [Validators.required],
       }],
-      hora_fin: [null, {
-        validators: [Validators.required],
-      }],
-      curso: [null, {
-        validators: [Validators.required],
-      }],
-      dia: [null, {
+      verificado: false,
+      persona: [null, {
         validators: [Validators.required],
       }],
     });
@@ -52,9 +42,10 @@ export class HorarioFieldsetComponent extends FieldsetComponent {
   }
 
   get id() { return this.fieldset.get('id')}
-  get horaInicio() { return this.fieldset.get('hora_inicio')}
-  get horaFin() { return this.fieldset.get('hora_fin')}
-  get curso() { return this.fieldset.get('curso')}
-  get dia() { return this.fieldset.get('dia')}
+  get email() { return this.fieldset.get('email')}
+  get verificado() { return this.fieldset.get('verificado')}
+  get insertado() { return this.fieldset.get('insertado')}
+  get eliminado() { return this.fieldset.get('eliminado')}
+  get persona() { return this.fieldset.get('persona')}
 
 }

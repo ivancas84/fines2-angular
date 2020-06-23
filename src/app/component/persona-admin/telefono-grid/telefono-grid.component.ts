@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ShowElementComponent } from '@component/show-element/show-element.component';
-import { ReplaySubject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { isEmptyObject } from '@function/is-empty-object.function';
 import { Display } from '@class/display';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { Router } from '@angular/router';
+import { mergeMap } from 'rxjs/operators';
     
 @Component({
   selector: 'app-telefono-grid',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class TelefonoGridComponent extends ShowElementComponent implements OnInit {
   
-  telefonos$: ReplaySubject<Array<object> | null> = new ReplaySubject();
+  telefonos$: Observable<Array<object>>;
 
   /**
    * telefonos$ se define a partir de data$, 
@@ -26,17 +27,14 @@ export class TelefonoGridComponent extends ShowElementComponent implements OnIni
   }
 
   ngOnInit(): void {
-    this.data$.subscribe(
+    this.telefonos$ = this.data$.pipe(mergeMap(
       persona => {
-        if(isEmptyObject(persona)) return;
+        if(isEmptyObject(persona)) return of(null);
         var d = new Display();
         d.setParams({persona:persona.id})
-        this.dd.all("telefono",d).subscribe(
-          telefonos => { 
-            this.telefonos$.next(telefonos); }        
-        )
+        return this.dd.all("telefono",d);
       }
-    )
+    ))
   }
 }
 

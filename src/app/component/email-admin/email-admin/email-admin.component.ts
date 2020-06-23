@@ -7,15 +7,14 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
 import { ToastService } from '@service/ng-bootstrap/toast.service';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
-import { emptyUrl } from '@function/empty-url.function';
 
 @Component({
-  selector: 'app-telefono-admin',
-  templateUrl: './telefono-admin.component.html',
+  selector: 'app-email-admin',
+  templateUrl: './email-admin.component.html',
 })
-export class TelefonoAdminComponent extends AdminComponent {
+export class EmailAdminComponent extends AdminComponent {
 
-  readonly entityName: string = "telefono";
+  readonly entityName: string = "email";
 
   constructor(
     protected fb: FormBuilder, 
@@ -30,15 +29,8 @@ export class TelefonoAdminComponent extends AdminComponent {
     super(fb, route, router, location, dd, toast, storage);
   }
 
-  ngOnInit() {
-    /**
-     * Se desactiva el registro de valores del formulario en el storage
-     * Utilizar el storage dificulta el hecho de agregar mas de un telefono a la misma persona
-     */
-    this.initData();   
-  }
-
   reload(response){
+    this.removeStorage();
     this.toast.showSuccess("Registro realizado");
     this.back();
   }

@@ -1,11 +1,3 @@
-<div >
-
-<h3>Domicilio
-    <button *ngIf="fieldset.enabled" type="button" class="btn btn-success" (click)="fieldset.disable()">SI</button>
-  <button *ngIf="fieldset.disabled" type="button" class="btn btn-danger" (click)="fieldset.enable()">NO</button>
-  
-  </h3>
-
 <fieldset  *ngIf="fieldset.enabled" [formGroup]="fieldset">
 
     <div class="form-group form-row">
@@ -68,5 +60,3 @@
       </div>
     </div>
   </fieldset>
-  
-</div>

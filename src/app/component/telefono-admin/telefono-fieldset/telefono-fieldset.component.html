@@ -27,10 +27,9 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Persona</label>
     <div class="col-sm-10">
-      <app-typeahead [entityName]="'persona'" [field]="persona"></app-typeahead>
+      <input class="form-control-plaintext" readonly value="{{persona.value | label:'persona'}}">
       <div class="text-danger" *ngIf="(persona.touched || persona.dirty) && persona.invalid">
-        <div *ngIf="persona.errors.required">Debe completar valor</div>
-        <div *ngIf="(persona.touched && persona.errors.unselected)">Valor no seleccionado</div>
+        <div *ngIf="persona.errors.required">No está definida la persona</div>
       </div>
     </div>
   </div>

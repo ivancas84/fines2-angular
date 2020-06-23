@@ -12,6 +12,7 @@ import { ComisionDataDefinition } from 'src/app/class/data-definition/comision-d
 import { ContralorDataDefinition } from 'src/app/class/data-definition/contralor-data-definition';
 import { CursoDataDefinition } from 'src/app/class/data-definition/curso-data-definition';
 import { DesignacionDataDefinition } from 'src/app/class/data-definition/designacion-data-definition';
+import { DetallePersonaDataDefinition } from 'src/app/class/data-definition/detalle-persona-data-definition';
 import { DiaDataDefinition } from 'src/app/class/data-definition/dia-data-definition';
 import { DistribucionHorariaDataDefinition } from 'src/app/class/data-definition/distribucion-horaria-data-definition';
 import { DomicilioDataDefinition } from 'src/app/class/data-definition/domicilio-data-definition';
@@ -45,6 +46,7 @@ export class DataDefinitionLoaderService {
       case "contralor": { return new ContralorDataDefinition(this.stg, this.parser); }
       case "curso": { return new CursoDataDefinition(this.stg, this.parser); }
       case "designacion": { return new DesignacionDataDefinition(this.stg, this.parser); }
+      case "detalle_persona": { return new DetallePersonaDataDefinition(this.stg, this.parser); }
       case "dia": { return new DiaDataDefinition(this.stg, this.parser); }
       case "distribucion_horaria": { return new DistribucionHorariaDataDefinition(this.stg, this.parser); }
       case "domicilio": { return new DomicilioDataDefinition(this.stg, this.parser); }

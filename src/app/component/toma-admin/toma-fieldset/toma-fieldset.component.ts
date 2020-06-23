@@ -41,16 +41,16 @@ export class TomaFieldsetComponent extends FieldsetComponent {
       estado_contralor: [null, {
       }],
       curso: [null, {
-        validators: [this.validators.typeaheadSelection('curso'), Validators.required],
+        validators: [Validators.required],
       }],
       docente: [null, {
-        validators: [this.validators.typeaheadSelection('persona')],
+        validators: [],
       }],
       reemplazo: [null, {
-        validators: [this.validators.typeaheadSelection('persona')],
+        validators: [],
       }],
       planilla_docente: [null, {
-        validators: [this.validators.typeaheadSelection('planilla_docente')],
+        validators: [],
       }],
     });
     return fg;

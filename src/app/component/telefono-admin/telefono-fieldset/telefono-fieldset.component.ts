@@ -35,7 +35,7 @@ export class TelefonoFieldsetComponent extends FieldsetComponent {
         validators: [Validators.required],
       }],
       persona: [null, {
-        validators: [this.validators.typeaheadSelection('persona'), Validators.required],
+        validators: [Validators.required],
       }],
     });
     return fg;

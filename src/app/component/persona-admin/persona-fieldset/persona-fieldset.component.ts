@@ -41,8 +41,6 @@ export class PersonaFieldsetComponent extends FieldsetComponent {
       cuil: [null, {
         asyncValidators: [this.validators.unique('cuil', 'persona')],
       }],
-      email: [null, {
-      }],
       genero: [null, {
       }],
       apodo: [null, {
@@ -59,7 +57,6 @@ export class PersonaFieldsetComponent extends FieldsetComponent {
   get fechaNacimiento() { return this.fieldset.get('fecha_nacimiento')}
   get numeroDocumento() { return this.fieldset.get('numero_documento')}
   get cuil() { return this.fieldset.get('cuil')}
-  get email() { return this.fieldset.get('email')}
   get genero() { return this.fieldset.get('genero')}
   get apodo() { return this.fieldset.get('apodo')}
   get alta() { return this.fieldset.get('alta')}

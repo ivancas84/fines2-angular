@@ -8,43 +8,34 @@ import { Display } from '@class/display';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 
+
 @Component({
-  selector: 'app-horario-fieldset',
-  templateUrl: './horario-fieldset.component.html',
+  selector: 'app-detalle-persona-fieldset',
+  templateUrl: './detalle-persona-fieldset.component.html',
 })
-export class HorarioFieldsetComponent extends FieldsetComponent {
+export class DetallePersonaFieldsetComponent extends FieldsetComponent {
 
-  readonly entityName: string = 'horario';
+  readonly entityName: string = 'detalle_persona';
 
-  optDia$: Observable<any>;
-  
   constructor(
     protected fb: FormBuilder, 
     protected dd: DataDefinitionService, 
     protected validators: ValidatorsService,
     protected router: Router, 
-    protected storage: SessionStorageService, 
+    protected storage: SessionStorageService 
   ) {
     super(router, storage);
-  }
-  
-  initOptions(): void {
-    this.optDia$ = this.dd.all('dia', new Display);
   }
 
   formGroup(): FormGroup {
     let fg: FormGroup = this.fb.group({
       id:null,
-      hora_inicio: [null, {
+      descripcion: [null, {
         validators: [Validators.required],
       }],
-      hora_fin: [null, {
-        validators: [Validators.required],
+      archivo: [null, {
       }],
-      curso: [null, {
-        validators: [Validators.required],
-      }],
-      dia: [null, {
+      persona: [null, {
         validators: [Validators.required],
       }],
     });
@@ -52,9 +43,9 @@ export class HorarioFieldsetComponent extends FieldsetComponent {
   }
 
   get id() { return this.fieldset.get('id')}
-  get horaInicio() { return this.fieldset.get('hora_inicio')}
-  get horaFin() { return this.fieldset.get('hora_fin')}
-  get curso() { return this.fieldset.get('curso')}
-  get dia() { return this.fieldset.get('dia')}
+  get descripcion() { return this.fieldset.get('descripcion')}
+  get creado() { return this.fieldset.get('creado')}
+  get archivo() { return this.fieldset.get('archivo')}
+  get persona() { return this.fieldset.get('persona')}
 
 }

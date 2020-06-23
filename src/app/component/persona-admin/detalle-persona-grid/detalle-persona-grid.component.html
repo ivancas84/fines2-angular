@@ -1,7 +1,7 @@
-<h3>Teléfonos 
+<h3>Detalle 
   <span *ngIf="data$ | async as persona; else disableAdd">
     <span *ngIf="persona && persona.id; else disableAdd">
-      <a class="btn btn-info" role="button" [routerLink]="['/telefono-admin']" [queryParams]="{persona:persona.id}" ><span class="oi oi-plus"></span></a>
+      <a class="btn btn-info" role="button" [routerLink]="['/detalle-persona-admin']" [queryParams]="{persona:persona.id}" ><span class="oi oi-plus"></span></a>
     </span>
   </span>
   <ng-template #disableAdd>
@@ -12,13 +12,13 @@
 <ng-template #empty>
   <div>No se han encontrado registros.</div>
 </ng-template>
-
-<div *ngIf="telefonos$ | async as data; else empty">
-  <div *ngIf="data && data.length; else empty"> 
+  
+<div *ngIf="detalle$ | async as data; else empty">
+  <div *ngIf="data && data.length"> 
     <div *ngFor="let row of data; let i = index" class="row align-items-center border">
-      <div class="col-md-4">
-        {{row.tipo}} {{row.prefijo}} {{row.numero}}
+      <div class="col-md">
+{{row.descripcion}} <app-download [id]="row.archivo"></app-download>
+      </div>
     </div>
   </div>
 </div>
-
