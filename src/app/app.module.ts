@@ -71,6 +71,7 @@ import { PersonaFieldsetComponent } from '@component/persona-admin/persona-field
 import { PersonaDomicilioFieldsetComponent } from '@component/persona-admin/persona-domicilio-fieldset/persona-domicilio-fieldset.component';
 import { TelefonoGridComponent } from '@component/persona-admin/telefono-grid/telefono-grid.component';
 import { DetallePersonaGridComponent } from '@component/persona-admin/detalle-persona-grid/detalle-persona-grid.component';
+import { EmailGridComponent } from '@component/persona-admin/email-grid/email-grid.component';
 
 import { DetallePersonaAdminComponent } from '@component/detalle-persona-admin/detalle-persona-admin/detalle-persona-admin.component';
 import { DetallePersonaFieldsetComponent } from '@component/detalle-persona-admin/detalle-persona-fieldset/detalle-persona-fieldset.component';
@@ -162,7 +163,7 @@ import { PlanificacionFormPickComponent } from '@component/comision-admin/comisi
     PlanAdminComponent, PlanFieldsetComponent,
     PlanShowComponent, PlanTableComponent,
     PersonaShowComponent, PersonaSearchComponent, PersonaGridComponent,
-    PersonaAdminComponent, PersonaFieldsetComponent, TelefonoGridComponent, PersonaDomicilioFieldsetComponent, DetallePersonaGridComponent,
+    PersonaAdminComponent, PersonaFieldsetComponent, TelefonoGridComponent, PersonaDomicilioFieldsetComponent, DetallePersonaGridComponent, EmailGridComponent,
     SedeShowComponent, SedeTableComponent, SedeSearchComponent, SedeSearchParamsComponent,
     SedeAdminComponent, SedeFieldsetComponent, DomicilioSedeFieldsetComponent, DesignacionTableComponent,
     TipoSedeAdminComponent, TipoSedeFieldsetComponent,
