@@ -13,16 +13,11 @@
   <div>No se han encontrado registros.</div>
 </ng-template>
   
-<div *ngIf="data$ | async as data; else empty">
+<div *ngIf="detalle$ | async as data; else empty">
   <div *ngIf="data && data.length"> 
     <div *ngFor="let row of data; let i = index" class="row align-items-center border">
-      <div class="col-md-4">
-        <h5>{{row.id | label:'detalle_persona'}}</h5>
-          <small><a [routerLink]="['/file-show']" [queryParams]="{id:row.file}" >{{row.file | label:'file'}}</a></small>
-          <br><small><a [routerLink]="['/persona-show']" [queryParams]="{id:row.persona}" >{{row.persona | label:'persona'}}</a></small>
-      </div>
       <div class="col-md">
-{{row.descripcion}} {{row.creado}} 
+{{row.descripcion}} <app-download [id]="row.archivo"></app-download>
       </div>
     </div>
   </div>
