@@ -101,7 +101,6 @@ import { ComisionCardComponent } from '@component/comision-detail/comision-card/
 import { ComisionDetailComponent } from '@component/comision-detail/comision-detail/comision-detail.component';
 import { ModalidadAdminComponent } from '@component/modalidad-admin/modalidad-admin/modalidad-admin.component';
 import { ModalidadFieldsetComponent } from '@component/modalidad-admin/modalidad-fieldset/modalidad-fieldset.component';
-import { ComisionCursoAdminComponent } from '@component/comision-admin/comision-curso-admin/comision-curso-admin.component';
 import { CursoShowComponent } from '@component/curso-show/curso-show/curso-show.component';
 import { CursoTableComponent } from '@component/curso-show/curso-table/curso-table.component';
 import { SedeSearchParamsComponent } from '@component/sede-show/sede-search/sede-search-params/sede-search-params.component';
@@ -131,6 +130,11 @@ import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.
 import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-fieldset.component';
 import { PlanificacionFormPickComponent } from '@component/comision-admin/comision-fieldset/planificacion-form-pick/planificacion-form-pick.component';
 
+import { ConsolidadoAdminComponent } from '@component/consolidado-admin/consolidado-admin/consolidado-admin.component';
+import { ConsolidadoAdminTableComponent } from '@component/consolidado-admin/consolidado-admin-table/consolidado-admin-table.component';
+import { ConsolidadoAdminSearchComponent } from '@component/consolidado-admin/consolidado-admin-search/consolidado-admin-search/consolidado-admin-search.component';
+import { ConsolidadoAdminSearchParamsComponent } from '@component/consolidado-admin/consolidado-admin-search/consolidado-admin-search-params/consolidado-admin-search-params.component';
+
 
 @NgModule({
   declarations: [
@@ -151,10 +155,11 @@ import { PlanificacionFormPickComponent } from '@component/comision-admin/comisi
     CargoAdminComponent, CargoFieldsetComponent,
     CentroEducativoAdminComponent, CentroEducativoFieldsetComponent, DomicilioCeFieldsetComponent,
     CentroEducativoShowComponent, CentroEducativoTableComponent,
-    ComisionAdminComponent, ComisionFieldsetComponent, ComisionCursoAdminComponent, PlanificacionFormPickComponent,
+    ComisionAdminComponent, ComisionFieldsetComponent, PlanificacionFormPickComponent,
     ComisionShowComponent, ComisionGridComponent, ComisionSearchComponent, ComisionSearchParamsComponent, 
     ComisionDetailComponent, ComisionCardComponent, ComisionHorarioGridComponent, ComisionCursoGridComponent, CrearHorariosComisionComponent,
     ConsolidadoComponent, ConsolidadoTableComponent, ConsolidadoSearchComponent, ConsolidadoSearchParamsComponent,
+    ConsolidadoAdminComponent, ConsolidadoAdminTableComponent, ConsolidadoAdminSearchComponent, ConsolidadoAdminSearchParamsComponent,
     CrearComisionesComponent, CrearHorariosComponent,
     CursoAdminComponent, CursoFieldsetComponent,
     CursoShowComponent, CursoTableComponent,
