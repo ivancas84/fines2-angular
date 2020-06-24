@@ -101,7 +101,6 @@ import { ComisionCardComponent } from '@component/comision-detail/comision-card/
 import { ComisionDetailComponent } from '@component/comision-detail/comision-detail/comision-detail.component';
 import { ModalidadAdminComponent } from '@component/modalidad-admin/modalidad-admin/modalidad-admin.component';
 import { ModalidadFieldsetComponent } from '@component/modalidad-admin/modalidad-fieldset/modalidad-fieldset.component';
-import { ComisionCursoAdminComponent } from '@component/comision-admin/comision-curso-admin/comision-curso-admin.component';
 import { CursoShowComponent } from '@component/curso-show/curso-show/curso-show.component';
 import { CursoTableComponent } from '@component/curso-show/curso-table/curso-table.component';
 import { SedeSearchParamsComponent } from '@component/sede-show/sede-search/sede-search-params/sede-search-params.component';
@@ -151,7 +150,7 @@ import { PlanificacionFormPickComponent } from '@component/comision-admin/comisi
     CargoAdminComponent, CargoFieldsetComponent,
     CentroEducativoAdminComponent, CentroEducativoFieldsetComponent, DomicilioCeFieldsetComponent,
     CentroEducativoShowComponent, CentroEducativoTableComponent,
-    ComisionAdminComponent, ComisionFieldsetComponent, ComisionCursoAdminComponent, PlanificacionFormPickComponent,
+    ComisionAdminComponent, ComisionFieldsetComponent, PlanificacionFormPickComponent,
     ComisionShowComponent, ComisionGridComponent, ComisionSearchComponent, ComisionSearchParamsComponent, 
     ComisionDetailComponent, ComisionCardComponent, ComisionHorarioGridComponent, ComisionCursoGridComponent, CrearHorariosComisionComponent,
     ConsolidadoComponent, ConsolidadoTableComponent, ConsolidadoSearchComponent, ConsolidadoSearchParamsComponent,

@@ -20,7 +20,6 @@ import { AsignaturaShowComponent } from '@component/asignatura-show/asignatura-s
 import { CursoAdminComponent } from '@component/curso-admin/curso-admin/curso-admin.component';
 import { ComisionDetailComponent } from '@component/comision-detail/comision-detail/comision-detail.component';
 import { ModalidadAdminComponent } from '@component/modalidad-admin/modalidad-admin/modalidad-admin.component';
-import { ComisionCursoAdminComponent } from '@component/comision-admin/comision-curso-admin/comision-curso-admin.component';
 import { CursoShowComponent } from '@component/curso-show/curso-show/curso-show.component';
 import { CrearComisionesComponent } from '@component/crear-comisiones/crear-comisiones.component';
 import { HorarioAdminComponent } from '@component/horario-admin/horario-admin/horario-admin.component';
@@ -38,7 +37,6 @@ const routes: Routes = [
   { path: 'centro-educativo-admin', component: CentroEducativoAdminComponent, pathMatch: 'full' },
   { path: 'centro-educativo-show', component: CentroEducativoShowComponent, pathMatch: 'full' },
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
-  { path: 'comision-curso-admin', component: ComisionCursoAdminComponent, pathMatch: 'full' },
   { path: 'comision-show', component: ComisionShowComponent, pathMatch: 'full' },
   { path: 'comision-detail', component: ComisionDetailComponent, pathMatch: 'full' },
   { path: 'consolidado', component: ConsolidadoComponent, pathMatch: 'full' },
