@@ -49,4 +49,7 @@ export class ConsolidadoAdminSearchParamsComponent extends SearchParamsComponent
     return fg;
   }
 
+  get sede() { return this.fieldset.get('sede')}
+
+
 }

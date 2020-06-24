@@ -130,6 +130,11 @@ import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.
 import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-fieldset.component';
 import { PlanificacionFormPickComponent } from '@component/comision-admin/comision-fieldset/planificacion-form-pick/planificacion-form-pick.component';
 
+import { ConsolidadoAdminComponent } from '@component/consolidado-admin/consolidado-admin/consolidado-admin.component';
+import { ConsolidadoAdminTableComponent } from '@component/consolidado-admin/consolidado-admin-table/consolidado-admin-table.component';
+import { ConsolidadoAdminSearchComponent } from '@component/consolidado-admin/consolidado-admin-search/consolidado-admin-search/consolidado-admin-search.component';
+import { ConsolidadoAdminSearchParamsComponent } from '@component/consolidado-admin/consolidado-admin-search/consolidado-admin-search-params/consolidado-admin-search-params.component';
+
 
 @NgModule({
   declarations: [
@@ -154,6 +159,7 @@ import { PlanificacionFormPickComponent } from '@component/comision-admin/comisi
     ComisionShowComponent, ComisionGridComponent, ComisionSearchComponent, ComisionSearchParamsComponent, 
     ComisionDetailComponent, ComisionCardComponent, ComisionHorarioGridComponent, ComisionCursoGridComponent, CrearHorariosComisionComponent,
     ConsolidadoComponent, ConsolidadoTableComponent, ConsolidadoSearchComponent, ConsolidadoSearchParamsComponent,
+    ConsolidadoAdminComponent, ConsolidadoAdminTableComponent, ConsolidadoAdminSearchComponent, ConsolidadoAdminSearchParamsComponent,
     CrearComisionesComponent, CrearHorariosComponent,
     CursoAdminComponent, CursoFieldsetComponent,
     CursoShowComponent, CursoTableComponent,
