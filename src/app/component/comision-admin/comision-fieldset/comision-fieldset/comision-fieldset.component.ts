@@ -101,6 +101,7 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
       calendario: [null, {
         validators: [Validators.required],
       }],
+      crear_cursos: false
     }, {
       asyncValidators: [this.localValidators.uniqueComision()],
     });
@@ -120,5 +121,6 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
   get planificacion() { return this.fieldset.get('planificacion')}
   get comisionSiguiente() { return this.fieldset.get('comision_siguiente')}
   get calendario() { return this.fieldset.get('calendario')}
+  get crearCursos() { return this.fieldset.get('crear_cursos')}
 
 }
