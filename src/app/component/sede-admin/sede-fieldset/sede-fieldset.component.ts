@@ -16,6 +16,7 @@ export class SedeFieldsetComponent extends FieldsetComponent {
 
   readonly entityName: string = 'sede';
 
+  optCentroEducativo$: Observable<Array<any>>;
   optTipoSede$: Observable<Array<any>>;
 
   constructor(
@@ -30,6 +31,7 @@ export class SedeFieldsetComponent extends FieldsetComponent {
 
   initOptions(): void {
     this.optTipoSede$ = this.dd.all('tipo_sede', new Display);
+    this.optCentroEducativo$ = this.dd.all('centro_educativo', new Display);
   }
 
 
@@ -44,15 +46,14 @@ export class SedeFieldsetComponent extends FieldsetComponent {
       }],
       observaciones: ['', {
       }],
-      // domicilio: ['', {
-      //   validators: [Validators.required],
-      // }],
       tipo_sede: ['', {
         //validators: Validators.required,
       }],
       centro_educativo: ['', {
         validators: [Validators.required],
       }],
+    }, {
+      asyncValidators: [this.validators.uniqueMultiple('sede', ['numero', 'centro_educativo'])],
     });
     return fg;
   }
