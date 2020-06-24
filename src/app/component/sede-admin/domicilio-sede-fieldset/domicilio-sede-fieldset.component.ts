@@ -39,7 +39,7 @@ export class DomicilioSedeFieldsetComponent extends FieldsetOptionalComponent {
             if(response && response.hasOwnProperty("domicilio") && response["domicilio"]) {
               this.dd.get("domicilio", response["domicilio"]).pipe(first()).subscribe(
                 domicilio => {
-                  this.initValues(response);
+                  this.initValues(domicilio);
                   this.fieldset.enable()
                 }
               )

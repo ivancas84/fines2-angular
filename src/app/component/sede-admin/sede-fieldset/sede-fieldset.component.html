@@ -36,14 +36,18 @@
       </div>
     </div>
   </div>
-  <div class="form-group row">
+  <div class="form-group form-row">
     <label class="col-sm-2 col-form-label">Centro Educativo</label>
     <div class="col-sm-10">
-      <app-typeahead [entityName]="'centro_educativo'" [field]="centroEducativo"></app-typeahead>
+      <select class="form-control" formControlName="centro_educativo" [ngClass]="{'is-invalid':(centroEducativo.invalid && (centroEducativo.dirty || centroEducativo.touched))}">
+        <option [ngValue]="null">--Centro Educativo--</option>
+        <option *ngFor="let option of (optCentroEducativo$ | async)" [value]="option.id" >{{option.id | label:"centro_educativo"}}</option>
+      </select>
       <div class="text-danger" *ngIf="(centroEducativo.touched || centroEducativo.dirty) && centroEducativo.invalid">
-        <div *ngIf="centroEducativo.errors.required">Debe completar valor</div>
-        <div *ngIf="(centroEducativo.touched && centroEducativo.errors.unselected)">Valor no seleccionado</div>
       </div>
     </div>
+  </div>
+  <div class="text-danger" *ngIf="fieldset.errors">
+    <div *ngIf="fieldset.errors.notUnique">El valor ya se encuentra utilizado: <a routerLink="/sede-admin" [queryParams]="{'id':fieldset.errors.notUnique}">Cargar</a></div>
   </div>
 </fieldset>
