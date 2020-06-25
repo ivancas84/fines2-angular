@@ -20,7 +20,6 @@ import { AsignaturaShowComponent } from '@component/asignatura-show/asignatura-s
 import { CursoAdminComponent } from '@component/curso-admin/curso-admin/curso-admin.component';
 import { ComisionDetailComponent } from '@component/comision-detail/comision-detail/comision-detail.component';
 import { ModalidadAdminComponent } from '@component/modalidad-admin/modalidad-admin/modalidad-admin.component';
-import { ComisionCursoAdminComponent } from '@component/comision-admin/comision-curso-admin/comision-curso-admin.component';
 import { CursoShowComponent } from '@component/curso-show/curso-show/curso-show.component';
 import { CrearComisionesComponent } from '@component/crear-comisiones/crear-comisiones.component';
 import { HorarioAdminComponent } from '@component/horario-admin/horario-admin/horario-admin.component';
@@ -30,6 +29,7 @@ import { TelefonoAdminComponent } from '@component/telefono-admin/telefono-admin
 import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
 import { DetallePersonaAdminComponent } from '@component/detalle-persona-admin/detalle-persona-admin/detalle-persona-admin.component';
 import { EmailAdminComponent } from '@component/email-admin/email-admin/email-admin.component';
+import { ConsolidadoAdminComponent } from '@component/consolidado-admin/consolidado-admin/consolidado-admin.component';
 
 const routes: Routes = [
   { path: 'asignatura-show', component: AsignaturaShowComponent, pathMatch: 'full' },
@@ -38,10 +38,10 @@ const routes: Routes = [
   { path: 'centro-educativo-admin', component: CentroEducativoAdminComponent, pathMatch: 'full' },
   { path: 'centro-educativo-show', component: CentroEducativoShowComponent, pathMatch: 'full' },
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
-  { path: 'comision-curso-admin', component: ComisionCursoAdminComponent, pathMatch: 'full' },
   { path: 'comision-show', component: ComisionShowComponent, pathMatch: 'full' },
   { path: 'comision-detail', component: ComisionDetailComponent, pathMatch: 'full' },
   { path: 'consolidado', component: ConsolidadoComponent, pathMatch: 'full' },
+  { path: 'consolidado-admin', component: ConsolidadoAdminComponent, pathMatch: 'full' },
   { path: 'crear-comisiones', component: CrearComisionesComponent, pathMatch: 'full' },
   { path: 'crear-horarios', component: CrearHorariosComponent, pathMatch: 'full' },
   { path: 'curso-admin', component: CursoAdminComponent, pathMatch: 'full' },

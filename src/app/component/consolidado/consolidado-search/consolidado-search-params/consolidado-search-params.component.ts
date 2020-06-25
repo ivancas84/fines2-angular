@@ -48,7 +48,7 @@ export class ConsolidadoSearchParamsComponent extends SearchParamsComponent {
     return fg;
   }
 
-  get sede() { return this.form.get('sede')}
+  get sede() { return this.fieldset.get('sede')}
 
 
 }
