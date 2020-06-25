@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { 
   NgbModule,
@@ -182,7 +182,7 @@ import { ConsolidadoAdminSearchParamsComponent } from '@component/consolidado-ad
   ],
   imports: [
     BrowserModule, AppRoutingModule, HttpClientModule,
-    FormsModule, ReactiveFormsModule,
+    ReactiveFormsModule,
     NgbModule
     //NgbToastModule, NgbCollapseModule, NgbDropdownModule, NgbPaginationModule, NgbAccordionModule, NgbTypeaheadModule, NgbDatepickerModule, NgbTimepickerModule
   ],
