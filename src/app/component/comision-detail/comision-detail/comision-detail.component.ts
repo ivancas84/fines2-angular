@@ -66,6 +66,15 @@ export class ComisionDetailComponent extends AdminComponent {
     return this.dd.persist("horariosComision", this.serverData())
   }
 
+  reload(response){
+    /**
+     * Recargar una vez persistido
+     */
+    this.setData(this.route.snapshot.queryParams)
+    this.toast.showSuccess("Registro realizado");
+    this.isSubmitted = false;
+  }
+
   getProcessedId(logs: Array<any>) {  
     return this.adminForm.get(this.entityName).get("id").value;
   }
@@ -83,7 +92,6 @@ export class ComisionDetailComponent extends AdminComponent {
   }
 
   confirmarEliminarHorarios(){
-    console.log("estoy");
     var id = this.adminForm.get(this.entityName).get("id").value;
     this.isSubmitted = true; 
     this.dd.persist("eliminarHorariosComision", id).pipe(first()).subscribe(
