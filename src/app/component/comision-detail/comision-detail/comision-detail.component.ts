@@ -8,9 +8,11 @@ import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { AdminComponent } from '@component/admin/admin.component';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, first } from 'rxjs/operators';
 import { emptyUrl } from '@function/empty-url.function';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalConfirmComponent } from '@component/modal-confirm/modal-confirm.component';
+import { ModalAlertComponent } from '@component/modal-alert/modal-alert.component';
 
 @Component({
   selector: 'app-comision-detail',
@@ -71,18 +73,22 @@ export class ComisionDetailComponent extends AdminComponent {
   eliminarHorarios(): void {
     /**
      * envio de id par eliminar horarios
-     */   
+     */
+    const modalRef = this.modalService.open(ModalConfirmComponent);
+    modalRef.componentInstance.title = "Eliminar";
+    modalRef.componentInstance.message = "Seguro que desea eliminar horarios?";
+    modalRef.result.then((result) => {
+      if(result) this.confirmarEliminarHorarios();
+    });     
+  }
+
+  confirmarEliminarHorarios(){
+    console.log("estoy");
     var id = this.adminForm.get(this.entityName).get("id").value;
     this.isSubmitted = true; 
-    var s = this.dd.persist("eliminarHorariosComision", id).subscribe(
+    this.dd.persist("eliminarHorariosComision", id).pipe(first()).subscribe(
         response => {
-          if(response && response.length){
-            this.storage.removeItemsContains(".");
-            response.forEach(
-              element => this.storage.removeItem(element)
-            );
-          }
-
+          this.storage.removeItemsPersisted(response)
           let route = emptyUrl(this.router.url) + "?id="+this.getProcessedId(response);
           if(route != this.router.url)  this.router.navigateByUrl('/' + route);
           else this.setData(this.route.snapshot.queryParams)
@@ -92,13 +98,16 @@ export class ComisionDetailComponent extends AdminComponent {
           this.toast.showSuccess("Horarios eliminados");
           this.isSubmitted = false;
         },
-        error => { 
+        error => {
           console.log(error);
-          this.toast.showDanger(error.error); 
+          const modalRef = this.modalService.open(ModalAlertComponent);
+          modalRef.componentInstance.title = "Error";
+          modalRef.componentInstance.message = error.error;
         }
       );
-    this.subscriptions.add(s);
   }
+
+
 }
 
 
