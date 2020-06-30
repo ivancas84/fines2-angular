@@ -29,7 +29,7 @@ export class ComisionCursoGridComponent extends ShowElementComponent {
         if(comision && comision.hasOwnProperty("id") && comision["id"]) {
           if(isEmptyObject(comision)) return of(null);
 
-          return this.dd.data("cursos_con_horarios_de_comision", comision["id"]).pipe(mergeMap(
+          return this.dd.data("curso_horario_comision", comision["id"]).pipe(mergeMap(
             cursos_con_horarios => {
               var d = new Display();
               d.setParams({"comision":comision["id"]});
