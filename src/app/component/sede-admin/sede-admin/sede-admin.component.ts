@@ -11,6 +11,7 @@ import { isEmptyObject } from '@function/is-empty-object.function';
 import { first, mergeMap } from 'rxjs/operators';
 import { ToastService } from '@service/ng-bootstrap/toast.service';
 import { Display } from '@class/display';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-sede-admin',
@@ -31,8 +32,9 @@ export class SedeAdminComponent extends AdminComponent {
     protected toast: ToastService, 
     protected validators: ValidatorsService,
     protected storage: SessionStorageService, 
+    protected modalService: NgbModal
   ) {
-    super(fb, route, router, location, dd, toast, storage);
+    super(fb, route, router, location, dd, toast, storage, modalService);
   }
   
   serverData() {  

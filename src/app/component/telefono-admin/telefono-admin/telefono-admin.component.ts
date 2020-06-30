@@ -8,6 +8,7 @@ import { ToastService } from '@service/ng-bootstrap/toast.service';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { emptyUrl } from '@function/empty-url.function';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-telefono-admin',
@@ -26,8 +27,9 @@ export class TelefonoAdminComponent extends AdminComponent {
     protected toast: ToastService, 
     protected validators: ValidatorsService,
     protected storage: SessionStorageService, 
+    protected modalService: NgbModal
   ) {
-    super(fb, route, router, location, dd, toast, storage);
+    super(fb, route, router, location, dd, toast, storage, modalService);
   }
 
   ngOnInit() {

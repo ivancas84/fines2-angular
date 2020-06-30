@@ -134,6 +134,7 @@ import { ConsolidadoAdminComponent } from '@component/consolidado-admin/consolid
 import { ConsolidadoAdminTableComponent } from '@component/consolidado-admin/consolidado-admin-table/consolidado-admin-table.component';
 import { ConsolidadoAdminSearchComponent } from '@component/consolidado-admin/consolidado-admin-search/consolidado-admin-search/consolidado-admin-search.component';
 import { ConsolidadoAdminSearchParamsComponent } from '@component/consolidado-admin/consolidado-admin-search/consolidado-admin-search-params/consolidado-admin-search-params.component';
+import { ModalAlertComponent } from '@component/modal-alert/modal-alert.component';
 
 
 @NgModule({
@@ -145,6 +146,7 @@ import { ConsolidadoAdminSearchParamsComponent } from '@component/consolidado-ad
     PaginationComponent,
     MessagesComponent,
     TypeaheadComponent,
+    ModalAlertComponent,
     ModalConfirmComponent,
     ToastsComponent,
     UploadComponent,

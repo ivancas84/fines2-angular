@@ -10,6 +10,7 @@ import { isEmptyObject } from '@function/is-empty-object.function';
 import { ReplaySubject, Observable, of } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { ToastService } from '@service/ng-bootstrap/toast.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-centro-educativo-admin',
@@ -29,8 +30,9 @@ export class CentroEducativoAdminComponent extends AdminComponent {
     protected toast: ToastService, 
     protected validators: ValidatorsService,
     protected storage: SessionStorageService, 
+    protected modalService: NgbModal
   ) {
-    super(fb, route, router, location, dd, toast, storage);
+    super(fb, route, router, location, dd, toast, storage, modalService);
   }
 
   setDataFromStorage(formValues: any): void {
