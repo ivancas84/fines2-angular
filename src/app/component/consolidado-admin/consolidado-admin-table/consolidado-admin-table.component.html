@@ -6,6 +6,7 @@
     <div class="col-4">
       <h5>{{c.id | label:'comision'}} 
         <span *ngIf="c.apertura">(APERTURA)</span>
+        <a [routerLink]="['/comision-detail']" [queryParams]="{id:c.id}" ><span class="oi oi-eye"></span></a>
         <a [routerLink]="['/comision-admin']" [queryParams]="{id:c.id}" ><span class="oi oi-pencil"></span></a>
       </h5>              
       <p>{{c.sede | label:'sede'}}</p>
