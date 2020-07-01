@@ -4,6 +4,8 @@
     <form [formGroup]="searchForm" novalidate (ngSubmit)="onSubmit()">       
       <!--app-search-all [form]="searchForm" [data$]="params$"></app-search-all-->
       <app-consolidado-search-params [form]="searchForm" [display$]="display$"></app-consolidado-search-params>
+      <app-consolidado-search-order [form]="searchForm" [display$]="display$"></app-consolidado-search-order>
+
       <!--app-sede-search-condition [form]="searchForm" [data$]="condition$"></app-sede-search-condition-->
       <div class="ml-5">
         <button type="submit" class="btn btn-primary btn-sm">Buscar <span class="oi oi-magnifying-glass"></span></button>

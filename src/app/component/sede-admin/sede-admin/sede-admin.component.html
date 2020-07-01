@@ -5,7 +5,7 @@
   <app-domicilio-sede-fieldset [form]="adminForm" [data$]="data$"></app-domicilio-sede-fieldset>
   <app-designacion-table [data$]="data$"></app-designacion-table>
 
-  <button type="submit" class="btn btn-primary">Aceptar</button>&nbsp;
+  <button [disabled]="isSubmitted" type="submit" class="btn btn-primary">Aceptar</button>&nbsp;
   <button type="button" class="btn btn-secondary" (click)="back()"><span class="oi oi-arrow-thick-left" title="Volver"></span></button>
   <button type="button" (click)="reset()" class="btn btn-secondary" ><span class="oi oi-reload" title="Restablecer"></span></button>
   <button type="button" (click)="clear()" class="btn btn-secondary" ><span title="Nuevo" class="oi oi-plus"></span></button>

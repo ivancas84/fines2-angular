@@ -44,15 +44,13 @@ import { ParserService } from '@service/parser/parser.service';
 import { UploadComponent } from '@component/upload/upload.component';
 import { DownloadComponent } from '@component/download/download.component';
 import { NgbStringTimeAdapter } from '@service/ng-bootstrap/ngb-string-time-adapter';
+import { ModalAlertComponent } from '@component/modal-alert/modal-alert.component';
 
 import { DataDefinitionLoaderService } from '@service/data-definition-loader.service';
 import { MenuComponent } from '@component/menu/menu.component';
 
 import { AsignaturaAdminComponent } from '@component/asignatura-admin/asignatura-admin/asignatura-admin.component';
 import { AsignaturaFieldsetComponent } from '@component/asignatura-admin/asignatura-fieldset/asignatura-fieldset.component';
-import { ConsolidadoComponent } from '@component/consolidado/consolidado/consolidado.component';
-import { ConsolidadoTableComponent } from '@component/consolidado/consolidado-table/consolidado-table.component';
-import { ConsolidadoSearchComponent } from '@component/consolidado/consolidado-search/consolidado-search/consolidado-search.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin/sede-admin.component';
 import { SedeFieldsetComponent } from '@component/sede-admin/sede-fieldset/sede-fieldset.component';
 import { TipoSedeAdminComponent } from '@component/tipo-sede-admin/tipo-sede-admin/tipo-sede-admin.component';
@@ -125,16 +123,18 @@ import { CrearHorariosComisionComponent } from '@component/comision-detail/crear
 import { PersonaGridComponent } from '@component/persona-show/persona-grid/persona-grid.component';
 import { TelefonoAdminComponent } from '@component/telefono-admin/telefono-admin/telefono-admin.component';
 import { TelefonoFieldsetComponent } from '@component/telefono-admin/telefono-fieldset/telefono-fieldset.component';
-import { ConsolidadoSearchParamsComponent } from '@component/consolidado/consolidado-search/consolidado-search-params/consolidado-search-params.component';
 import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
 import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-fieldset.component';
 import { PlanificacionFormPickComponent } from '@component/comision-admin/comision-fieldset/planificacion-form-pick/planificacion-form-pick.component';
 
+import { ConsolidadoComponent } from '@component/consolidado/consolidado/consolidado.component';
+import { ConsolidadoTableComponent } from '@component/consolidado/consolidado-table/consolidado-table.component';
+import { ConsolidadoSearchComponent } from '@component/consolidado/consolidado-search/consolidado-search/consolidado-search.component';
+import { ConsolidadoSearchParamsComponent } from '@component/consolidado/consolidado-search/consolidado-search-params/consolidado-search-params.component';
+import { ConsolidadoSearchOrderComponent } from '@component/consolidado/consolidado-search/consolidado-search-order/consolidado-search-order.component';
+
 import { ConsolidadoAdminComponent } from '@component/consolidado-admin/consolidado-admin/consolidado-admin.component';
 import { ConsolidadoAdminTableComponent } from '@component/consolidado-admin/consolidado-admin-table/consolidado-admin-table.component';
-import { ConsolidadoAdminSearchComponent } from '@component/consolidado-admin/consolidado-admin-search/consolidado-admin-search/consolidado-admin-search.component';
-import { ConsolidadoAdminSearchParamsComponent } from '@component/consolidado-admin/consolidado-admin-search/consolidado-admin-search-params/consolidado-admin-search-params.component';
-import { ModalAlertComponent } from '@component/modal-alert/modal-alert.component';
 
 
 @NgModule({
@@ -160,8 +160,8 @@ import { ModalAlertComponent } from '@component/modal-alert/modal-alert.componen
     ComisionAdminComponent, ComisionFieldsetComponent, PlanificacionFormPickComponent,
     ComisionShowComponent, ComisionGridComponent, ComisionSearchComponent, ComisionSearchParamsComponent, 
     ComisionDetailComponent, ComisionCardComponent, ComisionHorarioGridComponent, ComisionCursoGridComponent, CrearHorariosComisionComponent,
-    ConsolidadoComponent, ConsolidadoTableComponent, ConsolidadoSearchComponent, ConsolidadoSearchParamsComponent,
-    ConsolidadoAdminComponent, ConsolidadoAdminTableComponent, ConsolidadoAdminSearchComponent, ConsolidadoAdminSearchParamsComponent,
+    ConsolidadoComponent, ConsolidadoTableComponent, ConsolidadoSearchComponent, ConsolidadoSearchParamsComponent, ConsolidadoSearchOrderComponent,
+    ConsolidadoAdminComponent, ConsolidadoAdminTableComponent,
     CrearComisionesComponent, CrearHorariosComponent,
     CursoAdminComponent, CursoFieldsetComponent,
     CursoShowComponent, CursoTableComponent,
