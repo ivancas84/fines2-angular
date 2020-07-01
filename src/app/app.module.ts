@@ -135,8 +135,6 @@ import { ConsolidadoSearchOrderComponent } from '@component/consolidado/consolid
 
 import { ConsolidadoAdminComponent } from '@component/consolidado-admin/consolidado-admin/consolidado-admin.component';
 import { ConsolidadoAdminTableComponent } from '@component/consolidado-admin/consolidado-admin-table/consolidado-admin-table.component';
-import { ConsolidadoAdminSearchComponent } from '@component/consolidado-admin/consolidado-admin-search/consolidado-admin-search/consolidado-admin-search.component';
-import { ConsolidadoAdminSearchParamsComponent } from '@component/consolidado-admin/consolidado-admin-search/consolidado-admin-search-params/consolidado-admin-search-params.component';
 
 
 @NgModule({
@@ -163,7 +161,7 @@ import { ConsolidadoAdminSearchParamsComponent } from '@component/consolidado-ad
     ComisionShowComponent, ComisionGridComponent, ComisionSearchComponent, ComisionSearchParamsComponent, 
     ComisionDetailComponent, ComisionCardComponent, ComisionHorarioGridComponent, ComisionCursoGridComponent, CrearHorariosComisionComponent,
     ConsolidadoComponent, ConsolidadoTableComponent, ConsolidadoSearchComponent, ConsolidadoSearchParamsComponent, ConsolidadoSearchOrderComponent,
-    ConsolidadoAdminComponent, ConsolidadoAdminTableComponent, ConsolidadoAdminSearchComponent, ConsolidadoAdminSearchParamsComponent,
+    ConsolidadoAdminComponent, ConsolidadoAdminTableComponent,
     CrearComisionesComponent, CrearHorariosComponent,
     CursoAdminComponent, CursoFieldsetComponent,
     CursoShowComponent, CursoTableComponent,
