@@ -123,8 +123,6 @@ import { CrearHorariosComisionComponent } from '@component/comision-detail/crear
 import { PersonaGridComponent } from '@component/persona-show/persona-grid/persona-grid.component';
 import { TelefonoAdminComponent } from '@component/telefono-admin/telefono-admin/telefono-admin.component';
 import { TelefonoFieldsetComponent } from '@component/telefono-admin/telefono-fieldset/telefono-fieldset.component';
-import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
-import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-fieldset.component';
 import { PlanificacionFormPickComponent } from '@component/comision-admin/comision-fieldset/planificacion-form-pick/planificacion-form-pick.component';
 
 import { ConsolidadoComponent } from '@component/consolidado/consolidado/consolidado.component';
@@ -136,6 +134,8 @@ import { ConsolidadoSearchOrderComponent } from '@component/consolidado/consolid
 import { ConsolidadoAdminComponent } from '@component/consolidado-admin/consolidado-admin/consolidado-admin.component';
 import { ConsolidadoAdminTableComponent } from '@component/consolidado-admin/consolidado-admin-table/consolidado-admin-table.component';
 
+import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
+import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-fieldset.component';
 
 @NgModule({
   declarations: [

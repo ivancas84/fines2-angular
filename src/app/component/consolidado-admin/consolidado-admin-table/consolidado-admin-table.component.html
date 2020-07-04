@@ -22,7 +22,8 @@
       <ul class="list-group">
         <div class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let cu of c.cursos; let j = index">
           <div>
-            <b>{{cu.asignatura_.nombre}}</b>&nbsp;<small>{{cu.horario}}</small>
+            <b>{{cu.asignatura_.nombre}}</b>&nbsp;<small>{{cu.horario}}</small><a class="btn btn-outline-primary btn-sm" [routerLink]="['/toma-admin']" [queryParams]="{curso:cu.id}" ><span class="oi oi-plus"></span></a>
+
           </div>
           <ng-template #sintomas><small>Sin Tomas</small></ng-template>
           
@@ -32,6 +33,8 @@
               <small *ngIf="t.observaciones">({{t.observaciones}})</small>                                                                 
             </div>
           </div>
+
+          
         </div>
       </ul>
     </div>
