@@ -81,7 +81,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Curso</label>
     <div class="col-sm-10">
-      <app-typeahead [field]="curso" [entityName]="'curso'"></app-typeahead>
+      <app-label [id]="curso.value" [entityName]="'curso'"></app-label>
       <div class="text-danger" *ngIf="(curso.touched || curso.dirty) && curso.invalid">
         <div *ngIf="curso.errors.required">Debe completar valor</div>
       </div>

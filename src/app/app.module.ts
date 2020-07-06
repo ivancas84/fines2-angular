@@ -45,6 +45,7 @@ import { UploadComponent } from '@component/upload/upload.component';
 import { DownloadComponent } from '@component/download/download.component';
 import { NgbStringTimeAdapter } from '@service/ng-bootstrap/ngb-string-time-adapter';
 import { ModalAlertComponent } from '@component/modal-alert/modal-alert.component';
+import { LabelComponent } from '@component/label/label.component';
 
 import { DataDefinitionLoaderService } from '@service/data-definition-loader.service';
 import { MenuComponent } from '@component/menu/menu.component';
@@ -136,6 +137,7 @@ import { ConsolidadoAdminTableComponent } from '@component/consolidado-admin/con
 
 import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
 import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-fieldset.component';
+import { TaCursoCardComponent } from '@component/toma-admin/ta-curso-card/ta-curso-card.component';
 
 @NgModule({
   declarations: [
@@ -151,6 +153,7 @@ import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-
     ToastsComponent,
     UploadComponent,
     DownloadComponent,
+    LabelComponent,
 
     AsignaturaAdminComponent, AsignaturaFieldsetComponent,
     AsignaturaShowComponent, AsignaturaTableComponent, AsignaturaSearchComponent,
@@ -180,7 +183,7 @@ import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-
     TipoSedeAdminComponent, TipoSedeFieldsetComponent,
     TipoSedeShowComponent, TipoSedeTableComponent,
     TelefonoAdminComponent, TelefonoFieldsetComponent,
-    TomaAdminComponent, TomaFieldsetComponent
+    TomaAdminComponent, TomaFieldsetComponent, TaCursoCardComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, HttpClientModule,
