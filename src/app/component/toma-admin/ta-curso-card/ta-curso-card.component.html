@@ -1,15 +1,10 @@
 <div class="container">
 <div *ngIf="curso$ | async as data" class="card">
   <div class="card-header">
-    Curso {{data.id | label:"curso"}}
+    Curso
   </div>
 
   <div class="card-body">
-    <dl class="row">
-      <dt class="col-sm-3">Horas Catedra</dt>
-      <dd class="col-sm-9">{{data.horas_catedra}}</dd>
-    </dl>
-
     <dl class="row">
       <dt class="col-sm-3">Comision</dt>
       <dd class="col-sm-9">
@@ -21,9 +16,21 @@
     <dl class="row">
       <dt class="col-sm-3">Asignatura</dt>
       <dd class="col-sm-9">
-        <a *ngIf="data.asignatura; else sinAsignatura" [routerLink]="['/asignatura-detail']" [queryParams]="{id:data.asignatura}" ><app-label [id]="data.asignatura" [entityName]="'asignatura'"></app-label></a>
+        <app-label [id]="data.asignatura" [entityName]="'asignatura'"></app-label>
         <ng-template #sinAsignatura>No se han encontrado registros</ng-template>
       </dd>
+    </dl>
+
+    <dl class="row">
+      <dt class="col-sm-3">Horario</dt>
+      <dd class="col-sm-9">
+        <app-curso-horario-label [id]="data.id"></app-curso-horario-label>
+      </dd>
+    </dl>
+
+    <dl class="row">
+      <dt class="col-sm-3">Horas Catedra</dt>
+      <dd class="col-sm-9">{{data.horas_catedra}}</dd>
     </dl>
 
   </div>
