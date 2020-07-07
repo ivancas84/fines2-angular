@@ -134,6 +134,9 @@ import { TelefonoAdminComponent } from '@component/telefono-admin/telefono-admin
 import { TelefonoFieldsetComponent } from '@component/telefono-admin/telefono-fieldset/telefono-fieldset.component';
 import { PlanificacionFormPickComponent } from '@component/comision-admin/comision-fieldset/planificacion-form-pick/planificacion-form-pick.component';
 
+import { CalendarioAdminComponent } from '@component/calendario-admin/calendario-admin/calendario-admin.component';
+import { CalendarioFieldsetComponent } from '@component/calendario-admin/calendario-fieldset/calendario-fieldset.component';
+
 import { ConsolidadoComponent } from '@component/consolidado/consolidado/consolidado.component';
 import { ConsolidadoTableComponent } from '@component/consolidado/consolidado-table/consolidado-table.component';
 import { ConsolidadoSearchComponent } from '@component/consolidado/consolidado-search/consolidado-search/consolidado-search.component';
@@ -167,6 +170,7 @@ import { TaCursoCardComponent } from '@component/toma-admin/ta-curso-card/ta-cur
 
     AsignaturaAdminComponent, AsignaturaFieldsetComponent,
     AsignaturaShowComponent, AsignaturaTableComponent, AsignaturaSearchComponent,
+    CalendarioAdminComponent, CalendarioFieldsetComponent,
     CargoAdminComponent, CargoFieldsetComponent,
     CentroEducativoAdminComponent, CentroEducativoFieldsetComponent, DomicilioCeFieldsetComponent,
     CentroEducativoShowComponent, CentroEducativoTableComponent,

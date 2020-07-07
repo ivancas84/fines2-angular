@@ -30,10 +30,12 @@ import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.
 import { DetallePersonaAdminComponent } from '@component/detalle-persona-admin/detalle-persona-admin/detalle-persona-admin.component';
 import { EmailAdminComponent } from '@component/email-admin/email-admin/email-admin.component';
 import { ConsolidadoAdminComponent } from '@component/consolidado-admin/consolidado-admin/consolidado-admin.component';
+import { CalendarioAdminComponent } from '@component/calendario-admin/calendario-admin/calendario-admin.component';
 
 const routes: Routes = [
   { path: 'asignatura-show', component: AsignaturaShowComponent, pathMatch: 'full' },
   { path: 'asignatura-admin', component: AsignaturaAdminComponent, pathMatch: 'full' },
+  { path: 'calendario-admin', component: CalendarioAdminComponent, pathMatch: 'full' },
   { path: 'cargo-admin', component: CargoAdminComponent, pathMatch: 'full' },
   { path: 'centro-educativo-admin', component: CentroEducativoAdminComponent, pathMatch: 'full' },
   { path: 'centro-educativo-show', component: CentroEducativoShowComponent, pathMatch: 'full' },
