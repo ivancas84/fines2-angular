@@ -30,7 +30,7 @@ export class PersonaDomicilioFieldsetComponent extends FieldsetOptionalComponent
     /**
      * No suscribirse desde el template!
      * Puede disparar errores ExpressionChanged... no deseados (por ejemplo en la validacion inicial)
-     * Al suscribirse desde el template se cambia el Lifehook cycle 
+     * Al suscribirse desde el template se cambia el Lifehook cycle?
      */  
       var s = this.data$.subscribe(
         response => {
@@ -40,7 +40,7 @@ export class PersonaDomicilioFieldsetComponent extends FieldsetOptionalComponent
             if(response && response.hasOwnProperty("domicilio") && response["domicilio"]) {
               this.dd.get("domicilio", response["domicilio"]).pipe(first()).subscribe(
                 domicilio => {
-                  this.initValues(response);
+                  this.initValues(domicilio);
                   this.fieldset.enable()
                 }
               )
