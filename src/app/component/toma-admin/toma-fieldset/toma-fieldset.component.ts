@@ -5,6 +5,7 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
 import { ValidatorsService } from '@service/validators/validators.service';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@service/storage/session-storage.service';
+import { ParserService } from '@service/parser/parser.service';
 
 @Component({
   selector: 'app-toma-fieldset',
@@ -14,12 +15,20 @@ export class TomaFieldsetComponent extends FieldsetComponent {
 
   readonly entityName: string = 'toma';
 
+  readonly defaultValues: {[key:string]: any} = {
+    tipo_movimiento:"AI", 
+    fecha_toma: this.parser.dateFormat(new Date(),"Y-m-d"),
+    estado: 'Aprobada',
+    estado_contralor: 'Pasar',  
+  };
+
   constructor(
     protected fb: FormBuilder, 
     protected dd: DataDefinitionService, 
     protected validators: ValidatorsService,
     protected router: Router, 
-    protected storage: SessionStorageService, 
+    protected storage: SessionStorageService,
+    protected parser: ParserService, 
   ) {
     super(router, storage);
   }

@@ -6,13 +6,14 @@ import { mergeMap } from 'rxjs/operators';
 import { isEmptyObject } from '@function/is-empty-object.function';
 
 @Component({
-  selector: 'app-curso-card',
-  templateUrl: './curso-card.component.html',
+  selector: 'app-ta-curso-card',
+  templateUrl: './ta-curso-card.component.html',
 })
-export class CursoCardComponent extends CardComponent {
+export class TaCursoCardComponent extends CardComponent {
 
-  comision$: Observable<any>;
-  asignatura$: Observable<any>;
+  curso$: Observable<any>;
+  //comision$: Observable<any>;
+  //asignatura$: Observable<any>;
 
   constructor(
     protected dd: DataDefinitionService,
@@ -21,21 +22,21 @@ export class CursoCardComponent extends CardComponent {
   }
 
   ngOnInit(): void {
-
-    this.comision$ = this.data$.pipe(mergeMap(
-      curso => {
-        if(isEmptyObject(curso) || !curso.hasOwnProperty('comision') || !curso['comision']) return of(null);
-        return this.dd.get('comision', curso['comision']);        
+    this.curso$ = this.data$.pipe(mergeMap(
+      toma => {
+        if(isEmptyObject(toma) || !toma.hasOwnProperty('curso') || !toma['curso']) return of(null);
+        return this.dd.get('curso', toma['curso']);        
       }
     ));
 
+    /*
     this.asignatura$ = this.data$.pipe(mergeMap(
       curso => {
         if(isEmptyObject(curso) || !curso.hasOwnProperty('asignatura') || !curso['asignatura']) return of(null);
         return this.dd.get('asignatura', curso['asignatura']);        
       }
     ));
-
+    */
   }
 
 }

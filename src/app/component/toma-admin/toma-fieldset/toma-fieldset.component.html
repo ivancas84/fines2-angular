@@ -1,4 +1,12 @@
 <fieldset [formGroup]="fieldset">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Docente</label>
+    <div class="col-sm-10">
+      <app-typeahead [field]="docente" [entityName]="'persona'"></app-typeahead>
+      <div class="text-danger" *ngIf="(docente.touched || docente.dirty) && docente.invalid">
+      </div>
+    </div>
+  </div>
   <div class="form-group form-row">
     <label class="col-sm-2 col-form-label">Fecha toma</label>
     <div class="col-sm-10">
@@ -19,10 +27,54 @@
     </div>
   </div>
   <div class="form-group form-row">
-    <label class="col-sm-2 col-form-label">Estado</label>
+    <label class="col-sm-2 col-form-label">Estado:</label>
     <div class="col-sm-10">
-      <input class="form-control" type="text" formControlName="estado"  [ngClass]="{'is-invalid':(estado.invalid && (estado.dirty || estado.touched))}">
+      <select class="form-control" formControlName="estado" [ngClass]="{'is-invalid':(estado.invalid && (estado.dirty || estado.touched))}">
+        <option [ngValue]="null">--Estado--</option>
+            <option value="Aprobada">Aprobada</option>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Renuncia">Renuncia</option>
+            <option value="Error">Error</option>
+            <option value="Baja">Baja</option>
+            <option value="Modificada">Modificada</option>
+            <option value="Observada">Observada</option>
+      </select>
       <div class="text-danger" *ngIf="(estado.touched || estado.dirty) && estado.invalid">
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Estado Contralor:</label>
+    <div class="col-sm-10">
+      <select class="form-control" formControlName="estado_contralor" [ngClass]="{'is-invalid':(estadoContralor.invalid && (estadoContralor.dirty || estadoContralor.touched))}">
+        <option [ngValue]="null">--Estado Contralor--</option>
+            <option value="Pasar">Pasar</option>
+            <option value="Modificar">Modificar</option>
+            <option value="No pasar">No pasar</option>
+      </select>
+      <div class="text-danger" *ngIf="(estadoContralor.touched || estadoContralor.dirty) && estadoContralor.invalid">
+      </div>
+    </div>
+  </div>
+  <div class="form-group form-row">
+    <label class="col-sm-2 col-form-label">Tipo Movimiento:</label>
+    <div class="col-sm-10">
+      <select class="form-control" formControlName="tipo_movimiento" [ngClass]="{'is-invalid':(tipoMovimiento.invalid && (tipoMovimiento.dirty || tipoMovimiento.touched))}">
+        <option [ngValue]="null">--Tipo Movimiento--</option>
+            <option value="AI">AI</option>
+            <option value="CP">CP</option>
+            <option value="CC">CC</option>
+      </select>
+      <div class="text-danger" *ngIf="(tipoMovimiento.touched || tipoMovimiento.dirty) && tipoMovimiento.invalid">
+        <div *ngIf="tipoMovimiento.errors.required">Debe completar valor</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Reemplazo</label>
+    <div class="col-sm-10">
+      <app-typeahead [field]="reemplazo" [entityName]="'persona'"></app-typeahead>
+      <div class="text-danger" *ngIf="(reemplazo.touched || reemplazo.dirty) && reemplazo.invalid">
       </div>
     </div>
   </div>
@@ -39,60 +91,6 @@
     <div class="col-sm-10">
       <input class="form-control" type="text" formControlName="comentario"  [ngClass]="{'is-invalid':(comentario.invalid && (comentario.dirty || comentario.touched))}">
       <div class="text-danger" *ngIf="(comentario.touched || comentario.dirty) && comentario.invalid">
-      </div>
-    </div>
-  </div>
-  <div class="form-group form-row">
-    <label class="col-sm-2 col-form-label">Tipo movimiento</label>
-    <div class="col-sm-10">
-      <input class="form-control" type="text" formControlName="tipo_movimiento"  [ngClass]="{'is-invalid':(tipoMovimiento.invalid && (tipoMovimiento.dirty || tipoMovimiento.touched))}">
-      <div class="text-danger" *ngIf="(tipoMovimiento.touched || tipoMovimiento.dirty) && tipoMovimiento.invalid">
-        <div *ngIf="tipoMovimiento.errors.required">Debe completar valor</div>
-      </div>
-    </div>
-  </div>
-  <div class="form-group form-row">
-    <label class="col-sm-2 col-form-label">Estado contralor</label>
-    <div class="col-sm-10">
-      <input class="form-control" type="text" formControlName="estado_contralor"  [ngClass]="{'is-invalid':(estadoContralor.invalid && (estadoContralor.dirty || estadoContralor.touched))}">
-      <div class="text-danger" *ngIf="(estadoContralor.touched || estadoContralor.dirty) && estadoContralor.invalid">
-      </div>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Curso</label>
-    <div class="col-sm-10">
-      <app-typeahead [field]="curso" [entityName]="'curso'"></app-typeahead>
-      <div class="text-danger" *ngIf="(curso.touched || curso.dirty) && curso.invalid">
-        <div *ngIf="curso.errors.required">Debe completar valor</div>
-        <div *ngIf="(curso.touched && curso.errors.unselected)">Valor no seleccionado</div>
-      </div>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Docente</label>
-    <div class="col-sm-10">
-      <app-typeahead [field]="docente" [entityName]="'persona'"></app-typeahead>
-      <div class="text-danger" *ngIf="(docente.touched || docente.dirty) && docente.invalid">
-        <div *ngIf="(docente.touched && docente.errors.unselected)">Valor no seleccionado</div>
-      </div>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Reemplazo</label>
-    <div class="col-sm-10">
-      <app-typeahead [field]="reemplazo" [entityName]="'persona'"></app-typeahead>
-      <div class="text-danger" *ngIf="(reemplazo.touched || reemplazo.dirty) && reemplazo.invalid">
-        <div *ngIf="(reemplazo.touched && reemplazo.errors.unselected)">Valor no seleccionado</div>
-      </div>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Planilla Docente</label>
-    <div class="col-sm-10">
-      <app-typeahead [field]="planillaDocente" [entityName]="'planilla_docente'"></app-typeahead>
-      <div class="text-danger" *ngIf="(planillaDocente.touched || planillaDocente.dirty) && planillaDocente.invalid">
-        <div *ngIf="(planillaDocente.touched && planillaDocente.errors.unselected)">Valor no seleccionado</div>
       </div>
     </div>
   </div>

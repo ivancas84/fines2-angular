@@ -45,24 +45,33 @@ import { UploadComponent } from '@component/upload/upload.component';
 import { DownloadComponent } from '@component/download/download.component';
 import { NgbStringTimeAdapter } from '@service/ng-bootstrap/ngb-string-time-adapter';
 import { ModalAlertComponent } from '@component/modal-alert/modal-alert.component';
+import { LabelComponent } from '@component/label/label.component';
 
 import { DataDefinitionLoaderService } from '@service/data-definition-loader.service';
 import { MenuComponent } from '@component/menu/menu.component';
 
+import { CursoHorarioLabelComponent } from '@component/label/curso-horario-label/curso-horario-label.component';
+
 import { AsignaturaAdminComponent } from '@component/asignatura-admin/asignatura-admin/asignatura-admin.component';
 import { AsignaturaFieldsetComponent } from '@component/asignatura-admin/asignatura-fieldset/asignatura-fieldset.component';
+
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin/sede-admin.component';
 import { SedeFieldsetComponent } from '@component/sede-admin/sede-fieldset/sede-fieldset.component';
+import { DomicilioSedeFieldsetComponent } from '@component/sede-admin/domicilio-sede-fieldset/domicilio-sede-fieldset.component';
+
 import { TipoSedeAdminComponent } from '@component/tipo-sede-admin/tipo-sede-admin/tipo-sede-admin.component';
 import { TipoSedeFieldsetComponent } from '@component/tipo-sede-admin/tipo-sede-fieldset/tipo-sede-fieldset.component';
+
 import { TipoSedeShowComponent } from '@component/tipo-sede-show/tipo-sede-show/tipo-sede-show.component';
 import { TipoSedeTableComponent } from '@component/tipo-sede-show/tipo-sede-table/tipo-sede-table.component';
+
 import { CentroEducativoAdminComponent } from '@component/centro-educativo-admin/centro-educativo-admin/centro-educativo-admin.component';
 import { CentroEducativoFieldsetComponent } from '@component/centro-educativo-admin/centro-educativo-fieldset/centro-educativo-fieldset.component';
-import { DomicilioCeFieldsetComponent } from '@component/centro-educativo-admin/domicilio-ce-fieldset/domicilio-ce-fieldset.component';
+
 import { CentroEducativoShowComponent } from '@component/centro-educativo-show/centro-educativo-show/centro-educativo-show.component';
 import { CentroEducativoTableComponent } from '@component/centro-educativo-show/centro-educativo-table/centro-educativo-table.component';
-import { DomicilioSedeFieldsetComponent } from '@component/sede-admin/domicilio-sede-fieldset/domicilio-sede-fieldset.component';
+
+import { DomicilioCeFieldsetComponent } from '@component/centro-educativo-admin/domicilio-ce-fieldset/domicilio-ce-fieldset.component';
 
 import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/persona-admin.component';
 import { PersonaFieldsetComponent } from '@component/persona-admin/persona-fieldset/persona-fieldset.component';
@@ -123,8 +132,6 @@ import { CrearHorariosComisionComponent } from '@component/comision-detail/crear
 import { PersonaGridComponent } from '@component/persona-show/persona-grid/persona-grid.component';
 import { TelefonoAdminComponent } from '@component/telefono-admin/telefono-admin/telefono-admin.component';
 import { TelefonoFieldsetComponent } from '@component/telefono-admin/telefono-fieldset/telefono-fieldset.component';
-import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
-import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-fieldset.component';
 import { PlanificacionFormPickComponent } from '@component/comision-admin/comision-fieldset/planificacion-form-pick/planificacion-form-pick.component';
 
 import { ConsolidadoComponent } from '@component/consolidado/consolidado/consolidado.component';
@@ -136,6 +143,9 @@ import { ConsolidadoSearchOrderComponent } from '@component/consolidado/consolid
 import { ConsolidadoAdminComponent } from '@component/consolidado-admin/consolidado-admin/consolidado-admin.component';
 import { ConsolidadoAdminTableComponent } from '@component/consolidado-admin/consolidado-admin-table/consolidado-admin-table.component';
 
+import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
+import { TomaFieldsetComponent } from '@component/toma-admin/toma-fieldset/toma-fieldset.component';
+import { TaCursoCardComponent } from '@component/toma-admin/ta-curso-card/ta-curso-card.component';
 
 @NgModule({
   declarations: [
@@ -151,6 +161,9 @@ import { ConsolidadoAdminTableComponent } from '@component/consolidado-admin/con
     ToastsComponent,
     UploadComponent,
     DownloadComponent,
+    LabelComponent,
+
+    CursoHorarioLabelComponent,
 
     AsignaturaAdminComponent, AsignaturaFieldsetComponent,
     AsignaturaShowComponent, AsignaturaTableComponent, AsignaturaSearchComponent,
@@ -180,7 +193,7 @@ import { ConsolidadoAdminTableComponent } from '@component/consolidado-admin/con
     TipoSedeAdminComponent, TipoSedeFieldsetComponent,
     TipoSedeShowComponent, TipoSedeTableComponent,
     TelefonoAdminComponent, TelefonoFieldsetComponent,
-    TomaAdminComponent, TomaFieldsetComponent
+    TomaAdminComponent, TomaFieldsetComponent, TaCursoCardComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, HttpClientModule,
