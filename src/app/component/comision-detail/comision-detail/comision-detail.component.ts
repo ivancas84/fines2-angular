@@ -63,7 +63,7 @@ export class ComisionDetailComponent extends AdminComponent {
      * Se define un metodo independiente para facilitar la redefinicion
      * @return "datos de respuesta (habitualmente array de logs)"
      */
-    return this.dd.persist("horariosComision", this.serverData())
+    return this.dd.persist("horarios_comision", this.serverData())
   }
 
   reload(response){
