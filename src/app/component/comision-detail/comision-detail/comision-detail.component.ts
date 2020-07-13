@@ -63,7 +63,7 @@ export class ComisionDetailComponent extends AdminComponent {
      * Se define un metodo independiente para facilitar la redefinicion
      * @return "datos de respuesta (habitualmente array de logs)"
      */
-    return this.dd.persist("horariosComision", this.serverData())
+    return this.dd.persist("horarios_comision", this.serverData())
   }
 
   reload(response){
@@ -94,7 +94,7 @@ export class ComisionDetailComponent extends AdminComponent {
   confirmarEliminarHorarios(){
     var id = this.adminForm.get(this.entityName).get("id").value;
     this.isSubmitted = true; 
-    this.dd.persist("eliminarHorariosComision", id).pipe(first()).subscribe(
+    this.dd.persist("eliminar_horarios_comision", id).pipe(first()).subscribe(
         response => {
           this.storage.removeItemsPersisted(response)
           let route = emptyUrl(this.router.url) + "?id="+this.getProcessedId(response);
