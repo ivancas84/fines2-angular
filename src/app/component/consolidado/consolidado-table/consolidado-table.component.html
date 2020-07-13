@@ -21,13 +21,15 @@
             <b>{{cu.asignatura_.nombre}}</b>&nbsp;<small>{{cu.horario}}</small>
           </div>
           <ng-template #sintomas><small>Sin Tomas</small></ng-template>
+
+          <ul class="list-group" *ngIf="cu.tomas.length; else sintomas">
+            <li *ngFor="let t of cu.tomas; let k = index" [ngClass]="classToma(t)">
+              <small *ngIf="t.docente_">{{t.docente_.apellidos}} {{t.docente_.nombres}} {{t.fecha_toma | toDate | date:'dd/MM/yyyy'}}</small>
+              <div *ngIf="t.observaciones"><small>({{t.observaciones}})</small></div>
+              <div *ngIf="t.comentario"><small>({{t.comentario}})</small></div>
+            </li>
+          </ul>
           
-          <div *ngIf="cu.tomas.length; else sintomas">                    
-            <div *ngFor="let t of cu.tomas; let k = index">
-              <small *ngIf="t.docente_">{{t.docente_.apellidos}} {{t.docente_.nombres}}</small>
-              <small *ngIf="t.observaciones">({{t.observaciones}})</small>                                                                 
-            </div>
-          </div>
         </div>
       </ul>
     </div>

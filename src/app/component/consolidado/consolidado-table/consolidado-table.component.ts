@@ -20,6 +20,18 @@ export class ConsolidadoTableComponent extends ShowElementComponent implements O
     super(router);
   }
 
+  classToma(toma){
+    if(toma.estado_contralor == "Modificar")  return "list-group-item list-group-item-dark";
+    switch(toma.estado){
+      case "Aprobada": return "list-group-item list-group-item-success";
+      case "Pendiente": return "list-group-item list-group-item-warning";
+      case "Error": return "list-group-item list-group-item-danger";
+      case "Renuncia": return "list-group-item list-group-item-danger";
+      case "Baja": return "list-group-item list-group-item-danger";
+
+      default: return "list-group-item"
+    }
+  }
   asignarTomasACursosYComisiones(comisiones:any, cursos:any): Observable<any>{
     var ids = arrayColumn(cursos,"id");
     var display = new Display();
