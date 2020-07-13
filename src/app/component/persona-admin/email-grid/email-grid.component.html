@@ -1,13 +1,13 @@
-<h3>Emails 
-  <span *ngIf="data$ | async as persona; else disableAdd">
+<h4 class="mb-3">Emails
+    <span *ngIf="data$ | async as persona; else disableAdd">
     <span *ngIf="persona && persona.id; else disableAdd">
-      <a class="btn btn-info" role="button" [routerLink]="['/email-admin']" [queryParams]="{persona:persona.id}" ><span class="oi oi-plus"></span></a>
+      <a class="btn btn-info btn-sm" role="button" [routerLink]="['/email-admin']" [queryParams]="{persona:persona.id}" ><span class="oi oi-plus"></span></a>
     </span>
   </span>
   <ng-template #disableAdd>
-    <a class="btn btn-info disabled" role="button"><span class="oi oi-plus"></span></a>
+    <a class="btn btn-info btn-sm disabled" role="button"><span class="oi oi-plus"></span></a>
   </ng-template>
-</h3>
+</h4>
 
 
 <ng-template #empty>

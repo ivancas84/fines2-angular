@@ -1,24 +1,26 @@
-<h3>Teléfonos 
+<h4 class="mb-3">Teléfonos
   <span *ngIf="data$ | async as persona; else disableAdd">
     <span *ngIf="persona && persona.id; else disableAdd">
-      <a class="btn btn-info" role="button" [routerLink]="['/telefono-admin']" [queryParams]="{persona:persona.id}" ><span class="oi oi-plus"></span></a>
+      <a class="btn btn-info btn-sm" role="button" [routerLink]="['/telefono-admin']" [queryParams]="{persona:persona.id}" ><span class="oi oi-plus"></span></a>
     </span>
   </span>
   <ng-template #disableAdd>
-    <a class="btn btn-info disabled" role="button"><span class="oi oi-plus"></span></a>
+    <a class="btn btn-info btn-sm disabled" role="button"><span class="oi oi-plus"></span></a>
   </ng-template>
-</h3>
+</h4>
 
 <ng-template #empty>
   <div>No se han encontrado registros.</div>
 </ng-template>
 
 <div *ngIf="telefonos$ | async as data; else empty">
-  <div *ngIf="data && data.length; else empty"> 
-    <div *ngFor="let row of data; let i = index" class="row align-items-center border">
-      <div class="col-md-4">
-        {{row.tipo}} {{row.prefijo}} {{row.numero}}
-    </div>
-  </div>
+
+<ul *ngIf="data && data.length; else empty"  class="list-group">
+  <li *ngFor="let row of data; let i = index" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+    {{row.tipo}} {{row.prefijo}} {{row.numero}}
+    <button type="button" class="btn btn-sm btn-danger"><span class="oi oi-delete"></span></button>
+  </li>
+</ul>
+
 </div>
 
