@@ -1,0 +1,3 @@
+[submodule ".\\src\\app\\core"]
+	path = .\\src\\app\\core
+	url = https://github.com/ivancas84/angular-core-md.git
