@@ -1,0 +1,20 @@
+<mat-toolbar>
+  <span>My App</span>
+  
+  
+  <button mat-button [matMenuTriggerFor]="ver" aria-label="icon-button with menu icon">
+    Ver
+  </button>
+  <mat-menu #ver="matMenu">
+    <a mat-menu-item routerLink="/algo-show" routerLinkActive="active" title="Ver Algo">Algo</a>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="nuevo" aria-label="icon-button with menu icon">
+    Nuevo
+  </button>
+  <mat-menu #nuevo="matMenu">
+    <a mat-menu-item routerLink="/algo-admin" routerLinkActive="active" title="Nuevo Algo">Algo</a>
+  </mat-menu>
+</mat-toolbar>
+
+

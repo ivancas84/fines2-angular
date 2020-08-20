@@ -4,14 +4,16 @@
 
   To learn more about this file see: https://angular.io/config/solution-tsconfig.
 */
-{
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.spec.json"
-    }
-]
-}
+
+{ "compileOnSave": false, "compilerOptions": { "baseUrl": "./src/", 
+  
+  "paths": {
+    "@class/*":["app/class/*", "app/core/class/*",],
+    "@component/*":["app/component/*", "app/core/component/*"],
+    "@service/*":["app/service/*", "app/core/service/*"],
+    "@function/*":["app/function/*", "app/core/function/*"],
+    "@pipe/*":["app/pipe/*", "app/core/pipe/*"],
+    "@directive/*":["app/directive/*", "app/core/directive/*"],
+    "@config/*":["app/config/*", "app/core/config/*"]
+  },
+  "outDir": "./dist/out-tsc", "sourceMap": true, "declaration": false, "downlevelIteration": true, "experimentalDecorators": true, "module": "esnext", "moduleResolution": "node", "importHelpers": true, "target": "es2015", "typeRoots": [ "node_modules/@types" ], "lib": [ "es2018", "dom" ] }, "angularCompilerOptions": { "fullTemplateTypeCheck": true, "strictInjectionParameters": true } }
