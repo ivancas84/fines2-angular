@@ -52,6 +52,10 @@ import { MenuComponent } from '@component/menu/menu.component';
 import { SearchAllComponent } from '@component/search-all/search-all.component';
 import { LabelComponent } from '@component/label/label.component';
 
+import { PersonaShowComponent } from '@component/persona-show/persona-show/persona-show.component';
+import { PersonaTableComponent } from '@component/persona-show/persona-table/persona-table.component';
+import { PersonaSearchComponent } from '@component/persona-show/persona-search/persona-search.component';
+
 export const APP_DATE_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY',
@@ -77,6 +81,8 @@ export const APP_DATE_FORMATS = {
     MenuComponent,
     SearchAllComponent,
     LabelComponent,
+
+    PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent
   ],
   imports: [
     BrowserModule,

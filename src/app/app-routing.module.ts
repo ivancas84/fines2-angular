@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-//import { AfiliacionAdminComponent } from '@component/afiliacion-admin/afiliacion-admin/afiliacion-admin.component';
+import { PersonaShowComponent } from '@component/persona-show/persona-show/persona-show.component';
 
 const routes: Routes = [
-  //{ path: 'afiliacion-admin', component: AfiliacionAdminComponent, pathMatch: 'full' },
+  { path: 'persona-show', component: PersonaShowComponent, pathMatch: 'full' },
 ];
 
 @NgModule({
