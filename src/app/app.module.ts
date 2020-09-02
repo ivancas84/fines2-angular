@@ -20,8 +20,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
@@ -29,6 +31,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
@@ -56,6 +60,11 @@ import { PersonaShowComponent } from '@component/persona-show/persona-show/perso
 import { PersonaTableComponent } from '@component/persona-show/persona-table/persona-table.component';
 import { PersonaSearchComponent } from '@component/persona-show/persona-search/persona-search.component';
 
+import { ComisionShowComponent } from '@component/comision-show/comision-show/comision-show.component';
+import { ComisionTableComponent } from '@component/comision-show/comision-table/comision-table.component';
+import { ComisionSearchComponent } from '@component/comision-show/comision-search/comision-search.component';
+import { ComisionSearchParamsComponent } from '@component/comision-show/comision-search-params/comision-search-params.component';
+
 export const APP_DATE_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY',
@@ -82,7 +91,8 @@ export const APP_DATE_FORMATS = {
     SearchAllComponent,
     LabelComponent,
 
-    PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent
+    PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent,
+    ComisionShowComponent, ComisionTableComponent, ComisionSearchComponent, ComisionSearchParamsComponent
   ],
   imports: [
     BrowserModule,
@@ -102,14 +112,18 @@ export const APP_DATE_FORMATS = {
     MatExpansionModule,
     MatIconModule,
     MatInputModule,
+    MatListModule,
     MatMenuModule,
     MatNativeDateModule,
     MatPaginatorModule,
+    MatProgressBarModule,
     MatSnackBarModule,
     MatSelectModule,
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
+
+    MaterialFileInputModule
   ],
   providers: [
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
