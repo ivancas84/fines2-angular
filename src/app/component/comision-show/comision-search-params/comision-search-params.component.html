@@ -1,0 +1,36 @@
+<mat-card *ngIf="load$ | async" [formGroup]="fieldset">
+  <mat-card-content>
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
+      <div fxLayout="row" fxFlex="auto" fxLayoutGap="10px" fxLayout.xs="column">
+        <div fxFlex="auto">
+          <mat-form-field>
+            <mat-label>Turno</mat-label>
+            <mat-select formControlName="turno">
+              <mat-option>--Seleccione--</mat-option>
+              <mat-option value="Mañana">Mañana</mat-option>
+              <mat-option value="Tarde">Tarde</mat-option>
+              <mat-option value="Noche">Noche</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="auto">
+          <mat-form-field>
+            <mat-label>Division</mat-label>
+            <input matInput formControlName="division" >
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxFlex="auto" fxLayoutGap="10px" fxLayout.xs="column">
+        <div fxFlex="auto">
+          <mat-form-field>
+            <mat-label>Alta</mat-label>
+            <input matInput [matDatepicker]="altPicker" formControlName="alta">
+            <mat-datepicker-toggle matSuffix [for]="altPicker"></mat-datepicker-toggle>
+            <mat-datepicker #altPicker></mat-datepicker>
+            <mat-error *ngIf="alta.hasError('matDatepickerParse')">El formato es incorrecto</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,58 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Comision</mat-card-title>
+  </mat-card-header>
+  <mat-card-content *ngIf="(loadLength$ | async) as length">
+    <table mat-table *ngIf="(load$ | async)" [dataSource]="dataSource" matSort matSortDisableClear (matSortChange)="onChangeSort($event)" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="comision">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Comision </th>
+        <td mat-cell *matCellDef="let row"> 
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>
+                {{row.sede_.numero}} 
+                {{row.division}} 
+                <span *ngIf="row.planificacion">{{row.planificacion_.anio}}{{row.planificacion_.semestre}}</span>
+              </mat-card-title>
+              <mat-card-subtitle>{{row.sede_.nombre}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-list role="list" >
+                <mat-list-item *ngIf="row.planificacion" role="listitem">{{row.planificacion_.plan_.orientacion}} - {{row.planificacion_.plan_.distribucion_horaria}}</mat-list-item>
+                <mat-list-item *ngIf="row.calendario" role="listitem">{{row.calendario_.anio | toDate | date:"y"}}-{{row.calendario_.semestre}}</mat-list-item>
+              </mat-list>
+            </mat-card-content>
+            <mat-card-actions>
+              <mat-icon>open_in_new</mat-icon>
+            </mat-card-actions>
+          </mat-card>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="detalle">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Detalle </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-card *ngFor="let curso of row.cursos">
+            <mat-card-content>
+               <strong>{{curso.asignatura_.nombre}} <mat-icon>add_box</mat-icon></strong>  
+              <br><span class="mat-small">&nbsp;{{curso.horario}} - {{curso.horas_catedra}} horas cátedra</span>
+              
+              <mat-list role="list" dense>
+                <mat-list-item *ngFor="let toma of curso.tomas" role="listitem"><span *ngIf="toma.docente">{{toma.docente_.nombres}} {{toma.docente_.apellidos}}</span>&nbsp;{{toma.fecha_toma | toDate | date:"d/M/y"}}&nbsp;<mat-icon>edit</mat-icon></mat-list-item>
+              </mat-list>
+            </mat-card-content>
+          </mat-card>
+        </td>
+      </ng-container>
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>  
+    <mat-paginator *ngIf="(display$ | async) as display"
+                   [length]="length"
+                   [pageSize]="display.size"
+                   (page)="onChangePage($event)">
+    </mat-paginator>
+  </mat-card-content>
+</mat-card>
