@@ -40,19 +40,6 @@ export class _DesignacionDataDefinition extends DataDefinition {
       delete rowCloned['sede_']['centro_educativo_'];
     }
     if(('sede_' in rowCloned)
-    && ('coordinador_' in rowCloned['sede_'])
-    && ('domicilio_' in rowCloned['sede_']['coordinador_'])
-    ){
-      this.stg.setItem('domicilio' + rowCloned['sede_']['coordinador_']['domicilio_'].id, rowCloned['sede_']['coordinador_']['domicilio_']);
-      delete rowCloned['sede_']['coordinador_']['domicilio_'];
-    }
-    if(('sede_' in rowCloned)
-    && ('coordinador_' in rowCloned['sede_'])
-    ){
-      this.stg.setItem('persona' + rowCloned['sede_']['coordinador_'].id, rowCloned['sede_']['coordinador_']);
-      delete rowCloned['sede_']['coordinador_'];
-    }
-    if(('sede_' in rowCloned)
     ){
       this.stg.setItem('sede' + rowCloned['sede_'].id, rowCloned['sede_']);
       delete rowCloned['sede_'];

@@ -45,23 +45,6 @@ export class _HorarioDataDefinition extends DataDefinition {
     if(('curso_' in rowCloned)
     && ('comision_' in rowCloned['curso_'])
     && ('sede_' in rowCloned['curso_']['comision_'])
-    && ('coordinador_' in rowCloned['curso_']['comision_']['sede_'])
-    && ('domicilio_' in rowCloned['curso_']['comision_']['sede_']['coordinador_'])
-    ){
-      this.stg.setItem('domicilio' + rowCloned['curso_']['comision_']['sede_']['coordinador_']['domicilio_'].id, rowCloned['curso_']['comision_']['sede_']['coordinador_']['domicilio_']);
-      delete rowCloned['curso_']['comision_']['sede_']['coordinador_']['domicilio_'];
-    }
-    if(('curso_' in rowCloned)
-    && ('comision_' in rowCloned['curso_'])
-    && ('sede_' in rowCloned['curso_']['comision_'])
-    && ('coordinador_' in rowCloned['curso_']['comision_']['sede_'])
-    ){
-      this.stg.setItem('persona' + rowCloned['curso_']['comision_']['sede_']['coordinador_'].id, rowCloned['curso_']['comision_']['sede_']['coordinador_']);
-      delete rowCloned['curso_']['comision_']['sede_']['coordinador_'];
-    }
-    if(('curso_' in rowCloned)
-    && ('comision_' in rowCloned['curso_'])
-    && ('sede_' in rowCloned['curso_']['comision_'])
     ){
       this.stg.setItem('sede' + rowCloned['curso_']['comision_']['sede_'].id, rowCloned['curso_']['comision_']['sede_']);
       delete rowCloned['curso_']['comision_']['sede_'];
@@ -124,25 +107,6 @@ export class _HorarioDataDefinition extends DataDefinition {
     ){
       this.stg.setItem('centro_educativo' + rowCloned['curso_']['comision_']['comision_siguiente_']['sede_']['centro_educativo_'].id, rowCloned['curso_']['comision_']['comision_siguiente_']['sede_']['centro_educativo_']);
       delete rowCloned['curso_']['comision_']['comision_siguiente_']['sede_']['centro_educativo_'];
-    }
-    if(('curso_' in rowCloned)
-    && ('comision_' in rowCloned['curso_'])
-    && ('comision_siguiente_' in rowCloned['curso_']['comision_'])
-    && ('sede_' in rowCloned['curso_']['comision_']['comision_siguiente_'])
-    && ('coordinador_' in rowCloned['curso_']['comision_']['comision_siguiente_']['sede_'])
-    && ('domicilio_' in rowCloned['curso_']['comision_']['comision_siguiente_']['sede_']['coordinador_'])
-    ){
-      this.stg.setItem('domicilio' + rowCloned['curso_']['comision_']['comision_siguiente_']['sede_']['coordinador_']['domicilio_'].id, rowCloned['curso_']['comision_']['comision_siguiente_']['sede_']['coordinador_']['domicilio_']);
-      delete rowCloned['curso_']['comision_']['comision_siguiente_']['sede_']['coordinador_']['domicilio_'];
-    }
-    if(('curso_' in rowCloned)
-    && ('comision_' in rowCloned['curso_'])
-    && ('comision_siguiente_' in rowCloned['curso_']['comision_'])
-    && ('sede_' in rowCloned['curso_']['comision_']['comision_siguiente_'])
-    && ('coordinador_' in rowCloned['curso_']['comision_']['comision_siguiente_']['sede_'])
-    ){
-      this.stg.setItem('persona' + rowCloned['curso_']['comision_']['comision_siguiente_']['sede_']['coordinador_'].id, rowCloned['curso_']['comision_']['comision_siguiente_']['sede_']['coordinador_']);
-      delete rowCloned['curso_']['comision_']['comision_siguiente_']['sede_']['coordinador_'];
     }
     if(('curso_' in rowCloned)
     && ('comision_' in rowCloned['curso_'])

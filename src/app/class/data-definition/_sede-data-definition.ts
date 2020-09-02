@@ -30,17 +30,6 @@ export class _SedeDataDefinition extends DataDefinition {
       this.stg.setItem('centro_educativo' + rowCloned['centro_educativo_'].id, rowCloned['centro_educativo_']);
       delete rowCloned['centro_educativo_'];
     }
-    if(('coordinador_' in rowCloned)
-    && ('domicilio_' in rowCloned['coordinador_'])
-    ){
-      this.stg.setItem('domicilio' + rowCloned['coordinador_']['domicilio_'].id, rowCloned['coordinador_']['domicilio_']);
-      delete rowCloned['coordinador_']['domicilio_'];
-    }
-    if(('coordinador_' in rowCloned)
-    ){
-      this.stg.setItem('persona' + rowCloned['coordinador_'].id, rowCloned['coordinador_']);
-      delete rowCloned['coordinador_'];
-    }
     this.stg.setItem("sede" + rowCloned.id, rowCloned);
   }
 
