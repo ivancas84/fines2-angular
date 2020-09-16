@@ -29,6 +29,7 @@ export class ComisionSearchParamsComponent extends SearchParamsComponent {
       planificacion: null,
       comision_siguiente: null,
       calendario: null,
+      cal_anio: null, 
     });
     return fg;
   }
@@ -46,5 +47,6 @@ export class ComisionSearchParamsComponent extends SearchParamsComponent {
   get planificacion() { return this.fieldset.get('planificacion')}
   get comisionSiguiente() { return this.fieldset.get('comision_siguiente')}
   get calendario() { return this.fieldset.get('calendario')}
+  get calAnio() { return this.fieldset.get('cal_anio')}
 
 }

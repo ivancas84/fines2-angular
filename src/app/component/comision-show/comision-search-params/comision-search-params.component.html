@@ -2,6 +2,7 @@
   <mat-card-content>
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
       <div fxLayout="row" fxFlex="auto" fxLayoutGap="10px" fxLayout.xs="column">
+        <core-input-year [field]="calAnio" [title]="'Fecha Año'"></core-input-year>
         <div fxFlex="auto">
           <mat-form-field>
             <mat-label>Turno</mat-label>
@@ -30,6 +31,17 @@
             <mat-error *ngIf="alta.hasError('matDatepickerParse')">El formato es incorrecto</mat-error>
           </mat-form-field>
         </div>
+        <core-input-autocomplete fxFlex="auto" [field]="sede" [entityName]="'sede'" [title]="'Sede'"></core-input-autocomplete>
+      </div>
+    </div>  
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
+      <div fxLayout="row" fxFlex="auto" fxLayoutGap="10px" fxLayout.xs="column">
+        <core-input-select fxFlex="auto" [field]="modalidad" [entityName]="'modalidad'" [title]="'Modalidad'"></core-input-select>
+        <core-input-autocomplete fxFlex="auto" [field]="planificacion" [entityName]="'planificacion'" [title]="'Planificacion'"></core-input-autocomplete>
+      </div>
+      <div fxLayout="row" fxFlex="auto" fxLayoutGap="10px" fxLayout.xs="column">
+        <core-input-autocomplete fxFlex="auto" [field]="comisionSiguiente" [entityName]="'comision'" [title]="'Comision Siguiente'"></core-input-autocomplete>
+        <core-input-autocomplete fxFlex="auto" [field]="calendario" [entityName]="'calendario'" [title]="'Calendario'"></core-input-autocomplete>
       </div>
     </div>
   </mat-card-content>
