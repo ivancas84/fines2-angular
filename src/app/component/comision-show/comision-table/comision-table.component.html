@@ -6,8 +6,8 @@
   <mat-card-header>
     <mat-card-title>Comision</mat-card-title>
   </mat-card-header>
-  <mat-card-content>
-    <div *ngIf="(load$ | async); else loading">
+  <mat-card-content *ngIf="(load$ | async); else loading">
+    <div>
       <div *ngFor="let row of dataSource">
       <div  fxLayout fxLayout.xs="column">
         <div fxFlex="50%" fxFlex.xs="100%">
@@ -48,11 +48,13 @@
       </div>
     </div>
 
-    <mat-paginator *ngIf="(display$ | async) as display"
-      [length]="length"
-      [pageSize]="display.size"
-      [pageIndex]="display.page-1"
-      (page)="onChangePage($event)">
-    </mat-paginator>
+    <mat-paginator *ngIf="display"
+                   [length]="length"
+                   [pageSize]="display.size"
+                   [pageIndex]="display.page-1"
+                   (page)="onChangePage($event)"
+                   [pageSizeOptions]="[10, 25, 50, 100]" 
+                   showFirstLastButtons>
+    </mat-paginator>  
   </mat-card-content>
 </mat-card>
