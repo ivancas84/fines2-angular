@@ -4,13 +4,14 @@ import { of, Observable } from 'rxjs';
 import { arrayColumn } from '@function/array-column';
 import { Display } from '@class/display';
 import { mergeMap, map } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataToolsService {
 
-  constructor(protected dd: DataDefinitionService){ }
+  constructor(protected dd: DataDefinitionService, protected snackBar: MatSnackBar){ }
 
   asignarTomasACursos(cursos: any): Observable<any>{
     var ids = arrayColumn(cursos,"id");
@@ -47,6 +48,8 @@ export class DataToolsService {
       )
     )
   }
+
+
   asignarCursosAComisiones(comisiones: any){
     if(!comisiones || !comisiones.length) return of(null);
 
@@ -57,7 +60,8 @@ export class DataToolsService {
     display.addParam("comision",ids);
     return this.dd.all("curso", display).pipe(
       mergeMap(
-        cursos => { return this.asignarTomasACursos(cursos); }
+        cursos => { 
+          return this.asignarTomasACursos(cursos); }
       ),
       mergeMap(
         cursos => { return this.asignarHorariosACursos(cursos); }

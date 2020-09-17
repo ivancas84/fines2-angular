@@ -8,6 +8,9 @@ import { DataToolsService } from '@service/data-tools.service';
   selector: 'app-comision-table',
   templateUrl: './comision-table.component.html',
   styles:[`
+  .comision {
+    background: #C0C0C0;
+  }
   .mat-card-content { overflow-x: auto; }
   .mat-table.mat-table { min-width: 700px; }
   `],
@@ -23,17 +26,10 @@ export class ComisionTableComponent extends TableComponent {
   }
 
   initData(){
-    this.load$ = this.data$.pipe(
+    return this.data$.pipe(
       mergeMap(
         comisiones => {
           return this.dt.asignarCursosAComisiones(comisiones)
-        }
-      ),
-      map(
-        data => {
-          console.log(data);
-          this.dataSource = data;
-          return this.dataSource;
         }
       )
     )

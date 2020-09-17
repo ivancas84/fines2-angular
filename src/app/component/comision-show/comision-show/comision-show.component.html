@@ -1,2 +1,8 @@
-<app-comision-search [display$]="display$"></app-comision-search>
-<app-comision-table [data$]="data$" [collectionSize$]="collectionSize$" [display$]="display$"></app-comision-table>
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
+
+<div *ngIf="(load$ | async); else loading">
+  <app-comision-search *ngIf="loadDisplay; else loading" [display$]="display$"></app-comision-search>
+  <app-comision-table *ngIf="load; else loading" [data$]="data$" [collectionSize$]="collectionSize$" [display$]="display$"></app-comision-table>
+</div>
