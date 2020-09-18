@@ -1,2 +1,8 @@
-<app-persona-search [display$]="display$"></app-persona-search>
-<app-persona-table [data$]="data$" [collectionSize$]="collectionSize$" [display$]="display$"></app-persona-table>
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
+
+<div *ngIf="(load$ | async); else loading">
+  <app-persona-search [display$]="display$"></app-persona-search>
+  <app-persona-table [data$]="data$" [collectionSize$]="collectionSize$" [display$]="display$"></app-persona-table>
+</div>

@@ -30,6 +30,14 @@ export class ComisionSearchParamsComponent extends SearchParamsComponent {
       comision_siguiente: null,
       calendario: null,
       cal_anio: null, 
+      cal_semestre: null,
+      sed_centro_educativo: null,
+      sed_numero_trim: null,
+      pla_anio: null,
+      pla_semestre: null,
+      pla_plan: null,
+
+
     });
     return fg;
   }
@@ -48,5 +56,11 @@ export class ComisionSearchParamsComponent extends SearchParamsComponent {
   get comisionSiguiente() { return this.fieldset.get('comision_siguiente')}
   get calendario() { return this.fieldset.get('calendario')}
   get calAnio() { return this.fieldset.get('cal_anio')}
+  get calSemestre() { return this.fieldset.get('cal_semestre')}
+  get sedCentroEducativo() { return this.fieldset.get('sed_centro_educativo')}
+  get sedNumeroTrim() { return this.fieldset.get('sed_numero_trim')}
+  get plaAnio() { return this.fieldset.get('pla_anio')}
+  get plaSemestre() { return this.fieldset.get('pla_semestre')}
+  get plaPlan() { return this.fieldset.get('pla_plan')}
 
 }

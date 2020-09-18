@@ -53,7 +53,10 @@ import { DataDefinitionLoaderService } from '@service/data-definition-loader.ser
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { InputAutocompleteComponent } from '@component/input-autocomplete/input-autocomplete.component';
 import { InputDateComponent } from '@component/input-date/input-date.component';
+import { InputSelectCheckboxComponent } from '@component/input-select-checkbox/input-select-checkbox.component';
 import { InputSelectComponent } from '@component/input-select/input-select.component';
+import { InputSelectValueComponent } from '@component/input-select-value/input-select-value.component';
+import { InputSelectParamComponent } from '@component/input-select-param/input-select-param.component';
 import { InputSearchGoComponent } from '@component/input-search-go/input-search-go.component';
 import { InputTextComponent } from '@component/input-text/input-text.component';
 //import { InputYmComponent } from '@component/input-ym/input-ym.component';
@@ -103,7 +106,10 @@ export const APP_DATE_FORMATS = {
     DialogAlertComponent,
     InputAutocompleteComponent,
     InputDateComponent,
+    InputSelectCheckboxComponent,
     InputSelectComponent,
+    InputSelectValueComponent,
+    InputSelectParamComponent,
     InputSearchGoComponent,
     InputTextComponent,
   	InputYearComponent,
