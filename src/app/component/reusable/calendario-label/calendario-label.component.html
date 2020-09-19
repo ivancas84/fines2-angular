@@ -1,0 +1,5 @@
+<div *ngIf="label">
+  {{label.anio | toDate | date:"yyyy"}}-{{label.semestre}} 
+  <span *ngIf="label.inicio"> {{label.inicio | toDate | date:"d/M"}} </span>
+  <span *ngIf="label.fin"> {{label.fin | toDate | date:"d/M"}} </span>
+</div>
