@@ -1,0 +1,37 @@
+<mat-card [formGroup]="fieldset">
+  <mat-card-header>
+    <mat-card-title>Comision</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
+      <core-input-autocomplete [field]="sede" [entityName]="'sede'" [title]="'Sede'" fxFlex.xs="100%" fxFlex="50%" fxLayoutAlign="center center"></core-input-autocomplete>
+      <div fxLayout="row" fxFlex.xs="100%" fxFlex="50%" fxLayoutAlign="center center">
+          <mat-checkbox fxFlex="20%" fxFlex.lt-md="33%" formControlName="apertura">Apertura</mat-checkbox>
+          <mat-checkbox fxFlex="20%" fxFlex.lt-md="33%" formControlName="publicada">Publicada</mat-checkbox>
+          <mat-checkbox fxFlex="20%" fxFlex.lt-md="33%" formControlName="autorizada">Autorizada</mat-checkbox>
+      </div>
+    </div>
+    <div *ngIf="divisiones.length"  fxLayout="row" fxLayoutGap="10px">
+      Divisiones existentes: {{divisiones}}
+    </div>
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
+      <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
+        <core-input-text [field]="division" [title]="'Division'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-text>
+        <core-input-select-param [field]="turno" [options]="['Mañana','Tarde','Noche']" [title]="'Turno'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-select-param>
+      </div>
+      <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
+        <core-input-select [field]="modalidad" [entityName]="'modalidad'" [title]="'Modalidad'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-select>
+        <calendario-input-select [field]="calendario" [entityName]="'calendario'" [title]="'Calendario'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></calendario-input-select>
+      </div>
+    </div>  
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
+      <app-planificacion-input-picker fxFlex="75%" [field]="planificacion"></app-planificacion-input-picker>
+      <core-input-autocomplete fxFlex="25%" [field]="comisionSiguiente" [entityName]="'comision'" [title]="'Comision Siguiente'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-autocomplete>
+    </div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+      <core-input-textarea [field]="observaciones" [title]="'Observaciones'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-textarea>
+      <core-input-textarea [field]="comentario" [title]="'Comentario'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-textarea>
+    </div>  
+    <mat-error *ngIf="fieldset.hasError('error')">Error </mat-error>
+  </mat-card-content>
+</mat-card>
