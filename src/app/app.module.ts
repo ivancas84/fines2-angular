@@ -10,15 +10,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 //import { ClipboardModule } from '@angular/cdk/clipboard';
-//import { DATE_FORMATS } from './core/const/DATE_FORMATS';
 
-import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
 import { MatNativeDateModule } from '@angular/material/core';
-//import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
@@ -59,11 +58,19 @@ import { InputSelectValueComponent } from '@component/input-select-value/input-s
 import { InputSelectParamComponent } from '@component/input-select-param/input-select-param.component';
 import { InputSearchGoComponent } from '@component/input-search-go/input-search-go.component';
 import { InputTextComponent } from '@component/input-text/input-text.component';
+import { InputTextareaComponent } from '@component/input-textarea/input-textarea.component';
 //import { InputYmComponent } from '@component/input-ym/input-ym.component';
 import { InputYearComponent } from '@component/input-year/input-year.component';
 import { MenuComponent } from '@component/menu/menu.component';
 import { SearchAllComponent } from '@component/search-all/search-all.component';
 import { LabelComponent } from '@component/label/label.component';
+
+import { CalendarioLabelComponent } from '@component/reusable/calendario-label/calendario-label.component';
+import { CalendarioInputSelectComponent } from '@component/reusable/calendario-input-select/calendario-input-select.component';
+import { PlanificacionInputPickerComponent } from '@component/reusable/planificacion-input-picker/planificacion-input-picker.component';
+
+import { ComisionAdminComponent } from '@component/comision-admin/comision-admin/comision-admin.component';
+import { ComisionFieldsetComponent } from '@component/comision-admin/comision-fieldset/comision-fieldset.component';
 
 import { ComisionShowComponent } from '@component/comision-show/comision-show/comision-show.component';
 import { ComisionTableComponent } from '@component/comision-show/comision-table/comision-table.component';
@@ -112,12 +119,16 @@ export const APP_DATE_FORMATS = {
     InputSelectParamComponent,
     InputSearchGoComponent,
     InputTextComponent,
-  	InputYearComponent,
+    InputTextareaComponent,
+    InputYearComponent,
     //InputYmComponent,
     MenuComponent,
     SearchAllComponent,
     LabelComponent,
 
+    CalendarioLabelComponent, CalendarioInputSelectComponent, PlanificacionInputPickerComponent,
+    
+    ComisionAdminComponent, ComisionFieldsetComponent,
     ComisionShowComponent, ComisionTableComponent, ComisionSearchComponent, ComisionSearchParamsComponent,
     PersonaAdminComponent, PersonaFieldsetComponent,
     PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent,
@@ -139,6 +150,7 @@ export const APP_DATE_FORMATS = {
     MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
+    MatCheckboxModule,
     MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,
@@ -162,9 +174,6 @@ export const APP_DATE_FORMATS = {
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000, verticalPosition:"top", horizontalPosition:"right"}},
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
-    //{provide: MAT_DATE_LOCALE, useValue: 'es-AR' },
-    //{provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]},
-    //{provide: MAT_DATE_FORMATS, useValue: DATE_FORMATS},
 
     DataDefinitionService, 
     SessionStorageService, 
