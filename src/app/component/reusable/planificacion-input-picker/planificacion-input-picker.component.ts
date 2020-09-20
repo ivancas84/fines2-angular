@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { InputPickerComponent } from '@component/input-picker/input-picker.component';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
-import { ValidatorsService } from '@service/validators/validators.service';
-import { Observable } from 'rxjs';
-import { Display } from '@class/display';
 
 @Component({
   selector: 'app-planificacion-input-picker',
