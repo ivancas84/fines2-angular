@@ -26,7 +26,7 @@ export class PlanificacionInputPickerComponent extends InputPickerComponent {
       semestre: [null, {
         validators: [Validators.required],
       }],
-      plan: [null, {
+      plan: ["4", {
         validators: [Validators.required],
       }],
     });

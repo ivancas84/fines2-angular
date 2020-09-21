@@ -7,6 +7,8 @@ import { Display } from '@class/display';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { arrayColumn } from '@function/array-column';
+import { Observable, of } from 'rxjs';
+import { map, mergeMap, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-comision-fieldset',
@@ -15,10 +17,12 @@ import { arrayColumn } from '@function/array-column';
 export class ComisionFieldsetComponent extends FieldsetComponent {
 
   readonly entityName: string = 'comision';
-  
-  readonly defaultValues: {[key:string]: any} = {autorizada: false, apertura: false, publicada: false}
+
+  readonly defaultValues: {[key:string]: any} = {autorizada: true, apertura: false, publicada: true, modalidad: "1", turno:"Noche"}
 
   divisiones: Array<any>;
+
+  loadDivisiones$: Observable<any>;
 
   constructor(
     protected fb: FormBuilder, 
@@ -34,23 +38,30 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
     this.fieldset = this.formGroup();
     this.form.addControl(this.entityName, this.fieldset);
   
-    this.sede.valueChanges.subscribe(
-      value => {
-        if(!value) {
-          this.divisiones = [];
-          return;
+    var s = this.sede.valueChanges.pipe(
+      /**
+       * se realiza una suscripcion directamente ya que el valueChanges no me toma los valores iniciales del formulario
+       * ver notas adicionales en el initData de la superclase
+       */
+      mergeMap(
+        sede => {
+          if(!sede) return of([]);
+          var display = new Display
+          display.addParam("sede",sede)
+          display.addField("division");
+          display.setOrder({division:"ASC"});
+          return this.dd.advanced("comision", display);
         }
-        
-        var display = new Display
-        display.addParam("sede",value)
-        display.addField("division");
-        this.dd.advanced("comision", display).subscribe(
-          comisiones => {
-            this.divisiones = arrayColumn(comisiones, "division");
-          }
-        );
-      }
+      ),
+      map(
+        comisiones => {
+          return arrayColumn(comisiones, "division");
+        }
+      ),
+    ).subscribe(
+      response => this.divisiones = response 
     );
+    this.subscriptions.add(s)
   }
 
 
