@@ -15,8 +15,8 @@ import { arrayColumn } from '@function/array-column';
 export class ComisionFieldsetComponent extends FieldsetComponent {
 
   readonly entityName: string = 'comision';
-
-  readonly defaultValues: {[key:string]: any} = {}
+  
+  readonly defaultValues: {[key:string]: any} = {autorizada: false, apertura: false, publicada: false}
 
   divisiones: Array<any>;
 
