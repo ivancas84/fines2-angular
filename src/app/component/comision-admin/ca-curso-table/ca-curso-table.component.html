@@ -2,10 +2,10 @@
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </ng-template>
 
-<mat-card>
+<mat-card *ngIf="(load$ | async); else loading">
   <mat-card-header fxLayout="row" fxLayoutAlign="start center">
     <mat-card-title>Curso</mat-card-title>
-    <div *ngIf="(load$ | async) && idComision; else disableAdd">
+    <div *ngIf="idComision; else disableAdd">
       <a color="primary" mat-mini-fab  [routerLink]="['/curso-admin']" [queryParams]="{comision:idComision}" ><mat-icon>add</mat-icon></a>
       <button (click)="agregarCursos()" mat-mini-fab><mat-icon>post_add</mat-icon></button>
       <button (click)="eliminarCursos()" mat-mini-fab color="warn"><mat-icon>clear</mat-icon></button>
@@ -20,7 +20,7 @@
       <button color="warn" disabled mat-mini-fab><mat-icon>alarm_off</mat-icon></button>
     </ng-template>
   </mat-card-header>
-  <mat-card-content *ngIf="(loadCursos$ | async)">
+  <mat-card-content>
 
     <table *ngIf="dataSource.length" mat-table [dataSource]="dataSource" matSort matSortDisableClear (matSortChange)="onChangeSort($event)" class="mat-elevation-z8">
       <ng-container matColumnDef="asignatura">
