@@ -4,5 +4,5 @@
 
 <div *ngIf="(load$ | async); else loading">
   <app-persona-search [display$]="display$"></app-persona-search>
-  <app-persona-table [data$]="data$" [collectionSize$]="collectionSize$" [display$]="display$"></app-persona-table>
+  <app-persona-table [data$]="data$" [collectionSize$]="collectionSize$" [display]="display"></app-persona-table>
 </div>

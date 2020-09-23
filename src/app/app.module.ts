@@ -79,6 +79,9 @@ import { ComisionTableComponent } from '@component/comision-show/comision-table/
 import { ComisionSearchComponent } from '@component/comision-show/comision-search/comision-search.component';
 import { ComisionSearchParamsComponent } from '@component/comision-show/comision-search-params/comision-search-params.component';
 
+import { ComisionHorariosAdminComponent } from '@component/comision-horarios-admin/comision-horarios-admin/comision-horarios-admin.component';
+import { ComisionHorariosFieldsetComponent } from '@component/comision-horarios-admin/comision-horarios-fieldset/comision-horarios-fieldset.component';
+
 import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/persona-admin.component';
 import { PersonaFieldsetComponent } from '@component/persona-admin/persona-fieldset/persona-fieldset.component';
 
@@ -136,6 +139,7 @@ export const APP_DATE_FORMATS = {
     PersonaAdminComponent, PersonaFieldsetComponent,
     PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent,
     RdPersonaAdminComponent, RdPersonaFieldsetComponent,
+    ComisionHorariosAdminComponent, ComisionHorariosFieldsetComponent
     
   ],
   imports: [
