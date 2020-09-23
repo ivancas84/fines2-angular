@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Display } from '@class/display';
@@ -8,8 +8,9 @@ import { TableComponent } from '@component/table/table.component';
 import { arrayColumn } from '@function/array-column';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { DataToolsService } from '@service/data-tools.service';
-import { Observable, of, ReplaySubject } from 'rxjs';
-import { map, mergeMap, tap } from 'rxjs/operators';
+import { SessionStorageService } from '@service/storage/session-storage.service';
+import { Observable, of, ReplaySubject, Subscription } from 'rxjs';
+import { first, map, mergeMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ca-curso-table',
@@ -19,63 +20,57 @@ import { map, mergeMap, tap } from 'rxjs/operators';
   .mat-table.mat-table { min-width: 700px; }
   `],
 })
-export class CaCursoTableComponent extends TableComponent { 
+export class CaCursoTableComponent extends TableComponent implements OnDestroy { 
   displayedColumns: string[] = ['asignatura', 'horas_catedra', 'horario', 'docentes'];
 
   idComision: string;
   
-  cursos$: ReplaySubject<any> = new ReplaySubject();
-  loadCursos$: Observable<any>;
-  
+  cursos$: ReplaySubject<{ [index: string]: any }[]> = new ReplaySubject();
+
+  protected subscriptions = new Subscription();
+
   constructor(
     protected router: Router, 
     protected dd: DataDefinitionService, 
     protected dialog: MatDialog,
     protected dt: DataToolsService,
+    protected storage: SessionStorageService,
   ) {
     super(router);
   }
 
   ngOnInit(): void {
-    this.loadCursos$ = this.cursos$.pipe(
+    this.load$ = this.cursos$.pipe(
       map(cursos => {
         this.dataSource = cursos;
         return true;
       })
     );
-      
-      
-    this.load$ = this.initData().pipe(
-      map(data => {
-        this.cursos$.next(data);
-        return true;
-      })
-    );
+   
+    var s = this.data$.subscribe(
+      comision => {
+        this.idComision = (comision && comision.id) ? comision.id : null
+        this.initCursos();
+    })
+    this.subscriptions.add(s);
   }
 
-  initData(){
-    return this.data$.pipe(
-      tap(comision => {
-        if(comision && comision.id) this.idComision = comision.id
-        else this.idComision = null;
-      }),
-      mergeMap(comision => {
-        if(comision) {
-          let display: Display = new Display();
-          display.addParam("comision",comision.id);
 
-          return this.dd.all("curso", display).pipe(
-            mergeMap(cursos => { return this.dt.asignarTomasACursos(cursos); } ),
-            mergeMap( cursos => { return this.dt.asignarHorariosACursos(cursos); } ),
-          )
-        }
-        return of([]);
-      })
-    );
+  initCursos(){
+    let display: Display = new Display();
+    display.addParam("comision",this.idComision);
+
+    this.dd.all("curso", display).pipe(
+      mergeMap(cursos => { return this.dt.asignarTomasACursos(cursos); } ),
+      mergeMap( cursos => { return this.dt.asignarHorariosACursos(cursos); } ),
+      first(),
+    ).subscribe(
+      cursos => this.cursos$.next(cursos)
+    )
   }
+
 
   agregarCursos(){
-        
     if(this.dataSource.length) { 
       this.dialog.open(DialogAlertComponent, {
         data: {title: "Error", message: "Ya existen cursos, no puede agregar nuevos"}
@@ -89,6 +84,8 @@ export class CaCursoTableComponent extends TableComponent {
         if(result){
           this.dd.post("persist", "comision_cursos", this.idComision).subscribe(
             () => {
+              this.storage.removeItemsContains(".");
+              this.initCursos();
               this.dialog.open(DialogAlertComponent, {
                 data: {title: "Registro exitoso", message: "Se han agregado los cursos"}
               }) ;
@@ -123,7 +120,10 @@ export class CaCursoTableComponent extends TableComponent {
       dialogRef.afterClosed().subscribe(result => {
         if(result){
           this.dd.post("delete", "curso", arrayColumn(this.dataSource, "id")).subscribe(
-            () => {
+            response => {
+              this.storage.removeItemsContains(".");
+              this.storage.removeItemsPersisted(response["detail"]);
+              this.initCursos();
               this.dialog.open(DialogAlertComponent, {
                 data: {title: "Eliminación exitosa", message: "Se han eliminado los cursos de la comisión"}
               }) ;
@@ -133,5 +133,8 @@ export class CaCursoTableComponent extends TableComponent {
       });
     }
   }
+
+  ngOnDestroy () { this.subscriptions.unsubscribe() }
+
 
 }
