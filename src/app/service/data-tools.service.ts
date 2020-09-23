@@ -13,7 +13,8 @@ export class DataToolsService {
 
   constructor(protected dd: DataDefinitionService, protected snackBar: MatSnackBar){ }
 
-  asignarTomasACursos(cursos: any): Observable<any>{
+  asignarTomasACursos(cursos: any[]): Observable<any>{
+    if(!cursos.length) return of([]);
     var ids = arrayColumn(cursos,"id");
     var display = new Display();
     display.setSize(0);
@@ -32,6 +33,7 @@ export class DataToolsService {
 
   
   asignarHorariosACursos(cursos:any): Observable<any>{
+    if(!cursos.length) return of([]);
     var ids = arrayColumn(cursos,"id");
     var display = new Display();
     display.setSize(0);
