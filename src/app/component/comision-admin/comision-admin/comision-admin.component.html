@@ -7,6 +7,7 @@
   <button mat-mini-fab color="accent" type="button" (click)="clear()"><mat-icon>add</mat-icon></button>
   <button mat-mini-fab color="warn" type="button" [disabled]="isDeletable" (click)="delete()"><mat-icon>delete</mat-icon></button>
 
-  <p>Debug Form value: {{ adminForm.value | json }}</p>
-  <p>Debug Form status: {{ adminForm.status | json }}</p>
+  <!--p>Debug Form value: {{ adminForm.value | json }}</p>
+  <p>Debug Form status: {{ adminForm.status | json }}</p-->
 </form>
+<app-ca-curso-table [data$]="data$"></app-ca-curso-table>

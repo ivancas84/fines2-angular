@@ -50,6 +50,7 @@ import { SummaryPipe } from '@pipe/summary.pipe';
 import { DataDefinitionLoaderService } from '@service/data-definition-loader.service';
 
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
+import { DialogConfirmComponent } from '@component/dialog-confirm/dialog-confirm.component';
 import { InputAutocompleteComponent } from '@component/input-autocomplete/input-autocomplete.component';
 import { InputDateComponent } from '@component/input-date/input-date.component';
 import { InputSelectCheckboxComponent } from '@component/input-select-checkbox/input-select-checkbox.component';
@@ -71,6 +72,7 @@ import { PlanificacionInputPickerComponent } from '@component/reusable/planifica
 
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin/comision-admin.component';
 import { ComisionFieldsetComponent } from '@component/comision-admin/comision-fieldset/comision-fieldset.component';
+import { CaCursoTableComponent } from '@component/comision-admin/ca-curso-table/ca-curso-table.component';
 
 import { ComisionShowComponent } from '@component/comision-show/comision-show/comision-show.component';
 import { ComisionTableComponent } from '@component/comision-show/comision-table/comision-table.component';
@@ -111,6 +113,7 @@ export const APP_DATE_FORMATS = {
     StoragePipe,
 
     DialogAlertComponent,
+    DialogConfirmComponent,
     InputAutocompleteComponent,
     InputDateComponent,
     InputSelectCheckboxComponent,
@@ -128,7 +131,7 @@ export const APP_DATE_FORMATS = {
 
     CalendarioLabelComponent, CalendarioInputSelectComponent, PlanificacionInputPickerComponent,
     
-    ComisionAdminComponent, ComisionFieldsetComponent,
+    ComisionAdminComponent, ComisionFieldsetComponent, CaCursoTableComponent,
     ComisionShowComponent, ComisionTableComponent, ComisionSearchComponent, ComisionSearchParamsComponent,
     PersonaAdminComponent, PersonaFieldsetComponent,
     PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent,
