@@ -4,8 +4,8 @@
   </mat-card-header>
   <mat-card-content>
     <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-      <core-input-select [multiple]="'multiple'" [field]="dias" [entityName]="'dia'" [title]="'Días'" fxFlex.xs="100%" fxFlex="50%" fxLayoutAlign="center center"></core-input-select>
-      <core-input-text [field]="horaInicio" [title]="'Hora Inicio'" fxFlex.xs="100%" fxFlex="50%" fxLayoutAlign="center center"></core-input-text>
+      <core-input-select [multiple]="true" [field]="dias" [entityName]="'dia'" [title]="'Días'" fxFlex.xs="100%" fxFlex="50%" fxLayoutAlign="center center"></core-input-select>
+      <core-input-timepicker [field]="horaInicio" [title]="'Hora Inicio'" fxFlex.xs="100%" fxFlex="50%" fxLayoutAlign="center center"></core-input-timepicker>
     </div>
   </mat-card-content>
 </mat-card>

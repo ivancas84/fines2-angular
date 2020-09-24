@@ -9,6 +9,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { MatTimepickerModule } from 'mat-timepicker';
+
 //import { ClipboardModule } from '@angular/cdk/clipboard';
 
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
@@ -60,6 +62,8 @@ import { InputSelectParamComponent } from '@component/input-select-param/input-s
 import { InputSearchGoComponent } from '@component/input-search-go/input-search-go.component';
 import { InputTextComponent } from '@component/input-text/input-text.component';
 import { InputTextareaComponent } from '@component/input-textarea/input-textarea.component';
+import { InputTimepickerComponent } from '@component/input-timepicker/input-timepicker.component';
+
 //import { InputYmComponent } from '@component/input-ym/input-ym.component';
 import { InputYearComponent } from '@component/input-year/input-year.component';
 import { MenuComponent } from '@component/menu/menu.component';
@@ -126,6 +130,7 @@ export const APP_DATE_FORMATS = {
     InputSearchGoComponent,
     InputTextComponent,
     InputTextareaComponent,
+    InputTimepickerComponent,
     InputYearComponent,
     //InputYmComponent,
     MenuComponent,
@@ -175,7 +180,8 @@ export const APP_DATE_FORMATS = {
     MatTableModule,
     MatToolbarModule,
 
-    MaterialFileInputModule
+    MaterialFileInputModule,
+    MatTimepickerModule
   ],
   providers: [
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},

@@ -15,7 +15,7 @@ import { SessionStorageService } from '@service/storage/session-storage.service'
 })
 export class ComisionHorariosAdminComponent extends AdminComponent {
 
-  readonly entityName: string = "comision-horarios";
+  readonly entityName: string = "comision_horarios";
 
   constructor(
     protected fb: FormBuilder, 

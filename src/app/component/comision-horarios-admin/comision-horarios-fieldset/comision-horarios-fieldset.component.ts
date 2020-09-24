@@ -12,7 +12,7 @@ import { SessionStorageService } from '@service/storage/session-storage.service'
 })
 export class ComisionHorariosFieldsetComponent extends FieldsetComponent {
 
-  readonly entityName: string = 'comision-horarios';
+  readonly entityName: string = 'comision_horarios';
 
   readonly defaultValues: {[key:string]: any} = {}
 
