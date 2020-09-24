@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'comision-show', component: ComisionShowComponent, pathMatch: 'full' },
   { path: 'persona-show', component: PersonaShowComponent, pathMatch: 'full' },
   { path: 'registro-docente', component: RdPersonaAdminComponent, pathMatch: 'full' },
-  { path: 'comision-horarios', component: ComisionHorariosAdminComponent, pathMatch: 'full' },
+  { path: 'comision-horarios-admin', component: ComisionHorariosAdminComponent, pathMatch: 'full' },
 ];
 
 @NgModule({
