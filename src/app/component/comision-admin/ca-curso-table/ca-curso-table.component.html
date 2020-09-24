@@ -9,7 +9,7 @@
       <a color="primary" mat-mini-fab  [routerLink]="['/curso-admin']" [queryParams]="{comision:idComision}" ><mat-icon>add</mat-icon></a>
       <button (click)="agregarCursos()" mat-mini-fab><mat-icon>post_add</mat-icon></button>
       <button (click)="eliminarCursos()" mat-mini-fab color="warn"><mat-icon>clear</mat-icon></button>
-      <button mat-mini-fab><mat-icon>alarm_add</mat-icon></button>
+      <a mat-mini-fab  [routerLink]="['/comision-horarios-admin']" [queryParams]="{id:idComision}" ><mat-icon>alarm_add</mat-icon></a>
       <button color="warn" mat-mini-fab><mat-icon>alarm_off</mat-icon></button>
     </div>
     <ng-template #disableAdd>
