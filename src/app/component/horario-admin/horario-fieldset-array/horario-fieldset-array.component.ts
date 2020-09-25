@@ -39,14 +39,16 @@ export class HorarioFieldsetArrayComponent extends FieldsetArrayComponent {
       dia: [null, {
         validators: [Validators.required],
       }],
+      _delete: [null, {}],
     });
     return fg;
   }
 
-  id(index: number) { return this.fieldset.at(index).get('id')}
-  horaInicio(index: number) { return this.fieldset.at(index).get('hora_inicio')}
-  horaFin(index: number) { return this.fieldset.at(index).get('hora_fin')}
-  curso(index: number) { return this.fieldset.at(index).get('curso')}
-  dia(index: number) { return this.fieldset.at(index).get('dia')}
+  id(index: number) { return this.fieldset.at(index).get('id'); }
+  horaInicio(index: number) { return this.fieldset.at(index).get('hora_inicio'); }
+  horaFin(index: number) { return this.fieldset.at(index).get('hora_fin'); }
+  curso(index: number) { return this.fieldset.at(index).get('curso'); }
+  dia(index: number) { return this.fieldset.at(index).get('dia'); }
+  _delete(index: number) { return this.fieldset.at(index).get('_delete'); }
 
 }
