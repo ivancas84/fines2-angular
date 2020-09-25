@@ -4,18 +4,18 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AdminComponent } from '@component/admin/admin.component';
+import { AdminArrayComponent } from '@component/admin-array/admin-array.component';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 
 @Component({
-  selector: 'app-comision-horarios-admin',
-  templateUrl: './comision-horarios-admin.component.html',
+  selector: 'app-horario-admin',
+  templateUrl: './horario-admin.component.html',
 })
-export class ComisionHorariosAdminComponent extends AdminComponent {
+export class HorarioAdminComponent extends AdminArrayComponent {
 
-  readonly entityName: string = "comision_horarios";
+  readonly entityName: string = "horario";
 
   constructor(
     protected fb: FormBuilder, 
@@ -30,10 +30,5 @@ export class ComisionHorariosAdminComponent extends AdminComponent {
   ) {
     super(fb, route, router, location, dd, storage, dialog, snackBar);
   }
-
-  setData(): void {
-    this.data$.next(this.params);
-  }
-
 }
 

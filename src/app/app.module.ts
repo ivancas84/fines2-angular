@@ -86,6 +86,8 @@ import { ComisionSearchParamsComponent } from '@component/comision-show/comision
 import { ComisionHorariosAdminComponent } from '@component/comision-horarios-admin/comision-horarios-admin/comision-horarios-admin.component';
 import { ComisionHorariosFieldsetComponent } from '@component/comision-horarios-admin/comision-horarios-fieldset/comision-horarios-fieldset.component';
 
+import { HorarioFieldsetArrayComponent } from '@component/horario-admin/horario-fieldset-array/horario-fieldset-array.component';
+
 import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/persona-admin.component';
 import { PersonaFieldsetComponent } from '@component/persona-admin/persona-fieldset/persona-fieldset.component';
 
@@ -95,6 +97,7 @@ import { PersonaSearchComponent } from '@component/persona-show/persona-search/p
 
 import { RdPersonaAdminComponent } from '@component/registro-docente/persona-admin/persona-admin.component';
 import { RdPersonaFieldsetComponent } from '@component/registro-docente/persona-fieldset/persona-fieldset.component';
+import { HorarioAdminComponent } from '@component/horario-admin/horario-admin/horario-admin.component';
 
 export const APP_DATE_FORMATS = {
   parse: {
@@ -144,8 +147,9 @@ export const APP_DATE_FORMATS = {
     PersonaAdminComponent, PersonaFieldsetComponent,
     PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent,
     RdPersonaAdminComponent, RdPersonaFieldsetComponent,
-    ComisionHorariosAdminComponent, ComisionHorariosFieldsetComponent
-    
+    ComisionHorariosAdminComponent, ComisionHorariosFieldsetComponent,
+    HorarioAdminComponent, HorarioFieldsetArrayComponent,
+
   ],
   imports: [
     BrowserModule,
