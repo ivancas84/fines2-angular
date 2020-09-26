@@ -96,6 +96,31 @@ export class CaCursoTableComponent extends TableComponent implements OnDestroy {
     }
   }
 
+  agregarHorarios(){
+    if(!this.dataSource.length) { 
+      this.dialog.open(DialogAlertComponent, {
+        data: {title: "Error", message: "No existen cursos, no puede agregar horarios"}
+      }) ;
+      return;
+    }
+
+    var idCursos = arrayColumn(this.dataSource, "id");
+    var display = new Display();
+    display.addParam("curso",idCursos);
+    var s = this.dd.count("horario", display).subscribe(
+      cantidad => {
+        if(cantidad) {
+          this.dialog.open(DialogAlertComponent, {
+            data: {title: "Error", message: "Ya existen horarios, no puede agregar nuevos"}
+          }) ;
+          return;
+        }
+        this.router.navigate(['/comision-horarios-admin'], { queryParams: { id: this.idComision } });
+      }
+    )
+  }
+
+
   existenTomas(){
     for(var i = 0; i < this.dataSource.length; i++){
       if(this.dataSource[i].tomas.length) return true;
