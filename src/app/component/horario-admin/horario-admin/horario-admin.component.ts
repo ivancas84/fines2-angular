@@ -12,6 +12,7 @@ import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.compo
 import { isEmptyObject } from '@function/is-empty-object.function';
 import { first } from 'rxjs/operators';
 import { Display } from '@class/display';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-horario-admin',
@@ -40,10 +41,6 @@ export class HorarioAdminComponent extends AdminComponent {
   });
 
 
-  serverData() {  
-    return this.adminForm.value;
-    //return this.adminForm.value
-  }
 
   setParams(params: any){
     if(params.hasOwnProperty("id") && params["id"]) {
@@ -54,9 +51,21 @@ export class HorarioAdminComponent extends AdminComponent {
     }
   }
 
-
   setData(): void {
     this.data$.next(this.params["id"]);
+  }
+
+  persist(): Observable<any> {
+    return this.dd.post("persist_array", this.entityName, this.serverData())
+  }
+
+  reload(response){
+    /**
+     * Recargar una vez persistido
+     */
+    this.setData();
+    this.snackBar.open("Registro realizado", "X");
+    this.isSubmitted = false;
   }
 }
 
