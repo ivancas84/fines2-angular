@@ -9,15 +9,20 @@
       <a color="primary" mat-mini-fab  [routerLink]="['/curso-admin']" [queryParams]="{comision:idComision}" ><mat-icon>add</mat-icon></a>
       <button (click)="agregarCursos()" mat-mini-fab><mat-icon>post_add</mat-icon></button>
       <button (click)="eliminarCursos()" mat-mini-fab color="warn"><mat-icon>clear</mat-icon></button>
-      <a mat-mini-fab  [routerLink]="['/comision-horarios-admin']" [queryParams]="{id:idComision}" ><mat-icon>alarm_add</mat-icon></a>
-      <button color="warn" mat-mini-fab><mat-icon>alarm_off</mat-icon></button>
+      &nbsp;
+      <a mat-mini-fab  [routerLink]="['/comision-horarios-admin']" [queryParams]="{id:idComision}" title="Agregar horarios aleatoriamente"><mat-icon>alarm_add</mat-icon></a>
+      <a mat-mini-fab  [routerLink]="['/horario-admin']" [queryParams]="{id:idComision}" title="Ver y modificar horarios"><mat-icon>alarm</mat-icon></a>
+      <!--button color="warn" mat-mini-fab><mat-icon>alarm_off</mat-icon></button-->
     </div>
     <ng-template #disableAdd>
       <a color="primary" mat-mini-fab disabled><mat-icon>add</mat-icon></a>
       <button mat-mini-fab disabled><mat-icon>post_add</mat-icon></button>
       <button color="warn" disabled mat-mini-fab><mat-icon>clear</mat-icon></button>
+      &nbsp;
       <button mat-mini-fab disabled><mat-icon>alarm_add</mat-icon></button>
-      <button color="warn" disabled mat-mini-fab><mat-icon>alarm_off</mat-icon></button>
+      <button disabled mat-mini-fab><mat-icon>alarm</mat-icon></button>
+      <!--button color="warn" disabled mat-mini-fab><mat-icon>alarm_off</mat-icon></button-->
+
     </ng-template>
   </mat-card-header>
   <mat-card-content>
