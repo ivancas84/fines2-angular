@@ -5,6 +5,9 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
 import { ValidatorsService } from '@service/validators/validators.service';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@service/storage/session-storage.service';
+import { Display } from '@class/display';
+import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-horario-fieldset-array',
@@ -14,6 +17,8 @@ export class HorarioFieldsetArrayComponent extends FieldsetArrayComponent {
 
   readonly entityName: string = 'horario';
 
+  idComision: string;
+  
   constructor(
     protected fb: FormBuilder, 
     protected dd: DataDefinitionService, 
@@ -50,5 +55,29 @@ export class HorarioFieldsetArrayComponent extends FieldsetArrayComponent {
   curso(index: number) { return this.fieldset.at(index).get('curso'); }
   dia(index: number) { return this.fieldset.at(index).get('dia'); }
   _delete(index: number) { return this.fieldset.at(index).get('_delete'); }
+
+
+  initData(): void {
+    var s = this.data$.pipe(
+      mergeMap(
+        response => {
+          this.idComision = response;
+          var display = new Display();
+          display.addParam("cur_comision",this.idComision);
+          display.setOrder({dia_numero:"asc",hora_inicio:"asc"});
+          return this.dd.all(this.entityName, display);
+        }
+      )
+    ).subscribe(
+      response => {
+        this.initValues(response);
+      },
+      error => { 
+        console.log(error);
+      }
+    )
+    this.subscriptions.add(s);
+  }
+    
 
 }

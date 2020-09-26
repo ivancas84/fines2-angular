@@ -9,12 +9,12 @@
 
     <div fxLayout="row" fxFlex="90%" fxLayout.lt-md="column" fxLayoutGap="10px">
       <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
-        <core-input-timepicker [field]="horaInicio(i)" [title]="'Hora Inicio'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-timepicker>
-        <core-input-timepicker [field]="horaFin(i)" [title]="'Hora Fin'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-timepicker>
+        <app-input-curso-short-select [field]="curso(i)" [id]="idComision" [title]="'Curso'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></app-input-curso-short-select>
+        <core-input-select [field]="dia(i)" [entityName]="'dia'" [title]="'Dia'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-select>
       </div>
       <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
-        <core-input-autocomplete [field]="curso(i)" [entityName]="'curso'" [title]="'Curso'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-autocomplete>
-        <core-input-select [field]="dia(i)" [entityName]="'dia'" [title]="'Dia'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-select>
+        <core-input-timepicker [field]="horaInicio(i)" [title]="'Hora Inicio'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-timepicker>
+        <core-input-timepicker [field]="horaFin(i)" [title]="'Hora Fin'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-timepicker>
       </div>
     </div>
     <div fxLayout="row" fxFlex="10%" fxLayoutGap="10px" fxLayout.xs="column" fxLayoutAlign="center center">
