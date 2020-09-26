@@ -24,9 +24,18 @@
         <core-input-select-param [field]="turno" [options]="['Mañana','Tarde','Noche']" [title]="'Turno'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-select-param>
       </div>
     </div>  
+    
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
-      <app-planificacion-input-picker fxFlex="75%" [field]="planificacion"></app-planificacion-input-picker>
-      <core-input-autocomplete fxFlex="25%" [field]="comisionSiguiente" [entityName]="'comision'" [title]="'Comision Siguiente'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-autocomplete>
+      <app-planificacion-input-picker fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column" [field]="planificacion"></app-planificacion-input-picker>  
+      <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
+        <core-input-text [field]="identificacion" [title]="'Identificacion'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-text>
+        <core-input-autocomplete fxFlex="25%" [field]="comisionSiguiente" [entityName]="'comision'" [title]="'Comision Siguiente'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-autocomplete>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
+      
+
     </div>
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
       <core-input-textarea [field]="observaciones" [title]="'Observaciones'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-textarea>

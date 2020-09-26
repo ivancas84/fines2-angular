@@ -6,6 +6,7 @@ import { ComisionShowComponent } from '@component/comision-show/comision-show/co
 import { RdPersonaAdminComponent } from '@component/registro-docente/persona-admin/persona-admin.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin/comision-admin.component';
 import { HorarioAdminComponent } from '@component/horario-admin/horario-admin/horario-admin.component';
+import { SedeAdminComponent } from '@component/sede-admin/sede-admin/sede-admin.component';
 
 const routes: Routes = [
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'registro-docente', component: RdPersonaAdminComponent, pathMatch: 'full' },
   { path: 'comision-horarios-admin', component: ComisionHorariosAdminComponent, pathMatch: 'full' },
   { path: 'horario-admin', component: HorarioAdminComponent, pathMatch: 'full' },
+  { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
 
 ];
 
