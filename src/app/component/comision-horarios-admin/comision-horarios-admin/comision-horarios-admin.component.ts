@@ -35,5 +35,13 @@ export class ComisionHorariosAdminComponent extends AdminComponent {
     this.data$.next(this.params);
   }
 
+  reload(response){
+    /**
+     * Recargar una vez persistido
+     */
+    this.snackBar.open("Registro realizado", "X");
+    this.back();
+  }
+
 }
 
