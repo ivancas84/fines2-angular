@@ -26,7 +26,7 @@ export class ComisionTableComponent extends TableComponent {
   }
 
   initData(){
-    this.load=true;
+    this.load=false;
     return this.data$.pipe(
       switchMap(
         comisiones => {
