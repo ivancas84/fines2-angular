@@ -9,7 +9,7 @@ import { arrayColumn } from '@function/array-column';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { DataToolsService } from '@service/data-tools.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
-import { Observable, of, ReplaySubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { first, map, mergeMap, tap } from 'rxjs/operators';
 
 @Component({
@@ -25,7 +25,7 @@ export class CaCursoTableComponent extends TableComponent implements OnDestroy {
 
   idComision: string;
   
-  cursos$: ReplaySubject<{ [index: string]: any }[]> = new ReplaySubject();
+  cursos$: BehaviorSubject<{ [index: string]: any }[]> = new BehaviorSubject([]);
 
   protected subscriptions = new Subscription();
 
