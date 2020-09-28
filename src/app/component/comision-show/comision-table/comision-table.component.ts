@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TableComponent } from '@component/table/table.component';
-import { mergeMap, map } from 'rxjs/operators';
+import { mergeMap, map, tap, first, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { DataToolsService } from '@service/data-tools.service';
 
@@ -26,8 +26,9 @@ export class ComisionTableComponent extends TableComponent {
   }
 
   initData(){
+    this.load=true;
     return this.data$.pipe(
-      mergeMap(
+      switchMap(
         comisiones => {
           return this.dt.asignarCursosAComisiones(comisiones)
         }
