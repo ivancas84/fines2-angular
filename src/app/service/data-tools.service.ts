@@ -3,7 +3,7 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
 import { of, Observable } from 'rxjs';
 import { arrayColumn } from '@function/array-column';
 import { Display } from '@class/display';
-import { mergeMap, map } from 'rxjs/operators';
+import { map, first, switchMap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
@@ -30,7 +30,6 @@ export class DataToolsService {
       }),
     );
   }
-
   
   asignarHorariosACursos(cursos:any): Observable<any>{
     if(!cursos.length) return of([]);
@@ -46,14 +45,14 @@ export class DataToolsService {
             for(var i = 0; i < cursoHorario.length; i++) { if(cursos[j]["id"] == cursoHorario[i]["curso"]) cursos[j]["horario"] = cursoHorario[i]["horario"]; }
           }
   
-          return cursos;              }
+          return cursos;
+        }
       )
     )
   }
 
-
   asignarCursosAComisiones(comisiones: any){
-    if(!comisiones || !comisiones.length) return of(null);
+    if(!comisiones || !comisiones.length) return of([]);
 
     var ids = arrayColumn(comisiones,"id");
     
@@ -61,12 +60,13 @@ export class DataToolsService {
     display.setSize(0);
     display.addParam("comision",ids);
     return this.dd.all("curso", display).pipe(
-      mergeMap(
+      switchMap(
         cursos => { 
           return this.asignarTomasACursos(cursos); }
       ),
-      mergeMap(
-        cursos => { return this.asignarHorariosACursos(cursos); }
+      switchMap(
+        cursos => { 
+          return this.asignarHorariosACursos(cursos); }
       ),
       map(
         cursos => {
