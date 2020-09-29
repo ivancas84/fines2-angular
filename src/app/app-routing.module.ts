@@ -8,6 +8,7 @@ import { ComisionAdminComponent } from '@component/comision-admin/comision-admin
 import { HorarioAdminComponent } from '@component/horario-admin/horario-admin/horario-admin.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin/sede-admin.component';
 import { CursoAdminComponent } from '@component/curso-admin/curso-admin/curso-admin.component';
+import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
 
 const routes: Routes = [
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'comision-horarios-admin', component: ComisionHorariosAdminComponent, pathMatch: 'full' },
   { path: 'horario-admin', component: HorarioAdminComponent, pathMatch: 'full' },
   { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
+  { path: 'toma-admin', component: TomaAdminComponent, pathMatch: 'full' },
 
 ];
 

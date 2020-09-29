@@ -1,43 +1,44 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Toma</mat-card-title>
+    <mat-card-title>Toma <app-curso-short-label *ngIf="fkValue" [id]="fkValue" [entityName]="fkName"></app-curso-short-label></mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <div *ngFor="let row of fieldset.controls; let i=index" [formGroup]="fg(i)">
     
     <div fxLayout="row" *ngIf="!_delete(i).value">
 
-    <div fxLayout="row" fxFlex="90%" fxLayout.lt-md="column" fxLayoutGap="10px">
+    <div fxLayout="column" fxFlex="90%">
+
+    <div fxLayout="row" fxFlex="100%" fxLayout.lt-md="column" fxLayoutGap="10px">
       <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
-        <core-input-date [field]="fechaToma(i)" [title]="'Fecha Toma'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-timepicker>
-        <core-input-select-param [field]="estado" [options]="['Aprobada','Pendiente','Renuncia','Error','Baja','Modificada','Observada']" [title]="'Estado'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-select-param>
+        <core-input-autocomplete [field]="docente(i)" [entityName]="'persona'" [title]="'Docente'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-autocomplete>
+        <core-input-date [field]="fechaToma(i)" [title]="'Fecha Toma'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-date>      
+      </div>      
+      <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
+        <core-input-select-param [field]="estado(i)" [options]="['Aprobada','Pendiente','Renuncia','Error','Baja','Modificada','Observada']" [title]="'Estado'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-select-param>        
+        <core-input-select-param [field]="estadoContralor(i)" [options]="['Pasar','Modificar','No pasar']" [title]="'Estado contralor'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-select-param>
+      </div>      
+    </div>  
+    <div fxLayout="row" fxFlex="100%" fxLayout.lt-md="column" fxLayoutGap="10px">
+      <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
+        <core-input-select-param [field]="tipoMovimiento(i)" [options]="['AI','CP','CC']" [title]="'Tipo movimiento'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-select-param>
+        <core-input-autocomplete [field]="reemplazo(i)" [entityName]="'persona'" [title]="'Reemplazo'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-autocomplete>
       </div>
       <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
         <core-input-textarea [field]="observaciones(i)" [title]="'Observaciones'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-textarea>
-        <core-input-text [field]="comentario(i)" [title]="'Comentario'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-text>
+        <core-input-text [field]="comentario(i)" [title]="'Comentario'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-text>          
       </div>
     </div>  
-    <div fxLayout="row" fxFlex="90%" fxLayout.lt-md="column" fxLayoutGap="10px">
-      <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
-        <core-input-select-param [field]="tipoMovimiento" [options]="['AI','CP','CC']" [title]="'Tipo movimiento'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-select-param>
-        <core-input-select-param [field]="estadoContralor" [options]="['Pasar','Modificar','No pasar']" [title]="'Estado contralor'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-select-param>
-      </div>
-      <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
-        <core-input-autocomplete [field]="curso(i)" [entityName]="'curso'" [title]="'Curso'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-autocomplete>
-        <core-input-autocomplete [field]="docente(i)" [entityName]="'persona'" [title]="'Docente'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-autocomplete>
-      </div>
-    </div>  
-    <div fxLayout="row" fxFlex="90%" fxLayout.lt-md="column" fxLayoutGap="10px">
-      <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
-        <core-input-autocomplete [field]="reemplazo(i)" [entityName]="'persona'" [title]="'Reemplazo'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-autocomplete>
-        <core-input-autocomplete [field]="planillaDocente(i)" [entityName]="'planilla_docente'" [title]="'Planilla Docente'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-autocomplete>
-      </div>
-    </div>
+      
+    </div> <!--div fxLayout="column"-->
+    
     <div fxLayout="row" fxFlex="10%" fxLayoutGap="10px" fxLayout.xs="column" fxLayoutAlign="center center">
       <button mat-mini-fab color="warn" (click)="remove(i)" type="button"><mat-icon>delete</mat-icon></button>
     </div>
 
-    </div>
+    </div> <!--div fxLayout="row" *ngIf="!_delete(i).value"-->
+
+    <div *ngIf="!_delete(i).value"><mat-divider></mat-divider><br></div>
     
     </div>
     <button mat-mini-fab color="primary" (click)="add()" type="button"><mat-icon>add</mat-icon></button>

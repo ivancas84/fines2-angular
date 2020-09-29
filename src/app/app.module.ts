@@ -104,6 +104,8 @@ import { SedeAdminComponent } from '@component/sede-admin/sede-admin/sede-admin.
 import { SedeFieldsetComponent } from '@component/sede-admin/sede-fieldset/sede-fieldset.component';
 import { CursoAdminComponent } from '@component/curso-admin/curso-admin/curso-admin.component';
 import { CursoFieldsetArrayComponent } from '@component/curso-admin/curso-fieldset-array/curso-fieldset-array.component';
+import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
+import { TomaFieldsetArrayComponent } from '@component/toma-admin/toma-fieldset-array/toma-fieldset-array.component';
 
 export const APP_DATE_FORMATS = {
   parse: {
@@ -159,6 +161,7 @@ export const APP_DATE_FORMATS = {
     RdPersonaAdminComponent, RdPersonaFieldsetComponent,
     SedeAdminComponent, SedeFieldsetComponent,
     HorarioAdminComponent, HorarioFieldsetArrayComponent,
+    TomaAdminComponent, TomaFieldsetArrayComponent
   ],
   imports: [
     BrowserModule,
