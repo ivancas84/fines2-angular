@@ -4,24 +4,25 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AdminComponent } from '@component/admin/admin.component';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
-import { AdminComponent } from '@component/admin/admin.component';
-import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
-import { isEmptyObject } from '@function/is-empty-object.function';
-import { first } from 'rxjs/operators';
-import { Display } from '@class/display';
+import { AdminArrayComponent } from '@component/admin-array/admin-array.component';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-horario-admin',
-  templateUrl: './horario-admin.component.html',
+  selector: 'app-curso-admin',
+  templateUrl: './curso-admin.component.html',
 })
-export class HorarioAdminComponent extends AdminComponent {
+export class CursoAdminComponent extends AdminComponent {
 
-  readonly entityName: string = "horario";
+  readonly entityName: string = "curso";
 
+  adminForm: FormGroup = this.fb.group({
+    id: ['', Validators.required ],
+  });
+  
   constructor(
     protected fb: FormBuilder, 
     protected route: ActivatedRoute, 
@@ -35,10 +36,6 @@ export class HorarioAdminComponent extends AdminComponent {
   ) {
     super(fb, route, router, location, dd, storage, dialog, snackBar);
   }
-
-  adminForm: FormGroup = this.fb.group({
-    id: ['', Validators.required ],
-  });
 
   setParams(params: any){
     if(params.hasOwnProperty("id") && params["id"]) {

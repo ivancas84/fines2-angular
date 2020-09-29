@@ -102,6 +102,8 @@ import { RdPersonaFieldsetComponent } from '@component/registro-docente/persona-
 import { HorarioAdminComponent } from '@component/horario-admin/horario-admin/horario-admin.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin/sede-admin.component';
 import { SedeFieldsetComponent } from '@component/sede-admin/sede-fieldset/sede-fieldset.component';
+import { CursoAdminComponent } from '@component/curso-admin/curso-admin/curso-admin.component';
+import { CursoFieldsetArrayComponent } from '@component/curso-admin/curso-fieldset-array/curso-fieldset-array.component';
 
 export const APP_DATE_FORMATS = {
   parse: {
@@ -151,6 +153,7 @@ export const APP_DATE_FORMATS = {
     ComisionAdminComponent, ComisionFieldsetComponent, CaCursoTableComponent,
     ComisionHorariosAdminComponent, ComisionHorariosFieldsetComponent,
     ComisionShowComponent, ComisionTableComponent, ComisionSearchComponent, ComisionSearchParamsComponent,
+    CursoAdminComponent, CursoFieldsetArrayComponent,
     PersonaAdminComponent, PersonaFieldsetComponent,
     PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent,
     RdPersonaAdminComponent, RdPersonaFieldsetComponent,

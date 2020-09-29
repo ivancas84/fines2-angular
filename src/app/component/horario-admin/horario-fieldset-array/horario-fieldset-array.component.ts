@@ -6,28 +6,38 @@ import { ValidatorsService } from '@service/validators/validators.service';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { Display } from '@class/display';
-import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { mergeMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { FieldsetArrayFkComponent } from '@component/fieldset-array-fk/fieldset-array-fk.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-horario-fieldset-array',
   templateUrl: './horario-fieldset-array.component.html',
 })
-export class HorarioFieldsetArrayComponent extends FieldsetArrayComponent {
+export class HorarioFieldsetArrayComponent extends FieldsetArrayFkComponent {
 
   readonly entityName: string = 'horario';
 
+  readonly fkName: string = 'cur_comision';
+
   idComision: string;
-  
+  /** 
+   * Se utiliza el idComision desde el template
+   */
+
   constructor(
-    protected fb: FormBuilder, 
-    protected dd: DataDefinitionService, 
-    protected validators: ValidatorsService,
     protected router: Router, 
-    protected storage: SessionStorageService 
+    protected storage: SessionStorageService,
+    protected dd: DataDefinitionService, 
+    protected dialog: MatDialog,
+
+    protected fb: FormBuilder, 
+    protected validators: ValidatorsService,
   ) {
-    super(router, storage);
+    super(router, storage, dd, dialog)
   }
+
 
   formGroup(): FormGroup {
     let fg: FormGroup = this.fb.group({
@@ -56,28 +66,18 @@ export class HorarioFieldsetArrayComponent extends FieldsetArrayComponent {
   dia(index: number) { return this.fieldset.at(index).get('dia'); }
   _delete(index: number) { return this.fieldset.at(index).get('_delete'); }
 
-
-  initData(): void {
-    var s = this.data$.pipe(
+  data(): Observable<any> {
+    return this.data$.pipe(
       mergeMap(
         response => {
           this.idComision = response;
           var display = new Display();
-          display.addParam("cur_comision",this.idComision);
+          display.addParam("cur_comision",response);
           display.setOrder({dia_numero:"asc",hora_inicio:"asc"});
           return this.dd.all(this.entityName, display);
         }
       )
-    ).subscribe(
-      response => {
-        this.initValues(response);
-      },
-      error => { 
-        console.log(error);
-      }
     )
-    this.subscriptions.add(s);
   }
-    
 
 }
