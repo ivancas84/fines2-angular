@@ -23,7 +23,10 @@
 
     </div>
     
+    <div *ngIf="!_delete(i).value"><mat-divider></mat-divider><br></div>
+
     </div>
+    
     <button mat-mini-fab color="primary" (click)="add()" type="button"><mat-icon>add</mat-icon></button>
     
     </mat-card-content>

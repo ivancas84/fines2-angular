@@ -143,6 +143,7 @@ export const APP_DATE_FORMATS = {
     MenuComponent,
     SearchAllComponent,
     LabelComponent,
+    //DynamicTableComponent,
 
     CalendarioLabelComponent, CalendarioInputSelectComponent, PlanificacionInputPickerComponent,
     CursoShortLabelComponent, InputCursoShortSelectComponent,
