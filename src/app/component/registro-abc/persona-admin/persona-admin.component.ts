@@ -12,10 +12,10 @@ import { SessionStorageService } from '@service/storage/session-storage.service'
 @Component({
   selector: 'app-rabc-persona-admin',
   templateUrl: './persona-admin.component.html',
-})
+})  
 export class RabcPersonaAdminComponent extends AdminComponent {
 
-  readonly entityName: string = "persona";
+  readonly entityName: string = "registro_abc";
 
   constructor(
     protected fb: FormBuilder, 
@@ -29,6 +29,10 @@ export class RabcPersonaAdminComponent extends AdminComponent {
     protected snackBar: MatSnackBar
   ) {
     super(fb, route, router, location, dd, storage, dialog, snackBar);
+  }
+
+  setData(): void {
+    this.data$.next(this.params);
   }
 }
 

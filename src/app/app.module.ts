@@ -56,6 +56,7 @@ import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.compo
 import { DialogConfirmComponent } from '@component/dialog-confirm/dialog-confirm.component';
 import { InputAutocompleteComponent } from '@component/input-autocomplete/input-autocomplete.component';
 import { InputDateComponent } from '@component/input-date/input-date.component';
+import { InputNumberComponent } from '@component/input-number/input-number.component';
 import { InputSelectCheckboxComponent } from '@component/input-select-checkbox/input-select-checkbox.component';
 import { InputSelectComponent } from '@component/input-select/input-select.component';
 import { InputSelectValueComponent } from '@component/input-select-value/input-select-value.component';
@@ -141,6 +142,7 @@ export const APP_DATE_FORMATS = {
     DialogConfirmComponent,
     InputAutocompleteComponent,
     InputDateComponent,
+    InputNumberComponent,
     InputSelectCheckboxComponent,
     InputSelectComponent,
     InputSelectValueComponent,

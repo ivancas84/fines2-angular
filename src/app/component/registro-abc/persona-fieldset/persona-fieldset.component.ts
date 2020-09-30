@@ -13,7 +13,7 @@ import { LocalValidators } from '@service/local-validators.service';
 })
 export class RabcPersonaFieldsetComponent extends FieldsetComponent {
 
-  readonly entityName: string = 'persona';
+  readonly entityName: string = 'registro_abc';
 
   readonly defaultValues: {[key:string]: any} = {alta: new Date()}
 
@@ -51,9 +51,6 @@ export class RabcPersonaFieldsetComponent extends FieldsetComponent {
       telefono: [null, {
         validators: [Validators.required, Validators.maxLength(255),],
       }],
-      email: [null, {
-        validators: [Validators.required, Validators.maxLength(255)],
-      }],
       email_abc: [null, {
         validators: [Validators.required, Validators.maxLength(255)],
       }],
@@ -76,7 +73,6 @@ export class RabcPersonaFieldsetComponent extends FieldsetComponent {
   get genero() { return this.fieldset.get('genero')}
   get apodo() { return this.fieldset.get('apodo')}
   get telefono() { return this.fieldset.get('telefono')}
-  get email() { return this.fieldset.get('email')}
   get emailAbc() { return this.fieldset.get('email_abc')}
   get curso() { return this.fieldset.get('curso')}
   get alta() { return this.fieldset.get('alta')}
