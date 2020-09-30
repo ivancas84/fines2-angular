@@ -33,6 +33,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -106,6 +107,12 @@ import { CursoAdminComponent } from '@component/curso-admin/curso-admin/curso-ad
 import { CursoFieldsetArrayComponent } from '@component/curso-admin/curso-fieldset-array/curso-fieldset-array.component';
 import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
 import { TomaFieldsetArrayComponent } from '@component/toma-admin/toma-fieldset-array/toma-fieldset-array.component';
+import { CdComisionShowComponent } from '@component/consolidado-docente/consolidado-docente/comision-show.component';
+import { CdComisionTableComponent } from '@component/consolidado-docente/comision-table/comision-table.component';
+import { TomaPosesionAdminComponent } from '@component/toma-posesion/toma-posesion-admin/toma-posesion-admin.component';
+import { TomaPosesionFieldsetComponent } from '@component/toma-posesion/toma-posesion-fieldset/toma-posesion-fieldset.component';
+import { RabcPersonaAdminComponent } from '@component/registro-abc/persona-admin/persona-admin.component';
+import { RabcPersonaFieldsetComponent } from '@component/registro-abc/persona-fieldset/persona-fieldset.component';
 
 export const APP_DATE_FORMATS = {
   parse: {
@@ -152,6 +159,7 @@ export const APP_DATE_FORMATS = {
     CalendarioLabelComponent, CalendarioInputSelectComponent, PlanificacionInputPickerComponent,
     CursoShortLabelComponent, InputCursoShortSelectComponent,
 
+    CdComisionShowComponent, CdComisionTableComponent,
     ComisionAdminComponent, ComisionFieldsetComponent, CaCursoTableComponent,
     ComisionHorariosAdminComponent, ComisionHorariosFieldsetComponent,
     ComisionShowComponent, ComisionTableComponent, ComisionSearchComponent, ComisionSearchParamsComponent,
@@ -159,9 +167,11 @@ export const APP_DATE_FORMATS = {
     PersonaAdminComponent, PersonaFieldsetComponent,
     PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent,
     RdPersonaAdminComponent, RdPersonaFieldsetComponent,
+    RabcPersonaAdminComponent, RabcPersonaFieldsetComponent,
     SedeAdminComponent, SedeFieldsetComponent,
     HorarioAdminComponent, HorarioFieldsetArrayComponent,
-    TomaAdminComponent, TomaFieldsetArrayComponent
+    TomaAdminComponent, TomaFieldsetArrayComponent,
+    TomaPosesionAdminComponent, TomaPosesionFieldsetComponent,
   ],
   imports: [
     BrowserModule,
@@ -193,6 +203,7 @@ export const APP_DATE_FORMATS = {
     MatSnackBarModule,
     MatSelectModule,
     MatSortModule,
+    MatStepperModule,
     MatTableModule,
     MatToolbarModule,
 

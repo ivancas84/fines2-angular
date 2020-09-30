@@ -81,4 +81,30 @@ export class DataToolsService {
       )
     )
   }
+
+  asignarCursosAComisionesSinTomas(comisiones: any){
+    if(!comisiones || !comisiones.length) return of([]);
+
+    var ids = arrayColumn(comisiones,"id");
+    
+    var display = new Display();
+    display.setSize(0);
+    display.addParam("comision",ids);
+    return this.dd.all("curso", display).pipe(
+      switchMap(
+        cursos => { return this.asignarHorariosACursos(cursos); }
+      ),
+      map(
+        cursos => {
+          for(var j = 0; j < comisiones.length; j++){
+            comisiones[j]["cursos"] = [];
+            for(var i = 0; i < cursos.length; i++) { 
+              if(comisiones[j]["id"] == cursos[i]["comision"]) comisiones[j]["cursos"].push(cursos[i]); }
+          }
+  
+          return comisiones;
+        }
+      )
+    )
+  }
 }

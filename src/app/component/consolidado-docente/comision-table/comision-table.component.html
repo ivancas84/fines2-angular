@@ -1,0 +1,52 @@
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Bienvenido Docente</mat-card-title>
+    <mat-card-subtitle>Seleccione el curso en el cual ha sido designado para efectuar la toma de posesión</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content *ngIf="(load$ | async) && load; else loading">
+    <div *ngFor="let row of dataSource">
+      <div  fxLayout fxLayout.xs="column">
+        <div fxFlex="50%" fxFlex.xs="100%">
+          <mat-card class="comision">
+            <mat-card-header>
+              <mat-card-title>
+                {{row.sede_.numero}} 
+                {{row.division}} 
+                <span *ngIf="row.planificacion">{{row.planificacion_.anio}}{{row.planificacion_.semestre}}</span>
+              </mat-card-title>
+              <mat-card-subtitle>{{row.sede_.nombre}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-list role="list" >
+                <mat-list-item *ngIf="row.planificacion" role="listitem">{{row.planificacion_.plan_.orientacion}} - {{row.planificacion_.plan_.distribucion_horaria}}</mat-list-item>
+                <mat-list-item *ngIf="row.calendario" role="listitem">{{row.calendario_.anio | toDate | date:"y"}}-{{row.calendario_.semestre}}</mat-list-item>
+              </mat-list>
+            </mat-card-content>            
+          </mat-card>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%">
+            <mat-card *ngFor="let curso of row.cursos">
+              <mat-card-content>
+                 <strong>{{curso.asignatura_.nombre}} <a routerLink="/toma-posesion" [queryParams]="{'id':curso.id}"><mat-icon>add_box</mat-icon></a></strong>
+                <br><span class="mat-small">&nbsp;{{curso.horario}} - {{curso.horas_catedra}} horas cátedra</span>
+              </mat-card-content>
+            </mat-card>  
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+
+    <mat-paginator *ngIf="display"
+                   [length]="length"
+                   [pageSize]="display.size"
+                   [pageIndex]="display.page-1"
+                   (page)="onChangePage($event)"
+                   [pageSizeOptions]="[10, 25, 50, 100]" 
+                   showFirstLastButtons>
+    </mat-paginator>  
+  </mat-card-content>
+</mat-card>

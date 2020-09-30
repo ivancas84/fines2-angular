@@ -9,6 +9,9 @@ import { HorarioAdminComponent } from '@component/horario-admin/horario-admin/ho
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin/sede-admin.component';
 import { CursoAdminComponent } from '@component/curso-admin/curso-admin/curso-admin.component';
 import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
+import { CdComisionShowComponent } from '@component/consolidado-docente/consolidado-docente/comision-show.component';
+import { TomaPosesionAdminComponent } from '@component/toma-posesion/toma-posesion-admin/toma-posesion-admin.component';
+import { RabcPersonaAdminComponent } from '@component/registro-abc/persona-admin/persona-admin.component';
 
 const routes: Routes = [
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
@@ -20,6 +23,10 @@ const routes: Routes = [
   { path: 'horario-admin', component: HorarioAdminComponent, pathMatch: 'full' },
   { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
   { path: 'toma-admin', component: TomaAdminComponent, pathMatch: 'full' },
+  { path: 'consolidado-docente', component: CdComisionShowComponent, pathMatch: 'full' },
+  { path: 'toma-posesion', component: TomaPosesionAdminComponent, pathMatch: 'full' },
+  { path: 'registro-abc', component: RabcPersonaAdminComponent, pathMatch: 'full' },
+
 
 ];
 
