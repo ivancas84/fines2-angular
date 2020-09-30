@@ -34,5 +34,10 @@ export class RabcPersonaAdminComponent extends AdminComponent {
   setData(): void {
     this.data$.next(this.params);
   }
+
+  reload(response){
+    console.log(response);
+    this.router.navigateByUrl('/toma-posesion-realizada');
+  }
 }
 

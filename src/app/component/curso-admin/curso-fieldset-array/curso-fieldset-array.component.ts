@@ -62,7 +62,7 @@ export class CursoFieldsetArrayComponent extends FieldsetArrayFkComponent {
   asignatura(index: number) { return this.fieldset.at(index).get('asignatura')}
   _delete(index: number) { return this.fieldset.at(index).get('_delete')}
 
-  get dataObs(): Observable<any>{
+  data(): Observable<any>{
     return this.data$.pipe(
       mergeMap(
         response => {

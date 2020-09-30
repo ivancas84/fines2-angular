@@ -62,18 +62,16 @@ export class TomaPosesionAdminComponent extends AdminComponent {
 
 
   reload(response){
-
-    if(!response) {
-      console.log("redireccionar");
-    }  
+    if(response) this.router.navigateByUrl('/toma-posesion-realizada');
+    else {       
+      this.router.navigate(['/registro-abc'], { queryParams: { curso: this.adminForm.get(this.entityName+".id").value, email_abc: this.adminForm.get(this.entityName+".email_abc").value}});
+    }
     /**
      * Recargar una vez persistido
      */
     
      //Si existe profe felicitaciones
      //Si no existe profe registrese
-    //this.router.navigateByUrl('/' + route, {replaceUrl: true});
-    //this.snackBar.open("Asignacion realizada", "X");
   }
 }
 

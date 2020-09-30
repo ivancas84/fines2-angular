@@ -110,10 +110,11 @@ import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.
 import { TomaFieldsetArrayComponent } from '@component/toma-admin/toma-fieldset-array/toma-fieldset-array.component';
 import { CdComisionShowComponent } from '@component/consolidado-docente/consolidado-docente/comision-show.component';
 import { CdComisionTableComponent } from '@component/consolidado-docente/comision-table/comision-table.component';
-import { TomaPosesionAdminComponent } from '@component/toma-posesion/toma-posesion-admin/toma-posesion-admin.component';
-import { TomaPosesionFieldsetComponent } from '@component/toma-posesion/toma-posesion-fieldset/toma-posesion-fieldset.component';
 import { RabcPersonaAdminComponent } from '@component/registro-abc/persona-admin/persona-admin.component';
 import { RabcPersonaFieldsetComponent } from '@component/registro-abc/persona-fieldset/persona-fieldset.component';
+import { TomaPosesionAdminComponent } from '@component/toma-posesion/toma-posesion-admin/toma-posesion-admin.component';
+import { TomaPosesionFieldsetComponent } from '@component/toma-posesion/toma-posesion-fieldset/toma-posesion-fieldset.component';
+import { TomaPosesionRealizadaComponent } from '@component/toma-posesion-realizada/toma-posesion-realizada.component';
 
 export const APP_DATE_FORMATS = {
   parse: {
@@ -174,6 +175,7 @@ export const APP_DATE_FORMATS = {
     HorarioAdminComponent, HorarioFieldsetArrayComponent,
     TomaAdminComponent, TomaFieldsetArrayComponent,
     TomaPosesionAdminComponent, TomaPosesionFieldsetComponent,
+    TomaPosesionRealizadaComponent,
   ],
   imports: [
     BrowserModule,

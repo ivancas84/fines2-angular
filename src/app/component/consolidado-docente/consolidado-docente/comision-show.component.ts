@@ -13,7 +13,12 @@ export class CdComisionShowComponent extends ShowComponent {
   initDisplay(params: { [x: string]: any; }) {
     this.display = new Display();
     this.display.setSize(100);
-    this.display.setParamsByQueryParams(params);
+    this.display.addParam("cal_anio", "2020");
+    this.display.addParam("cal_semestre", "2");
+    this.display.addParam("sed_centro_educativo", "1");
+    this.display.addParam("modalidad", "1");
+    this.display.addParam("autorizada", true);
+    this.display.setOrder({sed_numero:"asc"})
     this.display$.next(this.display); //@todo reemplazar uso de display$ por display
   }
 
