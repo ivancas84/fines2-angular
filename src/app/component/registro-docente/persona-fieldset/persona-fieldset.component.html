@@ -1,8 +1,8 @@
 <mat-card [formGroup]="fieldset">
-  <mat-card-header>
-    <mat-card-title>Persona</mat-card-title>
-  </mat-card-header>
   <mat-card-content>
+    <p>
+      Los datos consignados en el siguiente formulario serán transferidos directamente a las oficinas de Contralor para ser cargados en la liquidación de haberes.</p>
+     <p>Verifique que sean completados correctamente. </p>
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
       <div fxLayout="row" fxFlex="50%" fxLayoutGap="10px" fxLayout.xs="column">
         <div fxFlex="50%">
@@ -35,11 +35,11 @@
         <div fxFlex="50%">
           <mat-form-field>
             <mat-label>Fecha nacimiento</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="fecha_nacimiento">
+            <input matInput placeholder="dd/mm/aaaa" [matDatepicker]="picker" formControlName="fecha_nacimiento">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="fechaNacimiento.hasError('matDatepickerParse')">El formato es incorrecto</mat-error>
             <mat-error *ngIf="fechaNacimiento.hasError('required')">Debe completar valor</mat-error>
+            <mat-error *ngIf="fechaNacimiento.hasError('matDatepickerParse')">El formato es incorrecto</mat-error>
           </mat-form-field>
         </div>
         
@@ -81,8 +81,10 @@
         <div fxFlex="50%">
           <mat-form-field>
             <mat-label>Email</mat-label>
-            <input matInput formControlName="email" >
+            <input placeholder="ejemplo@email.com" matInput formControlName="email" >
             <mat-error *ngIf="email.hasError('required')">Debe completar valor</mat-error>
+            <mat-error *ngIf="email.hasError('pattern')">Formato no válido</mat-error>
+
           </mat-form-field>
         </div>
       </div>

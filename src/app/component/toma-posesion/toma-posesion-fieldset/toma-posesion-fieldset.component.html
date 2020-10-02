@@ -1,11 +1,12 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Correo ABC</mat-card-title>
-    <mat-card-subtitle>Ingrese su correo abc.gob.ar</mat-card-subtitle>
+    <mat-card-title>Toma Posesión <app-curso-ige-label [id]="id.value"></app-curso-ige-label></mat-card-title>  
   </mat-card-header>
   <mat-card-content [formGroup]="fieldset">
+    <p>Ingrese su correo ABC.</p>
+    <p>Verifique que no haya espacios en blanco al principio ni al final del correo.</p>
     <div fxLayout="row" fxLayoutGap="10px">
-      <core-input-text fxFlex="100%" [field]="emailAbc" [title]="'Correo ABC'"></core-input-text>    
+      <core-input-text fxFlex="100%" [field]="emailAbc" [title]="'Correo ABC'" [placeholder]="'ejemplo@abc.gob.ar'"></core-input-text>    
     </div>  
   </mat-card-content>
 </mat-card>

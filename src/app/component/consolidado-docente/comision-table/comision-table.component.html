@@ -5,13 +5,14 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>Bienvenido Docente</mat-card-title>
-    <mat-card-subtitle>Seleccione el curso en el cual ha sido designado para efectuar la toma de posesión</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content *ngIf="(load$ | async) && load; else loading">
-    <div *ngFor="let row of dataSource">
-      <div  fxLayout fxLayout.xs="column">
-        <div fxFlex="50%" fxFlex.xs="100%">
-          <mat-card class="comision">
+    <div *ngFor="let row of dataSource; let i = index;">
+      <p>Seleccione el curso en el cual ha sido designado para efectuar la toma de posesión</p>
+      <p>Cualquier inconveniente informenos a coordinadores.cens456@gmail.com</p>
+      <div  fxLayout fxLayout.xs="column" [ngClass]="{'comision-bg-light': 0 === i % 2, 'comision-bg-dark': 0 !== i % 2}">
+        <div id="comisiones" fxFlex="50%" fxFlex.xs="100%">
+          <mat-card [ngClass]="{'comision-bg-light': 0 === i % 2, 'comision-bg-dark': 0 !== i % 2}">
             <mat-card-header>
               <mat-card-title>
                 {{row.sede_.numero}} 
@@ -23,7 +24,6 @@
             <mat-card-content>
               <mat-list role="list" >
                 <mat-list-item *ngIf="row.planificacion" role="listitem">{{row.planificacion_.plan_.orientacion}} - {{row.planificacion_.plan_.distribucion_horaria}}</mat-list-item>
-                <mat-list-item *ngIf="row.calendario" role="listitem">{{row.calendario_.anio | toDate | date:"y"}}-{{row.calendario_.semestre}}</mat-list-item>
               </mat-list>
             </mat-card-content>            
           </mat-card>
@@ -31,8 +31,11 @@
         <div fxFlex="50%" fxFlex.xs="100%">
             <mat-card *ngFor="let curso of row.cursos">
               <mat-card-content>
-                 <strong>{{curso.asignatura_.nombre}} <a routerLink="/toma-posesion" [queryParams]="{'id':curso.id}"><mat-icon>add_box</mat-icon></a></strong>
+                <strong>IGE {{curso.ige}}</strong>&nbsp;
+                <strong>{{curso.asignatura_.nombre}}</strong>
                 <br><span class="mat-small">&nbsp;{{curso.horario}} - {{curso.horas_catedra}} horas cátedra</span>
+                <br>
+                <br><a routerLink="/toma-posesion" [queryParams]="{'id':curso.id}">TOMAR POSESIÓN</a>
               </mat-card-content>
             </mat-card>  
         </div>

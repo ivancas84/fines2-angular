@@ -8,7 +8,16 @@ import { DataToolsService } from '@service/data-tools.service';
   selector: 'app-cd-comision-table',
   templateUrl: './comision-table.component.html',
   styles:[`
-  .comision {
+  #comisiones mat-card{
+    width: 100%;
+    height: 100%;
+  }
+  
+  .comision-bg-light {
+    background: #d6d6c2;
+  }
+  
+  .comision-bg-dark {
     background: #C0C0C0;
   }
   .mat-card-content { overflow-x: auto; }

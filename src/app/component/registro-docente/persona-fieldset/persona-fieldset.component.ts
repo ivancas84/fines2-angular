@@ -15,7 +15,7 @@ import { LocalValidators } from '@service/local-validators.service';
 })
 export class RdPersonaFieldsetComponent extends FieldsetComponent {
 
-  readonly entityName: string = 'persona';
+  readonly entityName: string = 'registro_docente';
 
   readonly defaultValues: {[key:string]: any} = {alta: new Date()}
 
@@ -54,10 +54,9 @@ export class RdPersonaFieldsetComponent extends FieldsetComponent {
         validators: [Validators.required, Validators.maxLength(255),],
       }],
       email: [null, {
-        validators: [Validators.required, Validators.maxLength(255)],
+        validators: [Validators.required, Validators.maxLength(255), ValidatorsService.email()],
       }],
     },{
-      updateOn: "submit",
       validators: [LocalValidators.cuilDni()],
     });
     return fg;

@@ -72,35 +72,17 @@ import { MenuComponent } from '@component/menu/menu.component';
 import { SearchAllComponent } from '@component/search-all/search-all.component';
 import { LabelComponent } from '@component/label/label.component';
 
-import { CalendarioLabelComponent } from '@component/reusable/calendario-label/calendario-label.component';
 import { CalendarioInputSelectComponent } from '@component/reusable/calendario-input-select/calendario-input-select.component';
-import { PlanificacionInputPickerComponent } from '@component/reusable/planificacion-input-picker/planificacion-input-picker.component';
+import { CalendarioLabelComponent } from '@component/reusable/calendario-label/calendario-label.component';
+import { CursoIgeLabelComponent } from '@component/reusable/curso-ige-label/curso-ige-label.component';
 import { CursoShortLabelComponent } from '@component/reusable/curso-short-label/curso-short-label.component';
 import { InputCursoShortSelectComponent } from '@component/reusable/input-curso-short-select/input-curso-short-select.component';
-
-import { ComisionAdminComponent } from '@component/comision-admin/comision-admin/comision-admin.component';
-import { ComisionFieldsetComponent } from '@component/comision-admin/comision-fieldset/comision-fieldset.component';
-import { CaCursoTableComponent } from '@component/comision-admin/ca-curso-table/ca-curso-table.component';
-
-import { ComisionShowComponent } from '@component/comision-show/comision-show/comision-show.component';
-import { ComisionTableComponent } from '@component/comision-show/comision-table/comision-table.component';
-import { ComisionSearchComponent } from '@component/comision-show/comision-search/comision-search.component';
-import { ComisionSearchParamsComponent } from '@component/comision-show/comision-search-params/comision-search-params.component';
-
-import { ComisionHorariosAdminComponent } from '@component/comision-horarios-admin/comision-horarios-admin/comision-horarios-admin.component';
-import { ComisionHorariosFieldsetComponent } from '@component/comision-horarios-admin/comision-horarios-fieldset/comision-horarios-fieldset.component';
-
-import { HorarioFieldsetArrayComponent } from '@component/horario-admin/horario-fieldset-array/horario-fieldset-array.component';
-
-import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/persona-admin.component';
-import { PersonaFieldsetComponent } from '@component/persona-admin/persona-fieldset/persona-fieldset.component';
-
-import { PersonaShowComponent } from '@component/persona-show/persona-show/persona-show.component';
-import { PersonaTableComponent } from '@component/persona-show/persona-table/persona-table.component';
-import { PersonaSearchComponent } from '@component/persona-show/persona-search/persona-search.component';
+import { PlanificacionInputPickerComponent } from '@component/reusable/planificacion-input-picker/planificacion-input-picker.component';
 
 import { RdPersonaAdminComponent } from '@component/registro-docente/persona-admin/persona-admin.component';
 import { RdPersonaFieldsetComponent } from '@component/registro-docente/persona-fieldset/persona-fieldset.component';
+import { RegistroRealizadoComponent } from '@component/registro-realizado/registro-realizado.component';
+
 import { HorarioAdminComponent } from '@component/horario-admin/horario-admin/horario-admin.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin/sede-admin.component';
 import { SedeFieldsetComponent } from '@component/sede-admin/sede-fieldset/sede-fieldset.component';
@@ -108,6 +90,7 @@ import { CursoAdminComponent } from '@component/curso-admin/curso-admin/curso-ad
 import { CursoFieldsetArrayComponent } from '@component/curso-admin/curso-fieldset-array/curso-fieldset-array.component';
 import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
 import { TomaFieldsetArrayComponent } from '@component/toma-admin/toma-fieldset-array/toma-fieldset-array.component';
+
 import { CdComisionShowComponent } from '@component/consolidado-docente/consolidado-docente/comision-show.component';
 import { CdComisionTableComponent } from '@component/consolidado-docente/comision-table/comision-table.component';
 import { RabcPersonaAdminComponent } from '@component/registro-abc/persona-admin/persona-admin.component';
@@ -161,6 +144,7 @@ export const APP_DATE_FORMATS = {
 
     CalendarioLabelComponent, CalendarioInputSelectComponent, PlanificacionInputPickerComponent,
     CursoShortLabelComponent, InputCursoShortSelectComponent,
+    CursoIgeLabelComponent,
 
     CdComisionShowComponent, CdComisionTableComponent,
     ComisionAdminComponent, ComisionFieldsetComponent, CaCursoTableComponent,
@@ -170,6 +154,7 @@ export const APP_DATE_FORMATS = {
     PersonaAdminComponent, PersonaFieldsetComponent,
     PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent,
     RdPersonaAdminComponent, RdPersonaFieldsetComponent,
+    RegistroRealizadoComponent,
     RabcPersonaAdminComponent, RabcPersonaFieldsetComponent,
     SedeAdminComponent, SedeFieldsetComponent,
     HorarioAdminComponent, HorarioFieldsetArrayComponent,
@@ -207,7 +192,7 @@ export const APP_DATE_FORMATS = {
     MatSnackBarModule,
     MatSelectModule,
     MatSortModule,
-    MatStepperModule,
+    //MatStepperModule,
     MatTableModule,
     MatToolbarModule,
 

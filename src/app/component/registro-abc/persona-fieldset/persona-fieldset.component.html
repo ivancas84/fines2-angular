@@ -1,8 +1,9 @@
 <mat-card [formGroup]="fieldset">
   <mat-card-header>
-    <mat-card-title>Persona</mat-card-title>
-  </mat-card-header>
+    <mat-card-title>Toma Posesión <app-curso-ige-label [id]="curso.value"></app-curso-ige-label></mat-card-title>  </mat-card-header>
   <mat-card-content>
+    <p>Los datos consignados en el siguiente formulario serán transferidos directamente a las oficinas de Contralor para ser cargados en la liquidación de haberes.</p>
+    <p>Verifique que sean completados correctamente</p>
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
       <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
         <core-input-text [field]="nombres" [title]="'Nombres'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-text>
