@@ -98,6 +98,22 @@ import { RabcPersonaFieldsetComponent } from '@component/registro-abc/persona-fi
 import { TomaPosesionAdminComponent } from '@component/toma-posesion/toma-posesion-admin/toma-posesion-admin.component';
 import { TomaPosesionFieldsetComponent } from '@component/toma-posesion/toma-posesion-fieldset/toma-posesion-fieldset.component';
 import { TomaPosesionRealizadaComponent } from '@component/toma-posesion-realizada/toma-posesion-realizada.component';
+import { ComisionAdminComponent } from '@component/comision-admin/comision-admin/comision-admin.component';
+import { ComisionFieldsetComponent } from '@component/comision-admin/comision-fieldset/comision-fieldset.component';
+import { CaCursoTableComponent } from '@component/comision-admin/ca-curso-table/ca-curso-table.component';
+import { ComisionHorariosAdminComponent } from '@component/comision-horarios-admin/comision-horarios-admin/comision-horarios-admin.component';
+import { ComisionShowComponent } from '@component/comision-show/comision-show/comision-show.component';
+import { ComisionHorariosFieldsetComponent } from '@component/comision-horarios-admin/comision-horarios-fieldset/comision-horarios-fieldset.component';
+import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/persona-admin.component';
+import { PersonaShowComponent } from '@component/persona-show/persona-show/persona-show.component';
+import { PersonaTableComponent } from '@component/persona-show/persona-table/persona-table.component';
+import { PersonaFieldsetComponent } from '@component/persona-admin/persona-fieldset/persona-fieldset.component';
+import { ComisionTableComponent } from '@component/comision-show/comision-table/comision-table.component';
+import { ComisionSearchComponent } from '@component/comision-show/comision-search/comision-search.component';
+import { ComisionSearchParamsComponent } from '@component/comision-show/comision-search-params/comision-search-params.component';
+import { PersonaSearchComponent } from '@component/persona-show/persona-search/persona-search.component';
+import { HorarioFieldsetArrayComponent } from '@component/horario-admin/horario-fieldset-array/horario-fieldset-array.component';
+import { ListaAlumnosComponent } from '@component/lista-alumnos/lista-alumnos.component';
 
 export const APP_DATE_FORMATS = {
   parse: {
@@ -161,6 +177,8 @@ export const APP_DATE_FORMATS = {
     TomaAdminComponent, TomaFieldsetArrayComponent,
     TomaPosesionAdminComponent, TomaPosesionFieldsetComponent,
     TomaPosesionRealizadaComponent,
+
+    ListaAlumnosComponent,
   ],
   imports: [
     BrowserModule,

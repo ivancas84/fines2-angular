@@ -34,11 +34,13 @@
         <div fxFlex="50%" fxFlex.xs="100%">
             <mat-card *ngFor="let curso of row.cursos">
               <mat-card-content>
-                 <strong>{{curso.asignatura_.nombre}} <mat-icon>add_box</mat-icon></strong>  
+                 <strong>{{curso.asignatura_.nombre}} IGE {{curso.ige}}<a routerLink="/toma-admin" [queryParams]="{'id':curso.id}"><mat-icon>edit</mat-icon></a></strong>  
                 <br><span class="mat-small">&nbsp;{{curso.horario}} - {{curso.horas_catedra}} horas cátedra</span>
                 
                 <mat-list role="list" dense>
-                  <mat-list-item *ngFor="let toma of curso.tomas" role="listitem"><span *ngIf="toma.docente">{{toma.docente_.nombres}} {{toma.docente_.apellidos}}</span>&nbsp;{{toma.fecha_toma | toDate | date:"d/M/y"}}&nbsp;<mat-icon>edit</mat-icon></mat-list-item>
+                  <mat-list-item *ngFor="let toma of curso.tomas" role="listitem" [ngClass]="{'green': toma.estado == 'Aprobada', 'yellow': toma.estado == 'Pendiente'}">
+                    <span *ngIf="toma.docente">{{toma.docente_.nombres}} {{toma.docente_.apellidos}}</span>&nbsp;{{toma.fecha_toma | toDate | date:"d/M/y"}}
+                  </mat-list-item>
                 </mat-list>
               </mat-card-content>
             </mat-card>  

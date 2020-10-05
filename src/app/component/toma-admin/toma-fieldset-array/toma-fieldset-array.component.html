@@ -34,6 +34,7 @@
     
     <div fxLayout="row" fxFlex="10%" fxLayoutGap="10px" fxLayout.xs="column" fxLayoutAlign="center center">
       <button mat-mini-fab color="warn" (click)="remove(i)" type="button"><mat-icon>delete</mat-icon></button>
+      <button mat-mini-fab  (click)="enviarEmail(i)" type="button"><mat-icon>email</mat-icon></button>
     </div>
 
     </div> <!--div fxLayout="row" *ngIf="!_delete(i).value"-->

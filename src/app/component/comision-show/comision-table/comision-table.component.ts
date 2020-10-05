@@ -13,6 +13,13 @@ import { DataToolsService } from '@service/data-tools.service';
   }
   .mat-card-content { overflow-x: auto; }
   .mat-table.mat-table { min-width: 700px; }
+    .green {
+      background-color: #9dff9d;
+    }
+    
+    .yellow {
+      background-color: #ffff9d;
+    }
   `],
 })
 export class ComisionTableComponent extends TableComponent { 

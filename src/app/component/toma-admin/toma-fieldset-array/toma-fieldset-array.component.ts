@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { FieldsetArrayFkComponent } from '@component/fieldset-array-fk/fieldset-array-fk.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-toma-fieldset-array',
@@ -25,7 +26,8 @@ export class TomaFieldsetArrayComponent extends FieldsetArrayFkComponent {
     protected validators: ValidatorsService,
     protected router: Router, 
     protected storage: SessionStorageService,
-    protected dialog: MatDialog
+    protected dialog: MatDialog,
+    protected snackBar: MatSnackBar,
   ) {
     super(router, storage, dd, dialog);
   }
@@ -73,5 +75,17 @@ export class TomaFieldsetArrayComponent extends FieldsetArrayFkComponent {
   reemplazo(index: number) { return this.fieldset.at(index).get('reemplazo')}
   planillaDocente(index: number) { return this.fieldset.at(index).get('planilla_docente')}
   _delete(index: number) { return this.fieldset.at(index).get('_delete')}
+
+  enviarEmail(index){
+    if(!this.id(index).value) return;
+    this.dd.post("base", "email_confirmacion", this.id(index).value).subscribe(
+      response => {
+        if(response){
+          this.snackBar.open("Email de confirmación enviado", "X"); 
+        }
+        
+      }
+    )
+  }
 
 }

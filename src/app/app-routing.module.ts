@@ -13,6 +13,7 @@ import { CdComisionShowComponent } from '@component/consolidado-docente/consolid
 import { TomaPosesionAdminComponent } from '@component/toma-posesion/toma-posesion-admin/toma-posesion-admin.component';
 import { RabcPersonaAdminComponent } from '@component/registro-abc/persona-admin/persona-admin.component';
 import { TomaPosesionRealizadaComponent } from '@component/toma-posesion-realizada/toma-posesion-realizada.component';
+import { ListaAlumnosComponent } from '@component/lista-alumnos/lista-alumnos.component';
 
 const routes: Routes = [
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'toma-posesion', component: TomaPosesionAdminComponent, pathMatch: 'full' },
   { path: 'registro-abc', component: RabcPersonaAdminComponent, pathMatch: 'full' },
   { path: 'toma-posesion-realizada', component: TomaPosesionRealizadaComponent, pathMatch: 'full' },
+  { path: 'lista-alumnos', component: ListaAlumnosComponent, pathMatch: 'full' },
 
 ];
 
