@@ -6,18 +6,18 @@ import { Router } from '@angular/router';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { mergeMap } from 'rxjs/operators';
 import { Display } from '@class/display';
-import { FieldsetArrayFkComponent } from '@component/fieldset-array-fk/fieldset-array-fk.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { FieldsetArrayIdComponent } from '@component/fieldset-array-id/fieldset-array-id.component';
 
 @Component({
   selector: 'app-curso-fieldset-array',
   templateUrl: './curso-fieldset-array.component.html',
 })
-export class CursoFieldsetArrayComponent extends FieldsetArrayFkComponent {
+export class CursoFieldsetArrayComponent extends FieldsetArrayIdComponent {
 
   readonly entityName: string = 'curso';
-  readonly fkName: string = 'comision';
+  readonly idName: string = 'comision';
 
   readonly defaultValues: {[key:string]: any} = {alta: new Date()}
 
@@ -67,7 +67,7 @@ export class CursoFieldsetArrayComponent extends FieldsetArrayFkComponent {
       mergeMap(
         response => {
           var display = new Display();
-          display.addParam(this.fkName,response);
+          display.addParam(this.idName,response);
           display.setOrder({asi_nombre:"asc"});
           return this.dd.all(this.entityName, display);
         }

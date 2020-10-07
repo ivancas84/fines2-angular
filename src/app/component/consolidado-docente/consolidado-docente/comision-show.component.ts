@@ -10,7 +10,7 @@ export class CdComisionShowComponent extends ShowComponent {
 
   readonly entityName: string = "comision";
 
-  initDisplay(params: { [x: string]: any; }) {
+  initDisplay() {
     this.display = new Display();
     this.display.setSize(100);
     this.display.addParam("cal_anio", "2020");

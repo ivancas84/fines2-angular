@@ -4,18 +4,18 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
 import { ValidatorsService } from '@service/validators/validators.service';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@service/storage/session-storage.service';
-import { FieldsetArrayFkComponent } from '@component/fieldset-array-fk/fieldset-array-fk.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FieldsetArrayIdComponent } from '@component/fieldset-array-id/fieldset-array-id.component';
 
 @Component({
   selector: 'app-toma-fieldset-array',
   templateUrl: './toma-fieldset-array.component.html',
 })
-export class TomaFieldsetArrayComponent extends FieldsetArrayFkComponent {
+export class TomaFieldsetArrayComponent extends FieldsetArrayIdComponent {
 
   readonly entityName: string = 'toma';
-  readonly fkName: string = 'curso';
+  readonly idName: string = 'curso';
 
 
   readonly defaultValues: {[key:string]: any} = {fecha_toma: new Date(), estado: "Aprobada", estado_contralor: "Pasar", tipo_movimiento: "AI", alta: new Date()}

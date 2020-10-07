@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Toma <app-curso-short-label *ngIf="fkValue" [id]="fkValue" [entityName]="fkName"></app-curso-short-label></mat-card-title>
+    <mat-card-title>Toma <app-curso-short-label *ngIf="idValue" [id]="idValue" [entityName]="idName"></app-curso-short-label></mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <div *ngFor="let row of fieldset.controls; let i=index" [formGroup]="fg(i)">

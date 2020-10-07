@@ -1,8 +1,12 @@
-<mat-card class="example-card">
+<mat-card *ngIf="load$ | async" class="example-card">
   <mat-card-header>
-    <mat-card-title>Lista de Alumnos</mat-card-title>
+    <mat-card-title>Lista de Alumnos IGE {{data$.value.curso_.ige}}</mat-card-title>
   </mat-card-header>
-  <mat-card-content>
-    <p>Estimado/a docente, las listas de alumnos estarán disponibles para su descarga a partir del lunes 2/10.</p>    
+  <mat-card-content >
+    <p>A través del siguiente enlace, podrá descargar la lista de alumnos.</p>
+    <p>Las listas de alumnos se encuentran en proceso de construcción, pueden faltar medios de contacto con los alumnos.</p>
+    <p>En breve, le facilitaremos el contacto del referente que le ayudará a ir incorporando los datos faltantes.</p>      
+    <p>Haga clic en el siguiente enlace para descargar la lista de alumnos {{data$.value.curso_.comision_.identificacion}}</p>
+    <p><a mat-raised-button href="http://planfines2.com.ar/alumnos/?id_comision={{data$.value.curso_.comision_.identificacion}}" target="_blank">DESCARGAR</a></p>
   </mat-card-content>
 </mat-card>

@@ -8,14 +8,14 @@ import { SessionStorageService } from '@service/storage/session-storage.service'
 import { Display } from '@class/display';
 import { mergeMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { FieldsetArrayFkComponent } from '@component/fieldset-array-fk/fieldset-array-fk.component';
 import { MatDialog } from '@angular/material/dialog';
+import { FieldsetArrayIdComponent } from '@component/fieldset-array-id/fieldset-array-id.component';
 
 @Component({
   selector: 'app-horario-fieldset-array',
   templateUrl: './horario-fieldset-array.component.html',
 })
-export class HorarioFieldsetArrayComponent extends FieldsetArrayFkComponent {
+export class HorarioFieldsetArrayComponent extends FieldsetArrayIdComponent {
 
   readonly entityName: string = 'horario';
 
