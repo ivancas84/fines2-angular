@@ -33,7 +33,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
-import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -65,8 +64,6 @@ import { InputSearchGoComponent } from '@component/input-search-go/input-search-
 import { InputTextComponent } from '@component/input-text/input-text.component';
 import { InputTextareaComponent } from '@component/input-textarea/input-textarea.component';
 import { InputTimepickerComponent } from '@component/input-timepicker/input-timepicker.component';
-
-//import { InputYmComponent } from '@component/input-ym/input-ym.component';
 import { InputYearComponent } from '@component/input-year/input-year.component';
 import { MenuComponent } from '@component/menu/menu.component';
 import { SearchAllComponent } from '@component/search-all/search-all.component';
@@ -114,6 +111,8 @@ import { ComisionSearchParamsComponent } from '@component/comision-show/comision
 import { PersonaSearchComponent } from '@component/persona-show/persona-search/persona-search.component';
 import { HorarioFieldsetArrayComponent } from '@component/horario-admin/horario-fieldset-array/horario-fieldset-array.component';
 import { ListaAlumnosComponent } from '@component/lista-alumnos/lista-alumnos.component';
+import { CrComisionShowComponent } from '@component/consolidado-referente/comision-show/comision-show.component';
+import { CrComisionTableComponent } from '@component/consolidado-referente/comision-table/comision-table.component';
 
 export const APP_DATE_FORMATS = {
   parse: {
@@ -177,6 +176,7 @@ export const APP_DATE_FORMATS = {
     TomaAdminComponent, TomaFieldsetArrayComponent,
     TomaPosesionAdminComponent, TomaPosesionFieldsetComponent,
     TomaPosesionRealizadaComponent,
+    CrComisionShowComponent, CrComisionTableComponent,
 
     ListaAlumnosComponent,
   ],

@@ -4,6 +4,7 @@ import { SessionStorageService } from '../core/service/storage/session-storage.s
 import { ParserService } from '../core/service/parser/parser.service';
 import { DataDefinition } from '../core/class/data-definition';
 
+import { AsignacionPlanillaDocenteDataDefinition } from '../class/data-definition/asignacion-planilla-docente-data-definition';
 import { AsignaturaDataDefinition } from '../class/data-definition/asignatura-data-definition';
 import { CalendarioDataDefinition } from '../class/data-definition/calendario-data-definition';
 import { CargoDataDefinition } from '../class/data-definition/cargo-data-definition';
@@ -38,6 +39,7 @@ export class DataDefinitionLoaderService {
 
   get(name: string): DataDefinition {
     switch(name) {
+      case "asignacion_planilla_docente": { return new AsignacionPlanillaDocenteDataDefinition(this.stg, this.parser); }
       case "asignatura": { return new AsignaturaDataDefinition(this.stg, this.parser); }
       case "calendario": { return new CalendarioDataDefinition(this.stg, this.parser); }
       case "cargo": { return new CargoDataDefinition(this.stg, this.parser); }

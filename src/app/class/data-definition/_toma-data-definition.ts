@@ -202,11 +202,6 @@ export class _TomaDataDefinition extends DataDefinition {
       this.stg.setItem('persona' + rowCloned['reemplazo_'].id, rowCloned['reemplazo_']);
       delete rowCloned['reemplazo_'];
     }
-    if(('planilla_docente_' in rowCloned)
-    ){
-      this.stg.setItem('planilla_docente' + rowCloned['planilla_docente_'].id, rowCloned['planilla_docente_']);
-      delete rowCloned['planilla_docente_'];
-    }
     this.stg.setItem("toma" + rowCloned.id, rowCloned);
   }
 
