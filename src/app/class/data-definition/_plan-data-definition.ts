@@ -12,15 +12,4 @@ export class _PlanDataDefinition extends DataDefinition {
     this.stg.setItem("plan" + rowCloned.id, rowCloned);
   }
 
-  label (id: string | number): string {
-    var row = this.stg.getItem(this.entity + id);
-    if(!row) return null;
-
-    let ret = "";
-    if (row["orientacion"]) ret = ret.trim() + " " + row["orientacion"];
-
-    if (row["distribucion_horaria"]) ret = ret.trim() + " " + row["distribucion_horaria"];
-
-    return ret.trim();
-  }
 }
