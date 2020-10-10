@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { FieldsetComponent } from '@component/fieldset/fieldset.component';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { ValidatorsService } from '@service/validators/validators.service';
-import { Observable } from 'rxjs';
-import { Display } from '@class/display';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@service/storage/session-storage.service';
+import { FieldsetComponent } from '@component/fieldset/fieldset.component';
 
 @Component({
   selector: 'app-persona-fieldset',
@@ -14,7 +12,7 @@ import { SessionStorageService } from '@service/storage/session-storage.service'
 })
 export class PersonaFieldsetComponent extends FieldsetComponent {
 
-  readonly entityName: string = 'persona';
+readonly entityName: string = 'persona';
 
   readonly defaultValues: {[key:string]: any} = {alta: new Date()}
 
@@ -53,6 +51,9 @@ export class PersonaFieldsetComponent extends FieldsetComponent {
       }],
       email: [null, {
       }],
+      email_abc: [null, {
+        asyncValidators: [this.validators.unique('email_abc', 'persona')],
+      }],
       domicilio: [null, {
       }],
     });
@@ -69,6 +70,7 @@ export class PersonaFieldsetComponent extends FieldsetComponent {
   get apodo() { return this.fieldset.get('apodo')}
   get telefono() { return this.fieldset.get('telefono')}
   get email() { return this.fieldset.get('email')}
+  get emailAbc() { return this.fieldset.get('email_abc')}
   get alta() { return this.fieldset.get('alta')}
   get domicilio() { return this.fieldset.get('domicilio')}
 

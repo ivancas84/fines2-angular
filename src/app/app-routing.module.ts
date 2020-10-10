@@ -15,24 +15,25 @@ import { RabcPersonaAdminComponent } from '@component/registro-abc/persona-admin
 import { TomaPosesionRealizadaComponent } from '@component/toma-posesion-realizada/toma-posesion-realizada.component';
 import { ListaAlumnosComponent } from '@component/lista-alumnos/lista-alumnos.component';
 import { CrComisionShowComponent } from '@component/consolidado-referente/comision-show/comision-show.component';
+import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/persona-admin.component';
 
 const routes: Routes = [
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
   { path: 'comision-show', component: ComisionShowComponent, pathMatch: 'full' },
-  { path: 'curso-admin', component: CursoAdminComponent, pathMatch: 'full' },
-  { path: 'persona-show', component: PersonaShowComponent, pathMatch: 'full' },
-  { path: 'registro-docente', component: RdPersonaAdminComponent, pathMatch: 'full' },
   { path: 'comision-horarios-admin', component: ComisionHorariosAdminComponent, pathMatch: 'full' },
-  { path: 'horario-admin', component: HorarioAdminComponent, pathMatch: 'full' },
-  { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
-  { path: 'toma-admin', component: TomaAdminComponent, pathMatch: 'full' },
   { path: 'consolidado-docente', component: CdComisionShowComponent, pathMatch: 'full' },
   { path: 'consolidado-referente', component: CrComisionShowComponent, pathMatch: 'full' },
-  { path: 'toma-posesion', component: TomaPosesionAdminComponent, pathMatch: 'full' },
-  { path: 'registro-abc', component: RabcPersonaAdminComponent, pathMatch: 'full' },
-  { path: 'toma-posesion-realizada', component: TomaPosesionRealizadaComponent, pathMatch: 'full' },
+  { path: 'curso-admin', component: CursoAdminComponent, pathMatch: 'full' },
+  { path: 'horario-admin', component: HorarioAdminComponent, pathMatch: 'full' },
   { path: 'lista-alumnos', component: ListaAlumnosComponent, pathMatch: 'full' },
-
+  { path: 'persona-admin', component: PersonaAdminComponent, pathMatch: 'full' },
+  { path: 'persona-show', component: PersonaShowComponent, pathMatch: 'full' },
+  { path: 'registro-docente', component: RdPersonaAdminComponent, pathMatch: 'full' },
+  { path: 'registro-abc', component: RabcPersonaAdminComponent, pathMatch: 'full' },
+  { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
+  { path: 'toma-admin', component: TomaAdminComponent, pathMatch: 'full' },
+  { path: 'toma-posesion', component: TomaPosesionAdminComponent, pathMatch: 'full' },
+  { path: 'toma-posesion-realizada', component: TomaPosesionRealizadaComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

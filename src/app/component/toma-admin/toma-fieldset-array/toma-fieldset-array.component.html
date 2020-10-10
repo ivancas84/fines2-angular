@@ -11,7 +11,7 @@
 
     <div fxLayout="row" fxFlex="100%" fxLayout.lt-md="column" fxLayoutGap="10px">
       <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
-        <core-input-autocomplete [field]="docente(i)" [entityName]="'persona'" [title]="'Docente'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-autocomplete>
+        <core-input-autocomplete [adminRoute]="'persona-admin'" [field]="docente(i)" [entityName]="'persona'" [title]="'Docente'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-autocomplete>
         <core-input-date [field]="fechaToma(i)" [title]="'Fecha Toma'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-date>      
       </div>      
       <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
