@@ -12,31 +12,31 @@ export class DataDefinitionStorageService {
 
   storage(entityName: string, row: { [index: string]: any }): void {
     switch(entityName) {
-      case "asignacion_planilla_docente": { this.storageAsignacionPlanillaDocente(row); }
-      case "asignatura": { this.storageAsignatura(row); }
-      case "calendario": { this.storageCalendario(row); }
-      case "cargo": { this.storageCargo(row); }
-      case "centro_educativo": { this.storageCentroEducativo(row); }
-      case "comision": { this.storageComision(row); }
-      case "contralor": { this.storageContralor(row); }
-      case "curso": { this.storageCurso(row); }
-      case "designacion": { this.storageDesignacion(row); }
-      case "detalle_persona": { this.storageDetallePersona(row); }
-      case "dia": { this.storageDia(row); }
-      case "distribucion_horaria": { this.storageDistribucionHoraria(row); }
-      case "domicilio": { this.storageDomicilio(row); }
-      case "email": { this.storageEmail(row); }
-      case "file": { this.storageFile(row); }
-      case "horario": { this.storageHorario(row); }
-      case "modalidad": { this.storageModalidad(row); }
-      case "persona": { this.storagePersona(row); }
-      case "plan": { this.storagePlan(row); }
-      case "planificacion": { this.storagePlanificacion(row); }
-      case "planilla_docente": { this.storagePlanillaDocente(row); }
-      case "sede": { this.storageSede(row); }
-      case "telefono": { this.storageTelefono(row); }
-      case "tipo_sede": { this.storageTipoSede(row); }
-      case "toma": { this.storageToma(row); }
+      case "asignacion_planilla_docente": this.storageAsignacionPlanillaDocente(row); break;
+      case "asignatura": this.storageAsignatura(row); break;
+      case "calendario": this.storageCalendario(row); break;
+      case "cargo": this.storageCargo(row); break;
+      case "centro_educativo": this.storageCentroEducativo(row); break;
+      case "comision": this.storageComision(row); break;
+      case "contralor": this.storageContralor(row); break;
+      case "curso": this.storageCurso(row); break;
+      case "designacion": this.storageDesignacion(row); break;
+      case "detalle_persona": this.storageDetallePersona(row); break;
+      case "dia": this.storageDia(row); break;
+      case "distribucion_horaria": this.storageDistribucionHoraria(row); break;
+      case "domicilio": this.storageDomicilio(row); break;
+      case "email": this.storageEmail(row); break;
+      case "file": this.storageFile(row); break;
+      case "horario": this.storageHorario(row); break;
+      case "modalidad": this.storageModalidad(row); break;
+      case "persona": this.storagePersona(row); break;
+      case "plan": this.storagePlan(row); break;
+      case "planificacion": this.storagePlanificacion(row); break;
+      case "planilla_docente": this.storagePlanillaDocente(row); break;
+      case "sede": this.storageSede(row); break;
+      case "telefono": this.storageTelefono(row); break;
+      case "tipo_sede": this.storageTipoSede(row); break;
+      case "toma": this.storageToma(row); break;
     }
   }
   storageAsignacionPlanillaDocente(row: { [index: string]: any }): void{

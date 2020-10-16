@@ -286,13 +286,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("asignacion_planilla_docente", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelAsignacionPlanillaDocenteRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -301,13 +302,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("asignatura", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelAsignaturaRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -316,13 +318,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("calendario", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelCalendarioRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -331,13 +334,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("cargo", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelCargoRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -346,13 +350,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("centro_educativo", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelCentroEducativoRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -361,6 +366,7 @@ export class _DataDefinitionLabelService {
     return this.dd.get("comision", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelComisionRow(row)),
             this.labelSede(row.sede),
@@ -370,7 +376,7 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -379,13 +385,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("contralor", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelContralorRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -394,6 +401,7 @@ export class _DataDefinitionLabelService {
     return this.dd.get("curso", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelCursoRow(row)),
             this.labelComision(row.comision),
@@ -402,7 +410,7 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -411,13 +419,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("designacion", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelDesignacionRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -426,13 +435,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("detalle_persona", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelDetallePersonaRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -441,13 +451,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("dia", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelDiaRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -456,13 +467,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("distribucion_horaria", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelDistribucionHorariaRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -471,13 +483,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("domicilio", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelDomicilioRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -486,13 +499,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("email", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelEmailRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -501,13 +515,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("file", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelFileRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -516,13 +531,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("horario", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelHorarioRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -531,13 +547,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("modalidad", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelModalidadRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -546,13 +563,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("persona", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelPersonaRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -561,13 +579,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("plan", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelPlanRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -576,6 +595,7 @@ export class _DataDefinitionLabelService {
     return this.dd.get("planificacion", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelPlanificacionRow(row)),
             this.labelPlan(row.plan),
@@ -583,7 +603,7 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -592,13 +612,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("planilla_docente", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelPlanillaDocenteRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -607,13 +628,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("sede", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelSedeRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -622,13 +644,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("telefono", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelTelefonoRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -637,13 +660,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("tipo_sede", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelTipoSedeRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }
@@ -652,13 +676,14 @@ export class _DataDefinitionLabelService {
     return this.dd.get("toma", id).pipe(
       switchMap(
         row => {
+          if(!row) return of(null);
           return combineLatest([
             of(this.labelTomaRow(row)),
           ])
         }
       ),
       map(
-        response => response.join(" ")
+        response => { return (!response)? null : response.join(" "); }
       )
     );
   }

@@ -67,6 +67,10 @@ import { InputYearComponent } from '@component/input-year/input-year.component';
 import { MenuComponent } from '@component/menu/menu.component';
 import { SearchAllComponent } from '@component/search-all/search-all.component';
 import { LabelComponent } from '@component/label/label.component';
+import { FieldLabelComponent } from '@component/field-label/field-label.component';
+import { FieldTreeLabelComponent } from '@component/field-tree-label/field-tree-label.component';
+
+
 
 import { CalendarioInputSelectComponent } from '@component/reusable/calendario-input-select/calendario-input-select.component';
 import { CalendarioLabelComponent } from '@component/reusable/calendario-label/calendario-label.component';
@@ -153,6 +157,8 @@ export const APP_DATE_FORMATS = {
     MenuComponent,
     SearchAllComponent,
     LabelComponent,
+    FieldLabelComponent,
+    FieldTreeLabelComponent,
     //DynamicTableComponent,
 
     CalendarioLabelComponent, CalendarioInputSelectComponent, PlanificacionInputPickerComponent,
