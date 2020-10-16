@@ -39,17 +39,16 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
-import { ParserService } from '@service/parser/parser.service';
 import { ValidatorsService } from '@service/validators/validators.service';
 
-import { LabelPipe } from '@pipe/label.pipe';
 import { ToDatePipe } from '@pipe/to-date.pipe';
 import { ToTimePipe } from '@pipe/to-time.pipe';
 import { SiNoPipe } from '@pipe/si-no.pipe';
 import { StoragePipe } from '@pipe/storage.pipe';
 import { SummaryPipe } from '@pipe/summary.pipe';
 
-import { DataDefinitionLoaderService } from '@service/data-definition-loader.service';
+import { DataDefinitionStorageService } from '@service/data-definition-storage.service';
+import { DataDefinitionLabelService } from '@service/data-definition-label/data-definition-label.service';
 
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { DialogConfirmComponent } from '@component/dialog-confirm/dialog-confirm.component';
@@ -130,7 +129,6 @@ export const APP_DATE_FORMATS = {
   declarations: [
     AppComponent,
 
-    LabelPipe, 
     ToDatePipe, 
     ToTimePipe, 
     SiNoPipe, 
@@ -224,10 +222,11 @@ export const APP_DATE_FORMATS = {
 
     DataDefinitionService, 
     SessionStorageService, 
-    ParserService, 
     ValidatorsService,
     
-    DataDefinitionLoaderService, 
+    DataDefinitionStorageService, 
+    DataDefinitionLabelService, 
+
   ],
   bootstrap: [AppComponent]
 })

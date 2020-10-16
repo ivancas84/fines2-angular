@@ -78,7 +78,7 @@ export class TomaFieldsetArrayComponent extends FieldsetArrayIdComponent {
 
   enviarEmail(index){
     if(!this.id(index).value) return;
-    this.dd.post("base", "email_confirmacion", this.id(index).value).subscribe(
+    this.dd.post("info", "email_confirmacion", {id:this.id(index).value}).subscribe(
       response => {
         if(response){
           this.snackBar.open("Email de confirmación enviado", "X"); 

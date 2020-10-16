@@ -50,7 +50,7 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
           display.addParam("sede",sede)
           display.addField("division");
           display.setOrder({division:"ASC"});
-          return this.dd.advanced("comision", display);
+          return this.dd.post("advanced","comision", display);
         }
       ),
       map(

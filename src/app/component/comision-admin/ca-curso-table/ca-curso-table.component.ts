@@ -107,7 +107,7 @@ export class CaCursoTableComponent extends TableComponent implements OnDestroy {
     var idCursos = arrayColumn(this.dataSource, "id");
     var display = new Display();
     display.addParam("curso",idCursos);
-    var s = this.dd.count("horario", display).subscribe(
+    var s = this.dd.post("count","horario", display).subscribe(
       cantidad => {
         if(cantidad) {
           this.dialog.open(DialogAlertComponent, {

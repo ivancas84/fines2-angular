@@ -11,7 +11,7 @@
       "@function/*":["app/function/*", "app/core/function/*"],
       "@pipe/*":["app/pipe/*", "app/core/pipe/*"],
       "@directive/*":["app/directive/*", "app/core/directive/*"],
-      "@config/*":["app/config/*", "app/core/config/*"]
+      "@config/*":["app/*", "app/core/*"]
     },
     "sourceMap": true,
     "declaration": false,
