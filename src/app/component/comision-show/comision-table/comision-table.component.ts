@@ -13,6 +13,9 @@ import { DataToolsService } from '@service/data-tools.service';
   }
   .mat-card-content { overflow-x: auto; }
   .mat-table.mat-table { min-width: 700px; }
+    .red {
+      background-color: #f2a5a5;
+    }
     .green {
       background-color: #9dff9d;
     }

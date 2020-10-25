@@ -82,7 +82,7 @@ export class CaCursoTableComponent extends TableComponent implements OnDestroy {
 
       dialogRef.afterClosed().subscribe(result => {
         if(result){
-          this.dd.post("persist", "comision_cursos", this.idComision).subscribe(
+          this.dd.post("persist", "comision_cursos", {id:this.idComision}).subscribe(
             () => {
               this.storage.removeItemsContains(".");
               this.initCursos();

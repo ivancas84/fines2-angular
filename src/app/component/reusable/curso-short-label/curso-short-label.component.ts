@@ -19,6 +19,7 @@ export class CursoShortLabelComponent implements OnChanges {
       if(!changes['id'].currentValue) this.row = null;
       else {
         this.dd.get("curso", this.id).pipe(first()).subscribe(
+          
           (row:any) => {
             this.row = row;}
         );

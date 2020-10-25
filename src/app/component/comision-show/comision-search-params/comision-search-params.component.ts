@@ -29,15 +29,13 @@ export class ComisionSearchParamsComponent extends SearchParamsComponent {
       planificacion: null,
       comision_siguiente: null,
       calendario: null,
-      cal_anio: null, 
-      cal_semestre: null,
-      sed_centro_educativo: null,
-      sed_numero_trim: null,
-      pla_anio: null,
-      pla_semestre: null,
-      pla_plan: null,
-
-
+      "cal-anio": null, 
+      "cal-semestre": null,
+      "sed-centro_educativo": null,
+      "sed-numero_trim": null,
+      "pla-anio": null,
+      "pla-semestre": null,
+      "pla-plan": null,
     });
     return fg;
   }
@@ -55,12 +53,12 @@ export class ComisionSearchParamsComponent extends SearchParamsComponent {
   get planificacion() { return this.fieldset.get('planificacion')}
   get comisionSiguiente() { return this.fieldset.get('comision_siguiente')}
   get calendario() { return this.fieldset.get('calendario')}
-  get calAnio() { return this.fieldset.get('cal_anio')}
-  get calSemestre() { return this.fieldset.get('cal_semestre')}
-  get sedCentroEducativo() { return this.fieldset.get('sed_centro_educativo')}
-  get sedNumeroTrim() { return this.fieldset.get('sed_numero_trim')}
-  get plaAnio() { return this.fieldset.get('pla_anio')}
-  get plaSemestre() { return this.fieldset.get('pla_semestre')}
-  get plaPlan() { return this.fieldset.get('pla_plan')}
+  get calAnio() { return this.fieldset.get('cal-anio')}
+  get calSemestre() { return this.fieldset.get('cal-semestre')}
+  get sedCentroEducativo() { return this.fieldset.get('sed-centro_educativo')}
+  get sedNumeroTrim() { return this.fieldset.get('sed-numero_trim')}
+  get plaAnio() { return this.fieldset.get('pla-anio')}
+  get plaSemestre() { return this.fieldset.get('pla-semestre')}
+  get plaPlan() { return this.fieldset.get('pla-plan')}
 
 }

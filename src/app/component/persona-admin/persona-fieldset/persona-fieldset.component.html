@@ -10,12 +10,12 @@
       </div>
       <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
         <core-input-date [field]="fechaNacimiento" [title]="'Fecha Nacimiento'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-date>
-        <core-input-text [field]="numeroDocumento" [title]="'Numero Documento'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-text>
+        <core-input-text [field]="numeroDocumento" [title]="'Numero Documento'" [uniqueRoute]="'persona-admin'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-text>
       </div>
     </div>  
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
       <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
-        <core-input-text [field]="cuil" [title]="'Cuil'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-text>
+        <core-input-text [field]="cuil" [title]="'Cuil'" [uniqueRoute]="'persona-admin'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-text>
         <core-input-select-param [field]="genero" [options]="['Femenino','Masculino','Otro']" [title]="'Genero'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-select-param>
       </div>
       <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">

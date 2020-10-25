@@ -19,7 +19,7 @@ export class HorarioFieldsetArrayComponent extends FieldsetArrayIdComponent {
 
   readonly entityName: string = 'horario';
 
-  readonly fkName: string = 'cur_comision';
+  readonly idName: string = 'cur-comision';
 
   idComision: string;
   /** 
@@ -72,8 +72,8 @@ export class HorarioFieldsetArrayComponent extends FieldsetArrayIdComponent {
         response => {
           this.idComision = response;
           var display = new Display();
-          display.addParam("cur_comision",response);
-          display.setOrder({dia_numero:"asc",hora_inicio:"asc"});
+          display.addParam("cur-comision",response);
+          display.setOrder({"dia-numero":"asc",hora_inicio:"asc"});
           return this.dd.all(this.entityName, display);
         }
       )

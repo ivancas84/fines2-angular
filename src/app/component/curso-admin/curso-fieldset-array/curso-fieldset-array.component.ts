@@ -68,7 +68,7 @@ export class CursoFieldsetArrayComponent extends FieldsetArrayIdComponent {
         response => {
           var display = new Display();
           display.addParam(this.idName,response);
-          display.setOrder({asi_nombre:"asc"});
+          display.setOrder({"asi-nombre":"asc"});
           return this.dd.all(this.entityName, display);
         }
       )

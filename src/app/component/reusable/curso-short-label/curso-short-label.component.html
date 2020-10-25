@@ -1,1 +1,1 @@
-<core-label *ngIf="row" [entityName]="'asignatura'" [id]="row.asignatura">({{row.horas_catedra}})</core-label>
+<span *ngIf="row"><core-label *ngIf="row" [entityName]="'asignatura'" [id]="row.asignatura"></core-label> ({{row.horas_catedra}})</span>

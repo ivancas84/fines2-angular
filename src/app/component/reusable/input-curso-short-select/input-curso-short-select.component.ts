@@ -17,7 +17,7 @@ export class InputCursoShortSelectComponent extends InputSelectComponent {
     if(!this.title) this.title = this.entityName;
     var display = new Display();
     display.addParam("comision", this.id);
-    display.setOrder({asi_nombre:"ASC"});
+    display.setOrder({"asi-nombre":"ASC"});
     this.options$ = this.dd.all(this.entityName, display);
   }
 

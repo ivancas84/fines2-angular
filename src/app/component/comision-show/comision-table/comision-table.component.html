@@ -39,7 +39,7 @@
                 <br><span class="mat-small">&nbsp;{{curso.horario}} - {{curso.horas_catedra}} horas cátedra</span>
                 
                 <mat-list role="list" dense>
-                  <mat-list-item *ngFor="let toma of curso.tomas" role="listitem" [ngClass]="{'green': toma.estado == 'Aprobada', 'yellow': toma.estado == 'Pendiente'}">
+                  <mat-list-item *ngFor="let toma of curso.tomas" role="listitem" [ngClass]="{'green': toma.estado == 'Aprobada', 'yellow': toma.estado == 'Pendiente', 'red':toma.estado == 'Renuncia'}">
                     <span *ngIf="toma.docente">
                       <core-field-label [entityName]="'persona'" [fieldNames]="['nombres','apellidos']" [id]="toma.docente"></core-field-label></span>&nbsp;{{toma.fecha_toma | toDate | date:"d/M/y"}}
                   </mat-list-item>
