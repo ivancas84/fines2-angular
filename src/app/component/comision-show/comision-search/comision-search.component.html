@@ -5,7 +5,7 @@
     </mat-expansion-panel-header>
     <form [formGroup]="searchForm" novalidate (ngSubmit)="onSubmit()">       
       <!--core-search-all [form]="searchForm" [display$]="display$"></core-search-all-->
-      <app-comision-search-params [form]="searchForm" [display$]="display$"></app-comision-search-params>
+      <app-comision-search-params [form]="searchForm" [display]="display"></app-comision-search-params>
       <!--app-comision-search-condition [form]="searchForm" [display$]="display$"></app-comision-search-condition-->
       <!--app-comision-search-order [form]="searchForm" [display$]="display$"></app-comision-search-order-->
       <button mat-raised-button color="primary" type="submit">Buscar</button>&nbsp;

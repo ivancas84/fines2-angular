@@ -51,7 +51,7 @@
       <mat-divider></mat-divider>
     </div>
 
-    <mat-paginator *ngIf="display"
+    <mat-paginator *ngIf="display && length"
                    [length]="length"
                    [pageSize]="display.size"
                    [pageIndex]="display.page-1"
