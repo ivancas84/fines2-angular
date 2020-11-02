@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatTimepickerModule } from 'mat-timepicker';
+import { CookieService } from 'ngx-cookie-service';
 
 //import { ClipboardModule } from '@angular/cdk/clipboard';
 
@@ -221,11 +222,12 @@ export const APP_DATE_FORMATS = {
     MaterialFileInputModule,
     MatTimepickerModule
   ],
-  providers: [
+  providers: [    
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000, verticalPosition:"top", horizontalPosition:"right"}},
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
-
+    CookieService,
+    
     DataDefinitionService, 
     SessionStorageService, 
     ValidatorsService,

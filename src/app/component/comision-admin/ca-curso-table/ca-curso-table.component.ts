@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { OnInit, OnChanges, Component, OnDestroy, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Display } from '@class/display';
@@ -6,11 +6,12 @@ import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.compo
 import { DialogConfirmComponent } from '@component/dialog-confirm/dialog-confirm.component';
 import { TableComponent } from '@component/table/table.component';
 import { arrayColumn } from '@function/array-column';
+import { isEmptyObject } from '@function/is-empty-object.function';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { DataToolsService } from '@service/data-tools.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
-import { first, map, mergeMap, tap } from 'rxjs/operators';
+import { first, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ca-curso-table',
@@ -20,12 +21,14 @@ import { first, map, mergeMap, tap } from 'rxjs/operators';
   .mat-table.mat-table { min-width: 700px; }
   `],
 })
-export class CaCursoTableComponent extends TableComponent implements OnDestroy { 
-  displayedColumns: string[] = ['asignatura', 'horas_catedra', 'horario', 'docentes'];
+export class CaCursoTableComponent extends TableComponent implements OnInit, OnChanges, OnDestroy { 
+  load$: Observable<any>;
+  load: boolean;
+  data$: BehaviorSubject<any> = new BehaviorSubject(null);
+  dataSource: any;
 
+  displayedColumns: string[] = ['asignatura', 'horas_catedra', 'horario', 'docentes'];
   idComision: string;
-  
-  cursos$: BehaviorSubject<{ [index: string]: any }[]> = new BehaviorSubject([]);
 
   protected subscriptions = new Subscription();
 
@@ -39,36 +42,44 @@ export class CaCursoTableComponent extends TableComponent implements OnDestroy {
     super(router);
   }
 
-  ngOnInit(): void {
-    this.load$ = this.cursos$.pipe(
-      map(cursos => {
-        this.dataSource = cursos;
-        return true;
-      })
-    );
-   
-    var s = this.data$.subscribe(
-      comision => {
-        this.idComision = (comision && comision.id) ? comision.id : null
-        this.initCursos();
-    })
-    this.subscriptions.add(s);
+  ngOnChanges(changes: SimpleChanges): void {
+    if( changes['data'] && changes['data'].previousValue != changes['data'].currentValue ) {    
+        this.data$.next(changes['data'].currentValue);
+    }
   }
-
-
-  initCursos(){
-    let display: Display = new Display();
-    display.addParam("comision",this.idComision);
-
-    this.dd.all("curso", display).pipe(
-      mergeMap(cursos => { return this.dt.asignarTomasACursos(cursos); } ),
-      mergeMap( cursos => { return this.dt.asignarHorariosACursos(cursos); } ),
-      first(),
-    ).subscribe(
-      cursos => this.cursos$.next(cursos)
+  
+  ngOnInit(): void {
+    this.load$ = this.data$.pipe(
+      tap(
+        comision => {
+          this.load = false;
+          this.idComision = (comision && comision.id) ? comision.id : null
+          this.initCursos();
+        }
+      ),  
+      switchMap(
+        () => {return this.initCursos();}
+      ),
+      map(
+        data => {
+          this.dataSource = data;
+          this.load = true;
+          return true;
+        }
+      )
     )
   }
 
+  initCursos(): Observable<any>{
+    if(!this.idComision) return of([]);
+    let display: Display = new Display();
+    display.addParam("comision",this.idComision);
+
+    return this.dd.all("curso", display).pipe(
+      mergeMap(cursos => { return this.dt.asignarTomasACursos(cursos); } ),
+      mergeMap( cursos => { return this.dt.asignarHorariosACursos(cursos); } ),   
+    )
+  }
 
   agregarCursos(){
     if(this.dataSource.length) { 
@@ -80,7 +91,7 @@ export class CaCursoTableComponent extends TableComponent implements OnDestroy {
         data: {title: "Agregar Cursos", message: "Está seguro?"}
       });
 
-      dialogRef.afterClosed().subscribe(result => {
+      var s = dialogRef.afterClosed().subscribe(result => {
         if(result){
           this.dd.post("persist", "comision_cursos", {id:this.idComision}).subscribe(
             () => {
@@ -93,6 +104,8 @@ export class CaCursoTableComponent extends TableComponent implements OnDestroy {
           );
         }
       });
+
+      this.subscriptions.add(s);
     }
   }
 
@@ -119,7 +132,6 @@ export class CaCursoTableComponent extends TableComponent implements OnDestroy {
       }
     )
   }
-
 
   existenTomas(){
     for(var i = 0; i < this.dataSource.length; i++){
@@ -160,6 +172,5 @@ export class CaCursoTableComponent extends TableComponent implements OnDestroy {
   }
 
   ngOnDestroy () { this.subscriptions.unsubscribe() }
-
 
 }

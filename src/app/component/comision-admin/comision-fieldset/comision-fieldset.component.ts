@@ -64,7 +64,6 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
     this.subscriptions.add(s)
   }
 
-
   formGroup(): FormGroup {
     let fg: FormGroup = this.fb.group({
       id:null,
@@ -101,20 +100,19 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
     return fg;
   }
 
-  get id() { return this.fieldset.get('id')}
-  get turno() { return this.fieldset.get('turno')}
-  get division() { return this.fieldset.get('division')}
-  get comentario() { return this.fieldset.get('comentario')}
-  get autorizada() { return this.fieldset.get('autorizada')}
-  get apertura() { return this.fieldset.get('apertura')}
-  get publicada() { return this.fieldset.get('publicada')}
-  get observaciones() { return this.fieldset.get('observaciones')}
-  get sede() { return this.fieldset.get('sede')}
-  get modalidad() { return this.fieldset.get('modalidad')}
-  get planificacion() { return this.fieldset.get('planificacion')}
-  get comisionSiguiente() { return this.fieldset.get('comision_siguiente')}
-  get calendario() { return this.fieldset.get('calendario')}
-  get identificacion() { return this.fieldset.get('identificacion')}
-  
+  get id() { return this.fieldset.controls['id']}
+  get turno() { return this.fieldset.controls['turno']}
+  get division() { return this.fieldset.controls['division']}
+  get comentario() { return this.fieldset.controls['comentario']}
+  get autorizada() { return this.fieldset.controls['autorizada']}
+  get apertura() { return this.fieldset.controls['apertura']}
+  get publicada() { return this.fieldset.controls['publicada']}
+  get observaciones() { return this.fieldset.controls['observaciones']}
+  get sede() { return this.fieldset.controls['sede']}
+  get modalidad() { return this.fieldset.controls['modalidad']}
+  get planificacion() { return this.fieldset.controls['planificacion']}
+  get comisionSiguiente() { return this.fieldset.controls['comision_siguiente']}
+  get calendario() { return this.fieldset.controls['calendario']}
+  get identificacion() { return this.fieldset.controls['identificacion']}
 
 }
