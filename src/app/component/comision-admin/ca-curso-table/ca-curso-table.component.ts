@@ -6,12 +6,11 @@ import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.compo
 import { DialogConfirmComponent } from '@component/dialog-confirm/dialog-confirm.component';
 import { TableComponent } from '@component/table/table.component';
 import { arrayColumn } from '@function/array-column';
-import { isEmptyObject } from '@function/is-empty-object.function';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { DataToolsService } from '@service/data-tools.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
-import { first, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ca-curso-table',
