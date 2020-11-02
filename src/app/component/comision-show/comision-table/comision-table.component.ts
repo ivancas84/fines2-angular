@@ -64,15 +64,4 @@ export class ComisionTableComponent extends TableComponent implements OnChanges 
     )
   }
 
-  initData(){
-    this.load=false;
-    return this.data$.pipe(
-      switchMap(
-        comisiones => {
-          return this.dt.asignarCursosAComisiones(comisiones)
-        }
-      )
-    )
-  }
-
 }
