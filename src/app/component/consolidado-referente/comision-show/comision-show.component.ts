@@ -13,7 +13,6 @@ export class CrComisionShowComponent extends ShowComponent {
 
   initDisplay() {
     this.display = DataToolsService.displayComisionesActuales();
-    this.display$.next(this.display); //@todo reemplazar uso de display$ por display
   }
 
 }
