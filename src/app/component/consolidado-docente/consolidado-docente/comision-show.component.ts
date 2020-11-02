@@ -20,7 +20,6 @@ export class CdComisionShowComponent extends ShowComponent {
     this.display.addParam("autorizada", true);
     this.display.addParam("publicada", true);
     this.display.setOrder({sed_numero:"asc"})
-    this.display$.next(this.display); //@todo reemplazar uso de display$ por display
   }
 
 }

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
 import { TableComponent } from '@component/table/table.component';
-import { mergeMap, map, tap, first, switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { DataToolsService } from '@service/data-tools.service';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-cd-comision-table',
@@ -26,6 +27,10 @@ import { DataToolsService } from '@service/data-tools.service';
 })
 export class CdComisionTableComponent extends TableComponent { 
   displayedColumns: string[] = ['comision', 'detalle'];
+  load$: Observable<any>;
+  load: boolean;
+  data$: BehaviorSubject<any> = new BehaviorSubject(null);
+  dataSource: any;
 
   constructor(
     protected dt: DataToolsService, 
@@ -34,21 +39,28 @@ export class CdComisionTableComponent extends TableComponent {
     super(router);
   }
 
-  initData(){
-    this.load=false;
-    return this.data$.pipe(
+  ngOnChanges(changes: SimpleChanges): void {
+    if( changes['data'] && changes['data'].previousValue != changes['data'].currentValue ) {    
+        this.data$.next(changes['data'].currentValue);
+    }
+  }
+
+  ngOnInit(): void {
+    this.load$ = this.data$.pipe(      
       switchMap(
         comisiones => {
-          return this.dt.asignarCursosAComisionesSinTomas(comisiones)
+          this.load = false;
+          return this.dt.asignarCursosAComisionesSinTomas(comisiones);
+        }
+      ),
+      map(
+        data => {
+          this.dataSource = data;
+          return this.load = true;
         }
       )
     )
   }
-
-    
-
-  
-   
   
 
 }
