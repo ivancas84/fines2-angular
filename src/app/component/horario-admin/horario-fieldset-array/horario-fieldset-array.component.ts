@@ -59,7 +59,7 @@ export class HorarioFieldsetArrayComponent extends FieldsetArrayIdComponent {
   dia(index: number) { return this.fieldset.at(index).get('dia'); }
   _delete(index: number) { return this.fieldset.at(index).get('_delete'); }
 
-  getData(): Observable<any>{
+  initData(): Observable<any>{
     var display = new Display();
     display.addParam("cur-comision",this.idValue);
     display.setOrder({"dia-numero":"asc","hora_inicio":"asc"});
