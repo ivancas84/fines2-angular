@@ -17,7 +17,6 @@ export class TomaFieldsetArrayComponent extends FieldsetArrayIdComponent {
   readonly entityName: string = 'toma';
   readonly idName: string = 'curso';
 
-
   readonly defaultValues: {[key:string]: any} = {fecha_toma: new Date(), estado: "Aprobada", estado_contralor: "Pasar", tipo_movimiento: "AI", alta: new Date()}
 
   constructor(

@@ -17,11 +17,6 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.storage.clear();
-
-    this.dd._post("test","check").subscribe(
-      test => console.log
-    )
-
   }
 
   title = 'Fines 2';

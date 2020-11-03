@@ -8,6 +8,7 @@ import { AdminComponent } from '@component/admin/admin.component';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-rd-persona-admin',
@@ -31,15 +32,11 @@ export class RdPersonaAdminComponent extends AdminComponent {
     super(fb, route, router, location, dd, storage, dialog, snackBar);
   }
 
-  setData(): void {
-    this.data$.next(null);
+  initData(): Observable<any> { //@override
+    return of(null);
   }
 
-  reload(response){
-    /**
-     * Recargar una vez persistido
-     */
-    this.snackBar.open("Registro realizado", "X");
+  reload(response){ //@override
     this.router.navigateByUrl('/registro-realizado');
   }
 

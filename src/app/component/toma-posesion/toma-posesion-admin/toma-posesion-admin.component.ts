@@ -9,6 +9,8 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
 import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
+import { fastClone } from '@function/fast-clone';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-toma-posesion-admin',
@@ -32,16 +34,16 @@ export class TomaPosesionAdminComponent extends AdminComponent {
     super(fb, route, router, location, dd, storage, dialog, snackBar);
   }
 
-  setParams(params: any){ 
+  initParams(params: any){ 
     if(!params.hasOwnProperty("id")){
       this.snackBar.open("Error de parámetros", "X");
       return;
     }
-    this.params = params;
+    return params;
   }
 
-  setData(): void {
-      this.data$.next(this.params);
+  initData(): Observable<any> {
+    return of(fastClone(this.display$.value));
   }
 
   submit(){
