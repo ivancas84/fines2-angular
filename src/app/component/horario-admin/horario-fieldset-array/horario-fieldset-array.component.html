@@ -9,7 +9,7 @@
 
     <div fxLayout="row" fxFlex="90%" fxLayout.lt-md="column" fxLayoutGap="10px">
       <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
-        <app-input-curso-short-select *ngIf="idComision" [field]="curso(i)" [id]="idComision" [title]="'Curso'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></app-input-curso-short-select>
+        <app-input-curso-short-select *ngIf="idValue" [field]="curso(i)" [id]="idValue" [title]="'Curso'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></app-input-curso-short-select>
         <core-input-select [field]="dia(i)" [entityName]="'dia'" [title]="'Dia'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-select>
       </div>
       <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">

@@ -18,13 +18,7 @@ import { FieldsetArrayIdComponent } from '@component/fieldset-array-id/fieldset-
 export class HorarioFieldsetArrayComponent extends FieldsetArrayIdComponent {
 
   readonly entityName: string = 'horario';
-
   readonly idName: string = 'cur-comision';
-
-  idComision: string;
-  /** 
-   * Se utiliza el idComision desde el template
-   */
 
   constructor(
     protected router: Router, 
@@ -37,7 +31,6 @@ export class HorarioFieldsetArrayComponent extends FieldsetArrayIdComponent {
   ) {
     super(router, storage, dd, dialog)
   }
-
 
   formGroup(): FormGroup {
     let fg: FormGroup = this.fb.group({
@@ -66,18 +59,11 @@ export class HorarioFieldsetArrayComponent extends FieldsetArrayIdComponent {
   dia(index: number) { return this.fieldset.at(index).get('dia'); }
   _delete(index: number) { return this.fieldset.at(index).get('_delete'); }
 
-  data(): Observable<any> {
-    return this.data$.pipe(
-      mergeMap(
-        response => {
-          this.idComision = response;
-          var display = new Display();
-          display.addParam("cur-comision",response);
-          display.setOrder({"dia-numero":"asc",hora_inicio:"asc"});
-          return this.dd.all(this.entityName, display);
-        }
-      )
-    )
+  getData(): Observable<any>{
+    var display = new Display();
+    display.addParam("cur-comision",this.idValue);
+    display.setOrder({"dia-numero":"asc","hora_inicio":"asc"});
+    return this.dd.all(this.entityName, display);
   }
 
 }

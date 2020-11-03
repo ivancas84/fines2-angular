@@ -8,17 +8,14 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
 import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { AdminComponent } from '@component/admin/admin.component';
-import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
-import { isEmptyObject } from '@function/is-empty-object.function';
-import { first } from 'rxjs/operators';
-import { Display } from '@class/display';
 import { Observable } from 'rxjs';
+import { AdminArrayIdComponent } from '@component/admin-array-id/admin-array-id.component';
 
 @Component({
   selector: 'app-horario-admin',
   templateUrl: './horario-admin.component.html',
 })
-export class HorarioAdminComponent extends AdminComponent {
+export class HorarioAdminComponent extends AdminArrayIdComponent {
 
   readonly entityName: string = "horario";
 
@@ -33,37 +30,8 @@ export class HorarioAdminComponent extends AdminComponent {
     protected dialog: MatDialog,
     protected snackBar: MatSnackBar
   ) {
-    super(fb, route, router, location, dd, storage, dialog, snackBar);
+    super(fb, route, router, location, dd, storage, dialog, snackBar, validators);
   }
 
-  adminForm: FormGroup = this.fb.group({
-    id: ['', Validators.required ],
-  });
-
-  setParams(params: any){
-    if(params.hasOwnProperty("id") && params["id"]) {
-      this.params = params;
-      this.adminForm.get("id").setValue(params["id"]);
-    } else {
-      this.snackBar.open("Error de parametros", "X"); 
-    }
-  }
-
-  setData(): void {
-    this.data$.next(this.params["id"]);
-  }
-
-  persist(): Observable<any> {
-    return this.dd.post("persist_array", this.entityName, this.serverData())
-  }
-
-  reload(response){
-    /**
-     * Recargar una vez persistido
-     */
-    this.setData();
-    this.snackBar.open("Registro realizado", "X");
-    this.isSubmitted = false;
-  }
 }
 
