@@ -4,7 +4,6 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
 import { ValidatorsService } from '@service/validators/validators.service';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@service/storage/session-storage.service';
-import { mergeMap } from 'rxjs/operators';
 import { Display } from '@class/display';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -62,17 +61,11 @@ export class CursoFieldsetArrayComponent extends FieldsetArrayIdComponent {
   asignatura(index: number) { return this.fieldset.at(index).get('asignatura')}
   _delete(index: number) { return this.fieldset.at(index).get('_delete')}
 
-  data(): Observable<any>{
-    return this.data$.pipe(
-      mergeMap(
-        response => {
-          var display = new Display();
-          display.addParam(this.idName,response);
-          display.setOrder({"asi-nombre":"asc"});
-          return this.dd.all(this.entityName, display);
-        }
-      )
-    )
+  getData(): Observable<any>{
+    var display = new Display();
+    display.addParam(this.idName,this.idValue);
+    display.setOrder({"asi-nombre":"asc"});
+    return this.dd.all(this.entityName, display);
   }
   
 }

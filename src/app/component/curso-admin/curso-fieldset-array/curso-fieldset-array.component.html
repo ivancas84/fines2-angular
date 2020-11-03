@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="load$ | async">
   <mat-card-header>
     <mat-card-title>Curso <core-label *ngIf="idValue" [id]="idValue" [entityName]="idName"></core-label></mat-card-title>
   </mat-card-header>

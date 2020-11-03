@@ -17,12 +17,8 @@ import { map, mergeMap, startWith } from 'rxjs/operators';
 export class ComisionFieldsetComponent extends FieldsetComponent {
 
   readonly entityName: string = 'comision';
-
   readonly defaultValues: {[key:string]: any} = {autorizada: true, apertura: false, publicada: true, modalidad: "1", turno:"Noche"}
-
   divisiones: Array<any>;
-
-  loadDivisiones$: Observable<any>;
 
   constructor(
     protected fb: FormBuilder, 
@@ -42,6 +38,7 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
       /**
        * se realiza una suscripcion directamente ya que el valueChanges no me toma los valores iniciales del formulario
        * ver notas adicionales en el initData de la superclase
+       * PROBAR SUSCRIBIRSE DESDE EL TEMPLATE Y UTILIZAR startWith()
        */
       mergeMap(
         sede => {
@@ -61,7 +58,7 @@ export class ComisionFieldsetComponent extends FieldsetComponent {
     ).subscribe(
       response => this.divisiones = response 
     );
-    this.subscriptions.add(s)
+    
   }
 
   formGroup(): FormGroup {
