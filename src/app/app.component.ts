@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@service/auth/auth.service';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -11,8 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class AppComponent implements OnInit{
   constructor(
     protected storage: SessionStorageService, 
-    protected cookieService: CookieService,
-    protected dd: DataDefinitionService,
+    public auth: AuthService,
   ) { }
 
   ngOnInit(): void {

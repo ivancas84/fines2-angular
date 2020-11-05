@@ -2,15 +2,15 @@
   <span>Fines 2</span>
   
   
-  <button mat-button [matMenuTriggerFor]="ver" aria-label="icon-button with menu icon">
+  <button *ngIf="logoutMenu" mat-button [matMenuTriggerFor]="ver" aria-label="icon-button with menu icon">
     Ver
   </button>
   <mat-menu #ver="matMenu">
-    <a mat-menu-item routerLink="/comision-show" [queryParams]="{'cal-anio':year, 'cal-semestre':semester, 'sed-centro_educativo':1, 'modalidad':1, 'autorizada':'true'}" routerLinkActive="active" title="Ver Comision">Comision</a>
+    <a *ngIf="comisionShowMenu" mat-menu-item routerLink="/comision-show" [queryParams]="{'cal-anio':year, 'cal-semestre':semester, 'sed-centro_educativo':1, 'modalidad':1, 'autorizada':'true'}" routerLinkActive="active" title="Ver Comision">Comision</a>
     <a mat-menu-item routerLink="/persona-show" routerLinkActive="active" title="Ver Persona">Persona</a>
   </mat-menu>
 
-  <button mat-button [matMenuTriggerFor]="nuevo" aria-label="icon-button with menu icon">
+  <button *ngIf="logoutMenu" mat-button [matMenuTriggerFor]="nuevo" aria-label="icon-button with menu icon">
     Nuevo
   </button>
   <mat-menu #nuevo="matMenu">
@@ -19,6 +19,11 @@
     <a mat-menu-item routerLink="/registro-docente" routerLinkActive="active" title="Nueva Persona">Registro docente</a>
     <a mat-menu-item routerLink="/persona-admin" routerLinkActive="active" title="Nueva Persona">Persona</a>
   </mat-menu>
+  
+  <a *ngIf="loginMenu" mat-menu-item routerLink="/login" routerLinkActive="active" title="Login"><strong>Login</strong></a>    
+
+  <a *ngIf="logoutMenu" mat-menu-item routerLink="/logout" routerLinkActive="active" title="Logout"><strong>Logout</strong></a>
+
 </mat-toolbar>
 
 

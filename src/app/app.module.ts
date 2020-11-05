@@ -41,6 +41,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { ValidatorsService } from '@service/validators/validators.service';
+import { AuthService } from '@service/auth/auth.service';
 
 import { ToDatePipe } from '@pipe/to-date.pipe';
 import { ToTimePipe } from '@pipe/to-time.pipe';
@@ -50,6 +51,11 @@ import { SummaryPipe } from '@pipe/summary.pipe';
 
 import { DataDefinitionStorageService } from '@service/data-definition-storage.service';
 import { DataDefinitionLabelService } from '@service/data-definition-label/data-definition-label.service';
+
+import { LoginComponent } from '@component/login/login.component';
+import { LogoutComponent } from '@component/logout/logout.component';
+import { HomeComponent } from '@component/home/home.component';
+
 
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { DialogConfirmComponent } from '@component/dialog-confirm/dialog-confirm.component';
@@ -118,17 +124,6 @@ import { ListaAlumnosComponent } from '@component/lista-alumnos/lista-alumnos.co
 import { CrComisionShowComponent } from '@component/consolidado-referente/comision-show/comision-show.component';
 import { CrComisionTableComponent } from '@component/consolidado-referente/comision-table/comision-table.component';
 
-export const APP_DATE_FORMATS = {
-  parse: {
-    dateInput: 'DD/MM/YYYY',
-  },
-  display: {
-    dateInput: 'DD/MM/YYYY',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
 
 @NgModule({
   declarations: [
@@ -139,6 +134,10 @@ export const APP_DATE_FORMATS = {
     SiNoPipe, 
     SummaryPipe, 
     StoragePipe,
+
+    LoginComponent,
+    LogoutComponent,
+    HomeComponent,
 
     DialogAlertComponent,
     DialogConfirmComponent,
@@ -222,12 +221,13 @@ export const APP_DATE_FORMATS = {
     MaterialFileInputModule,
     MatTimepickerModule
   ],
-  providers: [    
+  providers: [
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000, verticalPosition:"top", horizontalPosition:"right"}},
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
     CookieService,
     
+    AuthService,
     DataDefinitionService, 
     SessionStorageService, 
     ValidatorsService,

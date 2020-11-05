@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from '@component/login/login.component';
+import { LogoutComponent } from '@component/logout/logout.component';
+
 import { PersonaShowComponent } from '@component/persona-show/persona-show/persona-show.component';
 import { ComisionHorariosAdminComponent } from '@component/comision-horarios-admin/comision-horarios-admin/comision-horarios-admin.component';
 import { ComisionShowComponent } from '@component/comision-show/comision-show/comision-show.component';
@@ -16,8 +19,14 @@ import { TomaPosesionRealizadaComponent } from '@component/toma-posesion-realiza
 import { ListaAlumnosComponent } from '@component/lista-alumnos/lista-alumnos.component';
 import { CrComisionShowComponent } from '@component/consolidado-referente/comision-show/comision-show.component';
 import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/persona-admin.component';
+import { HomeComponent } from '@component/home/home.component';
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: 'logout', component: LogoutComponent, pathMatch: 'full' },
+  { path: 'login-success', redirectTo: '' },
+  { path: '',  component: HomeComponent, pathMatch: 'full' },
+
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
   { path: 'comision-show', component: ComisionShowComponent, pathMatch: 'full' },
   { path: 'comision-horarios-admin', component: ComisionHorariosAdminComponent, pathMatch: 'full' },
