@@ -18,19 +18,5 @@ export class TomaAdminComponent extends AdminArrayIdComponent {
   readonly entityName: string = "toma";
   readonly idName: string = 'curso';
 
-  constructor(
-    protected fb: FormBuilder, 
-    protected route: ActivatedRoute, 
-    protected router: Router, 
-    protected location: Location, 
-    protected dd: DataDefinitionService, 
-    protected storage: SessionStorageService, 
-    protected dialog: MatDialog,
-    protected snackBar: MatSnackBar,
-
-    protected validators: ValidatorsService,
-  ) {
-    super(fb, route, router, location, dd, storage, dialog, snackBar, validators);
-  }
 }
 

@@ -18,20 +18,7 @@ import { AdminArrayIdComponent } from '@component/admin-array-id/admin-array-id.
 export class HorarioAdminComponent extends AdminArrayIdComponent {
 
   readonly entityName: string = "horario";
-
-  constructor(
-    protected fb: FormBuilder, 
-    protected route: ActivatedRoute, 
-    protected router: Router, 
-    protected location: Location, 
-    protected dd: DataDefinitionService, 
-    protected validators: ValidatorsService,
-    protected storage: SessionStorageService, 
-    protected dialog: MatDialog,
-    protected snackBar: MatSnackBar
-  ) {
-    super(fb, route, router, location, dd, storage, dialog, snackBar, validators);
-  }
+  readonly idName: string = 'cur-comision';
 
 }
 

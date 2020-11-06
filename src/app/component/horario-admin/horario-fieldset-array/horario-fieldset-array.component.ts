@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { FieldsetArrayComponent } from '@component/fieldset-array/fieldset-array.component';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { Display } from '@class/display';
-import { mergeMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { FieldsetArrayIdComponent } from '@component/fieldset-array-id/fieldset-array-id.component';
