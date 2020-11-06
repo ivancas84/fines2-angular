@@ -76,6 +76,7 @@ export class TomaFieldsetArrayComponent extends FieldsetArrayIdComponent {
   _delete(index: number) { return this.fieldset.at(index).get('_delete')}
 
   enviarEmail(index){
+    console.log(index);
     if(!this.id(index).value) return;
     this.dd.post("info", "email_confirmacion", {id:this.id(index).value}).subscribe(
       response => {

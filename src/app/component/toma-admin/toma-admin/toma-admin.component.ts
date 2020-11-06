@@ -16,6 +16,7 @@ import { AdminArrayIdComponent } from '@component/admin-array-id/admin-array-id.
 export class TomaAdminComponent extends AdminArrayIdComponent {
 
   readonly entityName: string = "toma";
+  readonly idName: string = 'curso';
 
   constructor(
     protected fb: FormBuilder, 
