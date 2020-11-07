@@ -9,15 +9,14 @@ import { AuthService } from '@service/auth/auth.service';
 export class MenuComponent implements OnInit, OnChanges { 
 
   @Input() jwt?: string;
+  authenticated = false;
   logoutMenu = false;
   loginMenu = true;
-  comisionShowMenu = false;
+  view = [];
 
   constructor(
     protected auth: AuthService, 
-  ) { 
-
-  }
+  ) { }
 
   year: number;
   semester: number;
@@ -29,22 +28,14 @@ export class MenuComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes.jwt.currentValue != changes.jwt.previousValue){
-      if(this.auth.isAuthenticated()){
-        this.logoutMenu = true;
-        this.loginMenu = false;
+      this.authenticated = this.auth.isAuthenticated();
+      if(this.authenticated){
+        var token = this.auth.getToken();
+        this.view = (token && token.hasOwnProperty("view")) ? token["view"] : [];
       } else {
-        this.logoutMenu = false;
-        this.loginMenu = true;
-      }
-
-      if(this.auth.hasPermission(["comision.wx"])){
-        this.comisionShowMenu = true;
+        this.view = [];
       }
     }
-  }
-
-  logout(){
-    this.auth.logout();
   }
 
  
