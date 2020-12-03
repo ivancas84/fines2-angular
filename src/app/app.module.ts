@@ -12,30 +12,16 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatTimepickerModule } from 'mat-timepicker';
 import { CookieService } from 'ngx-cookie-service';
 
+import { AppMaterialModule } from './core/app-material.module';
+
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
+import { GOOGLE_CLIENT_ID } from './app.config';
+
 //import { ClipboardModule } from '@angular/cdk/clipboard';
 
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
-import { MatNativeDateModule } from '@angular/material/core';
-
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSortModule } from '@angular/material/sort';
-import { MatTableModule } from '@angular/material/table';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
@@ -55,7 +41,7 @@ import { DataDefinitionLabelService } from '@service/data-definition-label/data-
 import { LoginComponent } from '@component/login/login.component';
 import { LogoutComponent } from '@component/logout/logout.component';
 import { HomeComponent } from '@component/home/home.component';
-
+import { SocialLoginComponent } from '@component/social-login/social-login.component';
 
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { DialogConfirmComponent } from '@component/dialog-confirm/dialog-confirm.component';
@@ -76,8 +62,6 @@ import { SearchAllComponent } from '@component/search-all/search-all.component';
 import { LabelComponent } from '@component/label/label.component';
 import { FieldLabelComponent } from '@component/field-label/field-label.component';
 import { FieldTreeLabelComponent } from '@component/field-tree-label/field-tree-label.component';
-
-
 
 import { CalendarioInputSelectComponent } from '@component/reusable/calendario-input-select/calendario-input-select.component';
 import { CalendarioLabelComponent } from '@component/reusable/calendario-label/calendario-label.component';
@@ -124,7 +108,6 @@ import { ListaAlumnosComponent } from '@component/lista-alumnos/lista-alumnos.co
 import { CrComisionShowComponent } from '@component/consolidado-referente/comision-show/comision-show.component';
 import { CrComisionTableComponent } from '@component/consolidado-referente/comision-table/comision-table.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -136,6 +119,7 @@ import { CrComisionTableComponent } from '@component/consolidado-referente/comis
     StoragePipe,
 
     LoginComponent,
+    SocialLoginComponent,
     LogoutComponent,
     HomeComponent,
 
@@ -193,30 +177,10 @@ import { CrComisionTableComponent } from '@component/consolidado-referente/comis
     BrowserAnimationsModule,
     HttpClientModule,
     FlexLayoutModule,
-
+    SocialLoginModule,
     //ClipboardModule,
 
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatSnackBarModule,
-    MatSelectModule,
-    MatSortModule,
-    //MatStepperModule,
-    MatTableModule,
-    MatToolbarModule,
+    AppMaterialModule,
 
     MaterialFileInputModule,
     MatTimepickerModule
@@ -234,6 +198,13 @@ import { CrComisionTableComponent } from '@component/consolidado-referente/comis
     
     DataDefinitionStorageService, 
     DataDefinitionLabelService, 
+
+    {provide: 'SocialAuthServiceConfig', useValue: { autoLogin: false,  providers: [
+      {
+        id: GoogleLoginProvider.PROVIDER_ID,
+        provider: new GoogleLoginProvider(GOOGLE_CLIENT_ID)
+      },
+    ]} as SocialAuthServiceConfig, }
 
   ],
   bootstrap: [AppComponent]
