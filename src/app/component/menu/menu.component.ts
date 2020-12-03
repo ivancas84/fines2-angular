@@ -10,8 +10,6 @@ export class MenuComponent implements OnInit, OnChanges {
 
   @Input() jwt?: string;
   authenticated = false;
-  logoutMenu = false;
-  loginMenu = true;
   view = [];
 
   constructor(
