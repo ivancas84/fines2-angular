@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from '@component/login/login.component';
 import { LogoutComponent } from '@component/logout/logout.component';
 import { HomeComponent } from '@component/home/home.component';
+import { SocialLoginComponent } from '@component/social-login/social-login.component';
 
 import { PersonaShowComponent } from '@component/persona-show/persona-show/persona-show.component';
 import { ComisionHorariosAdminComponent } from '@component/comision-horarios-admin/comision-horarios-admin/comision-horarios-admin.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'logout', component: LogoutComponent, pathMatch: 'full' },
   { path: 'login-success', redirectTo: '' },
+  { path: 'social-login', component: SocialLoginComponent, pathMatch: 'full' },
   { path: '',  component: HomeComponent, pathMatch: 'full' },
 
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
