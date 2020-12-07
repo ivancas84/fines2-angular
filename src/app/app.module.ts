@@ -70,6 +70,10 @@ import { CursoShortLabelComponent } from '@component/reusable/curso-short-label/
 import { InputCursoShortSelectComponent } from '@component/reusable/input-curso-short-select/input-curso-short-select.component';
 import { PlanificacionInputPickerComponent } from '@component/reusable/planificacion-input-picker/planificacion-input-picker.component';
 
+import { DocenteTableComponent } from '@component/docente-show/docente-table/docente-table.component';
+import { DocenteShowComponent } from '@component/docente-show/docente-show/docente-show.component';
+import { DocenteSearchComponent } from '@component/docente-show/docente-search/docente-search.component';
+
 import { RdPersonaAdminComponent } from '@component/registro-docente/persona-admin/persona-admin.component';
 import { RdPersonaFieldsetComponent } from '@component/registro-docente/persona-fieldset/persona-fieldset.component';
 import { RegistroRealizadoComponent } from '@component/registro-realizado/registro-realizado.component';
@@ -154,6 +158,7 @@ import { CrComisionTableComponent } from '@component/consolidado-referente/comis
     ComisionHorariosAdminComponent, ComisionHorariosFieldsetComponent,
     ComisionShowComponent, ComisionTableComponent, ComisionSearchComponent, ComisionSearchParamsComponent,
     CursoAdminComponent, CursoFieldsetArrayComponent,
+    DocenteTableComponent, DocenteShowComponent, DocenteSearchComponent,
     PersonaAdminComponent, PersonaFieldsetComponent,
     PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent,
     RdPersonaAdminComponent, RdPersonaFieldsetComponent,
