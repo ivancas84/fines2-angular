@@ -8,8 +8,7 @@ import { AuthService } from '@service/auth/auth.service';
 })
 export class MenuComponent implements OnInit, OnChanges { 
 
-  @Input() jwt?: string;
-  authenticated = false;
+  @Input() authenticated = false;
   view = [];
 
   constructor(
@@ -25,8 +24,7 @@ export class MenuComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.jwt.currentValue != changes.jwt.previousValue){
-      this.authenticated = this.auth.isAuthenticated();
+    if(changes.authenticated.currentValue != changes.authenticated.previousValue){
       if(this.authenticated){
         var token = this.auth.getToken();
         this.view = (token && token.hasOwnProperty("view")) ? token["view"] : [];

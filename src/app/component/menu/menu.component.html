@@ -1,16 +1,16 @@
 <mat-toolbar>
   <span>Fines 2</span>
   
+
   
   <button *ngIf="authenticated" mat-button [matMenuTriggerFor]="ver" aria-label="icon-button with menu icon">
     Ver
   </button>
   <mat-menu #ver="matMenu">
-    <a *ngIf="view.includes('comision-show')" mat-menu-item routerLink="/comision-show" [queryParams]="{'cal-anio':year, 'cal-semestre':semester, 'sed-centro_educativo':1, 'modalidad':1, 'autorizada':'true'}" routerLinkActive="active" title="Ver Comision">Comision</a>
-    <a mat-menu-item routerLink="/persona-show" routerLinkActive="active" title="Ver Persona">Persona</a>
+    <a mat-menu-item routerLink="/docente-show" routerLinkActive="active" title="Ver Docente">Docente</a>
   </mat-menu>
 
-  <button *ngIf="authenticated" mat-button [matMenuTriggerFor]="nuevo" aria-label="icon-button with menu icon">
+  <button *ngIf="view.includes('new-menu')" mat-button [matMenuTriggerFor]="nuevo" aria-label="icon-button with menu icon">
     Nuevo
   </button>
   <mat-menu #nuevo="matMenu">
@@ -20,9 +20,11 @@
     <a mat-menu-item routerLink="/persona-admin" routerLinkActive="active" title="Nueva Persona">Persona</a>
   </mat-menu>
   
-  <a *ngIf="!authenticated" mat-menu-item routerLink="/login" routerLinkActive="active" title="Login"><strong>Login</strong></a>    
+  <span fxFlex="1 1 auto"></span>
 
-  <a *ngIf="authenticated" mat-menu-item routerLink="/logout" routerLinkActive="active" title="Logout"><strong>Logout</strong></a>
+  <a *ngIf="!authenticated" mat-menu-item routerLink="/login" routerLinkActive="active" title="Login"><mat-icon>login</mat-icon></a>    
+
+  <a *ngIf="authenticated" mat-menu-item routerLink="/logout" routerLinkActive="active" title="Logout"><mat-icon>logout</mat-icon></a>
 
 </mat-toolbar>
 
