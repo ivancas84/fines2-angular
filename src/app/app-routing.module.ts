@@ -22,6 +22,7 @@ import { ListaAlumnosComponent } from '@component/lista-alumnos/lista-alumnos.co
 import { CrComisionShowComponent } from '@component/consolidado-referente/comision-show/comision-show.component';
 import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/persona-admin.component';
 import { DocenteShowComponent } from '@component/docente-show/docente-show/docente-show.component';
+import { DocenteDetailComponent } from '@component/docente-detail/docente-detail/docente-detail.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'consolidado-docente', component: CdComisionShowComponent, pathMatch: 'full' },
   { path: 'consolidado-referente', component: CrComisionShowComponent, pathMatch: 'full' },
   { path: 'curso-admin', component: CursoAdminComponent, pathMatch: 'full' },
+  { path: 'docente-detail', component: DocenteDetailComponent, pathMatch: 'full' },
   { path: 'docente-show', component: DocenteShowComponent, pathMatch: 'full' },
   { path: 'horario-admin', component: HorarioAdminComponent, pathMatch: 'full' },
   { path: 'lista-alumnos', component: ListaAlumnosComponent, pathMatch: 'full' },

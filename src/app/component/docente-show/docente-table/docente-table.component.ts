@@ -11,6 +11,6 @@ import { TableComponent } from '@component/table/table.component';
   `],
 })
 export class DocenteTableComponent extends TableComponent { 
-  displayedColumns: string[] = ['nombres', 'apellidos', 'fecha_nacimiento', 'numero_documento', 'cuil', 'genero', 'apodo', 'telefono', 'email', 'email_abc', 'alta', 'domicilio'];
+  displayedColumns: string[] = ['nombres', 'apellidos', 'fecha_nacimiento', 'numero_documento', 'cuil', 'genero', 'apodo', 'telefono', 'email', 'email_abc', 'alta'];
 
 }

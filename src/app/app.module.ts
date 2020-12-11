@@ -112,6 +112,10 @@ import { ListaAlumnosComponent } from '@component/lista-alumnos/lista-alumnos.co
 import { CrComisionShowComponent } from '@component/consolidado-referente/comision-show/comision-show.component';
 import { CrComisionTableComponent } from '@component/consolidado-referente/comision-table/comision-table.component';
 
+import { DocenteDetailComponent } from '@component/docente-detail/docente-detail/docente-detail.component';
+import { DocenteCardComponent } from '@component/docente-detail/docente-card/docente-card.component';
+import { DdTomaTableComponent } from '@component/docente-detail/toma-table/toma-table.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -159,6 +163,7 @@ import { CrComisionTableComponent } from '@component/consolidado-referente/comis
     ComisionShowComponent, ComisionTableComponent, ComisionSearchComponent, ComisionSearchParamsComponent,
     CursoAdminComponent, CursoFieldsetArrayComponent,
     DocenteTableComponent, DocenteShowComponent, DocenteSearchComponent,
+    DocenteDetailComponent, DocenteCardComponent, DdTomaTableComponent,
     PersonaAdminComponent, PersonaFieldsetComponent,
     PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent,
     RdPersonaAdminComponent, RdPersonaFieldsetComponent,
