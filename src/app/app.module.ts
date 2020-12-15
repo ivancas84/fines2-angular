@@ -25,6 +25,7 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
+import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { AuthService } from '@service/auth/auth.service';
@@ -62,6 +63,8 @@ import { SearchAllComponent } from '@component/search-all/search-all.component';
 import { LabelComponent } from '@component/label/label.component';
 import { FieldLabelComponent } from '@component/field-label/field-label.component';
 import { FieldTreeLabelComponent } from '@component/field-tree-label/field-tree-label.component';
+import { FieldValueComponent } from '@component/field-value/field-value.component';
+import { FieldViewComponent } from '@component/field-view/field-view.component';
 
 import { CalendarioInputSelectComponent } from '@component/reusable/calendario-input-select/calendario-input-select.component';
 import { CalendarioLabelComponent } from '@component/reusable/calendario-label/calendario-label.component';
@@ -115,6 +118,8 @@ import { CrComisionTableComponent } from '@component/consolidado-referente/comis
 import { DocenteDetailComponent } from '@component/docente-detail/docente-detail/docente-detail.component';
 import { DocenteCardComponent } from '@component/docente-detail/docente-card/docente-card.component';
 import { DdTomaTableComponent } from '@component/docente-detail/toma-table/toma-table.component';
+import { TableDynamicComponent } from '@component/table-dynamic/table-dynamic.component';
+
 
 @NgModule({
   declarations: [
@@ -133,6 +138,8 @@ import { DdTomaTableComponent } from '@component/docente-detail/toma-table/toma-
 
     DialogAlertComponent,
     DialogConfirmComponent,
+    FieldViewComponent,
+    FieldValueComponent,
     InputAutocompleteComponent,
     InputDateComponent,
     InputNumberComponent,
@@ -151,6 +158,7 @@ import { DdTomaTableComponent } from '@component/docente-detail/toma-table/toma-
     LabelComponent,
     FieldLabelComponent,
     FieldTreeLabelComponent,
+    TableDynamicComponent,
     //DynamicTableComponent,
 
     CalendarioLabelComponent, CalendarioInputSelectComponent, PlanificacionInputPickerComponent,
@@ -203,6 +211,7 @@ import { DdTomaTableComponent } from '@component/docente-detail/toma-table/toma-
     
     AuthService,
     DataDefinitionService, 
+    DataDefinitionToolService,
     SessionStorageService, 
     ValidatorsService,
     

@@ -5,5 +5,5 @@
 <div *ngIf="(load$ | async); else loading">
   <mat-progress-bar *ngIf="!load" mode="indeterminate"></mat-progress-bar>
   <app-docente-card [data]="data"></app-docente-card>
-  <app-dd-toma-table [data]="data"></app-dd-toma-table>
+  <core-table-dynamic [infoColumns]="tomasColumns" [data]="tomas" [title]="'Tomas de Posesión'" [matSortActive]="'fecha_toma'" [matSortDirection]="'desc'"></core-table-dynamic>
 </div>
