@@ -3,11 +3,19 @@
   
 
   
-  <button *ngIf="authenticated" mat-button [matMenuTriggerFor]="ver" aria-label="icon-button with menu icon">
-    Ver
+  <button *ngIf="authenticated" mat-button [matMenuTriggerFor]="docente" aria-label="icon-button with menu icon">
+    Docente
   </button>
-  <mat-menu #ver="matMenu">
-    <a mat-menu-item routerLink="/docente-show" routerLinkActive="active" title="Ver Docente">Docente</a>
+  <mat-menu #docente="matMenu">
+    <a mat-menu-item routerLink="/docente-show" routerLinkActive="active" title="Ver Docente">Buscar</a>
+    <a mat-menu-item routerLink="/toma-show" routerLinkActive="active" title="Ver Tomas">Tomas de Posesión</a>
+  </mat-menu>
+
+  <button *ngIf="authenticated" mat-button [matMenuTriggerFor]="info" aria-label="icon-button with menu icon">
+    Info
+  </button>
+  <mat-menu #info="matMenu">
+    <a mat-menu-item routerLink="/comision-show" routerLinkActive="active" title="Consolidado">Consolidado</a>
   </mat-menu>
 
   <button *ngIf="view.includes('new-menu')" mat-button [matMenuTriggerFor]="nuevo" aria-label="icon-button with menu icon">

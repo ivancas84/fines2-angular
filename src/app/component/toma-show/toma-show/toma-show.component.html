@@ -4,6 +4,6 @@
 
 <div *ngIf="(load$ | async); else loading">
   <mat-progress-bar *ngIf="!load" mode="indeterminate"></mat-progress-bar>
-  <app-docente-search [display]="display"></app-docente-search>
+  <!-- app-toma-search [display]="display"></app-toma-search -->
   <core-table-dynamic [dataSource]="data" [length]="length" [display]="display" [infoColumns]="infoColumns"></core-table-dynamic>
 </div>

@@ -23,6 +23,7 @@ import { CrComisionShowComponent } from '@component/consolidado-referente/comisi
 import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/persona-admin.component';
 import { DocenteShowComponent } from '@component/docente-show/docente-show/docente-show.component';
 import { DocenteDetailComponent } from '@component/docente-detail/docente-detail/docente-detail.component';
+import { TomaShowComponent } from '@component/toma-show/toma-show/toma-show.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: 'registro-abc', component: RabcPersonaAdminComponent, pathMatch: 'full' },
   { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
   { path: 'toma-admin', component: TomaAdminComponent, pathMatch: 'full' },
+  { path: 'toma-show', component: TomaShowComponent, pathMatch: 'full' },
   { path: 'toma-posesion', component: TomaPosesionAdminComponent, pathMatch: 'full' },
   { path: 'toma-posesion-realizada', component: TomaPosesionRealizadaComponent, pathMatch: 'full' },
 ];

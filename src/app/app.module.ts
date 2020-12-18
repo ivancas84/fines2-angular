@@ -119,6 +119,7 @@ import { DocenteDetailComponent } from '@component/docente-detail/docente-detail
 import { DocenteCardComponent } from '@component/docente-detail/docente-card/docente-card.component';
 import { DdTomaTableComponent } from '@component/docente-detail/toma-table/toma-table.component';
 import { TableDynamicComponent } from '@component/table-dynamic/table-dynamic.component';
+import { TomaShowComponent } from '@component/toma-show/toma-show/toma-show.component';
 
 
 @NgModule({
@@ -185,6 +186,7 @@ import { TableDynamicComponent } from '@component/table-dynamic/table-dynamic.co
     CrComisionShowComponent, CrComisionTableComponent,
 
     ListaAlumnosComponent,
+    TomaShowComponent,
   ],
   imports: [
     BrowserModule,

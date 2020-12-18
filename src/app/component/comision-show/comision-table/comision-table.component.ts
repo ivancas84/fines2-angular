@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TableComponent } from '@component/table/table.component';
 import { mergeMap, map, tap, first, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -40,6 +40,7 @@ export class ComisionTableComponent extends TableComponent implements OnChanges 
   load: boolean;
   data$: BehaviorSubject<any> = new BehaviorSubject(null);
   dataSource: any;
+  @Input() data;
 
   ngOnChanges(changes: SimpleChanges): void {
     if( changes['data'] && changes['data'].previousValue != changes['data'].currentValue ) {    

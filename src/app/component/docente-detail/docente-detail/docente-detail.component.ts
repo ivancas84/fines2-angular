@@ -7,6 +7,7 @@ import { DataDefinitionToolService } from '@service/data-definition/data-definit
 import { Observable, of } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Location } from '@angular/common';
+import { arrayColumn } from '@function/array-column';
 
 
 @Component({
@@ -32,21 +33,26 @@ export class DocenteDetailComponent extends DetailComponent {
     {
       field:"estado",
       label:"Estado",
-      type:"string",
+    },
+    {
+      field:"estado_contralor",
+      label:"Estado Contralor",
     },
     {
       field:"numero_sede",
       label:"Número",
-      type:"string",
     },
     {
       field:"nombre_sede",
       label:"Sede",
-      type:"string",
     },
     {
       field:"nombre_asignatura",
       label:"Asignatura",
+    },
+    {
+      field:"horas_catedra",
+      label:"Horas Cátedra",
     },
     {
       field:"numero_comision",
@@ -57,6 +63,10 @@ export class DocenteDetailComponent extends DetailComponent {
     {
       field:"tramo",
       label:"Tramo",
+    },
+    {
+      field:"numero_planilla_docente",
+      label:"Planilla Docente",
     },
 
   ];
@@ -100,9 +110,15 @@ export class DocenteDetailComponent extends DetailComponent {
     display.addCondition(["docente","=", this.data["id"]]);
     display.addOrder("fecha_toma","desc");
 
-    return this.ddt.all("toma",display).pipe(
+    return this.ddt.all("toma",display).pipe( 
       switchMap(
-        tomas => {return this.ddt.getAllColumnData(tomas, "curso", "curso",{comision:"comision", asignatura:"asignatura"})}
+        tomas => {return this.ddt.advancedColumnDataGroup(tomas, "toma", "asignacion_planilla_docente", ["planilla_docente.max"], {ultima_planilla_docente:"planilla_docente_max"})}
+      ),   
+      switchMap(
+        tomas => {return this.ddt.getAllColumnData(tomas, "ultima_planilla_docente", "planilla_docente",{numero_planilla_docente:"numero"})}
+      ),
+      switchMap(
+        tomas => {return this.ddt.getAllColumnData(tomas, "curso", "curso",{comision:"comision", asignatura:"asignatura", horas_catedra:"horas_catedra" })}
       ),
       switchMap(
         tomas => {return this.ddt.getAllColumnData(tomas, "asignatura", "asignatura",{nombre_asignatura:"nombre"})}
@@ -116,14 +132,15 @@ export class DocenteDetailComponent extends DetailComponent {
       switchMap(
         tomas => {return this.ddt.getAllColumnData(tomas, "sede", "sede",{numero_sede:"numero",nombre_sede:"nombre"})}
       ),
+      
       map(
         tomas => {
+          console.log(tomas);
           return this.tomas = tomas;
         }
       )
     );
   }
-
 
 }
 
