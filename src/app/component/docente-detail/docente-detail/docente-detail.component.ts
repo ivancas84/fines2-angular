@@ -7,7 +7,6 @@ import { DataDefinitionToolService } from '@service/data-definition/data-definit
 import { Observable, of } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Location } from '@angular/common';
-import { arrayColumn } from '@function/array-column';
 
 
 @Component({
@@ -16,6 +15,64 @@ import { arrayColumn } from '@function/array-column';
 })
 export class DocenteDetailComponent extends DetailComponent {
   readonly entityName: string = "docente";
+
+  fields = [
+    {
+      field:"nombres",
+      label:"Nombres",
+      widthXs:"25%",
+      widthMd:"50%",
+    },
+    {
+      field:"apellidos",
+      label:"Apellidos",
+      widthXs:"25%",
+      widthMd:"50%",
+    },
+    {
+      field:"fecha_nacimiento",
+      label:"Fecha Nacimiento",
+      type:"date",
+      format:"dd/MM/yyyy",
+      widthXs:"25%",
+      widthMd:"50%",
+    },
+    {
+      field:"numero_documento",
+      label:"Numero Documento",
+      widthXs:"25%",
+      widthMd:"50%",
+    },
+    {
+      field:"cuil",
+      label:"Cuil",
+      widthXs:"25%",
+      widthMd:"50%",
+    },
+    
+    {
+      field:"telefono",
+      label:"Telefono",
+      widthXs:"25%",
+      widthMd:"50%",
+    },
+    {
+      field:"email",
+      label:"Email",
+      widthXs:"25%",
+      widthMd:"50%",
+    },
+    {
+      field:"email_abc",
+      label:"Email Abc",
+      widthXs:"25%",
+      widthMd:"50%",
+    },
+    
+  ];  
+
+
+
 
   tomasColumns = [
     {
@@ -135,7 +192,6 @@ export class DocenteDetailComponent extends DetailComponent {
       
       map(
         tomas => {
-          console.log(tomas);
           return this.tomas = tomas;
         }
       )

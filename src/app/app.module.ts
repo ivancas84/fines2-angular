@@ -116,10 +116,10 @@ import { CrComisionShowComponent } from '@component/consolidado-referente/comisi
 import { CrComisionTableComponent } from '@component/consolidado-referente/comision-table/comision-table.component';
 
 import { DocenteDetailComponent } from '@component/docente-detail/docente-detail/docente-detail.component';
-import { DocenteCardComponent } from '@component/docente-detail/docente-card/docente-card.component';
 import { DdTomaTableComponent } from '@component/docente-detail/toma-table/toma-table.component';
 import { TableDynamicComponent } from '@component/table-dynamic/table-dynamic.component';
 import { TomaShowComponent } from '@component/toma-show/toma-show/toma-show.component';
+import { CardDynamicComponent } from '@component/card-dynamic/card-dynamic.component';
 
 
 @NgModule({
@@ -160,6 +160,7 @@ import { TomaShowComponent } from '@component/toma-show/toma-show/toma-show.comp
     FieldLabelComponent,
     FieldTreeLabelComponent,
     TableDynamicComponent,
+    CardDynamicComponent,
     //DynamicTableComponent,
 
     CalendarioLabelComponent, CalendarioInputSelectComponent, PlanificacionInputPickerComponent,
@@ -172,7 +173,7 @@ import { TomaShowComponent } from '@component/toma-show/toma-show/toma-show.comp
     ComisionShowComponent, ComisionTableComponent, ComisionSearchComponent, ComisionSearchParamsComponent,
     CursoAdminComponent, CursoFieldsetArrayComponent,
     DocenteTableComponent, DocenteShowComponent, DocenteSearchComponent,
-    DocenteDetailComponent, DocenteCardComponent, DdTomaTableComponent,
+    DocenteDetailComponent, DdTomaTableComponent,
     PersonaAdminComponent, PersonaFieldsetComponent,
     PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent,
     RdPersonaAdminComponent, RdPersonaFieldsetComponent,
