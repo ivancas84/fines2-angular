@@ -1,0 +1,9 @@
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
+
+<div *ngIf="(load$ | async); else loading">
+  <mat-progress-bar *ngIf="!load" mode="indeterminate"></mat-progress-bar>
+  <core-card-dynamic [fieldsConfig]="fieldsConfig" [data]="data" [title]="'Toma de Posesión'"></core-card-dynamic>
+  <core-table-dynamic [fieldsConfig]="fieldsConfigApd" [dataSource]="dataApd" [title]="'Contralores'" [options]="{addButtonLink:'asignacion-planilla-docente-admin',addButtonQueryParams:{toma:data['id']}}"></core-table-dynamic>
+</div>

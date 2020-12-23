@@ -2,45 +2,24 @@
   <mat-card-header>
     <mat-card-title>Comision</mat-card-title>
   </mat-card-header>
-  <mat-card-content [formGroup]="fieldset">
-    <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-      <core-input-autocomplete [field]="sede" [entityName]="'sede'" [title]="'Sede'" fxFlex.xs="100%" fxFlex="50%" fxLayoutAlign="center center"></core-input-autocomplete>
-      <div fxLayout="row" fxFlex.xs="100%" fxFlex="50%" fxLayoutAlign="center center">
-          <mat-checkbox fxFlex="20%" fxFlex.lt-md="33%" formControlName="apertura">Apertura</mat-checkbox>
-          <mat-checkbox fxFlex="20%" fxFlex.lt-md="33%" formControlName="publicada">Publicada</mat-checkbox>
-          <mat-checkbox fxFlex="20%" fxFlex.lt-md="33%" formControlName="autorizada">Autorizada</mat-checkbox>
-      </div>
-    </div>
-    <div *ngIf="divisiones"  fxLayout="row" fxLayoutGap="10px">
+  <mat-card-content fxLayout="row wrap" [formGroup]="fieldset">
+    <core-input-autocomplete fxFlex="50%" fxFlex.xs="100%" [field]="sede" [entityName]="'sede'" [title]="'Sede'" fxFlex.xs="100%" fxFlex="50%" fxLayoutAlign="center center"></core-input-autocomplete>
+    <mat-checkbox fxFlex="17%" fxFlex.xs="33%" formControlName="apertura" fxLayoutAlign="center center">Apertura</mat-checkbox>
+    <mat-checkbox fxFlex="17%" fxFlex.xs="33%" formControlName="publicada" fxLayoutAlign="center center">Publicada</mat-checkbox>
+    <mat-checkbox fxFlex="16%" fxFlex.xs="33%" formControlName="autorizada" fxLayoutAlign="center center">Autorizada</mat-checkbox>
+    <div fxFlex="100%" *ngIf="divisiones">
       Divisiones existentes: {{divisiones}}
     </div>
-    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
-      <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
-        <core-input-text [field]="division" [title]="'Division'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-text>
-        <calendario-input-select [field]="calendario" [entityName]="'calendario'" [title]="'Calendario'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></calendario-input-select>
-      </div>
-      <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
-        <core-input-select [field]="modalidad" [entityName]="'modalidad'" [title]="'Modalidad'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-select>
-        <core-input-select-param [field]="turno" [options]="['Mañana','Tarde','Noche']" [title]="'Turno'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-select-param>
-      </div>
-    </div>  
+    <core-input-text fxFlex="25%" fxFlex.lt-md="50%" fxFlex.xs="100%" [field]="division" [title]="'Division'"></core-input-text>
+    <calendario-input-select fxFlex="25%" fxFlex.lt-md="50%" fxFlex.xs="100%" [field]="calendario" [entityName]="'calendario'" [title]="'Calendario'"></calendario-input-select>
+    <core-input-select fxFlex="25%" fxFlex.lt-md="50%" fxFlex.xs="100%" [field]="modalidad" [entityName]="'modalidad'" [title]="'Modalidad'"></core-input-select>
+    <core-input-select-param fxFlex="25%" fxFlex.lt-md="50%" fxFlex.xs="100%" [field]="turno" [options]="['Mañana','Tarde','Noche']" [title]="'Turno'"></core-input-select-param>
+    <app-planificacion-input-picker fxFlex="50%" fxFlex.xs="100%"  fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column" [field]="planificacion"></app-planificacion-input-picker>  
+    <core-input-text  fxFlex="25%" fxFlex.lt-md="50%" fxFlex.xs="100%" [field]="identificacion" [title]="'Identificacion'"></core-input-text>
+    <core-input-autocomplete  fxFlex="25%" fxFlex.lt-md="50%" fxFlex.xs="100%" fxFlex="25%" [field]="comisionSiguiente" [entityName]="'comision'" [title]="'Comision Siguiente'"></core-input-autocomplete>
+    <core-input-textarea [field]="observaciones"  fxFlex="50%" fxFlex.lt-md="50%" fxFlex.xs="100%" [title]="'Observaciones'"></core-input-textarea>
+    <core-input-textarea [field]="comentario"  fxFlex="50%" fxFlex.lt-md="50%" fxFlex.xs="100%" [title]="'Comentario'"></core-input-textarea>
     
-    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
-      <app-planificacion-input-picker fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column" [field]="planificacion"></app-planificacion-input-picker>  
-      <div fxLayout="row" fxFlex="50%" fxFlex.lt-md="100%" fxLayoutGap="10px" fxLayout.xs="column">
-        <core-input-text [field]="identificacion" [title]="'Identificacion'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-text>
-        <core-input-autocomplete fxFlex="25%" [field]="comisionSiguiente" [entityName]="'comision'" [title]="'Comision Siguiente'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-autocomplete>
-      </div>
-    </div>
-
-    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
-      
-
-    </div>
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
-      <core-input-textarea [field]="observaciones" [title]="'Observaciones'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-textarea>
-      <core-input-textarea [field]="comentario" [title]="'Comentario'" fxFlex="50%" fxFlex.xs="100%" fxLayoutAlign="center center"></core-input-textarea>
-    </div>
     <mat-error *ngIf="fieldset.hasError('multiple')">
       Existen múltiples comisiones para la combinación modalidad/planificación seleccionada
     </mat-error>

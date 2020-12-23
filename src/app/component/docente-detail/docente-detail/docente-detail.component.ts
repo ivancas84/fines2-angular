@@ -7,6 +7,7 @@ import { DataDefinitionToolService } from '@service/data-definition/data-definit
 import { Observable, of } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Location } from '@angular/common';
+import { FieldConfig } from '@class/field-config';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { Location } from '@angular/common';
 export class DocenteDetailComponent extends DetailComponent {
   readonly entityName: string = "docente";
 
-  fields = [
+  fieldsConfig: FieldConfig[] = [
     {
       field:"nombres",
       label:"Nombres",
@@ -79,7 +80,9 @@ export class DocenteDetailComponent extends DetailComponent {
       field:"fecha_toma",
       label:"Fecha Toma",
       type:"date",
-      format: "dd/MM/yyyy"
+      format: "dd/MM/yyyy",
+      routerLink:"toma-detail",
+      queryParamField:"toma",
     },
     {
       field:"fecha_fin",
@@ -169,7 +172,7 @@ export class DocenteDetailComponent extends DetailComponent {
 
     return this.ddt.all("toma",display).pipe( 
       switchMap(
-        tomas => {return this.ddt.advancedColumnDataGroup(tomas, "toma", "asignacion_planilla_docente", ["planilla_docente.max"], {ultima_planilla_docente:"planilla_docente_max"})}
+        tomas => {return this.ddt.advancedColumnDataGroup(tomas, "toma", "asignacion_planilla_docente", ["planilla_docente.max"], {toma:"toma",ultima_planilla_docente:"planilla_docente_max"})}
       ),   
       switchMap(
         tomas => {return this.ddt.getAllColumnData(tomas, "ultima_planilla_docente", "planilla_docente",{numero_planilla_docente:"numero"})}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FieldView } from '@class/field-view';
+import { FieldConfig } from '@class/field-config';
 import { ShowComponent } from '@component/show/show.component';
 
 @Component({
@@ -10,7 +10,7 @@ export class DocenteShowComponent extends ShowComponent {
 
   readonly entityName: string = "docente";
 
-  infoColumns: FieldView[] = [    
+  fieldsConfig: FieldConfig[] = [    
     {
       field:"apellidos",
       label:"Apellidos",

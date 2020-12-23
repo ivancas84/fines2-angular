@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { FieldConfig } from '@class/field-config';
 import { ShowComponent } from '@component/show/show.component';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
-import { Observable, of } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-toma-show',
@@ -23,7 +24,7 @@ export class TomaShowComponent extends ShowComponent {
 
   }
   
-  infoColumns = [
+  fieldsConfig: FieldConfig[] = [
     {
       field:"fecha_toma",
       label:"Fecha Toma",

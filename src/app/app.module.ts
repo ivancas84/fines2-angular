@@ -44,6 +44,9 @@ import { LogoutComponent } from '@component/logout/logout.component';
 import { HomeComponent } from '@component/home/home.component';
 import { SocialLoginComponent } from '@component/social-login/social-login.component';
 
+import { CardDynamicComponent } from '@component/card-dynamic/card-dynamic.component';
+import { TableDynamicComponent } from '@component/table-dynamic/table-dynamic.component';
+import { FieldsetDynamicComponent } from '@component/fieldset-dynamic/fieldset-dynamic.component';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { DialogConfirmComponent } from '@component/dialog-confirm/dialog-confirm.component';
 import { InputAutocompleteComponent } from '@component/input-autocomplete/input-autocomplete.component';
@@ -57,6 +60,7 @@ import { InputSearchGoComponent } from '@component/input-search-go/input-search-
 import { InputTextComponent } from '@component/input-text/input-text.component';
 import { InputTextareaComponent } from '@component/input-textarea/input-textarea.component';
 import { InputTimepickerComponent } from '@component/input-timepicker/input-timepicker.component';
+import { InputCheckboxComponent } from '@component/input-checkbox/input-checkbox.component';
 import { InputYearComponent } from '@component/input-year/input-year.component';
 import { MenuComponent } from '@component/menu/menu.component';
 import { SearchAllComponent } from '@component/search-all/search-all.component';
@@ -116,11 +120,11 @@ import { CrComisionShowComponent } from '@component/consolidado-referente/comisi
 import { CrComisionTableComponent } from '@component/consolidado-referente/comision-table/comision-table.component';
 
 import { DocenteDetailComponent } from '@component/docente-detail/docente-detail/docente-detail.component';
-import { DdTomaTableComponent } from '@component/docente-detail/toma-table/toma-table.component';
-import { TableDynamicComponent } from '@component/table-dynamic/table-dynamic.component';
-import { TomaShowComponent } from '@component/toma-show/toma-show/toma-show.component';
-import { CardDynamicComponent } from '@component/card-dynamic/card-dynamic.component';
 
+import { TomaShowComponent } from '@component/toma-show/toma-show/toma-show.component';
+import { FieldInputComponent } from '@component/field-input/field-input.component';
+import { TomaDetailComponent } from '@component/toma-detail/toma-detail.component';
+import { AsignacionPlanillaDocenteAdminComponent } from '@component/asignacion-planilla-docente-admin/asignacion-planilla-docente-admin.component';
 
 @NgModule({
   declarations: [
@@ -149,6 +153,7 @@ import { CardDynamicComponent } from '@component/card-dynamic/card-dynamic.compo
     InputSelectValueComponent,
     InputSelectParamComponent,
     InputSearchGoComponent,
+    InputCheckboxComponent,
     InputTextComponent,
     InputTextareaComponent,
     InputTimepickerComponent,
@@ -161,19 +166,22 @@ import { CardDynamicComponent } from '@component/card-dynamic/card-dynamic.compo
     FieldTreeLabelComponent,
     TableDynamicComponent,
     CardDynamicComponent,
+    FieldsetDynamicComponent,
+    FieldInputComponent,
     //DynamicTableComponent,
 
     CalendarioLabelComponent, CalendarioInputSelectComponent, PlanificacionInputPickerComponent,
     CursoShortLabelComponent, InputCursoShortSelectComponent,
     CursoIgeLabelComponent,
 
+    AsignacionPlanillaDocenteAdminComponent,
     CdComisionShowComponent, CdComisionTableComponent,
     ComisionAdminComponent, ComisionFieldsetComponent, CaCursoTableComponent,
     ComisionHorariosAdminComponent, ComisionHorariosFieldsetComponent,
     ComisionShowComponent, ComisionTableComponent, ComisionSearchComponent, ComisionSearchParamsComponent,
     CursoAdminComponent, CursoFieldsetArrayComponent,
     DocenteTableComponent, DocenteShowComponent, DocenteSearchComponent,
-    DocenteDetailComponent, DdTomaTableComponent,
+    DocenteDetailComponent,
     PersonaAdminComponent, PersonaFieldsetComponent,
     PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent,
     RdPersonaAdminComponent, RdPersonaFieldsetComponent,
@@ -185,6 +193,7 @@ import { CardDynamicComponent } from '@component/card-dynamic/card-dynamic.compo
     TomaPosesionAdminComponent, TomaPosesionFieldsetComponent,
     TomaPosesionRealizadaComponent,
     CrComisionShowComponent, CrComisionTableComponent,
+    TomaDetailComponent,
 
     ListaAlumnosComponent,
     TomaShowComponent,

@@ -24,6 +24,8 @@ import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/pe
 import { DocenteShowComponent } from '@component/docente-show/docente-show/docente-show.component';
 import { DocenteDetailComponent } from '@component/docente-detail/docente-detail/docente-detail.component';
 import { TomaShowComponent } from '@component/toma-show/toma-show/toma-show.component';
+import { TomaDetailComponent } from '@component/toma-detail/toma-detail.component';
+import { AsignacionPlanillaDocenteAdminComponent } from '@component/asignacion-planilla-docente-admin/asignacion-planilla-docente-admin.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -32,6 +34,7 @@ const routes: Routes = [
   { path: 'social-login', component: SocialLoginComponent, pathMatch: 'full' },
   { path: '',  component: HomeComponent, pathMatch: 'full' },
 
+  { path: 'asignacion-planilla-docente-admin', component: AsignacionPlanillaDocenteAdminComponent, pathMatch: 'full' },
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
   { path: 'comision-show', component: ComisionShowComponent, pathMatch: 'full' },
   { path: 'comision-horarios-admin', component: ComisionHorariosAdminComponent, pathMatch: 'full' },
@@ -51,6 +54,7 @@ const routes: Routes = [
   { path: 'toma-show', component: TomaShowComponent, pathMatch: 'full' },
   { path: 'toma-posesion', component: TomaPosesionAdminComponent, pathMatch: 'full' },
   { path: 'toma-posesion-realizada', component: TomaPosesionRealizadaComponent, pathMatch: 'full' },
+  { path: 'toma-detail', component: TomaDetailComponent, pathMatch: 'full' },
 ];
 
 @NgModule({
