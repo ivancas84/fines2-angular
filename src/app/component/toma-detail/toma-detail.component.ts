@@ -35,21 +35,8 @@ export class TomaDetailComponent extends DetailComponent {
       entityName: "persona",
       routerLink: "persona-detail",
       queryParamField:"docente", 
-      widthXs: "50%",
-      widthMd: "100%",
+      widthGtSm: "33%",
     }),
-
-    new FieldConfig({
-      field:"reemplazo",
-      label:"Reemplazo",
-      type:"label",
-      entityName: "persona",
-      routerLink: "persona-detail",
-      queryParamField:"reemplazo", 
-      widthXs: "50%",
-      widthMd: "100%",
-    }),
-
 
     new FieldConfig({
       field:"curso",
@@ -58,10 +45,22 @@ export class TomaDetailComponent extends DetailComponent {
       entityName: "curso",
       routerLink: "curso-detail",
       queryParamField:"curso", 
-      widthXs: "100%",
-      widthMd: "100%",
+      widthGtSm: "34%",
     }),
 
+
+    new FieldConfig({
+      field:"reemplazo",
+      label:"Reemplazo",
+      type:"label",
+      entityName: "persona",
+      routerLink: "persona-detail",
+      queryParamField:"reemplazo",  
+      widthGtSm: "33%",
+    }),
+
+
+    
     new FieldConfig({
       field:"fecha_toma",
       label:"Fecha Toma",
@@ -104,12 +103,6 @@ export class TomaDetailComponent extends DetailComponent {
 
   fieldsConfigApd: FieldConfig[] = [
     {
-      field:"insertado",
-      label:"Insertado",
-      type:"date",
-      format:"dd/MM/yyyy HH:mm"
-    },
-    {
       field:"planilla_docente",
       label:"Planilla Docente",
       type:"label",
@@ -117,6 +110,16 @@ export class TomaDetailComponent extends DetailComponent {
       routerLink: "asignacion-planilla-docente-admin",
       queryParamField:"id", 
     },
+    {
+      field:"comentario",
+      label:"Comentario",
+    },
+    {
+      field:"reclamo",
+      label:"Reclamo",
+      type:"si_no",
+    },
+    
   ];  
 
 

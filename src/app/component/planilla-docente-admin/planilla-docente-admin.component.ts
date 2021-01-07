@@ -11,12 +11,12 @@ import { SessionStorageService } from '@service/storage/session-storage.service'
 import { FieldControl } from '@class/field-control';
 
 @Component({
-  selector: 'app-asignacion-planilla-docente-admin',
-  templateUrl: './asignacion-planilla-docente-admin.component.html',
+  selector: 'app-planilla-docente-admin',
+  templateUrl: './planilla-docente-admin.component.html',
 })
-export class AsignacionPlanillaDocenteAdminComponent extends AdminComponent {
+export class PlanillaDocenteAdminComponent extends AdminComponent {
 
-  readonly entityName: string = "asignacion_planilla_docente";
+  readonly entityName: string = "planilla_docente";
 
   constructor(
     protected fb: FormBuilder, 
@@ -40,34 +40,27 @@ export class AsignacionPlanillaDocenteAdminComponent extends AdminComponent {
     }),
 
     new FieldControl({
-      field:"comentario",
-      label:"Comentario",
-    }),
-
-    new FieldControl({
-      field:"reclamo",
-      label:"Reclamo",
-      type: "checkbox",
-      default: false,
-    }),
-
-    new FieldControl({
-      field:"planilla_docente",
-      label:"Planilla Docente",
-      type: "autocomplete",
-      entityName: "planilla_docente",
-      adminRoute: "planilla-docente-admin",
+      field:"numero",
+      label:"Numero",
       validators: [Validators.required],
       asyncValidators: [],
     }),
 
     new FieldControl({
-      field:"toma",
-      label:"Toma",
-      type: "autocomplete",
-      entityName: "toma",
-      validators: [Validators.required],
-      asyncValidators: [],
+      field:"fecha_contralor",
+      label:"Fecha Contralor",
+      type: "date",
+    }),
+
+    new FieldControl({
+      field:"fecha_consejo",
+      label:"Fecha Consejo",
+      type: "date",
+    }),
+
+    new FieldControl({
+      field:"observaciones",
+      label:"Observaciones",
     }),
 
   ];  

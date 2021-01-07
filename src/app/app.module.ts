@@ -125,6 +125,7 @@ import { TomaShowComponent } from '@component/toma-show/toma-show/toma-show.comp
 import { FieldInputComponent } from '@component/field-input/field-input.component';
 import { TomaDetailComponent } from '@component/toma-detail/toma-detail.component';
 import { AsignacionPlanillaDocenteAdminComponent } from '@component/asignacion-planilla-docente-admin/asignacion-planilla-docente-admin.component';
+import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin/planilla-docente-admin.component';
 
 @NgModule({
   declarations: [
@@ -197,6 +198,7 @@ import { AsignacionPlanillaDocenteAdminComponent } from '@component/asignacion-p
 
     ListaAlumnosComponent,
     TomaShowComponent,
+    PlanillaDocenteAdminComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,57 +18,41 @@ export class DocenteDetailComponent extends DetailComponent {
   readonly entityName: string = "docente";
 
   fieldsConfig: FieldConfig[] = [
-    {
+    new FieldConfig({
       field:"nombres",
       label:"Nombres",
-      widthXs:"25%",
-      widthMd:"50%",
-    },
-    {
+    }),
+    new FieldConfig({
       field:"apellidos",
       label:"Apellidos",
-      widthXs:"25%",
-      widthMd:"50%",
-    },
-    {
+    }),
+    new FieldConfig({
       field:"fecha_nacimiento",
       label:"Fecha Nacimiento",
       type:"date",
       format:"dd/MM/yyyy",
-      widthXs:"25%",
-      widthMd:"50%",
-    },
-    {
+    }),
+    new FieldConfig({
       field:"numero_documento",
       label:"Numero Documento",
-      widthXs:"25%",
-      widthMd:"50%",
-    },
-    {
+    }),
+    new FieldConfig({
       field:"cuil",
       label:"Cuil",
-      widthXs:"25%",
-      widthMd:"50%",
-    },
+    }),
     
-    {
+    new FieldConfig({
       field:"telefono",
       label:"Telefono",
-      widthXs:"25%",
-      widthMd:"50%",
-    },
-    {
+    }),
+    new FieldConfig({
       field:"email",
       label:"Email",
-      widthXs:"25%",
-      widthMd:"50%",
-    },
-    {
+    }),
+    new FieldConfig({
       field:"email_abc",
       label:"Email Abc",
-      widthXs:"25%",
-      widthMd:"50%",
-    },
+    }),
     
   ];  
 
@@ -82,7 +66,7 @@ export class DocenteDetailComponent extends DetailComponent {
       type:"date",
       format: "dd/MM/yyyy",
       routerLink:"toma-detail",
-      queryParamField:"toma",
+      queryParamField:"id",
     },
     {
       field:"fecha_fin",
