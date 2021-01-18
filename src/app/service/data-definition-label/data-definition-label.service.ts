@@ -75,5 +75,26 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
       )
     );
   }
+
+
+  labelComision(id: string): Observable<any> {
+    return this.dd.get("comision", id).pipe(
+      switchMap(
+        curso => {
+          return this.dd.getColumnData(curso,"planificacion","planificacion",{anio:"anio",semestre:"semestre"})
+        }
+      ),
+      switchMap(
+        curso => {
+          return this.dd.getColumnData(curso,"sede","sede",{numero_sede:"numero"})
+        }
+      ),
+      map(
+        curso => { 
+          return (!curso)? null : curso["numero_sede"]+curso["division"]+"/"+curso["anio"]+curso["semestre"]; 
+        }
+      )
+    );
+  }
   
 }

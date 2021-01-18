@@ -129,6 +129,8 @@ import { TomaDetailComponent } from '@component/toma-detail/toma-detail.componen
 import { AsignacionPlanillaDocenteAdminComponent } from '@component/asignacion-planilla-docente-admin/asignacion-planilla-docente-admin.component';
 import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin/planilla-docente-admin.component';
 import { FieldTreeComponent } from '@component/field-tree/field-tree.component';
+import { SearchDynamicComponent } from '@component/search-dynamic/search-dynamic.component';
+import { SearchParamsDynamicComponent } from '@component/search-params-dynamic/search-params-dynamic.component';
 
 @NgModule({
   declarations: [
@@ -172,6 +174,8 @@ import { FieldTreeComponent } from '@component/field-tree/field-tree.component';
     TableDynamicComponent,
     CardDynamicComponent,
     FieldsetDynamicComponent,
+    SearchDynamicComponent,
+    SearchParamsDynamicComponent,
     FieldInputComponent,
     //DynamicTableComponent,
 

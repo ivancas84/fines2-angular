@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ShowComponent } from '@component/show/show.component';
 import { FieldConfig } from '@class/field-config';
 import { FieldTreeElement } from '@class/field-tree-element';
+import { Validators } from '@angular/forms';
+import { FieldControl } from '@class/field-control';
+import { SearchDynamicOptions } from '@class/search-dynamic-options';
 
 @Component({
   selector: 'app-alumno-show',
@@ -10,6 +13,17 @@ import { FieldTreeElement } from '@class/field-tree-element';
 export class AlumnoShowComponent extends ShowComponent {
 
   readonly entityName: string = "alumno";
+
+  searchOptions: SearchDynamicOptions = new SearchDynamicOptions({searchParams:true})
+ 
+  fieldsControlSp: FieldControl[] = [
+    new FieldControl({
+      field:"per-search",
+      label:"Buscar",
+      widthSm:"100%",
+      widthGtSm:"100%",
+    }),
+  ];
 
   fieldsConfig: FieldConfig[] = [
     {
@@ -62,7 +76,7 @@ export class AlumnoShowComponent extends ShowComponent {
     {
       field:"comision",
       label:"Comision",
-      type:"tree",
+      type:"label",
       tree:
         new FieldTreeElement({
           entityName:"comision",
@@ -82,7 +96,7 @@ export class AlumnoShowComponent extends ShowComponent {
             }),
           ]
         }),
-      //entityName: "comision",
+      entityName: "comision",
       //routerLink: "comision-detail",
       //queryParamField:"comision", 
     },
