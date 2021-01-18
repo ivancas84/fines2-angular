@@ -5,6 +5,7 @@ import { LogoutComponent } from '@component/logout/logout.component';
 import { HomeComponent } from '@component/home/home.component';
 import { SocialLoginComponent } from '@component/social-login/social-login.component';
 
+import { AlumnoShowComponent } from '@component/alumno-show/alumno-show.component';
 import { PersonaShowComponent } from '@component/persona-show/persona-show/persona-show.component';
 import { ComisionHorariosAdminComponent } from '@component/comision-horarios-admin/comision-horarios-admin/comision-horarios-admin.component';
 import { ComisionShowComponent } from '@component/comision-show/comision-show/comision-show.component';
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'social-login', component: SocialLoginComponent, pathMatch: 'full' },
   { path: '',  component: HomeComponent, pathMatch: 'full' },
 
+  { path: 'alumno-show', component: AlumnoShowComponent, pathMatch: 'full' },
   { path: 'asignacion-planilla-docente-admin', component: AsignacionPlanillaDocenteAdminComponent, pathMatch: 'full' },
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
   { path: 'comision-show', component: ComisionShowComponent, pathMatch: 'full' },

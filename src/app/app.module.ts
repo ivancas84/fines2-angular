@@ -77,6 +77,8 @@ import { CursoShortLabelComponent } from '@component/reusable/curso-short-label/
 import { InputCursoShortSelectComponent } from '@component/reusable/input-curso-short-select/input-curso-short-select.component';
 import { PlanificacionInputPickerComponent } from '@component/reusable/planificacion-input-picker/planificacion-input-picker.component';
 
+import { AlumnoShowComponent } from '@component/alumno-show/alumno-show.component';
+
 import { DocenteTableComponent } from '@component/docente-show/docente-table/docente-table.component';
 import { DocenteShowComponent } from '@component/docente-show/docente-show/docente-show.component';
 import { DocenteSearchComponent } from '@component/docente-show/docente-search/docente-search.component';
@@ -126,6 +128,7 @@ import { FieldInputComponent } from '@component/field-input/field-input.componen
 import { TomaDetailComponent } from '@component/toma-detail/toma-detail.component';
 import { AsignacionPlanillaDocenteAdminComponent } from '@component/asignacion-planilla-docente-admin/asignacion-planilla-docente-admin.component';
 import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin/planilla-docente-admin.component';
+import { FieldTreeComponent } from '@component/field-tree/field-tree.component';
 
 @NgModule({
   declarations: [
@@ -165,6 +168,7 @@ import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin
     LabelComponent,
     FieldLabelComponent,
     FieldTreeLabelComponent,
+    FieldTreeComponent,
     TableDynamicComponent,
     CardDynamicComponent,
     FieldsetDynamicComponent,
@@ -175,6 +179,7 @@ import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin
     CursoShortLabelComponent, InputCursoShortSelectComponent,
     CursoIgeLabelComponent,
 
+    AlumnoShowComponent,
     AsignacionPlanillaDocenteAdminComponent,
     CdComisionShowComponent, CdComisionTableComponent,
     ComisionAdminComponent, ComisionFieldsetComponent, CaCursoTableComponent,

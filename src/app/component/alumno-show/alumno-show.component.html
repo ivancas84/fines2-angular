@@ -1,0 +1,9 @@
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
+
+<div *ngIf="(load$ | async); else loading">
+  <mat-progress-bar *ngIf="!load" mode="indeterminate"></mat-progress-bar>
+  <!-- app-alumno-search [display]="display"></app-alumno-search -->
+  <core-table-dynamic [dataSource]="data" [length]="length" [display]="display" [fieldsConfig]="fieldsConfig"></core-table-dynamic>
+</div>

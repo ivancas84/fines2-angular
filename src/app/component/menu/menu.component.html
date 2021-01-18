@@ -4,12 +4,20 @@
 
   
   <button *ngIf="authenticated" mat-button [matMenuTriggerFor]="docente" aria-label="icon-button with menu icon">
+    Alumno
+  </button>
+  <mat-menu #docente="matMenu">
+    <a mat-menu-item routerLink="/alumno-show" routerLinkActive="active" title="Ver Alumno">Buscar</a>
+  </mat-menu>
+
+  <button *ngIf="authenticated" mat-button [matMenuTriggerFor]="docente" aria-label="icon-button with menu icon">
     Docente
   </button>
   <mat-menu #docente="matMenu">
     <a mat-menu-item routerLink="/docente-show" routerLinkActive="active" title="Ver Docente">Buscar</a>
     <a mat-menu-item routerLink="/toma-show" routerLinkActive="active" title="Ver Tomas">Tomas de Posesión</a>
   </mat-menu>
+
 
   <button *ngIf="authenticated" mat-button [matMenuTriggerFor]="info" aria-label="icon-button with menu icon">
     Info
