@@ -15,6 +15,7 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
   }
 
   label(entityName: string, id: string): Observable<string> {
+    if(!id) return of(null);
     var l = super.label(entityName, id);
     if(l) return l;
     switch(entityName){
