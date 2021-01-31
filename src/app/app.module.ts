@@ -47,6 +47,7 @@ import { SocialLoginComponent } from '@component/social-login/social-login.compo
 import { CardDynamicComponent } from '@component/card-dynamic/card-dynamic.component';
 import { TableDynamicComponent } from '@component/table-dynamic/table-dynamic.component';
 import { FieldsetDynamicComponent } from '@component/fieldset-dynamic/fieldset-dynamic.component';
+//import { BackupComponent } from '@component/backup/backup.component';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { DialogConfirmComponent } from '@component/dialog-confirm/dialog-confirm.component';
 import { InputAutocompleteComponent } from '@component/input-autocomplete/input-autocomplete.component';
@@ -56,11 +57,13 @@ import { InputSelectCheckboxComponent } from '@component/input-select-checkbox/i
 import { InputSelectComponent } from '@component/input-select/input-select.component';
 import { InputSelectValueComponent } from '@component/input-select-value/input-select-value.component';
 import { InputSelectParamComponent } from '@component/input-select-param/input-select-param.component';
+//import { InputSelectLabelComponent } from '@component/input-select-label/input-select-label.component';
 import { InputSearchGoComponent } from '@component/input-search-go/input-search-go.component';
 import { InputTextComponent } from '@component/input-text/input-text.component';
 import { InputTextareaComponent } from '@component/input-textarea/input-textarea.component';
 import { InputTimepickerComponent } from '@component/input-timepicker/input-timepicker.component';
 import { InputCheckboxComponent } from '@component/input-checkbox/input-checkbox.component';
+//import { InputYmComponent } from '@component/input-ym/input-ym.component';
 import { InputYearComponent } from '@component/input-year/input-year.component';
 import { MenuComponent } from '@component/menu/menu.component';
 import { SearchAllComponent } from '@component/search-all/search-all.component';
@@ -146,12 +149,14 @@ import { SearchParamsDynamicComponent } from '@component/search-params-dynamic/s
     SocialLoginComponent,
     LogoutComponent,
     HomeComponent,
+    //BackupComponent,
 
     DialogAlertComponent,
     DialogConfirmComponent,
     FieldViewComponent,
     FieldValueComponent,
     InputAutocompleteComponent,
+    InputCheckboxComponent,
     InputDateComponent,
     InputNumberComponent,
     InputSelectCheckboxComponent,
@@ -159,7 +164,6 @@ import { SearchParamsDynamicComponent } from '@component/search-params-dynamic/s
     InputSelectValueComponent,
     InputSelectParamComponent,
     InputSearchGoComponent,
-    InputCheckboxComponent,
     InputTextComponent,
     InputTextareaComponent,
     InputTimepickerComponent,
