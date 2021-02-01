@@ -20,8 +20,10 @@
               <mat-card-subtitle><core-field-label [entityName]="'sede'" [fieldNames]="['nombre']" [id]="row.sede"></core-field-label></mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-              <mat-list role="list" >                
-                <mat-list-item *ngIf="row.planificacion" role="listitem"><core-field-tree-label [entityName]="'planificacion'" [tree]="{plan:'plan'}" [fieldNames]="['orientacion','distribucion_horaria']" [id]="row.planificacion" [join]="' - '"></core-field-tree-label></mat-list-item>
+              <mat-list role="list" >
+                <mat-list-item *ngIf="row.planificacion" role="listitem">
+                  <core-field-tree [tree]="planificacionTree" [id]="row.planificacion"></core-field-tree>
+                </mat-list-item>
                 <mat-list-item *ngIf="row.calendario" role="listitem"><core-label [entityName]="'calendario_as'" [id]="row.calendario"></core-label></mat-list-item>
                </mat-list>
             </mat-card-content>
@@ -37,7 +39,6 @@
                  <strong><core-field-label [entityName]="'asignatura'" [fieldNames]="['nombre']" [id]="curso.asignatura"></core-field-label>
                   IGE {{curso.ige}}<a routerLink="/toma-admin" [queryParams]="{'curso':curso.id}"><mat-icon>edit</mat-icon></a></strong>  
                 <br><span class="mat-small">&nbsp;{{curso.horario}} - {{curso.horas_catedra}} horas cátedra</span>
-                
                 <mat-list role="list" dense>
                   <mat-list-item *ngFor="let toma of curso.tomas" role="listitem" [ngClass]="{'green': toma.estado == 'Aprobada', 'yellow': toma.estado == 'Pendiente', 'red':toma.estado == 'Renuncia'}">
                     <span *ngIf="toma.docente">

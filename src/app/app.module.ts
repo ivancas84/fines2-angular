@@ -134,6 +134,7 @@ import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin
 import { FieldTreeComponent } from '@component/field-tree/field-tree.component';
 import { SearchDynamicComponent } from '@component/search-dynamic/search-dynamic.component';
 import { SearchParamsDynamicComponent } from '@component/search-params-dynamic/search-params-dynamic.component';
+import { MenuLoginComponent } from '@component/menu-login/menu-login.component';
 
 @NgModule({
   declarations: [
@@ -181,6 +182,7 @@ import { SearchParamsDynamicComponent } from '@component/search-params-dynamic/s
     SearchDynamicComponent,
     SearchParamsDynamicComponent,
     FieldInputComponent,
+    MenuLoginComponent,
     //DynamicTableComponent,
 
     CalendarioLabelComponent, CalendarioInputSelectComponent, PlanificacionInputPickerComponent,

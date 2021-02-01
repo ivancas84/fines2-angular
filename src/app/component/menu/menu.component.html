@@ -1,14 +1,14 @@
 <mat-toolbar>
   <span>Fines 2</span>
   
-  <button *ngIf="authenticated" mat-button [matMenuTriggerFor]="docente" aria-label="icon-button with menu icon">
+  <button mat-button [matMenuTriggerFor]="alumno" aria-label="icon-button with menu icon">
     Alumno
   </button>
-  <mat-menu #docente="matMenu">
+  <mat-menu #alumno="matMenu">
     <a mat-menu-item routerLink="/alumno-show" routerLinkActive="active" title="Ver Alumno">Buscar</a>
   </mat-menu>
 
-  <button *ngIf="authenticated" mat-button [matMenuTriggerFor]="docente" aria-label="icon-button with menu icon">
+  <button mat-button [matMenuTriggerFor]="docente" aria-label="icon-button with menu icon">
     Docente
   </button>
   <mat-menu #docente="matMenu">
@@ -17,11 +17,11 @@
   </mat-menu>
 
 
-  <button *ngIf="authenticated" mat-button [matMenuTriggerFor]="info" aria-label="icon-button with menu icon">
+  <button mat-button [matMenuTriggerFor]="info" aria-label="icon-button with menu icon">
     Info
   </button>
   <mat-menu #info="matMenu">
-    <a mat-menu-item routerLink="/comision-show" routerLinkActive="active" title="Consolidado">Consolidado</a>
+    <a mat-menu-item routerLink="/comision-show" routerLinkActive="active" title="Consolidado" [queryParams]="comisionShowQueryParams">Consolidado</a>
   </mat-menu>
 
   <button *ngIf="view.includes('new-menu')" mat-button [matMenuTriggerFor]="nuevo" aria-label="icon-button with menu icon">
@@ -36,9 +36,7 @@
   
   <span fxFlex="1 1 auto"></span>
 
-  <a *ngIf="!authenticated" mat-menu-item routerLink="/login" routerLinkActive="active" title="Login"><mat-icon>login</mat-icon></a>    
-
-  <a *ngIf="authenticated" mat-menu-item routerLink="/logout" routerLinkActive="active" title="Logout"><mat-icon>logout</mat-icon></a>
+  <a mat-menu-item routerLink="/logout" routerLinkActive="active" title="Logout"><mat-icon>logout</mat-icon></a>
 
 </mat-toolbar>
 

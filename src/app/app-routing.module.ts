@@ -28,6 +28,7 @@ import { TomaShowComponent } from '@component/toma-show/toma-show/toma-show.comp
 import { TomaDetailComponent } from '@component/toma-detail/toma-detail.component';
 import { AsignacionPlanillaDocenteAdminComponent } from '@component/asignacion-planilla-docente-admin/asignacion-planilla-docente-admin.component';
 import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin/planilla-docente-admin.component';
+import { AuthGuardService } from '@service/auth/auth-guard.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -45,7 +46,7 @@ const routes: Routes = [
   { path: 'consolidado-referente', component: CrComisionShowComponent, pathMatch: 'full' },
   { path: 'curso-admin', component: CursoAdminComponent, pathMatch: 'full' },
   { path: 'docente-detail', component: DocenteDetailComponent, pathMatch: 'full' },
-  { path: 'docente-show', component: DocenteShowComponent, pathMatch: 'full' },
+  { path: 'docente-show', component: DocenteShowComponent, pathMatch: 'full', canActivate : [AuthGuardService]  },
   { path: 'horario-admin', component: HorarioAdminComponent, pathMatch: 'full' },
   { path: 'lista-alumnos', component: ListaAlumnosComponent, pathMatch: 'full' },
   { path: 'persona-admin', component: PersonaAdminComponent, pathMatch: 'full' },

@@ -4,6 +4,7 @@ import { mergeMap, map, tap, first, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { DataToolsService } from '@service/data-tools.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { FieldTreeElement } from '@class/field-tree-element';
 
 @Component({
   selector: 'app-comision-table',
@@ -41,6 +42,18 @@ export class ComisionTableComponent extends TableComponent implements OnChanges 
   data$: BehaviorSubject<any> = new BehaviorSubject(null);
   dataSource: any;
   @Input() data;
+
+  planificacionTree = new FieldTreeElement({
+    entityName:"planificacion",
+    fkName:"plan",
+    tree:[
+      new FieldTreeElement({
+        entityName:"plan",
+        fieldNames:["orientacion","distribucion_horaria"],
+        join:" - "
+      })
+    ]
+  })
 
   ngOnChanges(changes: SimpleChanges): void {
     if( changes['data'] && changes['data'].previousValue != changes['data'].currentValue ) {    
