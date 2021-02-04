@@ -34,15 +34,20 @@
           </mat-card>
         </div>
         <div fxFlex="50%" fxFlex.xs="100%">
-            <mat-card *ngFor="let curso of row.cursos">
+            <mat-card *ngFor="let curso of row._curso">
               <mat-card-content>
                  <strong><core-field-label [entityName]="'asignatura'" [fieldNames]="['nombre']" [id]="curso.asignatura"></core-field-label>
                   IGE {{curso.ige}}<a routerLink="/toma-admin" [queryParams]="{'curso':curso.id}"><mat-icon>edit</mat-icon></a></strong>  
                 <br><span class="mat-small">&nbsp;{{curso.horario}} - {{curso.horas_catedra}} horas cátedra</span>
                 <mat-list role="list" dense>
-                  <mat-list-item *ngFor="let toma of curso.tomas" role="listitem" [ngClass]="{'green': toma.estado == 'Aprobada', 'yellow': toma.estado == 'Pendiente', 'red':toma.estado == 'Renuncia'}">
-                    <span *ngIf="toma.docente">
-                      <core-field-label [entityName]="'persona'" [fieldNames]="['nombres','apellidos']" [id]="toma.docente"></core-field-label></span>&nbsp;{{toma.fecha_toma | toDate | date:"d/M/y"}}
+                  <mat-list-item *ngFor="let toma of curso._toma" role="listitem" [ngClass]="{'green': toma.estado == 'Aprobada', 'yellow': toma.estado == 'Pendiente', 'red':toma.estado == 'Renuncia'}">
+                    <a *ngIf="toma.docente"routerLink="/docente-detail" [queryParams]="{id: toma.docente}">
+                      <core-field-label [entityName]="'persona'" [fieldNames]="['nombres','apellidos']" [id]="toma.docente"></core-field-label>
+                    </a>
+                    &nbsp;{{toma.fecha_toma | toDate | date:"d/M/y"}}
+                    &nbsp;<a *ngIf="toma.planilla_docente" routerLink="/planilla-docente-admin" [queryParams]="{numero: toma.planilla_docente}">
+                      ({{toma.planilla_docente}})
+                    </a>
                   </mat-list-item>
                 </mat-list>
               </mat-card-content>

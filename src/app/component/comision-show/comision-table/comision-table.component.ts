@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { DataToolsService } from '@service/data-tools.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FieldTreeElement } from '@class/field-tree-element';
+import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
+import { recursiveData } from '@function/recursive-data';
 
 @Component({
   selector: 'app-comision-table',
@@ -31,6 +33,7 @@ export class ComisionTableComponent extends TableComponent implements OnChanges 
   displayedColumns: string[] = ['comision', 'detalle'];
 
   constructor(
+    protected ddt: DataDefinitionToolService,
     protected dt: DataToolsService, 
     protected router: Router,
   ) {
@@ -62,18 +65,41 @@ export class ComisionTableComponent extends TableComponent implements OnChanges 
   }
   
   ngOnInit(): void {
-    this.load$ = this.data$.pipe(      
+    super.ngOnInit();
+    this.load$ = this.data$.pipe(
       switchMap(
-        comisiones => {
+        data => {
           this.load = false;
-          return this.dt.asignarCursosAComisiones(comisiones);
+          return this.ddt.getAllColumnDataUm(data,"comision","curso")
+        }
+      ),
+      switchMap(
+        data => {
+          return this.ddt.getTree(["_curso"],data,"getAllColumnDataUm",{fkName:"curso",entityName:"toma"});
+        }
+      ),
+      switchMap(
+        data => {
+          return this.ddt.getTree(["_curso"],data,"getPostAllColumnData",{
+            method:"info", entityName:"curso_horario",
+            fieldNameData:"id",  fieldNameResponse:"curso",
+            fields:{horario:"horario"}
+          });
+        }
+      ),
+      switchMap(
+        data => {
+          return this.ddt.getTree(["_curso","_toma"],data,"advancedColumnDataGroup",{
+            fieldName:"toma", entityName:"asignacion_planilla_docente",
+            fields:["pd-numero.max"],fieldsResponse:{"planilla_docente":"pd_numero_max"}
+          });
         }
       ),
       map(
         data => {
           this.dataSource = data;
           return this.load = true;
-        }
+        }   
       )
     )
   }
