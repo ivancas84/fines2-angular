@@ -64,7 +64,7 @@ export class AlumnoShowComponent extends ShowComponent {
   ];  
   fieldsControlSp: FieldControl[] = [
     new FieldControl({
-      field:"search",
+      field:"per-search",
       label:"Buscar",
       widthSm: "100%",
       widthGtSm: "100%",

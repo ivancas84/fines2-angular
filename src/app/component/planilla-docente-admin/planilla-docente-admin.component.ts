@@ -12,11 +12,12 @@ import { FieldControl } from '@class/field-control';
 
 @Component({
   selector: 'app-planilla-docente-admin',
-  templateUrl: './planilla-docente-admin.component.html',
+  templateUrl: '../../core/component/admin/admin.component.html',
 })
 export class PlanillaDocenteAdminComponent extends AdminComponent {
 
   readonly entityName: string = "planilla_docente";
+  title:string = "Planilla Docente"
 
   constructor(
     protected fb: FormBuilder, 
