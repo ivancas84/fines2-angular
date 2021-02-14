@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DetailComponent } from '@component/detail/detail.component';
-import { FieldConfig } from '@class/field-config';
+import { FieldViewOptions } from '@class/field-view-options';
 import { Display } from '@class/display';
 import { Observable } from 'rxjs';
 import { tap, switchMap, map } from 'rxjs/operators';
@@ -27,8 +27,8 @@ export class TomaDetailComponent extends DetailComponent {
 
   }
   
-  fieldsConfig: FieldConfig[] = [
-    new FieldConfig({
+  fieldsViewOptions: FieldViewOptions[] = [
+    new FieldViewOptions({
       field:"docente",
       label:"Docente",
       type:"label",
@@ -38,7 +38,7 @@ export class TomaDetailComponent extends DetailComponent {
       widthGtSm: "33%",
     }),
 
-    new FieldConfig({
+    new FieldViewOptions({
       field:"curso",
       label:"Curso",
       type:"label",
@@ -49,7 +49,7 @@ export class TomaDetailComponent extends DetailComponent {
     }),
 
 
-    new FieldConfig({
+    new FieldViewOptions({
       field:"reemplazo",
       label:"Reemplazo",
       type:"label",
@@ -61,39 +61,39 @@ export class TomaDetailComponent extends DetailComponent {
 
 
     
-    new FieldConfig({
+    new FieldViewOptions({
       field:"fecha_toma",
       label:"Fecha Toma",
       type:"date",
       format:"dd/MM/yyyy",
     }),
 
-    new FieldConfig({
+    new FieldViewOptions({
       field:"estado",
       label:"Estado",
     }),
 
-    new FieldConfig({
+    new FieldViewOptions({
       field:"observaciones",
       label:"Observaciones",
     }),
 
-    new FieldConfig({
+    new FieldViewOptions({
       field:"comentario",
       label:"Comentario",
     }),
 
-    new FieldConfig({
+    new FieldViewOptions({
       field:"tipo_movimiento",
       label:"Tipo Movimiento",
     }),
 
-    new FieldConfig({
+    new FieldViewOptions({
       field:"estado_contralor",
       label:"Estado Contralor",
     }),
 
-    new FieldConfig({
+    new FieldViewOptions({
       field:"alta",
       label:"Alta",
       type:"date",
@@ -101,7 +101,7 @@ export class TomaDetailComponent extends DetailComponent {
     }),
   ];  
 
-  fieldsConfigApd: FieldConfig[] = [
+  fieldsViewOptionsApd: FieldViewOptions[] = [
     {
       field:"planilla_docente",
       label:"Planilla Docente",

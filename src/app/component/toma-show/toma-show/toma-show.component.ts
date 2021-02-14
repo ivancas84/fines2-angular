@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { FieldConfig } from '@class/field-config';
+import { FieldViewOptions } from '@class/field-view-options';
 import { ShowComponent } from '@component/show/show.component';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { Observable } from 'rxjs';
@@ -24,7 +24,7 @@ export class TomaShowComponent extends ShowComponent {
 
   }
   
-  fieldsConfig: FieldConfig[] = [
+  fieldsViewOptions: FieldViewOptions[] = [
     {
       field:"fecha_toma",
       label:"Fecha Toma",

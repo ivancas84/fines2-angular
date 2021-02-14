@@ -7,7 +7,7 @@ import { DataDefinitionToolService } from '@service/data-definition/data-definit
 import { Observable, of } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Location } from '@angular/common';
-import { FieldConfig } from '@class/field-config';
+import { FieldViewOptions } from '@class/field-view-options';
 
 
 @Component({
@@ -17,39 +17,39 @@ import { FieldConfig } from '@class/field-config';
 export class DocenteDetailComponent extends DetailComponent {
   readonly entityName: string = "docente";
 
-  fieldsConfig: FieldConfig[] = [
-    new FieldConfig({
+  fieldsViewOptions: FieldViewOptions[] = [
+    new FieldViewOptions({
       field:"nombres",
       label:"Nombres",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"apellidos",
       label:"Apellidos",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"fecha_nacimiento",
       label:"Fecha Nacimiento",
       type:"date",
       format:"dd/MM/yyyy",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"numero_documento",
       label:"Numero Documento",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"cuil",
       label:"Cuil",
     }),
     
-    new FieldConfig({
+    new FieldViewOptions({
       field:"telefono",
       label:"Telefono",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"email",
       label:"Email",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"email_abc",
       label:"Email Abc",
     }),

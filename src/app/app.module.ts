@@ -70,7 +70,6 @@ import { SearchAllComponent } from '@component/search-all/search-all.component';
 import { LabelComponent } from '@component/label/label.component';
 import { FieldLabelComponent } from '@component/field-label/field-label.component';
 import { FieldTreeLabelComponent } from '@component/field-tree-label/field-tree-label.component';
-import { FieldValueComponent } from '@component/field-value/field-value.component';
 import { FieldViewComponent } from '@component/field-view/field-view.component';
 
 import { CalendarioInputSelectComponent } from '@component/reusable/calendario-input-select/calendario-input-select.component';
@@ -127,7 +126,6 @@ import { CrComisionTableComponent } from '@component/consolidado-referente/comis
 import { DocenteDetailComponent } from '@component/docente-detail/docente-detail/docente-detail.component';
 
 import { TomaShowComponent } from '@component/toma-show/toma-show/toma-show.component';
-import { FieldInputComponent } from '@component/field-input/field-input.component';
 import { TomaDetailComponent } from '@component/toma-detail/toma-detail.component';
 import { AsignacionPlanillaDocenteAdminComponent } from '@component/asignacion-planilla-docente-admin/asignacion-planilla-docente-admin.component';
 import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin/planilla-docente-admin.component';
@@ -135,6 +133,8 @@ import { FieldTreeComponent } from '@component/field-tree/field-tree.component';
 import { SearchDynamicComponent } from '@component/search-dynamic/search-dynamic.component';
 import { SearchParamsDynamicComponent } from '@component/search-params-dynamic/search-params-dynamic.component';
 import { MenuLoginComponent } from '@component/menu-login/menu-login.component';
+import { FieldViewAuxComponent } from '@component/field-view-aux/field-view-aux.component';
+import { InputPersistComponent } from '@component/input-persist/input-persist.component';
 
 @NgModule({
   declarations: [
@@ -155,7 +155,7 @@ import { MenuLoginComponent } from '@component/menu-login/menu-login.component';
     DialogAlertComponent,
     DialogConfirmComponent,
     FieldViewComponent,
-    FieldValueComponent,
+    FieldViewAuxComponent,
     InputAutocompleteComponent,
     InputCheckboxComponent,
     InputDateComponent,
@@ -169,6 +169,7 @@ import { MenuLoginComponent } from '@component/menu-login/menu-login.component';
     InputTextareaComponent,
     InputTimepickerComponent,
     InputYearComponent,
+    InputPersistComponent,
     //InputYmComponent,
     MenuComponent,
     SearchAllComponent,
@@ -181,7 +182,6 @@ import { MenuLoginComponent } from '@component/menu-login/menu-login.component';
     FieldsetDynamicComponent,
     SearchDynamicComponent,
     SearchParamsDynamicComponent,
-    FieldInputComponent,
     MenuLoginComponent,
     //DynamicTableComponent,
 

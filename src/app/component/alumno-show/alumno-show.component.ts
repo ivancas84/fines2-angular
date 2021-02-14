@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ShowComponent } from '@component/show/show.component';
-import { FieldConfig } from '@class/field-config';
-import { FieldControl } from '@class/field-control';
+import { FieldViewOptions } from '@class/field-view-options';
+import { InputPersistOptions } from '@class/field-view-aux-options';
 
 @Component({
   selector: 'app-alumno-show',
@@ -11,116 +11,128 @@ export class AlumnoShowComponent extends ShowComponent {
 
   readonly entityName: string = "alumno";
 
-  fieldsConfig: FieldConfig[] = [
-    new FieldConfig({
+  fieldsViewOptions: FieldViewOptions[] = [
+    new FieldViewOptions({
       field:"fotocopia_documento",
       label:"Fotocopia Documento",
       type:"si_no",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"partida_nacimiento",
       label:"Partida Nacimiento",
       type:"si_no",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"constancia_cuil",
       label:"Constancia Cuil",
       type:"si_no",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"certificado_estudios",
       label:"Certificado Estudios",
       type:"si_no",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"anio_ingreso",
       label:"Anio Ingreso",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"activo",
       label:"Activo",
-      type:"si_no",
+      type:"input_checkbox",
+      entityName:"alumno",
+      aux:new InputPersistOptions({
+        params:{id:"{{id}}",api:"persist"}
+      })
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"observaciones",
       label:"Observaciones",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"persona",
       label:"Persona",
       type:"label",
-      entityName: "persona",
+      entityNameRef: "persona",
       //routerLink: "persona-detail",
       //queryParamField:"persona", 
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"comision",
       label:"Comision",
       type:"label",
-      entityName: "comision",
+      entityNameRef: "comision",
       //routerLink: "comision-detail",
       //queryParamField:"comision", 
     }),
   ];  
-  fieldsControlSp: FieldControl[] = [
-    new FieldControl({
+  fieldsViewOptionsSp: FieldViewOptions[] = [
+    new FieldViewOptions({
       field:"per-search",
       label:"Buscar",
       widthSm: "100%",
       widthGtSm: "100%",
+      type:"input_text"
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"fotocopia_documento",
       label:"Fotocopia Documento",
-      type: "select_checkbox",
+      type: "input_select_checkbox",
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"partida_nacimiento",
       label:"Partida Nacimiento",
-      type: "select_checkbox",
+      type: "input_select_checkbox",
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"constancia_cuil",
       label:"Constancia Cuil",
-      type: "select_checkbox",
+      type: "input_select_checkbox",
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"certificado_estudios",
       label:"Certificado Estudios",
-      type: "select_checkbox",
+      type: "input_select_checkbox",
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"anio_ingreso",
       label:"Anio Ingreso",
-      type: "select_param",
+      type: "input_select_param",
       options: ['1','2','3'],
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"activo",
       label:"Activo",
-      type: "select_checkbox",
+      type: "input_select_checkbox",
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"persona",
       label:"Persona",
-      type: "autocomplete",
+      type: "input_autocomplete",
       entityName: "persona",
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"comision",
       label:"Comision",
-      type: "autocomplete",
+      type: "input_autocomplete",
       entityName: "comision",
     }),
 
   ];  
+
+
+  activoInput: FieldViewOptions = new FieldViewOptions({
+    field:"activo", 
+    type:"input_checkbox"
+  });
+
 }
 
