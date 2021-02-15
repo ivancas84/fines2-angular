@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FieldDateOptions } from '@class/field-type-options';
+import { RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldViewOptions } from '@class/field-view-options';
 import { ShowComponent } from '@component/show/show.component';
 
@@ -14,8 +16,7 @@ export class DocenteShowComponent extends ShowComponent {
     {
       field:"apellidos",
       label:"Apellidos",
-      routerLink:"docente-detail",
-      queryParamField:"id"
+      aux: new RouterLinkOptions({path:"docente-detail", params:{id:"{{id}}"}})
     },
     {
       field:"nombres",
@@ -28,8 +29,7 @@ export class DocenteShowComponent extends ShowComponent {
     {
       field:"fecha_nacimiento",
       label:"Fecha Nacimiento",
-      type:"date",
-      format:"dd/MM/yyyy"
+      type:new FieldDateOptions(),
     },
     {
       field:"telefono",

@@ -9,6 +9,9 @@ import { ActivatedRoute } from '@angular/router';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { Location } from '@angular/common';
 import { TableDynamicOptions } from '@class/table-dynamic-options';
+import { FieldDateOptions, FieldLabelOptions, FieldYesNoOptions } from '@class/field-type-options';
+import { FieldWidthOptions } from '@class/field-width-options';
+import { RouterLinkOptions } from '@class/field-view-aux-options';
 
 @Component({
   selector: 'app-toma-detail',
@@ -31,32 +34,26 @@ export class TomaDetailComponent extends DetailComponent {
     new FieldViewOptions({
       field:"docente",
       label:"Docente",
-      type:"label",
-      entityName: "persona",
-      routerLink: "persona-detail",
-      queryParamField:"docente", 
-      widthGtSm: "33%",
+      type:new FieldLabelOptions({entityName: "persona"}),
+      aux:new RouterLinkOptions({path:"persona-detail",params:{id:"{{docente}}"}}),
+      width:new FieldWidthOptions({gtSm:"33%"})
     }),
 
     new FieldViewOptions({
       field:"curso",
       label:"Curso",
-      type:"label",
-      entityName: "curso",
-      routerLink: "curso-detail",
-      queryParamField:"curso", 
-      widthGtSm: "34%",
+      type:new FieldLabelOptions({entityName: "curso"}),
+      aux:new RouterLinkOptions({path:"curso-detail",params:{id:"{{curso}}"}}),
+      width:new FieldWidthOptions({gtSm:"34%"})
     }),
 
 
     new FieldViewOptions({
       field:"reemplazo",
       label:"Reemplazo",
-      type:"label",
-      entityName: "persona",
-      routerLink: "persona-detail",
-      queryParamField:"reemplazo",  
-      widthGtSm: "33%",
+      type:new FieldLabelOptions({entityName: "persona"}),
+      aux:new RouterLinkOptions({path:"persona-detail",params:{id:"{{reemplazo}}"}}),
+      width:new FieldWidthOptions({gtSm:"33%"})
     }),
 
 
@@ -64,8 +61,7 @@ export class TomaDetailComponent extends DetailComponent {
     new FieldViewOptions({
       field:"fecha_toma",
       label:"Fecha Toma",
-      type:"date",
-      format:"dd/MM/yyyy",
+      type:new FieldDateOptions(),
     }),
 
     new FieldViewOptions({
@@ -96,8 +92,7 @@ export class TomaDetailComponent extends DetailComponent {
     new FieldViewOptions({
       field:"alta",
       label:"Alta",
-      type:"date",
-      format:"dd/MM/yyyy HH:mm",
+      type:new FieldDateOptions({format:"dd/MM/yyyy HH:mm"})
     }),
   ];  
 
@@ -105,10 +100,8 @@ export class TomaDetailComponent extends DetailComponent {
     {
       field:"planilla_docente",
       label:"Planilla Docente",
-      type:"label",
-      entityName: "planilla_docente",
-      routerLink: "asignacion-planilla-docente-admin",
-      queryParamField:"id", 
+      type:new FieldLabelOptions({entityName:"planilla_docente"}),
+      aux:new RouterLinkOptions({path:"asignacion-planilla-docente-admin", params:{id:"{{id}}"}})
     },
     {
       field:"comentario",
@@ -117,7 +110,7 @@ export class TomaDetailComponent extends DetailComponent {
     {
       field:"reclamo",
       label:"Reclamo",
-      type:"si_no",
+      type:new FieldYesNoOptions(),
     },
     
   ];  

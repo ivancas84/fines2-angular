@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ShowComponent } from '@component/show/show.component';
 import { FieldViewOptions } from '@class/field-view-options';
-import { InputPersistOptions } from '@class/field-view-aux-options';
+import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
+import { FieldInputAutocompleteOptions, FieldInputCheckboxOptions, FieldInputSelectCheckboxOptions, FieldInputSelectParamOptions, FieldInputTextOptions, FieldLabelOptions, FieldYesNoOptions } from '@class/field-type-options';
+import { FieldWidthOptions } from '@class/field-width-options';
 
 @Component({
   selector: 'app-alumno-show',
@@ -15,22 +17,22 @@ export class AlumnoShowComponent extends ShowComponent {
     new FieldViewOptions({
       field:"fotocopia_documento",
       label:"Fotocopia Documento",
-      type:"si_no",
+      type:new FieldYesNoOptions(),
     }),
     new FieldViewOptions({
       field:"partida_nacimiento",
       label:"Partida Nacimiento",
-      type:"si_no",
+      type:new FieldYesNoOptions(),
     }),
     new FieldViewOptions({
       field:"constancia_cuil",
       label:"Constancia Cuil",
-      type:"si_no",
+      type:new FieldYesNoOptions(),
     }),
     new FieldViewOptions({
       field:"certificado_estudios",
       label:"Certificado Estudios",
-      type:"si_no",
+      type:new FieldYesNoOptions(),
     }),
     new FieldViewOptions({
       field:"anio_ingreso",
@@ -39,7 +41,7 @@ export class AlumnoShowComponent extends ShowComponent {
     new FieldViewOptions({
       field:"activo",
       label:"Activo",
-      type:"input_checkbox",
+      type:new FieldInputCheckboxOptions(),
       entityName:"alumno",
       aux:new InputPersistOptions({
         params:{id:"{{id}}",api:"persist"}
@@ -52,86 +54,77 @@ export class AlumnoShowComponent extends ShowComponent {
     new FieldViewOptions({
       field:"persona",
       label:"Persona",
-      type:"label",
-      entityNameRef: "persona",
-      //routerLink: "persona-detail",
-      //queryParamField:"persona", 
+      type:new FieldLabelOptions({entityName:"persona"}),
+      //aux: new RouterLinkOptions({path:"persona-detail",params:{id:"{{persona}}"}})
     }),
     new FieldViewOptions({
       field:"comision",
       label:"Comision",
-      type:"label",
-      entityNameRef: "comision",
-      //routerLink: "comision-detail",
-      //queryParamField:"comision", 
+      type:new FieldLabelOptions({entityName:"comision"}),
+      aux: new RouterLinkOptions({path:"comision-admin",params:{id:"{{comision}}"}})
     }),
   ];  
   fieldsViewOptionsSp: FieldViewOptions[] = [
     new FieldViewOptions({
       field:"per-search",
       label:"Buscar",
-      widthSm: "100%",
-      widthGtSm: "100%",
-      type:"input_text"
+      width:new FieldWidthOptions({sm:"100%",gtSm:"100%"}),
+      type:new FieldInputTextOptions()
     }),
 
     new FieldViewOptions({
       field:"fotocopia_documento",
       label:"Fotocopia Documento",
-      type: "input_select_checkbox",
+      type: new FieldInputSelectCheckboxOptions(),
     }),
 
     new FieldViewOptions({
       field:"partida_nacimiento",
       label:"Partida Nacimiento",
-      type: "input_select_checkbox",
+      type: new FieldInputSelectCheckboxOptions(),
     }),
 
     new FieldViewOptions({
       field:"constancia_cuil",
       label:"Constancia Cuil",
-      type: "input_select_checkbox",
+      type: new FieldInputSelectCheckboxOptions(),
     }),
 
     new FieldViewOptions({
       field:"certificado_estudios",
       label:"Certificado Estudios",
-      type: "input_select_checkbox",
+      type: new FieldInputSelectCheckboxOptions(),
     }),
 
     new FieldViewOptions({
       field:"anio_ingreso",
       label:"Anio Ingreso",
-      type: "input_select_param",
-      options: ['1','2','3'],
+      type: new FieldInputSelectParamOptions({options: ['1','2','3']}),
     }),
 
     new FieldViewOptions({
       field:"activo",
       label:"Activo",
-      type: "input_select_checkbox",
+      type: new FieldInputSelectCheckboxOptions(),
     }),
 
     new FieldViewOptions({
       field:"persona",
       label:"Persona",
-      type: "input_autocomplete",
-      entityName: "persona",
+      type: new FieldInputAutocompleteOptions({entityName: "persona"}),
     }),
 
     new FieldViewOptions({
       field:"comision",
       label:"Comision",
-      type: "input_autocomplete",
-      entityName: "comision",
+      type: new FieldInputAutocompleteOptions({entityName: "comision"}),
     }),
-
   ];  
 
 
   activoInput: FieldViewOptions = new FieldViewOptions({
-    field:"activo", 
-    type:"input_checkbox"
+    field:"activo",
+    type: new FieldInputCheckboxOptions(),
   });
 
 }

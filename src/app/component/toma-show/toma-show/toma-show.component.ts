@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { FieldDateOptions, FieldLabelOptions } from '@class/field-type-options';
+import { RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldViewOptions } from '@class/field-view-options';
 import { ShowComponent } from '@component/show/show.component';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
@@ -28,8 +30,7 @@ export class TomaShowComponent extends ShowComponent {
     {
       field:"fecha_toma",
       label:"Fecha Toma",
-      type:"date",
-      format:"dd/MM/yyyy"
+      type:new FieldDateOptions(),
     },
     {
       field:"estado",
@@ -54,26 +55,20 @@ export class TomaShowComponent extends ShowComponent {
     {
       field:"curso",
       label:"Curso",
-      type:"label",
-      entityName: "curso",
-      routerLink: "curso-admin",
-      queryParamField:"curso", 
+      type: new FieldLabelOptions({entityName:"curso"}),
+      aux: new RouterLinkOptions({path:"curso-admin", params:{id:"{{curso}}"}})
     },
     {
       field:"docente",
       label:"Docente",
-      type:"label",
-      entityName: "persona",
-      routerLink: "docente-detail",
-      queryParamField:"docente", 
+      type: new FieldLabelOptions({entityName:"persona"}),
+      aux: new RouterLinkOptions({path:"docente-detail", params:{id:"{{docente}}"}})
     },
     {
       field:"reemplazo",
       label:"Reemplazo",
-      type:"label",
-      entityName: "persona",
-      routerLink: "docente-detail",
-      queryParamField:"reemplazo", 
+      type: new FieldLabelOptions({entityName:"persona"}),
+      aux: new RouterLinkOptions({path:"docente-detail", params:{id:"{{reemplazo}}"}})
     },
     {
       field:"numero_planilla_docente",
