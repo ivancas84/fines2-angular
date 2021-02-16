@@ -18,10 +18,11 @@
 
 
   <button mat-button [matMenuTriggerFor]="info" aria-label="icon-button with menu icon">
-    Info
+    Sede
   </button>
   <mat-menu #info="matMenu">
     <a mat-menu-item routerLink="/comision-show" routerLinkActive="active" title="Consolidado" [queryParams]="comisionShowQueryParams">Consolidado</a>
+    <a mat-menu-item routerLink="/calendario-admin-array" routerLinkActive="active" title="Calendario">Calendario</a>
   </mat-menu>
 
   <button *ngIf="view.includes('new-menu')" mat-button [matMenuTriggerFor]="nuevo" aria-label="icon-button with menu icon">
