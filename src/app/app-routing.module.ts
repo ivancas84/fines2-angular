@@ -29,6 +29,7 @@ import { TomaDetailComponent } from '@component/toma-detail/toma-detail.componen
 import { AsignacionPlanillaDocenteAdminComponent } from '@component/asignacion-planilla-docente-admin/asignacion-planilla-docente-admin.component';
 import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin/planilla-docente-admin.component';
 import { AuthGuardService } from '@service/auth/auth-guard.service';
+import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -60,6 +61,7 @@ const routes: Routes = [
   { path: 'toma-posesion-realizada', component: TomaPosesionRealizadaComponent, pathMatch: 'full' },
   { path: 'toma-detail', component: TomaDetailComponent, pathMatch: 'full' },
   { path: 'planilla-docente-admin', component: PlanillaDocenteAdminComponent, pathMatch: 'full' },
+  { path: 'calendario-admin-array', component: CalendarioAdminArrayComponent, pathMatch: 'full' },
 
 ];
 
