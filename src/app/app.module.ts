@@ -135,6 +135,9 @@ import { SearchParamsDynamicComponent } from '@component/search-params-dynamic/s
 import { MenuLoginComponent } from '@component/menu-login/menu-login.component';
 import { FieldViewAuxComponent } from '@component/field-view-aux/field-view-aux.component';
 import { InputPersistComponent } from '@component/input-persist/input-persist.component';
+import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
+import { FieldsetArrayDynamicComponent } from '@component/fieldset-array-dynamic/fieldset-array-dynamic.component';
+import { ComisionShow2Component } from '@component/comision-show2/comision-show2.component';
 
 @NgModule({
   declarations: [
@@ -180,6 +183,7 @@ import { InputPersistComponent } from '@component/input-persist/input-persist.co
     TableDynamicComponent,
     CardDynamicComponent,
     FieldsetDynamicComponent,
+    FieldsetArrayDynamicComponent,
     SearchDynamicComponent,
     SearchParamsDynamicComponent,
     MenuLoginComponent,
@@ -214,6 +218,8 @@ import { InputPersistComponent } from '@component/input-persist/input-persist.co
     ListaAlumnosComponent,
     TomaShowComponent,
     PlanillaDocenteAdminComponent,
+    CalendarioAdminArrayComponent,
+    ComisionShow2Component,
   ],
   imports: [
     BrowserModule,

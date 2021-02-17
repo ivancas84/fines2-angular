@@ -30,6 +30,7 @@ import { AsignacionPlanillaDocenteAdminComponent } from '@component/asignacion-p
 import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin/planilla-docente-admin.component';
 import { AuthGuardService } from '@service/auth/auth-guard.service';
 import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
+import { ComisionShow2Component } from '@component/comision-show2/comision-show2.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'asignacion-planilla-docente-admin', component: AsignacionPlanillaDocenteAdminComponent, pathMatch: 'full' },
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
   { path: 'comision-show', component: ComisionShowComponent, pathMatch: 'full' },
+  { path: 'comision-show2', component: ComisionShow2Component, pathMatch: 'full' },
   { path: 'comision-horarios-admin', component: ComisionHorariosAdminComponent, pathMatch: 'full' },
   { path: 'consolidado-docente', component: CdComisionShowComponent, pathMatch: 'full' },
   { path: 'consolidado-referente', component: CrComisionShowComponent, pathMatch: 'full' },

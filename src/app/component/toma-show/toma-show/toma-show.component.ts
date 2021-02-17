@@ -82,7 +82,7 @@ export class TomaShowComponent extends ShowComponent {
     return this.ddt.all("toma",this.display).pipe( 
       switchMap(
         tomas => {
-          return this.ddt.advancedColumnDataGroup(tomas, "toma", "asignacion_planilla_docente", ["planilla_docente.max"], {ultima_planilla_docente:"planilla_docente_max"})}
+          return this.ddt.advancedColumnDataGroup(tomas, "toma", "asignacion_planilla_docente", {ultima_planilla_docente:"planilla_docente.max"})}
       ),   
       switchMap(
         tomas => {

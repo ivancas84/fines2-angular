@@ -156,7 +156,7 @@ export class DocenteDetailComponent extends DetailComponent {
 
     return this.ddt.all("toma",display).pipe( 
       switchMap(
-        tomas => {return this.ddt.advancedColumnDataGroup(tomas, "toma", "asignacion_planilla_docente", ["planilla_docente.max"], {toma:"toma",ultima_planilla_docente:"planilla_docente_max"})}
+        tomas => {return this.ddt.advancedColumnDataGroup(tomas, "toma", "asignacion_planilla_docente", {toma:"toma",ultima_planilla_docente:"planilla_docente.max"})}
       ),   
       switchMap(
         tomas => {return this.ddt.getAllColumnData(tomas, "ultima_planilla_docente", "planilla_docente",{numero_planilla_docente:"numero"})}

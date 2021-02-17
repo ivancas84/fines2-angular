@@ -80,6 +80,11 @@ export class ComisionTableComponent extends TableComponent implements OnChanges 
       ),
       switchMap(
         data => {
+          return this.ddt.advancedColumnDataGroup(data,"comision","alumno",{alumnos:"count"});
+        }
+      ),
+      switchMap(
+        data => {
           return this.ddt.getTree(["_curso"],data,"getPostAllColumnData",{
             method:"info", entityName:"curso_horario",
             fieldNameData:"id",  fieldNameResponse:"curso",
@@ -91,7 +96,7 @@ export class ComisionTableComponent extends TableComponent implements OnChanges 
         data => {
           return this.ddt.getTree(["_curso","_toma"],data,"advancedColumnDataGroup",{
             fieldName:"toma", entityName:"asignacion_planilla_docente",
-            fields:["pd-numero.max"],fieldsResponse:{"planilla_docente":"pd_numero_max"}
+            fields:{"planilla_docente":"pd-numero.max"}
           });
         }
       ),
