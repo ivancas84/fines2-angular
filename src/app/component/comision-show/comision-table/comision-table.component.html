@@ -23,7 +23,15 @@
               <mat-list role="list" >
                 <mat-list-item *ngIf="row.calendario" role="listitem">
                   <core-label [entityName]="'calendario_as'" [id]="row.calendario"></core-label>
-                  &nbsp;{{row.alumnos}} alumnos
+                    &nbsp;
+                    <a routerLink="/alumno-show" [queryParams]="{comision:row.id}">
+                      (
+                      <span *ngIf="row.alumnos">{{row.alumnos}}</span>
+                      <span *ngIf="!row.alumnos">0</span>
+                      &nbsp;alumnos
+                      )
+                    </a> 
+                  
                 </mat-list-item>
                 <mat-list-item *ngIf="row.planificacion" role="listitem">
                   <core-field-tree [tree]="planificacionTree" [id]="row.planificacion"></core-field-tree>

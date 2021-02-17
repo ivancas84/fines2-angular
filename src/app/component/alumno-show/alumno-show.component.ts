@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ShowComponent } from '@component/show/show.component';
 import { FieldViewOptions } from '@class/field-view-options';
 import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
-import { FieldInputAutocompleteOptions, FieldInputCheckboxOptions, FieldInputSelectCheckboxOptions, FieldInputSelectParamOptions, FieldInputTextOptions, FieldLabelOptions, FieldYesNoOptions } from '@class/field-type-options';
+import { FieldInputAutocompleteOptions, FieldInputCheckboxOptions, FieldInputSelectCheckboxOptions, FieldInputSelectParamOptions, FieldInputTextOptions, TypeLabelOptions, FieldYesNoOptions } from '@class/field-type-options';
 import { FieldWidthOptions } from '@class/field-width-options';
 
 @Component({
@@ -54,13 +54,13 @@ export class AlumnoShowComponent extends ShowComponent {
     new FieldViewOptions({
       field:"persona",
       label:"Persona",
-      type:new FieldLabelOptions({entityName:"persona"}),
+      type:new TypeLabelOptions({entityName:"persona"}),
       //aux: new RouterLinkOptions({path:"persona-detail",params:{id:"{{persona}}"}})
     }),
     new FieldViewOptions({
       field:"comision",
       label:"Comision",
-      type:new FieldLabelOptions({entityName:"comision"}),
+      type:new TypeLabelOptions({entityName:"comision"}),
       aux: new RouterLinkOptions({path:"comision-admin",params:{id:"{{comision}}"}})
     }),
   ];  
