@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { Location } from '@angular/common';
 import { TableDynamicOptions } from '@class/table-dynamic-options';
-import { FieldDateOptions, FieldLabelOptions, FieldYesNoOptions } from '@class/field-type-options';
+import { FieldDateOptions, TypeLabelOptions, FieldYesNoOptions } from '@class/field-type-options';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { RouterLinkOptions } from '@class/field-view-aux-options';
 
@@ -34,7 +34,7 @@ export class TomaDetailComponent extends DetailComponent {
     new FieldViewOptions({
       field:"docente",
       label:"Docente",
-      type:new FieldLabelOptions({entityName: "persona"}),
+      type:new TypeLabelOptions({entityName: "persona"}),
       aux:new RouterLinkOptions({path:"persona-detail",params:{id:"{{docente}}"}}),
       width:new FieldWidthOptions({gtSm:"33%"})
     }),
@@ -42,7 +42,7 @@ export class TomaDetailComponent extends DetailComponent {
     new FieldViewOptions({
       field:"curso",
       label:"Curso",
-      type:new FieldLabelOptions({entityName: "curso"}),
+      type:new TypeLabelOptions({entityName: "curso"}),
       aux:new RouterLinkOptions({path:"curso-detail",params:{id:"{{curso}}"}}),
       width:new FieldWidthOptions({gtSm:"34%"})
     }),
@@ -51,7 +51,7 @@ export class TomaDetailComponent extends DetailComponent {
     new FieldViewOptions({
       field:"reemplazo",
       label:"Reemplazo",
-      type:new FieldLabelOptions({entityName: "persona"}),
+      type:new TypeLabelOptions({entityName: "persona"}),
       aux:new RouterLinkOptions({path:"persona-detail",params:{id:"{{reemplazo}}"}}),
       width:new FieldWidthOptions({gtSm:"33%"})
     }),
@@ -100,7 +100,7 @@ export class TomaDetailComponent extends DetailComponent {
     {
       field:"planilla_docente",
       label:"Planilla Docente",
-      type:new FieldLabelOptions({entityName:"planilla_docente"}),
+      type:new TypeLabelOptions({entityName:"planilla_docente"}),
       aux:new RouterLinkOptions({path:"asignacion-planilla-docente-admin", params:{id:"{{id}}"}})
     },
     {

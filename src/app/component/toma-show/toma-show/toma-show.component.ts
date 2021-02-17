@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { FieldDateOptions, FieldLabelOptions } from '@class/field-type-options';
+import { FieldDateOptions, TypeLabelOptions } from '@class/field-type-options';
 import { RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldViewOptions } from '@class/field-view-options';
 import { ShowComponent } from '@component/show/show.component';
@@ -55,19 +55,19 @@ export class TomaShowComponent extends ShowComponent {
     {
       field:"curso",
       label:"Curso",
-      type: new FieldLabelOptions({entityName:"curso"}),
+      type: new TypeLabelOptions({entityName:"curso"}),
       aux: new RouterLinkOptions({path:"curso-admin", params:{id:"{{curso}}"}})
     },
     {
       field:"docente",
       label:"Docente",
-      type: new FieldLabelOptions({entityName:"persona"}),
+      type: new TypeLabelOptions({entityName:"persona"}),
       aux: new RouterLinkOptions({path:"docente-detail", params:{id:"{{docente}}"}})
     },
     {
       field:"reemplazo",
       label:"Reemplazo",
-      type: new FieldLabelOptions({entityName:"persona"}),
+      type: new TypeLabelOptions({entityName:"persona"}),
       aux: new RouterLinkOptions({path:"docente-detail", params:{id:"{{reemplazo}}"}})
     },
     {
