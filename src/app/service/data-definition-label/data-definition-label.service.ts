@@ -97,5 +97,15 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
       )
     );
   }
+
+  labelDomicilioRow (row: any): string {
+    if(!row) return null;
+
+    let ret = row["calle"] + " N° " + row["numero"];
+
+    if (row["entre"]) ret += " entre " + row["entre"];
+
+    return ret.trim();
+  }
   
 }
