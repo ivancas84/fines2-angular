@@ -5,7 +5,9 @@
     Alumno
   </button>
   <mat-menu #alumno="matMenu">
+    <a mat-menu-item routerLink="/alumno-admin" routerLinkActive="active" title="Agregar Alumno">Nuevo</a>
     <a mat-menu-item routerLink="/alumno-show" routerLinkActive="active" title="Ver Alumno">Buscar</a>
+
   </mat-menu>
 
   <button mat-button [matMenuTriggerFor]="docente" aria-label="icon-button with menu icon">

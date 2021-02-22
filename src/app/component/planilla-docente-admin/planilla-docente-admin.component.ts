@@ -9,6 +9,7 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
 import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { FieldViewOptions } from '@class/field-view-options';
+import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 
 @Component({
   selector: 'app-planilla-docente-admin',
@@ -18,20 +19,6 @@ export class PlanillaDocenteAdminComponent extends AdminComponent {
 
   readonly entityName: string = "planilla_docente";
   title:string = "Planilla Docente"
-
-  constructor(
-    protected fb: FormBuilder, 
-    protected route: ActivatedRoute, 
-    protected router: Router, 
-    protected location: Location, 
-    protected dd: DataDefinitionService, 
-    protected validators: ValidatorsService,
-    protected storage: SessionStorageService, 
-    protected dialog: MatDialog,
-    protected snackBar: MatSnackBar
-  ) {
-    super(fb, route, router, location, dd, storage, dialog, snackBar);
-  }
 
   fieldsViewOptions: FieldViewOptions[] = [
     new FieldViewOptions({

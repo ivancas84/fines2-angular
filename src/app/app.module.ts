@@ -138,6 +138,7 @@ import { InputPersistComponent } from '@component/input-persist/input-persist.co
 import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
 import { FieldsetArrayDynamicComponent } from '@component/fieldset-array-dynamic/fieldset-array-dynamic.component';
 import { ComisionShow2Component } from '@component/comision-show2/comision-show2.component';
+import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.component';
 
 @NgModule({
   declarations: [
@@ -220,6 +221,7 @@ import { ComisionShow2Component } from '@component/comision-show2/comision-show2
     PlanillaDocenteAdminComponent,
     CalendarioAdminArrayComponent,
     ComisionShow2Component,
+    AlumnoAdminComponent,
   ],
   imports: [
     BrowserModule,

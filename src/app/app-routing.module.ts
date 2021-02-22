@@ -31,6 +31,7 @@ import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin
 import { AuthGuardService } from '@service/auth/auth-guard.service';
 import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
 import { ComisionShow2Component } from '@component/comision-show2/comision-show2.component';
+import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -64,6 +65,7 @@ const routes: Routes = [
   { path: 'toma-detail', component: TomaDetailComponent, pathMatch: 'full' },
   { path: 'planilla-docente-admin', component: PlanillaDocenteAdminComponent, pathMatch: 'full' },
   { path: 'calendario-admin-array', component: CalendarioAdminArrayComponent, pathMatch: 'full' },
+  { path: 'alumno-admin', component: AlumnoAdminComponent, pathMatch: 'full' },
 
 ];
 

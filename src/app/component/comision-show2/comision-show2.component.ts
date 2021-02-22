@@ -34,7 +34,7 @@ export class ComisionShow2Component extends ShowComponent {
       map(data => {
         data.map (el => {
           el["numero"] =el["numero_sede"] + el["division"]
-          el["tramo"] =el["anio"] + el["semestre"]
+          el["tramo"] =el["anio"] + "º" + el["semestre"] + "C"
 
         }); 
         return data;
@@ -117,12 +117,22 @@ export class ComisionShow2Component extends ShowComponent {
     new FieldViewOptions({
       field:"alumnos",
       label:"Estudiantes",
+      aux:new RouterLinkOptions({path:"alumno-show",params:{comision:"{{id}}"}})
     }),
     new FieldViewOptions({
       field:"identificacion",
       label:"Id Comision",
     }),
+    new FieldViewOptions({
+      field:"observaciones",
+      label:"Observaciones",
+    }),
+    new FieldViewOptions({
+      field:"comentario",
+      label:"Comentario",
+    }),
   ];  
+
   fieldsViewOptionsSp: FieldViewOptions[] = [
     new FieldViewOptions({
       field:"search",
@@ -138,12 +148,12 @@ export class ComisionShow2Component extends ShowComponent {
     new FieldViewOptions({
       field:"autorizada",
       label:"Autorizada",
-      type: new FieldInputCheckboxOptions(),
+      type: new FieldInputSelectCheckboxOptions(),
     }),
     new FieldViewOptions({
       field:"apertura",
       label:"Apertura",
-      type: new FieldInputCheckboxOptions(),
+      type: new FieldInputSelectCheckboxOptions(),
     }),
     new FieldViewOptions({
       field:"publicada",
