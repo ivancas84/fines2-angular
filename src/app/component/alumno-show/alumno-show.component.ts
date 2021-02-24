@@ -41,6 +41,7 @@ export class AlumnoShowComponent extends ShowComponent {
     new FieldViewOptions({
       field:"activo",
       label:"Activo",
+      labelDisabled:true,
       type:new FieldInputCheckboxOptions(),
       entityName:"alumno",
       aux:new InputPersistOptions({
@@ -55,7 +56,7 @@ export class AlumnoShowComponent extends ShowComponent {
       field:"persona",
       label:"Persona",
       type:new TypeLabelOptions({entityName:"persona"}),
-      //aux: new RouterLinkOptions({path:"persona-detail",params:{id:"{{persona}}"}})
+      aux: new RouterLinkOptions({path:"alumno-admin",params:{id:"{{id}}"}})
     }),
     new FieldViewOptions({
       field:"comision",

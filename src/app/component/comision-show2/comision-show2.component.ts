@@ -72,7 +72,6 @@ export class ComisionShow2Component extends ShowComponent {
     return this.dd.post("advanced","alumno", display).pipe(
       map(
         response => {
-          console.log(response);
           for(var i = 0; i < data.length; i++){
             for(var j = 0; j < response.length; j++){
               if(data[i]["id"] == response[j]["comision"]) {

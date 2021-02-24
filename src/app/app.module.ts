@@ -139,6 +139,7 @@ import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array
 import { FieldsetArrayDynamicComponent } from '@component/fieldset-array-dynamic/fieldset-array-dynamic.component';
 import { ComisionShow2Component } from '@component/comision-show2/comision-show2.component';
 import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.component';
+import { SedeShowComponent } from '@component/sede-show/sede-show.component';
 
 @NgModule({
   declarations: [
@@ -222,6 +223,7 @@ import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.compo
     CalendarioAdminArrayComponent,
     ComisionShow2Component,
     AlumnoAdminComponent,
+    SedeShowComponent,
   ],
   imports: [
     BrowserModule,

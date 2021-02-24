@@ -10,6 +10,7 @@ import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { FieldViewOptions } from '@class/field-view-options';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
+import { FieldHiddenOptions, FieldInputDateOptions, FieldInputTextOptions } from '@class/field-type-options';
 
 @Component({
   selector: 'app-planilla-docente-admin',
@@ -24,31 +25,33 @@ export class PlanillaDocenteAdminComponent extends AdminComponent {
     new FieldViewOptions({
       field:"id",
       label:"Id",
-      type: "hidden",
+      type: new FieldHiddenOptions,
     }),
 
     new FieldViewOptions({
       field:"numero",
       label:"Numero",
       validators: [Validators.required],
-      asyncValidators: [],
+      type:new FieldInputTextOptions()
     }),
 
     new FieldViewOptions({
       field:"fecha_contralor",
       label:"Fecha Contralor",
-      type: "date",
+      type: new FieldInputDateOptions(),
     }),
 
     new FieldViewOptions({
       field:"fecha_consejo",
       label:"Fecha Consejo",
-      type: "date",
+      type: new FieldInputDateOptions(),
     }),
 
     new FieldViewOptions({
       field:"observaciones",
       label:"Observaciones",
+      type: new FieldInputTextOptions(),
+
     }),
 
   ];  

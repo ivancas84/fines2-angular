@@ -8,6 +8,8 @@ import { Observable, of } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { FieldViewOptions } from '@class/field-view-options';
+import { FieldDateOptions, FieldInputDateOptions } from '@class/field-type-options';
+import { RouterLinkOptions } from '@class/field-view-aux-options';
 
 
 @Component({
@@ -60,58 +62,54 @@ export class DocenteDetailComponent extends DetailComponent {
 
 
   tomasColumns = [
-    {
+    new FieldViewOptions({
       field:"fecha_toma",
       label:"Fecha Toma",
-      type:"date",
-      format: "dd/MM/yyyy",
-      routerLink:"toma-detail",
-      queryParamField:"id",
-    },
-    {
+      type:new FieldDateOptions({format: "dd/MM/yyyy"}),
+      aux:new RouterLinkOptions({path:"toma-detail",params:{id:"{{id}}"}})
+    }),
+    new FieldViewOptions({
       field:"fecha_fin",
       label:"Fecha Fin",
-      type:"date",
-      format:"dd/MM/yyyy"
-    },
-    {
+      type:new FieldDateOptions({format: "dd/MM/yyyy"}),
+    }),
+    new FieldViewOptions({
       field:"estado",
       label:"Estado",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"estado_contralor",
       label:"Estado Contralor",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"numero_sede",
       label:"Número",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"nombre_sede",
       label:"Sede",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"nombre_asignatura",
       label:"Asignatura",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"horas_catedra",
       label:"Horas Cátedra",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"numero_comision",
       label:"Comision",
-      routerLink:"comision-admin",
-      queryParamField:"comision",
-    },
-    {
+      aux:new RouterLinkOptions({path:"comision-admin",params:{id:"{{comision}}"}})
+    }),
+    new FieldViewOptions({
       field:"tramo",
       label:"Tramo",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"numero_planilla_docente",
       label:"Planilla Docente",
-    },
+    }),
 
   ];
 

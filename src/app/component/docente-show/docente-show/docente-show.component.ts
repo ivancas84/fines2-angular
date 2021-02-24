@@ -12,37 +12,37 @@ export class DocenteShowComponent extends ShowComponent {
 
   readonly entityName: string = "docente";
 
-  fieldsViewOptions: FieldViewOptions[] = [    
-    {
-      field:"apellidos",
-      label:"Apellidos",
-      aux: new RouterLinkOptions({path:"docente-detail", params:{id:"{{id}}"}})
-    },
-    {
+  fieldsViewOptions: FieldViewOptions[] = [
+    new FieldViewOptions({
+        field:"apellidos",
+        label:"Apellidos",
+        aux: new RouterLinkOptions({path:"docente-detail", params:{id:"{{id}}"}})
+    }),
+    new FieldViewOptions({
       field:"nombres",
       label:"Nombres",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"numero_documento",
       label:"Numero Documento",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"fecha_nacimiento",
       label:"Fecha Nacimiento",
       type:new FieldDateOptions(),
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"telefono",
       label:"Telefono",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"email",
       label:"Email",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"email_abc",
       label:"Email Abc",
-    },
+    }),
    
   ];  
 }
