@@ -51,8 +51,13 @@ export class AlumnoAdminComponent extends AdminRelComponent {
         new FieldViewOptions({
           field:"numero_documento",
           label:"Numero Documento",
-          type: new FieldInputTextOptions(),
-          control: new FieldControlOptions({validators: [Validators.required],asyncValidators: [this.validators.unique('numero_documento', 'persona')],})
+          type: new FieldInputTextOptions(
+            {uniqueRoute: "alumno-admin", uniqueParam:"per-numero_documento"},
+          ),
+          control: new FieldControlOptions({
+            validators: [Validators.required],
+            asyncValidators: [this.validators.unique('numero_documento', 'persona')],
+          })
         }),
         new FieldViewOptions({
           field:"cuil",
@@ -64,11 +69,6 @@ export class AlumnoAdminComponent extends AdminRelComponent {
           field:"genero",
           label:"Genero",
           type: new FieldInputSelectParamOptions({options:['Femenino','Masculino','Otro']}),
-        }),
-        new FieldViewOptions({
-          field:"apodo",
-          label:"Apodo",
-          type: new FieldInputTextOptions(),
         }),
         new FieldViewOptions({
           field:"telefono",
@@ -85,16 +85,6 @@ export class AlumnoAdminComponent extends AdminRelComponent {
           label:"Email Abc",
           type: new FieldInputTextOptions(),
           control: new FieldControlOptions({asyncValidators: [this.validators.unique('email_abc', 'persona')],})
-        }),
-        new FieldViewOptions({
-          field:"primer_nombre_apellido",
-          label:"Primer Nombre Apellido",
-          type: new FieldInputTextOptions(),
-        }),
-        new FieldViewOptions({
-          field:"primer_apellido_nombre",
-          label:"Primer Apellido Nombre",
-          type: new FieldInputTextOptions(),
         }),
         new FieldViewOptions({
           field:"domicilio",
