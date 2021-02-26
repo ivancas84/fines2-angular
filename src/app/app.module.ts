@@ -140,6 +140,7 @@ import { FieldsetArrayDynamicComponent } from '@component/fieldset-array-dynamic
 import { ComisionShow2Component } from '@component/comision-show2/comision-show2.component';
 import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.component';
 import { SedeShowComponent } from '@component/sede-show/sede-show.component';
+import { SedeAdmin2Component } from '@component/sede-admin2/sede-admin2.component';
 
 @NgModule({
   declarations: [
@@ -224,6 +225,7 @@ import { SedeShowComponent } from '@component/sede-show/sede-show.component';
     ComisionShow2Component,
     AlumnoAdminComponent,
     SedeShowComponent,
+    SedeAdmin2Component,
   ],
   imports: [
     BrowserModule,

@@ -26,7 +26,9 @@
     <a mat-menu-item routerLink="/comision-show" routerLinkActive="active" title="Consolidado" [queryParams]="comisionShowQueryParams">Consolidado</a>
     <a mat-menu-item routerLink="/comision-show2" routerLinkActive="active" title="Comisiones" [queryParams]="comisionShowQueryParams">Comisiones</a>
     <a mat-menu-item routerLink="/sede-show" routerLinkActive="active" title="Calendario">Sedes</a>
-    <a mat-menu-item routerLink="/calendario-admin-array" routerLinkActive="active" title="Calendario">Calendario</a>
+    <a mat-menu-item routerLink="/calendario-admin-array" routerLinkActive="active" title="Calendario">Calendarios</a>
+    <a mat-menu-item routerLink="/sede-admin-2" routerLinkActive="active" title="Calendario">Nueva Sede</a>
+
   </mat-menu>
 
   <button *ngIf="view.includes('new-menu')" mat-button [matMenuTriggerFor]="nuevo" aria-label="icon-button with menu icon">

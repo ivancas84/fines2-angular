@@ -33,6 +33,7 @@ import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array
 import { ComisionShow2Component } from '@component/comision-show2/comision-show2.component';
 import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.component';
 import { SedeShowComponent } from '@component/sede-show/sede-show.component';
+import { SedeAdmin2Component } from '@component/sede-admin2/sede-admin2.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -68,6 +69,7 @@ const routes: Routes = [
   { path: 'calendario-admin-array', component: CalendarioAdminArrayComponent, pathMatch: 'full' },
   { path: 'alumno-admin', component: AlumnoAdminComponent, pathMatch: 'full' },
   { path: 'sede-show', component: SedeShowComponent, pathMatch: 'full' },
+  { path: 'sede-admin-2', component: SedeAdmin2Component, pathMatch: 'full' },
 
 ];
 

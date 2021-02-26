@@ -1,21 +1,13 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { ValidatorsService } from '@service/validators/validators.service';
-import { SessionStorageService } from '@service/storage/session-storage.service';
+import { Validators } from '@angular/forms';
 import { FieldViewOptions } from '@class/field-view-options';
 import { FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputTextOptions, FieldInputAutocompleteOptions, FieldControlOptions, FieldHiddenOptions, FieldInputDateOptions, FieldInputYearOptions } from '@class/field-type-options';
-import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { AdminRelComponent } from '@component/admin-rel/admin-rel.component';
 import { AdminRelStructure } from '@class/admin-rel-structure';
 
 @Component({
   selector: 'app-alumno-admin',
   templateUrl: '../../core/component/admin-rel/admin-rel.component.html',
-  //templateUrl: './alumno-admin.component.html',
-  //template: '',
 })
 export class AlumnoAdminComponent extends AdminRelComponent {
 
@@ -86,15 +78,8 @@ export class AlumnoAdminComponent extends AdminRelComponent {
           type: new FieldInputTextOptions(),
           control: new FieldControlOptions({asyncValidators: [this.validators.unique('email_abc', 'persona')],})
         }),
-        new FieldViewOptions({
-          field:"domicilio",
-          label:"Domicilio",
-          type: new FieldInputAutocompleteOptions({entityName:"domicilio"}),
-        }),
       ]
     }),
-
-
 
     new AdminRelStructure({
       id:"alumno",

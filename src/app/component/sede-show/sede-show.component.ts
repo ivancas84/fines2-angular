@@ -17,6 +17,7 @@ export class SedeShowComponent extends ShowComponent {
     new FieldViewOptions({
       field:"numero",
       label:"Numero",
+      aux: new RouterLinkOptions({path:"sede-admin-2",params:{id:"{{id}}"}})
     }),
     new FieldViewOptions({
       field:"nombre",
