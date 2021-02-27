@@ -6,29 +6,23 @@ import { AdminRelComponent } from '@component/admin-rel/admin-rel.component';
 import { AdminRelStructure } from '@class/admin-rel-structure';
 
 @Component({
-  selector: 'app-sede-admin',
+  selector: 'app-centro-educativo-admin',
   templateUrl: '../../core/component/admin-rel/admin-rel.component.html',
 })
-export class SedeAdmin2Component extends AdminRelComponent {
+export class CentroEducativoAdminComponent extends AdminRelComponent {
 
-  readonly entityName: string = "sede"
+  readonly entityName: string = "centro_educativo"
 
   structure:AdminRelStructure[] = [
 
     new AdminRelStructure({
-      id:"sede",
-      title: "Sede",
+      id:"centro_educativo",
+      title: "Centro Educativo",
       fieldsViewOptions: [
         new FieldViewOptions({
           field:"id",
           label:"id",
           type: new FieldHiddenOptions,
-        }),
-        new FieldViewOptions({
-          field:"numero",
-          label:"Numero",
-          type: new FieldInputTextOptions(),
-          control: new FieldControlOptions({validators: [Validators.required],})
         }),
         new FieldViewOptions({
           field:"nombre",
@@ -37,24 +31,10 @@ export class SedeAdmin2Component extends AdminRelComponent {
           control: new FieldControlOptions({validators: [Validators.required],})
         }),
         new FieldViewOptions({
-          field:"observaciones",
-          label:"Observaciones",
+          field:"cue",
+          label:"Cue",
           type: new FieldInputTextOptions(),
-        }),
-        new FieldViewOptions({
-          field:"tipo_sede",
-          label:"Tipo Sede",
-          type: new FieldInputSelectOptions({entityName:'tipo_sede'}),
-        }),
-        new FieldViewOptions({
-          field:"centro_educativo",
-          label:"Centro Educativo",
-          type: new FieldInputSelectOptions({entityName:'centro_educativo'}),
-        }),
-        new FieldViewOptions({
-          field:"fecha_traspaso",
-          label:"Fecha Traspaso",
-          type: new FieldInputDateOptions(),
+          control: new FieldControlOptions({asyncValidators: [this.validators.unique('cue', 'centro_educativo')],})
         }),
       ]
     }),

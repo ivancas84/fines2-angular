@@ -34,6 +34,9 @@ import { ComisionShow2Component } from '@component/comision-show2/comision-show2
 import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.component';
 import { SedeShowComponent } from '@component/sede-show/sede-show.component';
 import { SedeAdmin2Component } from '@component/sede-admin2/sede-admin2.component';
+import { CentroEducativoAdminComponent } from '@component/centro-educativo-admin/centro-educativo-admin.component';
+import { CentroEducativoShowComponent } from '@component/centro-educativo-show/centro-educativo-show.component';
+import { CentroEducativoCantidadSedesComponent } from '@component/centro-educativo-cantidad-sedes/centro-educativo-cantidad-sedes.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -70,6 +73,9 @@ const routes: Routes = [
   { path: 'alumno-admin', component: AlumnoAdminComponent, pathMatch: 'full' },
   { path: 'sede-show', component: SedeShowComponent, pathMatch: 'full' },
   { path: 'sede-admin-2', component: SedeAdmin2Component, pathMatch: 'full' },
+  { path: 'centro-educativo-admin', component: CentroEducativoAdminComponent, pathMatch: 'full' },
+  { path: 'centro-educativo-show', component: CentroEducativoShowComponent, pathMatch: 'full' },
+  { path: 'centro-educativo-cantidad-sedes', component: CentroEducativoCantidadSedesComponent, pathMatch: 'full' },
 
 ];
 
