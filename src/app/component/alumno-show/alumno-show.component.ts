@@ -4,6 +4,8 @@ import { FieldViewOptions } from '@class/field-view-options';
 import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldInputAutocompleteOptions, FieldInputCheckboxOptions, FieldInputSelectCheckboxOptions, FieldInputSelectParamOptions, FieldInputTextOptions, TypeLabelOptions, FieldYesNoOptions } from '@class/field-type-options';
 import { FieldWidthOptions } from '@class/field-width-options';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-alumno-show',
@@ -13,7 +15,29 @@ export class AlumnoShowComponent extends ShowComponent {
 
   readonly entityName: string = "alumno";
 
+  queryData(): Observable<any>{
+    return this.dd.all(this.entityName, this.display).pipe(
+      switchMap(
+        data => {
+          return this.dd.getAllColumnData(data,"persona","persona",{"per-nombres":"nombres","per-apellidos":"apellidos","per-numero_documento":"numero_documento"})
+        }
+      )
+    );
+  }
+  
   fieldsViewOptions: FieldViewOptions[] = [
+    new FieldViewOptions({
+      field:"per-apellidos",
+      label:"Apellidos",
+    }),
+    new FieldViewOptions({
+      field:"per-nombres",
+      label:"Nombres",
+    }),
+    new FieldViewOptions({
+      field:"per-numero_documento",
+      label:"Numero Documento",
+    }),
     new FieldViewOptions({
       field:"fotocopia_documento",
       label:"Fotocopia Documento",

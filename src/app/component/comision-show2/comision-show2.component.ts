@@ -20,7 +20,7 @@ export class ComisionShow2Component extends ShowComponent {
   queryData(): Observable<any>{
     return this.dd.all(this.entityName, this.display).pipe(
       switchMap(data => {
-        return this.dd.getAllColumnData(data, "sede", "sede", {domicilio:"domicilio",nombre_sede:"nombre",numero_sede:"numero"} )
+        return this.dd.getAllColumnData(data, "sede", "sede", {domicilio:"domicilio","sed-nombre":"nombre", "numero_sede":"numero"}, " - ")
       }),
       switchMap(data => {
         return this.dd.getAllColumnData(data, "planificacion", "planificacion", {plan:"plan",anio:"anio",semestre:"semestre"} )
@@ -33,7 +33,7 @@ export class ComisionShow2Component extends ShowComponent {
       }),
       map(data => {
         data.map (el => {
-          el["numero"] =el["numero_sede"] + el["division"]
+          el["sed-numero"] =el["numero_sede"] + el["division"]
           el["tramo"] =el["anio"] + "º" + el["semestre"] + "C"
 
         }); 
@@ -88,7 +88,7 @@ export class ComisionShow2Component extends ShowComponent {
 
   fieldsViewOptions: FieldViewOptions[] = [
     new FieldViewOptions({
-      field:"nombre_sede",
+      field:"sed-nombre",
       label:"Sede",
       aux: new RouterLinkOptions({path:"comision-admin",params:{id:"{{id}}"}})
     }),
@@ -98,7 +98,7 @@ export class ComisionShow2Component extends ShowComponent {
       type:new TypeLabelOptions({entityName:"domicilio"})
     }),
     new FieldViewOptions({
-      field:"numero",
+      field:"sed-numero",
       label:"Numero",
     }),
     new FieldViewOptions({
