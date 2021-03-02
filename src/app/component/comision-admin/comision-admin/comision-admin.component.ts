@@ -9,6 +9,7 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
 import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { FieldViewOptions } from '@class/field-view-options';
+import { FieldInputSelectParamOptions } from '@class/field-type-options';
 
 @Component({
   selector: 'app-comision-admin',
@@ -29,7 +30,7 @@ export class ComisionAdminComponent extends AdminComponent {
       field:"turno",
       label:"Turno",
       type: "select_param",
-      options: ['Mañana','Tarde','Noche'],
+      options: ['Mañana','Tarde','Vespertino'],
     }),
 
     new FieldViewOptions({
@@ -114,6 +115,19 @@ export class ComisionAdminComponent extends AdminComponent {
       entityName: "calendario",
       validators: [Validators.required],
       asyncValidators: [],
+    }),
+
+    new FieldViewOptions({
+      field:"estado",
+      label:"Estado",
+      type: new FieldInputSelectParamOptions({options:['Confirma','Rectifica','Desdobla','Reagrupa']}),
+      default:"Confirma",
+    }),
+    new FieldViewOptions({
+      field:"configuracion",
+      label:"Configuracion",
+      type: new FieldInputSelectParamOptions({options:['Histórica','Nueva']}),
+      default:"Histórica",
     }),
 
   ];  

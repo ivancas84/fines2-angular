@@ -66,7 +66,7 @@ export class CentroEducativoCantidadSedesComponent extends ShowComponent {
     new FieldViewOptions({
       field:"turno",
       label:"Turno",
-      type: new FieldInputSelectParamOptions({options:['Mañana','Tarde','Noche']}),
+      type: new FieldInputSelectParamOptions({options:['Mañana','Tarde','Vespertino']}),
     }),
     new FieldViewOptions({
       field:"autorizada",

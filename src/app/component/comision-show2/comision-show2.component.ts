@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ShowComponent } from '@component/show/show.component';
 import { FieldViewOptions } from '@class/field-view-options';
 import { FieldYesNoOptions, TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldLabelOptions, FieldTreeOptions, FieldInputTextOptions, FieldInputSelectCheckboxOptions } from '@class/field-type-options';
-import { RouterLinkOptions } from '@class/field-view-aux-options';
+import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -90,7 +90,7 @@ export class ComisionShow2Component extends ShowComponent {
     new FieldViewOptions({
       field:"sed-nombre",
       label:"Sede",
-      aux: new RouterLinkOptions({path:"comision-admin",params:{id:"{{id}}"}})
+      //aux: new RouterLinkOptions({path:"comision-admin",params:{id:"{{id}}"}})
     }),
     new FieldViewOptions({
       field:"domicilio",
@@ -100,6 +100,13 @@ export class ComisionShow2Component extends ShowComponent {
     new FieldViewOptions({
       field:"sed-numero",
       label:"Numero",
+    }),
+    new FieldViewOptions({
+      field:"configuracion",
+      label:"Configuracion",
+      entityName:"comision",
+      //type:new FieldInputSelectParamOptions({options:['Histórica','Nueva']}),
+      //aux: new InputPersistOptions({params:{id:"{{id}}"},api:"persist"})
     }),
     new FieldViewOptions({
       field:"orientacion",
@@ -116,11 +123,18 @@ export class ComisionShow2Component extends ShowComponent {
     new FieldViewOptions({
       field:"alumnos",
       label:"Estudiantes",
-      aux:new RouterLinkOptions({path:"alumno-show",params:{comision:"{{id}}"}})
+      //aux:new RouterLinkOptions({path:"alumno-show",params:{comision:"{{id}}"}})
     }),
     new FieldViewOptions({
       field:"identificacion",
       label:"Id Comision",
+    }),
+    new FieldViewOptions({
+      field:"estado",
+      label:"Estado",
+      entityName:"comision",
+      //type:new FieldInputSelectParamOptions({options:['Confirma','Rectifica','Desdobla','Reagrupa']}),
+      //aux: new InputPersistOptions({params:{id:"{{id}}"},api:"persist"})
     }),
     new FieldViewOptions({
       field:"observaciones",
@@ -129,6 +143,9 @@ export class ComisionShow2Component extends ShowComponent {
     new FieldViewOptions({
       field:"comentario",
       label:"Comentario",
+      entityName:"comision",
+      //type:new FieldInputTextOptions(),
+      //aux: new InputPersistOptions({params:{id:"{{id}}"},api:"persist"})
     }),
   ];  
 
@@ -142,7 +159,7 @@ export class ComisionShow2Component extends ShowComponent {
     new FieldViewOptions({
       field:"turno",
       label:"Turno",
-      type: new FieldInputSelectParamOptions({options:['Mañana','Tarde','Noche']}),
+      type: new FieldInputSelectParamOptions({options:['Mañana','Tarde','Vespertino']}),
     }),
     new FieldViewOptions({
       field:"autorizada",

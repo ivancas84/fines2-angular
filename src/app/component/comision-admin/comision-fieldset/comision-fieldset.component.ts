@@ -17,7 +17,7 @@ import { map, mergeMap, startWith } from 'rxjs/operators';
 export class ComisionFieldsetComponent extends FieldsetComponent {
 
   readonly entityName: string = 'comision';
-  readonly defaultValues: {[key:string]: any} = {autorizada: true, apertura: false, publicada: true, modalidad: "1", turno:"Noche"}
+  readonly defaultValues: {[key:string]: any} = {autorizada: true, apertura: false, publicada: true, modalidad: "1", turno:"Vespertino"}
   divisiones: Array<any>;
 
   constructor(

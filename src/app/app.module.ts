@@ -144,6 +144,7 @@ import { SedeAdmin2Component } from '@component/sede-admin2/sede-admin2.componen
 import { CentroEducativoAdminComponent } from '@component/centro-educativo-admin/centro-educativo-admin.component';
 import { CentroEducativoShowComponent } from '@component/centro-educativo-show/centro-educativo-show.component';
 import { CentroEducativoCantidadSedesComponent } from '@component/centro-educativo-cantidad-sedes/centro-educativo-cantidad-sedes.component';
+import { ComisionAdmin2Component } from '@component/comision-admin2/comision-admin.component';
 
 @NgModule({
   declarations: [
@@ -232,6 +233,7 @@ import { CentroEducativoCantidadSedesComponent } from '@component/centro-educati
     CentroEducativoAdminComponent,
     CentroEducativoShowComponent,
     CentroEducativoCantidadSedesComponent,
+    ComisionAdmin2Component,
   ],
   imports: [
     BrowserModule,
