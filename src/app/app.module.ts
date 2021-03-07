@@ -145,6 +145,10 @@ import { CentroEducativoAdminComponent } from '@component/centro-educativo-admin
 import { CentroEducativoShowComponent } from '@component/centro-educativo-show/centro-educativo-show.component';
 import { CentroEducativoCantidadSedesComponent } from '@component/centro-educativo-cantidad-sedes/centro-educativo-cantidad-sedes.component';
 import { ComisionAdmin2Component } from '@component/comision-admin2/comision-admin.component';
+import { SedeShow2Component } from '@component/sede-show2/sede-show2.component';
+import { SedeShow3Component } from '@component/sede-show3/sede-show3.component';
+import { AsignaturaShowAdminComponent } from '@component/asignatura-show-admin/asignatura-show-admin.component';
+import { TableAdminDynamicComponent } from '@component/table-admin-dynamic/table-admin-dynamic.component';
 
 @NgModule({
   declarations: [
@@ -187,6 +191,7 @@ import { ComisionAdmin2Component } from '@component/comision-admin2/comision-adm
     FieldLabelComponent,
     FieldTreeLabelComponent,
     FieldTreeComponent,
+    TableAdminDynamicComponent,
     TableDynamicComponent,
     CardDynamicComponent,
     FieldsetDynamicComponent,
@@ -234,6 +239,9 @@ import { ComisionAdmin2Component } from '@component/comision-admin2/comision-adm
     CentroEducativoShowComponent,
     CentroEducativoCantidadSedesComponent,
     ComisionAdmin2Component,
+    SedeShow2Component,
+    SedeShow3Component,
+    AsignaturaShowAdminComponent,
   ],
   imports: [
     BrowserModule,

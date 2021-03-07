@@ -26,12 +26,17 @@
     <a mat-menu-item routerLink="/comision-show" routerLinkActive="active" title="Consolidado" [queryParams]="comisionShowQueryParams">Consolidado</a>
     <a mat-menu-item routerLink="/comision-show2" routerLinkActive="active" title="Comisiones" [queryParams]="comisionShowQueryParams">Comisiones</a>
     <a mat-menu-item routerLink="/sede-show" routerLinkActive="active" title="Calendario">Sedes</a>
+    <a mat-menu-item routerLink="/sede-show-2" routerLinkActive="active" title="Sedes Activas">Sedes activas en determinado periodo</a>
+    <a mat-menu-item routerLink="/sede-show-3" routerLinkActive="active" title="Sedes Activas">Sedes no activas en determinado periodo</a>
     <a mat-menu-item routerLink="/centro-educativo-show" routerLinkActive="active" title="Calendario">CENS</a>
     <a mat-menu-item routerLink="/centro-educativo-cantidad-sedes" routerLinkActive="active" title="Centro Educativo Cantidad Sedes">Cantidad Sedes por CENS</a>
     <a mat-menu-item routerLink="/calendario-admin-array" routerLinkActive="active" title="Calendario">Calendarios</a>
     <a mat-menu-item routerLink="/sede-admin-2" routerLinkActive="active" title="Nueva Sede">Nueva Sede</a>
     <a mat-menu-item routerLink="/centro-educativo-admin" routerLinkActive="active" title="Nuevo Centro Educativo">Nuevo CENS</a>
   </mat-menu>
+
+
+  
 
   <button *ngIf="view.includes('new-menu')" mat-button [matMenuTriggerFor]="nuevo" aria-label="icon-button with menu icon">
     Nuevo

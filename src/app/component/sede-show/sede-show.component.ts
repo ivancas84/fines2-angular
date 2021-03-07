@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ShowComponent } from '@component/show/show.component';
 import { FieldViewOptions } from '@class/field-view-options';
 import { FieldYesNoOptions, TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions } from '@class/field-type-options';
-import { RouterLinkOptions } from '@class/field-view-aux-options';
+import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldWidthOptions } from '@class/field-width-options';
 
 @Component({
@@ -36,7 +36,10 @@ export class SedeShowComponent extends ShowComponent {
     new FieldViewOptions({
       field:"centro_educativo",
       label:"Centro Educativo",
-      type:new TypeLabelOptions({entityName: "centro_educativo"}),
+      entityName: "centro_educativo",
+      //type:new TypeLabelOptions({entityName: "centro_educativo"}),
+      type:new FieldInputSelectOptions({entityName:"centro_educativo"}),
+      aux: new InputPersistOptions({api:"persist",params:{id:"{{centro_educativo}}"}})  
       //aux:new RouterLinkOptions({path: "centro-educativo-detail", params:{id:"{{centro_educativo}})"}}), 
     }),
   ];  

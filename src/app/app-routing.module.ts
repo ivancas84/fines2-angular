@@ -38,6 +38,9 @@ import { CentroEducativoAdminComponent } from '@component/centro-educativo-admin
 import { CentroEducativoShowComponent } from '@component/centro-educativo-show/centro-educativo-show.component';
 import { CentroEducativoCantidadSedesComponent } from '@component/centro-educativo-cantidad-sedes/centro-educativo-cantidad-sedes.component';
 import { ComisionAdmin2Component } from '@component/comision-admin2/comision-admin.component';
+import { SedeShow2Component } from '@component/sede-show2/sede-show2.component';
+import { SedeShow3Component } from '@component/sede-show3/sede-show3.component';
+import { AsignaturaShowAdminComponent } from '@component/asignatura-show-admin/asignatura-show-admin.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -78,6 +81,9 @@ const routes: Routes = [
   { path: 'centro-educativo-show', component: CentroEducativoShowComponent, pathMatch: 'full' },
   { path: 'centro-educativo-cantidad-sedes', component: CentroEducativoCantidadSedesComponent, pathMatch: 'full' },
   { path: 'comision-admin2', component: ComisionAdmin2Component, pathMatch: 'full' },
+  { path: 'sede-show-2', component: SedeShow2Component, pathMatch: 'full' },
+  { path: 'sede-show-3', component: SedeShow3Component, pathMatch: 'full' },
+  { path: 'asignatura-show-admin', component: AsignaturaShowAdminComponent, pathMatch: 'full' },
 
 ];
 

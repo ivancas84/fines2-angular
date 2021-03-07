@@ -90,7 +90,7 @@ export class ComisionShow2Component extends ShowComponent {
     new FieldViewOptions({
       field:"sed-nombre",
       label:"Sede",
-      //aux: new RouterLinkOptions({path:"comision-admin",params:{id:"{{id}}"}})
+      aux: new RouterLinkOptions({path:"comision-admin",params:{id:"{{id}}"}})
     }),
     new FieldViewOptions({
       field:"domicilio",
@@ -105,8 +105,8 @@ export class ComisionShow2Component extends ShowComponent {
       field:"configuracion",
       label:"Configuracion",
       entityName:"comision",
-      //type:new FieldInputSelectParamOptions({options:['Histórica','Nueva']}),
-      //aux: new InputPersistOptions({params:{id:"{{id}}"},api:"persist"})
+      type:new FieldInputSelectParamOptions({options:['Histórica','Nueva']}),
+      aux: new InputPersistOptions({params:{id:"{{id}}"},api:"persist"})
     }),
     new FieldViewOptions({
       field:"orientacion",
@@ -123,7 +123,7 @@ export class ComisionShow2Component extends ShowComponent {
     new FieldViewOptions({
       field:"alumnos",
       label:"Estudiantes",
-      //aux:new RouterLinkOptions({path:"alumno-show",params:{comision:"{{id}}"}})
+      aux:new RouterLinkOptions({path:"alumno-show",params:{comision:"{{id}}"}})
     }),
     new FieldViewOptions({
       field:"identificacion",

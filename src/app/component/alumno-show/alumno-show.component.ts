@@ -21,6 +21,21 @@ export class AlumnoShowComponent extends ShowComponent {
         data => {
           return this.dd.getAllColumnData(data,"persona","persona",{"per-nombres":"nombres","per-apellidos":"apellidos","per-numero_documento":"numero_documento"})
         }
+      ),
+      switchMap(
+        data => {
+          return this.dd.getAllColumnData(data,"comision","comision",{"planificacion":"planificacion"})
+        }
+      ),
+      switchMap(
+        data => {
+          return this.dd.getAllColumnData(data,"planificacion","planificacion",{"plan":"plan"})
+        }
+      ),
+      switchMap(
+        data => {
+          return this.dd.getAllColumnData(data,"plan","plan",{"orientacion":"orientacion"})
+        }
       )
     );
   }
@@ -65,28 +80,32 @@ export class AlumnoShowComponent extends ShowComponent {
     new FieldViewOptions({
       field:"activo",
       label:"Activo",
-      labelDisabled:true,
+      /*labelDisabled:true,
       type:new FieldInputCheckboxOptions(),
       entityName:"alumno",
       aux:new InputPersistOptions({
         params:{id:"{{id}}",api:"persist"}
-      })
+      })*/
     }),
     new FieldViewOptions({
       field:"observaciones",
       label:"Observaciones",
     }),
-    new FieldViewOptions({
+    /*new FieldViewOptions({
       field:"persona",
       label:"Persona",
       type:new TypeLabelOptions({entityName:"persona"}),
       aux: new RouterLinkOptions({path:"alumno-admin",params:{id:"{{id}}"}})
-    }),
+    }),*/
     new FieldViewOptions({
       field:"comision",
       label:"Comision",
       type:new TypeLabelOptions({entityName:"comision"}),
       aux: new RouterLinkOptions({path:"comision-admin",params:{id:"{{comision}}"}})
+    }),
+    new FieldViewOptions({
+      field:"orientacion",
+      label:"Orientacion",
     }),
   ];  
   fieldsViewOptionsSp: FieldViewOptions[] = [
@@ -130,19 +149,19 @@ export class AlumnoShowComponent extends ShowComponent {
     new FieldViewOptions({
       field:"activo",
       label:"Activo",
-      type: new FieldInputSelectCheckboxOptions(),
-    }),
-
-    new FieldViewOptions({
-      field:"persona",
-      label:"Persona",
-      type: new FieldInputAutocompleteOptions({entityName: "persona"}),
+      //type: new FieldInputSelectCheckboxOptions(),
     }),
 
     new FieldViewOptions({
       field:"comision",
       label:"Comision",
       type: new FieldInputAutocompleteOptions({entityName: "comision"}),
+    }),
+
+    new FieldViewOptions({
+      field:"orientacion",
+      label:"Especialidad",
+      //type: new FieldInputAutocompleteOptions({entityName: "comision"}),
     }),
   ];  
 
