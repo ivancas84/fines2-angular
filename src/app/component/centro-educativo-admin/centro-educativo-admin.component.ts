@@ -40,7 +40,7 @@ export class CentroEducativoAdminComponent extends AdminRelComponent {
     }),
 
     new AdminRelStructure({
-      id:"dom-domicilio",
+      id:"dom.domicilio",
       title: "Domicilio",
       fieldsViewOptions: [
         new FieldViewOptions({

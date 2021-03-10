@@ -16,7 +16,7 @@ export class AlumnoAdminComponent extends AdminRelComponent {
   structure:AdminRelStructure[] = [
 
     new AdminRelStructure({
-      id:"per-persona",
+      id:"per",
       title: "Persona",
       fieldsViewOptions: [
         new FieldViewOptions({

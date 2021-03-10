@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ShowComponent } from '@component/show/show.component';
 import { FieldViewOptions } from '@class/field-view-options';
 import { FieldYesNoOptions, TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions, FieldDateOptions, FieldInputDateOptions } from '@class/field-type-options';
-import { RouterLinkOptions } from '@class/field-view-aux-options';
+import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { tap, switchMap, map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
@@ -66,7 +66,7 @@ export class SedeShow2Component extends ShowComponent {
       return this.dd.post("advanced","comision", this.display).pipe(
         switchMap(
           data => {
-            return this.dd.getAllColumnData(data, "sede", "sede", {"sed-nombre":"nombre","sed-numero":"numero", "sed-centro_educativo":"centro_educativo",domicilio:"domicilio"})
+            return this.dd.getAllColumnData(data, "sede", "sede", {"sed-nombre":"nombre","sed-numero":"numero", "sed-centro_educativo":"centro_educativo","centro_educativo":"centro_educativo",domicilio:"domicilio"})
           }
         ),
         switchMap(
@@ -94,6 +94,7 @@ export class SedeShow2Component extends ShowComponent {
     new FieldViewOptions({
       field:"sed-numero",
       label:"Numero",
+      aux:new RouterLinkOptions({path:"sede-admin2",params:{id:"{{sede}}"}} )
     }),
     new FieldViewOptions({
       field:"sed-nombre",
@@ -108,8 +109,11 @@ export class SedeShow2Component extends ShowComponent {
       label:"Comisiones",
     }),
     new FieldViewOptions({
-      field:"sed_ce-nombre",
+      field:"centro_educativo",
       label:"Centro Educativo",
+      entityName:"sede",
+      type:new FieldInputSelectOptions({entityName:"centro_educativo"}),
+      aux:new InputPersistOptions({api:"persist", params:{id:"{{sede}}"}})
     }),
   ];  
   fieldsViewOptionsSp: FieldViewOptions[] = [

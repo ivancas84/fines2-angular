@@ -44,6 +44,7 @@ export class AlumnoShowComponent extends ShowComponent {
     new FieldViewOptions({
       field:"per-apellidos",
       label:"Apellidos",
+      aux: new RouterLinkOptions({path:"alumno-admin",params:{id:"{{id}}"}})
     }),
     new FieldViewOptions({
       field:"per-nombres",
