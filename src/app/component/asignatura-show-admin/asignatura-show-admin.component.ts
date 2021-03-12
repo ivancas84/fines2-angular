@@ -10,10 +10,7 @@ import { ShowAdminDynamicComponent } from '@component/show-admin-dynamic/show-ad
   templateUrl: '../../core/component/show-admin-dynamic/show-admin-dynamic.component.html',
 })
 export class AsignaturaShowAdminComponent extends ShowAdminDynamicComponent {
-  /**
-   * Compatible con ShowAdminDynamicComponent 1.x
-   */
-  
+
   readonly entityName: string = "asignatura";
 
   title: string = "Asignatura"

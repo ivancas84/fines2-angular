@@ -68,7 +68,12 @@ export class SedeShow3Component extends ShowComponent {
       return this.dd.post("advanced","comision", this.display).pipe(
         switchMap(
           data => {
-            return this.allSedes(data, "sede", "sede", {"sed-nombre":"nombre","sed-numero":"numero", domicilio:"domicilio"})
+            return this.allSedes(data, "sede", "sede", {"sed-nombre":"nombre","sed-numero":"numero", "sed-centro_educativo":"centro_educativo", domicilio:"domicilio"})
+          }
+        ),
+        switchMap(
+          data => {
+            return this.dd.getAllColumnData(data, "sed-centro_educativo", "centro_educativo", {"sed_ce-nombre":"nombre"})
           }
         ),
         switchMap(
@@ -129,7 +134,10 @@ export class SedeShow3Component extends ShowComponent {
       field:"detalle_domicilio",
       label:"Domicilio",
     }),
-
+    new FieldViewOptions({
+      field:"sed_ce-nombre",
+      label:"Centro Educativo",
+    }),
   ];  
   fieldsViewOptionsSp: FieldViewOptions[] = [
     new FieldViewOptions({

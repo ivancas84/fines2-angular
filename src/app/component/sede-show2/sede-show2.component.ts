@@ -66,7 +66,7 @@ export class SedeShow2Component extends ShowComponent {
       return this.dd.post("advanced","comision", this.display).pipe(
         switchMap(
           data => {
-            return this.dd.getAllColumnData(data, "sede", "sede", {"sed-nombre":"nombre","sed-numero":"numero", "sed-centro_educativo":"centro_educativo","centro_educativo":"centro_educativo",domicilio:"domicilio"})
+            return this.dd.getAllColumnData(data, "sede", "sede", {"sed-nombre":"nombre","sed-numero":"numero", "sed-centro_educativo":"centro_educativo","centro_educativo":"centro_educativo",domicilio:"domicilio",fecha_traspaso:"fecha_traspaso"})
           }
         ),
         switchMap(
@@ -114,6 +114,11 @@ export class SedeShow2Component extends ShowComponent {
       entityName:"sede",
       type:new FieldInputSelectOptions({entityName:"centro_educativo"}),
       aux:new InputPersistOptions({api:"persist", params:{id:"{{sede}}"}})
+    }),
+    new FieldViewOptions({
+      field:"fecha_traspaso",
+      label:"Fecha Traspaso",
+      type: new FieldDateOptions
     }),
   ];  
   fieldsViewOptionsSp: FieldViewOptions[] = [
@@ -177,6 +182,11 @@ export class SedeShow2Component extends ShowComponent {
       field:"calendario",
       label:"Calendario",
       type: new FieldInputAutocompleteOptions({entityName:'calendario'}),
+    }),
+    new FieldViewOptions({
+      field:"sed-centro_educativo",
+      label:"Centro Educativo",
+      type: new FieldInputSelectOptions({entityName:'centro_educativo'}),
     }),
   ];   
 }

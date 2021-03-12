@@ -41,6 +41,7 @@ import { ComisionAdmin2Component } from '@component/comision-admin2/comision-adm
 import { SedeShow2Component } from '@component/sede-show2/sede-show2.component';
 import { SedeShow3Component } from '@component/sede-show3/sede-show3.component';
 import { AsignaturaShowAdminComponent } from '@component/asignatura-show-admin/asignatura-show-admin.component';
+import { PersonaShowAdminRelComponent } from '@component/persona-show-admin-rel/persona-show-admin-rel.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -84,7 +85,7 @@ const routes: Routes = [
   { path: 'sede-show-2', component: SedeShow2Component, pathMatch: 'full' },
   { path: 'sede-show-3', component: SedeShow3Component, pathMatch: 'full' },
   { path: 'asignatura-show-admin', component: AsignaturaShowAdminComponent, pathMatch: 'full' },
-
+  { path: 'persona-show-admin-rel', component: PersonaShowAdminRelComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

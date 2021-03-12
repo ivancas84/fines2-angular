@@ -20,7 +20,13 @@ export class ComisionShow2Component extends ShowComponent {
   queryData(): Observable<any>{
     return this.dd.all(this.entityName, this.display).pipe(
       switchMap(data => {
-        return this.dd.getAllColumnData(data, "sede", "sede", {domicilio:"domicilio","sed-nombre":"nombre", "numero_sede":"numero"}, " - ")
+        return this.dd.getPostAllColumnData(data, "info", "id", "comision", "horarios_comision", {horario:["dias_dias","hora_inicio","hora_fin"]})
+      }),
+      switchMap(data => {
+        return this.dd.getAllColumnData(data, "sede", "sede", {domicilio:"domicilio","sed-nombre":"nombre", "sed-centro_educativo":"centro_educativo", "numero_sede":"numero"}, " - ")
+      }),
+      switchMap(data => {
+        return this.dd.getAllColumnData(data, "sed-centro_educativo", "centro_educativo", {cens:"nombre"}, " - ")
       }),
       switchMap(data => {
         return this.dd.getAllColumnData(data, "planificacion", "planificacion", {plan:"plan",anio:"anio",semestre:"semestre"} )
@@ -88,10 +94,15 @@ export class ComisionShow2Component extends ShowComponent {
 
   fieldsViewOptions: FieldViewOptions[] = [
     new FieldViewOptions({
+      field:"cens",
+      label:"CENS",
+    }),
+    new FieldViewOptions({
       field:"sed-nombre",
       label:"Sede",
       aux: new RouterLinkOptions({path:"comision-admin",params:{id:"{{id}}"}})
     }),
+    
     new FieldViewOptions({
       field:"domicilio",
       label:"Domicilio",
@@ -104,9 +115,12 @@ export class ComisionShow2Component extends ShowComponent {
     new FieldViewOptions({
       field:"configuracion",
       label:"Configuracion",
-      entityName:"comision",
-      type:new FieldInputSelectParamOptions({options:['Histórica','Nueva']}),
-      aux: new InputPersistOptions({params:{id:"{{id}}"},api:"persist"})
+      //type:new FieldInputSelectParamOptions({options:['Histórica','Nueva']}),
+      /*aux: new InputPersistOptions({
+        entityName:"comision",
+        fieldName:"configuracion",
+        params:{id:"{{id}}"},api:"persist"
+      })*/
     }),
     new FieldViewOptions({
       field:"orientacion",
@@ -132,9 +146,13 @@ export class ComisionShow2Component extends ShowComponent {
     new FieldViewOptions({
       field:"estado",
       label:"Estado",
-      entityName:"comision",
-      //type:new FieldInputSelectParamOptions({options:['Confirma','Rectifica','Desdobla','Reagrupa']}),
-      //aux: new InputPersistOptions({params:{id:"{{id}}"},api:"persist"})
+      /*  type:new FieldInputSelectParamOptions({options:['Confirma','Rectifica','Desdobla','Reagrupa']}),
+      aux: new InputPersistOptions({
+        entityName:"comision",
+        fieldName:"estado",
+        params:{id:"{{id}}"},
+        api:"persist"
+      })*/
     }),
     new FieldViewOptions({
       field:"observaciones",
@@ -143,9 +161,13 @@ export class ComisionShow2Component extends ShowComponent {
     new FieldViewOptions({
       field:"comentario",
       label:"Comentario",
-      entityName:"comision",
       //type:new FieldInputTextOptions(),
       //aux: new InputPersistOptions({params:{id:"{{id}}"},api:"persist"})
+    }),
+    new FieldViewOptions({
+      field:"horario",
+      label:"Horario",
+      //aux: new RouterLinkOptions({path:"comision-admin",params:{id:"{{id}}"}})
     }),
   ];  
 

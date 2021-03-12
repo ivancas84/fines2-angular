@@ -149,6 +149,7 @@ import { SedeShow2Component } from '@component/sede-show2/sede-show2.component';
 import { SedeShow3Component } from '@component/sede-show3/sede-show3.component';
 import { AsignaturaShowAdminComponent } from '@component/asignatura-show-admin/asignatura-show-admin.component';
 import { TableAdminDynamicComponent } from '@component/table-admin-dynamic/table-admin-dynamic.component';
+import { PersonaShowAdminRelComponent } from '@component/persona-show-admin-rel/persona-show-admin-rel.component';
 
 @NgModule({
   declarations: [
@@ -242,6 +243,7 @@ import { TableAdminDynamicComponent } from '@component/table-admin-dynamic/table
     SedeShow2Component,
     SedeShow3Component,
     AsignaturaShowAdminComponent,
+    PersonaShowAdminRelComponent,
   ],
   imports: [
     BrowserModule,
