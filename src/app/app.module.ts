@@ -150,6 +150,7 @@ import { SedeShow3Component } from '@component/sede-show3/sede-show3.component';
 import { AsignaturaShowAdminComponent } from '@component/asignatura-show-admin/asignatura-show-admin.component';
 import { TableAdminDynamicComponent } from '@component/table-admin-dynamic/table-admin-dynamic.component';
 import { PersonaShowAdminRelComponent } from '@component/persona-show-admin-rel/persona-show-admin-rel.component';
+import { DataDefinitionRelArrayService } from '@service/data-definition-rel-array/data-definition-rel-array.service';
 
 @NgModule({
   declarations: [
@@ -276,6 +277,8 @@ import { PersonaShowAdminRelComponent } from '@component/persona-show-admin-rel/
     
     DataDefinitionStorageService, 
     DataDefinitionLabelService, 
+    DataDefinitionRelArrayService, 
+
 
     {provide: 'SocialAuthServiceConfig', useValue: { autoLogin: false,  providers: [
       {

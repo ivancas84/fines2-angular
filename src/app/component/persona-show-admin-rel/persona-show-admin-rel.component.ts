@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { FieldHiddenOptions, FieldInputTextOptions, FieldControlOptions, FieldInputAutocompleteOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputDateOptions } from '@class/field-type-options';
 import { FieldViewOptions } from '@class/field-view-options';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { ShowAdminDynamicComponent } from '@component/show-admin-dynamic/show-admin-dynamic.component';
+import { DataDefinitionRelArrayService } from '@service/data-definition-rel-array/data-definition-rel-array.service';
+import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
+import { ValidatorsService } from '@service/validators/validators.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-persona-show-admin-rel',
@@ -12,6 +18,21 @@ import { ShowAdminDynamicComponent } from '@component/show-admin-dynamic/show-ad
 export class PersonaShowAdminRelComponent extends ShowAdminDynamicComponent {
 
   readonly entityName: string = "persona";
+
+  constructor(
+    protected dd: DataDefinitionToolService, 
+    protected route: ActivatedRoute, 
+    protected dialog: MatDialog,
+    protected validators: ValidatorsService, //los atributos fieldViewOptions y fieldViewOptionsFiters utilizar validadores
+    protected ddra: DataDefinitionRelArrayService
+  ) {
+    super(dd,route,dialog, validators)
+  }
+
+
+  queryData(): Observable<any>{
+    return this.ddra.main(this.entityName, this.display);
+  }
 
   
   reloadApi: string = "unique_rel_array"; //reloadApi de TableAdmin
