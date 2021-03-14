@@ -151,6 +151,7 @@ import { AsignaturaShowAdminComponent } from '@component/asignatura-show-admin/a
 import { TableAdminDynamicComponent } from '@component/table-admin-dynamic/table-admin-dynamic.component';
 import { PersonaShowAdminRelComponent } from '@component/persona-show-admin-rel/persona-show-admin-rel.component';
 import { DataDefinitionRelArrayService } from '@service/data-definition-rel-array/data-definition-rel-array.service';
+import { CalificacionShowAdminRelComponent } from '@component/calificacion-show-admin-rel/calificacion-show-admin-rel.component';
 
 @NgModule({
   declarations: [
@@ -245,6 +246,7 @@ import { DataDefinitionRelArrayService } from '@service/data-definition-rel-arra
     SedeShow3Component,
     AsignaturaShowAdminComponent,
     PersonaShowAdminRelComponent,
+    CalificacionShowAdminRelComponent
   ],
   imports: [
     BrowserModule,

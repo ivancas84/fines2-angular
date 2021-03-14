@@ -2,39 +2,21 @@ import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { FieldHiddenOptions, FieldInputTextOptions, FieldControlOptions, FieldInputAutocompleteOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputDateOptions } from '@class/field-type-options';
+import { FieldHiddenOptions, FieldInputTextOptions, FieldControlOptions, FieldInputDateOptions } from '@class/field-type-options';
 import { FieldViewOptions } from '@class/field-view-options';
 import { FieldWidthOptions } from '@class/field-width-options';
-import { ShowAdminDynamicComponent } from '@component/show-admin-dynamic/show-admin-dynamic.component';
+import { ShowAdminRelDynamicComponent } from '@component/show-admin-dynamic/show-admin-rel-dynamic.component';
 import { DataDefinitionRelArrayService } from '@service/data-definition-rel-array/data-definition-rel-array.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { ValidatorsService } from '@service/validators/validators.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-persona-show-admin-rel',
   templateUrl: '../../core/component/show-admin-dynamic/show-admin-dynamic.component.html',
 })
-export class PersonaShowAdminRelComponent extends ShowAdminDynamicComponent {
+export class PersonaShowAdminRelComponent extends ShowAdminRelDynamicComponent {
 
   readonly entityName: string = "persona";
-
-  constructor(
-    protected dd: DataDefinitionToolService, 
-    protected route: ActivatedRoute, 
-    protected dialog: MatDialog,
-    protected validators: ValidatorsService, //los atributos fieldViewOptions y fieldViewOptionsFiters utilizar validadores
-    protected ddra: DataDefinitionRelArrayService
-  ) {
-    super(dd,route,dialog, validators)
-  }
-
-
-  queryData(): Observable<any>{
-    return this.ddra.main(this.entityName, this.display);
-  }
-
-  
   reloadApi: string = "unique_rel_array"; //reloadApi de TableAdmin
   /**
    * Puede utilizarse unique_rel_array
@@ -43,6 +25,10 @@ export class PersonaShowAdminRelComponent extends ShowAdminDynamicComponent {
 
   title: string = "Persona"
 
+  
+ 
+
+  
   fieldsViewOptions: FieldViewOptions[] = [
     new FieldViewOptions({
       field:"id",
@@ -71,6 +57,7 @@ export class PersonaShowAdminRelComponent extends ShowAdminDynamicComponent {
       type: new FieldInputTextOptions(),
       control: new FieldControlOptions({validators: [Validators.required],asyncValidators: [this.validators.unique('numero_documento', 'persona')],})
     }),
+    /*
     new FieldViewOptions({
       field:"cuil",
       label:"Cuil",
@@ -107,7 +94,7 @@ export class PersonaShowAdminRelComponent extends ShowAdminDynamicComponent {
       field:"domicilio",
       label:"Domicilio",
       type: new FieldInputAutocompleteOptions({entityName:"domicilio"}),
-    }),
+    }),*/
   ];   
  
   fieldsViewOptionsSp: FieldViewOptions[] = [

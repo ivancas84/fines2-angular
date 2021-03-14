@@ -18,6 +18,7 @@ export class _DataDefinitionLabelService {
       case "asignacion_planilla_docente": { return this.labelAsignacionPlanillaDocente(id); }
       case "asignatura": { return this.labelAsignatura(id); }
       case "calendario": { return this.labelCalendario(id); }
+      case "calificacion": { return this.labelCalificacion(id); }
       case "cargo": { return this.labelCargo(id); }
       case "centro_educativo": { return this.labelCentroEducativo(id); }
       case "comision": { return this.labelComision(id); }
@@ -80,6 +81,15 @@ export class _DataDefinitionLabelService {
     if (row["anio"]) ret = ret.trim() + " " + row["anio"];
 
     if (row["semestre"]) ret = ret.trim() + " " + row["semestre"];
+
+    return ret.trim();
+  }
+
+  labelCalificacionRow (row: any): string {
+    if(!row) return null;
+
+    let ret = "";
+    if (row["id"]) ret = ret.trim() + " " + row["id"];
 
     return ret.trim();
   }
@@ -349,6 +359,22 @@ export class _DataDefinitionLabelService {
           if(!row) return of(null);
           return combineLatest([
             of(this.labelCalendarioRow(row)),
+          ])
+        }
+      ),
+      map(
+        response => { return (!response)? null : response.join(" "); }
+      )
+    );
+  }
+
+  labelCalificacion(id: string): Observable<any> {
+    return this.dd.get("calificacion", id).pipe(
+      switchMap(
+        row => {
+          if(!row) return of(null);
+          return combineLatest([
+            of(this.labelCalificacionRow(row)),
           ])
         }
       ),

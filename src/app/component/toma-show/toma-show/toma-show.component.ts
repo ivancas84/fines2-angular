@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { FieldDateOptions, TypeLabelOptions } from '@class/field-type-options';
 import { RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldViewOptions } from '@class/field-view-options';
 import { ShowComponent } from '@component/show/show.component';
-import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -17,15 +14,6 @@ export class TomaShowComponent extends ShowComponent {
 
   readonly entityName: string = "toma";
 
-  constructor(
-    protected ddt: DataDefinitionToolService,
-    protected route: ActivatedRoute,
-    protected dialog: MatDialog
-  ) {
-    super(ddt, route, dialog);
-
-  }
-  
   fieldsViewOptions: FieldViewOptions[] = [
     {
       field:"fecha_toma",
@@ -79,32 +67,32 @@ export class TomaShowComponent extends ShowComponent {
 
 
   queryData(): Observable<any>{
-    return this.ddt.all("toma",this.display).pipe( 
+    return this.dd.all("toma",this.display).pipe( 
       switchMap(
         tomas => {
-          return this.ddt.advancedColumnDataGroup(tomas, "toma", "asignacion_planilla_docente", {ultima_planilla_docente:"planilla_docente.max"})}
+          return this.dd.advancedColumnDataGroup(tomas, "toma", "asignacion_planilla_docente", {ultima_planilla_docente:"planilla_docente.max"})}
       ),   
       switchMap(
         tomas => {
-          return this.ddt.getAllColumnData(tomas, "ultima_planilla_docente", "planilla_docente",{numero_planilla_docente:"numero"})}
+          return this.dd.getAllColumnData(tomas, "ultima_planilla_docente", "planilla_docente",{numero_planilla_docente:"numero"})}
       ),
       switchMap(
         tomas => {
-          return this.ddt.getAllColumnData(tomas, "curso", "curso",{comision:"comision", asignatura:"asignatura", horas_catedra:"horas_catedra" })}
+          return this.dd.getAllColumnData(tomas, "curso", "curso",{comision:"comision", asignatura:"asignatura", horas_catedra:"horas_catedra" })}
       ),
       switchMap(
         tomas => {
-          return this.ddt.getAllColumnData(tomas, "asignatura", "asignatura",{nombre_asignatura:"nombre"})}
+          return this.dd.getAllColumnData(tomas, "asignatura", "asignatura",{nombre_asignatura:"nombre"})}
       ),
       switchMap(
         tomas => {
-          return this.ddt.advancedColumnData(tomas, "comision", "comision",{calendario:"calendario", sede:"sede", numero_comision:"numero", tramo:"tramo"})}
+          return this.dd.advancedColumnData(tomas, "comision", "comision",{calendario:"calendario", sede:"sede", numero_comision:"numero", tramo:"tramo"})}
       ),
       switchMap(
-        tomas => {return this.ddt.getAllColumnData(tomas, "calendario", "calendario",{fecha_fin:"fin"})}
+        tomas => {return this.dd.getAllColumnData(tomas, "calendario", "calendario",{fecha_fin:"fin"})}
       ),
       switchMap(
-        tomas => {return this.ddt.getAllColumnData(tomas, "sede", "sede",{numero_sede:"numero",nombre_sede:"nombre"})}
+        tomas => {return this.dd.getAllColumnData(tomas, "sede", "sede",{numero_sede:"numero",nombre_sede:"nombre"})}
       )
     )
    }
