@@ -20,41 +20,42 @@ export class _DataDefinitionRelArrayService {
 
   constructor(protected dd: DataDefinitionToolService){ }
 
-  main(entityName: string, display:Display): Observable<string> {
+  main(entityName: string, ids:string[]): Observable<string> {
     switch(entityName) {
-      case "alumno": { return this.alumno(display); }
-      case "asignacion_planilla_docente": { return this.asignacionPlanillaDocente(display); }
-      case "asignatura": { return this.asignatura(display); }
-      case "calendario": { return this.calendario(display); }
-      case "cargo": { return this.cargo(display); }
-      case "centro_educativo": { return this.centroEducativo(display); }
-      case "comision": { return this.comision(display); }
-      case "contralor": { return this.contralor(display); }
-      case "curso": { return this.curso(display); }
-      case "designacion": { return this.designacion(display); }
-      case "detalle_persona": { return this.detallePersona(display); }
-      case "dia": { return this.dia(display); }
-      case "distribucion_horaria": { return this.distribucionHoraria(display); }
-      case "domicilio": { return this.domicilio(display); }
-      case "email": { return this.email(display); }
-      case "file": { return this.file(display); }
-      case "horario": { return this.horario(display); }
-      case "modalidad": { return this.modalidad(display); }
-      case "persona": { return this.persona(display); }
-      case "plan": { return this.plan(display); }
-      case "planificacion": { return this.planificacion(display); }
-      case "planilla_docente": { return this.planillaDocente(display); }
-      case "sede": { return this.sede(display); }
-      case "telefono": { return this.telefono(display); }
-      case "tipo_sede": { return this.tipoSede(display); }
-      case "toma": { return this.toma(display); }
+      case "alumno": { return this.alumno(ids); }
+      case "asignacion_planilla_docente": { return this.asignacionPlanillaDocente(ids); }
+      case "asignatura": { return this.asignatura(ids); }
+      case "calendario": { return this.calendario(ids); }
+      case "calificacion": { return this.calificacion(ids); }
+      case "cargo": { return this.cargo(ids); }
+      case "centro_educativo": { return this.centroEducativo(ids); }
+      case "comision": { return this.comision(ids); }
+      case "contralor": { return this.contralor(ids); }
+      case "curso": { return this.curso(ids); }
+      case "designacion": { return this.designacion(ids); }
+      case "detalle_persona": { return this.detallePersona(ids); }
+      case "dia": { return this.dia(ids); }
+      case "distribucion_horaria": { return this.distribucionHoraria(ids); }
+      case "domicilio": { return this.domicilio(ids); }
+      case "email": { return this.email(ids); }
+      case "file": { return this.file(ids); }
+      case "horario": { return this.horario(ids); }
+      case "modalidad": { return this.modalidad(ids); }
+      case "persona": { return this.persona(ids); }
+      case "plan": { return this.plan(ids); }
+      case "planificacion": { return this.planificacion(ids); }
+      case "planilla_docente": { return this.planillaDocente(ids); }
+      case "sede": { return this.sede(ids); }
+      case "telefono": { return this.telefono(ids); }
+      case "tipo_sede": { return this.tipoSede(ids); }
+      case "toma": { return this.toma(ids); }
     }
   }
-  alumno(display: Display): Observable<any> {
-    return this.dd.all("alumno", display).pipe(
+  alumno(ids: string[]): Observable<any> {
+    return this.dd.getAll("alumno", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-primer_nombre_apellido':'primer_nombre_apellido', 'per-primer_apellido_nombre':'primer_apellido_nombre', 'per-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -115,8 +116,8 @@ export class _DataDefinitionRelArrayService {
     )
   }
     
-  asignacionPlanillaDocente(display: Display): Observable<any> {
-    return this.dd.all("asignacion_planilla_docente", display).pipe(
+  asignacionPlanillaDocente(ids: string[]): Observable<any> {
+    return this.dd.getAll("asignacion_planilla_docente", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
           return this.dd.getAllColumnData(data, 'planilla_docente', 'planilla_docente', {'pd-id':'id', 'pd-numero':'numero', 'pd-insertado':'insertado', 'pd-fecha_contralor':'fecha_contralor', 'pd-fecha_consejo':'fecha_consejo', 'pd-observaciones':'observaciones', })
@@ -129,7 +130,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom-curso', 'curso', {'tom_cur-id':'id', 'tom_cur-horas_catedra':'horas_catedra', 'tom_cur-ige':'ige', 'tom_cur-numero_documento_designado':'numero_documento_designado', 'tom_cur-alta':'alta', 'tom_cur-comision':'comision', 'tom_cur-asignatura':'asignatura', })
+          return this.dd.getAllColumnData(data, 'tom-curso', 'curso', {'tom_cur-id':'id', 'tom_cur-horas_catedra':'horas_catedra', 'tom_cur-ige':'ige', 'tom_cur-alta':'alta', 'tom_cur-comision':'comision', 'tom_cur-asignatura':'asignatura', })
         }
       ),
       switchMap(
@@ -189,7 +190,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom-docente', 'persona', {'tom_doc-id':'id', 'tom_doc-nombres':'nombres', 'tom_doc-apellidos':'apellidos', 'tom_doc-fecha_nacimiento':'fecha_nacimiento', 'tom_doc-numero_documento':'numero_documento', 'tom_doc-cuil':'cuil', 'tom_doc-genero':'genero', 'tom_doc-apodo':'apodo', 'tom_doc-telefono':'telefono', 'tom_doc-email':'email', 'tom_doc-email_abc':'email_abc', 'tom_doc-alta':'alta', 'tom_doc-primer_nombre_apellido':'primer_nombre_apellido', 'tom_doc-primer_apellido_nombre':'primer_apellido_nombre', 'tom_doc-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'tom-docente', 'persona', {'tom_doc-id':'id', 'tom_doc-nombres':'nombres', 'tom_doc-apellidos':'apellidos', 'tom_doc-fecha_nacimiento':'fecha_nacimiento', 'tom_doc-numero_documento':'numero_documento', 'tom_doc-cuil':'cuil', 'tom_doc-genero':'genero', 'tom_doc-apodo':'apodo', 'tom_doc-telefono':'telefono', 'tom_doc-email':'email', 'tom_doc-email_abc':'email_abc', 'tom_doc-alta':'alta', 'tom_doc-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -199,7 +200,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom-reemplazo', 'persona', {'tom_ree-id':'id', 'tom_ree-nombres':'nombres', 'tom_ree-apellidos':'apellidos', 'tom_ree-fecha_nacimiento':'fecha_nacimiento', 'tom_ree-numero_documento':'numero_documento', 'tom_ree-cuil':'cuil', 'tom_ree-genero':'genero', 'tom_ree-apodo':'apodo', 'tom_ree-telefono':'telefono', 'tom_ree-email':'email', 'tom_ree-email_abc':'email_abc', 'tom_ree-alta':'alta', 'tom_ree-primer_nombre_apellido':'primer_nombre_apellido', 'tom_ree-primer_apellido_nombre':'primer_apellido_nombre', 'tom_ree-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'tom-reemplazo', 'persona', {'tom_ree-id':'id', 'tom_ree-nombres':'nombres', 'tom_ree-apellidos':'apellidos', 'tom_ree-fecha_nacimiento':'fecha_nacimiento', 'tom_ree-numero_documento':'numero_documento', 'tom_ree-cuil':'cuil', 'tom_ree-genero':'genero', 'tom_ree-apodo':'apodo', 'tom_ree-telefono':'telefono', 'tom_ree-email':'email', 'tom_ree-email_abc':'email_abc', 'tom_ree-alta':'alta', 'tom_ree-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -215,17 +216,92 @@ export class _DataDefinitionRelArrayService {
     )
   }
     
-  asignatura(display: Display): Observable<any> {
-    return this.dd.all("asignatura", display)  }
+  asignatura(ids: string[]): Observable<any> {
+    return this.dd.getAll("asignatura", ids)  }
     
-  calendario(display: Display): Observable<any> {
-    return this.dd.all("calendario", display)  }
+  calendario(ids: string[]): Observable<any> {
+    return this.dd.getAll("calendario", ids)  }
     
-  cargo(display: Display): Observable<any> {
-    return this.dd.all("cargo", display)  }
+  calificacion(ids: string[]): Observable<any> {
+    return this.dd.getAll("calificacion", ids).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'curso', 'curso', {'cur-id':'id', 'cur-horas_catedra':'horas_catedra', 'cur-ige':'ige', 'cur-alta':'alta', 'cur-comision':'comision', 'cur-asignatura':'asignatura', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'cur-comision', 'comision', {'cur_com-id':'id', 'cur_com-turno':'turno', 'cur_com-division':'division', 'cur_com-comentario':'comentario', 'cur_com-autorizada':'autorizada', 'cur_com-apertura':'apertura', 'cur_com-publicada':'publicada', 'cur_com-observaciones':'observaciones', 'cur_com-alta':'alta', 'cur_com-identificacion':'identificacion', 'cur_com-estado':'estado', 'cur_com-configuracion':'configuracion', 'cur_com-sede':'sede', 'cur_com-modalidad':'modalidad', 'cur_com-planificacion':'planificacion', 'cur_com-comision_siguiente':'comision_siguiente', 'cur_com-calendario':'calendario', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'cur_com-sede', 'sede', {'cur_com_sed-id':'id', 'cur_com_sed-numero':'numero', 'cur_com_sed-nombre':'nombre', 'cur_com_sed-observaciones':'observaciones', 'cur_com_sed-alta':'alta', 'cur_com_sed-baja':'baja', 'cur_com_sed-fecha_traspaso':'fecha_traspaso', 'cur_com_sed-domicilio':'domicilio', 'cur_com_sed-tipo_sede':'tipo_sede', 'cur_com_sed-centro_educativo':'centro_educativo', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'cur_com_sed-domicilio', 'domicilio', {'cur_com_sed_dom-id':'id', 'cur_com_sed_dom-calle':'calle', 'cur_com_sed_dom-entre':'entre', 'cur_com_sed_dom-numero':'numero', 'cur_com_sed_dom-piso':'piso', 'cur_com_sed_dom-departamento':'departamento', 'cur_com_sed_dom-barrio':'barrio', 'cur_com_sed_dom-localidad':'localidad', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'cur_com_sed-tipo_sede', 'tipo_sede', {'cur_com_sed_ts-id':'id', 'cur_com_sed_ts-descripcion':'descripcion', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'cur_com_sed-centro_educativo', 'centro_educativo', {'cur_com_sed_ce-id':'id', 'cur_com_sed_ce-nombre':'nombre', 'cur_com_sed_ce-cue':'cue', 'cur_com_sed_ce-domicilio':'domicilio', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'cur_com_sed_ce-domicilio', 'domicilio', {'cur_com_sed_ce_dom-id':'id', 'cur_com_sed_ce_dom-calle':'calle', 'cur_com_sed_ce_dom-entre':'entre', 'cur_com_sed_ce_dom-numero':'numero', 'cur_com_sed_ce_dom-piso':'piso', 'cur_com_sed_ce_dom-departamento':'departamento', 'cur_com_sed_ce_dom-barrio':'barrio', 'cur_com_sed_ce_dom-localidad':'localidad', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'cur_com-modalidad', 'modalidad', {'cur_com_moa-id':'id', 'cur_com_moa-nombre':'nombre', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'cur_com-planificacion', 'planificacion', {'cur_com_pla-id':'id', 'cur_com_pla-anio':'anio', 'cur_com_pla-semestre':'semestre', 'cur_com_pla-plan':'plan', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'cur_com_pla-plan', 'plan', {'cur_com_pla_plb-id':'id', 'cur_com_pla_plb-orientacion':'orientacion', 'cur_com_pla_plb-resolucion':'resolucion', 'cur_com_pla_plb-distribucion_horaria':'distribucion_horaria', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'cur_com-calendario', 'calendario', {'cur_com_cal-id':'id', 'cur_com_cal-inicio':'inicio', 'cur_com_cal-fin':'fin', 'cur_com_cal-anio':'anio', 'cur_com_cal-semestre':'semestre', 'cur_com_cal-insertado':'insertado', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'cur-asignatura', 'asignatura', {'cur_asi-id':'id', 'cur_asi-nombre':'nombre', 'cur_asi-formacion':'formacion', 'cur_asi-clasificacion':'clasificacion', 'cur_asi-codigo':'codigo', 'cur_asi-perfil':'perfil', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-domicilio':'domicilio', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'per-domicilio', 'domicilio', {'per_dom-id':'id', 'per_dom-calle':'calle', 'per_dom-entre':'entre', 'per_dom-numero':'numero', 'per_dom-piso':'piso', 'per_dom-departamento':'departamento', 'per_dom-barrio':'barrio', 'per_dom-localidad':'localidad', })
+        }
+      ),
+    )
+  }
     
-  centroEducativo(display: Display): Observable<any> {
-    return this.dd.all("centro_educativo", display).pipe(
+  cargo(ids: string[]): Observable<any> {
+    return this.dd.getAll("cargo", ids)  }
+    
+  centroEducativo(ids: string[]): Observable<any> {
+    return this.dd.getAll("centro_educativo", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
           return this.dd.getAllColumnData(data, 'domicilio', 'domicilio', {'dom-id':'id', 'dom-calle':'calle', 'dom-entre':'entre', 'dom-numero':'numero', 'dom-piso':'piso', 'dom-departamento':'departamento', 'dom-barrio':'barrio', 'dom-localidad':'localidad', })
@@ -234,8 +310,8 @@ export class _DataDefinitionRelArrayService {
     )
   }
     
-  comision(display: Display): Observable<any> {
-    return this.dd.all("comision", display).pipe(
+  comision(ids: string[]): Observable<any> {
+    return this.dd.getAll("comision", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
           return this.dd.getAllColumnData(data, 'sede', 'sede', {'sed-id':'id', 'sed-numero':'numero', 'sed-nombre':'nombre', 'sed-observaciones':'observaciones', 'sed-alta':'alta', 'sed-baja':'baja', 'sed-fecha_traspaso':'fecha_traspaso', 'sed-domicilio':'domicilio', 'sed-tipo_sede':'tipo_sede', 'sed-centro_educativo':'centro_educativo', })
@@ -284,8 +360,8 @@ export class _DataDefinitionRelArrayService {
     )
   }
     
-  contralor(display: Display): Observable<any> {
-    return this.dd.all("contralor", display).pipe(
+  contralor(ids: string[]): Observable<any> {
+    return this.dd.getAll("contralor", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
           return this.dd.getAllColumnData(data, 'planilla_docente', 'planilla_docente', {'pd-id':'id', 'pd-numero':'numero', 'pd-insertado':'insertado', 'pd-fecha_contralor':'fecha_contralor', 'pd-fecha_consejo':'fecha_consejo', 'pd-observaciones':'observaciones', })
@@ -294,8 +370,8 @@ export class _DataDefinitionRelArrayService {
     )
   }
     
-  curso(display: Display): Observable<any> {
-    return this.dd.all("curso", display).pipe(
+  curso(ids: string[]): Observable<any> {
+    return this.dd.getAll("curso", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
           return this.dd.getAllColumnData(data, 'comision', 'comision', {'com-id':'id', 'com-turno':'turno', 'com-division':'division', 'com-comentario':'comentario', 'com-autorizada':'autorizada', 'com-apertura':'apertura', 'com-publicada':'publicada', 'com-observaciones':'observaciones', 'com-alta':'alta', 'com-identificacion':'identificacion', 'com-estado':'estado', 'com-configuracion':'configuracion', 'com-sede':'sede', 'com-modalidad':'modalidad', 'com-planificacion':'planificacion', 'com-comision_siguiente':'comision_siguiente', 'com-calendario':'calendario', })
@@ -354,8 +430,8 @@ export class _DataDefinitionRelArrayService {
     )
   }
     
-  designacion(display: Display): Observable<any> {
-    return this.dd.all("designacion", display).pipe(
+  designacion(ids: string[]): Observable<any> {
+    return this.dd.getAll("designacion", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
           return this.dd.getAllColumnData(data, 'cargo', 'cargo', {'car-id':'id', 'car-descripcion':'descripcion', })
@@ -388,7 +464,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-primer_nombre_apellido':'primer_nombre_apellido', 'per-primer_apellido_nombre':'primer_apellido_nombre', 'per-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -399,8 +475,8 @@ export class _DataDefinitionRelArrayService {
     )
   }
     
-  detallePersona(display: Display): Observable<any> {
-    return this.dd.all("detalle_persona", display).pipe(
+  detallePersona(ids: string[]): Observable<any> {
+    return this.dd.getAll("detalle_persona", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
           return this.dd.getAllColumnData(data, 'archivo', 'file', {'arc-id':'id', 'arc-name':'name', 'arc-type':'type', 'arc-content':'content', 'arc-size':'size', 'arc-created':'created', })
@@ -408,7 +484,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-primer_nombre_apellido':'primer_nombre_apellido', 'per-primer_apellido_nombre':'primer_apellido_nombre', 'per-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -419,11 +495,11 @@ export class _DataDefinitionRelArrayService {
     )
   }
     
-  dia(display: Display): Observable<any> {
-    return this.dd.all("dia", display)  }
+  dia(ids: string[]): Observable<any> {
+    return this.dd.getAll("dia", ids)  }
     
-  distribucionHoraria(display: Display): Observable<any> {
-    return this.dd.all("distribucion_horaria", display).pipe(
+  distribucionHoraria(ids: string[]): Observable<any> {
+    return this.dd.getAll("distribucion_horaria", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
           return this.dd.getAllColumnData(data, 'asignatura', 'asignatura', {'asi-id':'id', 'asi-nombre':'nombre', 'asi-formacion':'formacion', 'asi-clasificacion':'clasificacion', 'asi-codigo':'codigo', 'asi-perfil':'perfil', })
@@ -442,14 +518,14 @@ export class _DataDefinitionRelArrayService {
     )
   }
     
-  domicilio(display: Display): Observable<any> {
-    return this.dd.all("domicilio", display)  }
+  domicilio(ids: string[]): Observable<any> {
+    return this.dd.getAll("domicilio", ids)  }
     
-  email(display: Display): Observable<any> {
-    return this.dd.all("email", display).pipe(
+  email(ids: string[]): Observable<any> {
+    return this.dd.getAll("email", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-primer_nombre_apellido':'primer_nombre_apellido', 'per-primer_apellido_nombre':'primer_apellido_nombre', 'per-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -460,14 +536,14 @@ export class _DataDefinitionRelArrayService {
     )
   }
     
-  file(display: Display): Observable<any> {
-    return this.dd.all("file", display)  }
+  file(ids: string[]): Observable<any> {
+    return this.dd.getAll("file", ids)  }
     
-  horario(display: Display): Observable<any> {
-    return this.dd.all("horario", display).pipe(
+  horario(ids: string[]): Observable<any> {
+    return this.dd.getAll("horario", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'curso', 'curso', {'cur-id':'id', 'cur-horas_catedra':'horas_catedra', 'cur-ige':'ige', 'cur-numero_documento_designado':'numero_documento_designado', 'cur-alta':'alta', 'cur-comision':'comision', 'cur-asignatura':'asignatura', })
+          return this.dd.getAllColumnData(data, 'curso', 'curso', {'cur-id':'id', 'cur-horas_catedra':'horas_catedra', 'cur-ige':'ige', 'cur-alta':'alta', 'cur-comision':'comision', 'cur-asignatura':'asignatura', })
         }
       ),
       switchMap(
@@ -533,11 +609,11 @@ export class _DataDefinitionRelArrayService {
     )
   }
     
-  modalidad(display: Display): Observable<any> {
-    return this.dd.all("modalidad", display)  }
+  modalidad(ids: string[]): Observable<any> {
+    return this.dd.getAll("modalidad", ids)  }
     
-  persona(display: Display): Observable<any> {
-    return this.dd.all("persona", display).pipe(
+  persona(ids: string[]): Observable<any> {
+    return this.dd.getAll("persona", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
           return this.dd.getAllColumnData(data, 'domicilio', 'domicilio', {'dom-id':'id', 'dom-calle':'calle', 'dom-entre':'entre', 'dom-numero':'numero', 'dom-piso':'piso', 'dom-departamento':'departamento', 'dom-barrio':'barrio', 'dom-localidad':'localidad', })
@@ -546,11 +622,11 @@ export class _DataDefinitionRelArrayService {
     )
   }
     
-  plan(display: Display): Observable<any> {
-    return this.dd.all("plan", display)  }
+  plan(ids: string[]): Observable<any> {
+    return this.dd.getAll("plan", ids)  }
     
-  planificacion(display: Display): Observable<any> {
-    return this.dd.all("planificacion", display).pipe(
+  planificacion(ids: string[]): Observable<any> {
+    return this.dd.getAll("planificacion", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
           return this.dd.getAllColumnData(data, 'plan', 'plan', {'plb-id':'id', 'plb-orientacion':'orientacion', 'plb-resolucion':'resolucion', 'plb-distribucion_horaria':'distribucion_horaria', })
@@ -559,11 +635,11 @@ export class _DataDefinitionRelArrayService {
     )
   }
     
-  planillaDocente(display: Display): Observable<any> {
-    return this.dd.all("planilla_docente", display)  }
+  planillaDocente(ids: string[]): Observable<any> {
+    return this.dd.getAll("planilla_docente", ids)  }
     
-  sede(display: Display): Observable<any> {
-    return this.dd.all("sede", display).pipe(
+  sede(ids: string[]): Observable<any> {
+    return this.dd.getAll("sede", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
           return this.dd.getAllColumnData(data, 'domicilio', 'domicilio', {'dom-id':'id', 'dom-calle':'calle', 'dom-entre':'entre', 'dom-numero':'numero', 'dom-piso':'piso', 'dom-departamento':'departamento', 'dom-barrio':'barrio', 'dom-localidad':'localidad', })
@@ -587,11 +663,11 @@ export class _DataDefinitionRelArrayService {
     )
   }
     
-  telefono(display: Display): Observable<any> {
-    return this.dd.all("telefono", display).pipe(
+  telefono(ids: string[]): Observable<any> {
+    return this.dd.getAll("telefono", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-primer_nombre_apellido':'primer_nombre_apellido', 'per-primer_apellido_nombre':'primer_apellido_nombre', 'per-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -602,14 +678,14 @@ export class _DataDefinitionRelArrayService {
     )
   }
     
-  tipoSede(display: Display): Observable<any> {
-    return this.dd.all("tipo_sede", display)  }
+  tipoSede(ids: string[]): Observable<any> {
+    return this.dd.getAll("tipo_sede", ids)  }
     
-  toma(display: Display): Observable<any> {
-    return this.dd.all("toma", display).pipe(
+  toma(ids: string[]): Observable<any> {
+    return this.dd.getAll("toma", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'curso', 'curso', {'cur-id':'id', 'cur-horas_catedra':'horas_catedra', 'cur-ige':'ige', 'cur-numero_documento_designado':'numero_documento_designado', 'cur-alta':'alta', 'cur-comision':'comision', 'cur-asignatura':'asignatura', })
+          return this.dd.getAllColumnData(data, 'curso', 'curso', {'cur-id':'id', 'cur-horas_catedra':'horas_catedra', 'cur-ige':'ige', 'cur-alta':'alta', 'cur-comision':'comision', 'cur-asignatura':'asignatura', })
         }
       ),
       switchMap(
@@ -669,7 +745,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'docente', 'persona', {'doc-id':'id', 'doc-nombres':'nombres', 'doc-apellidos':'apellidos', 'doc-fecha_nacimiento':'fecha_nacimiento', 'doc-numero_documento':'numero_documento', 'doc-cuil':'cuil', 'doc-genero':'genero', 'doc-apodo':'apodo', 'doc-telefono':'telefono', 'doc-email':'email', 'doc-email_abc':'email_abc', 'doc-alta':'alta', 'doc-primer_nombre_apellido':'primer_nombre_apellido', 'doc-primer_apellido_nombre':'primer_apellido_nombre', 'doc-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'docente', 'persona', {'doc-id':'id', 'doc-nombres':'nombres', 'doc-apellidos':'apellidos', 'doc-fecha_nacimiento':'fecha_nacimiento', 'doc-numero_documento':'numero_documento', 'doc-cuil':'cuil', 'doc-genero':'genero', 'doc-apodo':'apodo', 'doc-telefono':'telefono', 'doc-email':'email', 'doc-email_abc':'email_abc', 'doc-alta':'alta', 'doc-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -679,7 +755,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'reemplazo', 'persona', {'ree-id':'id', 'ree-nombres':'nombres', 'ree-apellidos':'apellidos', 'ree-fecha_nacimiento':'fecha_nacimiento', 'ree-numero_documento':'numero_documento', 'ree-cuil':'cuil', 'ree-genero':'genero', 'ree-apodo':'apodo', 'ree-telefono':'telefono', 'ree-email':'email', 'ree-email_abc':'email_abc', 'ree-alta':'alta', 'ree-primer_nombre_apellido':'primer_nombre_apellido', 'ree-primer_apellido_nombre':'primer_apellido_nombre', 'ree-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'reemplazo', 'persona', {'ree-id':'id', 'ree-nombres':'nombres', 'ree-apellidos':'apellidos', 'ree-fecha_nacimiento':'fecha_nacimiento', 'ree-numero_documento':'numero_documento', 'ree-cuil':'cuil', 'ree-genero':'genero', 'ree-apodo':'apodo', 'ree-telefono':'telefono', 'ree-email':'email', 'ree-email_abc':'email_abc', 'ree-alta':'alta', 'ree-domicilio':'domicilio', })
         }
       ),
       switchMap(
