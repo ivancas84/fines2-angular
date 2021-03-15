@@ -19,10 +19,36 @@ import { map, switchMap, tap } from 'rxjs/operators';
 export class CalificacionShowAdminRelComponent extends ShowAdminRelDynamicComponent {
 
   readonly entityName: string = "calificacion";
+  persistApi: string = "persist_rel_array_unique"; 
 
   title: string = "Calificacion"
 
   fieldsViewOptions: FieldViewOptions[] = [
+    new FieldViewOptions({
+      field:"per-id",
+      label:"Persona",
+      type: new FieldHiddenOptions,
+    }),
+    
+    new FieldViewOptions({
+      field:"per-apellidos",
+      label:"Apellidos",
+      type: new FieldInputTextOptions({width:"100px"}),
+      control: new FieldControlOptions({validators: [Validators.required],})
+    }),
+    new FieldViewOptions({
+      field:"per-nombres",
+      label:"Nombres",
+      type: new FieldInputTextOptions({width:"100px"}),
+      control: new FieldControlOptions({validators: [Validators.required],})
+    }),
+    new FieldViewOptions({
+      field:"per-numero_documento",
+      label:"Número Documento",
+      type: new FieldInputTextOptions({width:"100px"}),
+      control: new FieldControlOptions({validators: [Validators.required],})
+    }),
+    
     new FieldViewOptions({
       field:"id",
       label:"id",
@@ -31,44 +57,34 @@ export class CalificacionShowAdminRelComponent extends ShowAdminRelDynamicCompon
     new FieldViewOptions({
       field:"nota1",
       label:"Nota1",
-      type: new FieldInputTextOptions(),
-      control: new FieldControlOptions({validators: [Validators.pattern('^-?[0-9]+(\\.[0-9]{1,2})?$'), Validators.max(99.99), Validators.min(-99.99)],})
+      type: new FieldInputTextOptions({width:"60px"}),
+      control: new FieldControlOptions({validators: [Validators.pattern('^-?[0-9]+(\\.[0-9]{1,2})?$'), Validators.max(10.00), Validators.min(-10.00)],})
     }),
     new FieldViewOptions({
       field:"nota2",
       label:"Nota2",
-      type: new FieldInputTextOptions(),
-      control: new FieldControlOptions({validators: [Validators.pattern('^-?[0-9]+(\\.[0-9]{1,2})?$'), Validators.max(99.99), Validators.min(-99.99)],})
+      type: new FieldInputTextOptions({width:"60px"}),
+      control: new FieldControlOptions({validators: [Validators.pattern('^-?[0-9]+(\\.[0-9]{1,2})?$'), Validators.max(10.00), Validators.min(-10.00)],})
     }),
     new FieldViewOptions({
       field:"nota3",
       label:"Nota3",
-      type: new FieldInputTextOptions(),
-      control: new FieldControlOptions({validators: [Validators.pattern('^-?[0-9]+(\\.[0-9]{1,2})?$'), Validators.max(99.99), Validators.min(-99.99)],})
+      type: new FieldInputTextOptions({width:"60px"}),
+      control: new FieldControlOptions({validators: [Validators.pattern('^-?[0-9]+(\\.[0-9]{1,2})?$'), Validators.max(10.00), Validators.min(-10.00)],})
     }),
     new FieldViewOptions({
       field:"nota_final",
       label:"Nota Final",
-      type: new FieldInputTextOptions(),
-      control: new FieldControlOptions({validators: [Validators.required, Validators.pattern('^-?[0-9]+(\\.[0-9]{1,2})?$'), Validators.max(99.99), Validators.min(-99.99)],})
+      type: new FieldInputTextOptions({width:"60px"}),
+      control: new FieldControlOptions({validators: [Validators.pattern('^-?[0-9]+(\\.[0-9]{1,2})?$'), Validators.max(10.00), Validators.min(-10.00)],})
     }),
     new FieldViewOptions({
       field:"crec",
       label:"Crec",
-      type: new FieldInputTextOptions(),
-      control: new FieldControlOptions({validators: [Validators.pattern('^-?[0-9]+(\\.[0-9]{1,2})?$'), Validators.max(99.99), Validators.min(-99.99)],})
+      type: new FieldInputTextOptions({width:"60px"}),
+      control: new FieldControlOptions({validators: [Validators.pattern('^-?[0-9]+(\\.[0-9]{1,2})?$'), Validators.max(10.00), Validators.min(-10.00)],})
     }),
-    new FieldViewOptions({
-      field:"curso",
-      label:"Curso",
-      type: new FieldInputAutocompleteOptions({entityName:"curso"}),
-    }),
-    new FieldViewOptions({
-      field:"persona",
-      label:"Persona",
-      type: new FieldInputAutocompleteOptions({entityName:"persona"}),
-      control: new FieldControlOptions({validators: [Validators.required],})
-    }),
+    
   ];   
 
   constructor(
@@ -123,5 +139,11 @@ export class CalificacionShowAdminRelComponent extends ShowAdminRelDynamicCompon
     );
   }
 
-
+  /*
+  serverData(i) {  
+    var v = this.forms[i].value;
+    v["curso"] = this.display.getParam("cur-id");
+    return v;
+  }*/
+  
 }
