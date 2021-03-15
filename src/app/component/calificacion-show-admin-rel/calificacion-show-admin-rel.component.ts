@@ -73,6 +73,11 @@ export class CalificacionShowAdminRelComponent extends ShowAdminRelDynamicCompon
       control: new FieldControlOptions({validators: [Validators.pattern('^-?[0-9]+(\\.[0-9]{1,2})?$'), Validators.max(10.00), Validators.min(-10.00)],})
     }),
     new FieldViewOptions({
+      field:"porcentaje_asistencia",
+      label:"Porcentaje Asistencia",
+      type: new FieldInputTextOptions({width:"60px"}),
+    }),
+    new FieldViewOptions({
       field:"nota_final",
       label:"Nota Final",
       type: new FieldInputTextOptions({width:"60px"}),
@@ -84,7 +89,6 @@ export class CalificacionShowAdminRelComponent extends ShowAdminRelDynamicCompon
       type: new FieldInputTextOptions({width:"60px"}),
       control: new FieldControlOptions({validators: [Validators.pattern('^-?[0-9]+(\\.[0-9]{1,2})?$'), Validators.max(10.00), Validators.min(-10.00)],})
     }),
- 
     
   ];   
 
