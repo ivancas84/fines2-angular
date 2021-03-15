@@ -84,6 +84,7 @@ export class CalificacionShowAdminRelComponent extends ShowAdminRelDynamicCompon
       type: new FieldInputTextOptions({width:"60px"}),
       control: new FieldControlOptions({validators: [Validators.pattern('^-?[0-9]+(\\.[0-9]{1,2})?$'), Validators.max(10.00), Validators.min(-10.00)],})
     }),
+ 
     
   ];   
 
@@ -116,6 +117,17 @@ export class CalificacionShowAdminRelComponent extends ShowAdminRelDynamicCompon
           this.params = this.initParams(queryParams);
           this.initDisplay();
         },
+      ),
+      map(
+        () => {
+          var fc = new FieldViewOptions({
+            field:"curso",
+            label:"Curso",
+            type: new FieldHiddenOptions(),
+            default:this.params["cur-id"]
+          });
+          this.fieldsViewOptions.push(fc)
+        }
       ),
       switchMap(
         () => {
