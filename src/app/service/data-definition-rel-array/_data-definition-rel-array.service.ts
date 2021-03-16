@@ -125,7 +125,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'toma', 'toma', {'tom-id':'id', 'tom-fecha_toma':'fecha_toma', 'tom-estado':'estado', 'tom-observaciones':'observaciones', 'tom-comentario':'comentario', 'tom-tipo_movimiento':'tipo_movimiento', 'tom-estado_contralor':'estado_contralor', 'tom-alta':'alta', 'tom-curso':'curso', 'tom-docente':'docente', 'tom-reemplazo':'reemplazo', 'tom-planilla_docente':'planilla_docente', })
+          return this.dd.getAllColumnData(data, 'toma', 'toma', {'tom-id':'id', 'tom-fecha_toma':'fecha_toma', 'tom-estado':'estado', 'tom-observaciones':'observaciones', 'tom-comentario':'comentario', 'tom-tipo_movimiento':'tipo_movimiento', 'tom-estado_contralor':'estado_contralor', 'tom-alta':'alta', 'tom-calificacion':'calificacion', 'tom-temas_tratados':'temas_tratados', 'tom-asistencia':'asistencia', 'tom-sin_planillas':'sin_planillas', 'tom-curso':'curso', 'tom-docente':'docente', 'tom-reemplazo':'reemplazo', 'tom-planilla_docente':'planilla_docente', })
         }
       ),
       switchMap(
