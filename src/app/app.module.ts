@@ -152,6 +152,7 @@ import { TableAdminDynamicComponent } from '@component/table-admin-dynamic/table
 import { PersonaShowAdminRelComponent } from '@component/persona-show-admin-rel/persona-show-admin-rel.component';
 import { DataDefinitionRelArrayService } from '@service/data-definition-rel-array/data-definition-rel-array.service';
 import { CalificacionShowAdminRelComponent } from '@component/calificacion-show-admin-rel/calificacion-show-admin-rel.component';
+import { OptionsComponent } from '@component/options/options.component';
 
 @NgModule({
   declarations: [
@@ -246,7 +247,8 @@ import { CalificacionShowAdminRelComponent } from '@component/calificacion-show-
     SedeShow3Component,
     AsignaturaShowAdminComponent,
     PersonaShowAdminRelComponent,
-    CalificacionShowAdminRelComponent
+    CalificacionShowAdminRelComponent,
+    OptionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -263,7 +265,8 @@ import { CalificacionShowAdminRelComponent } from '@component/calificacion-show-
     AppMaterialModule,
 
     MaterialFileInputModule,
-    MatTimepickerModule
+    MatTimepickerModule,
+    
   ],
   providers: [
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},

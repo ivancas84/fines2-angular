@@ -11,7 +11,7 @@ import { Display } from '@class/display';
 
 @Component({
   selector: 'app-sede-show-3',
-  templateUrl: '../../core/component/show/show.component.html',
+  templateUrl: '../../core/component/show/show-dynamic.component.html',
 })
 export class SedeShow3Component extends ShowComponent {
 

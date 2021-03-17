@@ -43,6 +43,7 @@ import { SedeShow3Component } from '@component/sede-show3/sede-show3.component';
 import { AsignaturaShowAdminComponent } from '@component/asignatura-show-admin/asignatura-show-admin.component';
 import { PersonaShowAdminRelComponent } from '@component/persona-show-admin-rel/persona-show-admin-rel.component';
 import { CalificacionShowAdminRelComponent } from '@component/calificacion-show-admin-rel/calificacion-show-admin-rel.component';
+import { OptionsComponent } from '@component/options/options.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -88,6 +89,7 @@ const routes: Routes = [
   { path: 'asignatura-show-admin', component: AsignaturaShowAdminComponent, pathMatch: 'full' },
   { path: 'persona-show-admin-rel', component: PersonaShowAdminRelComponent, pathMatch: 'full' },
   { path: 'calificacion-show-admin-rel', component: CalificacionShowAdminRelComponent, pathMatch: 'full' },
+  { path: 'options', component: OptionsComponent, pathMatch: 'full' },
 
 ];
 

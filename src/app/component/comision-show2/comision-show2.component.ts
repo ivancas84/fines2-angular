@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ShowComponent } from '@component/show/show.component';
 import { FieldViewOptions } from '@class/field-view-options';
-import { FieldYesNoOptions, TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldLabelOptions, FieldTreeOptions, FieldInputTextOptions, FieldInputSelectCheckboxOptions } from '@class/field-type-options';
-import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
+import { TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions, FieldInputSelectCheckboxOptions } from '@class/field-type-options';
+import { RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { arrayColumn } from '@function/array-column';
 
 @Component({
   selector: 'app-comision-show2',
-  templateUrl: '../../core/component/show/show.component.html',
+  templateUrl: '../../core/component/show/show-dynamic.component.html',
 })
 export class ComisionShow2Component extends ShowComponent {
 

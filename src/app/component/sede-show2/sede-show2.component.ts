@@ -9,7 +9,7 @@ import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-sede-show-2',
-  templateUrl: '../../core/component/show/show.component.html',
+  templateUrl: '../../core/component/show/show-dynamic.component.html',
 })
 export class SedeShow2Component extends ShowComponent {
 

@@ -9,7 +9,7 @@ import { FieldWidthOptions } from '@class/field-width-options';
 
 @Component({
   selector: 'app-centro-educativo-cantidad-sedes-show',
-  templateUrl: '../../core/component/show/show.component.html',
+  templateUrl: '../../core/component/show/show-dynamic.component.html',
 })
 export class CentroEducativoCantidadSedesComponent extends ShowComponent {
 

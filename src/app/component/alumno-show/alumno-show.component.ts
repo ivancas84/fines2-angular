@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import { ShowComponent } from '@component/show/show.component';
 import { FieldViewOptions } from '@class/field-view-options';
-import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
+import { RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldInputAutocompleteOptions, FieldInputCheckboxOptions, FieldInputSelectCheckboxOptions, FieldInputSelectParamOptions, FieldInputTextOptions, TypeLabelOptions, FieldYesNoOptions } from '@class/field-type-options';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { ShowDynamicComponent } from '@component/show/show-dynamic.component';
 
 @Component({
   selector: 'app-alumno-show',
-  templateUrl: '../../core/component/show/show.component.html',
+  templateUrl: '../../core/component/show/show-dynamic.component.html',
 })
-export class AlumnoShowComponent extends ShowComponent {
+export class AlumnoShowComponent extends ShowDynamicComponent {
 
   readonly entityName: string = "alumno";
 
