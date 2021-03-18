@@ -1,18 +1,28 @@
 import { Component } from '@angular/core';
-import { ShowComponent } from '@component/show/show.component';
 import { FieldViewOptions } from '@class/field-view-options';
-import { FieldYesNoOptions, TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions, FieldControlOptions, FieldHiddenOptions } from '@class/field-type-options';
-import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
-import { FieldWidthOptions } from '@class/field-width-options';
+import { TypeLabelOptions, FieldInputTextOptions, FieldHiddenOptions } from '@class/field-type-options';
+import { ShowRelDynamicComponent } from '@component/show/show-rel-dynamic.component';
+import { Display } from '@class/display';
 
 @Component({
   selector: 'app-sede-cens',
   templateUrl: '../../core/component/show/show-dynamic.component.html',
 })
-export class SedeCensComponent extends ShowComponent {
+export class SedeCensComponent extends ShowRelDynamicComponent {
 
   readonly entityName: string = "sede";
 
+  initDisplay() {
+    this.display = new Display();
+    this.display.setSize(100);
+    this.display.setParamsByQueryParams(this.params);
+    this.display.addCondition([
+      ["centro_educativo","=",["2","3","60386fc844004","603870c621106","60391bc7de25c","6047d36d50316","6047d3b1e59ae"]],
+      ["fecha_traspaso","=","2021-02-26"]  
+    ]);
+
+  }
+  
   fieldsViewOptions: FieldViewOptions[] = [
     new FieldViewOptions({
       field:"numero",
@@ -28,14 +38,14 @@ export class SedeCensComponent extends ShowComponent {
       label:"Domicilio",
       type:new TypeLabelOptions({entityName: "domicilio"}),
     }),
-    /*new FieldViewOptions({
+    new FieldViewOptions({
       field:"centro_educativo",
       label:"Centro Educativo",
-      //type:new TypeLabelOptions({entityName: "centro_educativo"}),
-      type:new FieldInputSelectOptions({entityName:"centro_educativo"}),
-      aux: new InputPersistOptions({fieldName:"centro_educativo", entityName: "sede", api:"persist",params:{id:"{{id}}"}})  
+      type:new TypeLabelOptions({entityName: "centro_educativo"}),
+      //type:new FieldInputSelectOptions({entityName:"centro_educativo"}),
+      //aux: new InputPersistOptions({fieldName:"centro_educativo", entityName: "sede", api:"persist",params:{id:"{{id}}"}})  
       //aux:new RouterLinkOptions({path: "centro-educativo-detail", params:{id:"{{centro_educativo}})"}}), 
-    }),*/
+    }),
   ];  
   fieldsViewOptionsSp: FieldViewOptions[] = [
     new FieldViewOptions({

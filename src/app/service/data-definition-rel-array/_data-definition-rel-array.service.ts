@@ -30,6 +30,7 @@ export class _DataDefinitionRelArrayService {
       case "cargo": { return this.cargo(ids); }
       case "centro_educativo": { return this.centroEducativo(ids); }
       case "comision": { return this.comision(ids); }
+      case "comision_relacionada": { return this.comisionRelacionada(ids); }
       case "contralor": { return this.contralor(ids); }
       case "curso": { return this.curso(ids); }
       case "designacion": { return this.designacion(ids); }
@@ -355,6 +356,111 @@ export class _DataDefinitionRelArrayService {
       switchMap(
         (data:{ [index: string]: any; }[]) => {
           return this.dd.getAllColumnData(data, 'calendario', 'calendario', {'cal-id':'id', 'cal-inicio':'inicio', 'cal-fin':'fin', 'cal-anio':'anio', 'cal-semestre':'semestre', 'cal-insertado':'insertado', })
+        }
+      ),
+    )
+  }
+    
+  comisionRelacionada(ids: string[]): Observable<any> {
+    return this.dd.getAll("comision_relacionada", ids).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'comision', 'comision', {'com-id':'id', 'com-turno':'turno', 'com-division':'division', 'com-comentario':'comentario', 'com-autorizada':'autorizada', 'com-apertura':'apertura', 'com-publicada':'publicada', 'com-observaciones':'observaciones', 'com-alta':'alta', 'com-identificacion':'identificacion', 'com-estado':'estado', 'com-configuracion':'configuracion', 'com-sede':'sede', 'com-modalidad':'modalidad', 'com-planificacion':'planificacion', 'com-comision_siguiente':'comision_siguiente', 'com-calendario':'calendario', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'com-sede', 'sede', {'com_sed-id':'id', 'com_sed-numero':'numero', 'com_sed-nombre':'nombre', 'com_sed-observaciones':'observaciones', 'com_sed-alta':'alta', 'com_sed-baja':'baja', 'com_sed-fecha_traspaso':'fecha_traspaso', 'com_sed-domicilio':'domicilio', 'com_sed-tipo_sede':'tipo_sede', 'com_sed-centro_educativo':'centro_educativo', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'com_sed-domicilio', 'domicilio', {'com_sed_dom-id':'id', 'com_sed_dom-calle':'calle', 'com_sed_dom-entre':'entre', 'com_sed_dom-numero':'numero', 'com_sed_dom-piso':'piso', 'com_sed_dom-departamento':'departamento', 'com_sed_dom-barrio':'barrio', 'com_sed_dom-localidad':'localidad', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'com_sed-tipo_sede', 'tipo_sede', {'com_sed_ts-id':'id', 'com_sed_ts-descripcion':'descripcion', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'com_sed-centro_educativo', 'centro_educativo', {'com_sed_ce-id':'id', 'com_sed_ce-nombre':'nombre', 'com_sed_ce-cue':'cue', 'com_sed_ce-domicilio':'domicilio', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'com_sed_ce-domicilio', 'domicilio', {'com_sed_ce_dom-id':'id', 'com_sed_ce_dom-calle':'calle', 'com_sed_ce_dom-entre':'entre', 'com_sed_ce_dom-numero':'numero', 'com_sed_ce_dom-piso':'piso', 'com_sed_ce_dom-departamento':'departamento', 'com_sed_ce_dom-barrio':'barrio', 'com_sed_ce_dom-localidad':'localidad', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'com-modalidad', 'modalidad', {'com_moa-id':'id', 'com_moa-nombre':'nombre', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'com-planificacion', 'planificacion', {'com_pla-id':'id', 'com_pla-anio':'anio', 'com_pla-semestre':'semestre', 'com_pla-plan':'plan', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'com_pla-plan', 'plan', {'com_pla_plb-id':'id', 'com_pla_plb-orientacion':'orientacion', 'com_pla_plb-resolucion':'resolucion', 'com_pla_plb-distribucion_horaria':'distribucion_horaria', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'com-calendario', 'calendario', {'com_cal-id':'id', 'com_cal-inicio':'inicio', 'com_cal-fin':'fin', 'com_cal-anio':'anio', 'com_cal-semestre':'semestre', 'com_cal-insertado':'insertado', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'relacion', 'comision', {'rel-id':'id', 'rel-turno':'turno', 'rel-division':'division', 'rel-comentario':'comentario', 'rel-autorizada':'autorizada', 'rel-apertura':'apertura', 'rel-publicada':'publicada', 'rel-observaciones':'observaciones', 'rel-alta':'alta', 'rel-identificacion':'identificacion', 'rel-estado':'estado', 'rel-configuracion':'configuracion', 'rel-sede':'sede', 'rel-modalidad':'modalidad', 'rel-planificacion':'planificacion', 'rel-comision_siguiente':'comision_siguiente', 'rel-calendario':'calendario', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'rel-sede', 'sede', {'rel_sed-id':'id', 'rel_sed-numero':'numero', 'rel_sed-nombre':'nombre', 'rel_sed-observaciones':'observaciones', 'rel_sed-alta':'alta', 'rel_sed-baja':'baja', 'rel_sed-fecha_traspaso':'fecha_traspaso', 'rel_sed-domicilio':'domicilio', 'rel_sed-tipo_sede':'tipo_sede', 'rel_sed-centro_educativo':'centro_educativo', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'rel_sed-domicilio', 'domicilio', {'rel_sed_dom-id':'id', 'rel_sed_dom-calle':'calle', 'rel_sed_dom-entre':'entre', 'rel_sed_dom-numero':'numero', 'rel_sed_dom-piso':'piso', 'rel_sed_dom-departamento':'departamento', 'rel_sed_dom-barrio':'barrio', 'rel_sed_dom-localidad':'localidad', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'rel_sed-tipo_sede', 'tipo_sede', {'rel_sed_ts-id':'id', 'rel_sed_ts-descripcion':'descripcion', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'rel_sed-centro_educativo', 'centro_educativo', {'rel_sed_ce-id':'id', 'rel_sed_ce-nombre':'nombre', 'rel_sed_ce-cue':'cue', 'rel_sed_ce-domicilio':'domicilio', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'rel_sed_ce-domicilio', 'domicilio', {'rel_sed_ce_dom-id':'id', 'rel_sed_ce_dom-calle':'calle', 'rel_sed_ce_dom-entre':'entre', 'rel_sed_ce_dom-numero':'numero', 'rel_sed_ce_dom-piso':'piso', 'rel_sed_ce_dom-departamento':'departamento', 'rel_sed_ce_dom-barrio':'barrio', 'rel_sed_ce_dom-localidad':'localidad', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'rel-modalidad', 'modalidad', {'rel_moa-id':'id', 'rel_moa-nombre':'nombre', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'rel-planificacion', 'planificacion', {'rel_pla-id':'id', 'rel_pla-anio':'anio', 'rel_pla-semestre':'semestre', 'rel_pla-plan':'plan', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'rel_pla-plan', 'plan', {'rel_pla_plb-id':'id', 'rel_pla_plb-orientacion':'orientacion', 'rel_pla_plb-resolucion':'resolucion', 'rel_pla_plb-distribucion_horaria':'distribucion_horaria', })
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          return this.dd.getAllColumnData(data, 'rel-calendario', 'calendario', {'rel_cal-id':'id', 'rel_cal-inicio':'inicio', 'rel_cal-fin':'fin', 'rel_cal-anio':'anio', 'rel_cal-semestre':'semestre', 'rel_cal-insertado':'insertado', })
         }
       ),
     )

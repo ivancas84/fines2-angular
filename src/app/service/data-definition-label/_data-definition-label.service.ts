@@ -22,6 +22,7 @@ export class _DataDefinitionLabelService {
       case "cargo": { return this.labelCargo(id); }
       case "centro_educativo": { return this.labelCentroEducativo(id); }
       case "comision": { return this.labelComision(id); }
+      case "comision_relacionada": { return this.labelComisionRelacionada(id); }
       case "contralor": { return this.labelContralor(id); }
       case "curso": { return this.labelCurso(id); }
       case "designacion": { return this.labelDesignacion(id); }
@@ -117,6 +118,15 @@ export class _DataDefinitionLabelService {
 
     let ret = "";
     if (row["division"]) ret = ret.trim() + " " + row["division"];
+
+    return ret.trim();
+  }
+
+  labelComisionRelacionadaRow (row: any): string {
+    if(!row) return null;
+
+    let ret = "";
+    if (row["id"]) ret = ret.trim() + " " + row["id"];
 
     return ret.trim();
   }
@@ -426,6 +436,22 @@ export class _DataDefinitionLabelService {
             this.labelSede(row.sede),
             this.labelPlanificacion(row.planificacion),
             this.labelCalendario(row.calendario),
+          ])
+        }
+      ),
+      map(
+        response => { return (!response)? null : response.join(" "); }
+      )
+    );
+  }
+
+  labelComisionRelacionada(id: string): Observable<any> {
+    return this.dd.get("comision_relacionada", id).pipe(
+      switchMap(
+        row => {
+          if(!row) return of(null);
+          return combineLatest([
+            of(this.labelComisionRelacionadaRow(row)),
           ])
         }
       ),
