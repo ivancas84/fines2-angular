@@ -44,6 +44,8 @@ import { AsignaturaShowAdminComponent } from '@component/asignatura-show-admin/a
 import { PersonaShowAdminRelComponent } from '@component/persona-show-admin-rel/persona-show-admin-rel.component';
 import { CalificacionShowAdminRelComponent } from '@component/calificacion-show-admin-rel/calificacion-show-admin-rel.component';
 import { OptionsComponent } from '@component/options/options.component';
+import { ComisionCensComponent } from '@component/comision-cens/comision-cens.component';
+import { SedeCensComponent } from '@component/sede-cens/sede-cens.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -90,6 +92,8 @@ const routes: Routes = [
   { path: 'persona-show-admin-rel', component: PersonaShowAdminRelComponent, pathMatch: 'full' },
   { path: 'calificacion-show-admin-rel', component: CalificacionShowAdminRelComponent, pathMatch: 'full' },
   { path: 'options', component: OptionsComponent, pathMatch: 'full' },
+  { path: 'comision-cens', component: ComisionCensComponent, pathMatch: 'full' },
+  { path: 'sede-cens', component: SedeCensComponent, pathMatch: 'full' },
 
 ];
 

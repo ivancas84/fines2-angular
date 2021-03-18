@@ -153,6 +153,8 @@ import { PersonaShowAdminRelComponent } from '@component/persona-show-admin-rel/
 import { DataDefinitionRelArrayService } from '@service/data-definition-rel-array/data-definition-rel-array.service';
 import { CalificacionShowAdminRelComponent } from '@component/calificacion-show-admin-rel/calificacion-show-admin-rel.component';
 import { OptionsComponent } from '@component/options/options.component';
+import { ComisionCensComponent } from '@component/comision-cens/comision-cens.component';
+import { SedeCensComponent } from '@component/sede-cens/sede-cens.component';
 
 @NgModule({
   declarations: [
@@ -249,6 +251,8 @@ import { OptionsComponent } from '@component/options/options.component';
     PersonaShowAdminRelComponent,
     CalificacionShowAdminRelComponent,
     OptionsComponent,
+    ComisionCensComponent,
+    SedeCensComponent,
   ],
   imports: [
     BrowserModule,
