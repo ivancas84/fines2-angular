@@ -72,12 +72,12 @@ export class ComisionTableComponent extends TableComponent implements OnChanges 
       switchMap(
         data => {
           this.load = false;
-          return this.ddt.getAllColumnDataUm(data,"comision","curso")
+          return this.ddt.getAllColumnDataUm(data,"id","comision","curso")
         }
       ),
       switchMap(
         data => {
-          return this.ddt.getTree(["_curso"],data,"getAllColumnDataUm",{fkName:"curso",entityName:"toma"});
+          return this.ddt.getTree(["_curso"],data,"getAllColumnDataUm",{fieldName:"id",fkName:"curso",entityName:"toma"});
         }
       ),
       switchMap(

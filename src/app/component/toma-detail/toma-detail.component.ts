@@ -8,7 +8,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { Location } from '@angular/common';
-import { TableDynamicOptions } from '@class/table-dynamic-options';
 import { FieldDateOptions, TypeLabelOptions, FieldYesNoOptions } from '@class/field-type-options';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { RouterLinkOptions } from '@class/field-view-aux-options';

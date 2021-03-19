@@ -233,6 +233,11 @@ export class ComisionShow2Component extends ShowComponent {
       label:"Tiene identificacion?",
       type: new FieldInputSelectCheckboxOptions(),
     }),
+    new FieldViewOptions({
+      field:"sed-centro_educativo",
+      label:"Centro Educativo",
+      type: new FieldInputSelectOptions({entityName:"centro_educativo"}),
+    }),
   ];  
 }
 

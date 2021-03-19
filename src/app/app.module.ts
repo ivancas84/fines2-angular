@@ -155,8 +155,9 @@ import { CalificacionShowAdminRelComponent } from '@component/calificacion-show-
 import { OptionsComponent } from '@component/options/options.component';
 import { ComisionCensComponent } from '@component/comision-cens/comision-cens.component';
 import { SedeCensComponent } from '@component/sede-cens/sede-cens.component';
-import { CursoShowComponent } from '@component/curso-show/curso-show.component';
 import { ComisionRelacionadaAdminComponent } from '@component/comision-relacionada-admin/comision-relacionada-admin.component';
+import { CursoShowComponent } from '@component/curso-show/curso-show/curso-show.component';
+import { CursoTableComponent } from '@component/curso-show/curso-table/curso-table.component';
 
 
 @NgModule({
@@ -256,7 +257,7 @@ import { ComisionRelacionadaAdminComponent } from '@component/comision-relaciona
     OptionsComponent,
     ComisionCensComponent,
     SedeCensComponent,
-    CursoShowComponent,
+    CursoShowComponent, CursoTableComponent,
     ComisionRelacionadaAdminComponent
   ],
   imports: [

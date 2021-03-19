@@ -86,7 +86,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_sed-centro_educativo', 'centro_educativo', {'com_sed_ce-id':'id', 'com_sed_ce-nombre':'nombre', 'com_sed_ce-cue':'cue', 'com_sed_ce-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'com_sed-centro_educativo', 'centro_educativo', {'com_sed_ce-id':'id', 'com_sed_ce-nombre':'nombre', 'com_sed_ce-cue':'cue', 'com_sed_ce-observaciones':'observaciones', 'com_sed_ce-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -156,7 +156,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom_cur_com_sed-centro_educativo', 'centro_educativo', {'tom_cur_com_sed_ce-id':'id', 'tom_cur_com_sed_ce-nombre':'nombre', 'tom_cur_com_sed_ce-cue':'cue', 'tom_cur_com_sed_ce-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'tom_cur_com_sed-centro_educativo', 'centro_educativo', {'tom_cur_com_sed_ce-id':'id', 'tom_cur_com_sed_ce-nombre':'nombre', 'tom_cur_com_sed_ce-cue':'cue', 'tom_cur_com_sed_ce-observaciones':'observaciones', 'tom_cur_com_sed_ce-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -252,7 +252,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_sed-centro_educativo', 'centro_educativo', {'cur_com_sed_ce-id':'id', 'cur_com_sed_ce-nombre':'nombre', 'cur_com_sed_ce-cue':'cue', 'cur_com_sed_ce-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'cur_com_sed-centro_educativo', 'centro_educativo', {'cur_com_sed_ce-id':'id', 'cur_com_sed_ce-nombre':'nombre', 'cur_com_sed_ce-cue':'cue', 'cur_com_sed_ce-observaciones':'observaciones', 'cur_com_sed_ce-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -330,7 +330,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'sed-centro_educativo', 'centro_educativo', {'sed_ce-id':'id', 'sed_ce-nombre':'nombre', 'sed_ce-cue':'cue', 'sed_ce-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'sed-centro_educativo', 'centro_educativo', {'sed_ce-id':'id', 'sed_ce-nombre':'nombre', 'sed_ce-cue':'cue', 'sed_ce-observaciones':'observaciones', 'sed_ce-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -385,7 +385,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_sed-centro_educativo', 'centro_educativo', {'com_sed_ce-id':'id', 'com_sed_ce-nombre':'nombre', 'com_sed_ce-cue':'cue', 'com_sed_ce-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'com_sed-centro_educativo', 'centro_educativo', {'com_sed_ce-id':'id', 'com_sed_ce-nombre':'nombre', 'com_sed_ce-cue':'cue', 'com_sed_ce-observaciones':'observaciones', 'com_sed_ce-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -435,7 +435,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'rel_sed-centro_educativo', 'centro_educativo', {'rel_sed_ce-id':'id', 'rel_sed_ce-nombre':'nombre', 'rel_sed_ce-cue':'cue', 'rel_sed_ce-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'rel_sed-centro_educativo', 'centro_educativo', {'rel_sed_ce-id':'id', 'rel_sed_ce-nombre':'nombre', 'rel_sed_ce-cue':'cue', 'rel_sed_ce-observaciones':'observaciones', 'rel_sed_ce-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -500,7 +500,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_sed-centro_educativo', 'centro_educativo', {'com_sed_ce-id':'id', 'com_sed_ce-nombre':'nombre', 'com_sed_ce-cue':'cue', 'com_sed_ce-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'com_sed-centro_educativo', 'centro_educativo', {'com_sed_ce-id':'id', 'com_sed_ce-nombre':'nombre', 'com_sed_ce-cue':'cue', 'com_sed_ce-observaciones':'observaciones', 'com_sed_ce-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -560,7 +560,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'sed-centro_educativo', 'centro_educativo', {'sed_ce-id':'id', 'sed_ce-nombre':'nombre', 'sed_ce-cue':'cue', 'sed_ce-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'sed-centro_educativo', 'centro_educativo', {'sed_ce-id':'id', 'sed_ce-nombre':'nombre', 'sed_ce-cue':'cue', 'sed_ce-observaciones':'observaciones', 'sed_ce-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -674,7 +674,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_sed-centro_educativo', 'centro_educativo', {'cur_com_sed_ce-id':'id', 'cur_com_sed_ce-nombre':'nombre', 'cur_com_sed_ce-cue':'cue', 'cur_com_sed_ce-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'cur_com_sed-centro_educativo', 'centro_educativo', {'cur_com_sed_ce-id':'id', 'cur_com_sed_ce-nombre':'nombre', 'cur_com_sed_ce-cue':'cue', 'cur_com_sed_ce-observaciones':'observaciones', 'cur_com_sed_ce-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -758,7 +758,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'centro_educativo', 'centro_educativo', {'ce-id':'id', 'ce-nombre':'nombre', 'ce-cue':'cue', 'ce-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'centro_educativo', 'centro_educativo', {'ce-id':'id', 'ce-nombre':'nombre', 'ce-cue':'cue', 'ce-observaciones':'observaciones', 'ce-domicilio':'domicilio', })
         }
       ),
       switchMap(
@@ -816,7 +816,7 @@ export class _DataDefinitionRelArrayService {
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_sed-centro_educativo', 'centro_educativo', {'cur_com_sed_ce-id':'id', 'cur_com_sed_ce-nombre':'nombre', 'cur_com_sed_ce-cue':'cue', 'cur_com_sed_ce-domicilio':'domicilio', })
+          return this.dd.getAllColumnData(data, 'cur_com_sed-centro_educativo', 'centro_educativo', {'cur_com_sed_ce-id':'id', 'cur_com_sed_ce-nombre':'nombre', 'cur_com_sed_ce-cue':'cue', 'cur_com_sed_ce-observaciones':'observaciones', 'cur_com_sed_ce-domicilio':'domicilio', })
         }
       ),
       switchMap(

@@ -1,93 +1,46 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { AdminComponent } from '@component/admin/admin.component';
 import { FieldViewOptions } from '@class/field-view-options';
-import { FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputTextOptions, FieldInputAutocompleteOptions, FieldControlOptions, FieldHiddenOptions, FieldInputDateOptions, FieldInputYearOptions, FieldInputSelectOptions } from '@class/field-type-options';
-import { AdminRelComponent } from '@component/admin-rel/admin-rel.component';
-import { AdminRelStructure } from '@class/admin-rel-structure';
+import { FieldInputTextOptions, FieldInputAutocompleteOptions, FieldControlOptions, FieldHiddenOptions } from '@class/field-type-options';
 
 @Component({
   selector: 'app-centro-educativo-admin',
-  templateUrl: '../../core/component/admin-rel/admin-rel.component.html',
+  templateUrl: '../../core/component/admin/admin.component.html',
 })
-export class CentroEducativoAdminComponent extends AdminRelComponent {
+export class CentroEducativoAdminComponent extends AdminComponent {
 
   readonly entityName: string = "centro_educativo"
+  title: string = "Centro Educativo"
 
-  structure:AdminRelStructure[] = [
-
-    new AdminRelStructure({
-      id:"centro_educativo",
-      title: "Centro Educativo",
-      fieldsViewOptions: [
-        new FieldViewOptions({
-          field:"id",
-          label:"id",
-          type: new FieldHiddenOptions,
-        }),
-        new FieldViewOptions({
-          field:"nombre",
-          label:"Nombre",
-          type: new FieldInputTextOptions(),
-          control: new FieldControlOptions({validators: [Validators.required],})
-        }),
-        new FieldViewOptions({
-          field:"cue",
-          label:"Cue",
-          type: new FieldInputTextOptions(),
-          control: new FieldControlOptions({asyncValidators: [this.validators.unique('cue', 'centro_educativo')],})
-        }),
-      ]
+  fieldsViewOptions: FieldViewOptions[] = [
+    new FieldViewOptions({
+      field:"id",
+      label:"id",
+      type: new FieldHiddenOptions,
     }),
-
-    new AdminRelStructure({
-      id:"dom.domicilio",
-      title: "Domicilio",
-      fieldsViewOptions: [
-        new FieldViewOptions({
-          field:"id",
-          label:"id",
-          type: new FieldHiddenOptions,
-        }),
-        new FieldViewOptions({
-          field:"calle",
-          label:"Calle",
-          type: new FieldInputTextOptions(),
-          control: new FieldControlOptions({validators: [Validators.required],})
-        }),
-        new FieldViewOptions({
-          field:"entre",
-          label:"Entre",
-          type: new FieldInputTextOptions(),
-        }),
-        new FieldViewOptions({
-          field:"numero",
-          label:"Numero",
-          type: new FieldInputTextOptions(),
-          control: new FieldControlOptions({validators: [Validators.required],})
-        }),
-        new FieldViewOptions({
-          field:"piso",
-          label:"Piso",
-          type: new FieldInputTextOptions(),
-        }),
-        new FieldViewOptions({
-          field:"departamento",
-          label:"Departamento",
-          type: new FieldInputTextOptions(),
-        }),
-        new FieldViewOptions({
-          field:"barrio",
-          label:"Barrio",
-          type: new FieldInputTextOptions(),
-        }),
-        new FieldViewOptions({
-          field:"localidad",
-          label:"Localidad",
-          type: new FieldInputTextOptions(),
-          control: new FieldControlOptions({validators: [Validators.required],})
-        }),
-      ]
-    })
-  ]
+    new FieldViewOptions({
+      field:"nombre",
+      label:"Nombre",
+      type: new FieldInputTextOptions(),
+      control: new FieldControlOptions({validators: [Validators.required],})
+    }),
+    new FieldViewOptions({
+      field:"cue",
+      label:"Cue",
+      type: new FieldInputTextOptions(),
+      control: new FieldControlOptions({asyncValidators: [this.validators.unique('cue', 'centro_educativo')],})
+    }),
+    new FieldViewOptions({
+      field:"observaciones",
+      label:"Observaciones",
+      type: new FieldInputTextOptions(),
+    }),
+    new FieldViewOptions({
+      field:"domicilio",
+      label:"Domicilio",
+      type: new FieldInputAutocompleteOptions({entityName:"domicilio"}),
+    }),
+  ];  
 }
 
