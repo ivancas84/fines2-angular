@@ -47,7 +47,7 @@ import { OptionsComponent } from '@component/options/options.component';
 import { ComisionCensComponent } from '@component/comision-cens/comision-cens.component';
 import { SedeCensComponent } from '@component/sede-cens/sede-cens.component';
 import { ComisionRelacionadaAdminComponent } from '@component/comision-relacionada-admin/comision-relacionada-admin.component';
-import { CursoShowComponent } from '@component/curso-show/curso-show/curso-show.component';
+import { CursoTomaPosesionComponent } from '@component/curso-toma-posesion/curso-toma-posesion/curso-toma-posesion.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -96,7 +96,7 @@ const routes: Routes = [
   { path: 'options', component: OptionsComponent, pathMatch: 'full' },
   { path: 'comision-cens', component: ComisionCensComponent, pathMatch: 'full' },
   { path: 'sede-cens', component: SedeCensComponent, pathMatch: 'full' },
-  { path: 'curso-show', component: CursoShowComponent, pathMatch: 'full' },
+  { path: 'curso-toma-posesion', component: CursoTomaPosesionComponent, pathMatch: 'full' },
   { path: 'comision-relacionada', component: ComisionRelacionadaAdminComponent, pathMatch: 'full' },
 
 

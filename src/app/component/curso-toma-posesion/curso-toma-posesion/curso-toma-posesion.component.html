@@ -5,5 +5,5 @@
 <div *ngIf="(load$ | async); else loading">
   <mat-progress-bar *ngIf="!load" mode="indeterminate"></mat-progress-bar>
   <core-search-dynamic [display]="display" [fieldsViewOptionsSp]="fieldsViewOptionsSp"></core-search-dynamic>
-  <app-curso-table [dataSource]="data" [length]="length" [display]="display" [fieldsViewOptions]="fieldsViewOptions"></app-curso-table>
+  <app-curso-toma-posesion-table [dataSource]="data" [length]="length" [display]="display" [fieldsViewOptions]="fieldsViewOptions"></app-curso-toma-posesion-table>
 </div>

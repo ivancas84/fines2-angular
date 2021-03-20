@@ -49,8 +49,8 @@
             <mat-card *ngFor="let curso of row._curso">
               <mat-card-content>
                  <strong><core-field-label [entityName]="'asignatura'" [fieldNames]="['nombre']" [id]="curso.asignatura"></core-field-label>
-                  IGE {{curso.ige}}<!--a routerLink="/toma-admin" [queryParams]="{'curso':curso.id}"><mat-icon>edit</mat-icon></a>
-                  <a routerLink="/calificacion-show-admin-rel" [queryParams]="{'cur-id':curso.id}"><mat-icon>account_box</mat-icon></a--></strong>  
+                  IGE {{curso.ige}}<a routerLink="/toma-admin" [queryParams]="{'curso':curso.id}"><mat-icon>edit</mat-icon></a>
+                  <a routerLink="/calificacion-show-admin-rel" [queryParams]="{'cur-id':curso.id}"><mat-icon>account_box</mat-icon></a></strong>  
                 <br><span class="mat-small">&nbsp;{{curso.horario}} - {{curso.horas_catedra}} horas cátedra</span>
                 <mat-list role="list" dense>
                   <mat-list-item *ngFor="let toma of curso._toma" role="listitem" [ngClass]="{'green': toma.estado == 'Aprobada', 'yellow': toma.estado == 'Pendiente', 'red':toma.estado == 'Renuncia'}">
