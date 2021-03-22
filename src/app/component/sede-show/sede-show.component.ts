@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ShowComponent } from '@component/show/show.component';
 import { FieldViewOptions } from '@class/field-view-options';
-import { FieldYesNoOptions, TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions, FieldControlOptions, FieldHiddenOptions } from '@class/field-type-options';
+import { FieldYesNoOptions, TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions, FieldControlOptions, FieldHiddenOptions, FieldInputDateOptions } from '@class/field-type-options';
 import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldWidthOptions } from '@class/field-width-options';
 
@@ -28,14 +28,22 @@ export class SedeShowComponent extends ShowComponent {
       label:"Domicilio",
       type:new TypeLabelOptions({entityName: "domicilio"}),
     }),
-    /*new FieldViewOptions({
+    new FieldViewOptions({
       field:"centro_educativo",
       label:"Centro Educativo",
       //type:new TypeLabelOptions({entityName: "centro_educativo"}),
       type:new FieldInputSelectOptions({entityName:"centro_educativo"}),
-      aux: new InputPersistOptions({fieldName:"centro_educativo", entityName: "sede", api:"persist",params:{id:"{{id}}"}})  
+      aux: new InputPersistOptions({fieldName:"centro_educativo", entityName: "sede", api:"persist"})  
       //aux:new RouterLinkOptions({path: "centro-educativo-detail", params:{id:"{{centro_educativo}})"}}), 
-    }),*/
+    }),
+    new FieldViewOptions({
+      field:"fecha_traspaso",
+      label:"Fecha Traspaso",
+      //type:new TypeLabelOptions({entityName: "centro_educativo"}),
+      type:new FieldInputDateOptions(),
+      aux: new InputPersistOptions({fieldName:"fecha_traspaso", entityName: "sede", api:"persist"})  
+      //aux:new RouterLinkOptions({path: "centro-educativo-detail", params:{id:"{{centro_educativo}})"}}), 
+    }),
   ];  
   fieldsViewOptionsSp: FieldViewOptions[] = [
     new FieldViewOptions({

@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { FieldHiddenOptions, FieldInputTextOptions, FieldControlOptions, FieldInputDateOptions } from '@class/field-type-options';
 import { FieldViewOptions } from '@class/field-view-options';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { ShowAdminRelDynamicComponent } from '@component/show-admin-dynamic/show-admin-rel-dynamic.component';
-import { DataDefinitionRelArrayService } from '@service/data-definition-rel-array/data-definition-rel-array.service';
-import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
-import { ValidatorsService } from '@service/validators/validators.service';
 
 @Component({
   selector: 'app-persona-show-admin-rel',

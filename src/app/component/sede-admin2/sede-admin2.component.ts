@@ -60,7 +60,7 @@ export class SedeAdmin2Component extends AdminRelComponent {
     }),
 
     new AdminRelStructure({
-      id:"dom.domicilio",
+      id:"dom",
       title: "Domicilio",
       fieldsViewOptions: [
         new FieldViewOptions({

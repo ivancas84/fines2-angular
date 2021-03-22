@@ -158,6 +158,8 @@ import { SedeCensComponent } from '@component/sede-cens/sede-cens.component';
 import { ComisionRelacionadaAdminComponent } from '@component/comision-relacionada-admin/comision-relacionada-admin.component';
 import { CursoTomaPosesionComponent } from '@component/curso-toma-posesion/curso-toma-posesion/curso-toma-posesion.component';
 import { CursoTomaPosesionTableComponent } from '@component/curso-toma-posesion/curso-toma-posesion-table/curso-toma-posesion-table.component';
+import { DesignacionAdminComponent } from '@component/designacion-admin/designacion-admin.component';
+import { DesignacionShowComponent } from '@component/designacion-show/designacion-show.component';
 
 
 @NgModule({
@@ -258,7 +260,9 @@ import { CursoTomaPosesionTableComponent } from '@component/curso-toma-posesion/
     ComisionCensComponent,
     SedeCensComponent,
     CursoTomaPosesionComponent, CursoTomaPosesionTableComponent,
-    ComisionRelacionadaAdminComponent
+    ComisionRelacionadaAdminComponent,
+    DesignacionAdminComponent,
+    DesignacionShowComponent
   ],
   imports: [
     BrowserModule,
