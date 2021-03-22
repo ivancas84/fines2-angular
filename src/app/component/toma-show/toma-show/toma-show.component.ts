@@ -5,40 +5,25 @@ import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-op
 import { FieldWidthOptions } from '@class/field-width-options';
 import { ShowDynamicComponent } from '@component/show/show-dynamic.component';
 import { InputCheckboxComponent } from '@component/input-checkbox/input-checkbox.component';
+import { ShowRelDynamicComponent } from '@component/show/show-rel-dynamic.component';
 
 @Component({
   selector: 'app-toma-show',
   templateUrl: '../../../core/component/show/show-dynamic.component.html',
 })
-export class TomaShowComponent extends ShowDynamicComponent {
+export class TomaShowComponent extends ShowRelDynamicComponent {
 
   readonly entityName: string = "toma";
 
   fieldsViewOptions: FieldViewOptions[] = [
     new FieldViewOptions({
-      field:"fecha_toma",
-      label:"Fecha Toma",
-      type:new FieldDateOptions({format:"dd/MM/yyyy"})
+      field:"cur-ige",
+      label:"IGE",
+      aux: new RouterLinkOptions({path:"calificacion-show-admin-rel",params:{"cur-id":"{{curso}}"}})
     }),
     new FieldViewOptions({
       field:"estado",
       label:"Estado",
-    }),
-    new FieldViewOptions({
-      field:"observaciones",
-      label:"Observaciones",
-    }),
-    new FieldViewOptions({
-      field:"comentario",
-      label:"Comentario",
-    }),
-    new FieldViewOptions({
-      field:"tipo_movimiento",
-      label:"Tipo Movimiento",
-    }),
-    new FieldViewOptions({
-      field:"estado_contralor",
-      label:"Estado Contralor",
     }),
     new FieldViewOptions({
       field:"calificacion",
@@ -95,18 +80,6 @@ export class TomaShowComponent extends ShowDynamicComponent {
       label:"Docente",
       type:new TypeLabelOptions({entityName: "persona"}),
       aux:new RouterLinkOptions({path: "persona-detail", params:{id:"{{docente}})"}}), 
-    }),
-    new FieldViewOptions({
-      field:"reemplazo",
-      label:"Reemplazo",
-      type:new TypeLabelOptions({entityName: "persona"}),
-      aux:new RouterLinkOptions({path: "persona-detail", params:{id:"{{reemplazo}})"}}), 
-    }),
-    new FieldViewOptions({
-      field:"planilla_docente",
-      label:"Planilla Docente",
-      type:new TypeLabelOptions({entityName: "planilla_docente"}),
-      aux:new RouterLinkOptions({path: "planilla-docente-detail", params:{id:"{{planilla_docente}})"}}), 
     }),
   ];  
   fieldsViewOptionsSp: FieldViewOptions[] = [
