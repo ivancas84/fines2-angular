@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { FieldHiddenOptions, FieldInputTextOptions, FieldControlOptions, FieldInputAutocompleteOptions } from '@class/field-type-options';
+import { Display } from '@class/display';
+import { FieldHiddenOptions, FieldInputTextOptions, FieldControlOptions, FieldInputAutocompleteOptions, FieldTextareaOptions } from '@class/field-type-options';
 import { FieldViewOptions } from '@class/field-view-options';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { ShowAdminRelDynamicComponent } from '@component/show-admin-dynamic/show-admin-rel-dynamic.component';
@@ -89,6 +90,11 @@ export class CalificacionShowAdminRelComponent extends ShowAdminRelDynamicCompon
       type: new FieldInputTextOptions({width:"60px"}),
       control: new FieldControlOptions({validators: [Validators.pattern('^-?[0-9]+(\\.[0-9]{1,2})?$'), Validators.max(10.00), Validators.min(-10.00)],})
     }),
+    new FieldViewOptions({
+      field:"observaciones",
+      label:"observaciones",
+      type: new FieldTextareaOptions(),
+    }),
     
   ];   
 
@@ -140,7 +146,6 @@ export class CalificacionShowAdminRelComponent extends ShowAdminRelDynamicCompon
       ),
       switchMap(
         response => {
-          console.log(response);
           if(response["ids"].length) this.storage.removeItemsContains("."); 
           //si se realizo alguna insercion eliminamos el storage de las consultas
           return this.initLength();
@@ -155,6 +160,15 @@ export class CalificacionShowAdminRelComponent extends ShowAdminRelDynamicCompon
     );
   }
 
+  initDisplay() {
+    this.display = new Display();
+    this.display.setSize(100);
+    this.display.setParamsByQueryParams(this.params);
+    this.display.setOrder({"per-apellidos":"asc","per-nombres":"asc"});
+    
+  }
+
+  
   /*
   serverData(i) {  
     var v = this.forms[i].value;
