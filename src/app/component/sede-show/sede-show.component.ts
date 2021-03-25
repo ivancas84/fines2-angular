@@ -33,7 +33,7 @@ export class SedeShowComponent extends ShowComponent {
       label:"Centro Educativo",
       //type:new TypeLabelOptions({entityName: "centro_educativo"}),
       type:new FieldInputSelectOptions({entityName:"centro_educativo"}),
-      aux: new InputPersistOptions({fieldName:"centro_educativo", entityName: "sede", api:"persist"})  
+      aux: new InputPersistOptions({fieldName:"centro_educativo", entityName: "sede"})  
       //aux:new RouterLinkOptions({path: "centro-educativo-detail", params:{id:"{{centro_educativo}})"}}), 
     }),
     new FieldViewOptions({
@@ -41,7 +41,7 @@ export class SedeShowComponent extends ShowComponent {
       label:"Fecha Traspaso",
       //type:new TypeLabelOptions({entityName: "centro_educativo"}),
       type:new FieldInputDateOptions(),
-      aux: new InputPersistOptions({fieldName:"fecha_traspaso", entityName: "sede", api:"persist"})  
+      aux: new InputPersistOptions({fieldName:"fecha_traspaso", entityName: "sede"})  
       //aux:new RouterLinkOptions({path: "centro-educativo-detail", params:{id:"{{centro_educativo}})"}}), 
     }),
   ];  

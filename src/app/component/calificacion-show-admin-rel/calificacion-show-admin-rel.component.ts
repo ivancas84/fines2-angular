@@ -20,7 +20,7 @@ import { map, switchMap, tap } from 'rxjs/operators';
 export class CalificacionShowAdminRelComponent extends ShowAdminRelDynamicComponent {
 
   readonly entityName: string = "calificacion";
-  persistApi: string = "persist_rel_array_unique"; 
+  persistApi: string = "persist_calificacion"; 
 
   title: string = "Calificacion"
 

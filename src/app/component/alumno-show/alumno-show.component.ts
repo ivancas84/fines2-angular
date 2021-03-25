@@ -83,10 +83,9 @@ export class AlumnoShowComponent extends ShowDynamicComponent {
       label:"Activo",
       /*labelDisabled:true,
       type:new FieldInputCheckboxOptions(),
-      aux:new InputPersistOptions({
+      aux:new InputPersistOptions({ 
         entityName:"alumno",
         fieldName:"activo",
-        params:{id:"{{id}}",api:"persist"}
       })*/
     }),
     new FieldViewOptions({

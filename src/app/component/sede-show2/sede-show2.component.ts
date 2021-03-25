@@ -113,7 +113,7 @@ export class SedeShow2Component extends ShowComponent {
       label:"Centro Educativo",
       entityName:"sede",
       type:new FieldInputSelectOptions({entityName:"centro_educativo"}),
-      aux:new InputPersistOptions({api:"persist", params:{id:"{{sede}}"}})
+      aux:new InputPersistOptions({params:{id:"{{sede}}"}})
     }),
     new FieldViewOptions({
       field:"fecha_traspaso",

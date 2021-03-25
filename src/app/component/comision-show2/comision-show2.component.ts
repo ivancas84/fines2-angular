@@ -119,7 +119,6 @@ export class ComisionShow2Component extends ShowComponent {
       /*aux: new InputPersistOptions({
         entityName:"comision",
         fieldName:"configuracion",
-        params:{id:"{{id}}"},api:"persist"
       })*/
     }),
     new FieldViewOptions({
@@ -150,7 +149,6 @@ export class ComisionShow2Component extends ShowComponent {
       aux: new InputPersistOptions({
         entityName:"comision",
         fieldName:"estado",
-        params:{id:"{{id}}"},
         api:"persist"
       })*/
     }),
@@ -162,7 +160,7 @@ export class ComisionShow2Component extends ShowComponent {
       field:"comentario",
       label:"Comentario",
       //type:new FieldInputTextOptions(),
-      //aux: new InputPersistOptions({params:{id:"{{id}}"},api:"persist"})
+      //aux: new InputPersistOptions()
     }),
     new FieldViewOptions({
       field:"horario",

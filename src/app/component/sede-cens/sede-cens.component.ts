@@ -42,14 +42,14 @@ export class SedeCensComponent extends ShowRelDynamicComponent {
       field:"ce-nombre",
       label:"Centro Educativo",
       //type:new FieldInputSelectOptions({entityName:"centro_educativo"}),
-      //aux: new InputPersistOptions({fieldName:"centro_educativo", entityName: "sede", api:"persist",params:{id:"{{id}}"}})  
+      //aux: new InputPersistOptions({fieldName:"centro_educativo", entityName: "sede")  
       //aux:new RouterLinkOptions({path: "centro-educativo-detail", params:{id:"{{centro_educativo}})"}}), 
     }),
     new FieldViewOptions({
       field:"ce-observaciones",
       label:"Contacto CENS",
       //type:new FieldInputSelectOptions({entityName:"centro_educativo"}),
-      //aux: new InputPersistOptions({fieldName:"centro_educativo", entityName: "sede", api:"persist",params:{id:"{{id}}"}})  
+      //aux: new InputPersistOptions({fieldName:"centro_educativo", entityName: "sede")  
       //aux:new RouterLinkOptions({path: "centro-educativo-detail", params:{id:"{{centro_educativo}})"}}), 
     }),
   ];  
