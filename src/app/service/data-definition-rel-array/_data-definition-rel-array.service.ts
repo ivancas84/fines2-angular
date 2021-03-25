@@ -1,877 +1,2038 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
-import { Display } from '@class/display';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
+import { isEmptyObject } from '@function/is-empty-object.function';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class _DataDefinitionRelArrayService {
+export class _DataDefinitionRelArrayService { //2
   /**
-   * Define un array de relaciones, 
-   * utilizando metodos que consultan el storage,
-   * para reducir las consultas al servidor.
-   * La estructura resultante, puede ser utilizada directamente 
-   * en una tabla de visualizacion, facilitando el ordenamiento,
-   * ya que cada campo se identifica con el prefijo correspondiente
-   * de la entidad relacionada
+   * Define un array de relaciones, utilizando metodos que consultan el storage,
+   * 
+   * La estructura resultante, puede ser utilizada directamente en una tabla de visualizacion.
+   * 
+   * Gracias al storage y la identificacion de fields, 
+   * reduce los accesos al servidor y facilita el ordenamiento
+   * 
+   * La identificacion de fields es distinta de la que hace el servidor.
+   * En el servidor habitualmente se utiliza '-' para las consultas 
+   * y '_' representar el resultado, 
    */
 
   constructor(protected dd: DataDefinitionToolService){ }
 
-  main(entityName: string, ids:string[]): Observable<string> {
+    filterFields(fields, prefix) {
+      var f = {}
+      for(var key in fields){
+        if(fields.hasOwnProperty(key)){
+          if(key.includes(prefix)) f[key] = fields[key];
+        }
+      }
+      return f;
+    }
+
+  get(entityName: string, id:string, fields: { [index: string]: any }): Observable<any> {
+      /**
+       * @param fields Ejemplo de estructura, para entityName = 'alumno'
+       * {'per-nombres':'nombres', 'per-numero_documento':'numero_documento', 'per_dom-calle':'calle'}
+       */
     switch(entityName) {
-      case "alumno": { return this.alumno(ids); }
-      case "asignacion_planilla_docente": { return this.asignacionPlanillaDocente(ids); }
-      case "asignatura": { return this.asignatura(ids); }
-      case "calendario": { return this.calendario(ids); }
-      case "calificacion": { return this.calificacion(ids); }
-      case "cargo": { return this.cargo(ids); }
-      case "centro_educativo": { return this.centroEducativo(ids); }
-      case "comision": { return this.comision(ids); }
-      case "comision_relacionada": { return this.comisionRelacionada(ids); }
-      case "contralor": { return this.contralor(ids); }
-      case "curso": { return this.curso(ids); }
-      case "designacion": { return this.designacion(ids); }
-      case "detalle_persona": { return this.detallePersona(ids); }
-      case "dia": { return this.dia(ids); }
-      case "distribucion_horaria": { return this.distribucionHoraria(ids); }
-      case "domicilio": { return this.domicilio(ids); }
-      case "email": { return this.email(ids); }
-      case "file": { return this.file(ids); }
-      case "horario": { return this.horario(ids); }
-      case "modalidad": { return this.modalidad(ids); }
-      case "persona": { return this.persona(ids); }
-      case "plan": { return this.plan(ids); }
-      case "planificacion": { return this.planificacion(ids); }
-      case "planilla_docente": { return this.planillaDocente(ids); }
-      case "sede": { return this.sede(ids); }
-      case "telefono": { return this.telefono(ids); }
-      case "tipo_sede": { return this.tipoSede(ids); }
-      case "toma": { return this.toma(ids); }
+      case "alumno": { return this.alumnoGet(id, fields); }
+      case "asignacion_planilla_docente": { return this.asignacionPlanillaDocenteGet(id, fields); }
+      case "asignatura": { return this.asignaturaGet(id, fields); }
+      case "calendario": { return this.calendarioGet(id, fields); }
+      case "calificacion": { return this.calificacionGet(id, fields); }
+      case "cargo": { return this.cargoGet(id, fields); }
+      case "centro_educativo": { return this.centroEducativoGet(id, fields); }
+      case "comision": { return this.comisionGet(id, fields); }
+      case "comision_relacionada": { return this.comisionRelacionadaGet(id, fields); }
+      case "contralor": { return this.contralorGet(id, fields); }
+      case "curso": { return this.cursoGet(id, fields); }
+      case "designacion": { return this.designacionGet(id, fields); }
+      case "detalle_persona": { return this.detallePersonaGet(id, fields); }
+      case "dia": { return this.diaGet(id, fields); }
+      case "distribucion_horaria": { return this.distribucionHorariaGet(id, fields); }
+      case "domicilio": { return this.domicilioGet(id, fields); }
+      case "email": { return this.emailGet(id, fields); }
+      case "file": { return this.fileGet(id, fields); }
+      case "horario": { return this.horarioGet(id, fields); }
+      case "modalidad": { return this.modalidadGet(id, fields); }
+      case "persona": { return this.personaGet(id, fields); }
+      case "plan": { return this.planGet(id, fields); }
+      case "planificacion": { return this.planificacionGet(id, fields); }
+      case "planilla_docente": { return this.planillaDocenteGet(id, fields); }
+      case "sede": { return this.sedeGet(id, fields); }
+      case "telefono": { return this.telefonoGet(id, fields); }
+      case "tipo_sede": { return this.tipoSedeGet(id, fields); }
+      case "toma": { return this.tomaGet(id, fields); }
     }
   }
-  alumno(ids: string[]): Observable<any> {
+  getAll(entityName: string, ids:string[], fields: { [index: string]: any }): Observable<any> {
+      /**
+       * @param fields Ejemplo de estructura, para entityName = 'alumno'
+       * {'per-nombres':'nombres', 'per-numero_documento':'numero_documento', 'per_dom-calle':'calle'}
+       */
+    switch(entityName) {
+      case "alumno": { return this.alumnoGetAll(ids, fields); }
+      case "asignacion_planilla_docente": { return this.asignacionPlanillaDocenteGetAll(ids, fields); }
+      case "asignatura": { return this.asignaturaGetAll(ids, fields); }
+      case "calendario": { return this.calendarioGetAll(ids, fields); }
+      case "calificacion": { return this.calificacionGetAll(ids, fields); }
+      case "cargo": { return this.cargoGetAll(ids, fields); }
+      case "centro_educativo": { return this.centroEducativoGetAll(ids, fields); }
+      case "comision": { return this.comisionGetAll(ids, fields); }
+      case "comision_relacionada": { return this.comisionRelacionadaGetAll(ids, fields); }
+      case "contralor": { return this.contralorGetAll(ids, fields); }
+      case "curso": { return this.cursoGetAll(ids, fields); }
+      case "designacion": { return this.designacionGetAll(ids, fields); }
+      case "detalle_persona": { return this.detallePersonaGetAll(ids, fields); }
+      case "dia": { return this.diaGetAll(ids, fields); }
+      case "distribucion_horaria": { return this.distribucionHorariaGetAll(ids, fields); }
+      case "domicilio": { return this.domicilioGetAll(ids, fields); }
+      case "email": { return this.emailGetAll(ids, fields); }
+      case "file": { return this.fileGetAll(ids, fields); }
+      case "horario": { return this.horarioGetAll(ids, fields); }
+      case "modalidad": { return this.modalidadGetAll(ids, fields); }
+      case "persona": { return this.personaGetAll(ids, fields); }
+      case "plan": { return this.planGetAll(ids, fields); }
+      case "planificacion": { return this.planificacionGetAll(ids, fields); }
+      case "planilla_docente": { return this.planillaDocenteGetAll(ids, fields); }
+      case "sede": { return this.sedeGetAll(ids, fields); }
+      case "telefono": { return this.telefonoGetAll(ids, fields); }
+      case "tipo_sede": { return this.tipoSedeGetAll(ids, fields); }
+      case "toma": { return this.tomaGetAll(ids, fields); }
+    }
+  }
+  alumnoGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("alumno", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'per-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'persona', 'persona', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'per-domicilio', 'domicilio', {'per_dom-id':'id', 'per_dom-calle':'calle', 'per_dom-entre':'entre', 'per_dom-numero':'numero', 'per_dom-piso':'piso', 'per_dom-departamento':'departamento', 'per_dom-barrio':'barrio', 'per_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'per_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'per-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'comision', 'comision', {'com-id':'id', 'com-turno':'turno', 'com-division':'division', 'com-comentario':'comentario', 'com-autorizada':'autorizada', 'com-apertura':'apertura', 'com-publicada':'publicada', 'com-observaciones':'observaciones', 'com-alta':'alta', 'com-identificacion':'identificacion', 'com-estado':'estado', 'com-configuracion':'configuracion', 'com-sede':'sede', 'com-modalidad':'modalidad', 'com-planificacion':'planificacion', 'com-comision_siguiente':'comision_siguiente', 'com-calendario':'calendario', })
+          var f = this.filterFields(fields, 'com-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'comision', 'comision', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com-sede', 'sede', {'com_sed-id':'id', 'com_sed-numero':'numero', 'com_sed-nombre':'nombre', 'com_sed-observaciones':'observaciones', 'com_sed-alta':'alta', 'com_sed-baja':'baja', 'com_sed-fecha_traspaso':'fecha_traspaso', 'com_sed-domicilio':'domicilio', 'com_sed-tipo_sede':'tipo_sede', 'com_sed-centro_educativo':'centro_educativo', })
+          var f = this.filterFields(fields, 'com_sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com-sede', 'sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_sed-domicilio', 'domicilio', {'com_sed_dom-id':'id', 'com_sed_dom-calle':'calle', 'com_sed_dom-entre':'entre', 'com_sed_dom-numero':'numero', 'com_sed_dom-piso':'piso', 'com_sed_dom-departamento':'departamento', 'com_sed_dom-barrio':'barrio', 'com_sed_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'com_sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com_sed-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_sed-tipo_sede', 'tipo_sede', {'com_sed_ts-id':'id', 'com_sed_ts-descripcion':'descripcion', })
+          var f = this.filterFields(fields, 'com_sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com_sed-tipo_sede', 'tipo_sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_sed-centro_educativo', 'centro_educativo', {'com_sed_ce-id':'id', 'com_sed_ce-nombre':'nombre', 'com_sed_ce-cue':'cue', 'com_sed_ce-observaciones':'observaciones', 'com_sed_ce-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'com_sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com_sed-centro_educativo', 'centro_educativo', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_sed_ce-domicilio', 'domicilio', {'com_sed_ce_dom-id':'id', 'com_sed_ce_dom-calle':'calle', 'com_sed_ce_dom-entre':'entre', 'com_sed_ce_dom-numero':'numero', 'com_sed_ce_dom-piso':'piso', 'com_sed_ce_dom-departamento':'departamento', 'com_sed_ce_dom-barrio':'barrio', 'com_sed_ce_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'com_sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com_sed_ce-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com-modalidad', 'modalidad', {'com_moa-id':'id', 'com_moa-nombre':'nombre', })
+          var f = this.filterFields(fields, 'com_moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com-modalidad', 'modalidad', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com-planificacion', 'planificacion', {'com_pla-id':'id', 'com_pla-anio':'anio', 'com_pla-semestre':'semestre', 'com_pla-plan':'plan', })
+          var f = this.filterFields(fields, 'com_pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com-planificacion', 'planificacion', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_pla-plan', 'plan', {'com_pla_plb-id':'id', 'com_pla_plb-orientacion':'orientacion', 'com_pla_plb-resolucion':'resolucion', 'com_pla_plb-distribucion_horaria':'distribucion_horaria', })
+          var f = this.filterFields(fields, 'com_pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com_pla-plan', 'plan', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com-calendario', 'calendario', {'com_cal-id':'id', 'com_cal-inicio':'inicio', 'com_cal-fin':'fin', 'com_cal-anio':'anio', 'com_cal-semestre':'semestre', 'com_cal-insertado':'insertado', })
+          var f = this.filterFields(fields, 'com_cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com-calendario', 'calendario', f)
         }
       ),
     )
   }
     
-  asignacionPlanillaDocente(ids: string[]): Observable<any> {
+  asignacionPlanillaDocenteGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("asignacion_planilla_docente", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'planilla_docente', 'planilla_docente', {'pd-id':'id', 'pd-numero':'numero', 'pd-insertado':'insertado', 'pd-fecha_contralor':'fecha_contralor', 'pd-fecha_consejo':'fecha_consejo', 'pd-observaciones':'observaciones', })
+          var f = this.filterFields(fields, 'pd-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'planilla_docente', 'planilla_docente', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'toma', 'toma', {'tom-id':'id', 'tom-fecha_toma':'fecha_toma', 'tom-estado':'estado', 'tom-observaciones':'observaciones', 'tom-comentario':'comentario', 'tom-tipo_movimiento':'tipo_movimiento', 'tom-estado_contralor':'estado_contralor', 'tom-alta':'alta', 'tom-calificacion':'calificacion', 'tom-temas_tratados':'temas_tratados', 'tom-asistencia':'asistencia', 'tom-sin_planillas':'sin_planillas', 'tom-curso':'curso', 'tom-docente':'docente', 'tom-reemplazo':'reemplazo', 'tom-planilla_docente':'planilla_docente', })
+          var f = this.filterFields(fields, 'tom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'toma', 'toma', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom-curso', 'curso', {'tom_cur-id':'id', 'tom_cur-horas_catedra':'horas_catedra', 'tom_cur-ige':'ige', 'tom_cur-alta':'alta', 'tom_cur-comision':'comision', 'tom_cur-asignatura':'asignatura', })
+          var f = this.filterFields(fields, 'tom_cur-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom-curso', 'curso', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom_cur-comision', 'comision', {'tom_cur_com-id':'id', 'tom_cur_com-turno':'turno', 'tom_cur_com-division':'division', 'tom_cur_com-comentario':'comentario', 'tom_cur_com-autorizada':'autorizada', 'tom_cur_com-apertura':'apertura', 'tom_cur_com-publicada':'publicada', 'tom_cur_com-observaciones':'observaciones', 'tom_cur_com-alta':'alta', 'tom_cur_com-identificacion':'identificacion', 'tom_cur_com-estado':'estado', 'tom_cur_com-configuracion':'configuracion', 'tom_cur_com-sede':'sede', 'tom_cur_com-modalidad':'modalidad', 'tom_cur_com-planificacion':'planificacion', 'tom_cur_com-comision_siguiente':'comision_siguiente', 'tom_cur_com-calendario':'calendario', })
+          var f = this.filterFields(fields, 'tom_cur_com-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom_cur-comision', 'comision', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom_cur_com-sede', 'sede', {'tom_cur_com_sed-id':'id', 'tom_cur_com_sed-numero':'numero', 'tom_cur_com_sed-nombre':'nombre', 'tom_cur_com_sed-observaciones':'observaciones', 'tom_cur_com_sed-alta':'alta', 'tom_cur_com_sed-baja':'baja', 'tom_cur_com_sed-fecha_traspaso':'fecha_traspaso', 'tom_cur_com_sed-domicilio':'domicilio', 'tom_cur_com_sed-tipo_sede':'tipo_sede', 'tom_cur_com_sed-centro_educativo':'centro_educativo', })
+          var f = this.filterFields(fields, 'tom_cur_com_sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom_cur_com-sede', 'sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom_cur_com_sed-domicilio', 'domicilio', {'tom_cur_com_sed_dom-id':'id', 'tom_cur_com_sed_dom-calle':'calle', 'tom_cur_com_sed_dom-entre':'entre', 'tom_cur_com_sed_dom-numero':'numero', 'tom_cur_com_sed_dom-piso':'piso', 'tom_cur_com_sed_dom-departamento':'departamento', 'tom_cur_com_sed_dom-barrio':'barrio', 'tom_cur_com_sed_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'tom_cur_com_sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom_cur_com_sed-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom_cur_com_sed-tipo_sede', 'tipo_sede', {'tom_cur_com_sed_ts-id':'id', 'tom_cur_com_sed_ts-descripcion':'descripcion', })
+          var f = this.filterFields(fields, 'tom_cur_com_sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom_cur_com_sed-tipo_sede', 'tipo_sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom_cur_com_sed-centro_educativo', 'centro_educativo', {'tom_cur_com_sed_ce-id':'id', 'tom_cur_com_sed_ce-nombre':'nombre', 'tom_cur_com_sed_ce-cue':'cue', 'tom_cur_com_sed_ce-observaciones':'observaciones', 'tom_cur_com_sed_ce-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'tom_cur_com_sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom_cur_com_sed-centro_educativo', 'centro_educativo', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom_cur_com_sed_ce-domicilio', 'domicilio', {'tom_cur_com_sed_ce_dom-id':'id', 'tom_cur_com_sed_ce_dom-calle':'calle', 'tom_cur_com_sed_ce_dom-entre':'entre', 'tom_cur_com_sed_ce_dom-numero':'numero', 'tom_cur_com_sed_ce_dom-piso':'piso', 'tom_cur_com_sed_ce_dom-departamento':'departamento', 'tom_cur_com_sed_ce_dom-barrio':'barrio', 'tom_cur_com_sed_ce_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'tom_cur_com_sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom_cur_com_sed_ce-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom_cur_com-modalidad', 'modalidad', {'tom_cur_com_moa-id':'id', 'tom_cur_com_moa-nombre':'nombre', })
+          var f = this.filterFields(fields, 'tom_cur_com_moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom_cur_com-modalidad', 'modalidad', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom_cur_com-planificacion', 'planificacion', {'tom_cur_com_pla-id':'id', 'tom_cur_com_pla-anio':'anio', 'tom_cur_com_pla-semestre':'semestre', 'tom_cur_com_pla-plan':'plan', })
+          var f = this.filterFields(fields, 'tom_cur_com_pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom_cur_com-planificacion', 'planificacion', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom_cur_com_pla-plan', 'plan', {'tom_cur_com_pla_plb-id':'id', 'tom_cur_com_pla_plb-orientacion':'orientacion', 'tom_cur_com_pla_plb-resolucion':'resolucion', 'tom_cur_com_pla_plb-distribucion_horaria':'distribucion_horaria', })
+          var f = this.filterFields(fields, 'tom_cur_com_pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom_cur_com_pla-plan', 'plan', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom_cur_com-calendario', 'calendario', {'tom_cur_com_cal-id':'id', 'tom_cur_com_cal-inicio':'inicio', 'tom_cur_com_cal-fin':'fin', 'tom_cur_com_cal-anio':'anio', 'tom_cur_com_cal-semestre':'semestre', 'tom_cur_com_cal-insertado':'insertado', })
+          var f = this.filterFields(fields, 'tom_cur_com_cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom_cur_com-calendario', 'calendario', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom_cur-asignatura', 'asignatura', {'tom_cur_asi-id':'id', 'tom_cur_asi-nombre':'nombre', 'tom_cur_asi-formacion':'formacion', 'tom_cur_asi-clasificacion':'clasificacion', 'tom_cur_asi-codigo':'codigo', 'tom_cur_asi-perfil':'perfil', })
+          var f = this.filterFields(fields, 'tom_cur_asi-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom_cur-asignatura', 'asignatura', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom-docente', 'persona', {'tom_doc-id':'id', 'tom_doc-nombres':'nombres', 'tom_doc-apellidos':'apellidos', 'tom_doc-fecha_nacimiento':'fecha_nacimiento', 'tom_doc-numero_documento':'numero_documento', 'tom_doc-cuil':'cuil', 'tom_doc-genero':'genero', 'tom_doc-apodo':'apodo', 'tom_doc-telefono':'telefono', 'tom_doc-email':'email', 'tom_doc-email_abc':'email_abc', 'tom_doc-alta':'alta', 'tom_doc-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'tom_doc-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom-docente', 'persona', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom_doc-domicilio', 'domicilio', {'tom_doc_dom-id':'id', 'tom_doc_dom-calle':'calle', 'tom_doc_dom-entre':'entre', 'tom_doc_dom-numero':'numero', 'tom_doc_dom-piso':'piso', 'tom_doc_dom-departamento':'departamento', 'tom_doc_dom-barrio':'barrio', 'tom_doc_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'tom_doc_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom_doc-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom-reemplazo', 'persona', {'tom_ree-id':'id', 'tom_ree-nombres':'nombres', 'tom_ree-apellidos':'apellidos', 'tom_ree-fecha_nacimiento':'fecha_nacimiento', 'tom_ree-numero_documento':'numero_documento', 'tom_ree-cuil':'cuil', 'tom_ree-genero':'genero', 'tom_ree-apodo':'apodo', 'tom_ree-telefono':'telefono', 'tom_ree-email':'email', 'tom_ree-email_abc':'email_abc', 'tom_ree-alta':'alta', 'tom_ree-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'tom_ree-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom-reemplazo', 'persona', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom_ree-domicilio', 'domicilio', {'tom_ree_dom-id':'id', 'tom_ree_dom-calle':'calle', 'tom_ree_dom-entre':'entre', 'tom_ree_dom-numero':'numero', 'tom_ree_dom-piso':'piso', 'tom_ree_dom-departamento':'departamento', 'tom_ree_dom-barrio':'barrio', 'tom_ree_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'tom_ree_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom_ree-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tom-planilla_docente', 'planilla_docente', {'tom_pd-id':'id', 'tom_pd-numero':'numero', 'tom_pd-insertado':'insertado', 'tom_pd-fecha_contralor':'fecha_contralor', 'tom_pd-fecha_consejo':'fecha_consejo', 'tom_pd-observaciones':'observaciones', })
+          var f = this.filterFields(fields, 'tom_pd-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tom-planilla_docente', 'planilla_docente', f)
         }
       ),
     )
   }
     
-  asignatura(ids: string[]): Observable<any> {
+  asignaturaGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("asignatura", ids)  }
     
-  calendario(ids: string[]): Observable<any> {
+  calendarioGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("calendario", ids)  }
     
-  calificacion(ids: string[]): Observable<any> {
+  calificacionGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("calificacion", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'curso', 'curso', {'cur-id':'id', 'cur-horas_catedra':'horas_catedra', 'cur-ige':'ige', 'cur-alta':'alta', 'cur-comision':'comision', 'cur-asignatura':'asignatura', })
+          var f = this.filterFields(fields, 'cur-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'curso', 'curso', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur-comision', 'comision', {'cur_com-id':'id', 'cur_com-turno':'turno', 'cur_com-division':'division', 'cur_com-comentario':'comentario', 'cur_com-autorizada':'autorizada', 'cur_com-apertura':'apertura', 'cur_com-publicada':'publicada', 'cur_com-observaciones':'observaciones', 'cur_com-alta':'alta', 'cur_com-identificacion':'identificacion', 'cur_com-estado':'estado', 'cur_com-configuracion':'configuracion', 'cur_com-sede':'sede', 'cur_com-modalidad':'modalidad', 'cur_com-planificacion':'planificacion', 'cur_com-comision_siguiente':'comision_siguiente', 'cur_com-calendario':'calendario', })
+          var f = this.filterFields(fields, 'cur_com-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur-comision', 'comision', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com-sede', 'sede', {'cur_com_sed-id':'id', 'cur_com_sed-numero':'numero', 'cur_com_sed-nombre':'nombre', 'cur_com_sed-observaciones':'observaciones', 'cur_com_sed-alta':'alta', 'cur_com_sed-baja':'baja', 'cur_com_sed-fecha_traspaso':'fecha_traspaso', 'cur_com_sed-domicilio':'domicilio', 'cur_com_sed-tipo_sede':'tipo_sede', 'cur_com_sed-centro_educativo':'centro_educativo', })
+          var f = this.filterFields(fields, 'cur_com_sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com-sede', 'sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_sed-domicilio', 'domicilio', {'cur_com_sed_dom-id':'id', 'cur_com_sed_dom-calle':'calle', 'cur_com_sed_dom-entre':'entre', 'cur_com_sed_dom-numero':'numero', 'cur_com_sed_dom-piso':'piso', 'cur_com_sed_dom-departamento':'departamento', 'cur_com_sed_dom-barrio':'barrio', 'cur_com_sed_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'cur_com_sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com_sed-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_sed-tipo_sede', 'tipo_sede', {'cur_com_sed_ts-id':'id', 'cur_com_sed_ts-descripcion':'descripcion', })
+          var f = this.filterFields(fields, 'cur_com_sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com_sed-tipo_sede', 'tipo_sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_sed-centro_educativo', 'centro_educativo', {'cur_com_sed_ce-id':'id', 'cur_com_sed_ce-nombre':'nombre', 'cur_com_sed_ce-cue':'cue', 'cur_com_sed_ce-observaciones':'observaciones', 'cur_com_sed_ce-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'cur_com_sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com_sed-centro_educativo', 'centro_educativo', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_sed_ce-domicilio', 'domicilio', {'cur_com_sed_ce_dom-id':'id', 'cur_com_sed_ce_dom-calle':'calle', 'cur_com_sed_ce_dom-entre':'entre', 'cur_com_sed_ce_dom-numero':'numero', 'cur_com_sed_ce_dom-piso':'piso', 'cur_com_sed_ce_dom-departamento':'departamento', 'cur_com_sed_ce_dom-barrio':'barrio', 'cur_com_sed_ce_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'cur_com_sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com_sed_ce-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com-modalidad', 'modalidad', {'cur_com_moa-id':'id', 'cur_com_moa-nombre':'nombre', })
+          var f = this.filterFields(fields, 'cur_com_moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com-modalidad', 'modalidad', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com-planificacion', 'planificacion', {'cur_com_pla-id':'id', 'cur_com_pla-anio':'anio', 'cur_com_pla-semestre':'semestre', 'cur_com_pla-plan':'plan', })
+          var f = this.filterFields(fields, 'cur_com_pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com-planificacion', 'planificacion', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_pla-plan', 'plan', {'cur_com_pla_plb-id':'id', 'cur_com_pla_plb-orientacion':'orientacion', 'cur_com_pla_plb-resolucion':'resolucion', 'cur_com_pla_plb-distribucion_horaria':'distribucion_horaria', })
+          var f = this.filterFields(fields, 'cur_com_pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com_pla-plan', 'plan', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com-calendario', 'calendario', {'cur_com_cal-id':'id', 'cur_com_cal-inicio':'inicio', 'cur_com_cal-fin':'fin', 'cur_com_cal-anio':'anio', 'cur_com_cal-semestre':'semestre', 'cur_com_cal-insertado':'insertado', })
+          var f = this.filterFields(fields, 'cur_com_cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com-calendario', 'calendario', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur-asignatura', 'asignatura', {'cur_asi-id':'id', 'cur_asi-nombre':'nombre', 'cur_asi-formacion':'formacion', 'cur_asi-clasificacion':'clasificacion', 'cur_asi-codigo':'codigo', 'cur_asi-perfil':'perfil', })
+          var f = this.filterFields(fields, 'cur_asi-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur-asignatura', 'asignatura', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'per-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'persona', 'persona', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'per-domicilio', 'domicilio', {'per_dom-id':'id', 'per_dom-calle':'calle', 'per_dom-entre':'entre', 'per_dom-numero':'numero', 'per_dom-piso':'piso', 'per_dom-departamento':'departamento', 'per_dom-barrio':'barrio', 'per_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'per_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'per-domicilio', 'domicilio', f)
         }
       ),
     )
   }
     
-  cargo(ids: string[]): Observable<any> {
+  cargoGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("cargo", ids)  }
     
-  centroEducativo(ids: string[]): Observable<any> {
+  centroEducativoGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("centro_educativo", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'domicilio', 'domicilio', {'dom-id':'id', 'dom-calle':'calle', 'dom-entre':'entre', 'dom-numero':'numero', 'dom-piso':'piso', 'dom-departamento':'departamento', 'dom-barrio':'barrio', 'dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'domicilio', 'domicilio', f)
         }
       ),
     )
   }
     
-  comision(ids: string[]): Observable<any> {
+  comisionGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("comision", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'sede', 'sede', {'sed-id':'id', 'sed-numero':'numero', 'sed-nombre':'nombre', 'sed-observaciones':'observaciones', 'sed-alta':'alta', 'sed-baja':'baja', 'sed-fecha_traspaso':'fecha_traspaso', 'sed-domicilio':'domicilio', 'sed-tipo_sede':'tipo_sede', 'sed-centro_educativo':'centro_educativo', })
+          var f = this.filterFields(fields, 'sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'sede', 'sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'sed-domicilio', 'domicilio', {'sed_dom-id':'id', 'sed_dom-calle':'calle', 'sed_dom-entre':'entre', 'sed_dom-numero':'numero', 'sed_dom-piso':'piso', 'sed_dom-departamento':'departamento', 'sed_dom-barrio':'barrio', 'sed_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'sed-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'sed-tipo_sede', 'tipo_sede', {'sed_ts-id':'id', 'sed_ts-descripcion':'descripcion', })
+          var f = this.filterFields(fields, 'sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'sed-tipo_sede', 'tipo_sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'sed-centro_educativo', 'centro_educativo', {'sed_ce-id':'id', 'sed_ce-nombre':'nombre', 'sed_ce-cue':'cue', 'sed_ce-observaciones':'observaciones', 'sed_ce-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'sed-centro_educativo', 'centro_educativo', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'sed_ce-domicilio', 'domicilio', {'sed_ce_dom-id':'id', 'sed_ce_dom-calle':'calle', 'sed_ce_dom-entre':'entre', 'sed_ce_dom-numero':'numero', 'sed_ce_dom-piso':'piso', 'sed_ce_dom-departamento':'departamento', 'sed_ce_dom-barrio':'barrio', 'sed_ce_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'sed_ce-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'modalidad', 'modalidad', {'moa-id':'id', 'moa-nombre':'nombre', })
+          var f = this.filterFields(fields, 'moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'modalidad', 'modalidad', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'planificacion', 'planificacion', {'pla-id':'id', 'pla-anio':'anio', 'pla-semestre':'semestre', 'pla-plan':'plan', })
+          var f = this.filterFields(fields, 'pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'planificacion', 'planificacion', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'pla-plan', 'plan', {'pla_plb-id':'id', 'pla_plb-orientacion':'orientacion', 'pla_plb-resolucion':'resolucion', 'pla_plb-distribucion_horaria':'distribucion_horaria', })
+          var f = this.filterFields(fields, 'pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'pla-plan', 'plan', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'calendario', 'calendario', {'cal-id':'id', 'cal-inicio':'inicio', 'cal-fin':'fin', 'cal-anio':'anio', 'cal-semestre':'semestre', 'cal-insertado':'insertado', })
+          var f = this.filterFields(fields, 'cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'calendario', 'calendario', f)
         }
       ),
     )
   }
     
-  comisionRelacionada(ids: string[]): Observable<any> {
+  comisionRelacionadaGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("comision_relacionada", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'comision', 'comision', {'com-id':'id', 'com-turno':'turno', 'com-division':'division', 'com-comentario':'comentario', 'com-autorizada':'autorizada', 'com-apertura':'apertura', 'com-publicada':'publicada', 'com-observaciones':'observaciones', 'com-alta':'alta', 'com-identificacion':'identificacion', 'com-estado':'estado', 'com-configuracion':'configuracion', 'com-sede':'sede', 'com-modalidad':'modalidad', 'com-planificacion':'planificacion', 'com-comision_siguiente':'comision_siguiente', 'com-calendario':'calendario', })
+          var f = this.filterFields(fields, 'com-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'comision', 'comision', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com-sede', 'sede', {'com_sed-id':'id', 'com_sed-numero':'numero', 'com_sed-nombre':'nombre', 'com_sed-observaciones':'observaciones', 'com_sed-alta':'alta', 'com_sed-baja':'baja', 'com_sed-fecha_traspaso':'fecha_traspaso', 'com_sed-domicilio':'domicilio', 'com_sed-tipo_sede':'tipo_sede', 'com_sed-centro_educativo':'centro_educativo', })
+          var f = this.filterFields(fields, 'com_sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com-sede', 'sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_sed-domicilio', 'domicilio', {'com_sed_dom-id':'id', 'com_sed_dom-calle':'calle', 'com_sed_dom-entre':'entre', 'com_sed_dom-numero':'numero', 'com_sed_dom-piso':'piso', 'com_sed_dom-departamento':'departamento', 'com_sed_dom-barrio':'barrio', 'com_sed_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'com_sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com_sed-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_sed-tipo_sede', 'tipo_sede', {'com_sed_ts-id':'id', 'com_sed_ts-descripcion':'descripcion', })
+          var f = this.filterFields(fields, 'com_sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com_sed-tipo_sede', 'tipo_sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_sed-centro_educativo', 'centro_educativo', {'com_sed_ce-id':'id', 'com_sed_ce-nombre':'nombre', 'com_sed_ce-cue':'cue', 'com_sed_ce-observaciones':'observaciones', 'com_sed_ce-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'com_sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com_sed-centro_educativo', 'centro_educativo', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_sed_ce-domicilio', 'domicilio', {'com_sed_ce_dom-id':'id', 'com_sed_ce_dom-calle':'calle', 'com_sed_ce_dom-entre':'entre', 'com_sed_ce_dom-numero':'numero', 'com_sed_ce_dom-piso':'piso', 'com_sed_ce_dom-departamento':'departamento', 'com_sed_ce_dom-barrio':'barrio', 'com_sed_ce_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'com_sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com_sed_ce-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com-modalidad', 'modalidad', {'com_moa-id':'id', 'com_moa-nombre':'nombre', })
+          var f = this.filterFields(fields, 'com_moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com-modalidad', 'modalidad', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com-planificacion', 'planificacion', {'com_pla-id':'id', 'com_pla-anio':'anio', 'com_pla-semestre':'semestre', 'com_pla-plan':'plan', })
+          var f = this.filterFields(fields, 'com_pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com-planificacion', 'planificacion', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_pla-plan', 'plan', {'com_pla_plb-id':'id', 'com_pla_plb-orientacion':'orientacion', 'com_pla_plb-resolucion':'resolucion', 'com_pla_plb-distribucion_horaria':'distribucion_horaria', })
+          var f = this.filterFields(fields, 'com_pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com_pla-plan', 'plan', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com-calendario', 'calendario', {'com_cal-id':'id', 'com_cal-inicio':'inicio', 'com_cal-fin':'fin', 'com_cal-anio':'anio', 'com_cal-semestre':'semestre', 'com_cal-insertado':'insertado', })
+          var f = this.filterFields(fields, 'com_cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com-calendario', 'calendario', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'relacion', 'comision', {'rel-id':'id', 'rel-turno':'turno', 'rel-division':'division', 'rel-comentario':'comentario', 'rel-autorizada':'autorizada', 'rel-apertura':'apertura', 'rel-publicada':'publicada', 'rel-observaciones':'observaciones', 'rel-alta':'alta', 'rel-identificacion':'identificacion', 'rel-estado':'estado', 'rel-configuracion':'configuracion', 'rel-sede':'sede', 'rel-modalidad':'modalidad', 'rel-planificacion':'planificacion', 'rel-comision_siguiente':'comision_siguiente', 'rel-calendario':'calendario', })
+          var f = this.filterFields(fields, 'rel-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'relacion', 'comision', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'rel-sede', 'sede', {'rel_sed-id':'id', 'rel_sed-numero':'numero', 'rel_sed-nombre':'nombre', 'rel_sed-observaciones':'observaciones', 'rel_sed-alta':'alta', 'rel_sed-baja':'baja', 'rel_sed-fecha_traspaso':'fecha_traspaso', 'rel_sed-domicilio':'domicilio', 'rel_sed-tipo_sede':'tipo_sede', 'rel_sed-centro_educativo':'centro_educativo', })
+          var f = this.filterFields(fields, 'rel_sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'rel-sede', 'sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'rel_sed-domicilio', 'domicilio', {'rel_sed_dom-id':'id', 'rel_sed_dom-calle':'calle', 'rel_sed_dom-entre':'entre', 'rel_sed_dom-numero':'numero', 'rel_sed_dom-piso':'piso', 'rel_sed_dom-departamento':'departamento', 'rel_sed_dom-barrio':'barrio', 'rel_sed_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'rel_sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'rel_sed-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'rel_sed-tipo_sede', 'tipo_sede', {'rel_sed_ts-id':'id', 'rel_sed_ts-descripcion':'descripcion', })
+          var f = this.filterFields(fields, 'rel_sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'rel_sed-tipo_sede', 'tipo_sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'rel_sed-centro_educativo', 'centro_educativo', {'rel_sed_ce-id':'id', 'rel_sed_ce-nombre':'nombre', 'rel_sed_ce-cue':'cue', 'rel_sed_ce-observaciones':'observaciones', 'rel_sed_ce-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'rel_sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'rel_sed-centro_educativo', 'centro_educativo', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'rel_sed_ce-domicilio', 'domicilio', {'rel_sed_ce_dom-id':'id', 'rel_sed_ce_dom-calle':'calle', 'rel_sed_ce_dom-entre':'entre', 'rel_sed_ce_dom-numero':'numero', 'rel_sed_ce_dom-piso':'piso', 'rel_sed_ce_dom-departamento':'departamento', 'rel_sed_ce_dom-barrio':'barrio', 'rel_sed_ce_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'rel_sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'rel_sed_ce-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'rel-modalidad', 'modalidad', {'rel_moa-id':'id', 'rel_moa-nombre':'nombre', })
+          var f = this.filterFields(fields, 'rel_moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'rel-modalidad', 'modalidad', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'rel-planificacion', 'planificacion', {'rel_pla-id':'id', 'rel_pla-anio':'anio', 'rel_pla-semestre':'semestre', 'rel_pla-plan':'plan', })
+          var f = this.filterFields(fields, 'rel_pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'rel-planificacion', 'planificacion', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'rel_pla-plan', 'plan', {'rel_pla_plb-id':'id', 'rel_pla_plb-orientacion':'orientacion', 'rel_pla_plb-resolucion':'resolucion', 'rel_pla_plb-distribucion_horaria':'distribucion_horaria', })
+          var f = this.filterFields(fields, 'rel_pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'rel_pla-plan', 'plan', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'rel-calendario', 'calendario', {'rel_cal-id':'id', 'rel_cal-inicio':'inicio', 'rel_cal-fin':'fin', 'rel_cal-anio':'anio', 'rel_cal-semestre':'semestre', 'rel_cal-insertado':'insertado', })
+          var f = this.filterFields(fields, 'rel_cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'rel-calendario', 'calendario', f)
         }
       ),
     )
   }
     
-  contralor(ids: string[]): Observable<any> {
+  contralorGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("contralor", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'planilla_docente', 'planilla_docente', {'pd-id':'id', 'pd-numero':'numero', 'pd-insertado':'insertado', 'pd-fecha_contralor':'fecha_contralor', 'pd-fecha_consejo':'fecha_consejo', 'pd-observaciones':'observaciones', })
+          var f = this.filterFields(fields, 'pd-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'planilla_docente', 'planilla_docente', f)
         }
       ),
     )
   }
     
-  curso(ids: string[]): Observable<any> {
+  cursoGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("curso", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'comision', 'comision', {'com-id':'id', 'com-turno':'turno', 'com-division':'division', 'com-comentario':'comentario', 'com-autorizada':'autorizada', 'com-apertura':'apertura', 'com-publicada':'publicada', 'com-observaciones':'observaciones', 'com-alta':'alta', 'com-identificacion':'identificacion', 'com-estado':'estado', 'com-configuracion':'configuracion', 'com-sede':'sede', 'com-modalidad':'modalidad', 'com-planificacion':'planificacion', 'com-comision_siguiente':'comision_siguiente', 'com-calendario':'calendario', })
+          var f = this.filterFields(fields, 'com-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'comision', 'comision', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com-sede', 'sede', {'com_sed-id':'id', 'com_sed-numero':'numero', 'com_sed-nombre':'nombre', 'com_sed-observaciones':'observaciones', 'com_sed-alta':'alta', 'com_sed-baja':'baja', 'com_sed-fecha_traspaso':'fecha_traspaso', 'com_sed-domicilio':'domicilio', 'com_sed-tipo_sede':'tipo_sede', 'com_sed-centro_educativo':'centro_educativo', })
+          var f = this.filterFields(fields, 'com_sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com-sede', 'sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_sed-domicilio', 'domicilio', {'com_sed_dom-id':'id', 'com_sed_dom-calle':'calle', 'com_sed_dom-entre':'entre', 'com_sed_dom-numero':'numero', 'com_sed_dom-piso':'piso', 'com_sed_dom-departamento':'departamento', 'com_sed_dom-barrio':'barrio', 'com_sed_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'com_sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com_sed-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_sed-tipo_sede', 'tipo_sede', {'com_sed_ts-id':'id', 'com_sed_ts-descripcion':'descripcion', })
+          var f = this.filterFields(fields, 'com_sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com_sed-tipo_sede', 'tipo_sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_sed-centro_educativo', 'centro_educativo', {'com_sed_ce-id':'id', 'com_sed_ce-nombre':'nombre', 'com_sed_ce-cue':'cue', 'com_sed_ce-observaciones':'observaciones', 'com_sed_ce-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'com_sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com_sed-centro_educativo', 'centro_educativo', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_sed_ce-domicilio', 'domicilio', {'com_sed_ce_dom-id':'id', 'com_sed_ce_dom-calle':'calle', 'com_sed_ce_dom-entre':'entre', 'com_sed_ce_dom-numero':'numero', 'com_sed_ce_dom-piso':'piso', 'com_sed_ce_dom-departamento':'departamento', 'com_sed_ce_dom-barrio':'barrio', 'com_sed_ce_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'com_sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com_sed_ce-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com-modalidad', 'modalidad', {'com_moa-id':'id', 'com_moa-nombre':'nombre', })
+          var f = this.filterFields(fields, 'com_moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com-modalidad', 'modalidad', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com-planificacion', 'planificacion', {'com_pla-id':'id', 'com_pla-anio':'anio', 'com_pla-semestre':'semestre', 'com_pla-plan':'plan', })
+          var f = this.filterFields(fields, 'com_pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com-planificacion', 'planificacion', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com_pla-plan', 'plan', {'com_pla_plb-id':'id', 'com_pla_plb-orientacion':'orientacion', 'com_pla_plb-resolucion':'resolucion', 'com_pla_plb-distribucion_horaria':'distribucion_horaria', })
+          var f = this.filterFields(fields, 'com_pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com_pla-plan', 'plan', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'com-calendario', 'calendario', {'com_cal-id':'id', 'com_cal-inicio':'inicio', 'com_cal-fin':'fin', 'com_cal-anio':'anio', 'com_cal-semestre':'semestre', 'com_cal-insertado':'insertado', })
+          var f = this.filterFields(fields, 'com_cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'com-calendario', 'calendario', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'asignatura', 'asignatura', {'asi-id':'id', 'asi-nombre':'nombre', 'asi-formacion':'formacion', 'asi-clasificacion':'clasificacion', 'asi-codigo':'codigo', 'asi-perfil':'perfil', })
+          var f = this.filterFields(fields, 'asi-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'asignatura', 'asignatura', f)
         }
       ),
     )
   }
     
-  designacion(ids: string[]): Observable<any> {
+  designacionGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("designacion", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cargo', 'cargo', {'car-id':'id', 'car-descripcion':'descripcion', })
+          var f = this.filterFields(fields, 'car-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cargo', 'cargo', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'sede', 'sede', {'sed-id':'id', 'sed-numero':'numero', 'sed-nombre':'nombre', 'sed-observaciones':'observaciones', 'sed-alta':'alta', 'sed-baja':'baja', 'sed-fecha_traspaso':'fecha_traspaso', 'sed-domicilio':'domicilio', 'sed-tipo_sede':'tipo_sede', 'sed-centro_educativo':'centro_educativo', })
+          var f = this.filterFields(fields, 'sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'sede', 'sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'sed-domicilio', 'domicilio', {'sed_dom-id':'id', 'sed_dom-calle':'calle', 'sed_dom-entre':'entre', 'sed_dom-numero':'numero', 'sed_dom-piso':'piso', 'sed_dom-departamento':'departamento', 'sed_dom-barrio':'barrio', 'sed_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'sed-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'sed-tipo_sede', 'tipo_sede', {'sed_ts-id':'id', 'sed_ts-descripcion':'descripcion', })
+          var f = this.filterFields(fields, 'sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'sed-tipo_sede', 'tipo_sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'sed-centro_educativo', 'centro_educativo', {'sed_ce-id':'id', 'sed_ce-nombre':'nombre', 'sed_ce-cue':'cue', 'sed_ce-observaciones':'observaciones', 'sed_ce-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'sed-centro_educativo', 'centro_educativo', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'sed_ce-domicilio', 'domicilio', {'sed_ce_dom-id':'id', 'sed_ce_dom-calle':'calle', 'sed_ce_dom-entre':'entre', 'sed_ce_dom-numero':'numero', 'sed_ce_dom-piso':'piso', 'sed_ce_dom-departamento':'departamento', 'sed_ce_dom-barrio':'barrio', 'sed_ce_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'sed_ce-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'per-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'persona', 'persona', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'per-domicilio', 'domicilio', {'per_dom-id':'id', 'per_dom-calle':'calle', 'per_dom-entre':'entre', 'per_dom-numero':'numero', 'per_dom-piso':'piso', 'per_dom-departamento':'departamento', 'per_dom-barrio':'barrio', 'per_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'per_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'per-domicilio', 'domicilio', f)
         }
       ),
     )
   }
     
-  detallePersona(ids: string[]): Observable<any> {
+  detallePersonaGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("detalle_persona", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'archivo', 'file', {'arc-id':'id', 'arc-name':'name', 'arc-type':'type', 'arc-content':'content', 'arc-size':'size', 'arc-created':'created', })
+          var f = this.filterFields(fields, 'arc-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'archivo', 'file', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'per-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'persona', 'persona', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'per-domicilio', 'domicilio', {'per_dom-id':'id', 'per_dom-calle':'calle', 'per_dom-entre':'entre', 'per_dom-numero':'numero', 'per_dom-piso':'piso', 'per_dom-departamento':'departamento', 'per_dom-barrio':'barrio', 'per_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'per_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'per-domicilio', 'domicilio', f)
         }
       ),
     )
   }
     
-  dia(ids: string[]): Observable<any> {
+  diaGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("dia", ids)  }
     
-  distribucionHoraria(ids: string[]): Observable<any> {
+  distribucionHorariaGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("distribucion_horaria", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'asignatura', 'asignatura', {'asi-id':'id', 'asi-nombre':'nombre', 'asi-formacion':'formacion', 'asi-clasificacion':'clasificacion', 'asi-codigo':'codigo', 'asi-perfil':'perfil', })
+          var f = this.filterFields(fields, 'asi-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'asignatura', 'asignatura', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'planificacion', 'planificacion', {'pla-id':'id', 'pla-anio':'anio', 'pla-semestre':'semestre', 'pla-plan':'plan', })
+          var f = this.filterFields(fields, 'pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'planificacion', 'planificacion', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'pla-plan', 'plan', {'pla_plb-id':'id', 'pla_plb-orientacion':'orientacion', 'pla_plb-resolucion':'resolucion', 'pla_plb-distribucion_horaria':'distribucion_horaria', })
+          var f = this.filterFields(fields, 'pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'pla-plan', 'plan', f)
         }
       ),
     )
   }
     
-  domicilio(ids: string[]): Observable<any> {
+  domicilioGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("domicilio", ids)  }
     
-  email(ids: string[]): Observable<any> {
+  emailGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("email", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'per-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'persona', 'persona', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'per-domicilio', 'domicilio', {'per_dom-id':'id', 'per_dom-calle':'calle', 'per_dom-entre':'entre', 'per_dom-numero':'numero', 'per_dom-piso':'piso', 'per_dom-departamento':'departamento', 'per_dom-barrio':'barrio', 'per_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'per_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'per-domicilio', 'domicilio', f)
         }
       ),
     )
   }
     
-  file(ids: string[]): Observable<any> {
+  fileGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("file", ids)  }
     
-  horario(ids: string[]): Observable<any> {
+  horarioGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("horario", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'curso', 'curso', {'cur-id':'id', 'cur-horas_catedra':'horas_catedra', 'cur-ige':'ige', 'cur-alta':'alta', 'cur-comision':'comision', 'cur-asignatura':'asignatura', })
+          var f = this.filterFields(fields, 'cur-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'curso', 'curso', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur-comision', 'comision', {'cur_com-id':'id', 'cur_com-turno':'turno', 'cur_com-division':'division', 'cur_com-comentario':'comentario', 'cur_com-autorizada':'autorizada', 'cur_com-apertura':'apertura', 'cur_com-publicada':'publicada', 'cur_com-observaciones':'observaciones', 'cur_com-alta':'alta', 'cur_com-identificacion':'identificacion', 'cur_com-estado':'estado', 'cur_com-configuracion':'configuracion', 'cur_com-sede':'sede', 'cur_com-modalidad':'modalidad', 'cur_com-planificacion':'planificacion', 'cur_com-comision_siguiente':'comision_siguiente', 'cur_com-calendario':'calendario', })
+          var f = this.filterFields(fields, 'cur_com-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur-comision', 'comision', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com-sede', 'sede', {'cur_com_sed-id':'id', 'cur_com_sed-numero':'numero', 'cur_com_sed-nombre':'nombre', 'cur_com_sed-observaciones':'observaciones', 'cur_com_sed-alta':'alta', 'cur_com_sed-baja':'baja', 'cur_com_sed-fecha_traspaso':'fecha_traspaso', 'cur_com_sed-domicilio':'domicilio', 'cur_com_sed-tipo_sede':'tipo_sede', 'cur_com_sed-centro_educativo':'centro_educativo', })
+          var f = this.filterFields(fields, 'cur_com_sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com-sede', 'sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_sed-domicilio', 'domicilio', {'cur_com_sed_dom-id':'id', 'cur_com_sed_dom-calle':'calle', 'cur_com_sed_dom-entre':'entre', 'cur_com_sed_dom-numero':'numero', 'cur_com_sed_dom-piso':'piso', 'cur_com_sed_dom-departamento':'departamento', 'cur_com_sed_dom-barrio':'barrio', 'cur_com_sed_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'cur_com_sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com_sed-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_sed-tipo_sede', 'tipo_sede', {'cur_com_sed_ts-id':'id', 'cur_com_sed_ts-descripcion':'descripcion', })
+          var f = this.filterFields(fields, 'cur_com_sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com_sed-tipo_sede', 'tipo_sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_sed-centro_educativo', 'centro_educativo', {'cur_com_sed_ce-id':'id', 'cur_com_sed_ce-nombre':'nombre', 'cur_com_sed_ce-cue':'cue', 'cur_com_sed_ce-observaciones':'observaciones', 'cur_com_sed_ce-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'cur_com_sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com_sed-centro_educativo', 'centro_educativo', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_sed_ce-domicilio', 'domicilio', {'cur_com_sed_ce_dom-id':'id', 'cur_com_sed_ce_dom-calle':'calle', 'cur_com_sed_ce_dom-entre':'entre', 'cur_com_sed_ce_dom-numero':'numero', 'cur_com_sed_ce_dom-piso':'piso', 'cur_com_sed_ce_dom-departamento':'departamento', 'cur_com_sed_ce_dom-barrio':'barrio', 'cur_com_sed_ce_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'cur_com_sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com_sed_ce-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com-modalidad', 'modalidad', {'cur_com_moa-id':'id', 'cur_com_moa-nombre':'nombre', })
+          var f = this.filterFields(fields, 'cur_com_moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com-modalidad', 'modalidad', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com-planificacion', 'planificacion', {'cur_com_pla-id':'id', 'cur_com_pla-anio':'anio', 'cur_com_pla-semestre':'semestre', 'cur_com_pla-plan':'plan', })
+          var f = this.filterFields(fields, 'cur_com_pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com-planificacion', 'planificacion', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_pla-plan', 'plan', {'cur_com_pla_plb-id':'id', 'cur_com_pla_plb-orientacion':'orientacion', 'cur_com_pla_plb-resolucion':'resolucion', 'cur_com_pla_plb-distribucion_horaria':'distribucion_horaria', })
+          var f = this.filterFields(fields, 'cur_com_pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com_pla-plan', 'plan', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com-calendario', 'calendario', {'cur_com_cal-id':'id', 'cur_com_cal-inicio':'inicio', 'cur_com_cal-fin':'fin', 'cur_com_cal-anio':'anio', 'cur_com_cal-semestre':'semestre', 'cur_com_cal-insertado':'insertado', })
+          var f = this.filterFields(fields, 'cur_com_cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com-calendario', 'calendario', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur-asignatura', 'asignatura', {'cur_asi-id':'id', 'cur_asi-nombre':'nombre', 'cur_asi-formacion':'formacion', 'cur_asi-clasificacion':'clasificacion', 'cur_asi-codigo':'codigo', 'cur_asi-perfil':'perfil', })
+          var f = this.filterFields(fields, 'cur_asi-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur-asignatura', 'asignatura', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'dia', 'dia', {'dia-id':'id', 'dia-numero':'numero', 'dia-dia':'dia', })
+          var f = this.filterFields(fields, 'dia-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'dia', 'dia', f)
         }
       ),
     )
   }
     
-  modalidad(ids: string[]): Observable<any> {
+  modalidadGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("modalidad", ids)  }
     
-  persona(ids: string[]): Observable<any> {
+  personaGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("persona", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'domicilio', 'domicilio', {'dom-id':'id', 'dom-calle':'calle', 'dom-entre':'entre', 'dom-numero':'numero', 'dom-piso':'piso', 'dom-departamento':'departamento', 'dom-barrio':'barrio', 'dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'domicilio', 'domicilio', f)
         }
       ),
     )
   }
     
-  plan(ids: string[]): Observable<any> {
+  planGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("plan", ids)  }
     
-  planificacion(ids: string[]): Observable<any> {
+  planificacionGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("planificacion", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'plan', 'plan', {'plb-id':'id', 'plb-orientacion':'orientacion', 'plb-resolucion':'resolucion', 'plb-distribucion_horaria':'distribucion_horaria', })
+          var f = this.filterFields(fields, 'plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'plan', 'plan', f)
         }
       ),
     )
   }
     
-  planillaDocente(ids: string[]): Observable<any> {
+  planillaDocenteGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("planilla_docente", ids)  }
     
-  sede(ids: string[]): Observable<any> {
+  sedeGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("sede", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'domicilio', 'domicilio', {'dom-id':'id', 'dom-calle':'calle', 'dom-entre':'entre', 'dom-numero':'numero', 'dom-piso':'piso', 'dom-departamento':'departamento', 'dom-barrio':'barrio', 'dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'tipo_sede', 'tipo_sede', {'ts-id':'id', 'ts-descripcion':'descripcion', })
+          var f = this.filterFields(fields, 'ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'tipo_sede', 'tipo_sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'centro_educativo', 'centro_educativo', {'ce-id':'id', 'ce-nombre':'nombre', 'ce-cue':'cue', 'ce-observaciones':'observaciones', 'ce-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'centro_educativo', 'centro_educativo', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'ce-domicilio', 'domicilio', {'ce_dom-id':'id', 'ce_dom-calle':'calle', 'ce_dom-entre':'entre', 'ce_dom-numero':'numero', 'ce_dom-piso':'piso', 'ce_dom-departamento':'departamento', 'ce_dom-barrio':'barrio', 'ce_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'ce-domicilio', 'domicilio', f)
         }
       ),
     )
   }
     
-  telefono(ids: string[]): Observable<any> {
+  telefonoGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("telefono", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'persona', 'persona', {'per-id':'id', 'per-nombres':'nombres', 'per-apellidos':'apellidos', 'per-fecha_nacimiento':'fecha_nacimiento', 'per-numero_documento':'numero_documento', 'per-cuil':'cuil', 'per-genero':'genero', 'per-apodo':'apodo', 'per-telefono':'telefono', 'per-email':'email', 'per-email_abc':'email_abc', 'per-alta':'alta', 'per-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'per-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'persona', 'persona', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'per-domicilio', 'domicilio', {'per_dom-id':'id', 'per_dom-calle':'calle', 'per_dom-entre':'entre', 'per_dom-numero':'numero', 'per_dom-piso':'piso', 'per_dom-departamento':'departamento', 'per_dom-barrio':'barrio', 'per_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'per_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'per-domicilio', 'domicilio', f)
         }
       ),
     )
   }
     
-  tipoSede(ids: string[]): Observable<any> {
+  tipoSedeGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("tipo_sede", ids)  }
     
-  toma(ids: string[]): Observable<any> {
+  tomaGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("toma", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'curso', 'curso', {'cur-id':'id', 'cur-horas_catedra':'horas_catedra', 'cur-ige':'ige', 'cur-alta':'alta', 'cur-comision':'comision', 'cur-asignatura':'asignatura', })
+          var f = this.filterFields(fields, 'cur-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'curso', 'curso', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur-comision', 'comision', {'cur_com-id':'id', 'cur_com-turno':'turno', 'cur_com-division':'division', 'cur_com-comentario':'comentario', 'cur_com-autorizada':'autorizada', 'cur_com-apertura':'apertura', 'cur_com-publicada':'publicada', 'cur_com-observaciones':'observaciones', 'cur_com-alta':'alta', 'cur_com-identificacion':'identificacion', 'cur_com-estado':'estado', 'cur_com-configuracion':'configuracion', 'cur_com-sede':'sede', 'cur_com-modalidad':'modalidad', 'cur_com-planificacion':'planificacion', 'cur_com-comision_siguiente':'comision_siguiente', 'cur_com-calendario':'calendario', })
+          var f = this.filterFields(fields, 'cur_com-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur-comision', 'comision', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com-sede', 'sede', {'cur_com_sed-id':'id', 'cur_com_sed-numero':'numero', 'cur_com_sed-nombre':'nombre', 'cur_com_sed-observaciones':'observaciones', 'cur_com_sed-alta':'alta', 'cur_com_sed-baja':'baja', 'cur_com_sed-fecha_traspaso':'fecha_traspaso', 'cur_com_sed-domicilio':'domicilio', 'cur_com_sed-tipo_sede':'tipo_sede', 'cur_com_sed-centro_educativo':'centro_educativo', })
+          var f = this.filterFields(fields, 'cur_com_sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com-sede', 'sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_sed-domicilio', 'domicilio', {'cur_com_sed_dom-id':'id', 'cur_com_sed_dom-calle':'calle', 'cur_com_sed_dom-entre':'entre', 'cur_com_sed_dom-numero':'numero', 'cur_com_sed_dom-piso':'piso', 'cur_com_sed_dom-departamento':'departamento', 'cur_com_sed_dom-barrio':'barrio', 'cur_com_sed_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'cur_com_sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com_sed-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_sed-tipo_sede', 'tipo_sede', {'cur_com_sed_ts-id':'id', 'cur_com_sed_ts-descripcion':'descripcion', })
+          var f = this.filterFields(fields, 'cur_com_sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com_sed-tipo_sede', 'tipo_sede', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_sed-centro_educativo', 'centro_educativo', {'cur_com_sed_ce-id':'id', 'cur_com_sed_ce-nombre':'nombre', 'cur_com_sed_ce-cue':'cue', 'cur_com_sed_ce-observaciones':'observaciones', 'cur_com_sed_ce-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'cur_com_sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com_sed-centro_educativo', 'centro_educativo', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_sed_ce-domicilio', 'domicilio', {'cur_com_sed_ce_dom-id':'id', 'cur_com_sed_ce_dom-calle':'calle', 'cur_com_sed_ce_dom-entre':'entre', 'cur_com_sed_ce_dom-numero':'numero', 'cur_com_sed_ce_dom-piso':'piso', 'cur_com_sed_ce_dom-departamento':'departamento', 'cur_com_sed_ce_dom-barrio':'barrio', 'cur_com_sed_ce_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'cur_com_sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com_sed_ce-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com-modalidad', 'modalidad', {'cur_com_moa-id':'id', 'cur_com_moa-nombre':'nombre', })
+          var f = this.filterFields(fields, 'cur_com_moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com-modalidad', 'modalidad', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com-planificacion', 'planificacion', {'cur_com_pla-id':'id', 'cur_com_pla-anio':'anio', 'cur_com_pla-semestre':'semestre', 'cur_com_pla-plan':'plan', })
+          var f = this.filterFields(fields, 'cur_com_pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com-planificacion', 'planificacion', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com_pla-plan', 'plan', {'cur_com_pla_plb-id':'id', 'cur_com_pla_plb-orientacion':'orientacion', 'cur_com_pla_plb-resolucion':'resolucion', 'cur_com_pla_plb-distribucion_horaria':'distribucion_horaria', })
+          var f = this.filterFields(fields, 'cur_com_pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com_pla-plan', 'plan', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur_com-calendario', 'calendario', {'cur_com_cal-id':'id', 'cur_com_cal-inicio':'inicio', 'cur_com_cal-fin':'fin', 'cur_com_cal-anio':'anio', 'cur_com_cal-semestre':'semestre', 'cur_com_cal-insertado':'insertado', })
+          var f = this.filterFields(fields, 'cur_com_cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur_com-calendario', 'calendario', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'cur-asignatura', 'asignatura', {'cur_asi-id':'id', 'cur_asi-nombre':'nombre', 'cur_asi-formacion':'formacion', 'cur_asi-clasificacion':'clasificacion', 'cur_asi-codigo':'codigo', 'cur_asi-perfil':'perfil', })
+          var f = this.filterFields(fields, 'cur_asi-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cur-asignatura', 'asignatura', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'docente', 'persona', {'doc-id':'id', 'doc-nombres':'nombres', 'doc-apellidos':'apellidos', 'doc-fecha_nacimiento':'fecha_nacimiento', 'doc-numero_documento':'numero_documento', 'doc-cuil':'cuil', 'doc-genero':'genero', 'doc-apodo':'apodo', 'doc-telefono':'telefono', 'doc-email':'email', 'doc-email_abc':'email_abc', 'doc-alta':'alta', 'doc-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'doc-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'docente', 'persona', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'doc-domicilio', 'domicilio', {'doc_dom-id':'id', 'doc_dom-calle':'calle', 'doc_dom-entre':'entre', 'doc_dom-numero':'numero', 'doc_dom-piso':'piso', 'doc_dom-departamento':'departamento', 'doc_dom-barrio':'barrio', 'doc_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'doc_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'doc-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'reemplazo', 'persona', {'ree-id':'id', 'ree-nombres':'nombres', 'ree-apellidos':'apellidos', 'ree-fecha_nacimiento':'fecha_nacimiento', 'ree-numero_documento':'numero_documento', 'ree-cuil':'cuil', 'ree-genero':'genero', 'ree-apodo':'apodo', 'ree-telefono':'telefono', 'ree-email':'email', 'ree-email_abc':'email_abc', 'ree-alta':'alta', 'ree-domicilio':'domicilio', })
+          var f = this.filterFields(fields, 'ree-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'reemplazo', 'persona', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'ree-domicilio', 'domicilio', {'ree_dom-id':'id', 'ree_dom-calle':'calle', 'ree_dom-entre':'entre', 'ree_dom-numero':'numero', 'ree_dom-piso':'piso', 'ree_dom-departamento':'departamento', 'ree_dom-barrio':'barrio', 'ree_dom-localidad':'localidad', })
+          var f = this.filterFields(fields, 'ree_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'ree-domicilio', 'domicilio', f)
         }
       ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          return this.dd.getAllColumnData(data, 'planilla_docente', 'planilla_docente', {'pd-id':'id', 'pd-numero':'numero', 'pd-insertado':'insertado', 'pd-fecha_contralor':'fecha_contralor', 'pd-fecha_consejo':'fecha_consejo', 'pd-observaciones':'observaciones', })
+          var f = this.filterFields(fields, 'pd-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'planilla_docente', 'planilla_docente', f)
+        }
+      ),
+    )
+  }
+    
+  alumnoGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("alumno", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'per-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'persona', 'persona', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'per_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'per-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'comision', 'comision', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com-sede', 'sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com_sed-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com_sed-tipo_sede', 'tipo_sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com_sed-centro_educativo', 'centro_educativo', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com_sed_ce-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com-modalidad', 'modalidad', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com-planificacion', 'planificacion', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com_pla-plan', 'plan', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com-calendario', 'calendario', f)
+        }
+      ),
+    )
+  }
+    
+  asignacionPlanillaDocenteGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("asignacion_planilla_docente", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'pd-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'planilla_docente', 'planilla_docente', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'toma', 'toma', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_cur-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom-curso', 'curso', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_cur_com-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom_cur-comision', 'comision', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_cur_com_sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom_cur_com-sede', 'sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_cur_com_sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom_cur_com_sed-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_cur_com_sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom_cur_com_sed-tipo_sede', 'tipo_sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_cur_com_sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom_cur_com_sed-centro_educativo', 'centro_educativo', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_cur_com_sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom_cur_com_sed_ce-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_cur_com_moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom_cur_com-modalidad', 'modalidad', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_cur_com_pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom_cur_com-planificacion', 'planificacion', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_cur_com_pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom_cur_com_pla-plan', 'plan', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_cur_com_cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom_cur_com-calendario', 'calendario', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_cur_asi-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom_cur-asignatura', 'asignatura', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_doc-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom-docente', 'persona', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_doc_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom_doc-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_ree-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom-reemplazo', 'persona', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_ree_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom_ree-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'tom_pd-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tom-planilla_docente', 'planilla_docente', f)
+        }
+      ),
+    )
+  }
+    
+  asignaturaGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("asignatura", id)  }
+    
+  calendarioGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("calendario", id)  }
+    
+  calificacionGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("calificacion", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'curso', 'curso', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur-comision', 'comision', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com-sede', 'sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com_sed-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com_sed-tipo_sede', 'tipo_sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com_sed-centro_educativo', 'centro_educativo', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com_sed_ce-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com-modalidad', 'modalidad', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com-planificacion', 'planificacion', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com_pla-plan', 'plan', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com-calendario', 'calendario', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_asi-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur-asignatura', 'asignatura', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'per-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'persona', 'persona', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'per_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'per-domicilio', 'domicilio', f)
+        }
+      ),
+    )
+  }
+    
+  cargoGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("cargo", id)  }
+    
+  centroEducativoGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("centro_educativo", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'domicilio', 'domicilio', f)
+        }
+      ),
+    )
+  }
+    
+  comisionGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("comision", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'sede', 'sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'sed-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'sed-tipo_sede', 'tipo_sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'sed-centro_educativo', 'centro_educativo', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'sed_ce-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'modalidad', 'modalidad', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'planificacion', 'planificacion', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'pla-plan', 'plan', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'calendario', 'calendario', f)
+        }
+      ),
+    )
+  }
+    
+  comisionRelacionadaGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("comision_relacionada", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'comision', 'comision', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com-sede', 'sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com_sed-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com_sed-tipo_sede', 'tipo_sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com_sed-centro_educativo', 'centro_educativo', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com_sed_ce-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com-modalidad', 'modalidad', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com-planificacion', 'planificacion', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com_pla-plan', 'plan', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com-calendario', 'calendario', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'rel-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'relacion', 'comision', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'rel_sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'rel-sede', 'sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'rel_sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'rel_sed-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'rel_sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'rel_sed-tipo_sede', 'tipo_sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'rel_sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'rel_sed-centro_educativo', 'centro_educativo', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'rel_sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'rel_sed_ce-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'rel_moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'rel-modalidad', 'modalidad', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'rel_pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'rel-planificacion', 'planificacion', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'rel_pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'rel_pla-plan', 'plan', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'rel_cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'rel-calendario', 'calendario', f)
+        }
+      ),
+    )
+  }
+    
+  contralorGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("contralor", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'pd-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'planilla_docente', 'planilla_docente', f)
+        }
+      ),
+    )
+  }
+    
+  cursoGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("curso", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'comision', 'comision', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com-sede', 'sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com_sed-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com_sed-tipo_sede', 'tipo_sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com_sed-centro_educativo', 'centro_educativo', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com_sed_ce-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com-modalidad', 'modalidad', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com-planificacion', 'planificacion', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com_pla-plan', 'plan', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'com_cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'com-calendario', 'calendario', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'asi-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'asignatura', 'asignatura', f)
+        }
+      ),
+    )
+  }
+    
+  designacionGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("designacion", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'car-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cargo', 'cargo', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'sede', 'sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'sed-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'sed-tipo_sede', 'tipo_sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'sed-centro_educativo', 'centro_educativo', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'sed_ce-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'per-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'persona', 'persona', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'per_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'per-domicilio', 'domicilio', f)
+        }
+      ),
+    )
+  }
+    
+  detallePersonaGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("detalle_persona", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'arc-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'archivo', 'file', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'per-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'persona', 'persona', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'per_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'per-domicilio', 'domicilio', f)
+        }
+      ),
+    )
+  }
+    
+  diaGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("dia", id)  }
+    
+  distribucionHorariaGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("distribucion_horaria", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'asi-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'asignatura', 'asignatura', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'planificacion', 'planificacion', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'pla-plan', 'plan', f)
+        }
+      ),
+    )
+  }
+    
+  domicilioGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("domicilio", id)  }
+    
+  emailGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("email", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'per-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'persona', 'persona', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'per_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'per-domicilio', 'domicilio', f)
+        }
+      ),
+    )
+  }
+    
+  fileGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("file", id)  }
+    
+  horarioGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("horario", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'curso', 'curso', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur-comision', 'comision', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com-sede', 'sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com_sed-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com_sed-tipo_sede', 'tipo_sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com_sed-centro_educativo', 'centro_educativo', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com_sed_ce-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com-modalidad', 'modalidad', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com-planificacion', 'planificacion', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com_pla-plan', 'plan', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com-calendario', 'calendario', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_asi-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur-asignatura', 'asignatura', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'dia-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'dia', 'dia', f)
+        }
+      ),
+    )
+  }
+    
+  modalidadGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("modalidad", id)  }
+    
+  personaGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("persona", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'domicilio', 'domicilio', f)
+        }
+      ),
+    )
+  }
+    
+  planGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("plan", id)  }
+    
+  planificacionGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("planificacion", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'plan', 'plan', f)
+        }
+      ),
+    )
+  }
+    
+  planillaDocenteGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("planilla_docente", id)  }
+    
+  sedeGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("sede", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'tipo_sede', 'tipo_sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'centro_educativo', 'centro_educativo', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'ce-domicilio', 'domicilio', f)
+        }
+      ),
+    )
+  }
+    
+  telefonoGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("telefono", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'per-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'persona', 'persona', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'per_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'per-domicilio', 'domicilio', f)
+        }
+      ),
+    )
+  }
+    
+  tipoSedeGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("tipo_sede", id)  }
+    
+  tomaGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("toma", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'curso', 'curso', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur-comision', 'comision', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_sed-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com-sede', 'sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_sed_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com_sed-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_sed_ts-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com_sed-tipo_sede', 'tipo_sede', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_sed_ce-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com_sed-centro_educativo', 'centro_educativo', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_sed_ce_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com_sed_ce-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_moa-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com-modalidad', 'modalidad', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com-planificacion', 'planificacion', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com_pla-plan', 'plan', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_com_cal-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur_com-calendario', 'calendario', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'cur_asi-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cur-asignatura', 'asignatura', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'doc-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'docente', 'persona', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'doc_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'doc-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'ree-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'reemplazo', 'persona', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'ree_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'ree-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'pd-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'planilla_docente', 'planilla_docente', f)
         }
       ),
     )
