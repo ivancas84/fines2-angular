@@ -47,6 +47,7 @@ import { SocialLoginComponent } from '@component/social-login/social-login.compo
 import { CardDynamicComponent } from '@component/card-dynamic/card-dynamic.component';
 import { TableDynamicComponent } from '@component/table-dynamic/table-dynamic.component';
 import { FieldsetDynamicComponent } from '@component/fieldset-dynamic/fieldset-dynamic.component';
+//import { BackupComponent } from '@component/backup/backup.component';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { DialogConfirmComponent } from '@component/dialog-confirm/dialog-confirm.component';
 import { InputAutocompleteComponent } from '@component/input-autocomplete/input-autocomplete.component';
@@ -56,18 +57,19 @@ import { InputSelectCheckboxComponent } from '@component/input-select-checkbox/i
 import { InputSelectComponent } from '@component/input-select/input-select.component';
 import { InputSelectValueComponent } from '@component/input-select-value/input-select-value.component';
 import { InputSelectParamComponent } from '@component/input-select-param/input-select-param.component';
+//import { InputSelectLabelComponent } from '@component/input-select-label/input-select-label.component';
 import { InputSearchGoComponent } from '@component/input-search-go/input-search-go.component';
 import { InputTextComponent } from '@component/input-text/input-text.component';
 import { InputTextareaComponent } from '@component/input-textarea/input-textarea.component';
 import { InputTimepickerComponent } from '@component/input-timepicker/input-timepicker.component';
 import { InputCheckboxComponent } from '@component/input-checkbox/input-checkbox.component';
+//import { InputYmComponent } from '@component/input-ym/input-ym.component';
 import { InputYearComponent } from '@component/input-year/input-year.component';
 import { MenuComponent } from '@component/menu/menu.component';
 import { SearchAllComponent } from '@component/search-all/search-all.component';
 import { LabelComponent } from '@component/label/label.component';
 import { FieldLabelComponent } from '@component/field-label/field-label.component';
 import { FieldTreeLabelComponent } from '@component/field-tree-label/field-tree-label.component';
-import { FieldValueComponent } from '@component/field-value/field-value.component';
 import { FieldViewComponent } from '@component/field-view/field-view.component';
 
 import { CalendarioInputSelectComponent } from '@component/reusable/calendario-input-select/calendario-input-select.component';
@@ -76,6 +78,8 @@ import { CursoIgeLabelComponent } from '@component/reusable/curso-ige-label/curs
 import { CursoShortLabelComponent } from '@component/reusable/curso-short-label/curso-short-label.component';
 import { InputCursoShortSelectComponent } from '@component/reusable/input-curso-short-select/input-curso-short-select.component';
 import { PlanificacionInputPickerComponent } from '@component/reusable/planificacion-input-picker/planificacion-input-picker.component';
+
+import { AlumnoShowComponent } from '@component/alumno-show/alumno-show.component';
 
 import { DocenteTableComponent } from '@component/docente-show/docente-table/docente-table.component';
 import { DocenteShowComponent } from '@component/docente-show/docente-show/docente-show.component';
@@ -122,10 +126,41 @@ import { CrComisionTableComponent } from '@component/consolidado-referente/comis
 import { DocenteDetailComponent } from '@component/docente-detail/docente-detail/docente-detail.component';
 
 import { TomaShowComponent } from '@component/toma-show/toma-show/toma-show.component';
-import { FieldInputComponent } from '@component/field-input/field-input.component';
 import { TomaDetailComponent } from '@component/toma-detail/toma-detail.component';
 import { AsignacionPlanillaDocenteAdminComponent } from '@component/asignacion-planilla-docente-admin/asignacion-planilla-docente-admin.component';
 import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin/planilla-docente-admin.component';
+import { FieldTreeComponent } from '@component/field-tree/field-tree.component';
+import { SearchDynamicComponent } from '@component/search-dynamic/search-dynamic.component';
+import { SearchParamsDynamicComponent } from '@component/search-params-dynamic/search-params-dynamic.component';
+import { MenuLoginComponent } from '@component/menu-login/menu-login.component';
+import { FieldViewAuxComponent } from '@component/field-view-aux/field-view-aux.component';
+import { InputPersistComponent } from '@component/input-persist/input-persist.component';
+import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
+import { FieldsetArrayDynamicComponent } from '@component/fieldset-array-dynamic/fieldset-array-dynamic.component';
+import { ComisionShow2Component } from '@component/comision-show2/comision-show2.component';
+import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.component';
+import { SedeShowComponent } from '@component/sede-show/sede-show.component';
+import { SedeAdmin2Component } from '@component/sede-admin2/sede-admin2.component';
+import { CentroEducativoAdminComponent } from '@component/centro-educativo-admin/centro-educativo-admin.component';
+import { CentroEducativoShowComponent } from '@component/centro-educativo-show/centro-educativo-show.component';
+import { CentroEducativoCantidadSedesComponent } from '@component/centro-educativo-cantidad-sedes/centro-educativo-cantidad-sedes.component';
+import { ComisionAdmin2Component } from '@component/comision-admin2/comision-admin.component';
+import { SedeShow2Component } from '@component/sede-show2/sede-show2.component';
+import { SedeShow3Component } from '@component/sede-show3/sede-show3.component';
+import { AsignaturaShowAdminComponent } from '@component/asignatura-show-admin/asignatura-show-admin.component';
+import { TableAdminDynamicComponent } from '@component/table-admin-dynamic/table-admin-dynamic.component';
+import { PersonaShowAdminRelComponent } from '@component/persona-show-admin-rel/persona-show-admin-rel.component';
+import { DataDefinitionRelArrayService } from '@service/data-definition-rel-array/data-definition-rel-array.service';
+import { CalificacionShowAdminRelComponent } from '@component/calificacion-show-admin-rel/calificacion-show-admin-rel.component';
+import { OptionsComponent } from '@component/options/options.component';
+import { ComisionCensComponent } from '@component/comision-cens/comision-cens.component';
+import { SedeCensComponent } from '@component/sede-cens/sede-cens.component';
+import { ComisionRelacionadaAdminComponent } from '@component/comision-relacionada-admin/comision-relacionada-admin.component';
+import { CursoTomaPosesionComponent } from '@component/curso-toma-posesion/curso-toma-posesion/curso-toma-posesion.component';
+import { CursoTomaPosesionTableComponent } from '@component/curso-toma-posesion/curso-toma-posesion-table/curso-toma-posesion-table.component';
+import { DesignacionAdminComponent } from '@component/designacion-admin/designacion-admin.component';
+import { DesignacionShowComponent } from '@component/designacion-show/designacion-show.component';
+
 
 @NgModule({
   declarations: [
@@ -141,12 +176,14 @@ import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin
     SocialLoginComponent,
     LogoutComponent,
     HomeComponent,
+    //BackupComponent,
 
     DialogAlertComponent,
     DialogConfirmComponent,
     FieldViewComponent,
-    FieldValueComponent,
+    FieldViewAuxComponent,
     InputAutocompleteComponent,
+    InputCheckboxComponent,
     InputDateComponent,
     InputNumberComponent,
     InputSelectCheckboxComponent,
@@ -154,27 +191,33 @@ import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin
     InputSelectValueComponent,
     InputSelectParamComponent,
     InputSearchGoComponent,
-    InputCheckboxComponent,
     InputTextComponent,
     InputTextareaComponent,
     InputTimepickerComponent,
     InputYearComponent,
+    InputPersistComponent,
     //InputYmComponent,
     MenuComponent,
     SearchAllComponent,
     LabelComponent,
     FieldLabelComponent,
     FieldTreeLabelComponent,
+    FieldTreeComponent,
+    TableAdminDynamicComponent,
     TableDynamicComponent,
     CardDynamicComponent,
     FieldsetDynamicComponent,
-    FieldInputComponent,
+    FieldsetArrayDynamicComponent,
+    SearchDynamicComponent,
+    SearchParamsDynamicComponent,
+    MenuLoginComponent,
     //DynamicTableComponent,
 
     CalendarioLabelComponent, CalendarioInputSelectComponent, PlanificacionInputPickerComponent,
     CursoShortLabelComponent, InputCursoShortSelectComponent,
     CursoIgeLabelComponent,
 
+    AlumnoShowComponent,
     AsignacionPlanillaDocenteAdminComponent,
     CdComisionShowComponent, CdComisionTableComponent,
     ComisionAdminComponent, ComisionFieldsetComponent, CaCursoTableComponent,
@@ -199,6 +242,27 @@ import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin
     ListaAlumnosComponent,
     TomaShowComponent,
     PlanillaDocenteAdminComponent,
+    CalendarioAdminArrayComponent,
+    ComisionShow2Component,
+    AlumnoAdminComponent,
+    SedeShowComponent,
+    SedeAdmin2Component,
+    CentroEducativoAdminComponent,
+    CentroEducativoShowComponent,
+    CentroEducativoCantidadSedesComponent,
+    ComisionAdmin2Component,
+    SedeShow2Component,
+    SedeShow3Component,
+    AsignaturaShowAdminComponent,
+    PersonaShowAdminRelComponent,
+    CalificacionShowAdminRelComponent,
+    OptionsComponent,
+    ComisionCensComponent,
+    SedeCensComponent,
+    CursoTomaPosesionComponent, CursoTomaPosesionTableComponent,
+    ComisionRelacionadaAdminComponent,
+    DesignacionAdminComponent,
+    DesignacionShowComponent
   ],
   imports: [
     BrowserModule,
@@ -215,7 +279,8 @@ import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin
     AppMaterialModule,
 
     MaterialFileInputModule,
-    MatTimepickerModule
+    MatTimepickerModule,
+    
   ],
   providers: [
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
@@ -231,6 +296,8 @@ import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin
     
     DataDefinitionStorageService, 
     DataDefinitionLabelService, 
+    DataDefinitionRelArrayService, 
+
 
     {provide: 'SocialAuthServiceConfig', useValue: { autoLogin: false,  providers: [
       {

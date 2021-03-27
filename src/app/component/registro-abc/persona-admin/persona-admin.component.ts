@@ -19,20 +19,6 @@ export class RabcPersonaAdminComponent extends AdminComponent {
 
   readonly entityName: string = "registro_abc";
 
-  constructor(
-    protected fb: FormBuilder, 
-    protected route: ActivatedRoute, 
-    protected router: Router, 
-    protected location: Location, 
-    protected dd: DataDefinitionService, 
-    protected validators: ValidatorsService,
-    protected storage: SessionStorageService, 
-    protected dialog: MatDialog,
-    protected snackBar: MatSnackBar
-  ) {
-    super(fb, route, router, location, dd, storage, dialog, snackBar);
-  }
-
   initData(): Observable<any> {
     return of(fastClone(this.display$.value))
   }

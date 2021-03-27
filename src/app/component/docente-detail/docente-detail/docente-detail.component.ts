@@ -7,7 +7,9 @@ import { DataDefinitionToolService } from '@service/data-definition/data-definit
 import { Observable, of } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Location } from '@angular/common';
-import { FieldConfig } from '@class/field-config';
+import { FieldViewOptions } from '@class/field-view-options';
+import { FieldDateOptions, FieldInputDateOptions } from '@class/field-type-options';
+import { RouterLinkOptions } from '@class/field-view-aux-options';
 
 
 @Component({
@@ -17,39 +19,39 @@ import { FieldConfig } from '@class/field-config';
 export class DocenteDetailComponent extends DetailComponent {
   readonly entityName: string = "docente";
 
-  fieldsConfig: FieldConfig[] = [
-    new FieldConfig({
+  fieldsViewOptions: FieldViewOptions[] = [
+    new FieldViewOptions({
       field:"nombres",
       label:"Nombres",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"apellidos",
       label:"Apellidos",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"fecha_nacimiento",
       label:"Fecha Nacimiento",
       type:"date",
       format:"dd/MM/yyyy",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"numero_documento",
       label:"Numero Documento",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"cuil",
       label:"Cuil",
     }),
     
-    new FieldConfig({
+    new FieldViewOptions({
       field:"telefono",
       label:"Telefono",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"email",
       label:"Email",
     }),
-    new FieldConfig({
+    new FieldViewOptions({
       field:"email_abc",
       label:"Email Abc",
     }),
@@ -60,58 +62,54 @@ export class DocenteDetailComponent extends DetailComponent {
 
 
   tomasColumns = [
-    {
+    new FieldViewOptions({
       field:"fecha_toma",
       label:"Fecha Toma",
-      type:"date",
-      format: "dd/MM/yyyy",
-      routerLink:"toma-detail",
-      queryParamField:"id",
-    },
-    {
+      type:new FieldDateOptions({format: "dd/MM/yyyy"}),
+      aux:new RouterLinkOptions({path:"toma-detail",params:{id:"{{id}}"}})
+    }),
+    new FieldViewOptions({
       field:"fecha_fin",
       label:"Fecha Fin",
-      type:"date",
-      format:"dd/MM/yyyy"
-    },
-    {
+      type:new FieldDateOptions({format: "dd/MM/yyyy"}),
+    }),
+    new FieldViewOptions({
       field:"estado",
       label:"Estado",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"estado_contralor",
       label:"Estado Contralor",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"numero_sede",
       label:"Número",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"nombre_sede",
       label:"Sede",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"nombre_asignatura",
       label:"Asignatura",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"horas_catedra",
       label:"Horas Cátedra",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"numero_comision",
       label:"Comision",
-      routerLink:"comision-admin",
-      queryParamField:"comision",
-    },
-    {
+      aux:new RouterLinkOptions({path:"comision-admin",params:{id:"{{comision}}"}})
+    }),
+    new FieldViewOptions({
       field:"tramo",
       label:"Tramo",
-    },
-    {
+    }),
+    new FieldViewOptions({
       field:"numero_planilla_docente",
       label:"Planilla Docente",
-    },
+    }),
 
   ];
 
@@ -156,7 +154,7 @@ export class DocenteDetailComponent extends DetailComponent {
 
     return this.ddt.all("toma",display).pipe( 
       switchMap(
-        tomas => {return this.ddt.advancedColumnDataGroup(tomas, "toma", "asignacion_planilla_docente", ["planilla_docente.max"], {toma:"toma",ultima_planilla_docente:"planilla_docente_max"})}
+        tomas => {return this.ddt.advancedColumnDataGroup(tomas, "toma", "asignacion_planilla_docente", {toma:"toma",ultima_planilla_docente:"planilla_docente.max"})}
       ),   
       switchMap(
         tomas => {return this.ddt.getAllColumnData(tomas, "ultima_planilla_docente", "planilla_docente",{numero_planilla_docente:"numero"})}

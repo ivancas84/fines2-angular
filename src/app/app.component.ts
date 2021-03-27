@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@service/auth/auth.service';
-import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',

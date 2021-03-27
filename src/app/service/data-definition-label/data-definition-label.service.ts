@@ -15,6 +15,7 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
   }
 
   label(entityName: string, id: string): Observable<string> {
+    if(!id) return of(null);
     var l = super.label(entityName, id);
     if(l) return l;
     switch(entityName){
@@ -74,6 +75,37 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
         }
       )
     );
+  }
+
+
+  labelComision(id: string): Observable<any> {
+    return this.dd.get("comision", id).pipe(
+      switchMap(
+        curso => {
+          return this.dd.getColumnData(curso,"planificacion","planificacion",{anio:"anio",semestre:"semestre"})
+        }
+      ),
+      switchMap(
+        curso => {
+          return this.dd.getColumnData(curso,"sede","sede",{numero_sede:"numero"})
+        }
+      ),
+      map(
+        curso => { 
+          return (!curso)? null : curso["numero_sede"]+curso["division"]+"/"+curso["anio"]+curso["semestre"]; 
+        }
+      )
+    );
+  }
+
+  labelDomicilioRow (row: any): string {
+    if(!row) return null;
+
+    let ret = row["calle"] + " N° " + row["numero"];
+
+    if (row["entre"]) ret += " entre " + row["entre"];
+
+    return ret.trim();
   }
   
 }

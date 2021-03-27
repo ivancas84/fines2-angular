@@ -1,118 +1,163 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
-import { FieldConfig } from '@class/field-config';
-import { ShowComponent } from '@component/show/show.component';
-import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { FieldViewOptions } from '@class/field-view-options';
+import { FieldYesNoOptions, TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions, FieldDateOptions, FieldInputDateOptions, FieldInputSelectCheckboxOptions, FieldTextareaOptions } from '@class/field-type-options';
+import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
+import { FieldWidthOptions } from '@class/field-width-options';
+import { ShowDynamicComponent } from '@component/show/show-dynamic.component';
+import { InputCheckboxComponent } from '@component/input-checkbox/input-checkbox.component';
+import { ShowRelDynamicComponent } from '@component/show/show-rel-dynamic.component';
+import { InputTextareaComponent } from '@component/input-textarea/input-textarea.component';
 
 @Component({
   selector: 'app-toma-show',
-  templateUrl: './toma-show.component.html',
+  templateUrl: '../../../core/component/show/show-dynamic.component.html',
 })
-export class TomaShowComponent extends ShowComponent {
+export class TomaShowComponent extends ShowRelDynamicComponent {
 
   readonly entityName: string = "toma";
 
-  constructor(
-    protected ddt: DataDefinitionToolService,
-    protected route: ActivatedRoute,
-    protected dialog: MatDialog
-  ) {
-    super(ddt, route, dialog);
-
-  }
-  
-  fieldsConfig: FieldConfig[] = [
-    {
-      field:"fecha_toma",
-      label:"Fecha Toma",
-      type:"date",
-      format:"dd/MM/yyyy"
-    },
-    {
+  fieldsViewOptions: FieldViewOptions[] = [
+    new FieldViewOptions({
+      field:"cur-ige",
+      label:"IGE",
+      aux: new RouterLinkOptions({path:"calificacion-show-admin-rel",params:{"cur-id":"{{curso}}"}})
+    }),
+    new FieldViewOptions({
       field:"estado",
       label:"Estado",
-    },
-    {
-      field:"observaciones",
-      label:"Observaciones",
-    },
-    {
-      field:"comentario",
-      label:"Comentario",
-    },
-    {
-      field:"tipo_movimiento",
-      label:"Tipo Movimiento",
-    },
-    {
-      field:"estado_contralor",
-      label:"Estado Contralor",
-    },
-    {
+    }),
+    new FieldViewOptions({
+      field:"calificacion",
+      label:"Calificacion",
+      labelDisabled:true,
+      type:new FieldInputCheckboxOptions(),
+      aux:new InputPersistOptions({
+        entityName:"toma",
+        fieldName:"calificacion",
+      })
+    }),
+    new FieldViewOptions({
+      field:"temas_tratados",
+      label:"Temas Tratados",
+      labelDisabled:true,
+      type:new FieldInputCheckboxOptions(),
+      aux:new InputPersistOptions({
+        entityName:"toma",
+        fieldName:"temas_tratados",
+      })
+    }),
+    new FieldViewOptions({
+      field:"asistencia",
+      label:"Asistencia",
+      labelDisabled:true,
+      type:new FieldInputCheckboxOptions(),
+      aux:new InputPersistOptions({
+        entityName:"toma",
+        fieldName:"asistencia",
+      })
+    }),
+    new FieldViewOptions({
+      field:"sin_planillas",
+      label:"Sin Planillas",
+      labelDisabled:true,
+      type:new FieldInputCheckboxOptions(),
+      aux:new InputPersistOptions({
+        entityName:"toma",
+        fieldName:"sin_planillas",
+      })
+    }),
+    new FieldViewOptions({
       field:"curso",
       label:"Curso",
-      type:"label",
-      entityName: "curso",
-      routerLink: "curso-admin",
-      queryParamField:"curso", 
-    },
-    {
+      type:new TypeLabelOptions({entityName: "curso"}),
+      aux:new RouterLinkOptions({path: "curso-detail", params:{id:"{{curso}})"}}), 
+    }),
+    new FieldViewOptions({
       field:"docente",
       label:"Docente",
-      type:"label",
-      entityName: "persona",
-      routerLink: "docente-detail",
-      queryParamField:"docente", 
-    },
-    {
+      type:new TypeLabelOptions({entityName: "persona"}),
+      aux:new RouterLinkOptions({path: "persona-detail", params:{id:"{{docente}})"}}), 
+    }),
+    new FieldViewOptions({
+      field:"observaciones",
+      label:"Observaciones",
+      type:new FieldTextareaOptions(),
+      aux:new InputPersistOptions({
+        entityName:"toma",
+        fieldName:"observaciones",
+      }), 
+    }),
+
+  ];  
+  fieldsViewOptionsSp: FieldViewOptions[] = [
+    new FieldViewOptions({
+      field:"search",
+      label:"Buscar",
+      type: new FieldInputTextOptions(),
+      width: new FieldWidthOptions({sm:'100%',gtSm:'100%'}),
+    }),
+    new FieldViewOptions({
+      field:"fecha_toma",
+      label:"Fecha Toma",
+      type: new FieldInputDateOptions(),
+    }),
+    new FieldViewOptions({
+      field:"calificacion",
+      label:"Calificacion",
+      type: new FieldInputSelectCheckboxOptions(),
+    }),
+    new FieldViewOptions({
+      field:"temas_tratados",
+      label:"Temas Tratados",
+      type: new FieldInputSelectCheckboxOptions(),
+    }),
+    new FieldViewOptions({
+      field:"asistencia",
+      label:"Asistencia",
+      type: new FieldInputSelectCheckboxOptions(),
+    }),
+    new FieldViewOptions({
+      field:"sin_planillas",
+      label:"Sin Planillas",
+      type: new FieldInputSelectCheckboxOptions(),
+    }),
+    new FieldViewOptions({
+      field:"cur-asignatura",
+      label:"Asignatura",
+      type: new FieldInputSelectOptions({entityName:'asignatura'}),
+    }),
+    new FieldViewOptions({
+      field:"cur_com_sed-centro_educativo",
+      label:"Centro Educativo",
+      type: new FieldInputSelectOptions({entityName:'centro_educativo'}),
+    }),
+    new FieldViewOptions({
+      field:"docente",
+      label:"Docente",
+      type: new FieldInputAutocompleteOptions({entityName:'persona'}),
+    }),
+    new FieldViewOptions({
       field:"reemplazo",
       label:"Reemplazo",
-      type:"label",
-      entityName: "persona",
-      routerLink: "docente-detail",
-      queryParamField:"reemplazo", 
-    },
-    {
-      field:"numero_planilla_docente",
-      label:"Planilla Docente",
-      sortDisabled:true
-    },
+      type: new FieldInputAutocompleteOptions({entityName:'persona'}),
+    }),
+    new FieldViewOptions({
+      field:"cur_com_cal-anio",
+      label:"Año Calendario",
+      type: new FieldInputTextOptions(),
+    }),
+    new FieldViewOptions({
+      field:"cur_com_cal-semestre",
+      label:"Semestre Calendario",
+      type: new FieldInputSelectParamOptions({options:[1,2,3]}),
+    }),
+    new FieldViewOptions({
+      field:"cur_com-numero",
+      label:"Número de Comisión",
+      type: new FieldInputTextOptions(),
+    }),
+    
+    
   ];  
-
-
-  queryData(): Observable<any>{
-    return this.ddt.all("toma",this.display).pipe( 
-      switchMap(
-        tomas => {
-          return this.ddt.advancedColumnDataGroup(tomas, "toma", "asignacion_planilla_docente", ["planilla_docente.max"], {ultima_planilla_docente:"planilla_docente_max"})}
-      ),   
-      switchMap(
-        tomas => {
-          return this.ddt.getAllColumnData(tomas, "ultima_planilla_docente", "planilla_docente",{numero_planilla_docente:"numero"})}
-      ),
-      switchMap(
-        tomas => {
-          return this.ddt.getAllColumnData(tomas, "curso", "curso",{comision:"comision", asignatura:"asignatura", horas_catedra:"horas_catedra" })}
-      ),
-      switchMap(
-        tomas => {
-          return this.ddt.getAllColumnData(tomas, "asignatura", "asignatura",{nombre_asignatura:"nombre"})}
-      ),
-      switchMap(
-        tomas => {
-          return this.ddt.advancedColumnData(tomas, "comision", "comision",{calendario:"calendario", sede:"sede", numero_comision:"numero", tramo:"tramo"})}
-      ),
-      switchMap(
-        tomas => {return this.ddt.getAllColumnData(tomas, "calendario", "calendario",{fecha_fin:"fin"})}
-      ),
-      switchMap(
-        tomas => {return this.ddt.getAllColumnData(tomas, "sede", "sede",{numero_sede:"numero",nombre_sede:"nombre"})}
-      )
-    )
-   }
-
 }
 

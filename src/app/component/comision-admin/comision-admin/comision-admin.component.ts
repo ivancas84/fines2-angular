@@ -8,7 +8,8 @@ import { AdminComponent } from '@component/admin/admin.component';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
-import { FieldControl } from '@class/field-control';
+import { FieldViewOptions } from '@class/field-view-options';
+import { FieldInputSelectParamOptions } from '@class/field-type-options';
 
 @Component({
   selector: 'app-comision-admin',
@@ -18,78 +19,64 @@ export class ComisionAdminComponent extends AdminComponent {
 
   readonly entityName: string = "comision";
 
-  constructor(
-    protected fb: FormBuilder, 
-    protected route: ActivatedRoute, 
-    protected router: Router, 
-    protected location: Location, 
-    protected dd: DataDefinitionService, 
-    protected validators: ValidatorsService,
-    protected storage: SessionStorageService, 
-    protected dialog: MatDialog,
-    protected snackBar: MatSnackBar
-  ) {
-    super(fb, route, router, location, dd, storage, dialog, snackBar);
-  }
-
-  fieldsControl: FieldControl[] = [
-    new FieldControl({
+  fieldsViewOptions: FieldViewOptions[] = [
+    new FieldViewOptions({
       field:"id",
       label:"Id",
       type: "hidden",
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"turno",
       label:"Turno",
       type: "select_param",
-      options: ['Mañana','Tarde','Noche'],
+      options: ['Mañana','Tarde','Vespertino'],
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"division",
       label:"Division",
       validators: [Validators.required],
       asyncValidators: [],
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"comentario",
       label:"Comentario",
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"autorizada",
       label:"Autorizada",
       type: "checkbox",
       default: false,
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"apertura",
       label:"Apertura",
       type: "checkbox",
       default: false,
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"publicada",
       label:"Publicada",
       type: "checkbox",
       default: false,
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"observaciones",
       label:"Observaciones",
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"identificacion",
       label:"Identificacion",
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"sede",
       label:"Sede",
       type: "autocomplete",
@@ -98,7 +85,7 @@ export class ComisionAdminComponent extends AdminComponent {
       asyncValidators: [],
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"modalidad",
       label:"Modalidad",
       type: "select",
@@ -107,27 +94,40 @@ export class ComisionAdminComponent extends AdminComponent {
       asyncValidators: [],
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"planificacion",
       label:"Planificacion",
       type: "select",
       entityName: "planificacion",
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"comision_siguiente",
       label:"Comision Siguiente",
       type: "autocomplete",
       entityName: "comision",
     }),
 
-    new FieldControl({
+    new FieldViewOptions({
       field:"calendario",
       label:"Calendario",
       type: "autocomplete",
       entityName: "calendario",
       validators: [Validators.required],
       asyncValidators: [],
+    }),
+
+    new FieldViewOptions({
+      field:"estado",
+      label:"Estado",
+      type: new FieldInputSelectParamOptions({options:['Confirma','Rectifica','Desdobla','Reagrupa']}),
+      default:"Confirma",
+    }),
+    new FieldViewOptions({
+      field:"configuracion",
+      label:"Configuracion",
+      type: new FieldInputSelectParamOptions({options:['Histórica','Nueva']}),
+      default:"Histórica",
     }),
 
   ];  

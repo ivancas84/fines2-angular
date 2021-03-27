@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DetailComponent } from '@component/detail/detail.component';
-import { FieldConfig } from '@class/field-config';
+import { FieldViewOptions } from '@class/field-view-options';
 import { Display } from '@class/display';
 import { Observable } from 'rxjs';
 import { tap, switchMap, map } from 'rxjs/operators';
@@ -8,7 +8,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { Location } from '@angular/common';
-import { TableDynamicOptions } from '@class/table-dynamic-options';
+import { FieldDateOptions, TypeLabelOptions, FieldYesNoOptions } from '@class/field-type-options';
+import { FieldWidthOptions } from '@class/field-width-options';
+import { RouterLinkOptions } from '@class/field-view-aux-options';
 
 @Component({
   selector: 'app-toma-detail',
@@ -27,88 +29,78 @@ export class TomaDetailComponent extends DetailComponent {
 
   }
   
-  fieldsConfig: FieldConfig[] = [
-    new FieldConfig({
+  fieldsViewOptions: FieldViewOptions[] = [
+    new FieldViewOptions({
       field:"docente",
       label:"Docente",
-      type:"label",
-      entityName: "persona",
-      routerLink: "persona-detail",
-      queryParamField:"docente", 
-      widthGtSm: "33%",
+      type:new TypeLabelOptions({entityName: "persona"}),
+      aux:new RouterLinkOptions({path:"persona-detail",params:{id:"{{docente}}"}}),
+      width:new FieldWidthOptions({gtSm:"33%"})
     }),
 
-    new FieldConfig({
+    new FieldViewOptions({
       field:"curso",
       label:"Curso",
-      type:"label",
-      entityName: "curso",
-      routerLink: "curso-detail",
-      queryParamField:"curso", 
-      widthGtSm: "34%",
+      type:new TypeLabelOptions({entityName: "curso"}),
+      aux:new RouterLinkOptions({path:"curso-detail",params:{id:"{{curso}}"}}),
+      width:new FieldWidthOptions({gtSm:"34%"})
     }),
 
 
-    new FieldConfig({
+    new FieldViewOptions({
       field:"reemplazo",
       label:"Reemplazo",
-      type:"label",
-      entityName: "persona",
-      routerLink: "persona-detail",
-      queryParamField:"reemplazo",  
-      widthGtSm: "33%",
+      type:new TypeLabelOptions({entityName: "persona"}),
+      aux:new RouterLinkOptions({path:"persona-detail",params:{id:"{{reemplazo}}"}}),
+      width:new FieldWidthOptions({gtSm:"33%"})
     }),
 
 
     
-    new FieldConfig({
+    new FieldViewOptions({
       field:"fecha_toma",
       label:"Fecha Toma",
-      type:"date",
-      format:"dd/MM/yyyy",
+      type:new FieldDateOptions(),
     }),
 
-    new FieldConfig({
+    new FieldViewOptions({
       field:"estado",
       label:"Estado",
     }),
 
-    new FieldConfig({
+    new FieldViewOptions({
       field:"observaciones",
       label:"Observaciones",
     }),
 
-    new FieldConfig({
+    new FieldViewOptions({
       field:"comentario",
       label:"Comentario",
     }),
 
-    new FieldConfig({
+    new FieldViewOptions({
       field:"tipo_movimiento",
       label:"Tipo Movimiento",
     }),
 
-    new FieldConfig({
+    new FieldViewOptions({
       field:"estado_contralor",
       label:"Estado Contralor",
     }),
 
-    new FieldConfig({
+    new FieldViewOptions({
       field:"alta",
       label:"Alta",
-      type:"date",
-      format:"dd/MM/yyyy HH:mm",
+      type:new FieldDateOptions({format:"dd/MM/yyyy HH:mm"})
     }),
   ];  
 
-  fieldsConfigApd: FieldConfig[] = [
+  fieldsViewOptionsApd: FieldViewOptions[] = [
     {
       field:"planilla_docente",
       label:"Planilla Docente",
-      type:"label",
-      entityName: "planilla_docente",
-      routerLink: "asignacion-planilla-docente-admin",
-      queryParamField:"id", 
+      type:new TypeLabelOptions({entityName:"planilla_docente"}),
+      aux:new RouterLinkOptions({path:"asignacion-planilla-docente-admin", params:{id:"{{id}}"}})
     },
     {
       field:"comentario",
@@ -117,7 +109,7 @@ export class TomaDetailComponent extends DetailComponent {
     {
       field:"reclamo",
       label:"Reclamo",
-      type:"si_no",
+      type:new FieldYesNoOptions(),
     },
     
   ];  

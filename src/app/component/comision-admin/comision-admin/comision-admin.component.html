@@ -5,7 +5,7 @@
 <form *ngIf="(loadParams$ | async); else loading" [formGroup]="adminForm" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
   <div *ngIf="(loadDisplay$ | async); else loading">
 
-    <!--core-fieldset-dynamic [fieldsControl]="fieldsControl" [form]="adminForm" [data]="data" [title]="'Comisión'"></core-fieldset-dynamic-->
+    <!--core-fieldset-dynamic [fieldsViewOptions]="fieldsViewOptions" [form]="adminForm" [data]="data" [title]="'Comisión'"></core-fieldset-dynamic-->
     <app-comision-fieldset [form]="adminForm" [data]="data"></app-comision-fieldset>
 
     <button mat-raised-button [disabled]="adminForm.pending || isSubmitted" type="submit" color="primary">Aceptar</button>&nbsp;
