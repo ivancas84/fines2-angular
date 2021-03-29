@@ -3,7 +3,7 @@
     <option value="nombre-field">Nombre Field</option>
   </select>
 
-  <span [ngSwitch]="f(i)">
+  <span [ngSwitch]="elements.controls[i].controls['field']">
     <span *ngSwitchCase="nombre-field'">
 
     </span>
