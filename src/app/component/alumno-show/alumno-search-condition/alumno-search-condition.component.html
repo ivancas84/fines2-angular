@@ -1,0 +1,13 @@
+<div *ngFor="let filter of filters.controls; let i=index" [formGroupName]="i" >
+  <select formControlName="field">
+    <option value="nombre-field">Nombre Field</option>
+  </select>
+
+  <span [ngSwitch]="f(i)">
+    <span *ngSwitchCase="nombre-field'">
+
+    </span>
+
+    <span *ngSwitchCase="otro-field'">...</span>
+  </span>
+</div>

@@ -130,8 +130,7 @@ import { TomaDetailComponent } from '@component/toma-detail/toma-detail.componen
 import { AsignacionPlanillaDocenteAdminComponent } from '@component/asignacion-planilla-docente-admin/asignacion-planilla-docente-admin.component';
 import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin/planilla-docente-admin.component';
 import { FieldTreeComponent } from '@component/field-tree/field-tree.component';
-import { SearchDynamicComponent } from '@component/search-dynamic/search-dynamic.component';
-import { SearchParamsDynamicComponent } from '@component/search-params-dynamic/search-params-dynamic.component';
+import { SearchDynamicComponent } from '@component/search/search-dynamic.component';
 import { MenuLoginComponent } from '@component/menu-login/menu-login.component';
 import { FieldViewAuxComponent } from '@component/field-view-aux/field-view-aux.component';
 import { InputPersistComponent } from '@component/input-persist/input-persist.component';
@@ -160,6 +159,8 @@ import { CursoTomaPosesionComponent } from '@component/curso-toma-posesion/curso
 import { CursoTomaPosesionTableComponent } from '@component/curso-toma-posesion/curso-toma-posesion-table/curso-toma-posesion-table.component';
 import { DesignacionAdminComponent } from '@component/designacion-admin/designacion-admin.component';
 import { DesignacionShowComponent } from '@component/designacion-show/designacion-show.component';
+import { SearchParamsDynamicComponent } from '@component/search-params/search-params-dynamic.component';
+import { AlumnoSearchComponent } from '@component/alumno-show/alumno-search/alumno-search.component';
 
 
 @NgModule({
@@ -262,7 +263,8 @@ import { DesignacionShowComponent } from '@component/designacion-show/designacio
     CursoTomaPosesionComponent, CursoTomaPosesionTableComponent,
     ComisionRelacionadaAdminComponent,
     DesignacionAdminComponent,
-    DesignacionShowComponent
+    DesignacionShowComponent,
+    AlumnoSearchComponent
   ],
   imports: [
     BrowserModule,
