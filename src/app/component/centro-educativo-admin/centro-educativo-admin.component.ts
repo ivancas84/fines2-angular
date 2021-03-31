@@ -6,7 +6,7 @@ import { FieldInputTextOptions, FieldInputAutocompleteOptions, FieldControlOptio
 
 @Component({
   selector: 'app-centro-educativo-admin',
-  templateUrl: '../../core/component/admin/admin.component.html',
+  templateUrl: '../../core/component/admin/admin-dynamic.component.html',
 })
 export class CentroEducativoAdminComponent extends AdminComponent {
 

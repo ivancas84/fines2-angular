@@ -50,6 +50,9 @@ import { ComisionRelacionadaAdminComponent } from '@component/comision-relaciona
 import { CursoTomaPosesionComponent } from '@component/curso-toma-posesion/curso-toma-posesion/curso-toma-posesion.component';
 import { DesignacionShowComponent } from '@component/designacion-show/designacion-show.component';
 import { DesignacionAdminComponent } from '@component/designacion-admin/designacion-admin.component';
+import { ComisionShow3Component } from '@component/comision-show3/comision-show3.component';
+import { AlumnosAprobadosShowComponent } from '@component/alumnos-aprobados-show/alumnos-aprobados-show.component';
+import { TransferirAlumnoAdminComponent } from '@component/transferir-alumno-admin/transferir-alumno-admin.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -102,6 +105,9 @@ const routes: Routes = [
   { path: 'comision-relacionada', component: ComisionRelacionadaAdminComponent, pathMatch: 'full' },
   { path: 'designacion-show', component: DesignacionShowComponent, pathMatch: 'full' },
   { path: 'designacion-admin', component: DesignacionAdminComponent, pathMatch: 'full' },
+  { path: 'comision-show-3', component: ComisionShow3Component, pathMatch: 'full' },
+  { path: 'alumnos-aprobados', component: AlumnosAprobadosShowComponent, pathMatch: 'full' },
+  { path: 'transferir-alumno', component: TransferirAlumnoAdminComponent, pathMatch: 'full' },
 
 ];
 

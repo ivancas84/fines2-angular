@@ -161,6 +161,9 @@ import { DesignacionAdminComponent } from '@component/designacion-admin/designac
 import { DesignacionShowComponent } from '@component/designacion-show/designacion-show.component';
 import { SearchParamsDynamicComponent } from '@component/search-params/search-params-dynamic.component';
 import { AlumnoSearchComponent } from '@component/alumno-show/alumno-search/alumno-search.component';
+import { ComisionShow3Component } from '@component/comision-show3/comision-show3.component';
+import { AlumnosAprobadosShowComponent } from '@component/alumnos-aprobados-show/alumnos-aprobados-show.component';
+import { TransferirAlumnoAdminComponent } from '@component/transferir-alumno-admin/transferir-alumno-admin.component';
 
 
 @NgModule({
@@ -264,7 +267,10 @@ import { AlumnoSearchComponent } from '@component/alumno-show/alumno-search/alum
     ComisionRelacionadaAdminComponent,
     DesignacionAdminComponent,
     DesignacionShowComponent,
-    AlumnoSearchComponent
+    AlumnoSearchComponent,
+    ComisionShow3Component,
+    AlumnosAprobadosShowComponent,
+    TransferirAlumnoAdminComponent
   ],
   imports: [
     BrowserModule,

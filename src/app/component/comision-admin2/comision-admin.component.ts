@@ -6,7 +6,7 @@ import { FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputText
 
 @Component({
   selector: 'app-comision-admin2',
-  templateUrl: '../../core/component/admin/admin.component.html',
+  templateUrl: '../../core/component/admin/admin-dynamic.component.html',
 })
 export class ComisionAdmin2Component extends AdminComponent {
 
