@@ -13,6 +13,7 @@ export class DataDefinitionStorageService {
   storage(entityName: string, row: { [index: string]: any }): void {
     switch(entityName) {
       case "alumno": this.storageAlumno(row); break;
+      case "alumno_comision": this.storageAlumnoComision(row); break;
       case "asignacion_planilla_docente": this.storageAsignacionPlanillaDocente(row); break;
       case "asignatura": this.storageAsignatura(row); break;
       case "calendario": this.storageCalendario(row); break;
@@ -43,6 +44,26 @@ export class DataDefinitionStorageService {
     }
   }
   storageAlumno(row: { [index: string]: any }): void{
+    if(!row) return;
+    var rowCloned = JSON.parse(JSON.stringify(row))
+    /**
+     * se realiza un 'deep clone' del objeto para poder eliminar atributos a medida que se procesa y no alterar la referencia original
+     */
+    if(('persona_' in rowCloned)
+    && ('domicilio_' in rowCloned['persona_'])
+    ){
+      this.stg.setItem('domicilio' + rowCloned['persona_']['domicilio_'].id, rowCloned['persona_']['domicilio_']);
+      delete rowCloned['persona_']['domicilio_'];
+    }
+    if(('persona_' in rowCloned)
+    ){
+      this.stg.setItem('persona' + rowCloned['persona_'].id, rowCloned['persona_']);
+      delete rowCloned['persona_'];
+    }
+    this.stg.setItem("alumno" + rowCloned.id, rowCloned);
+  }
+
+  storageAlumnoComision(row: { [index: string]: any }): void{
     if(!row) return;
     var rowCloned = JSON.parse(JSON.stringify(row))
     /**
@@ -199,7 +220,7 @@ export class DataDefinitionStorageService {
       this.stg.setItem('comision' + rowCloned['comision_'].id, rowCloned['comision_']);
       delete rowCloned['comision_'];
     }
-    this.stg.setItem("alumno" + rowCloned.id, rowCloned);
+    this.stg.setItem("alumno_comision" + rowCloned.id, rowCloned);
   }
 
   storageAsignacionPlanillaDocente(row: { [index: string]: any }): void{

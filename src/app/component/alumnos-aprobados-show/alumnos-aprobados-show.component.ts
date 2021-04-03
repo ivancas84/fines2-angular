@@ -5,7 +5,7 @@ import { TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptio
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { arrayColumn } from '@function/array-column';
-import { InputPersistOptions } from '@class/field-view-aux-options';
+import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
 
 @Component({
   selector: 'app-alumnos-aprobados-show',
@@ -47,7 +47,8 @@ export class AlumnosAprobadosShowComponent extends ShowComponent {
     new FieldViewOptions({
       field:"comision",
       label:"Comision",
-      type:new TypeLabelOptions({entityName:"comision"})
+      type:new TypeLabelOptions({entityName:"comision"}),
+      aux:new RouterLinkOptions({path:"toma-show",params:{"cur-comision":"{{comision}}"}})
     }),
     new FieldViewOptions({
       field:"nombres",
@@ -77,6 +78,11 @@ export class AlumnosAprobadosShowComponent extends ShowComponent {
         fieldName:"numero_documento",
 
       }), 
+    }),
+    new FieldViewOptions({
+      field:"cantidad",
+      label:"Cantidad",
+      aux: new RouterLinkOptions({path:"calificacion-show-admin-rel",params:{"persona":"{{id}}"}})
     }),
   ];  
 

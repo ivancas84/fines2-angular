@@ -42,7 +42,6 @@ export class ComisionShow3Component extends ShowComponent {
       //   return this.alumnosActivos(data)
       // }),
       map(data => {
-        console.log(data);
         data.map (el => {
           el["sed-numero"] =el["numero_sede"] + el["division"]
           el["tramo"] =el["anio"] + "º" + el["semestre"] + "C"
@@ -142,6 +141,7 @@ export class ComisionShow3Component extends ShowComponent {
     new FieldViewOptions({
       field:"aprobados",
       label:"Alumnos con al menos una asignatura aprobada",
+      aux:new RouterLinkOptions({path:"alumnos-aprobados",params:{id:"{{id}}"}})
     }),
     // new FieldViewOptions({
     //   field:"alumnos",

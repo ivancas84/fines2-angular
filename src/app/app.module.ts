@@ -147,7 +147,6 @@ import { ComisionAdmin2Component } from '@component/comision-admin2/comision-adm
 import { SedeShow2Component } from '@component/sede-show2/sede-show2.component';
 import { SedeShow3Component } from '@component/sede-show3/sede-show3.component';
 import { AsignaturaShowAdminComponent } from '@component/asignatura-show-admin/asignatura-show-admin.component';
-import { TableAdminDynamicComponent } from '@component/table-admin-dynamic/table-admin-dynamic.component';
 import { PersonaShowAdminRelComponent } from '@component/persona-show-admin-rel/persona-show-admin-rel.component';
 import { DataDefinitionRelArrayService } from '@service/data-definition-rel-array/data-definition-rel-array.service';
 import { CalificacionShowAdminRelComponent } from '@component/calificacion-show-admin-rel/calificacion-show-admin-rel.component';
@@ -164,6 +163,7 @@ import { AlumnoSearchComponent } from '@component/alumno-show/alumno-search/alum
 import { ComisionShow3Component } from '@component/comision-show3/comision-show3.component';
 import { AlumnosAprobadosShowComponent } from '@component/alumnos-aprobados-show/alumnos-aprobados-show.component';
 import { TransferirAlumnoAdminComponent } from '@component/transferir-alumno-admin/transferir-alumno-admin.component';
+import { TableAdminDynamicComponent } from '@component/table-admin/table-admin-dynamic.component';
 
 
 @NgModule({

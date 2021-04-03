@@ -39,7 +39,7 @@ export class ComisionTableComponent extends TableComponent implements OnChanges 
     protected dt: DataToolsService, 
     protected router: Router,
   ) {
-    super(router);
+    super(router, ddt);
   }
 
   load$: Observable<any>;

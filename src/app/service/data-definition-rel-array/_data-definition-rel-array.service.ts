@@ -41,6 +41,7 @@ export class _DataDefinitionRelArrayService { //2
        */
     switch(entityName) {
       case "alumno": { return this.alumnoGet(id, fields); }
+      case "alumno_comision": { return this.alumnoComisionGet(id, fields); }
       case "asignacion_planilla_docente": { return this.asignacionPlanillaDocenteGet(id, fields); }
       case "asignatura": { return this.asignaturaGet(id, fields); }
       case "calendario": { return this.calendarioGet(id, fields); }
@@ -77,6 +78,7 @@ export class _DataDefinitionRelArrayService { //2
        */
     switch(entityName) {
       case "alumno": { return this.alumnoGetAll(ids, fields); }
+      case "alumno_comision": { return this.alumnoComisionGetAll(ids, fields); }
       case "asignacion_planilla_docente": { return this.asignacionPlanillaDocenteGetAll(ids, fields); }
       case "asignatura": { return this.asignaturaGetAll(ids, fields); }
       case "calendario": { return this.calendarioGetAll(ids, fields); }
@@ -108,6 +110,23 @@ export class _DataDefinitionRelArrayService { //2
   }
   alumnoGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
     return this.dd.getAll("alumno", ids).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'per-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'persona', 'persona', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'per_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'per-domicilio', 'domicilio', f)
+        }
+      ),
+    )
+  }
+    
+  alumnoComisionGetAll(ids: string[], fields: { [index: string]: any }): Observable<any> {
+    return this.dd.getAll("alumno_comision", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
           var f = this.filterFields(fields, 'per-');
@@ -1074,6 +1093,23 @@ export class _DataDefinitionRelArrayService { //2
     
   alumnoGet(id: string, fields: { [index: string]: any }): Observable<any> {
     return this.dd.get("alumno", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'per-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'persona', 'persona', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'per_dom-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'per-domicilio', 'domicilio', f)
+        }
+      ),
+    )
+  }
+    
+  alumnoComisionGet(id: string, fields: { [index: string]: any }): Observable<any> {
+    return this.dd.get("alumno_comision", id).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
           var f = this.filterFields(fields, 'per-');

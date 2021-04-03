@@ -15,6 +15,7 @@ export class _DataDefinitionLabelService {
   label(entityName: string, id: string): Observable<string> {
     switch(entityName) {
       case "alumno": { return this.labelAlumno(id); }
+      case "alumno_comision": { return this.labelAlumnoComision(id); }
       case "asignacion_planilla_docente": { return this.labelAsignacionPlanillaDocente(id); }
       case "asignatura": { return this.labelAsignatura(id); }
       case "calendario": { return this.labelCalendario(id); }
@@ -45,6 +46,15 @@ export class _DataDefinitionLabelService {
     }
   }
   labelAlumnoRow (row: any): string {
+    if(!row) return null;
+
+    let ret = "";
+    if (row["id"]) ret = ret.trim() + " " + row["id"];
+
+    return ret.trim();
+  }
+
+  labelAlumnoComisionRow (row: any): string {
     if(!row) return null;
 
     let ret = "";
@@ -321,6 +331,22 @@ export class _DataDefinitionLabelService {
           if(!row) return of(null);
           return combineLatest([
             of(this.labelAlumnoRow(row)),
+          ])
+        }
+      ),
+      map(
+        response => { return (!response)? null : response.join(" "); }
+      )
+    );
+  }
+
+  labelAlumnoComision(id: string): Observable<any> {
+    return this.dd.get("alumno_comision", id).pipe(
+      switchMap(
+        row => {
+          if(!row) return of(null);
+          return combineLatest([
+            of(this.labelAlumnoComisionRow(row)),
           ])
         }
       ),

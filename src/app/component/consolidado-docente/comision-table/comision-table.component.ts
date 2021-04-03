@@ -4,6 +4,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { DataToolsService } from '@service/data-tools.service';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 
 @Component({
   selector: 'app-cd-comision-table',
@@ -35,8 +36,9 @@ export class CdComisionTableComponent extends TableComponent {
   constructor(
     protected dt: DataToolsService, 
     protected router: Router,
+    protected dd: DataDefinitionService
   ) {
-    super(router);
+    super(router, dd);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

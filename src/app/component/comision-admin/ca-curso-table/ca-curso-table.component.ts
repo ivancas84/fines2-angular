@@ -38,7 +38,7 @@ export class CaCursoTableComponent extends TableComponent implements OnInit, OnC
     protected dt: DataToolsService,
     protected storage: SessionStorageService,
   ) {
-    super(router);
+    super(router, dd);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
