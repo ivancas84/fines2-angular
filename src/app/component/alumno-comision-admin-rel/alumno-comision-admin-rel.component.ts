@@ -6,12 +6,12 @@ import { AdminRelComponent } from '@component/admin-rel/admin-rel.component';
 import { AdminRelStructure } from '@class/admin-rel-structure';
 
 @Component({
-  selector: 'app-alumno-admin',
+  selector: 'app-alumno-comision-admin-rel',
   templateUrl: '../../core/component/admin-rel/admin-rel.component.html',
 })
-export class AlumnoAdminComponent extends AdminRelComponent {
+export class AlumnoComisionAdminRelComponent extends AdminRelComponent {
 
-  readonly entityName: string = "alumno"
+  readonly entityName: string = "alumno_comision"
 
   structure:AdminRelStructure[] = [
 
@@ -44,7 +44,7 @@ export class AlumnoAdminComponent extends AdminRelComponent {
           field:"numero_documento",
           label:"Numero Documento",
           type: new FieldInputTextOptions(
-            {uniqueRoute: "alumno-admin", uniqueParam:"per-numero_documento"},
+            {uniqueRoute: "alumno-comision-admin", uniqueParam:"persona"},
           ),
           control: new FieldControlOptions({
             validators: [Validators.required],
@@ -75,7 +75,9 @@ export class AlumnoAdminComponent extends AdminRelComponent {
         new FieldViewOptions({
           field:"email_abc",
           label:"Email Abc",
-          type: new FieldInputTextOptions(),
+          type: new FieldInputTextOptions(
+            {uniqueRoute: "alumno-comision-admin", uniqueParam:"persona"},
+          ),
           control: new FieldControlOptions({asyncValidators: [this.validators.unique('email_abc', 'persona')],})
         }),
       ]

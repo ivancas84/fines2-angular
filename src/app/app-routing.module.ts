@@ -31,7 +31,6 @@ import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin
 import { AuthGuardService } from '@service/auth/auth-guard.service';
 import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
 import { ComisionShow2Component } from '@component/comision-show2/comision-show2.component';
-import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.component';
 import { SedeShowComponent } from '@component/sede-show/sede-show.component';
 import { SedeAdmin2Component } from '@component/sede-admin2/sede-admin2.component';
 import { CentroEducativoAdminComponent } from '@component/centro-educativo-admin/centro-educativo-admin.component';
@@ -53,6 +52,8 @@ import { DesignacionAdminComponent } from '@component/designacion-admin/designac
 import { ComisionShow3Component } from '@component/comision-show3/comision-show3.component';
 import { AlumnosAprobadosShowComponent } from '@component/alumnos-aprobados-show/alumnos-aprobados-show.component';
 import { TransferirAlumnoAdminComponent } from '@component/transferir-alumno-admin/transferir-alumno-admin.component';
+import { AlumnoComisionAdminRelComponent } from '@component/alumno-comision-admin-rel/alumno-comision-admin-rel.component';
+import { AlumnoAdminRelComponent } from '@component/alumno-admin-rel/alumno-admin-rel.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -86,7 +87,7 @@ const routes: Routes = [
   { path: 'toma-detail', component: TomaDetailComponent, pathMatch: 'full' },
   { path: 'planilla-docente-admin', component: PlanillaDocenteAdminComponent, pathMatch: 'full' },
   { path: 'calendario-admin-array', component: CalendarioAdminArrayComponent, pathMatch: 'full' },
-  { path: 'alumno-admin', component: AlumnoAdminComponent, pathMatch: 'full' },
+  { path: 'alumno-comision-admin', component: AlumnoComisionAdminRelComponent, pathMatch: 'full' },
   { path: 'sede-show', component: SedeShowComponent, pathMatch: 'full' },
   { path: 'sede-admin-2', component: SedeAdmin2Component, pathMatch: 'full' },
   { path: 'centro-educativo-admin', component: CentroEducativoAdminComponent, pathMatch: 'full' },
@@ -108,6 +109,7 @@ const routes: Routes = [
   { path: 'comision-show-3', component: ComisionShow3Component, pathMatch: 'full' },
   { path: 'alumnos-aprobados', component: AlumnosAprobadosShowComponent, pathMatch: 'full' },
   { path: 'transferir-alumno', component: TransferirAlumnoAdminComponent, pathMatch: 'full' },
+  { path: 'alumno-admin-rel', component: AlumnoAdminRelComponent, pathMatch: 'full' },
 
 ];
 

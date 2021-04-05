@@ -28,7 +28,9 @@ export class CentroEducativoAdminComponent extends AdminComponent {
     new FieldViewOptions({
       field:"cue",
       label:"Cue",
-      type: new FieldInputTextOptions(),
+      type: new FieldInputTextOptions(
+        {uniqueRoute: "centro-educativo-admin"},
+      ),
       control: new FieldControlOptions({asyncValidators: [this.validators.unique('cue', 'centro_educativo')],})
     }),
     new FieldViewOptions({

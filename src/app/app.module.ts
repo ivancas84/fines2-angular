@@ -137,7 +137,6 @@ import { InputPersistComponent } from '@component/input-persist/input-persist.co
 import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
 import { FieldsetArrayDynamicComponent } from '@component/fieldset-array-dynamic/fieldset-array-dynamic.component';
 import { ComisionShow2Component } from '@component/comision-show2/comision-show2.component';
-import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.component';
 import { SedeShowComponent } from '@component/sede-show/sede-show.component';
 import { SedeAdmin2Component } from '@component/sede-admin2/sede-admin2.component';
 import { CentroEducativoAdminComponent } from '@component/centro-educativo-admin/centro-educativo-admin.component';
@@ -164,6 +163,8 @@ import { ComisionShow3Component } from '@component/comision-show3/comision-show3
 import { AlumnosAprobadosShowComponent } from '@component/alumnos-aprobados-show/alumnos-aprobados-show.component';
 import { TransferirAlumnoAdminComponent } from '@component/transferir-alumno-admin/transferir-alumno-admin.component';
 import { TableAdminDynamicComponent } from '@component/table-admin/table-admin-dynamic.component';
+import { AlumnoComisionAdminRelComponent } from '@component/alumno-comision-admin-rel/alumno-comision-admin-rel.component';
+import { AlumnoAdminRelComponent } from '@component/alumno-admin-rel/alumno-admin-rel.component';
 
 
 @NgModule({
@@ -248,7 +249,7 @@ import { TableAdminDynamicComponent } from '@component/table-admin/table-admin-d
     PlanillaDocenteAdminComponent,
     CalendarioAdminArrayComponent,
     ComisionShow2Component,
-    AlumnoAdminComponent,
+    AlumnoComisionAdminRelComponent,
     SedeShowComponent,
     SedeAdmin2Component,
     CentroEducativoAdminComponent,
@@ -270,7 +271,8 @@ import { TableAdminDynamicComponent } from '@component/table-admin/table-admin-d
     AlumnoSearchComponent,
     ComisionShow3Component,
     AlumnosAprobadosShowComponent,
-    TransferirAlumnoAdminComponent
+    TransferirAlumnoAdminComponent,
+    AlumnoAdminRelComponent
   ],
   imports: [
     BrowserModule,
