@@ -49,6 +49,11 @@ export class DataDefinitionStorageService {
     /**
      * se realiza un 'deep clone' del objeto para poder eliminar atributos a medida que se procesa y no alterar la referencia original
      */
+    if(('documento_' in rowCloned)
+    ){
+      this.stg.setItem('file' + rowCloned['documento_'].id, rowCloned['documento_']);
+      delete rowCloned['documento_'];
+    }
     if(('persona_' in rowCloned)
     && ('domicilio_' in rowCloned['persona_'])
     ){
