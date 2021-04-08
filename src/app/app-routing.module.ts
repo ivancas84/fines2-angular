@@ -54,6 +54,10 @@ import { AlumnosAprobadosShowComponent } from '@component/alumnos-aprobados-show
 import { TransferirAlumnoAdminComponent } from '@component/transferir-alumno-admin/transferir-alumno-admin.component';
 import { AlumnoComisionAdminRelComponent } from '@component/alumno-comision-admin-rel/alumno-comision-admin-rel.component';
 import { AlumnoAdminRelComponent } from '@component/alumno-admin-rel/alumno-admin-rel.component';
+import { AlumnoComisionShowComponent } from '@component/alumno-comision-show/alumno-comision-show.component';
+import { OptionsAdminComponent } from '@component/options-admin/options-admin.component';
+import { TransferirAlumnoComisionAdminComponent } from '@component/transferir-alumno-comision-admin/transferir-alumno-comision-admin.component';
+import { OptionsDirectionComponent } from '@component/options-direction/options-direction.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -110,6 +114,10 @@ const routes: Routes = [
   { path: 'alumnos-aprobados', component: AlumnosAprobadosShowComponent, pathMatch: 'full' },
   { path: 'transferir-alumno', component: TransferirAlumnoAdminComponent, pathMatch: 'full' },
   { path: 'alumno-admin-rel', component: AlumnoAdminRelComponent, pathMatch: 'full' },
+  { path: 'alumno-comision-show', component: AlumnoComisionShowComponent, pathMatch: 'full' },
+  { path: 'options-admin', component: OptionsAdminComponent, pathMatch: 'full' },
+  { path: 'transferir-alumno-comision', component: TransferirAlumnoComisionAdminComponent, pathMatch: 'full' },
+  { path: 'options-direction', component: OptionsDirectionComponent, pathMatch: 'full' },
 
 ];
 

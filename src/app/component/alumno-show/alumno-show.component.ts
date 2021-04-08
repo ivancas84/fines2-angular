@@ -13,7 +13,7 @@ import { ShowDynamicComponent } from '@component/show/show-dynamic.component';
 })
 export class AlumnoShowComponent extends ShowDynamicComponent {
 
-  readonly entityName: string = "alumno";
+  readonly entityName: string = "alumno_comision";
 
   queryData(): Observable<any>{
     return this.dd.all(this.entityName, this.display).pipe(

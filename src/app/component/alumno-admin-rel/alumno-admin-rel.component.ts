@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FieldViewOptions } from '@class/field-view-options';
-import { FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputTextOptions, FieldInputAutocompleteOptions, FieldControlOptions, FieldHiddenOptions, FieldInputDateOptions, FieldInputYearOptions } from '@class/field-type-options';
+import { FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputTextOptions, FieldInputAutocompleteOptions, FieldControlOptions, FieldHiddenOptions, FieldInputDateOptions, FieldInputYearOptions, FieldInputUploadOptions } from '@class/field-type-options';
 import { AdminRelComponent } from '@component/admin-rel/admin-rel.component';
 import { AdminRelStructure } from '@class/admin-rel-structure';
 
@@ -74,14 +74,7 @@ export class AlumnoAdminRelComponent extends AdminRelComponent {
           label:"Email",
           type: new FieldInputTextOptions(),
         }),
-        new FieldViewOptions({
-          field:"email_abc",
-          label:"Email Abc",
-          type: new FieldInputTextOptions(
-            {uniqueRoute: "alumno-admin-rel", uniqueParam:"persona"},
-          ),
-          control: new FieldControlOptions({asyncValidators: [this.validators.unique('email_abc', 'persona')],})
-        }),
+
       ]
     }),
 
@@ -95,26 +88,26 @@ export class AlumnoAdminRelComponent extends AdminRelComponent {
           type: new FieldHiddenOptions,
         }),
         new FieldViewOptions({
-          field:"documento",
-          label:"Documento",
+          field:"tiene_documento",
+          label:"Tiene Documento",
           type: new FieldInputCheckboxOptions(),
           default:false,
         }),
         new FieldViewOptions({
-          field:"partida_nacimiento",
-          label:"Partida Nacimiento",
+          field:"tiene_partida_nacimiento",
+          label:"Tiene Partida Nacimiento",
           type: new FieldInputCheckboxOptions(),
           default:false,
         }),
         new FieldViewOptions({
-          field:"cuil",
-          label:"Cuil",
+          field:"tiene_cuil",
+          label:"Tiene Cuil",
           type: new FieldInputCheckboxOptions(),
           default:false,
         }),
         new FieldViewOptions({
-          field:"certificado_estudios",
-          label:"Certificado Estudios",
+          field:"tiene_certificado_estudios",
+          label:"Tiene Certificado Estudios",
           type: new FieldInputCheckboxOptions(),
           default:false,
         }),
@@ -122,6 +115,26 @@ export class AlumnoAdminRelComponent extends AdminRelComponent {
           field:"anio_ingreso",
           label:"Anio Ingreso",
           type: new FieldInputSelectParamOptions({options:['1','2','3']}),
+        }),
+        new FieldViewOptions({
+          field:"documento",
+          label:"Documento",
+          type: new FieldInputUploadOptions(),
+        }),
+        new FieldViewOptions({
+          field:"partida_nacimiento",
+          label:"Partida Nacimiento",
+          type: new FieldInputUploadOptions(),
+        }),
+        new FieldViewOptions({
+          field:"certificado_estudios",
+          label:"Certificado Estudios",
+          type: new FieldInputUploadOptions(),
+        }),
+        new FieldViewOptions({
+          field:"cuil",
+          label:"Cuil",
+          type: new FieldInputUploadOptions(),
         }),
         new FieldViewOptions({
           field:"observaciones",

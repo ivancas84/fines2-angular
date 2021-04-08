@@ -1,0 +1,18 @@
+<mat-card *ngIf="(load$ | async)">
+  <mat-card-header>
+    <mat-card-title>Opciones</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-selection-list [multiple]="false">
+      <mat-list-option>
+        <a routerLink="/alumno-comision-show" routerLinkActive="active">Alumnos por comisión</a>
+      </mat-list-option>
+      <mat-list-option>
+        <a routerLink="/sede-show" routerLinkActive="active" [queryParams]="{centro_educativo:id}">Sedes</a>
+      </mat-list-option>
+      <mat-list-option>
+        <a routerLink="/comision-show" routerLinkActive="active" [queryParams]="{'cal-anio':2021,'cal-semestre':1,modalidad:1,autorizada:true,'sed-centro_educativo':id}">Consolidado 2021-1</a> Si desea ver otros períodos modifique la fecha año y fecha semestre en las opciones
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-card-content>
+</mat-card>

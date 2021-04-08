@@ -139,7 +139,7 @@ export class ComisionTableComponent extends TableComponent implements OnChanges 
     display.setGroup(["comision"]);
     display.addCondition(["comision","=",ids]);
     display.addCondition(["activo","=",true]);
-    return this.ddt.post("advanced","alumno", display).pipe(
+    return this.ddt.post("advanced","alumno_comision", display).pipe(
       map(
         response => {
           for(var i = 0; i < data.length; i++){

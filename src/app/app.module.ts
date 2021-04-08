@@ -165,7 +165,11 @@ import { TransferirAlumnoAdminComponent } from '@component/transferir-alumno-adm
 import { TableAdminDynamicComponent } from '@component/table-admin/table-admin-dynamic.component';
 import { AlumnoComisionAdminRelComponent } from '@component/alumno-comision-admin-rel/alumno-comision-admin-rel.component';
 import { AlumnoAdminRelComponent } from '@component/alumno-admin-rel/alumno-admin-rel.component';
-
+import { InputUploadComponent } from '@component/input-upload/input-upload.component';
+import { AlumnoComisionShowComponent } from '@component/alumno-comision-show/alumno-comision-show.component';
+import { OptionsAdminComponent } from '@component/options-admin/options-admin.component';
+import { TransferirAlumnoComisionAdminComponent } from '@component/transferir-alumno-comision-admin/transferir-alumno-comision-admin.component';
+import { OptionsDirectionComponent } from '@component/options-direction/options-direction.component';
 
 @NgModule({
   declarations: [
@@ -199,6 +203,7 @@ import { AlumnoAdminRelComponent } from '@component/alumno-admin-rel/alumno-admi
     InputTextComponent,
     InputTextareaComponent,
     InputTimepickerComponent,
+    InputUploadComponent,
     InputYearComponent,
     InputPersistComponent,
     //InputYmComponent,
@@ -272,7 +277,11 @@ import { AlumnoAdminRelComponent } from '@component/alumno-admin-rel/alumno-admi
     ComisionShow3Component,
     AlumnosAprobadosShowComponent,
     TransferirAlumnoAdminComponent,
-    AlumnoAdminRelComponent
+    AlumnoAdminRelComponent,
+    OptionsAdminComponent,
+    AlumnoComisionShowComponent,
+    TransferirAlumnoComisionAdminComponent,
+    OptionsDirectionComponent,
   ],
   imports: [
     BrowserModule,

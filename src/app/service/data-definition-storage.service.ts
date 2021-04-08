@@ -54,6 +54,21 @@ export class DataDefinitionStorageService {
       this.stg.setItem('file' + rowCloned['documento_'].id, rowCloned['documento_']);
       delete rowCloned['documento_'];
     }
+    if(('partida_nacimiento_' in rowCloned)
+    ){
+      this.stg.setItem('file' + rowCloned['partida_nacimiento_'].id, rowCloned['partida_nacimiento_']);
+      delete rowCloned['partida_nacimiento_'];
+    }
+    if(('certificado_estudios_' in rowCloned)
+    ){
+      this.stg.setItem('file' + rowCloned['certificado_estudios_'].id, rowCloned['certificado_estudios_']);
+      delete rowCloned['certificado_estudios_'];
+    }
+    if(('cuil_' in rowCloned)
+    ){
+      this.stg.setItem('file' + rowCloned['cuil_'].id, rowCloned['cuil_']);
+      delete rowCloned['cuil_'];
+    }
     if(('persona_' in rowCloned)
     && ('domicilio_' in rowCloned['persona_'])
     ){

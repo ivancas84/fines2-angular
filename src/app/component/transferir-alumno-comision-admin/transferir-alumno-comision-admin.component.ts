@@ -5,27 +5,21 @@ import { AdminDynamicComponent } from '@component/admin/admin-dynamic.component'
 import { Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-transferir-alumno-admin',
+  selector: 'app-transferir-comision-alumno-admin',
   templateUrl: '../../core/component/admin/admin-dynamic.component.html',
 })
-export class TransferirAlumnoAdminComponent extends AdminDynamicComponent {
+export class TransferirAlumnoComisionAdminComponent extends AdminDynamicComponent {
 
-  readonly entityName: string = "persona"
-  persistApi: string = "transferir_alumno";
+  readonly entityName: string = "alumno"
+  persistApi: string = "transferir_alumno_comision";
 
   fieldsViewOptions: FieldViewOptions[] = [
     new FieldViewOptions({
       field:"id",
-      label:"Alumno a transferir",
-      type: new FieldInputAutocompleteOptions({entityName:"persona"}),
+      label:"Comisión a transferir",
+      type: new FieldInputAutocompleteOptions({entityName:"comision"}),
       control: new FieldControlOptions({validators:Validators.required})
 
-    }),
-    new FieldViewOptions({
-      field:"persona",
-      label:"Alumno",
-      type: new FieldInputAutocompleteOptions({entityName:"persona"}),
-      control: new FieldControlOptions({validators:Validators.required})
     }),
   ]
 }
