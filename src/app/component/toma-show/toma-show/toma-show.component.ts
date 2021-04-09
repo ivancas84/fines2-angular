@@ -14,11 +14,13 @@ export class TomaShowComponent extends ShowRelDynamicComponent {
   readonly entityName: string = "toma";
 
   fieldsViewOptions: FieldViewOptions[] = [
+    
     new FieldViewOptions({
       field:"cur-ige",
       label:"IGE",
       aux: new RouterLinkOptions({path:"calificacion-show-admin-rel",params:{"cur-id":"{{curso}}"}})
     }),
+    
     new FieldViewOptions({
       field:"estado",
       label:"Estado",

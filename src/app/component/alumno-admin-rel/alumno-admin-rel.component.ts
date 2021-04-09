@@ -141,9 +141,80 @@ export class AlumnoAdminRelComponent extends AdminRelComponent {
           label:"Observaciones",
           type: new FieldInputTextOptions(),
         }),
-        
+      
       ]
+
+
+      
+
+      
     }),
+
+
+    new AdminRelStructure({
+      id:"per-detalle_persona/persona",
+      title: "Detalle Persona",
+      fieldsViewOptions: [
+        new FieldViewOptions({
+          field:"id",
+          label:"id",
+          type: new FieldHiddenOptions,
+        }),
+        new FieldViewOptions({
+          field:"tiene_documento",
+          label:"Tiene Documento",
+          type: new FieldInputCheckboxOptions(),
+          default:false,
+        }),
+        new FieldViewOptions({
+          field:"tiene_partida_nacimiento",
+          label:"Tiene Partida Nacimiento",
+          type: new FieldInputCheckboxOptions(),
+          default:false,
+        }),
+        new FieldViewOptions({
+          field:"tiene_cuil",
+          label:"Tiene Cuil",
+          type: new FieldInputCheckboxOptions(),
+          default:false,
+        }),
+        new FieldViewOptions({
+          field:"tiene_certificado_estudios",
+          label:"Tiene Certificado Estudios",
+          type: new FieldInputCheckboxOptions(),
+          default:false,
+        }),
+        new FieldViewOptions({
+          field:"anio_ingreso",
+          label:"Anio Ingreso",
+          type: new FieldInputSelectParamOptions({options:['1','2','3']}),
+        }),
+        new FieldViewOptions({
+          field:"documento",
+          label:"Documento",
+          type: new FieldInputUploadOptions(),
+        }),
+        new FieldViewOptions({
+          field:"partida_nacimiento",
+          label:"Partida Nacimiento",
+          type: new FieldInputUploadOptions(),
+        }),
+        new FieldViewOptions({
+          field:"certificado_estudios",
+          label:"Certificado Estudios",
+          type: new FieldInputUploadOptions(),
+        }),
+        new FieldViewOptions({
+          field:"cuil",
+          label:"Cuil",
+          type: new FieldInputUploadOptions(),
+        }),
+        new FieldViewOptions({
+          field:"observaciones",
+          label:"Observaciones",
+          type: new FieldInputTextOptions(),
+        }),
+      ]})
 
 
   ];
