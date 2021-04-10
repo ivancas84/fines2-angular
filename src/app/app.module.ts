@@ -135,7 +135,6 @@ import { MenuLoginComponent } from '@component/menu-login/menu-login.component';
 import { FieldViewAuxComponent } from '@component/field-view-aux/field-view-aux.component';
 import { InputPersistComponent } from '@component/input-persist/input-persist.component';
 import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
-import { FieldsetArrayDynamicComponent } from '@component/fieldset-array-dynamic/fieldset-array-dynamic.component';
 import { ComisionShow2Component } from '@component/comision-show2/comision-show2.component';
 import { SedeShowComponent } from '@component/sede-show/sede-show.component';
 import { SedeAdmin2Component } from '@component/sede-admin2/sede-admin2.component';
@@ -170,6 +169,7 @@ import { AlumnoComisionShowComponent } from '@component/alumno-comision-show/alu
 import { OptionsAdminComponent } from '@component/options-admin/options-admin.component';
 import { TransferirAlumnoComisionAdminComponent } from '@component/transferir-alumno-comision-admin/transferir-alumno-comision-admin.component';
 import { OptionsDirectionComponent } from '@component/options-direction/options-direction.component';
+import { FieldsetArrayDynamicComponent } from '@component/fieldset-array/fieldset-array-dynamic.component';
 
 @NgModule({
   declarations: [

@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FieldsetArrayIdComponent } from '@component/fieldset-array-id/fieldset-array-id.component';
+import { FieldsetArrayIdComponent } from '@component/fieldset-array/fieldset-array-id.component';
 
 @Component({
   selector: 'app-toma-fieldset-array',

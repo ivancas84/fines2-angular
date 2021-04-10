@@ -7,7 +7,7 @@ import { SessionStorageService } from '@service/storage/session-storage.service'
 import { Display } from '@class/display';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { FieldsetArrayIdComponent } from '@component/fieldset-array-id/fieldset-array-id.component';
+import { FieldsetArrayIdComponent } from '@component/fieldset-array/fieldset-array-id.component';
 
 @Component({
   selector: 'app-curso-fieldset-array',
