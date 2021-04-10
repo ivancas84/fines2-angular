@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AdminArrayIdComponent } from '@component/admin-array-id/admin-array-id.component';
+import { AdminArrayIdComponent } from '@component/admin-array/admin-array-id.component';
 
 @Component({
   selector: 'app-toma-admin',

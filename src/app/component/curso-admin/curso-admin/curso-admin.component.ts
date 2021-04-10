@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
-import { AdminArrayIdComponent } from '@component/admin-array-id/admin-array-id.component';
+import { AdminArrayIdComponent } from '@component/admin-array/admin-array-id.component';
 
 @Component({
   selector: 'app-curso-admin',

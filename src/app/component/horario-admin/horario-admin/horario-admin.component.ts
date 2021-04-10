@@ -9,7 +9,7 @@ import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { AdminComponent } from '@component/admin/admin.component';
 import { Observable } from 'rxjs';
-import { AdminArrayIdComponent } from '@component/admin-array-id/admin-array-id.component';
+import { AdminArrayIdComponent } from '@component/admin-array/admin-array-id.component';
 
 @Component({
   selector: 'app-horario-admin',
