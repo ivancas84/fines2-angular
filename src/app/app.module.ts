@@ -45,7 +45,6 @@ import { HomeComponent } from '@component/home/home.component';
 import { SocialLoginComponent } from '@component/social-login/social-login.component';
 
 import { CardDynamicComponent } from '@component/card-dynamic/card-dynamic.component';
-import { TableDynamicComponent } from '@component/table-dynamic/table-dynamic.component';
 import { FieldsetDynamicComponent } from '@component/fieldset-dynamic/fieldset-dynamic.component';
 //import { BackupComponent } from '@component/backup/backup.component';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
@@ -170,6 +169,7 @@ import { OptionsAdminComponent } from '@component/options-admin/options-admin.co
 import { TransferirAlumnoComisionAdminComponent } from '@component/transferir-alumno-comision-admin/transferir-alumno-comision-admin.component';
 import { OptionsDirectionComponent } from '@component/options-direction/options-direction.component';
 import { FieldsetArrayDynamicComponent } from '@component/fieldset-array/fieldset-array-dynamic.component';
+import { TableDynamicComponent } from '@component/table/table-dynamic.component';
 
 @NgModule({
   declarations: [

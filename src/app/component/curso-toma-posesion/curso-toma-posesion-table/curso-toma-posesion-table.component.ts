@@ -1,5 +1,5 @@
 import { Component  } from '@angular/core';
-import { TableDynamicComponent } from '@component/table-dynamic/table-dynamic.component';
+import { TableDynamicComponent } from '@component/table/table-dynamic.component';
 
 @Component({
   selector: 'app-curso-toma-posesion-table',
