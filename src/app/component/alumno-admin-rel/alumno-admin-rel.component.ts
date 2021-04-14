@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FieldViewOptions } from '@class/field-view-options';
-import { FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputTextOptions, FieldInputAutocompleteOptions, FieldControlOptions, FieldHiddenOptions, FieldInputDateOptions, FieldInputYearOptions, FieldInputUploadOptions } from '@class/field-type-options';
+import { FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputTextOptions, FieldInputAutocompleteOptions, FieldControlOptions, FieldHiddenOptions, FieldInputDateOptions, FieldInputYearOptions, FieldInputUploadOptions, FieldTextareaOptions } from '@class/field-type-options';
 import { AdminRelComponent } from '@component/admin-rel/admin-rel.component';
 import { AdminRelStructure } from '@class/admin-rel-structure';
 
@@ -147,6 +147,45 @@ export class AlumnoAdminRelComponent extends AdminRelComponent {
       ]
     }),
 
+    new AdminRelStructure({
+      id:"per-calificacion/persona",
+      title: "Calificaciones",
+
+
+      fieldsViewOptions: 
+    
+      [
+        new FieldViewOptions({
+          field:"id",
+          label:"id",
+          type: new FieldHiddenOptions,
+        }),
+        new FieldViewOptions({
+          field:"curso",
+          label:"Curso",
+          type: new FieldInputAutocompleteOptions({entityName:"curso"}),
+        }),
+        new FieldViewOptions({
+          field:"nota_final",
+          label:"Nota Final",
+          type: new FieldInputTextOptions(),
+        }),
+        new FieldViewOptions({
+          field:"crec",
+          label:"CREC",
+          type: new FieldInputTextOptions(),
+        }),
+        
+        new FieldViewOptions({
+          field:"observaciones",
+          label:"Observaciones",
+          type: new FieldTextareaOptions(),
+        }),
+
+      ]  
+    
+    
+    }),
 
     new AdminRelStructure({
       id:"per-alumno_comision/persona",
@@ -187,7 +226,7 @@ export class AlumnoAdminRelComponent extends AdminRelComponent {
       ]  
     
     
-    })
+    }),
 
 
   ];
