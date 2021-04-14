@@ -75,7 +75,7 @@ export class ComisionShow2Component extends ShowComponent {
     display.setGroup(["comision"]);
     display.addCondition(["comision","=",ids]);
     display.addCondition(["activo","=",true]);
-    return this.dd.post("advanced","alumno", display).pipe(
+    return this.dd.post("advanced","comision-alumno", display).pipe(
       map(
         response => {
           for(var i = 0; i < data.length; i++){

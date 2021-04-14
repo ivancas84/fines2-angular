@@ -162,15 +162,27 @@ export class AlumnoAdminRelComponent extends AdminRelComponent {
           type: new FieldHiddenOptions,
         }),
         new FieldViewOptions({
+          field:"comision",
+          label:"Comision",
+          type: new FieldInputAutocompleteOptions({entityName:"comision"}),
+        }),
+        new FieldViewOptions({
           field:"activo",
           label:"Activo",
           type: new FieldInputCheckboxOptions(),
           default:false,
         }),
         new FieldViewOptions({
-          field:"comision",
-          label:"Comision",
-          type: new FieldInputAutocompleteOptions({entityName:"comision"}),
+          field:"com_cal-anio",
+          label:"Año",
+          type: new FieldInputYearOptions(),
+          control:new FieldControlOptions({disabled:true})
+        }),
+        new FieldViewOptions({
+          field:"com_cal-semestre",
+          label:"Semestre",
+          type: new FieldInputTextOptions(),
+          control:new FieldControlOptions({disabled:true})
         }),
       ]  
     
