@@ -22,8 +22,8 @@ export class OptionsAdminComponent {
     this.load$ = this.route.queryParams.pipe(
       tap(
         queryParams => {
-          if(!queryParams.hasOwnProperty("id") || !queryParams["id"]) throw new Error("No se encuentra definido el identificador");
-          this.id= queryParams["id"]          
+          //if(!queryParams.hasOwnProperty("id") || !queryParams["id"]) throw new Error("No se encuentra definido el identificador");
+          //this.id= queryParams["id"]          
         },
       ),
     );

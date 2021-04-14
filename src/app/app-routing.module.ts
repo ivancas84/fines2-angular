@@ -118,6 +118,7 @@ const routes: Routes = [
   { path: 'options-admin', component: OptionsAdminComponent, pathMatch: 'full' },
   { path: 'transferir-alumno-comision', component: TransferirAlumnoComisionAdminComponent, pathMatch: 'full' },
   { path: 'options-direction', component: OptionsDirectionComponent, pathMatch: 'full' },
+  { path: 'options-admin', component: OptionsAdminComponent, pathMatch: 'full' },
 
 ];
 
