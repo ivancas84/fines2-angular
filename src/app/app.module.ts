@@ -170,6 +170,7 @@ import { FieldsetArrayDynamicComponent } from '@component/fieldset-array/fieldse
 import { TableDynamicComponent } from '@component/table/table-dynamic.component';
 import { FieldsetDynamicComponent } from '@component/fieldset/fieldset-dynamic.component';
 import { CardDynamicComponent } from '@component/card/card-dynamic.component';
+import { OptComponent } from '@component/opt/opt.component';
 
 @NgModule({
   declarations: [
@@ -191,6 +192,7 @@ import { CardDynamicComponent } from '@component/card/card-dynamic.component';
     DialogConfirmComponent,
     FieldViewComponent,
     FieldViewAuxComponent,
+    OptComponent,
     InputAutocompleteComponent,
     InputCheckboxComponent,
     InputDateComponent,
