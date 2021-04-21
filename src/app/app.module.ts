@@ -171,6 +171,7 @@ import { TableDynamicComponent } from '@component/table/table-dynamic.component'
 import { FieldsetDynamicComponent } from '@component/fieldset/fieldset-dynamic.component';
 import { CardDynamicComponent } from '@component/card/card-dynamic.component';
 import { OptComponent } from '@component/opt/opt.component';
+import { TomaShowOptionsComponent } from '@component/toma-show-options/toma-show-options.component';
 
 @NgModule({
   declarations: [
@@ -284,6 +285,7 @@ import { OptComponent } from '@component/opt/opt.component';
     AlumnoComisionShowComponent,
     TransferirAlumnoComisionAdminComponent,
     OptionsDirectionComponent,
+    TomaShowOptionsComponent,
   ],
   imports: [
     BrowserModule,

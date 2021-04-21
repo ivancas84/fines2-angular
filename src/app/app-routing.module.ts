@@ -58,6 +58,7 @@ import { AlumnoComisionShowComponent } from '@component/alumno-comision-show/alu
 import { OptionsAdminComponent } from '@component/options-admin/options-admin.component';
 import { TransferirAlumnoComisionAdminComponent } from '@component/transferir-alumno-comision-admin/transferir-alumno-comision-admin.component';
 import { OptionsDirectionComponent } from '@component/options-direction/options-direction.component';
+import { TomaShowOptionsComponent } from '@component/toma-show-options/toma-show-options.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -119,6 +120,7 @@ const routes: Routes = [
   { path: 'transferir-alumno-comision', component: TransferirAlumnoComisionAdminComponent, pathMatch: 'full' },
   { path: 'options-direction', component: OptionsDirectionComponent, pathMatch: 'full' },
   { path: 'options-admin', component: OptionsAdminComponent, pathMatch: 'full' },
+  { path: 'toma-show-options', component: TomaShowOptionsComponent, pathMatch: 'full' },
 
 ];
 

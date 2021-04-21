@@ -143,6 +143,12 @@ export class ComisionShow3Component extends ShowComponent {
       label:"Alumnos con al menos una asignatura aprobada",
       aux:new RouterLinkOptions({path:"alumnos-aprobados",params:{id:"{{id}}"}})
     }),
+    new FieldViewOptions({
+      field:"comision_siguiente",
+      label:"Comision Siguiente",
+      type:new TypeLabelOptions({entityName: "comision"}),
+      aux:new RouterLinkOptions({path: "comision-detail", params:{id:"{{comision_siguiente}})"}}), 
+    }),
     // new FieldViewOptions({
     //   field:"alumnos",
     //   label:"Estudiantes",
