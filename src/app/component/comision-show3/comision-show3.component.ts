@@ -22,6 +22,13 @@ export class ComisionShow3Component extends ShowComponent {
         return this.dd.getPostAllColumnData(data,"cantidad_alumnos_aprobados_comision", "id", "comision", "calificacion", {"aprobados":"aprobados"} )
       }),
       switchMap(data => {
+        return this.dd.getPostAllColumnData(data,"cantidad_alumnos_activos_comision", "id", "comision", "calificacion", {"activos":"activos"} )
+      }),
+      switchMap(data => {
+        return this.dd.advancedColumnDataGroup(data,"comision", "alumno_comision", {"alumnos":"persona.count"} )
+      }),
+
+      switchMap(data => {
         return this.dd.getPostAllColumnData(data, "info", "id", "comision", "horarios_comision", {horario:["dias_dias","hora_inicio","hora_fin"]})
       }),
       
@@ -52,49 +59,6 @@ export class ComisionShow3Component extends ShowComponent {
     );
   }
 
-  alumnosActivos(
-    data: { [index: string]: any }[], 
-  ): Observable<{ [index: string]: any }[]>{
-    /**
-     * Consulta avanzada de relaciones con agrupamiento
-     * Define "ids" filtra el campo "id" del parametro "data"
-     * Define "display.fields", asigna el parametro fields
-     * Define "display.group", asigna el parametro fieldName
-     * Define "display.condition", utiliza el parametro "fieldName" y el array ids
-     * Consulta entidad indicada en parametro "entityName" para obtener "response"
-     * Realiza asociacion entre "data" y "response"
-     * Si data[i]["id"] == response[j][fieldName] almacena en data los campos indicados en parametro "fieldsResponse"
-     * "fieldsResponse" es un objeto de la forma {nombre_identificacion:nombre_field}
-     * si "nombre_field" es un array realiza un join utilizando el parametro "join"
-     * A diferencia de las consultas no avanzadas, se especifican los fields directamente en la consulta y se retornan dichos fields que seran asignados
-     * Tiene la ventaja de que se reducen los parametros, pero como desventaja no utilizan el storage para las entities.
-     */
-
-    var ids = arrayColumn(data, "id")
-    for(var i = 0; i < data.length; i++) data["alumnos"] = 0;
-    if(!ids.length) return of(data);
-    var display = new Display();
-    display.setSize(0);
-    display.setFields({alumnos:"count"});
-    display.setGroup(["comision"]);
-    display.addCondition(["comision","=",ids]);
-    display.addCondition(["activo","=",true]);
-    return this.dd.post("advanced","alumno", display).pipe(
-      map(
-        response => {
-          for(var i = 0; i < data.length; i++){
-            for(var j = 0; j < response.length; j++){
-              if(data[i]["id"] == response[j]["comision"]) {
-                data[i]["alumnos"] = response[j]["alumnos"];
-                break;
-              }
-            }
-          }
-          return data;
-        }
-      )
-    );  
-  }
 
   fieldsViewOptions: FieldViewOptions[] = [
     // new FieldViewOptions({
@@ -137,6 +101,14 @@ export class ComisionShow3Component extends ShowComponent {
     new FieldViewOptions({
       field:"turno",
       label:"Turno",
+    }),
+    new FieldViewOptions({
+      field:"alumnos",
+      label:"Cantidad de alumnos",
+    }),
+    new FieldViewOptions({
+      field:"activos",
+      label:"Alumnos activos",
     }),
     new FieldViewOptions({
       field:"aprobados",

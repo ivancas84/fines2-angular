@@ -4,6 +4,8 @@ import { FieldYesNoOptions, TypeLabelOptions, FieldInputCheckboxOptions, FieldIn
 import { RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { ShowRelDynamicComponent } from '@component/show/show-rel-dynamic.component';
+import { Observable } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-alumno-comision-show',
@@ -13,6 +15,29 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
 
   readonly entityName: string = "alumno_comision";
 
+  queryData(): Observable<any>{
+    return this.dd.post("ids", this.entityName, this.display).pipe(
+      switchMap(
+        ids => this.dd.relGetAllFvo(this.entityName, ids, this.fieldsViewOptions)
+      ),
+      switchMap(
+        data => {
+          return this.dd.allColumnData(
+            data,"persona","alumno","persona",
+            {
+              "tiene_documento":"tiene_documento",
+              "tiene_cuil":"tiene_cuil",
+              "tiene_certificado_estudios":"tiene_certificado_estudios",
+              "tiene_partida_nacimiento":"tiene_partida_nacimiento",
+              "alumno_observaciones":"observaciones",
+              "alumno_anio_ingreso":"anio_ingreso",
+            }
+          );
+        }
+      ),
+    )
+  }
+  
   fieldsViewOptions: FieldViewOptions[] = [
     new FieldViewOptions({
       field:"per-nombres",
@@ -28,27 +53,27 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
       label:"Número Documento",
     }),
     new FieldViewOptions({
-      field:"fotocopia_documento",
+      field:"tiene_documento",
       label:"Fotocopia Documento",
       type:new FieldYesNoOptions(),
     }),
     new FieldViewOptions({
-      field:"partida_nacimiento",
+      field:"tiene_partida_nacimiento",
       label:"Partida Nacimiento",
       type:new FieldYesNoOptions(),
     }),
     new FieldViewOptions({
-      field:"constancia_cuil",
+      field:"tiene_constancia_cuil",
       label:"Constancia Cuil",
       type:new FieldYesNoOptions(),
     }),
     new FieldViewOptions({
-      field:"certificado_estudios",
+      field:"tiene_certificado_estudios",
       label:"Certificado Estudios",
       type:new FieldYesNoOptions(),
     }),
     new FieldViewOptions({
-      field:"anio_ingreso",
+      field:"alumno_anio_ingreso",
       label:"Anio Ingreso",
     }),
     new FieldViewOptions({
@@ -57,17 +82,21 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
       type:new FieldYesNoOptions(),
     }),
     new FieldViewOptions({
-      field:"programa",
-      label:"Programa",
-    }),
-    new FieldViewOptions({
-      field:"observaciones",
+      field:"alumno_observaciones",
       label:"Observaciones",
     }),
     new FieldViewOptions({
       field:"comision",
       label:"Comision",
       type:new TypeLabelOptions({entityName: "comision"}),
+    }),
+    new FieldViewOptions({
+      field:"per-email",
+      label:"Email",
+    }),
+    new FieldViewOptions({
+      field:"per-telefono",
+      label:"Teléfono",
     }),
   ];  
   fieldsViewOptionsSp: FieldViewOptions[] = [
@@ -77,26 +106,7 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
       type: new FieldInputTextOptions(),
       width: new FieldWidthOptions({sm:'100%',gtSm:'100%'}),
     }),
-    new FieldViewOptions({
-      field:"fotocopia_documento",
-      label:"Fotocopia Documento",
-      type: new FieldInputSelectCheckboxOptions(),
-    }),
-    new FieldViewOptions({
-      field:"partida_nacimiento",
-      label:"Partida Nacimiento",
-      type: new FieldInputSelectCheckboxOptions(),
-    }),
-    new FieldViewOptions({
-      field:"constancia_cuil",
-      label:"Constancia Cuil",
-      type: new FieldInputSelectCheckboxOptions(),
-    }),
-    new FieldViewOptions({
-      field:"certificado_estudios",
-      label:"Certificado Estudios",
-      type: new FieldInputSelectCheckboxOptions(),
-    }),
+  
     new FieldViewOptions({
       field:"activo",
       label:"Activo",

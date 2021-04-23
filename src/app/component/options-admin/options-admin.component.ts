@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { SCRIPT_URL } from '@config/app.config';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-options-admin',
@@ -12,6 +14,8 @@ import { map, switchMap, tap } from 'rxjs/operators';
 export class OptionsAdminComponent {
   load$: Observable<any>;
   id:string; //id de cens
+  script_url:string = SCRIPT_URL
+
   constructor(
     protected dd: DataDefinitionToolService, 
     protected route: ActivatedRoute, 

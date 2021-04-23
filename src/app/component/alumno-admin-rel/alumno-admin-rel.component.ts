@@ -147,6 +147,39 @@ export class AlumnoAdminRelComponent extends AdminRelComponent {
       ]
     }),
 
+
+
+    new AdminRelStructure({
+      id:"per-detalle_persona/persona",
+      title: "Detalle Persona",
+
+
+      fieldsViewOptions: 
+    
+      [
+        new FieldViewOptions({
+          field:"id",
+          label:"id",
+          type: new FieldHiddenOptions,
+        }),
+        new FieldViewOptions({
+          field:"descripcion",
+          label:"Descripcion",
+          type: new FieldInputTextOptions(),
+          control: new FieldControlOptions({validators: [Validators.required],})
+        }),
+        new FieldViewOptions({
+          field:"archivo",
+          label:"Archivo",
+          type: new FieldInputUploadOptions(),
+        }),
+      ]  
+    
+    
+    }),
+
+
+
     new AdminRelStructure({
       id:"per-calificacion/persona",
       title: "Calificaciones",
@@ -227,6 +260,8 @@ export class AlumnoAdminRelComponent extends AdminRelComponent {
     
     
     }),
+
+
 
 
   ];

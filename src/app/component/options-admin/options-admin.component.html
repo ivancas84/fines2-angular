@@ -32,5 +32,15 @@
         <a routerLink="/curso-toma-posesion" routerLinkActive="active">Toma de Posesión para docentes 2021-1</a>
       </mat-list-option>
     </mat-selection-list>
+
+    <h2>Scripts</h2>
+      <p>
+        <a href="{{script_url}}actualizar_alumnos_activos_calificacion.php" target="_blank">Actualizar activos en base a calificacion</a>
+        Actualizar campo activo de alumno_comision de un periodo x, en base a las calificaciones de ese periodo x. 
+        Si existen personas calificadas que no figuran como alumno_comision, son insertadas
+      </p>
+      <p>
+        <a href="{{script_url}}transferir_alumnos_activos.php" target="_blank">Transferir Alumnos Activos</a> Dado un periodo X, elimina todos los registros de alumno_comision del periodo x+1 y registra todos los registros de alumno_comision del periodo x en el periodo x+1
+      </p>
   </mat-card-content>
 </mat-card>
