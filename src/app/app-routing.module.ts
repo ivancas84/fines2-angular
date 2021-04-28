@@ -6,7 +6,6 @@ import { HomeComponent } from '@component/home/home.component';
 import { SocialLoginComponent } from '@component/social-login/social-login.component';
 
 import { AlumnoShowComponent } from '@component/alumno-show/alumno-show.component';
-import { PersonaShowComponent } from '@component/persona-show/persona-show/persona-show.component';
 import { ComisionHorariosAdminComponent } from '@component/comision-horarios-admin/comision-horarios-admin/comision-horarios-admin.component';
 import { ComisionShowComponent } from '@component/comision-show/comision-show/comision-show.component';
 import { RdPersonaAdminComponent } from '@component/registro-docente/persona-admin/persona-admin.component';
@@ -82,7 +81,6 @@ const routes: Routes = [
   { path: 'horario-admin', component: HorarioAdminComponent, pathMatch: 'full' },
   { path: 'lista-alumnos', component: ListaAlumnosComponent, pathMatch: 'full' },
   { path: 'persona-admin', component: PersonaAdminComponent, pathMatch: 'full' },
-  { path: 'persona-show', component: PersonaShowComponent, pathMatch: 'full' },
   { path: 'registro-docente', component: RdPersonaAdminComponent, pathMatch: 'full' },
   { path: 'registro-abc', component: RabcPersonaAdminComponent, pathMatch: 'full' },
   { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },

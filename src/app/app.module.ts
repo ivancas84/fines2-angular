@@ -108,13 +108,10 @@ import { ComisionHorariosAdminComponent } from '@component/comision-horarios-adm
 import { ComisionShowComponent } from '@component/comision-show/comision-show/comision-show.component';
 import { ComisionHorariosFieldsetComponent } from '@component/comision-horarios-admin/comision-horarios-fieldset/comision-horarios-fieldset.component';
 import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/persona-admin.component';
-import { PersonaShowComponent } from '@component/persona-show/persona-show/persona-show.component';
-import { PersonaTableComponent } from '@component/persona-show/persona-table/persona-table.component';
 import { PersonaFieldsetComponent } from '@component/persona-admin/persona-fieldset/persona-fieldset.component';
 import { ComisionTableComponent } from '@component/comision-show/comision-table/comision-table.component';
 import { ComisionSearchComponent } from '@component/comision-show/comision-search/comision-search.component';
 import { ComisionSearchParamsComponent } from '@component/comision-show/comision-search-params/comision-search-params.component';
-import { PersonaSearchComponent } from '@component/persona-show/persona-search/persona-search.component';
 import { HorarioFieldsetArrayComponent } from '@component/horario-admin/horario-fieldset-array/horario-fieldset-array.component';
 import { ListaAlumnosComponent } from '@component/lista-alumnos/lista-alumnos.component';
 import { CrComisionShowComponent } from '@component/consolidado-referente/comision-show/comision-show.component';
@@ -241,7 +238,6 @@ import { ReferenteTomaShowComponent } from '@component/referente-toma-show/refer
     DocenteTableComponent, DocenteShowComponent, DocenteSearchComponent,
     DocenteDetailComponent,
     PersonaAdminComponent, PersonaFieldsetComponent,
-    PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent,
     RdPersonaAdminComponent, RdPersonaFieldsetComponent,
     RegistroRealizadoComponent,
     RabcPersonaAdminComponent, RabcPersonaFieldsetComponent,

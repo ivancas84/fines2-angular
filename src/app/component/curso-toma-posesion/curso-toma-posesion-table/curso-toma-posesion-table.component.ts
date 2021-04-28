@@ -13,7 +13,7 @@ export class CursoTomaPosesionTableComponent extends TableDynamicComponent {
  
   ngOnInit(): void {
     super.ngOnInit();
-    this.displayedColumns.push("comision")
+    //this.displayedColumns.push("comision") //corresponde a grupo alumnos
     this.displayedColumns.push("options")
     
   }

@@ -19,8 +19,10 @@ export class ReferenteTomaShowComponent extends ShowRelDynamicComponent {
 
   readonly entityName: string = "comision_relacionada";
 
+  title: string = "Referentes";
+
   initParams(params: any){ 
-    if(!params.hasOwnProperty("comision")) throw "Error de parametros";
+    if(!params.hasOwnProperty("com-id")) throw "Error de parametros";
     return params; 
   }
 
@@ -33,8 +35,8 @@ export class ReferenteTomaShowComponent extends ShowRelDynamicComponent {
     return this.dd.all("comision_relacionada", this.display).pipe(
       switchMap(
         comision_relacionada_ => {
-          var id_comision_ = arrayColumn(comision_relacionada_,'comision');
-          id_comision_.push(this.params["comision"]);
+          var id_comision_ = arrayColumn(comision_relacionada_,'relacion');
+          id_comision_.push(this.params["com-id"]);
           return this.dd.getAll("comision", id_comision_)
         }
       ),
@@ -61,14 +63,24 @@ export class ReferenteTomaShowComponent extends ShowRelDynamicComponent {
 
   fieldsViewOptions: FieldViewOptions[] = [
     new FieldViewOptions({
-      field:"sede",
-      label:"Sede",
-      type:new TypeLabelOptions({entityName: "sede"}),
-      aux:new RouterLinkOptions({path: "sede-detail", params:{id:"{{sede}})"}}), 
+      field:"sed-numero",
+      label:"Grupo de Alumnos",
     }),
     new FieldViewOptions({
       field:"per-nombres",
       label:"Nombres",
+    }),
+    new FieldViewOptions({
+      field:"per-apellidos",
+      label:"Apellidos",
+    }),
+    new FieldViewOptions({
+      field:"per-telefono",
+      label:"Teléfono",
+    }),
+    new FieldViewOptions({
+      field:"per-email",
+      label:"Email",
     }),
   ];  
 }

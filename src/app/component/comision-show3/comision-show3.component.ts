@@ -79,6 +79,7 @@ export class ComisionShow3Component extends ShowComponent {
     new FieldViewOptions({
       field:"sed-numero",
       label:"Numero",
+      aux: new RouterLinkOptions({path:"comision-admin",params:{id:"{{id}}"}})
     }),
     new FieldViewOptions({
       field:"tramo",
