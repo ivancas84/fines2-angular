@@ -170,6 +170,7 @@ import { CardDynamicComponent } from '@component/card/card-dynamic.component';
 import { OptComponent } from '@component/opt/opt.component';
 import { TomaShowOptionsComponent } from '@component/toma-show-options/toma-show-options.component';
 import { ReferenteTomaShowComponent } from '@component/referente-toma-show/referente-toma-show.component';
+import { AlumnoComisionTomaShowComponent } from '@component/alumno-comision-toma-show/alumno-comision-toma-show.component';
 
 @NgModule({
   declarations: [
@@ -284,6 +285,7 @@ import { ReferenteTomaShowComponent } from '@component/referente-toma-show/refer
     OptionsDirectionComponent,
     TomaShowOptionsComponent,
     ReferenteTomaShowComponent,
+    AlumnoComisionTomaShowComponent
   ],
   imports: [
     BrowserModule,
