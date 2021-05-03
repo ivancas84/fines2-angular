@@ -171,6 +171,8 @@ import { OptComponent } from '@component/opt/opt.component';
 import { TomaShowOptionsComponent } from '@component/toma-show-options/toma-show-options.component';
 import { ReferenteTomaShowComponent } from '@component/referente-toma-show/referente-toma-show.component';
 import { AlumnoComisionTomaShowComponent } from '@component/alumno-comision-toma-show/alumno-comision-toma-show.component';
+import { PersonaAdminRelComponent } from '@component/persona-admin-rel/persona-admin-rel.component';
+import { PersonaShowComponent } from '@component/persona-show/persona-show.component';
 
 @NgModule({
   declarations: [
@@ -285,7 +287,9 @@ import { AlumnoComisionTomaShowComponent } from '@component/alumno-comision-toma
     OptionsDirectionComponent,
     TomaShowOptionsComponent,
     ReferenteTomaShowComponent,
-    AlumnoComisionTomaShowComponent
+    AlumnoComisionTomaShowComponent,
+    PersonaAdminRelComponent,
+    PersonaShowComponent,
   ],
   imports: [
     BrowserModule,

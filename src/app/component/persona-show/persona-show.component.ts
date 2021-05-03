@@ -4,6 +4,7 @@ import { FieldViewOptions } from '@class/field-view-options';
 import { FieldYesNoOptions, TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions, FieldDateOptions, FieldInputDateOptions } from '@class/field-type-options';
 import { RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldWidthOptions } from '@class/field-width-options';
+import { OptRouteIcon } from '@class/opt';
 
 @Component({
   selector: 'app-persona-show',
@@ -39,10 +40,7 @@ export class PersonaShowComponent extends ShowDynamicComponent {
       field:"genero",
       label:"Genero",
     }),
-    new FieldViewOptions({
-      field:"apodo",
-      label:"Apodo",
-    }),
+
     new FieldViewOptions({
       field:"telefono",
       label:"Telefono",
@@ -55,12 +53,7 @@ export class PersonaShowComponent extends ShowDynamicComponent {
       field:"email_abc",
       label:"Email Abc",
     }),
-    new FieldViewOptions({
-      field:"domicilio",
-      label:"Domicilio",
-      type:new TypeLabelOptions({entityName: "domicilio"}),
-      aux:new RouterLinkOptions({path: "domicilio-detail", params:{id:"{{domicilio}})"}}), 
-    }),
+
   ];  
   fieldsViewOptionsSp: FieldViewOptions[] = [
     new FieldViewOptions({
@@ -79,6 +72,11 @@ export class PersonaShowComponent extends ShowDynamicComponent {
       label:"Domicilio",
       type: new FieldInputAutocompleteOptions({entityName:'domicilio'}),
     }),
-  ];  
+  ]; 
+  
+  
+  optColumn: any[] = [
+    new OptRouteIcon({action:"persona-admin-rel", template:"edit"})
+  ]
 }
 

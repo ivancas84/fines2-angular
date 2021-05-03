@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FieldViewOptions } from '@class/field-view-options';
 import { FieldYesNoOptions, TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions, FieldDateOptions, FieldInputDateOptions, FieldInputSelectCheckboxOptions } from '@class/field-type-options';
-import { RouterLinkOptions } from '@class/field-view-aux-options';
+import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { ShowRelDynamicComponent } from '@component/show/show-rel-dynamic.component';
 import { Observable } from 'rxjs';
@@ -97,6 +97,12 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
     new FieldViewOptions({
       field:"per-telefono",
       label:"Teléfono",
+      // type: new FieldInputTextOptions(),
+      // aux:new InputPersistOptions({
+      //   entityName:"persona",
+      //   fieldName:"telefono",
+      //   params: {id:"{{persona}}"}//utilizar {{key}} para identificar valor del conjunto de datos
+      // })
     }),
   ];  
   fieldsViewOptionsSp: FieldViewOptions[] = [

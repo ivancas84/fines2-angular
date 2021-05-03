@@ -61,6 +61,7 @@ import { TomaShowOptionsComponent } from '@component/toma-show-options/toma-show
 import { ReferenteTomaShowComponent } from '@component/referente-toma-show/referente-toma-show.component';
 import { PersonaShowComponent } from '@component/persona-show/persona-show.component';
 import { AlumnoComisionTomaShowComponent } from '@component/alumno-comision-toma-show/alumno-comision-toma-show.component';
+import { PersonaAdminRelComponent } from '@component/persona-admin-rel/persona-admin-rel.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -83,7 +84,6 @@ const routes: Routes = [
   { path: 'horario-admin', component: HorarioAdminComponent, pathMatch: 'full' },
   { path: 'lista-alumnos', component: ListaAlumnosComponent, pathMatch: 'full' },
   { path: 'persona-admin', component: PersonaAdminComponent, pathMatch: 'full' },
-  { path: 'persona-show', component: PersonaShowComponent, pathMatch: 'full' },
   { path: 'registro-docente', component: RdPersonaAdminComponent, pathMatch: 'full' },
   { path: 'registro-abc', component: RabcPersonaAdminComponent, pathMatch: 'full' },
   { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
@@ -125,6 +125,8 @@ const routes: Routes = [
   { path: 'toma-show-options', component: TomaShowOptionsComponent, pathMatch: 'full' },
   { path: 'referente-toma', component: ReferenteTomaShowComponent, pathMatch: 'full' },
   { path: 'alumno-comision-toma', component: AlumnoComisionTomaShowComponent, pathMatch: 'full' },
+  { path: 'persona-admin-rel', component: PersonaAdminRelComponent, pathMatch: 'full' },
+  { path: 'persona-show', component: PersonaShowComponent, pathMatch: 'full' },
 
 ];
 

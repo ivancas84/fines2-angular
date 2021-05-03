@@ -163,6 +163,12 @@ export class AlumnoAdminRelComponent extends AdminRelComponent {
           type: new FieldHiddenOptions,
         }),
         new FieldViewOptions({
+          field:"fecha",
+          label:"Fecha",
+          type: new FieldInputDateOptions(),
+          default:new Date(),
+        }),
+        new FieldViewOptions({
           field:"descripcion",
           label:"Descripcion",
           type: new FieldInputTextOptions(),
