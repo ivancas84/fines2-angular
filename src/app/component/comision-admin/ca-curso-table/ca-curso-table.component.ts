@@ -1,5 +1,6 @@
 import { OnInit, OnChanges, Component, OnDestroy, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
@@ -32,13 +33,16 @@ export class CaCursoTableComponent extends TableComponent implements OnInit, OnC
   protected subscriptions = new Subscription();
 
   constructor(
-    protected router: Router, 
-    protected dd: DataDefinitionService, 
+    protected router: Router,
+    protected dd: DataDefinitionService,
     protected dialog: MatDialog,
-    protected dt: DataToolsService,
+    protected snackBar: MatSnackBar,
     protected storage: SessionStorageService,
+
+    protected dt: DataToolsService,
+    
   ) {
-    super(router, dd);
+    super(router, dd, dialog, snackBar, storage);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -106,16 +106,6 @@ export class CalificacionShowAdminRelComponent extends ShowAdminRelDynamicCompon
     
   ];   
 
-  constructor(
-    protected dd: DataDefinitionToolService, 
-    protected route: ActivatedRoute, 
-    protected dialog: MatDialog,
-    protected validators: ValidatorsService, //los atributos fieldViewOptions y fieldViewOptionsFiters utilizar validadores
-    protected ddra: DataDefinitionRelArrayService,
-    protected storage: SessionStorageService, 
-  ) {
-    super(dd,route,dialog, validators, ddra)
-  }
 
   initParams(params: any){ 
     /*if(!params.hasOwnProperty("cur-id")) {

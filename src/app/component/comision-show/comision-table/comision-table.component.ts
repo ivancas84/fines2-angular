@@ -9,6 +9,9 @@ import { DataDefinitionToolService } from '@service/data-definition/data-definit
 import { recursiveData } from '@function/recursive-data';
 import { arrayColumn } from '@function/array-column';
 import { Display } from '@class/display';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SessionStorageService } from '@service/storage/session-storage.service';
 
 @Component({
   selector: 'app-comision-table',
@@ -35,11 +38,14 @@ export class ComisionTableComponent extends TableComponent implements OnChanges 
   displayedColumns: string[] = ['comision', 'detalle'];
 
   constructor(
-    protected ddt: DataDefinitionToolService,
-    protected dt: DataToolsService, 
     protected router: Router,
+    protected ddt: DataDefinitionToolService,
+    protected dialog: MatDialog,
+    protected snackBar: MatSnackBar,
+    protected storage: SessionStorageService,
+    protected dt: DataToolsService, 
   ) {
-    super(router, ddt);
+    super(router, ddt, dialog, snackBar, storage);
   }
 
   load$: Observable<any>;

@@ -8,6 +8,7 @@ import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Display } from '@class/display';
 import { arrayColumn } from '@function/array-column';
+import { OptRouteIcon } from '@class/opt';
 
 @Component({
   selector: 'app-comision-show-3',
@@ -60,6 +61,8 @@ export class ComisionShow3Component extends ShowComponent {
   }
 
 
+
+
   fieldsViewOptions: FieldViewOptions[] = [
     // new FieldViewOptions({
     //   field:"cens",
@@ -79,7 +82,7 @@ export class ComisionShow3Component extends ShowComponent {
     new FieldViewOptions({
       field:"sed-numero",
       label:"Numero",
-      aux: new RouterLinkOptions({path:"comision-admin",params:{id:"{{id}}"}})
+      aux: new RouterLinkOptions({path:"referente-toma",params:{'com-id':"{{id}}"}})
     }),
     new FieldViewOptions({
       field:"tramo",
@@ -110,6 +113,7 @@ export class ComisionShow3Component extends ShowComponent {
     new FieldViewOptions({
       field:"activos",
       label:"Alumnos activos",
+      aux:new RouterLinkOptions({path:"alumno-comision-toma",params:{"com-id":"{{id}}"}})
     }),
     new FieldViewOptions({
       field:"aprobados",
@@ -225,6 +229,16 @@ export class ComisionShow3Component extends ShowComponent {
       label:"Centro Educativo",
       type: new FieldInputSelectOptions({entityName:"centro_educativo"}),
     }),
-  ];  
+  ];
+  
+  
+  optColumn = [
+    new OptRouteIcon({
+      action:"alumno-comision-show", 
+      template:"edit",
+      params:{"com-id":"{{id}}"}
+    }),
+  ]
+
 }
 

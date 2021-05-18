@@ -86,13 +86,8 @@ import { RdPersonaAdminComponent } from '@component/registro-docente/persona-adm
 import { RdPersonaFieldsetComponent } from '@component/registro-docente/persona-fieldset/persona-fieldset.component';
 import { RegistroRealizadoComponent } from '@component/registro-realizado/registro-realizado.component';
 
-import { HorarioAdminComponent } from '@component/horario-admin/horario-admin/horario-admin.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin/sede-admin.component';
 import { SedeFieldsetComponent } from '@component/sede-admin/sede-fieldset/sede-fieldset.component';
-import { CursoAdminComponent } from '@component/curso-admin/curso-admin/curso-admin.component';
-import { CursoFieldsetArrayComponent } from '@component/curso-admin/curso-fieldset-array/curso-fieldset-array.component';
-import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
-import { TomaFieldsetArrayComponent } from '@component/toma-admin/toma-fieldset-array/toma-fieldset-array.component';
 
 import { CdComisionShowComponent } from '@component/consolidado-docente/consolidado-docente/comision-show.component';
 import { CdComisionTableComponent } from '@component/consolidado-docente/comision-table/comision-table.component';
@@ -112,7 +107,6 @@ import { PersonaFieldsetComponent } from '@component/persona-admin/persona-field
 import { ComisionTableComponent } from '@component/comision-show/comision-table/comision-table.component';
 import { ComisionSearchComponent } from '@component/comision-show/comision-search/comision-search.component';
 import { ComisionSearchParamsComponent } from '@component/comision-show/comision-search-params/comision-search-params.component';
-import { HorarioFieldsetArrayComponent } from '@component/horario-admin/horario-fieldset-array/horario-fieldset-array.component';
 import { ListaAlumnosComponent } from '@component/lista-alumnos/lista-alumnos.component';
 import { CrComisionShowComponent } from '@component/consolidado-referente/comision-show/comision-show.component';
 import { CrComisionTableComponent } from '@component/consolidado-referente/comision-table/comision-table.component';
@@ -156,7 +150,6 @@ import { ComisionShow3Component } from '@component/comision-show3/comision-show3
 import { AlumnosAprobadosShowComponent } from '@component/alumnos-aprobados-show/alumnos-aprobados-show.component';
 import { TransferirAlumnoAdminComponent } from '@component/transferir-alumno-admin/transferir-alumno-admin.component';
 import { TableAdminDynamicComponent } from '@component/table-admin/table-admin-dynamic.component';
-import { AlumnoComisionAdminRelComponent } from '@component/alumno-comision-admin-rel/alumno-comision-admin-rel.component';
 import { AlumnoAdminRelComponent } from '@component/alumno-admin-rel/alumno-admin-rel.component';
 import { InputUploadComponent } from '@component/input-upload/input-upload.component';
 import { AlumnoComisionShowComponent } from '@component/alumno-comision-show/alumno-comision-show.component';
@@ -173,6 +166,9 @@ import { ReferenteTomaShowComponent } from '@component/referente-toma-show/refer
 import { AlumnoComisionTomaShowComponent } from '@component/alumno-comision-toma-show/alumno-comision-toma-show.component';
 import { PersonaAdminRelComponent } from '@component/persona-admin-rel/persona-admin-rel.component';
 import { PersonaShowComponent } from '@component/persona-show/persona-show.component';
+import { AlumnoComisionAdminComponent } from '@component/alumno-comision-admin/alumno-comision-admin.component';
+import { CalificacionShowComponent } from '@component/calificacion-show/calificacion-show.component';
+import { CalificacionAdminComponent } from '@component/calificacion-admin/calificacion-admin.component';
 
 @NgModule({
   declarations: [
@@ -237,7 +233,6 @@ import { PersonaShowComponent } from '@component/persona-show/persona-show.compo
     ComisionAdminComponent, ComisionFieldsetComponent, CaCursoTableComponent,
     ComisionHorariosAdminComponent, ComisionHorariosFieldsetComponent,
     ComisionShowComponent, ComisionTableComponent, ComisionSearchComponent, ComisionSearchParamsComponent,
-    CursoAdminComponent, CursoFieldsetArrayComponent,
     DocenteTableComponent, DocenteShowComponent, DocenteSearchComponent,
     DocenteDetailComponent,
     PersonaAdminComponent, PersonaFieldsetComponent,
@@ -245,8 +240,6 @@ import { PersonaShowComponent } from '@component/persona-show/persona-show.compo
     RegistroRealizadoComponent,
     RabcPersonaAdminComponent, RabcPersonaFieldsetComponent,
     SedeAdminComponent, SedeFieldsetComponent,
-    HorarioAdminComponent, HorarioFieldsetArrayComponent,
-    TomaAdminComponent, TomaFieldsetArrayComponent,
     TomaPosesionAdminComponent, TomaPosesionFieldsetComponent,
     TomaPosesionRealizadaComponent,
     CrComisionShowComponent, CrComisionTableComponent,
@@ -257,7 +250,7 @@ import { PersonaShowComponent } from '@component/persona-show/persona-show.compo
     PlanillaDocenteAdminComponent,
     CalendarioAdminArrayComponent,
     ComisionShow2Component,
-    AlumnoComisionAdminRelComponent,
+    AlumnoComisionAdminComponent,
     SedeShowComponent,
     SedeAdmin2Component,
     CentroEducativoAdminComponent,
@@ -290,6 +283,8 @@ import { PersonaShowComponent } from '@component/persona-show/persona-show.compo
     AlumnoComisionTomaShowComponent,
     PersonaAdminRelComponent,
     PersonaShowComponent,
+    CalificacionShowComponent,
+    CalificacionAdminComponent,
   ],
   imports: [
     BrowserModule,

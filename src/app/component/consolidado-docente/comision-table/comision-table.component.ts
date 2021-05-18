@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { DataToolsService } from '@service/data-tools.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SessionStorageService } from '@service/storage/session-storage.service';
 
 @Component({
   selector: 'app-cd-comision-table',
@@ -34,11 +37,15 @@ export class CdComisionTableComponent extends TableComponent {
   dataSource: any;
 
   constructor(
-    protected dt: DataToolsService, 
     protected router: Router,
-    protected dd: DataDefinitionService
+    protected dd: DataDefinitionService,
+    protected dialog: MatDialog,
+    protected snackBar: MatSnackBar,
+    protected storage: SessionStorageService,
+
+    protected dt: DataToolsService, 
   ) {
-    super(router, dd);
+    super(router, dd, dialog, snackBar, storage);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

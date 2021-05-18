@@ -15,28 +15,6 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
 
   readonly entityName: string = "alumno_comision";
 
-  queryData(): Observable<any>{
-    return this.dd.post("ids", this.entityName, this.display).pipe(
-      switchMap(
-        ids => this.dd.relGetAllFvo(this.entityName, ids, this.fieldsViewOptions)
-      ),
-      switchMap(
-        data => {
-          return this.dd.allColumnData(
-            data,"persona","alumno","persona",
-            {
-              "tiene_documento":"tiene_documento",
-              "tiene_cuil":"tiene_cuil",
-              "tiene_certificado_estudios":"tiene_certificado_estudios",
-              "tiene_partida_nacimiento":"tiene_partida_nacimiento",
-              "alumno_observaciones":"observaciones",
-              "alumno_anio_ingreso":"anio_ingreso",
-            }
-          );
-        }
-      ),
-    )
-  }
   
   fieldsViewOptions: FieldViewOptions[] = [
     new FieldViewOptions({
@@ -53,37 +31,13 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
       label:"Número Documento",
     }),
     new FieldViewOptions({
-      field:"tiene_documento",
-      label:"Fotocopia Documento",
-      type:new FieldYesNoOptions(),
-    }),
-    new FieldViewOptions({
-      field:"tiene_partida_nacimiento",
-      label:"Partida Nacimiento",
-      type:new FieldYesNoOptions(),
-    }),
-    new FieldViewOptions({
-      field:"tiene_constancia_cuil",
-      label:"Constancia Cuil",
-      type:new FieldYesNoOptions(),
-    }),
-    new FieldViewOptions({
-      field:"tiene_certificado_estudios",
-      label:"Certificado Estudios",
-      type:new FieldYesNoOptions(),
-    }),
-    new FieldViewOptions({
-      field:"alumno_anio_ingreso",
-      label:"Anio Ingreso",
-    }),
-    new FieldViewOptions({
       field:"activo",
       label:"Activo",
-      type:new FieldYesNoOptions(),
-    }),
-    new FieldViewOptions({
-      field:"alumno_observaciones",
-      label:"Observaciones",
+      type: new FieldInputCheckboxOptions(),
+      aux:new InputPersistOptions({
+         entityName:"alumno_comision",
+         fieldName:"activo",
+      })
     }),
     new FieldViewOptions({
       field:"comision",
@@ -97,12 +51,12 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
     new FieldViewOptions({
       field:"per-telefono",
       label:"Teléfono",
-      // type: new FieldInputTextOptions(),
-      // aux:new InputPersistOptions({
-      //   entityName:"persona",
-      //   fieldName:"telefono",
-      //   params: {id:"{{persona}}"}//utilizar {{key}} para identificar valor del conjunto de datos
-      // })
+      type: new FieldInputTextOptions(),
+      aux:new InputPersistOptions({
+         entityName:"persona",
+         fieldName:"telefono",
+         params: {id:"{{persona}}"}//utilizar {{key}} para identificar valor del conjunto de datos
+      })
     }),
   ];  
   fieldsViewOptionsSp: FieldViewOptions[] = [

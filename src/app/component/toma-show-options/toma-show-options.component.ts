@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ShowDynamicComponent } from '@component/show/show-dynamic.component';
 import { FieldViewOptions } from '@class/field-view-options';
 import { FieldYesNoOptions, TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions, FieldDateOptions, FieldInputDateOptions, FieldInputSelectCheckboxOptions } from '@class/field-type-options';
-import { RouterLinkOptions } from '@class/field-view-aux-options';
+import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { OptEventIcon } from '@class/opt';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
@@ -19,11 +19,14 @@ export class TomaShowOptionsComponent extends ShowDynamicComponent {
     new FieldViewOptions({
       field:"fecha_toma",
       label:"Fecha Toma",
-      type:new FieldDateOptions({format:"dd/MM/yyyy"})
+      type:new FieldInputDateOptions(),
+      aux:new InputPersistOptions({entityName:"toma",fieldName:"fecha_toma"})
     }),
     new FieldViewOptions({
       field:"estado",
       label:"Estado",
+      type: new FieldInputSelectParamOptions({options:['Aprobada','Pendiente','Renuncia','Error','Baja','Modificada','Observada']}),
+      aux:new InputPersistOptions({entityName:"toma",fieldName:"estado"})
     }),
     new FieldViewOptions({
       field:"observaciones",
@@ -40,6 +43,8 @@ export class TomaShowOptionsComponent extends ShowDynamicComponent {
     new FieldViewOptions({
       field:"estado_contralor",
       label:"Estado Contralor",
+      type: new FieldInputSelectParamOptions({options:['Pasar','Modificar','No pasar']}),
+      aux:new InputPersistOptions({entityName:"toma",fieldName:"estado_contralor"})
     }),
     new FieldViewOptions({
       field:"calificacion",
@@ -75,13 +80,13 @@ export class TomaShowOptionsComponent extends ShowDynamicComponent {
       field:"docente",
       label:"Docente",
       type:new TypeLabelOptions({entityName: "persona"}),
-      aux:new RouterLinkOptions({path: "persona-detail", params:{id:"{{docente}})"}}), 
+      aux:new RouterLinkOptions({path: "persona-admin-rel", params:{id:"{{docente}})"}}), 
     }),
     new FieldViewOptions({
       field:"reemplazo",
       label:"Reemplazo",
       type:new TypeLabelOptions({entityName: "persona"}),
-      aux:new RouterLinkOptions({path: "persona-detail", params:{id:"{{reemplazo}})"}}), 
+      aux:new RouterLinkOptions({path: "persona-admin-rel", params:{id:"{{reemplazo}})"}}), 
     }),
     new FieldViewOptions({
       field:"planilla_docente",
@@ -90,6 +95,11 @@ export class TomaShowOptionsComponent extends ShowDynamicComponent {
       aux:new RouterLinkOptions({path: "planilla-docente-detail", params:{id:"{{planilla_docente}})"}}), 
     }),
   ];  
+
+
+
+
+
   fieldsViewOptionsSp: FieldViewOptions[] = [
     new FieldViewOptions({
       field:"search",
@@ -142,28 +152,39 @@ export class TomaShowOptionsComponent extends ShowDynamicComponent {
       label:"Planilla Docente",
       type: new FieldInputAutocompleteOptions({entityName:'planilla_docente'}),
     }),
+    new FieldViewOptions({
+      field:"cur_com_cal-anio",
+      label:"Año Calendario",
+      type: new FieldInputTextOptions(),
+    }),
+    new FieldViewOptions({
+      field:"cur_com_cal-semestre",
+      label:"Semestre Calendario",
+      type: new FieldInputTextOptions(),
+    }),
+
+    
   ];  
 
   optColumn = [
-    new OptEventIcon({action:"email_registro", template:"mail"}),
-    //new OptEventIcon({action:"test2", template:"mail_outline"}),
-    //new OptEventIcon({action:"test1", template:"mail"}),
-    //new OptEventIcon({action:"test2", template:"mail_outline"})
+    new OptEventIcon({action:"email_confirmacion", template:"mail"}),
+    new OptEventIcon({action:"table_delete", template:"delete"}),
   ]
 
 
   switchAction($event:any){ 
     switch($event.action){
-      case "email_registro": 
+      case "email_confirmacion": 
         this.dd._post("email_confirmacion","toma",$event.data).subscribe(
-          response => {
-            console.log(response);
+          () => {
             this.dialog.open(DialogAlertComponent, {
               data: {title: "Email enviado", message: "Se ha enviado el email de confirmación"}
             })
           }
         )
       break;
+      default:
+        super.switchAction($event)
     } 
   }
 

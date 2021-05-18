@@ -112,30 +112,6 @@ export class _DataDefinitionRelArrayService { //2
     return this.dd.getAll("alumno", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          var f = this.filterFields(fields, 'doc-');
-          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'documento', 'file', f)
-        }
-      ),
-      switchMap(
-        (data:{ [index: string]: any; }[]) => {
-          var f = this.filterFields(fields, 'pn-');
-          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'partida_nacimiento', 'file', f)
-        }
-      ),
-      switchMap(
-        (data:{ [index: string]: any; }[]) => {
-          var f = this.filterFields(fields, 'ce-');
-          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'certificado_estudios', 'file', f)
-        }
-      ),
-      switchMap(
-        (data:{ [index: string]: any; }[]) => {
-          var f = this.filterFields(fields, 'cui-');
-          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'cuil', 'file', f)
-        }
-      ),
-      switchMap(
-        (data:{ [index: string]: any; }[]) => {
           var f = this.filterFields(fields, 'per-');
           return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'persona', 'persona', f)
         }
@@ -435,6 +411,24 @@ export class _DataDefinitionRelArrayService { //2
         (data:{ [index: string]: any; }[]) => {
           var f = this.filterFields(fields, 'per_dom-');
           return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'per-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'asi-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'asignatura', 'asignatura', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'planificacion', 'planificacion', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'pla-plan', 'plan', f)
         }
       ),
     )
@@ -1119,30 +1113,6 @@ export class _DataDefinitionRelArrayService { //2
     return this.dd.get("alumno", id).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
-          var f = this.filterFields(fields, 'doc-');
-          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'documento', 'file', f)
-        }
-      ),
-      switchMap(
-        (data:{ [index: string]: any; }[]) => {
-          var f = this.filterFields(fields, 'pn-');
-          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'partida_nacimiento', 'file', f)
-        }
-      ),
-      switchMap(
-        (data:{ [index: string]: any; }[]) => {
-          var f = this.filterFields(fields, 'ce-');
-          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'certificado_estudios', 'file', f)
-        }
-      ),
-      switchMap(
-        (data:{ [index: string]: any; }[]) => {
-          var f = this.filterFields(fields, 'cui-');
-          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'cuil', 'file', f)
-        }
-      ),
-      switchMap(
-        (data:{ [index: string]: any; }[]) => {
           var f = this.filterFields(fields, 'per-');
           return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'persona', 'persona', f)
         }
@@ -1442,6 +1412,24 @@ export class _DataDefinitionRelArrayService { //2
         (data:{ [index: string]: any; }[]) => {
           var f = this.filterFields(fields, 'per_dom-');
           return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'per-domicilio', 'domicilio', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'asi-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'asignatura', 'asignatura', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'planificacion', 'planificacion', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'pla_plb-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'pla-plan', 'plan', f)
         }
       ),
     )

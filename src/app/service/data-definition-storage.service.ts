@@ -49,26 +49,6 @@ export class DataDefinitionStorageService {
     /**
      * se realiza un 'deep clone' del objeto para poder eliminar atributos a medida que se procesa y no alterar la referencia original
      */
-    if(('documento_' in rowCloned)
-    ){
-      this.stg.setItem('file' + rowCloned['documento_'].id, rowCloned['documento_']);
-      delete rowCloned['documento_'];
-    }
-    if(('partida_nacimiento_' in rowCloned)
-    ){
-      this.stg.setItem('file' + rowCloned['partida_nacimiento_'].id, rowCloned['partida_nacimiento_']);
-      delete rowCloned['partida_nacimiento_'];
-    }
-    if(('certificado_estudios_' in rowCloned)
-    ){
-      this.stg.setItem('file' + rowCloned['certificado_estudios_'].id, rowCloned['certificado_estudios_']);
-      delete rowCloned['certificado_estudios_'];
-    }
-    if(('cuil_' in rowCloned)
-    ){
-      this.stg.setItem('file' + rowCloned['cuil_'].id, rowCloned['cuil_']);
-      delete rowCloned['cuil_'];
-    }
     if(('persona_' in rowCloned)
     && ('domicilio_' in rowCloned['persona_'])
     ){
@@ -692,6 +672,22 @@ export class DataDefinitionStorageService {
     ){
       this.stg.setItem('persona' + rowCloned['persona_'].id, rowCloned['persona_']);
       delete rowCloned['persona_'];
+    }
+    if(('asignatura_' in rowCloned)
+    ){
+      this.stg.setItem('asignatura' + rowCloned['asignatura_'].id, rowCloned['asignatura_']);
+      delete rowCloned['asignatura_'];
+    }
+    if(('planificacion_' in rowCloned)
+    && ('plan_' in rowCloned['planificacion_'])
+    ){
+      this.stg.setItem('plan' + rowCloned['planificacion_']['plan_'].id, rowCloned['planificacion_']['plan_']);
+      delete rowCloned['planificacion_']['plan_'];
+    }
+    if(('planificacion_' in rowCloned)
+    ){
+      this.stg.setItem('planificacion' + rowCloned['planificacion_'].id, rowCloned['planificacion_']);
+      delete rowCloned['planificacion_'];
     }
     this.stg.setItem("calificacion" + rowCloned.id, rowCloned);
   }

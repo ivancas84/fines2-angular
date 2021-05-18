@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { FieldViewOptions } from '@class/field-view-options';
-import { TypeLabelOptions } from '@class/field-type-options';
-import { RouterLinkOptions } from '@class/field-view-aux-options';
 import { ShowRelDynamicComponent } from '@component/show/show-rel-dynamic.component';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -19,19 +17,15 @@ export class AlumnoComisionTomaShowComponent extends ShowRelDynamicComponent {
 
   readonly entityName: string = "alumno_comision";
 
-  title: string = "Referentes";
+  title: string = "Alumnos";
 
   initParams(params: any){ 
     if(!params.hasOwnProperty("com-id")) throw "Error de parametros";
-    return params; 
+    this.params = params; 
   }
-
-  initLength(): Observable<any> {
-    return of(false);
-  }
-
 
   queryData(): Observable<any>{
+
     return this.dd.all("comision_relacionada", this.display).pipe(
       switchMap(
         comision_relacionada_ => {
@@ -60,6 +54,10 @@ export class AlumnoComisionTomaShowComponent extends ShowRelDynamicComponent {
     }),
     new FieldViewOptions({
       field:"per-apellidos",
+      label:"Apellidos",
+    }),
+    new FieldViewOptions({
+      field:"per-numero_documento",
       label:"Apellidos",
     }),
     new FieldViewOptions({

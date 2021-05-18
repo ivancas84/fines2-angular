@@ -22,7 +22,7 @@ export class SedeShow3Component extends ShowComponent {
       tap(
         queryParams => {
           this.load = false;
-          this.params = this.initParams(queryParams);
+          this.initParams(queryParams);
           this.initDisplay();          
         }
       ),

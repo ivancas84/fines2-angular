@@ -20,7 +20,7 @@ export class CentroEducativoCantidadSedesComponent extends ShowComponent {
       tap(
         queryParams => {
           this.load = false;
-          this.params = this.initParams(queryParams);
+          this.initParams(queryParams);
           this.initDisplay();          
         }
       ),

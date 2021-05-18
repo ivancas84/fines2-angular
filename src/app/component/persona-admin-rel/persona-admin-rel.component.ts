@@ -3,13 +3,13 @@ import { Validators } from '@angular/forms';
 import { FieldViewOptions } from '@class/field-view-options';
 import { FieldInputSelectParamOptions, FieldInputTextOptions, FieldControlOptions, FieldHiddenOptions, FieldInputDateOptions, FieldInputUploadOptions } from '@class/field-type-options';
 import { AdminRelStructure } from '@class/admin-rel-structure';
-import { AdminRelComponent } from '@component/admin-rel/admin-rel.component';
+import { AdminRelDynamicComponent } from '@component/admin-rel/admin-rel-dynamic.component';
 
 @Component({
   selector: 'app-persona-admin',
-  templateUrl: '../../core/component/admin-rel/admin-rel.component.html',
+  templateUrl: '../../core/component/admin-rel/admin-rel-dynamic.component.html',
 })
-export class PersonaAdminRelComponent extends AdminRelComponent {
+export class PersonaAdminRelComponent extends AdminRelDynamicComponent {
 
   readonly entityName: string = "persona"
   queryApi:string = "unique_rel_um"
@@ -73,6 +73,11 @@ export class PersonaAdminRelComponent extends AdminRelComponent {
         new FieldViewOptions({
           field:"email",
           label:"Email",
+          type: new FieldInputTextOptions(),
+        }),
+        new FieldViewOptions({
+          field:"email_abc",
+          label:"Email ABC",
           type: new FieldInputTextOptions(),
         }),
 

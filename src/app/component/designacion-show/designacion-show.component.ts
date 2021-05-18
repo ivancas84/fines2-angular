@@ -44,6 +44,8 @@ export class DesignacionShowComponent extends ShowDynamicComponent {
       aux:new RouterLinkOptions({path: "persona-admin", params:{id:"{{persona}})"}}), 
     }),
   ];  
+
+
   fieldsViewOptionsSp: FieldViewOptions[] = [
     new FieldViewOptions({
       field:"search",
@@ -76,6 +78,7 @@ export class DesignacionShowComponent extends ShowDynamicComponent {
       label:"Persona",
       type: new FieldInputAutocompleteOptions({entityName:'persona'}),
     }),
+    
   ];  
 }
 
