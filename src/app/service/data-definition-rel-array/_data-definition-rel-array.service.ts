@@ -112,6 +112,12 @@ export class _DataDefinitionRelArrayService { //2
     return this.dd.getAll("alumno", ids).pipe(
       switchMap(
         (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'plan', 'plan', f)
+        }
+      ),
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
           var f = this.filterFields(fields, 'per-');
           return (isEmptyObject(f)) ? of(data) : this.dd.getAllColumnData(data, 'persona', 'persona', f)
         }
@@ -1111,6 +1117,12 @@ export class _DataDefinitionRelArrayService { //2
     
   alumnoGet(id: string, fields: { [index: string]: any }): Observable<any> {
     return this.dd.get("alumno", id).pipe(
+      switchMap(
+        (data:{ [index: string]: any; }[]) => {
+          var f = this.filterFields(fields, 'pla-');
+          return (isEmptyObject(f)) ? of(data) : this.dd.getColumnData(data, 'plan', 'plan', f)
+        }
+      ),
       switchMap(
         (data:{ [index: string]: any; }[]) => {
           var f = this.filterFields(fields, 'per-');
