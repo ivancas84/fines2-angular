@@ -6,14 +6,28 @@ import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-op
 import { FieldWidthOptions } from '@class/field-width-options';
 import { OptEventIcon } from '@class/opt';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
+import { ShowRelDynamicComponent } from '@component/show/show-rel-dynamic.component';
+import { Observable, of } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-toma-show',
   templateUrl: '../../core/component/show/show-dynamic.component.html',
 })
-export class TomaShowOptionsComponent extends ShowDynamicComponent {
+export class TomaShowOptionsComponent extends ShowRelDynamicComponent {
 
   readonly entityName: string = "toma";
+
+  queryData(): Observable<any>{
+    return this.dd.post("ids", this.entityName, this.display).pipe(
+      switchMap(
+        ids => this.dd.relGetAllFvo(this.entityName, ids, this.fieldsViewOptions)
+      ),
+      switchMap(
+        data => this.dd.getPostAllColumnData(data,"info","curso","curso","curso_horario",{"horario":"horario"})
+      ),
+    )
+  }
 
   fieldsViewOptions: FieldViewOptions[] = [
     new FieldViewOptions({
@@ -46,7 +60,7 @@ export class TomaShowOptionsComponent extends ShowDynamicComponent {
       type: new FieldInputSelectParamOptions({options:['Pasar','Modificar','No pasar']}),
       aux:new InputPersistOptions({entityName:"toma",fieldName:"estado_contralor"})
     }),
-    new FieldViewOptions({
+    /*new FieldViewOptions({
       field:"calificacion",
       label:"Calificacion",
       type:new FieldYesNoOptions(),
@@ -69,18 +83,25 @@ export class TomaShowOptionsComponent extends ShowDynamicComponent {
     new FieldViewOptions({
       field:"enlace_planillas",
       label:"Enlace Planillas",
-    }),
+    }),*/
     new FieldViewOptions({
       field:"curso",
       label:"Curso",
       type:new TypeLabelOptions({entityName: "curso"}),
-      aux:new RouterLinkOptions({path: "curso-detail", params:{id:"{{curso}})"}}), 
+    }),
+    new FieldViewOptions({
+      field:"horario",
+      label:"Horario",
     }),
     new FieldViewOptions({
       field:"docente",
       label:"Docente",
       type:new TypeLabelOptions({entityName: "persona"}),
       aux:new RouterLinkOptions({path: "persona-admin-rel", params:{id:"{{docente}})"}}), 
+    }),
+    new FieldViewOptions({
+      field:"doc-telefono",
+      label:"Telefono",
     }),
     new FieldViewOptions({
       field:"reemplazo",
