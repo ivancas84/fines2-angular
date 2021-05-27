@@ -118,7 +118,11 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
           label:"Observaciones",
           type: new FieldTextareaOptions(),
         }),
-      
+        new FieldViewOptions({
+          field:"plan",
+          label:"Plan",
+          type: new FieldInputAutocompleteOptions({entityName:"plan"}),
+        }),
       ]
     }),
 
@@ -148,6 +152,13 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
           label:"Descripcion",
           type: new FieldInputTextOptions(),
           control: new FieldControlOptions({validators: [Validators.required],})
+        }),
+        new FieldViewOptions({
+          field:"tipo",
+          label:"Tipo",
+          type: new FieldInputSelectParamOptions({options:['Legajo', 'Solicitud', "Solicitud Resuelta"]}),
+          control: new FieldControlOptions({validators: [Validators.required],}),
+          default:"Legajo"
         }),
         new FieldViewOptions({
           field:"archivo",

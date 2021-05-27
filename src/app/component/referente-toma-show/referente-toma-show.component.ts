@@ -23,11 +23,11 @@ export class ReferenteTomaShowComponent extends ShowRelDynamicComponent {
 
   initParams(params: any){ 
     if(!params.hasOwnProperty("com-id")) throw "Error de parametros";
-    return params; 
+    this.params = params; 
   }
 
   initLength(): Observable<any> {
-    return of(false);
+    return of(undefined);
   }
 
 

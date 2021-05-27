@@ -31,6 +31,14 @@ export class TomaShowOptionsComponent extends ShowRelDynamicComponent {
 
   fieldsViewOptions: FieldViewOptions[] = [
     new FieldViewOptions({
+      field:"cur-id",
+      label:"id curso",
+    }),
+    new FieldViewOptions({
+      field:"cur-ige",
+      label:"IGE",
+    }),
+    new FieldViewOptions({
       field:"fecha_toma",
       label:"Fecha Toma",
       type:new FieldInputDateOptions(),
@@ -115,6 +123,7 @@ export class TomaShowOptionsComponent extends ShowRelDynamicComponent {
       type:new TypeLabelOptions({entityName: "planilla_docente"}),
       aux:new RouterLinkOptions({path: "planilla-docente-detail", params:{id:"{{planilla_docente}})"}}), 
     }),
+    
   ];  
 
 
@@ -152,6 +161,11 @@ export class TomaShowOptionsComponent extends ShowRelDynamicComponent {
       field:"sin_planillas",
       label:"Sin Planillas",
       type: new FieldInputSelectCheckboxOptions(),
+    }),
+    new FieldViewOptions({
+      field:"cur-ige",
+      label:"IGE",
+      type: new FieldInputTextOptions(),
     }),
     new FieldViewOptions({
       field:"curso",
