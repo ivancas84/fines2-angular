@@ -169,6 +169,8 @@ import { PersonaShowComponent } from '@component/persona-show/persona-show.compo
 import { AlumnoComisionAdminComponent } from '@component/alumno-comision-admin/alumno-comision-admin.component';
 import { CalificacionShowComponent } from '@component/calificacion-show/calificacion-show.component';
 import { CalificacionAdminComponent } from '@component/calificacion-admin/calificacion-admin.component';
+import { DownloadComponent } from '@component/download/download.component';
+import { UmComponent } from '@component/um/um.component';
 
 @NgModule({
   declarations: [
@@ -221,6 +223,8 @@ import { CalificacionAdminComponent } from '@component/calificacion-admin/califi
     SearchDynamicComponent,
     SearchParamsDynamicComponent,
     MenuLoginComponent,
+    UmComponent,
+    DownloadComponent,
     //DynamicTableComponent,
 
     CalendarioLabelComponent, CalendarioInputSelectComponent, PlanificacionInputPickerComponent,

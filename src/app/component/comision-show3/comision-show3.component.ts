@@ -8,13 +8,15 @@ import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Display } from '@class/display';
 import { arrayColumn } from '@function/array-column';
-import { OptRouteIcon } from '@class/opt';
+import { OptEventIcon, OptRouteIcon } from '@class/opt';
+import { ShowDynamicComponent } from '@component/show/show-dynamic.component';
+import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 
 @Component({
   selector: 'app-comision-show-3',
   templateUrl: '../../core/component/show/show-dynamic.component.html',
 })
-export class ComisionShow3Component extends ShowComponent {
+export class ComisionShow3Component extends ShowDynamicComponent {
   readonly entityName: string = "comision";
 
   queryData(): Observable<any>{
@@ -26,7 +28,7 @@ export class ComisionShow3Component extends ShowComponent {
         return this.dd.getPostAllColumnData(data,"cantidad_alumnos_activos_comision", "id", "comision", "calificacion", {"activos":"activos"} )
       }),
       switchMap(data => {
-        return this.dd.advancedColumnDataGroup(data,"comision", "alumno_comision", {"alumnos":"persona.count"} )
+        return this.dd.advancedColumnDataGroup(data,"comision", "alumno_comision", {"alumnos":"alumno.count"} )
       }),
 
       switchMap(data => {
@@ -238,7 +240,30 @@ export class ComisionShow3Component extends ShowComponent {
       template:"edit",
       params:{"com-id":"{{id}}"}
     }),
+    new OptEventIcon({
+      action:"actualizar-plan", 
+      template:"info"
+    }),
+
   ]
+
+
+  switchAction($event:any){ 
+    switch($event.action){
+      case "actualizar-plan":
+        this.dd._post("actualizar_plan_alumnos","alumno",$event.data.id).subscribe(
+          () => {
+            this.dialog.open(DialogAlertComponent, {
+              data: {title: "Plan actualizado", message: "Se ha actualizado el plan de los alumnos"}
+            })
+          }
+        )
+      break;
+      default:
+        super.switchAction($event)
+    } 
+  }
+
 
 }
 

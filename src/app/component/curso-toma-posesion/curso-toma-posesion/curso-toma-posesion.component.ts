@@ -52,7 +52,6 @@ export class CursoTomaPosesionComponent extends ShowComponent {
       ),
       tap(
         (data: any) => {
-console.log(data)
         }
       )
     )

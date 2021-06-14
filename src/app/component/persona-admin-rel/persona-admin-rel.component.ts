@@ -101,7 +101,7 @@ export class PersonaAdminRelComponent extends AdminRelDynamicComponent {
           field:"fecha",
           label:"Fecha",
           type: new FieldInputDateOptions(),
-          default:new Date(),
+          control: new FieldControlOptions({default:new Date()})
         }),
         new FieldViewOptions({
           field:"descripcion",

@@ -23,25 +23,25 @@ export class AlumnoComisionAdminComponent extends AdminComponent {
       field:"fotocopia_documento",
       label:"Fotocopia Documento",
       type: new FieldInputCheckboxOptions(),
-      default:false,
+      control: new FieldControlOptions({default:false})
     }),
     new FieldViewOptions({
       field:"partida_nacimiento",
       label:"Partida Nacimiento",
       type: new FieldInputCheckboxOptions(),
-      default:false,
+      control: new FieldControlOptions({default:false})
     }),
     new FieldViewOptions({
       field:"constancia_cuil",
       label:"Constancia Cuil",
       type: new FieldInputCheckboxOptions(),
-      default:false,
+      control: new FieldControlOptions({default:false})
     }),
     new FieldViewOptions({
       field:"certificado_estudios",
       label:"Certificado Estudios",
       type: new FieldInputCheckboxOptions(),
-      default:false,
+      control: new FieldControlOptions({default:false})
     }),
     new FieldViewOptions({
       field:"anio_ingreso",
@@ -52,7 +52,7 @@ export class AlumnoComisionAdminComponent extends AdminComponent {
       field:"activo",
       label:"Activo",
       type: new FieldInputCheckboxOptions(),
-      default:false,
+      control: new FieldControlOptions({default:false})
     }),
     new FieldViewOptions({
       field:"programa",

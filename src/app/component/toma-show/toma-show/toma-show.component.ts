@@ -30,8 +30,7 @@ export class TomaShowComponent extends ShowRelDynamicComponent {
     new FieldViewOptions({
       field:"calificacion",
       label:"Calificacion",
-      labelDisabled:true,
-      type:new FieldInputCheckboxOptions(),
+      type:new FieldInputCheckboxOptions({labelDisabled:true}),
       aux:new InputPersistOptions({
         entityName:"toma",
         fieldName:"calificacion",
@@ -40,8 +39,7 @@ export class TomaShowComponent extends ShowRelDynamicComponent {
     new FieldViewOptions({
       field:"temas_tratados",
       label:"Temas Tratados",
-      labelDisabled:true,
-      type:new FieldInputCheckboxOptions(),
+      type:new FieldInputCheckboxOptions({labelDisabled:true}),
       aux:new InputPersistOptions({
         entityName:"toma",
         fieldName:"temas_tratados",
@@ -50,8 +48,7 @@ export class TomaShowComponent extends ShowRelDynamicComponent {
     new FieldViewOptions({
       field:"asistencia",
       label:"Asistencia",
-      labelDisabled:true,
-      type:new FieldInputCheckboxOptions(),
+      type:new FieldInputCheckboxOptions({labelDisabled:true}),
       aux:new InputPersistOptions({
         entityName:"toma",
         fieldName:"asistencia",
@@ -60,8 +57,7 @@ export class TomaShowComponent extends ShowRelDynamicComponent {
     new FieldViewOptions({
       field:"sin_planillas",
       label:"Sin Planillas",
-      labelDisabled:true,
-      type:new FieldInputCheckboxOptions(),
+      type:new FieldInputCheckboxOptions({labelDisabled:true}),
       aux:new InputPersistOptions({
         entityName:"toma",
         fieldName:"sin_planillas",

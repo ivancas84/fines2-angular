@@ -49,23 +49,23 @@ export class AlumnoComisionTomaShowComponent extends ShowRelDynamicComponent {
 
   fieldsViewOptions: FieldViewOptions[] = [
     new FieldViewOptions({
-      field:"per-nombres",
+      field:"alu_per-nombres",
       label:"Nombres",
     }),
     new FieldViewOptions({
-      field:"per-apellidos",
+      field:"alu_per-apellidos",
       label:"Apellidos",
     }),
     new FieldViewOptions({
-      field:"per-numero_documento",
+      field:"alu_per-numero_documento",
       label:"Apellidos",
     }),
     new FieldViewOptions({
-      field:"per-telefono",
+      field:"alu_per-telefono",
       label:"Teléfono",
     }),
     new FieldViewOptions({
-      field:"per-email",
+      field:"alu_per-email",
       label:"Email",
     }),
   ];  

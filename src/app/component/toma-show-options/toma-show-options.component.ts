@@ -31,6 +31,10 @@ export class TomaShowOptionsComponent extends ShowRelDynamicComponent {
 
   fieldsViewOptions: FieldViewOptions[] = [
     new FieldViewOptions({
+      field:"id",
+      label:"id toma",
+    }),
+    new FieldViewOptions({
       field:"cur-id",
       label:"id curso",
     }),

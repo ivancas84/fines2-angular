@@ -27,6 +27,7 @@ export class DataDefinitionStorageService {
       case "designacion": this.storageDesignacion(row); break;
       case "detalle_persona": this.storageDetallePersona(row); break;
       case "dia": this.storageDia(row); break;
+      case "disposicion": this.storageDisposicion(row); break;
       case "distribucion_horaria": this.storageDistribucionHoraria(row); break;
       case "domicilio": this.storageDomicilio(row); break;
       case "email": this.storageEmail(row); break;
@@ -37,6 +38,7 @@ export class DataDefinitionStorageService {
       case "plan": this.storagePlan(row); break;
       case "planificacion": this.storagePlanificacion(row); break;
       case "planilla_docente": this.storagePlanillaDocente(row); break;
+      case "resolucion": this.storageResolucion(row); break;
       case "sede": this.storageSede(row); break;
       case "telefono": this.storageTelefono(row); break;
       case "tipo_sede": this.storageTipoSede(row); break;
@@ -53,6 +55,11 @@ export class DataDefinitionStorageService {
     ){
       this.stg.setItem('plan' + rowCloned['plan_'].id, rowCloned['plan_']);
       delete rowCloned['plan_'];
+    }
+    if(('resolucion_inscripcion_' in rowCloned)
+    ){
+      this.stg.setItem('resolucion' + rowCloned['resolucion_inscripcion_'].id, rowCloned['resolucion_inscripcion_']);
+      delete rowCloned['resolucion_inscripcion_'];
     }
     if(('persona_' in rowCloned)
     && ('domicilio_' in rowCloned['persona_'])
@@ -74,17 +81,6 @@ export class DataDefinitionStorageService {
     /**
      * se realiza un 'deep clone' del objeto para poder eliminar atributos a medida que se procesa y no alterar la referencia original
      */
-    if(('persona_' in rowCloned)
-    && ('domicilio_' in rowCloned['persona_'])
-    ){
-      this.stg.setItem('domicilio' + rowCloned['persona_']['domicilio_'].id, rowCloned['persona_']['domicilio_']);
-      delete rowCloned['persona_']['domicilio_'];
-    }
-    if(('persona_' in rowCloned)
-    ){
-      this.stg.setItem('persona' + rowCloned['persona_'].id, rowCloned['persona_']);
-      delete rowCloned['persona_'];
-    }
     if(('comision_' in rowCloned)
     && ('sede_' in rowCloned['comision_'])
     && ('domicilio_' in rowCloned['comision_']['sede_'])
@@ -224,6 +220,36 @@ export class DataDefinitionStorageService {
     ){
       this.stg.setItem('comision' + rowCloned['comision_'].id, rowCloned['comision_']);
       delete rowCloned['comision_'];
+    }
+    if(('alumno_' in rowCloned)
+    && ('plan_' in rowCloned['alumno_'])
+    ){
+      this.stg.setItem('plan' + rowCloned['alumno_']['plan_'].id, rowCloned['alumno_']['plan_']);
+      delete rowCloned['alumno_']['plan_'];
+    }
+    if(('alumno_' in rowCloned)
+    && ('resolucion_inscripcion_' in rowCloned['alumno_'])
+    ){
+      this.stg.setItem('resolucion' + rowCloned['alumno_']['resolucion_inscripcion_'].id, rowCloned['alumno_']['resolucion_inscripcion_']);
+      delete rowCloned['alumno_']['resolucion_inscripcion_'];
+    }
+    if(('alumno_' in rowCloned)
+    && ('persona_' in rowCloned['alumno_'])
+    && ('domicilio_' in rowCloned['alumno_']['persona_'])
+    ){
+      this.stg.setItem('domicilio' + rowCloned['alumno_']['persona_']['domicilio_'].id, rowCloned['alumno_']['persona_']['domicilio_']);
+      delete rowCloned['alumno_']['persona_']['domicilio_'];
+    }
+    if(('alumno_' in rowCloned)
+    && ('persona_' in rowCloned['alumno_'])
+    ){
+      this.stg.setItem('persona' + rowCloned['alumno_']['persona_'].id, rowCloned['alumno_']['persona_']);
+      delete rowCloned['alumno_']['persona_'];
+    }
+    if(('alumno_' in rowCloned)
+    ){
+      this.stg.setItem('alumno' + rowCloned['alumno_'].id, rowCloned['alumno_']);
+      delete rowCloned['alumno_'];
     }
     this.stg.setItem("alumno_comision" + rowCloned.id, rowCloned);
   }
@@ -667,32 +693,59 @@ export class DataDefinitionStorageService {
       this.stg.setItem('curso' + rowCloned['curso_'].id, rowCloned['curso_']);
       delete rowCloned['curso_'];
     }
-    if(('persona_' in rowCloned)
-    && ('domicilio_' in rowCloned['persona_'])
+    if(('alumno_' in rowCloned)
+    && ('plan_' in rowCloned['alumno_'])
     ){
-      this.stg.setItem('domicilio' + rowCloned['persona_']['domicilio_'].id, rowCloned['persona_']['domicilio_']);
-      delete rowCloned['persona_']['domicilio_'];
+      this.stg.setItem('plan' + rowCloned['alumno_']['plan_'].id, rowCloned['alumno_']['plan_']);
+      delete rowCloned['alumno_']['plan_'];
     }
-    if(('persona_' in rowCloned)
+    if(('alumno_' in rowCloned)
+    && ('resolucion_inscripcion_' in rowCloned['alumno_'])
     ){
-      this.stg.setItem('persona' + rowCloned['persona_'].id, rowCloned['persona_']);
-      delete rowCloned['persona_'];
+      this.stg.setItem('resolucion' + rowCloned['alumno_']['resolucion_inscripcion_'].id, rowCloned['alumno_']['resolucion_inscripcion_']);
+      delete rowCloned['alumno_']['resolucion_inscripcion_'];
     }
-    if(('asignatura_' in rowCloned)
+    if(('alumno_' in rowCloned)
+    && ('persona_' in rowCloned['alumno_'])
+    && ('domicilio_' in rowCloned['alumno_']['persona_'])
     ){
-      this.stg.setItem('asignatura' + rowCloned['asignatura_'].id, rowCloned['asignatura_']);
-      delete rowCloned['asignatura_'];
+      this.stg.setItem('domicilio' + rowCloned['alumno_']['persona_']['domicilio_'].id, rowCloned['alumno_']['persona_']['domicilio_']);
+      delete rowCloned['alumno_']['persona_']['domicilio_'];
     }
-    if(('planificacion_' in rowCloned)
-    && ('plan_' in rowCloned['planificacion_'])
+    if(('alumno_' in rowCloned)
+    && ('persona_' in rowCloned['alumno_'])
     ){
-      this.stg.setItem('plan' + rowCloned['planificacion_']['plan_'].id, rowCloned['planificacion_']['plan_']);
-      delete rowCloned['planificacion_']['plan_'];
+      this.stg.setItem('persona' + rowCloned['alumno_']['persona_'].id, rowCloned['alumno_']['persona_']);
+      delete rowCloned['alumno_']['persona_'];
     }
-    if(('planificacion_' in rowCloned)
+    if(('alumno_' in rowCloned)
     ){
-      this.stg.setItem('planificacion' + rowCloned['planificacion_'].id, rowCloned['planificacion_']);
-      delete rowCloned['planificacion_'];
+      this.stg.setItem('alumno' + rowCloned['alumno_'].id, rowCloned['alumno_']);
+      delete rowCloned['alumno_'];
+    }
+    if(('disposicion_' in rowCloned)
+    && ('asignatura_' in rowCloned['disposicion_'])
+    ){
+      this.stg.setItem('asignatura' + rowCloned['disposicion_']['asignatura_'].id, rowCloned['disposicion_']['asignatura_']);
+      delete rowCloned['disposicion_']['asignatura_'];
+    }
+    if(('disposicion_' in rowCloned)
+    && ('planificacion_' in rowCloned['disposicion_'])
+    && ('plan_' in rowCloned['disposicion_']['planificacion_'])
+    ){
+      this.stg.setItem('plan' + rowCloned['disposicion_']['planificacion_']['plan_'].id, rowCloned['disposicion_']['planificacion_']['plan_']);
+      delete rowCloned['disposicion_']['planificacion_']['plan_'];
+    }
+    if(('disposicion_' in rowCloned)
+    && ('planificacion_' in rowCloned['disposicion_'])
+    ){
+      this.stg.setItem('planificacion' + rowCloned['disposicion_']['planificacion_'].id, rowCloned['disposicion_']['planificacion_']);
+      delete rowCloned['disposicion_']['planificacion_'];
+    }
+    if(('disposicion_' in rowCloned)
+    ){
+      this.stg.setItem('disposicion' + rowCloned['disposicion_'].id, rowCloned['disposicion_']);
+      delete rowCloned['disposicion_'];
     }
     this.stg.setItem("calificacion" + rowCloned.id, rowCloned);
   }
@@ -1326,7 +1379,7 @@ export class DataDefinitionStorageService {
     this.stg.setItem("dia" + rowCloned.id, rowCloned);
   }
 
-  storageDistribucionHoraria(row: { [index: string]: any }): void{
+  storageDisposicion(row: { [index: string]: any }): void{
     if(!row) return;
     var rowCloned = JSON.parse(JSON.stringify(row))
     /**
@@ -1347,6 +1400,39 @@ export class DataDefinitionStorageService {
     ){
       this.stg.setItem('planificacion' + rowCloned['planificacion_'].id, rowCloned['planificacion_']);
       delete rowCloned['planificacion_'];
+    }
+    this.stg.setItem("disposicion" + rowCloned.id, rowCloned);
+  }
+
+  storageDistribucionHoraria(row: { [index: string]: any }): void{
+    if(!row) return;
+    var rowCloned = JSON.parse(JSON.stringify(row))
+    /**
+     * se realiza un 'deep clone' del objeto para poder eliminar atributos a medida que se procesa y no alterar la referencia original
+     */
+    if(('disposicion_' in rowCloned)
+    && ('asignatura_' in rowCloned['disposicion_'])
+    ){
+      this.stg.setItem('asignatura' + rowCloned['disposicion_']['asignatura_'].id, rowCloned['disposicion_']['asignatura_']);
+      delete rowCloned['disposicion_']['asignatura_'];
+    }
+    if(('disposicion_' in rowCloned)
+    && ('planificacion_' in rowCloned['disposicion_'])
+    && ('plan_' in rowCloned['disposicion_']['planificacion_'])
+    ){
+      this.stg.setItem('plan' + rowCloned['disposicion_']['planificacion_']['plan_'].id, rowCloned['disposicion_']['planificacion_']['plan_']);
+      delete rowCloned['disposicion_']['planificacion_']['plan_'];
+    }
+    if(('disposicion_' in rowCloned)
+    && ('planificacion_' in rowCloned['disposicion_'])
+    ){
+      this.stg.setItem('planificacion' + rowCloned['disposicion_']['planificacion_'].id, rowCloned['disposicion_']['planificacion_']);
+      delete rowCloned['disposicion_']['planificacion_'];
+    }
+    if(('disposicion_' in rowCloned)
+    ){
+      this.stg.setItem('disposicion' + rowCloned['disposicion_'].id, rowCloned['disposicion_']);
+      delete rowCloned['disposicion_'];
     }
     this.stg.setItem("distribucion_horaria" + rowCloned.id, rowCloned);
   }
@@ -1627,6 +1713,15 @@ export class DataDefinitionStorageService {
      * se realiza un 'deep clone' del objeto para poder eliminar atributos a medida que se procesa y no alterar la referencia original
      */
     this.stg.setItem("planilla_docente" + rowCloned.id, rowCloned);
+  }
+
+  storageResolucion(row: { [index: string]: any }): void{
+    if(!row) return;
+    var rowCloned = JSON.parse(JSON.stringify(row))
+    /**
+     * se realiza un 'deep clone' del objeto para poder eliminar atributos a medida que se procesa y no alterar la referencia original
+     */
+    this.stg.setItem("resolucion" + rowCloned.id, rowCloned);
   }
 
   storageSede(row: { [index: string]: any }): void{

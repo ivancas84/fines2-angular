@@ -9,7 +9,7 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
 import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { FieldViewOptions } from '@class/field-view-options';
-import { FieldInputSelectParamOptions } from '@class/field-type-options';
+import { FieldControlOptions, FieldInputSelectParamOptions } from '@class/field-type-options';
 
 @Component({
   selector: 'app-comision-admin',
@@ -49,21 +49,21 @@ export class ComisionAdminComponent extends AdminComponent {
       field:"autorizada",
       label:"Autorizada",
       type: "checkbox",
-      default: false,
+      control: new FieldControlOptions({default:false})
     }),
 
     new FieldViewOptions({
       field:"apertura",
       label:"Apertura",
       type: "checkbox",
-      default: false,
+      control: new FieldControlOptions({default:false})
     }),
 
     new FieldViewOptions({
       field:"publicada",
       label:"Publicada",
       type: "checkbox",
-      default: false,
+      control: new FieldControlOptions({default:false})
     }),
 
     new FieldViewOptions({
@@ -121,13 +121,13 @@ export class ComisionAdminComponent extends AdminComponent {
       field:"estado",
       label:"Estado",
       type: new FieldInputSelectParamOptions({options:['Confirma','Rectifica','Desdobla','Reagrupa']}),
-      default:"Confirma",
+      control: new FieldControlOptions({default:"Confirma"})
     }),
     new FieldViewOptions({
       field:"configuracion",
       label:"Configuracion",
       type: new FieldInputSelectParamOptions({options:['Histórica','Nueva']}),
-      default:"Histórica",
+      control: new FieldControlOptions({default:"Histórica"})
     }),
 
   ];  
