@@ -28,6 +28,7 @@ export class DataDefinitionStorageService {
       case "detalle_persona": this.storageDetallePersona(row); break;
       case "dia": this.storageDia(row); break;
       case "disposicion": this.storageDisposicion(row); break;
+      case "disposicion_pendiente": this.storageDisposicionPendiente(row); break;
       case "distribucion_horaria": this.storageDistribucionHoraria(row); break;
       case "domicilio": this.storageDomicilio(row); break;
       case "email": this.storageEmail(row); break;
@@ -1402,6 +1403,69 @@ export class DataDefinitionStorageService {
       delete rowCloned['planificacion_'];
     }
     this.stg.setItem("disposicion" + rowCloned.id, rowCloned);
+  }
+
+  storageDisposicionPendiente(row: { [index: string]: any }): void{
+    if(!row) return;
+    var rowCloned = JSON.parse(JSON.stringify(row))
+    /**
+     * se realiza un 'deep clone' del objeto para poder eliminar atributos a medida que se procesa y no alterar la referencia original
+     */
+    if(('disposicion_' in rowCloned)
+    && ('asignatura_' in rowCloned['disposicion_'])
+    ){
+      this.stg.setItem('asignatura' + rowCloned['disposicion_']['asignatura_'].id, rowCloned['disposicion_']['asignatura_']);
+      delete rowCloned['disposicion_']['asignatura_'];
+    }
+    if(('disposicion_' in rowCloned)
+    && ('planificacion_' in rowCloned['disposicion_'])
+    && ('plan_' in rowCloned['disposicion_']['planificacion_'])
+    ){
+      this.stg.setItem('plan' + rowCloned['disposicion_']['planificacion_']['plan_'].id, rowCloned['disposicion_']['planificacion_']['plan_']);
+      delete rowCloned['disposicion_']['planificacion_']['plan_'];
+    }
+    if(('disposicion_' in rowCloned)
+    && ('planificacion_' in rowCloned['disposicion_'])
+    ){
+      this.stg.setItem('planificacion' + rowCloned['disposicion_']['planificacion_'].id, rowCloned['disposicion_']['planificacion_']);
+      delete rowCloned['disposicion_']['planificacion_'];
+    }
+    if(('disposicion_' in rowCloned)
+    ){
+      this.stg.setItem('disposicion' + rowCloned['disposicion_'].id, rowCloned['disposicion_']);
+      delete rowCloned['disposicion_'];
+    }
+    if(('alumno_' in rowCloned)
+    && ('plan_' in rowCloned['alumno_'])
+    ){
+      this.stg.setItem('plan' + rowCloned['alumno_']['plan_'].id, rowCloned['alumno_']['plan_']);
+      delete rowCloned['alumno_']['plan_'];
+    }
+    if(('alumno_' in rowCloned)
+    && ('resolucion_inscripcion_' in rowCloned['alumno_'])
+    ){
+      this.stg.setItem('resolucion' + rowCloned['alumno_']['resolucion_inscripcion_'].id, rowCloned['alumno_']['resolucion_inscripcion_']);
+      delete rowCloned['alumno_']['resolucion_inscripcion_'];
+    }
+    if(('alumno_' in rowCloned)
+    && ('persona_' in rowCloned['alumno_'])
+    && ('domicilio_' in rowCloned['alumno_']['persona_'])
+    ){
+      this.stg.setItem('domicilio' + rowCloned['alumno_']['persona_']['domicilio_'].id, rowCloned['alumno_']['persona_']['domicilio_']);
+      delete rowCloned['alumno_']['persona_']['domicilio_'];
+    }
+    if(('alumno_' in rowCloned)
+    && ('persona_' in rowCloned['alumno_'])
+    ){
+      this.stg.setItem('persona' + rowCloned['alumno_']['persona_'].id, rowCloned['alumno_']['persona_']);
+      delete rowCloned['alumno_']['persona_'];
+    }
+    if(('alumno_' in rowCloned)
+    ){
+      this.stg.setItem('alumno' + rowCloned['alumno_'].id, rowCloned['alumno_']);
+      delete rowCloned['alumno_'];
+    }
+    this.stg.setItem("disposicion_pendiente" + rowCloned.id, rowCloned);
   }
 
   storageDistribucionHoraria(row: { [index: string]: any }): void{

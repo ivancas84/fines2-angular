@@ -240,9 +240,18 @@ export class ComisionShow3Component extends ShowDynamicComponent {
       template:"edit",
       params:{"com-id":"{{id}}"}
     }),
+    new OptRouteIcon({
+      action:"comision-admin2", 
+      template:"list",
+      params:{"id":"{{id}}"}
+    }),
     new OptEventIcon({
       action:"actualizar-plan", 
       template:"info"
+    }),
+    new OptEventIcon({
+      action:"actualizar-disposicion-pendiente", 
+      template:"dashboard"
     }),
 
   ]
@@ -255,6 +264,15 @@ export class ComisionShow3Component extends ShowDynamicComponent {
           () => {
             this.dialog.open(DialogAlertComponent, {
               data: {title: "Plan actualizado", message: "Se ha actualizado el plan de los alumnos"}
+            })
+          }
+        )
+      break;
+      case "actualizar-disposicion-pendiente":
+        this.dd._post("actualizar_disposiciones_pendientes_alumnos","alumno",$event.data.id).subscribe(
+          () => {
+            this.dialog.open(DialogAlertComponent, {
+              data: {title: "Disposiciones pendientes actualizadas", message: "Se han actualizado las disposiciones pendientes de los alumnos"}
             })
           }
         )

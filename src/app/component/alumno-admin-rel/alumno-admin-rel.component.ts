@@ -89,11 +89,11 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
           label:"id",
           type: new FieldHiddenOptions,
         }),
-        new FieldViewOptions({
-          field:"estado_legajo",
-          label:"Estado Legajo",
-          type: new FieldInputSelectParamOptions({options:['Completo','Incompleto']}),
-        }),
+        // new FieldViewOptions({
+        //   field:"estado_legajo",
+        //   label:"Estado Legajo",
+        //   type: new FieldInputSelectParamOptions({options:['Completo','Incompleto']}),
+        // }),
         
         new FieldViewOptions({
           field:"anio_ingreso",
@@ -137,10 +137,17 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
           type: new FieldInputSelectParamOptions({options:["Si","No"]}),
         }),
         new FieldViewOptions({
-          field:"adeuda_inscripcion",
-          label:"Adeuda Inscripcion",
+          field:"adeuda_legajo",
+          label:"Adeuda Legajo",
           type: new FieldTextareaOptions(),
         }),
+        new FieldViewOptions({
+          field:"adeuda_deudores",
+          label:"Adeuda Deudores",
+          type: new FieldTextareaOptions(),
+        }),
+        
+        
         new FieldViewOptions({
           field:"plan",
           label:"Plan",

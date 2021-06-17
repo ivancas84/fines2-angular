@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FieldViewOptions } from '@class/field-view-options';
-import { TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions, FieldDateOptions, FieldInputDateOptions, FieldInputSelectCheckboxOptions, UmOptions, DownloadOptions, FieldTextareaOptions } from '@class/field-type-options';
+import { TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions, FieldDateOptions, FieldInputDateOptions, FieldInputSelectCheckboxOptions, UmOptions, DownloadOptions, FieldTextareaOptions, FieldYesNoOptions } from '@class/field-type-options';
 import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { ShowRelDynamicComponent } from '@component/show/show-rel-dynamic.component';
@@ -27,6 +27,9 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
       ),
       switchMap(
         data => this.cantidadAsignaturasAprobadasAlumnosComision(data)
+      ),
+      switchMap(
+        data => this.dd.getRelColumnDataUm(data, "alumno", "alumno", "disposicion_pendiente", ["dis_asi-nombre", "dis_pla-anio", "dis_pla-semestre"])
       ),
       tap(
          data => console.log(data)
@@ -58,6 +61,7 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
       )
     );
   }
+
 
   cantidadAsignaturasAprobadasAlumnosComision(data){
     
@@ -101,12 +105,13 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
     new FieldViewOptions({
       field:"activo",
       label:"Activo",
-      type: new FieldInputCheckboxOptions(),
-      aux:new InputPersistOptions({
-         params: {id:"{{id}}"},
-         entityName:"alumno_comision",
-         fieldName:"activo",
-      })
+      type: new FieldYesNoOptions(),
+      //type: new FieldInputCheckboxOptions(),
+      // aux:new InputPersistOptions({
+      //    params: {id:"{{id}}"},
+      //    entityName:"alumno_comision",
+      //    fieldName:"activo",
+      // })
     }),
     new FieldViewOptions({
       field:"alu-anio_ingreso",
@@ -129,8 +134,8 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
       // })
     }),
     new FieldViewOptions({
-      field:"alu-estado_legajo",
-      label:"Estado legajo",
+      field:"alu-adeuda_legajo",
+      label:"Adeuda legajo",
       // type: new FieldInputSelectParamOptions({options:['Completo','Incompleto']}),
       // aux:new InputPersistOptions({
       //   entityName:"alumno",
@@ -139,15 +144,36 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
       // })
     }),
     new FieldViewOptions({
-      field:"alu-adeuda_inscripcion",
-      label:"Adeuda Inscripcion",
-      // type: new FieldTextareaOptions(),
+      field:"alu-adeuda_deudores",
+      label:"Adeuda Deudores",
+      // type: new FieldInputSelectParamOptions({options:['Completo','Incompleto']}),
       // aux:new InputPersistOptions({
       //   entityName:"alumno",
-      //   fieldName:"adeuda_inscripcion",
+      //   fieldName:"estado_legajo",
       //   params: {id:"{{alumno}}"},
       // })
     }),
+    // new FieldViewOptions({
+    //   field:"alu-adeuda_mesa",
+    //   label:"Adeuda Mesa",
+    //   // type: new FieldInputSelectParamOptions({options:['Completo','Incompleto']}),
+    //   // aux:new InputPersistOptions({
+    //   //   entityName:"alumno",
+    //   //   fieldName:"estado_legajo",
+    //   //   params: {id:"{{alumno}}"},
+    //   // })
+    // }),
+    // new FieldViewOptions({
+    //   field:"alu-adeuda_egresar",
+    //   label:"Adeuda Egresar",
+    //   // type: new FieldInputSelectParamOptions({options:['Completo','Incompleto']}),
+    //   // aux:new InputPersistOptions({
+    //   //   entityName:"alumno",
+    //   //   fieldName:"estado_legajo",
+    //   //   params: {id:"{{alumno}}"},
+    //   // })
+    // }),
+    
     new FieldViewOptions({
       field:"comision",
       label:"Comision",
@@ -160,25 +186,35 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
     new FieldViewOptions({
       field:"alu_per-telefono",
       label:"Teléfono",
-      type: new FieldInputTextOptions(),
-      aux:new InputPersistOptions({
-         entityName:"persona",
-         fieldName:"telefono",
-         params: {id:"{{alu-persona}}"}//utilizar {{key}} para identificar valor del conjunto de datos
-      })
+      // type: new FieldInputTextOptions(),
+      // aux:new InputPersistOptions({
+      //    entityName:"persona",
+      //    fieldName:"telefono",
+      //    params: {id:"{{alu-persona}}"}//utilizar {{key}} para identificar valor del conjunto de datos
+      // })
     }),
     new FieldViewOptions({
       field:"cantidad_aprobada",
       label:"Asignaturas aprobadas",
     }),
-    new FieldViewOptions({
-      field:"_detalle_persona",
-      label:"Legajo",
-      type: new UmOptions({fields:[
-        new FieldViewOptions({ field:"descripcion" }),
-        new FieldViewOptions({ field:"archivo", type:new DownloadOptions() }),
-      ]})
-    }),
+    // new FieldViewOptions({
+    //   field:"_disposicion_pendiente",
+    //   label:"Pendiente",
+    //   type: new UmOptions({fields:[
+    //     new FieldViewOptions({field:"dis_asi-nombre"}),
+    //     new FieldViewOptions({field:"dis_pla-anio"}),
+    //     new FieldViewOptions({field:"dis_pla-semestre"}),
+
+    //   ]})
+    // }),
+    // // new FieldViewOptions({
+    //   field:"_detalle_persona",
+    //   label:"Legajo",
+    //   type: new UmOptions({fields:[
+    //     new FieldViewOptions({ field:"descripcion" }),
+    //     new FieldViewOptions({ field:"archivo", type:new DownloadOptions() }),
+    //   ]})
+    // }),
     // new FieldViewOptions({
     //   field:"_disposicion_no_aprobada",
     //   label:"Asignaturas restantes",

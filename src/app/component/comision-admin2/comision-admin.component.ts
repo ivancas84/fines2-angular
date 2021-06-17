@@ -5,10 +5,11 @@ import { FieldViewOptions } from '@class/field-view-options';
 import { FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputTextOptions, FieldInputAutocompleteOptions, FieldControlOptions, FieldHiddenOptions, FieldInputDateOptions, FieldInputYearOptions, FieldInputSelectOptions } from '@class/field-type-options';
 import { AdminRelDynamicComponent } from '@component/admin-rel/admin-rel-dynamic.component';
 import { AdminRelStructure } from '@class/admin-rel-structure';
+import { FieldWidthOptions } from '@class/field-width-options';
 
 @Component({
   selector: 'app-comision-admin2',
-  templateUrl: '../../core/component/admin/admin-dynamic.component.html',
+  templateUrl: '../../core/component/admin-rel/admin-rel-dynamic.component.html',
 })
 export class ComisionAdmin2Component extends AdminRelDynamicComponent {
 
@@ -126,13 +127,25 @@ export class ComisionAdmin2Component extends AdminRelDynamicComponent {
 
     new AdminRelStructure({
       id:"alumno_comision/comision",
-      title: "Comisión",
+      title: "Alumnos de la Comisión",
       fieldsViewOptions: [ 
+        new FieldViewOptions({
+          field:"id",
+          label:"id",
+          type: new FieldHiddenOptions,
+        }),
         new FieldViewOptions({
           field:"alumno",
           label:"Alumno",
           type: new FieldInputAutocompleteOptions({entityName:"alumno"}),
-          control: new FieldControlOptions({validators: [Validators.required],})
+          control: new FieldControlOptions({validators: [Validators.required],}),
+          width: new FieldWidthOptions({sm:"75%",gtSm:"75%"})
+        }),  
+        new FieldViewOptions({
+          field:"activo",
+          label:"Activo",
+          type: new FieldInputCheckboxOptions(),
+          control: new FieldControlOptions({default:true})
         }),  
       ]
     }),

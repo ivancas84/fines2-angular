@@ -30,6 +30,7 @@ export class _DataDefinitionLabelService {
       case "detalle_persona": { return this.labelDetallePersona(id); }
       case "dia": { return this.labelDia(id); }
       case "disposicion": { return this.labelDisposicion(id); }
+      case "disposicion_pendiente": { return this.labelDisposicionPendiente(id); }
       case "distribucion_horaria": { return this.labelDistribucionHoraria(id); }
       case "domicilio": { return this.labelDomicilio(id); }
       case "email": { return this.labelEmail(id); }
@@ -51,8 +52,6 @@ export class _DataDefinitionLabelService {
     if(!row) return null;
 
     let ret = "";
-    if (row["id"]) ret = ret.trim() + " " + row["id"];
-
     return ret.trim();
   }
 
@@ -190,6 +189,15 @@ export class _DataDefinitionLabelService {
     if(!row) return null;
 
     let ret = "";
+    return ret.trim();
+  }
+
+  labelDisposicionPendienteRow (row: any): string {
+    if(!row) return null;
+
+    let ret = "";
+    if (row["id"]) ret = ret.trim() + " " + row["id"];
+
     return ret.trim();
   }
 
@@ -349,6 +357,7 @@ export class _DataDefinitionLabelService {
           if(!row) return of(null);
           return combineLatest([
             of(this.labelAlumnoRow(row)),
+            this.labelPersona(row.persona),
           ])
         }
       ),
@@ -596,6 +605,22 @@ export class _DataDefinitionLabelService {
             of(this.labelDisposicionRow(row)),
             this.labelAsignatura(row.asignatura),
             this.labelPlanificacion(row.planificacion),
+          ])
+        }
+      ),
+      map(
+        response => { return (!response)? null : response.join(" "); }
+      )
+    );
+  }
+
+  labelDisposicionPendiente(id: string): Observable<any> {
+    return this.dd.get("disposicion_pendiente", id).pipe(
+      switchMap(
+        row => {
+          if(!row) return of(null);
+          return combineLatest([
+            of(this.labelDisposicionPendienteRow(row)),
           ])
         }
       ),
