@@ -11,12 +11,10 @@ import { ComisionShowComponent } from '@component/comision-show/comision-show/co
 import { RdPersonaAdminComponent } from '@component/registro-docente/persona-admin/persona-admin.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin/comision-admin.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin/sede-admin.component';
-import { CdComisionShowComponent } from '@component/consolidado-docente/consolidado-docente/comision-show.component';
 import { TomaPosesionAdminComponent } from '@component/toma-posesion/toma-posesion-admin/toma-posesion-admin.component';
 import { RabcPersonaAdminComponent } from '@component/registro-abc/persona-admin/persona-admin.component';
 import { TomaPosesionRealizadaComponent } from '@component/toma-posesion-realizada/toma-posesion-realizada.component';
 import { ListaAlumnosComponent } from '@component/lista-alumnos/lista-alumnos.component';
-import { CrComisionShowComponent } from '@component/consolidado-referente/comision-show/comision-show.component';
 import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/persona-admin.component';
 import { DocenteShowComponent } from '@component/docente-show/docente-show/docente-show.component';
 import { DocenteDetailComponent } from '@component/docente-detail/docente-detail/docente-detail.component';
@@ -61,6 +59,7 @@ import { PersonaAdminRelComponent } from '@component/persona-admin-rel/persona-a
 import { AlumnoComisionAdminComponent } from '@component/alumno-comision-admin/alumno-comision-admin.component';
 import { CalificacionShowComponent } from '@component/calificacion-show/calificacion-show.component';
 import { CalificacionAdminComponent } from '@component/calificacion-admin/calificacion-admin.component';
+import { DetallePersonaShowComponent } from '@component/detalle-persona-show/detalle-persona-show.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -75,8 +74,6 @@ const routes: Routes = [
   { path: 'comision-show', component: ComisionShowComponent, pathMatch: 'full' },
   { path: 'comision-show2', component: ComisionShow2Component, pathMatch: 'full' },
   { path: 'comision-horarios-admin', component: ComisionHorariosAdminComponent, pathMatch: 'full' },
-  { path: 'consolidado-docente', component: CdComisionShowComponent, pathMatch: 'full' },
-  { path: 'consolidado-referente', component: CrComisionShowComponent, pathMatch: 'full' },
   { path: 'docente-detail', component: DocenteDetailComponent, pathMatch: 'full' },
   { path: 'docente-show', component: DocenteShowComponent, pathMatch: 'full', canActivate : [AuthGuardService]  },
   { path: 'lista-alumnos', component: ListaAlumnosComponent, pathMatch: 'full' },
@@ -126,6 +123,7 @@ const routes: Routes = [
 
   { path: 'calificacion-show', component: CalificacionShowComponent, pathMatch: 'full' },
   { path: 'calificacion-admin', component: CalificacionAdminComponent, pathMatch: 'full' },
+  { path: 'detalle-persona', component: DetallePersonaShowComponent, pathMatch: 'full' },
 
 ];
 

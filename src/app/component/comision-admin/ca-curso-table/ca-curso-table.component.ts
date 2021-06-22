@@ -7,6 +7,7 @@ import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.compo
 import { DialogConfirmComponent } from '@component/dialog-confirm/dialog-confirm.component';
 import { TableComponent } from '@component/table/table.component';
 import { arrayColumn } from '@function/array-column';
+import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { DataToolsService } from '@service/data-tools.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
@@ -34,7 +35,7 @@ export class CaCursoTableComponent extends TableComponent implements OnInit, OnC
 
   constructor(
     protected router: Router,
-    protected dd: DataDefinitionService,
+    protected dd: DataDefinitionToolService,
     protected dialog: MatDialog,
     protected snackBar: MatSnackBar,
     protected storage: SessionStorageService,

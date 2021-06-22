@@ -89,8 +89,6 @@ import { RegistroRealizadoComponent } from '@component/registro-realizado/regist
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin/sede-admin.component';
 import { SedeFieldsetComponent } from '@component/sede-admin/sede-fieldset/sede-fieldset.component';
 
-import { CdComisionShowComponent } from '@component/consolidado-docente/consolidado-docente/comision-show.component';
-import { CdComisionTableComponent } from '@component/consolidado-docente/comision-table/comision-table.component';
 import { RabcPersonaAdminComponent } from '@component/registro-abc/persona-admin/persona-admin.component';
 import { RabcPersonaFieldsetComponent } from '@component/registro-abc/persona-fieldset/persona-fieldset.component';
 import { TomaPosesionAdminComponent } from '@component/toma-posesion/toma-posesion-admin/toma-posesion-admin.component';
@@ -108,8 +106,6 @@ import { ComisionTableComponent } from '@component/comision-show/comision-table/
 import { ComisionSearchComponent } from '@component/comision-show/comision-search/comision-search.component';
 import { ComisionSearchParamsComponent } from '@component/comision-show/comision-search-params/comision-search-params.component';
 import { ListaAlumnosComponent } from '@component/lista-alumnos/lista-alumnos.component';
-import { CrComisionShowComponent } from '@component/consolidado-referente/comision-show/comision-show.component';
-import { CrComisionTableComponent } from '@component/consolidado-referente/comision-table/comision-table.component';
 
 import { DocenteDetailComponent } from '@component/docente-detail/docente-detail/docente-detail.component';
 
@@ -171,6 +167,7 @@ import { CalificacionShowComponent } from '@component/calificacion-show/califica
 import { CalificacionAdminComponent } from '@component/calificacion-admin/calificacion-admin.component';
 import { DownloadComponent } from '@component/download/download.component';
 import { UmComponent } from '@component/um/um.component';
+import { DetallePersonaShowComponent } from '@component/detalle-persona-show/detalle-persona-show.component';
 
 @NgModule({
   declarations: [
@@ -233,7 +230,6 @@ import { UmComponent } from '@component/um/um.component';
 
     AlumnoShowComponent,
     AsignacionPlanillaDocenteAdminComponent,
-    CdComisionShowComponent, CdComisionTableComponent,
     ComisionAdminComponent, ComisionFieldsetComponent, CaCursoTableComponent,
     ComisionHorariosAdminComponent, ComisionHorariosFieldsetComponent,
     ComisionShowComponent, ComisionTableComponent, ComisionSearchComponent, ComisionSearchParamsComponent,
@@ -246,7 +242,6 @@ import { UmComponent } from '@component/um/um.component';
     SedeAdminComponent, SedeFieldsetComponent,
     TomaPosesionAdminComponent, TomaPosesionFieldsetComponent,
     TomaPosesionRealizadaComponent,
-    CrComisionShowComponent, CrComisionTableComponent,
     TomaDetailComponent,
 
     ListaAlumnosComponent,
@@ -289,6 +284,7 @@ import { UmComponent } from '@component/um/um.component';
     PersonaShowComponent,
     CalificacionShowComponent,
     CalificacionAdminComponent,
+    DetallePersonaShowComponent,
   ],
   imports: [
     BrowserModule,

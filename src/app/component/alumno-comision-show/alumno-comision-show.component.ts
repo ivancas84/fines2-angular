@@ -105,13 +105,13 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
     new FieldViewOptions({
       field:"activo",
       label:"Activo",
-      type: new FieldYesNoOptions(),
-      //type: new FieldInputCheckboxOptions(),
-      // aux:new InputPersistOptions({
-      //    params: {id:"{{id}}"},
-      //    entityName:"alumno_comision",
-      //    fieldName:"activo",
-      // })
+      //type: new FieldYesNoOptions(),
+      type: new FieldInputCheckboxOptions(),
+      aux:new InputPersistOptions({
+         params: {id:"{{id}}"},
+         entityName:"alumno_comision",
+         fieldName:"activo",
+      })
     }),
     new FieldViewOptions({
       field:"alu-anio_ingreso",
