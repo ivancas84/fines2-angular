@@ -1,5 +1,5 @@
 import { Component  } from '@angular/core';
-import { TableDynamicComponent } from '@component/table-dynamic/table-dynamic.component';
+import { TableDynamicComponent } from '@component/table/table-dynamic.component';
 
 @Component({
   selector: 'app-curso-toma-posesion-table',
@@ -13,7 +13,7 @@ export class CursoTomaPosesionTableComponent extends TableDynamicComponent {
  
   ngOnInit(): void {
     super.ngOnInit();
-    this.displayedColumns.push("comision")
+    //this.displayedColumns.push("comision") //corresponde a grupo alumnos
     this.displayedColumns.push("options")
     
   }

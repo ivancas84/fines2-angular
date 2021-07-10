@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FieldViewOptions } from '@class/field-view-options';
 import { FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputTextOptions, FieldInputAutocompleteOptions, FieldControlOptions, FieldHiddenOptions, FieldInputDateOptions, FieldInputYearOptions, FieldInputSelectOptions } from '@class/field-type-options';
-import { AdminRelComponent } from '@component/admin-rel/admin-rel.component';
+import { AdminRelDynamicComponent } from '@component/admin-rel/admin-rel-dynamic.component';
 import { AdminRelStructure } from '@class/admin-rel-structure';
 
 @Component({
   selector: 'app-sede-admin',
-  templateUrl: '../../core/component/admin-rel/admin-rel.component.html',
+  templateUrl: '../../core/component/admin-rel/admin-rel-dynamic.component.html',
 })
-export class SedeAdmin2Component extends AdminRelComponent {
+export class SedeAdmin2Component extends AdminRelDynamicComponent {
 
   readonly entityName: string = "sede"
 

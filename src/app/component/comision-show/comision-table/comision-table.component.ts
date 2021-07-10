@@ -9,6 +9,9 @@ import { DataDefinitionToolService } from '@service/data-definition/data-definit
 import { recursiveData } from '@function/recursive-data';
 import { arrayColumn } from '@function/array-column';
 import { Display } from '@class/display';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SessionStorageService } from '@service/storage/session-storage.service';
 
 @Component({
   selector: 'app-comision-table',
@@ -35,11 +38,14 @@ export class ComisionTableComponent extends TableComponent implements OnChanges 
   displayedColumns: string[] = ['comision', 'detalle'];
 
   constructor(
-    protected ddt: DataDefinitionToolService,
-    protected dt: DataToolsService, 
     protected router: Router,
+    protected ddt: DataDefinitionToolService,
+    protected dialog: MatDialog,
+    protected snackBar: MatSnackBar,
+    protected storage: SessionStorageService,
+    protected dt: DataToolsService, 
   ) {
-    super(router);
+    super(router, ddt, dialog, snackBar, storage);
   }
 
   load$: Observable<any>;
@@ -139,7 +145,7 @@ export class ComisionTableComponent extends TableComponent implements OnChanges 
     display.setGroup(["comision"]);
     display.addCondition(["comision","=",ids]);
     display.addCondition(["activo","=",true]);
-    return this.ddt.post("advanced","alumno", display).pipe(
+    return this.ddt.post("advanced","alumno_comision", display).pipe(
       map(
         response => {
           for(var i = 0; i < data.length; i++){

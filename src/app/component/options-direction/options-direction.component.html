@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Opciones</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-selection-list [multiple]="false">
+      <mat-list-option>
+        <a routerLink="/alumno-comision-show" routerLinkActive="active">Buscar alumnos</a>
+      </mat-list-option>
+      <mat-list-option>
+        <a routerLink="/comision-show" routerLinkActive="active" [queryParams]="{'cal-anio':2021,'cal-semestre':1,modalidad:1,autorizada:true,'sed-centro_educativo':'6047d36d50316'}">Consolidado 2021-1</a>
+      </mat-list-option>
+      <mat-list-option>
+        <a routerLink="/comision-show" routerLinkActive="active" [queryParams]="{'cal-anio':2020,'cal-semestre':2,modalidad:1,autorizada:true,'sed-centro_educativo':'6047d36d50316'}">Consolidado 2020-2</a>
+      </mat-list-option>
+
+    </mat-selection-list>
+  </mat-card-content>
+</mat-card>

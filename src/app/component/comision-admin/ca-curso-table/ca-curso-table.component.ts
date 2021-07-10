@@ -1,11 +1,13 @@
 import { OnInit, OnChanges, Component, OnDestroy, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { DialogConfirmComponent } from '@component/dialog-confirm/dialog-confirm.component';
 import { TableComponent } from '@component/table/table.component';
 import { arrayColumn } from '@function/array-column';
+import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { DataToolsService } from '@service/data-tools.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
@@ -32,13 +34,16 @@ export class CaCursoTableComponent extends TableComponent implements OnInit, OnC
   protected subscriptions = new Subscription();
 
   constructor(
-    protected router: Router, 
-    protected dd: DataDefinitionService, 
+    protected router: Router,
+    protected dd: DataDefinitionToolService,
     protected dialog: MatDialog,
-    protected dt: DataToolsService,
+    protected snackBar: MatSnackBar,
     protected storage: SessionStorageService,
+
+    protected dt: DataToolsService,
+    
   ) {
-    super(router);
+    super(router, dd, dialog, snackBar, storage);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -1,8 +1,0 @@
-<ng-template #loading>
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</ng-template>
-
-<div *ngIf="(load$ | async) && load; else loading">
-  <app-persona-search [display]="display"></app-persona-search>
-  <app-persona-table [data]="data" [length]="length" [display]="display"></app-persona-table>
-</div>

@@ -13,7 +13,7 @@ import { FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputText
 
 @Component({
   selector: 'app-comision-relacionada-admin',
-  templateUrl: '../../core/component/admin/admin.component.html',
+  templateUrl: '../../core/component/admin/admin-dynamic.component.html',
 })
 export class ComisionRelacionadaAdminComponent extends AdminComponent {
 

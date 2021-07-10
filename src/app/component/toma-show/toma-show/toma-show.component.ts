@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { FieldViewOptions } from '@class/field-view-options';
-import { FieldYesNoOptions, TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions, FieldDateOptions, FieldInputDateOptions, FieldInputSelectCheckboxOptions, FieldTextareaOptions } from '@class/field-type-options';
+import { TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions, FieldInputDateOptions, FieldInputSelectCheckboxOptions, FieldTextareaOptions } from '@class/field-type-options';
 import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldWidthOptions } from '@class/field-width-options';
-import { ShowDynamicComponent } from '@component/show/show-dynamic.component';
-import { InputCheckboxComponent } from '@component/input-checkbox/input-checkbox.component';
 import { ShowRelDynamicComponent } from '@component/show/show-rel-dynamic.component';
-import { InputTextareaComponent } from '@component/input-textarea/input-textarea.component';
 
 @Component({
   selector: 'app-toma-show',
@@ -17,20 +14,23 @@ export class TomaShowComponent extends ShowRelDynamicComponent {
   readonly entityName: string = "toma";
 
   fieldsViewOptions: FieldViewOptions[] = [
+    
     new FieldViewOptions({
       field:"cur-ige",
       label:"IGE",
       aux: new RouterLinkOptions({path:"calificacion-show-admin-rel",params:{"cur-id":"{{curso}}"}})
     }),
+    
     new FieldViewOptions({
       field:"estado",
       label:"Estado",
+      aux: new RouterLinkOptions({path:"calificacion-show-admin-rel",params:{"cur-id":"{{curso}}"}})
+
     }),
     new FieldViewOptions({
       field:"calificacion",
       label:"Calificacion",
-      labelDisabled:true,
-      type:new FieldInputCheckboxOptions(),
+      type:new FieldInputCheckboxOptions({labelDisabled:true}),
       aux:new InputPersistOptions({
         entityName:"toma",
         fieldName:"calificacion",
@@ -39,8 +39,7 @@ export class TomaShowComponent extends ShowRelDynamicComponent {
     new FieldViewOptions({
       field:"temas_tratados",
       label:"Temas Tratados",
-      labelDisabled:true,
-      type:new FieldInputCheckboxOptions(),
+      type:new FieldInputCheckboxOptions({labelDisabled:true}),
       aux:new InputPersistOptions({
         entityName:"toma",
         fieldName:"temas_tratados",
@@ -49,8 +48,7 @@ export class TomaShowComponent extends ShowRelDynamicComponent {
     new FieldViewOptions({
       field:"asistencia",
       label:"Asistencia",
-      labelDisabled:true,
-      type:new FieldInputCheckboxOptions(),
+      type:new FieldInputCheckboxOptions({labelDisabled:true}),
       aux:new InputPersistOptions({
         entityName:"toma",
         fieldName:"asistencia",
@@ -59,8 +57,7 @@ export class TomaShowComponent extends ShowRelDynamicComponent {
     new FieldViewOptions({
       field:"sin_planillas",
       label:"Sin Planillas",
-      labelDisabled:true,
-      type:new FieldInputCheckboxOptions(),
+      type:new FieldInputCheckboxOptions({labelDisabled:true}),
       aux:new InputPersistOptions({
         entityName:"toma",
         fieldName:"sin_planillas",

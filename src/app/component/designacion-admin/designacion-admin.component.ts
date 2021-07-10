@@ -6,7 +6,7 @@ import { FieldInputAutocompleteOptions, FieldControlOptions, FieldHiddenOptions,
 
 @Component({
   selector: 'app-designacion-admin',
-  templateUrl: '../../core/component/admin/admin.component.html',
+  templateUrl: '../../core/component/admin/admin-dynamic.component.html',
 })
 export class DesignacionAdminComponent extends AdminComponent {
 

@@ -10,6 +10,7 @@ import { ValidatorsService } from '@service/validators/validators.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { FieldViewOptions } from '@class/field-view-options';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
+import { FieldControlOptions } from '@class/field-type-options';
 
 @Component({
   selector: 'app-asignacion-planilla-docente-admin',
@@ -35,7 +36,7 @@ export class AsignacionPlanillaDocenteAdminComponent extends AdminComponent {
       field:"reclamo",
       label:"Reclamo",
       type: "checkbox",
-      default: false,
+      control: new FieldControlOptions({default:false})
     }),
 
     new FieldViewOptions({

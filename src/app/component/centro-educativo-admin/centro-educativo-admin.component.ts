@@ -6,7 +6,7 @@ import { FieldInputTextOptions, FieldInputAutocompleteOptions, FieldControlOptio
 
 @Component({
   selector: 'app-centro-educativo-admin',
-  templateUrl: '../../core/component/admin/admin.component.html',
+  templateUrl: '../../core/component/admin/admin-dynamic.component.html',
 })
 export class CentroEducativoAdminComponent extends AdminComponent {
 
@@ -28,7 +28,9 @@ export class CentroEducativoAdminComponent extends AdminComponent {
     new FieldViewOptions({
       field:"cue",
       label:"Cue",
-      type: new FieldInputTextOptions(),
+      type: new FieldInputTextOptions(
+        {uniqueRoute: "centro-educativo-admin"},
+      ),
       control: new FieldControlOptions({asyncValidators: [this.validators.unique('cue', 'centro_educativo')],})
     }),
     new FieldViewOptions({

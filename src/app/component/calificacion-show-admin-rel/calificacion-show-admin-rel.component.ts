@@ -11,6 +11,7 @@ import { DataDefinitionRelArrayService } from '@service/data-definition-rel-arra
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { ValidatorsService } from '@service/validators/validators.service';
+import { of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
@@ -25,6 +26,13 @@ export class CalificacionShowAdminRelComponent extends ShowAdminRelDynamicCompon
   title: string = "Calificacion"
 
   fieldsViewOptions: FieldViewOptions[] = [
+    new FieldViewOptions({
+      field:"cur-id",
+      label:"Curso",
+      type: new FieldInputAutocompleteOptions({entityName:"curso"}),
+      control: new FieldControlOptions({disabled:false, validators: [Validators.required],})
+    }),
+
     new FieldViewOptions({
       field:"per-id",
       label:"Persona",
@@ -98,24 +106,14 @@ export class CalificacionShowAdminRelComponent extends ShowAdminRelDynamicCompon
     
   ];   
 
-  constructor(
-    protected dd: DataDefinitionToolService, 
-    protected route: ActivatedRoute, 
-    protected dialog: MatDialog,
-    protected validators: ValidatorsService, //los atributos fieldViewOptions y fieldViewOptionsFiters utilizar validadores
-    protected ddra: DataDefinitionRelArrayService,
-    protected storage: SessionStorageService, 
-  ) {
-    super(dd,route,dialog, validators, ddra)
-  }
 
   initParams(params: any){ 
-    if(!params.hasOwnProperty("cur-id")) {
+    /*if(!params.hasOwnProperty("cur-id")) {
       this.dialog.open(DialogAlertComponent, {
         data: {title: "Error", message: 'No se encuentra identificado el curso'}
       })
       throw new Error('No se encuentra identificado el curso')
-    }
+    }*/
     return params;
   }
 
@@ -141,12 +139,12 @@ export class CalificacionShowAdminRelComponent extends ShowAdminRelDynamicCompon
       ),
       switchMap(
         () => {
-          return this.dd._post("persist","calificacion_curso",this.params["cur-id"])
+          return (this.params.hasOwnProperty("cur-id")) ? this.dd._post("persist","calificacion_curso",this.params["cur-id"]) : of(null);
         }
       ),
       switchMap(
         response => {
-          if(response["ids"].length) this.storage.removeItemsContains("."); 
+          if(response && (response["ids"].length)) this.storage.removeItemsContains("."); 
           //si se realizo alguna insercion eliminamos el storage de las consultas
           return this.initLength();
         }

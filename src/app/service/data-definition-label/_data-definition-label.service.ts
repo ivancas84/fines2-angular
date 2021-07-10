@@ -15,6 +15,7 @@ export class _DataDefinitionLabelService {
   label(entityName: string, id: string): Observable<string> {
     switch(entityName) {
       case "alumno": { return this.labelAlumno(id); }
+      case "alumno_comision": { return this.labelAlumnoComision(id); }
       case "asignacion_planilla_docente": { return this.labelAsignacionPlanillaDocente(id); }
       case "asignatura": { return this.labelAsignatura(id); }
       case "calendario": { return this.labelCalendario(id); }
@@ -28,6 +29,8 @@ export class _DataDefinitionLabelService {
       case "designacion": { return this.labelDesignacion(id); }
       case "detalle_persona": { return this.labelDetallePersona(id); }
       case "dia": { return this.labelDia(id); }
+      case "disposicion": { return this.labelDisposicion(id); }
+      case "disposicion_pendiente": { return this.labelDisposicionPendiente(id); }
       case "distribucion_horaria": { return this.labelDistribucionHoraria(id); }
       case "domicilio": { return this.labelDomicilio(id); }
       case "email": { return this.labelEmail(id); }
@@ -38,6 +41,7 @@ export class _DataDefinitionLabelService {
       case "plan": { return this.labelPlan(id); }
       case "planificacion": { return this.labelPlanificacion(id); }
       case "planilla_docente": { return this.labelPlanillaDocente(id); }
+      case "resolucion": { return this.labelResolucion(id); }
       case "sede": { return this.labelSede(id); }
       case "telefono": { return this.labelTelefono(id); }
       case "tipo_sede": { return this.labelTipoSede(id); }
@@ -45,6 +49,13 @@ export class _DataDefinitionLabelService {
     }
   }
   labelAlumnoRow (row: any): string {
+    if(!row) return null;
+
+    let ret = "";
+    return ret.trim();
+  }
+
+  labelAlumnoComisionRow (row: any): string {
     if(!row) return null;
 
     let ret = "";
@@ -174,6 +185,22 @@ export class _DataDefinitionLabelService {
     return ret.trim();
   }
 
+  labelDisposicionRow (row: any): string {
+    if(!row) return null;
+
+    let ret = "";
+    return ret.trim();
+  }
+
+  labelDisposicionPendienteRow (row: any): string {
+    if(!row) return null;
+
+    let ret = "";
+    if (row["id"]) ret = ret.trim() + " " + row["id"];
+
+    return ret.trim();
+  }
+
   labelDistribucionHorariaRow (row: any): string {
     if(!row) return null;
 
@@ -276,6 +303,15 @@ export class _DataDefinitionLabelService {
     return ret.trim();
   }
 
+  labelResolucionRow (row: any): string {
+    if(!row) return null;
+
+    let ret = "";
+    if (row["numero"]) ret = ret.trim() + " " + row["numero"];
+
+    return ret.trim();
+  }
+
   labelSedeRow (row: any): string {
     if(!row) return null;
 
@@ -321,6 +357,23 @@ export class _DataDefinitionLabelService {
           if(!row) return of(null);
           return combineLatest([
             of(this.labelAlumnoRow(row)),
+            this.labelPersona(row.persona),
+          ])
+        }
+      ),
+      map(
+        response => { return (!response)? null : response.join(" "); }
+      )
+    );
+  }
+
+  labelAlumnoComision(id: string): Observable<any> {
+    return this.dd.get("alumno_comision", id).pipe(
+      switchMap(
+        row => {
+          if(!row) return of(null);
+          return combineLatest([
+            of(this.labelAlumnoComisionRow(row)),
           ])
         }
       ),
@@ -543,6 +596,40 @@ export class _DataDefinitionLabelService {
     );
   }
 
+  labelDisposicion(id: string): Observable<any> {
+    return this.dd.get("disposicion", id).pipe(
+      switchMap(
+        row => {
+          if(!row) return of(null);
+          return combineLatest([
+            of(this.labelDisposicionRow(row)),
+            this.labelAsignatura(row.asignatura),
+            this.labelPlanificacion(row.planificacion),
+          ])
+        }
+      ),
+      map(
+        response => { return (!response)? null : response.join(" "); }
+      )
+    );
+  }
+
+  labelDisposicionPendiente(id: string): Observable<any> {
+    return this.dd.get("disposicion_pendiente", id).pipe(
+      switchMap(
+        row => {
+          if(!row) return of(null);
+          return combineLatest([
+            of(this.labelDisposicionPendienteRow(row)),
+          ])
+        }
+      ),
+      map(
+        response => { return (!response)? null : response.join(" "); }
+      )
+    );
+  }
+
   labelDistribucionHoraria(id: string): Observable<any> {
     return this.dd.get("distribucion_horaria", id).pipe(
       switchMap(
@@ -695,6 +782,22 @@ export class _DataDefinitionLabelService {
           if(!row) return of(null);
           return combineLatest([
             of(this.labelPlanillaDocenteRow(row)),
+          ])
+        }
+      ),
+      map(
+        response => { return (!response)? null : response.join(" "); }
+      )
+    );
+  }
+
+  labelResolucion(id: string): Observable<any> {
+    return this.dd.get("resolucion", id).pipe(
+      switchMap(
+        row => {
+          if(!row) return of(null);
+          return combineLatest([
+            of(this.labelResolucionRow(row)),
           ])
         }
       ),

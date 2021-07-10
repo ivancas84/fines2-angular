@@ -9,11 +9,11 @@ import { ShowDynamicComponent } from '@component/show/show-dynamic.component';
 
 @Component({
   selector: 'app-alumno-show',
-  templateUrl: '../../core/component/show/show-dynamic.component.html',
+  templateUrl: './alumno-show.component.html',
 })
 export class AlumnoShowComponent extends ShowDynamicComponent {
 
-  readonly entityName: string = "alumno";
+  readonly entityName: string = "alumno_comision";
 
   queryData(): Observable<any>{
     return this.dd.all(this.entityName, this.display).pipe(

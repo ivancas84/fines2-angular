@@ -27,7 +27,7 @@
       <ng-container matColumnDef="comision">
         <th mat-header-cell *matHeaderCellDef> Grupo de alumnos </th>
         <td mat-cell *matCellDef="let row">{{row.numero}}
-          <div *ngFor="let cr of row['_comision_relacionada']">{{cr.rel_numero}}</div>
+          <span *ngFor="let cr of row['_comision_relacionada']">&nbsp;{{cr.rel_numero}}</span>
         </td>
       </ng-container>
 

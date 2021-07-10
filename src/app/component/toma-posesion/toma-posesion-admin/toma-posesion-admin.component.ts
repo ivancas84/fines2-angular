@@ -17,7 +17,7 @@ export class TomaPosesionAdminComponent extends AdminComponent {
       this.snackBar.open("Error de parámetros", "X");
       return;
     }
-    return params;
+    this.params = params;
   }
 
   initData(): Observable<any> {

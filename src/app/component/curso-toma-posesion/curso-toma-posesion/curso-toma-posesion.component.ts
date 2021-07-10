@@ -20,11 +20,13 @@ export class CursoTomaPosesionComponent extends ShowComponent {
   
   readonly entityName: string = "curso";
 
+  
+
   queryData(): Observable<any>{
     return this.dd.all(this.entityName, this.display).pipe(
       switchMap(
         data => {
-          return this.dd.advancedColumnData(data, "comision", "comision", {"numero":"numero"});
+          return this.dd.advancedColumnData(data, "comision", "comision", {"numero":"numero", "sede":"sede"});
         }
       ),
       switchMap(
@@ -32,6 +34,26 @@ export class CursoTomaPosesionComponent extends ShowComponent {
           return this.dd.selectColumnDataUm(data, {"com_numero":"com-numero", "rel_numero":"rel-numero"}, "comision", "comision_relacionada", "comision")
         }
       ),
+      switchMap(
+        (data: any) => {
+          return this.dd.getPostAllColumnData(data, "info", "id", "curso", "curso_horario", {"horario":"horario"})
+        }
+      ),
+
+      switchMap(
+        (data: any) => {
+          return this.dd.getAllColumnData(data, "sede", "sede",  {"sed-nombre":"nombre","sed-domicilio":"domicilio"} )
+        }
+      ),
+      switchMap(
+        (data: any) => {
+          return this.dd.advancedColumnData(data, "sed-domicilio", "domicilio", {"domicilio":"label"} )
+        }
+      ),
+      tap(
+        (data: any) => {
+        }
+      )
     )
   }
   
@@ -40,24 +62,45 @@ export class CursoTomaPosesionComponent extends ShowComponent {
     this.display.setSize(100);
     this.display.setParamsByQueryParams(this.params);
     this.display.setCondition([
-      ["com_sed-centro_educativo","=","6047d36d50316"],
-      ["com_cal-anio","=","2021"],
-      ["com_cal-semestre","=","1"],
-      ["com-autorizada","=",true]
+      [
+        ["com_sed-centro_educativo","=","6047d36d50316"],
+        ["com_cal-anio","=","2021"],
+        ["com_cal-semestre","=","2"],
+        ["com-autorizada","=",true]
+      ],
+      //["id","=",['5e501982a45f0','5f73a42629144'],"OR"] //horas remanentes
     ])
+    this.display.setOrder({"com-numero":"asc"})
   }
   
   fieldsViewOptions: FieldViewOptions[] = [
-    new FieldViewOptions({
-      field:"ige",
-      label:"Ige",
-    }),
+    // new FieldViewOptions({
+    //   field:"ige",
+    //   label:"Ige",
+    // }),
     new FieldViewOptions({
       field:"asignatura",
       label:"Asignatura",
       type:new TypeLabelOptions({entityName: "asignatura"}),
       //aux:new RouterLinkOptions({path: "asignatura-detail", params:{id:"{{asignatura}})"}}), 
     }),
+    new FieldViewOptions({
+      field:"numero",
+      label:"Numero",
+    }),
+    new FieldViewOptions({
+      field:"sed-nombre",
+      label:"Sede",
+    }),
+    new FieldViewOptions({
+      field:"horario",
+      label:"Horario",
+    }),
+    new FieldViewOptions({
+      field:"domicilio",
+      label:"Domicilio",
+    }),
+    
     new FieldViewOptions({
       field:"horas_catedra",
       label:"Horas Catedra",
@@ -76,6 +119,7 @@ export class CursoTomaPosesionComponent extends ShowComponent {
       label:"Comision",
       type: new FieldInputAutocompleteOptions({entityName:'comision'}),
     }),
+   
     new FieldViewOptions({
       field:"asignatura",
       label:"Asignatura",

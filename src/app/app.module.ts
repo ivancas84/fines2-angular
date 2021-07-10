@@ -44,9 +44,6 @@ import { LogoutComponent } from '@component/logout/logout.component';
 import { HomeComponent } from '@component/home/home.component';
 import { SocialLoginComponent } from '@component/social-login/social-login.component';
 
-import { CardDynamicComponent } from '@component/card-dynamic/card-dynamic.component';
-import { TableDynamicComponent } from '@component/table-dynamic/table-dynamic.component';
-import { FieldsetDynamicComponent } from '@component/fieldset-dynamic/fieldset-dynamic.component';
 //import { BackupComponent } from '@component/backup/backup.component';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { DialogConfirmComponent } from '@component/dialog-confirm/dialog-confirm.component';
@@ -89,16 +86,9 @@ import { RdPersonaAdminComponent } from '@component/registro-docente/persona-adm
 import { RdPersonaFieldsetComponent } from '@component/registro-docente/persona-fieldset/persona-fieldset.component';
 import { RegistroRealizadoComponent } from '@component/registro-realizado/registro-realizado.component';
 
-import { HorarioAdminComponent } from '@component/horario-admin/horario-admin/horario-admin.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin/sede-admin.component';
 import { SedeFieldsetComponent } from '@component/sede-admin/sede-fieldset/sede-fieldset.component';
-import { CursoAdminComponent } from '@component/curso-admin/curso-admin/curso-admin.component';
-import { CursoFieldsetArrayComponent } from '@component/curso-admin/curso-fieldset-array/curso-fieldset-array.component';
-import { TomaAdminComponent } from '@component/toma-admin/toma-admin/toma-admin.component';
-import { TomaFieldsetArrayComponent } from '@component/toma-admin/toma-fieldset-array/toma-fieldset-array.component';
 
-import { CdComisionShowComponent } from '@component/consolidado-docente/consolidado-docente/comision-show.component';
-import { CdComisionTableComponent } from '@component/consolidado-docente/comision-table/comision-table.component';
 import { RabcPersonaAdminComponent } from '@component/registro-abc/persona-admin/persona-admin.component';
 import { RabcPersonaFieldsetComponent } from '@component/registro-abc/persona-fieldset/persona-fieldset.component';
 import { TomaPosesionAdminComponent } from '@component/toma-posesion/toma-posesion-admin/toma-posesion-admin.component';
@@ -111,17 +101,11 @@ import { ComisionHorariosAdminComponent } from '@component/comision-horarios-adm
 import { ComisionShowComponent } from '@component/comision-show/comision-show/comision-show.component';
 import { ComisionHorariosFieldsetComponent } from '@component/comision-horarios-admin/comision-horarios-fieldset/comision-horarios-fieldset.component';
 import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/persona-admin.component';
-import { PersonaShowComponent } from '@component/persona-show/persona-show/persona-show.component';
-import { PersonaTableComponent } from '@component/persona-show/persona-table/persona-table.component';
 import { PersonaFieldsetComponent } from '@component/persona-admin/persona-fieldset/persona-fieldset.component';
 import { ComisionTableComponent } from '@component/comision-show/comision-table/comision-table.component';
 import { ComisionSearchComponent } from '@component/comision-show/comision-search/comision-search.component';
 import { ComisionSearchParamsComponent } from '@component/comision-show/comision-search-params/comision-search-params.component';
-import { PersonaSearchComponent } from '@component/persona-show/persona-search/persona-search.component';
-import { HorarioFieldsetArrayComponent } from '@component/horario-admin/horario-fieldset-array/horario-fieldset-array.component';
 import { ListaAlumnosComponent } from '@component/lista-alumnos/lista-alumnos.component';
-import { CrComisionShowComponent } from '@component/consolidado-referente/comision-show/comision-show.component';
-import { CrComisionTableComponent } from '@component/consolidado-referente/comision-table/comision-table.component';
 
 import { DocenteDetailComponent } from '@component/docente-detail/docente-detail/docente-detail.component';
 
@@ -130,15 +114,12 @@ import { TomaDetailComponent } from '@component/toma-detail/toma-detail.componen
 import { AsignacionPlanillaDocenteAdminComponent } from '@component/asignacion-planilla-docente-admin/asignacion-planilla-docente-admin.component';
 import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin/planilla-docente-admin.component';
 import { FieldTreeComponent } from '@component/field-tree/field-tree.component';
-import { SearchDynamicComponent } from '@component/search-dynamic/search-dynamic.component';
-import { SearchParamsDynamicComponent } from '@component/search-params-dynamic/search-params-dynamic.component';
+import { SearchDynamicComponent } from '@component/search/search-dynamic.component';
 import { MenuLoginComponent } from '@component/menu-login/menu-login.component';
 import { FieldViewAuxComponent } from '@component/field-view-aux/field-view-aux.component';
 import { InputPersistComponent } from '@component/input-persist/input-persist.component';
 import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
-import { FieldsetArrayDynamicComponent } from '@component/fieldset-array-dynamic/fieldset-array-dynamic.component';
 import { ComisionShow2Component } from '@component/comision-show2/comision-show2.component';
-import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.component';
 import { SedeShowComponent } from '@component/sede-show/sede-show.component';
 import { SedeAdmin2Component } from '@component/sede-admin2/sede-admin2.component';
 import { CentroEducativoAdminComponent } from '@component/centro-educativo-admin/centro-educativo-admin.component';
@@ -148,7 +129,6 @@ import { ComisionAdmin2Component } from '@component/comision-admin2/comision-adm
 import { SedeShow2Component } from '@component/sede-show2/sede-show2.component';
 import { SedeShow3Component } from '@component/sede-show3/sede-show3.component';
 import { AsignaturaShowAdminComponent } from '@component/asignatura-show-admin/asignatura-show-admin.component';
-import { TableAdminDynamicComponent } from '@component/table-admin-dynamic/table-admin-dynamic.component';
 import { PersonaShowAdminRelComponent } from '@component/persona-show-admin-rel/persona-show-admin-rel.component';
 import { DataDefinitionRelArrayService } from '@service/data-definition-rel-array/data-definition-rel-array.service';
 import { CalificacionShowAdminRelComponent } from '@component/calificacion-show-admin-rel/calificacion-show-admin-rel.component';
@@ -160,7 +140,39 @@ import { CursoTomaPosesionComponent } from '@component/curso-toma-posesion/curso
 import { CursoTomaPosesionTableComponent } from '@component/curso-toma-posesion/curso-toma-posesion-table/curso-toma-posesion-table.component';
 import { DesignacionAdminComponent } from '@component/designacion-admin/designacion-admin.component';
 import { DesignacionShowComponent } from '@component/designacion-show/designacion-show.component';
-
+import { SearchParamsDynamicComponent } from '@component/search-params/search-params-dynamic.component';
+import { AlumnoSearchComponent } from '@component/alumno-show/alumno-search/alumno-search.component';
+import { ComisionShow3Component } from '@component/comision-show3/comision-show3.component';
+import { AlumnosAprobadosShowComponent } from '@component/alumnos-aprobados-show/alumnos-aprobados-show.component';
+import { TransferirAlumnoAdminComponent } from '@component/transferir-alumno-admin/transferir-alumno-admin.component';
+import { TableAdminDynamicComponent } from '@component/table-admin/table-admin-dynamic.component';
+import { AlumnoAdminRelComponent } from '@component/alumno-admin-rel/alumno-admin-rel.component';
+import { InputUploadComponent } from '@component/input-upload/input-upload.component';
+import { AlumnoComisionShowComponent } from '@component/alumno-comision-show/alumno-comision-show.component';
+import { OptionsAdminComponent } from '@component/options-admin/options-admin.component';
+import { TransferirAlumnoComisionAdminComponent } from '@component/transferir-alumno-comision-admin/transferir-alumno-comision-admin.component';
+import { OptionsDirectionComponent } from '@component/options-direction/options-direction.component';
+import { FieldsetArrayDynamicComponent } from '@component/fieldset-array/fieldset-array-dynamic.component';
+import { TableDynamicComponent } from '@component/table/table-dynamic.component';
+import { FieldsetDynamicComponent } from '@component/fieldset/fieldset-dynamic.component';
+import { CardDynamicComponent } from '@component/card/card-dynamic.component';
+import { OptComponent } from '@component/opt/opt.component';
+import { TomaShowOptionsComponent } from '@component/toma-show-options/toma-show-options.component';
+import { ReferenteTomaShowComponent } from '@component/referente-toma-show/referente-toma-show.component';
+import { AlumnoComisionTomaShowComponent } from '@component/alumno-comision-toma-show/alumno-comision-toma-show.component';
+import { PersonaAdminRelComponent } from '@component/persona-admin-rel/persona-admin-rel.component';
+import { PersonaShowComponent } from '@component/persona-show/persona-show.component';
+import { AlumnoComisionAdminComponent } from '@component/alumno-comision-admin/alumno-comision-admin.component';
+import { CalificacionShowComponent } from '@component/calificacion-show/calificacion-show.component';
+import { CalificacionAdminComponent } from '@component/calificacion-admin/calificacion-admin.component';
+import { DownloadComponent } from '@component/download/download.component';
+import { UmComponent } from '@component/um/um.component';
+import { DetallePersonaShowComponent } from '@component/detalle-persona-show/detalle-persona-show.component';
+import { InscripcionAlumnoAdminRelComponent } from '@component/inscripcion-alumno/inscripcion-alumno/inscripcion-alumno.component';
+import { IaDetallePersonaFieldsetArrayComponent } from '@component/inscripcion-alumno/ia-detalle-persona-fieldset-array/ia-detalle-persona-fieldset-array.component';
+import { InscripcionRealizadaComponent } from '@component/inscripcion-realizada/inscripcion-realizada.component';
+import { DisposicionShowComponent } from '@component/disposicion-show/disposicion-show.component';
+import { CursoShowComponent } from '@component/curso-show/curso-show.component';
 
 @NgModule({
   declarations: [
@@ -182,6 +194,7 @@ import { DesignacionShowComponent } from '@component/designacion-show/designacio
     DialogConfirmComponent,
     FieldViewComponent,
     FieldViewAuxComponent,
+    OptComponent,
     InputAutocompleteComponent,
     InputCheckboxComponent,
     InputDateComponent,
@@ -194,6 +207,7 @@ import { DesignacionShowComponent } from '@component/designacion-show/designacio
     InputTextComponent,
     InputTextareaComponent,
     InputTimepickerComponent,
+    InputUploadComponent,
     InputYearComponent,
     InputPersistComponent,
     //InputYmComponent,
@@ -211,6 +225,8 @@ import { DesignacionShowComponent } from '@component/designacion-show/designacio
     SearchDynamicComponent,
     SearchParamsDynamicComponent,
     MenuLoginComponent,
+    UmComponent,
+    DownloadComponent,
     //DynamicTableComponent,
 
     CalendarioLabelComponent, CalendarioInputSelectComponent, PlanificacionInputPickerComponent,
@@ -219,24 +235,18 @@ import { DesignacionShowComponent } from '@component/designacion-show/designacio
 
     AlumnoShowComponent,
     AsignacionPlanillaDocenteAdminComponent,
-    CdComisionShowComponent, CdComisionTableComponent,
     ComisionAdminComponent, ComisionFieldsetComponent, CaCursoTableComponent,
     ComisionHorariosAdminComponent, ComisionHorariosFieldsetComponent,
     ComisionShowComponent, ComisionTableComponent, ComisionSearchComponent, ComisionSearchParamsComponent,
-    CursoAdminComponent, CursoFieldsetArrayComponent,
     DocenteTableComponent, DocenteShowComponent, DocenteSearchComponent,
     DocenteDetailComponent,
     PersonaAdminComponent, PersonaFieldsetComponent,
-    PersonaShowComponent, PersonaTableComponent, PersonaSearchComponent,
     RdPersonaAdminComponent, RdPersonaFieldsetComponent,
     RegistroRealizadoComponent,
     RabcPersonaAdminComponent, RabcPersonaFieldsetComponent,
     SedeAdminComponent, SedeFieldsetComponent,
-    HorarioAdminComponent, HorarioFieldsetArrayComponent,
-    TomaAdminComponent, TomaFieldsetArrayComponent,
     TomaPosesionAdminComponent, TomaPosesionFieldsetComponent,
     TomaPosesionRealizadaComponent,
-    CrComisionShowComponent, CrComisionTableComponent,
     TomaDetailComponent,
 
     ListaAlumnosComponent,
@@ -244,7 +254,7 @@ import { DesignacionShowComponent } from '@component/designacion-show/designacio
     PlanillaDocenteAdminComponent,
     CalendarioAdminArrayComponent,
     ComisionShow2Component,
-    AlumnoAdminComponent,
+    AlumnoComisionAdminComponent,
     SedeShowComponent,
     SedeAdmin2Component,
     CentroEducativoAdminComponent,
@@ -262,7 +272,29 @@ import { DesignacionShowComponent } from '@component/designacion-show/designacio
     CursoTomaPosesionComponent, CursoTomaPosesionTableComponent,
     ComisionRelacionadaAdminComponent,
     DesignacionAdminComponent,
-    DesignacionShowComponent
+    DesignacionShowComponent,
+    AlumnoSearchComponent,
+    ComisionShow3Component,
+    AlumnosAprobadosShowComponent,
+    TransferirAlumnoAdminComponent,
+    AlumnoAdminRelComponent,
+    OptionsAdminComponent,
+    AlumnoComisionShowComponent,
+    TransferirAlumnoComisionAdminComponent,
+    OptionsDirectionComponent,
+    TomaShowOptionsComponent,
+    ReferenteTomaShowComponent,
+    AlumnoComisionTomaShowComponent,
+    PersonaAdminRelComponent,
+    PersonaShowComponent,
+    CalificacionShowComponent,
+    CalificacionAdminComponent,
+    DetallePersonaShowComponent,
+    InscripcionAlumnoAdminRelComponent, IaDetallePersonaFieldsetArrayComponent,
+    InscripcionRealizadaComponent,
+    DisposicionShowComponent,
+    CursoShowComponent,
+
   ],
   imports: [
     BrowserModule,

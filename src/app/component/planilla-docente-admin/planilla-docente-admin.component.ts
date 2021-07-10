@@ -14,7 +14,7 @@ import { FieldHiddenOptions, FieldInputDateOptions, FieldInputTextOptions } from
 
 @Component({
   selector: 'app-planilla-docente-admin',
-  templateUrl: '../../core/component/admin/admin.component.html',
+  templateUrl: '../../core/component/admin/admin-dynamic.component.html',
 })
 export class PlanillaDocenteAdminComponent extends AdminComponent {
 
