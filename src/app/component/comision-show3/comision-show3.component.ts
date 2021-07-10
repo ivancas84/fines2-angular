@@ -157,11 +157,11 @@ export class ComisionShow3Component extends ShowDynamicComponent {
     //   //type:new FieldInputTextOptions(),
     //   //aux: new InputPersistOptions()
     // }),
-    // new FieldViewOptions({
-    //   field:"horario",
-    //   label:"Horario",
-    //   //aux: new RouterLinkOptions({path:"comision-admin",params:{id:"{{id}}"}})
-    // }),
+    new FieldViewOptions({
+      field:"horario",
+      label:"Horario",
+      //aux: new RouterLinkOptions({path:"comision-admin",params:{id:"{{id}}"}})
+    }),
   ];  
 
   fieldsViewOptionsSp: FieldViewOptions[] = [

@@ -60,6 +60,10 @@ import { AlumnoComisionAdminComponent } from '@component/alumno-comision-admin/a
 import { CalificacionShowComponent } from '@component/calificacion-show/calificacion-show.component';
 import { CalificacionAdminComponent } from '@component/calificacion-admin/calificacion-admin.component';
 import { DetallePersonaShowComponent } from '@component/detalle-persona-show/detalle-persona-show.component';
+import { InscripcionAlumnoAdminRelComponent } from '@component/inscripcion-alumno/inscripcion-alumno/inscripcion-alumno.component';
+import { InscripcionRealizadaComponent } from '@component/inscripcion-realizada/inscripcion-realizada.component';
+import { DisposicionShowComponent } from '@component/disposicion-show/disposicion-show.component';
+import { CursoShowComponent } from '@component/curso-show/curso-show.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -124,6 +128,10 @@ const routes: Routes = [
   { path: 'calificacion-show', component: CalificacionShowComponent, pathMatch: 'full' },
   { path: 'calificacion-admin', component: CalificacionAdminComponent, pathMatch: 'full' },
   { path: 'detalle-persona', component: DetallePersonaShowComponent, pathMatch: 'full' },
+  { path: 'inscripcion-alumno', component: InscripcionAlumnoAdminRelComponent, pathMatch: 'full' },
+  { path: 'inscripcion-realizada', component: InscripcionRealizadaComponent, pathMatch: 'full' },
+  { path: 'disposicion-show', component: DisposicionShowComponent, pathMatch: 'full' },
+  { path: 'curso-show', component: CursoShowComponent, pathMatch: 'full' },
 
 ];
 

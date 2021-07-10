@@ -168,6 +168,11 @@ import { CalificacionAdminComponent } from '@component/calificacion-admin/califi
 import { DownloadComponent } from '@component/download/download.component';
 import { UmComponent } from '@component/um/um.component';
 import { DetallePersonaShowComponent } from '@component/detalle-persona-show/detalle-persona-show.component';
+import { InscripcionAlumnoAdminRelComponent } from '@component/inscripcion-alumno/inscripcion-alumno/inscripcion-alumno.component';
+import { IaDetallePersonaFieldsetArrayComponent } from '@component/inscripcion-alumno/ia-detalle-persona-fieldset-array/ia-detalle-persona-fieldset-array.component';
+import { InscripcionRealizadaComponent } from '@component/inscripcion-realizada/inscripcion-realizada.component';
+import { DisposicionShowComponent } from '@component/disposicion-show/disposicion-show.component';
+import { CursoShowComponent } from '@component/curso-show/curso-show.component';
 
 @NgModule({
   declarations: [
@@ -285,6 +290,11 @@ import { DetallePersonaShowComponent } from '@component/detalle-persona-show/det
     CalificacionShowComponent,
     CalificacionAdminComponent,
     DetallePersonaShowComponent,
+    InscripcionAlumnoAdminRelComponent, IaDetallePersonaFieldsetArrayComponent,
+    InscripcionRealizadaComponent,
+    DisposicionShowComponent,
+    CursoShowComponent,
+
   ],
   imports: [
     BrowserModule,

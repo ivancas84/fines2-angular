@@ -5,6 +5,9 @@ import { FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputText
 import { AdminRelDynamicComponent } from '@component/admin-rel/admin-rel-dynamic.component';
 import { AdminRelStructure } from '@class/admin-rel-structure';
 import { FieldWidthOptions } from '@class/field-width-options';
+import { OptEventIcon, OptLinkIcon, OptRouteIcon } from '@class/opt';
+import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
+import { PDF_URL } from '@config/app.config';
 
 @Component({
   selector: 'app-alumno-admin-rel',
@@ -14,6 +17,24 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
 
   readonly entityName: string = "alumno"
   queryApi:string = "unique_rel_um"
+
+  optColumn = [
+    new OptLinkIcon({
+      action:PDF_URL+"certificado_alumno_regular.php", 
+      template:"description",
+      key:"alumno", 
+      target:"_blank",
+      title:"Constancia de Alumno Regular"
+    }),
+    new OptLinkIcon({
+      action:PDF_URL+"constancia_general_finalizo.php", 
+      template:"description",
+      key:"alumno", 
+      target:"_blank",
+      title:"Constancia de Finalización de Estudios"
+    }),
+    new OptEventIcon({action:"email-inscripcion", template:"mail",key:"per"}),
+  ]
 
   structure:AdminRelStructure[] = [
 
@@ -76,6 +97,19 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
           label:"Email",
           type: new FieldInputTextOptions(),
         }),
+        new FieldViewOptions({
+          field:"telefono_verificado",
+          label:"Teléfono Verificado",
+          type: new FieldInputCheckboxOptions(),
+          control: new FieldControlOptions({default:false})
+        }),
+        new FieldViewOptions({
+          field:"email_verificado",
+          label:"Email Verificado",
+          type: new FieldInputCheckboxOptions(),
+          control: new FieldControlOptions({default:false})
+
+        }),
 
       ]
     }),
@@ -112,7 +146,16 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
           type: new FieldInputSelectParamOptions({options:['Correcto','Indeterminado','Caso particular']}),
         }),
 
-        
+        new FieldViewOptions({
+          field:"adeuda_legajo",
+          label:"Adeuda Legajo",
+          type: new FieldTextareaOptions(),
+        }),
+        new FieldViewOptions({
+          field:"adeuda_deudores",
+          label:"Adeuda Deudores",
+          type: new FieldTextareaOptions(),
+        }),   
         
 
         new FieldViewOptions({
@@ -131,21 +174,65 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
           type: new FieldInputSelectParamOptions({options:[1,2]}),
           control:new FieldControlOptions({default:1})
         }),
+
         new FieldViewOptions({
-          field:"tramo_inscripcion_completo",
-          label:"Tramo inscripcion completo",
-          type: new FieldInputSelectParamOptions({options:["Si","No"]}),
+          field:"tiene_dni",
+          label:"Tiene DNI",
+          type: new FieldInputCheckboxOptions(),
+          control: new FieldControlOptions({default:false})
+
         }),
+
         new FieldViewOptions({
-          field:"adeuda_legajo",
-          label:"Adeuda Legajo",
-          type: new FieldTextareaOptions(),
+          field:"tiene_cuil",
+          label:"Tiene CUIL",
+          type: new FieldInputCheckboxOptions(),
+          control: new FieldControlOptions({default:false})
+
         }),
+
         new FieldViewOptions({
-          field:"adeuda_deudores",
-          label:"Adeuda Deudores",
-          type: new FieldTextareaOptions(),
+          field:"tiene_constancia_primaria",
+          label:"Tiene Constancia Primaria",
+          type: new FieldInputCheckboxOptions(),
+          control: new FieldControlOptions({default:false})
+
         }),
+
+        new FieldViewOptions({
+          field:"tiene_certificado_primaria",
+          label:"Tiene Certificado Primaria",
+          type: new FieldInputCheckboxOptions(),
+          control: new FieldControlOptions({default:false})
+
+        }),
+        
+
+        new FieldViewOptions({
+          field:"tiene_constancia_secundaria",
+          label:"Tiene Constancia Secundaria",
+          type: new FieldInputCheckboxOptions(),
+          control: new FieldControlOptions({default:false})
+
+        }),
+
+        new FieldViewOptions({
+          field:"tiene_analitico_secundaria",
+          label:"Tiene Analitico Secundaria",
+          type: new FieldInputCheckboxOptions(),
+          control: new FieldControlOptions({default:false})
+
+        }),
+
+        new FieldViewOptions({
+          field:"tiene_declaracion_jurada",
+          label:"Tiene Declaracion Jurada",
+          type: new FieldInputCheckboxOptions(),
+          control: new FieldControlOptions({default:false})
+
+        }),
+        
+        
         
         
         new FieldViewOptions({
@@ -197,7 +284,7 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
         }),
         new FieldViewOptions({
           field:"tipo",
-          type: new FieldInputSelectParamOptions({options:['Legajo', 'Información', 'Solicitud', "Solicitud Resuelta", "Certificado"]}),
+          type: new FieldInputSelectParamOptions({options:['Legajo', 'Información', 'Solicitud', "Solicitud Resuelta", "Certificado", "Inscripción"]}),
           control: new FieldControlOptions({default:"Legajo", validators: [Validators.required],}),
         }),
         new FieldViewOptions({
@@ -211,7 +298,7 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
     new AdminRelStructure({
       id:"calificacion/alumno",
       title: "Calificaciones",
-      //order: {"pla-anio":"asc","pla-semestre":"asc","asi-nombre":"asc"},
+      order: {"dis_pla-anio":"asc","dis_pla-semestre":"asc","dis_asi-nombre":"asc"},
 
       fieldsViewOptions: 
     
@@ -258,6 +345,37 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
     
     }),
 
+
+
+
+
+    new AdminRelStructure({
+      id:"disposicion_pendiente/alumno",
+      title: "Disposiciones Pendientes",
+
+
+      fieldsViewOptions: 
+    
+      [
+        new FieldViewOptions({
+          field:"id",
+          label:"id",
+          type: new FieldHiddenOptions,
+        }),
+        new FieldViewOptions({
+          field:"disposicion",
+          label:"Disposicion",
+          type: new FieldInputAutocompleteOptions({entityName:"disposicion"}),
+          width:new FieldWidthOptions({"gtSm":"100%"})
+
+        }),
+       
+      ]  
+    }),
+
+
+
+
     new AdminRelStructure({
       id:"alumno_comision/alumno",
       title: "Comisiones",
@@ -297,6 +415,23 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
       ]  
     }),
   ];
+
+
+  switchAction($event:any){ 
+    switch($event.action){
+      case "email-inscripcion": 
+        this.dd._post("email_inscripcion","toma",$event.data).subscribe(
+          () => {
+            this.dialog.open(DialogAlertComponent, {
+              data: {title: "Email enviado", message: "Se ha enviado el email de inscripción"}
+            })
+          }
+        )
+      break;
+      default:
+        super.switchAction($event)
+    } 
+  }
 
    
 

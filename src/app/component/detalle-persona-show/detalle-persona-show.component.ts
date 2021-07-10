@@ -37,7 +37,7 @@ export class DetallePersonaShowComponent extends ShowDynamicComponent {
       field:"persona",
       label:"Persona",
       type:new TypeLabelOptions({entityName: "persona"}),
-      aux:new RouterLinkOptions({path: "persona-detail", params:{id:"{{persona}})"}}), 
+      aux:new RouterLinkOptions({path: "alumno-admin-rel", params:{persona:"{{persona}})"}}), 
     }),
   ];  
   fieldsViewOptionsSp: FieldViewOptions[] = [
@@ -60,7 +60,7 @@ export class DetallePersonaShowComponent extends ShowDynamicComponent {
     new FieldViewOptions({
       field:"tipo",
       label:"Tipo",
-      type: new FieldInputSelectParamOptions({options:["Solicitud",'Legajo', "Información"]}),
+      type: new FieldInputSelectParamOptions({options:["Solicitud",'Legajo', "Información", "Inscripción"]}),
     }),
     new FieldViewOptions({
       field:"persona",

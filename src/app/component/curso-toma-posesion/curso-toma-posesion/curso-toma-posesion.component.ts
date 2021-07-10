@@ -65,10 +65,10 @@ export class CursoTomaPosesionComponent extends ShowComponent {
       [
         ["com_sed-centro_educativo","=","6047d36d50316"],
         ["com_cal-anio","=","2021"],
-        ["com_cal-semestre","=","1"],
+        ["com_cal-semestre","=","2"],
         ["com-autorizada","=",true]
       ],
-      ["id","=",['5e501982a45f0','5f73a42629144'],"OR"] //horas remanentes
+      //["id","=",['5e501982a45f0','5f73a42629144'],"OR"] //horas remanentes
     ])
     this.display.setOrder({"com-numero":"asc"})
   }
