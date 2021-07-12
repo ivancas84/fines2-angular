@@ -8,6 +8,11 @@ import { Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { Display } from '@class/display';
 import { arrayColumn } from '@function/array-column';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
+import { SessionStorageService } from '@service/storage/session-storage.service';
+import { DataDefinitionRelFieldsService } from '@service/data-definition/data-definition-rel-fields.service';
 
 @Component({
   selector: 'app-alumno-comision-show',
@@ -20,7 +25,7 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
   queryData(): Observable<any>{
     return this.dd.post("ids", this.entityName, this.display).pipe(
       switchMap(
-        ids => this.dd.relGetAllFvo(this.entityName, ids, this.fieldsViewOptions)
+        ids => this.ddrf.getAllFvo(this.entityName, ids, this.fieldsViewOptions)
       ),
       switchMap(
          data => this.legajoAlumno(data)
@@ -29,7 +34,7 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
         data => this.cantidadAsignaturasAprobadasAlumnosComision(data)
       ),
       switchMap(
-        data => this.dd.getRelColumnDataUm(data, "alumno", "alumno", "disposicion_pendiente", ["dis_asi-nombre", "dis_pla-anio", "dis_pla-semestre"])
+        data => this.ddrf.um(data, "alumno", "alumno", "disposicion_pendiente", ["dis_asi-nombre", "dis_pla-anio", "dis_pla-semestre"])
       ),
       tap(
          data => console.log(data)

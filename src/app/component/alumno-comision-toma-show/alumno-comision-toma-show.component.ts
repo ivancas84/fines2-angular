@@ -5,6 +5,11 @@ import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Display } from '@class/display';
 import { arrayColumn } from '@function/array-column';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
+import { SessionStorageService } from '@service/storage/session-storage.service';
+import { DataDefinitionRelFieldsService } from '@service/data-definition/data-definition-rel-fields.service';
 
 @Component({
   selector: 'app-alumno-comision-toma-show',
@@ -18,6 +23,7 @@ export class AlumnoComisionTomaShowComponent extends ShowRelDynamicComponent {
   readonly entityName: string = "alumno_comision";
 
   title: string = "Alumnos";
+
 
   initParams(params: any){ 
     if(!params.hasOwnProperty("com-id")) throw "Error de parametros";
@@ -42,7 +48,7 @@ export class AlumnoComisionTomaShowComponent extends ShowRelDynamicComponent {
         }
       ),
       switchMap(
-        ids => this.dd.relGetAllFvo("alumno_comision", ids, this.fieldsViewOptions)
+        ids => this.ddrf.getAllFvo("alumno_comision", ids, this.fieldsViewOptions)
       )
     )
   }
