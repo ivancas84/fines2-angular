@@ -16,11 +16,8 @@ export class CursoTomaPosesionComponent extends ShowComponent {
   /**
    * Lista de cursos para que el docente pueda seleccionar y tomar posesion
    */
-
   
   readonly entityName: string = "curso";
-
-  
 
   queryData(): Observable<any>{
     return this.dd.all(this.entityName, this.display).pipe(

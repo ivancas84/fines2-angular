@@ -7,7 +7,6 @@ import { FieldHiddenOptions, FieldInputTextOptions, FieldControlOptions, FieldIn
 import { FieldViewOptions } from '@class/field-view-options';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { ShowAdminRelDynamicComponent } from '@component/show-admin-dynamic/show-admin-rel-dynamic.component';
-import { DataDefinitionRelArrayService } from '@service/data-definition-rel-array/data-definition-rel-array.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { ValidatorsService } from '@service/validators/validators.service';

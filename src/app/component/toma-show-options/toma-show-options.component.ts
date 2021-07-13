@@ -9,6 +9,11 @@ import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.compo
 import { ShowRelDynamicComponent } from '@component/show/show-rel-dynamic.component';
 import { Observable, of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { DataDefinitionRelFieldsService } from '@service/data-definition/data-definition-rel-fields.service';
+import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
+import { SessionStorageService } from '@service/storage/session-storage.service';
 
 @Component({
   selector: 'app-toma-show',
@@ -21,7 +26,7 @@ export class TomaShowOptionsComponent extends ShowRelDynamicComponent {
   queryData(): Observable<any>{
     return this.dd.post("ids", this.entityName, this.display).pipe(
       switchMap(
-        ids => this.dd.relGetAllFvo(this.entityName, ids, this.fieldsViewOptions)
+        ids => this.ddrf.getAllFvo(this.entityName, ids, this.fieldsViewOptions)
       ),
       switchMap(
         data => this.dd.getPostAllColumnData(data,"info","curso","curso","curso_horario",{"horario":"horario"})

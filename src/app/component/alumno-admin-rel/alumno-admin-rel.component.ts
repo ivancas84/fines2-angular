@@ -114,6 +114,7 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
       ]
     }),
 
+
     new AdminRelStructure({
       id:"alumno",
       title: "Alumno",

@@ -36,7 +36,6 @@ import { SiNoPipe } from '@pipe/si-no.pipe';
 import { StoragePipe } from '@pipe/storage.pipe';
 import { SummaryPipe } from '@pipe/summary.pipe';
 
-import { DataDefinitionStorageService } from '@service/data-definition-storage.service';
 import { DataDefinitionLabelService } from '@service/data-definition-label/data-definition-label.service';
 
 import { LoginComponent } from '@component/login/login.component';
@@ -130,7 +129,6 @@ import { SedeShow2Component } from '@component/sede-show2/sede-show2.component';
 import { SedeShow3Component } from '@component/sede-show3/sede-show3.component';
 import { AsignaturaShowAdminComponent } from '@component/asignatura-show-admin/asignatura-show-admin.component';
 import { PersonaShowAdminRelComponent } from '@component/persona-show-admin-rel/persona-show-admin-rel.component';
-import { DataDefinitionRelArrayService } from '@service/data-definition-rel-array/data-definition-rel-array.service';
 import { CalificacionShowAdminRelComponent } from '@component/calificacion-show-admin-rel/calificacion-show-admin-rel.component';
 import { OptionsComponent } from '@component/options/options.component';
 import { ComisionCensComponent } from '@component/comision-cens/comision-cens.component';
@@ -173,6 +171,10 @@ import { IaDetallePersonaFieldsetArrayComponent } from '@component/inscripcion-a
 import { InscripcionRealizadaComponent } from '@component/inscripcion-realizada/inscripcion-realizada.component';
 import { DisposicionShowComponent } from '@component/disposicion-show/disposicion-show.component';
 import { CursoShowComponent } from '@component/curso-show/curso-show.component';
+import { DataDefinitionFkObjService } from '@service/data-definition/data-definition-fk-obj.service';
+import { DataDefinitionUmObjService } from '@service/data-definition/data-definition-um-obj.service';
+import { DataDefinitionRelFieldsService } from '@service/data-definition/data-definition-rel-fields.service';
+import { DataDefinitionStorageService } from '@service/data-definition/data-definition-storage-service';
 
 @NgModule({
   declarations: [
@@ -323,12 +325,15 @@ import { CursoShowComponent } from '@component/curso-show/curso-show.component';
     AuthService,
     DataDefinitionService, 
     DataDefinitionToolService,
+    DataDefinitionFkObjService,
+    DataDefinitionUmObjService,
+    DataDefinitionRelFieldsService,
+    
     SessionStorageService, 
     ValidatorsService,
     
-    DataDefinitionStorageService, 
+    DataDefinitionStorageService,
     DataDefinitionLabelService, 
-    DataDefinitionRelArrayService, 
 
 
     {provide: 'SocialAuthServiceConfig', useValue: { autoLogin: false,  providers: [

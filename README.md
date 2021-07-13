@@ -28,5 +28,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Versions
 
-_DataDefinitionRelArrayService v2
 ShowComponent v1

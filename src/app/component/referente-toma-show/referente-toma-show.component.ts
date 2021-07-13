@@ -7,6 +7,11 @@ import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Display } from '@class/display';
 import { arrayColumn } from '@function/array-column';
+import { SessionStorageService } from '@service/storage/session-storage.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { DataDefinitionRelFieldsService } from '@service/data-definition/data-definition-rel-fields.service';
+import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 
 @Component({
   selector: 'app-referente-toma-show',
@@ -16,6 +21,7 @@ export class ReferenteTomaShowComponent extends ShowRelDynamicComponent {
   /**
    * Lista de referentes de toma de posesion
    */
+
 
   readonly entityName: string = "comision_relacionada";
 
@@ -56,7 +62,7 @@ export class ReferenteTomaShowComponent extends ShowRelDynamicComponent {
         }
       ),
       switchMap(
-        ids => this.dd.relGetAllFvo("designacion", ids, this.fieldsViewOptions)
+        ids => this.ddrf.getAllFvo("designacion", ids, this.fieldsViewOptions)
       )
     )
   }
