@@ -36,7 +36,6 @@ import { SiNoPipe } from '@pipe/si-no.pipe';
 import { StoragePipe } from '@pipe/storage.pipe';
 import { SummaryPipe } from '@pipe/summary.pipe';
 
-import { DataDefinitionStorageService } from '@service/data-definition-storage.service';
 import { DataDefinitionLabelService } from '@service/data-definition-label/data-definition-label.service';
 
 import { LoginComponent } from '@component/login/login.component';
@@ -175,6 +174,7 @@ import { CursoShowComponent } from '@component/curso-show/curso-show.component';
 import { DataDefinitionFkObjService } from '@service/data-definition/data-definition-fk-obj.service';
 import { DataDefinitionUmObjService } from '@service/data-definition/data-definition-um-obj.service';
 import { DataDefinitionRelFieldsService } from '@service/data-definition/data-definition-rel-fields.service';
+import { DataDefinitionStorageService } from '@service/data-definition/data-definition-storage-service';
 
 @NgModule({
   declarations: [
@@ -332,7 +332,7 @@ import { DataDefinitionRelFieldsService } from '@service/data-definition/data-de
     SessionStorageService, 
     ValidatorsService,
     
-    DataDefinitionStorageService, 
+    DataDefinitionStorageService,
     DataDefinitionLabelService, 
 
 
