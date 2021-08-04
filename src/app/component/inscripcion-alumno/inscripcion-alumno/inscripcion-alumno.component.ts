@@ -132,6 +132,14 @@ export class InscripcionAlumnoAdminRelComponent extends AdminRelDynamicComponent
           }),
         }),
 
+        new FieldViewOptions({
+          field:"mensaje",
+          label:"Ya se encuentra inscripto? (Mensaje opcional)",
+          type: new FieldTextareaOptions(),
+          control:new FieldControlOptions({placeholder:"Indique si ya se encuentra inscripto en una sede, si ya se encuentra cursando o cualquier otro comentario que desee"}),
+          width: new FieldWidthOptions({ gtSm: "100%" }),
+        }),
+
       ]
     }),
 

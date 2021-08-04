@@ -5,9 +5,10 @@ import { FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputText
 import { AdminRelDynamicComponent } from '@component/admin-rel/admin-rel-dynamic.component';
 import { AdminRelStructure } from '@class/admin-rel-structure';
 import { FieldWidthOptions } from '@class/field-width-options';
-import { OptEventIcon, OptLinkIcon, OptRouteIcon } from '@class/opt';
+import { OptEventIcon, OptLinkIcon } from '@class/opt';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { PDF_URL } from '@config/app.config';
+import { UniqueValidatorOpt, ValidatorOpt } from '@class/validator-opt';
 
 @Component({
   selector: 'app-alumno-admin-rel',
@@ -34,6 +35,12 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
       title:"Constancia de Finalización de Estudios"
     }),
     new OptEventIcon({action:"email-inscripcion", template:"mail",key:"per"}),
+    new OptEventIcon({
+      action:"email-inscripcion", 
+      template:"mail",
+      key:"alumno"
+    }),
+
   ]
 
   structure:AdminRelStructure[] = [
@@ -70,8 +77,21 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
             {uniqueRoute: "alumno-admin-rel", uniqueParam:"persona"},
           ),
           control: new FieldControlOptions({
-            validators: [Validators.required],
-            asyncValidators: [this.validators.unique('numero_documento', 'persona')],
+            validatorOpts: [
+              new ValidatorOpt({
+                id:"required",
+                message:"Debe completar valor",
+                fn:Validators.required,
+              })
+            ],
+            asyncValidatorOpts: [
+              new UniqueValidatorOpt({
+                message:"Valor utilizado",
+                fn:this.validators.unique('numero_documento', 'persona'),
+                route:"alumno-admin-rel",
+                uniqueParam:"persona"
+              })
+            ]
           })
         }),
         new FieldViewOptions({
@@ -108,8 +128,10 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
           label:"Email Verificado",
           type: new FieldInputCheckboxOptions(),
           control: new FieldControlOptions({default:false})
-
         }),
+
+        
+        
 
       ]
     }),
@@ -367,7 +389,15 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
           field:"disposicion",
           label:"Disposicion",
           type: new FieldInputAutocompleteOptions({entityName:"disposicion"}),
-          width:new FieldWidthOptions({"gtSm":"100%"})
+          width:new FieldWidthOptions({"gtSm":"75%"})
+
+        }),
+
+        new FieldViewOptions({
+          field:"modo",
+          label:"Modo",
+          type: new FieldInputTextOptions,
+          width:new FieldWidthOptions({"gtSm":"25%"})
 
         }),
        
@@ -422,6 +452,15 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
     switch($event.action){
       case "email-inscripcion": 
         this.dd._post("email_inscripcion","toma",$event.data).subscribe(
+          () => {
+            this.dialog.open(DialogAlertComponent, {
+              data: {title: "Email enviado", message: "Se ha enviado el email de inscripción"}
+            })
+          }
+        )
+      break;
+      case "email-calificaciones": 
+        this.dd._post("email_calificaciones","alumno",$event.data).subscribe(
           () => {
             this.dialog.open(DialogAlertComponent, {
               data: {title: "Email enviado", message: "Se ha enviado el email de inscripción"}

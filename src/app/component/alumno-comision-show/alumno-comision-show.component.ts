@@ -27,8 +27,11 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
       switchMap(
         ids => this.ddrf.getAllFvo(this.entityName, ids, this.fieldsViewOptions)
       ),
+      
       switchMap(
-         data => this.legajoAlumno(data)
+         data => {
+          return this.legajoAlumno(data)
+         }
       ),
       switchMap(
         data => this.cantidadAsignaturasAprobadasAlumnosComision(data)
@@ -36,9 +39,9 @@ export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
       switchMap(
         data => this.ddrf.um(data, "alumno", "alumno", "disposicion_pendiente", ["dis_asi-nombre", "dis_pla-anio", "dis_pla-semestre"])
       ),
-      tap(
-         data => console.log(data)
-      )
+      // tap(
+      //    data => console.log(data)
+      // )
     )
   }
 

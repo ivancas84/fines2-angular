@@ -85,9 +85,6 @@ import { RdPersonaAdminComponent } from '@component/registro-docente/persona-adm
 import { RdPersonaFieldsetComponent } from '@component/registro-docente/persona-fieldset/persona-fieldset.component';
 import { RegistroRealizadoComponent } from '@component/registro-realizado/registro-realizado.component';
 
-import { SedeAdminComponent } from '@component/sede-admin/sede-admin/sede-admin.component';
-import { SedeFieldsetComponent } from '@component/sede-admin/sede-fieldset/sede-fieldset.component';
-
 import { RabcPersonaAdminComponent } from '@component/registro-abc/persona-admin/persona-admin.component';
 import { RabcPersonaFieldsetComponent } from '@component/registro-abc/persona-fieldset/persona-fieldset.component';
 import { TomaPosesionAdminComponent } from '@component/toma-posesion/toma-posesion-admin/toma-posesion-admin.component';
@@ -120,7 +117,7 @@ import { InputPersistComponent } from '@component/input-persist/input-persist.co
 import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
 import { ComisionShow2Component } from '@component/comision-show2/comision-show2.component';
 import { SedeShowComponent } from '@component/sede-show/sede-show.component';
-import { SedeAdmin2Component } from '@component/sede-admin2/sede-admin2.component';
+import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
 import { CentroEducativoAdminComponent } from '@component/centro-educativo-admin/centro-educativo-admin.component';
 import { CentroEducativoShowComponent } from '@component/centro-educativo-show/centro-educativo-show.component';
 import { CentroEducativoCantidadSedesComponent } from '@component/centro-educativo-cantidad-sedes/centro-educativo-cantidad-sedes.component';
@@ -175,6 +172,8 @@ import { DataDefinitionFkObjService } from '@service/data-definition/data-defini
 import { DataDefinitionUmObjService } from '@service/data-definition/data-definition-um-obj.service';
 import { DataDefinitionRelFieldsService } from '@service/data-definition/data-definition-rel-fields.service';
 import { DataDefinitionStorageService } from '@service/data-definition/data-definition-storage-service';
+import { FormBuilderService } from '@service/form-builder/form-builder.service';
+import { CursoAdminComponent } from '@component/curso-admin/curso-admin.component';
 
 @NgModule({
   declarations: [
@@ -246,7 +245,6 @@ import { DataDefinitionStorageService } from '@service/data-definition/data-defi
     RdPersonaAdminComponent, RdPersonaFieldsetComponent,
     RegistroRealizadoComponent,
     RabcPersonaAdminComponent, RabcPersonaFieldsetComponent,
-    SedeAdminComponent, SedeFieldsetComponent,
     TomaPosesionAdminComponent, TomaPosesionFieldsetComponent,
     TomaPosesionRealizadaComponent,
     TomaDetailComponent,
@@ -258,7 +256,7 @@ import { DataDefinitionStorageService } from '@service/data-definition/data-defi
     ComisionShow2Component,
     AlumnoComisionAdminComponent,
     SedeShowComponent,
-    SedeAdmin2Component,
+    SedeAdminComponent,
     CentroEducativoAdminComponent,
     CentroEducativoShowComponent,
     CentroEducativoCantidadSedesComponent,
@@ -296,6 +294,7 @@ import { DataDefinitionStorageService } from '@service/data-definition/data-defi
     InscripcionRealizadaComponent,
     DisposicionShowComponent,
     CursoShowComponent,
+    CursoAdminComponent
 
   ],
   imports: [
@@ -334,6 +333,7 @@ import { DataDefinitionStorageService } from '@service/data-definition/data-defi
     
     DataDefinitionStorageService,
     DataDefinitionLabelService, 
+    FormBuilderService,
 
 
     {provide: 'SocialAuthServiceConfig', useValue: { autoLogin: false,  providers: [

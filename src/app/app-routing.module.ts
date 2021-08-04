@@ -10,7 +10,6 @@ import { ComisionHorariosAdminComponent } from '@component/comision-horarios-adm
 import { ComisionShowComponent } from '@component/comision-show/comision-show/comision-show.component';
 import { RdPersonaAdminComponent } from '@component/registro-docente/persona-admin/persona-admin.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin/comision-admin.component';
-import { SedeAdminComponent } from '@component/sede-admin/sede-admin/sede-admin.component';
 import { TomaPosesionAdminComponent } from '@component/toma-posesion/toma-posesion-admin/toma-posesion-admin.component';
 import { RabcPersonaAdminComponent } from '@component/registro-abc/persona-admin/persona-admin.component';
 import { TomaPosesionRealizadaComponent } from '@component/toma-posesion-realizada/toma-posesion-realizada.component';
@@ -26,7 +25,6 @@ import { AuthGuardService } from '@service/auth/auth-guard.service';
 import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
 import { ComisionShow2Component } from '@component/comision-show2/comision-show2.component';
 import { SedeShowComponent } from '@component/sede-show/sede-show.component';
-import { SedeAdmin2Component } from '@component/sede-admin2/sede-admin2.component';
 import { CentroEducativoAdminComponent } from '@component/centro-educativo-admin/centro-educativo-admin.component';
 import { CentroEducativoShowComponent } from '@component/centro-educativo-show/centro-educativo-show.component';
 import { CentroEducativoCantidadSedesComponent } from '@component/centro-educativo-cantidad-sedes/centro-educativo-cantidad-sedes.component';
@@ -64,6 +62,8 @@ import { InscripcionAlumnoAdminRelComponent } from '@component/inscripcion-alumn
 import { InscripcionRealizadaComponent } from '@component/inscripcion-realizada/inscripcion-realizada.component';
 import { DisposicionShowComponent } from '@component/disposicion-show/disposicion-show.component';
 import { CursoShowComponent } from '@component/curso-show/curso-show.component';
+import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
+import { CursoAdminComponent } from '@component/curso-admin/curso-admin.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -84,7 +84,6 @@ const routes: Routes = [
   { path: 'persona-admin', component: PersonaAdminComponent, pathMatch: 'full' },
   { path: 'registro-docente', component: RdPersonaAdminComponent, pathMatch: 'full' },
   { path: 'registro-abc', component: RabcPersonaAdminComponent, pathMatch: 'full' },
-  { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
   { path: 'toma-show', component: TomaShowComponent, pathMatch: 'full' },
   { path: 'toma-posesion', component: TomaPosesionAdminComponent, pathMatch: 'full' },
   { path: 'toma-posesion-realizada', component: TomaPosesionRealizadaComponent, pathMatch: 'full' },
@@ -93,7 +92,6 @@ const routes: Routes = [
   { path: 'calendario-admin-array', component: CalendarioAdminArrayComponent, pathMatch: 'full' },
   { path: 'alumno-comision-admin', component: AlumnoComisionAdminComponent, pathMatch: 'full' },
   { path: 'sede-show', component: SedeShowComponent, pathMatch: 'full' },
-  { path: 'sede-admin-2', component: SedeAdmin2Component, pathMatch: 'full' },
   { path: 'centro-educativo-admin', component: CentroEducativoAdminComponent, pathMatch: 'full' },
   { path: 'centro-educativo-show', component: CentroEducativoShowComponent, pathMatch: 'full' },
   { path: 'centro-educativo-cantidad-sedes', component: CentroEducativoCantidadSedesComponent, pathMatch: 'full' },
@@ -132,6 +130,9 @@ const routes: Routes = [
   { path: 'inscripcion-realizada', component: InscripcionRealizadaComponent, pathMatch: 'full' },
   { path: 'disposicion-show', component: DisposicionShowComponent, pathMatch: 'full' },
   { path: 'curso-show', component: CursoShowComponent, pathMatch: 'full' },
+  { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
+  { path: 'curso-admin', component: CursoAdminComponent, pathMatch: 'full' },
+
 
 ];
 

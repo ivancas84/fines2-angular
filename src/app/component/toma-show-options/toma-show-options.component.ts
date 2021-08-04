@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ShowDynamicComponent } from '@component/show/show-dynamic.component';
 import { FieldViewOptions } from '@class/field-view-options';
-import { FieldYesNoOptions, TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions, FieldDateOptions, FieldInputDateOptions, FieldInputSelectCheckboxOptions } from '@class/field-type-options';
+import { FieldYesNoOptions, TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions, FieldDateOptions, FieldInputDateOptions, FieldInputSelectCheckboxOptions, FieldControlOptions } from '@class/field-type-options';
 import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { OptEventIcon } from '@class/opt';
@@ -14,6 +14,8 @@ import { ActivatedRoute } from '@angular/router';
 import { DataDefinitionRelFieldsService } from '@service/data-definition/data-definition-rel-fields.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
+import { ValidatorOpt } from '@class/validator-opt';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-toma-show',
@@ -35,14 +37,15 @@ export class TomaShowOptionsComponent extends ShowRelDynamicComponent {
   }
 
   fieldsViewOptions: FieldViewOptions[] = [
-    new FieldViewOptions({
+    /*new FieldViewOptions({
       field:"id",
       label:"id toma",
-    }),
+    }),*/
     new FieldViewOptions({
       field:"cur-id",
       label:"id curso",
     }),
+    
     new FieldViewOptions({
       field:"cur-ige",
       label:"IGE",
@@ -51,9 +54,19 @@ export class TomaShowOptionsComponent extends ShowRelDynamicComponent {
       field:"fecha_toma",
       label:"Fecha Toma",
       type:new FieldInputDateOptions(),
+      control:new FieldControlOptions({
+        validatorOpts: [
+          new ValidatorOpt({
+            id:'required',
+            message:'No puede estar vacio',
+            fn:Validators.required
+          })
+        ],
+        //asyncValidatorOpts: []
+      }),
       aux:new InputPersistOptions({entityName:"toma",fieldName:"fecha_toma"})
     }),
-    new FieldViewOptions({
+   /* new FieldViewOptions({
       field:"estado",
       label:"Estado",
       type: new FieldInputSelectParamOptions({options:['Aprobada','Pendiente','Renuncia','Error','Baja','Modificada','Observada']}),
@@ -77,7 +90,7 @@ export class TomaShowOptionsComponent extends ShowRelDynamicComponent {
       type: new FieldInputSelectParamOptions({options:['Pasar','Modificar','No pasar']}),
       aux:new InputPersistOptions({entityName:"toma",fieldName:"estado_contralor"})
     }),
-    /*new FieldViewOptions({
+    new FieldViewOptions({
       field:"calificacion",
       label:"Calificacion",
       type:new FieldYesNoOptions(),
@@ -106,10 +119,7 @@ export class TomaShowOptionsComponent extends ShowRelDynamicComponent {
       label:"Curso",
       type:new TypeLabelOptions({entityName: "curso"}),
     }),
-    new FieldViewOptions({
-      field:"horario",
-      label:"Horario",
-    }),
+  
     new FieldViewOptions({
       field:"docente",
       label:"Docente",
@@ -121,18 +131,15 @@ export class TomaShowOptionsComponent extends ShowRelDynamicComponent {
       label:"Telefono",
     }),
     new FieldViewOptions({
-      field:"reemplazo",
-      label:"Reemplazo",
-      type:new TypeLabelOptions({entityName: "persona"}),
-      aux:new RouterLinkOptions({path: "persona-admin-rel", params:{id:"{{reemplazo}})"}}), 
+      field:"doc-email",
+      label:"Email",
     }),
     new FieldViewOptions({
-      field:"planilla_docente",
-      label:"Planilla Docente",
-      type:new TypeLabelOptions({entityName: "planilla_docente"}),
-      aux:new RouterLinkOptions({path: "planilla-docente-detail", params:{id:"{{planilla_docente}})"}}), 
+      field:"doc-email_abc",
+      label:"Email ABC",
     }),
     
+   
   ];  
 
 

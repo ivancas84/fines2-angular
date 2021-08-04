@@ -6,6 +6,8 @@ import { FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputText
 import { AdminRelDynamicComponent } from '@component/admin-rel/admin-rel-dynamic.component';
 import { AdminRelStructure } from '@class/admin-rel-structure';
 import { FieldWidthOptions } from '@class/field-width-options';
+import { ValidatorOpt } from '@class/validator-opt';
+import { FieldsetDynamicOptions } from '@class/fieldset-dynamic-options';
 
 @Component({
   selector: 'app-comision-admin2',
@@ -27,6 +29,7 @@ export class ComisionAdmin2Component extends AdminRelDynamicComponent {
     new AdminRelStructure({
       id:"comision",
       title: "comision",
+      options: new FieldsetDynamicOptions({inputSearchGo:true}),
       fieldsViewOptions: [
         new FieldViewOptions({
           field:"id",
@@ -149,9 +152,48 @@ export class ComisionAdmin2Component extends AdminRelDynamicComponent {
         }),  
       ]
     }),
+
+
+
+
+
+
+
+    new AdminRelStructure({
+      id:"curso/comision",
+      title: "Cursos de la Comisión",
+      fieldsViewOptions: [
+        new FieldViewOptions({
+          field:"id",
+          label:"id",
+          type: new FieldHiddenOptions,
+        }),
+        new FieldViewOptions({
+          field:"horas_catedra",
+          label:"Horas Catedra",
+          type: new FieldInputTextOptions(),
+          control: new FieldControlOptions({validatorOpts: [new ValidatorOpt({id:"required", message:"Debe completar valor", fn:Validators.required})],})
+        }),
+        new FieldViewOptions({
+          field:"ige",
+          label:"Ige",
+          type: new FieldInputTextOptions(),
+        }),
+   
+        new FieldViewOptions({
+          field:"asignatura",
+          label:"Asignatura",
+          type: new FieldInputAutocompleteOptions({entityName:"asignatura"}),
+          control: new FieldControlOptions({validatorOpts: [new ValidatorOpt({id:"required", message:"Debe completar valor", fn:Validators.required})],})
+        }),
+      ]
+    }),
+
+
+
+
+
   ]
-
-
 
 
 
