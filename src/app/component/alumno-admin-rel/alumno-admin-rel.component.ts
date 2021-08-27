@@ -36,9 +36,10 @@ export class AlumnoAdminRelComponent extends AdminRelDynamicComponent {
     }),
     new OptEventIcon({action:"email-inscripcion", template:"mail",key:"per"}),
     new OptEventIcon({
-      action:"email-inscripcion", 
+      action:"email-calificaciones", 
       template:"mail",
-      key:"alumno"
+      key:"alumno",
+      title:"email calificaciones"
     }),
 
   ]

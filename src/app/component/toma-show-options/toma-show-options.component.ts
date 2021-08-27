@@ -115,6 +115,10 @@ export class TomaShowOptionsComponent extends ShowRelDynamicComponent {
       label:"Enlace Planillas",
     }),*/
     new FieldViewOptions({
+      field:"horario",
+      label:"horario",
+    }),
+    new FieldViewOptions({
       field:"curso",
       label:"Curso",
       type:new TypeLabelOptions({entityName: "curso"}),
