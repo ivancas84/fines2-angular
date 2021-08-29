@@ -4,66 +4,8 @@ import { LoginComponent } from '@component/login/login.component';
 import { LogoutComponent } from '@component/logout/logout.component';
 import { HomeComponent } from '@component/home/home.component';
 import { SocialLoginComponent } from '@component/social-login/social-login.component';
+import { ComisionShowComponent } from '@component/comision-show/comision-show.component';
 
-import { AlumnoShowComponent } from '@component/alumno-show/alumno-show.component';
-import { ComisionHorariosAdminComponent } from '@component/comision-horarios-admin/comision-horarios-admin/comision-horarios-admin.component';
-import { ComisionShowComponent } from '@component/comision-show/comision-show/comision-show.component';
-import { RdPersonaAdminComponent } from '@component/registro-docente/persona-admin/persona-admin.component';
-import { ComisionAdminComponent } from '@component/comision-admin/comision-admin/comision-admin.component';
-import { TomaPosesionAdminComponent } from '@component/toma-posesion/toma-posesion-admin/toma-posesion-admin.component';
-import { RabcPersonaAdminComponent } from '@component/registro-abc/persona-admin/persona-admin.component';
-import { TomaPosesionRealizadaComponent } from '@component/toma-posesion-realizada/toma-posesion-realizada.component';
-import { ListaAlumnosComponent } from '@component/lista-alumnos/lista-alumnos.component';
-import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/persona-admin.component';
-import { DocenteShowComponent } from '@component/docente-show/docente-show/docente-show.component';
-import { DocenteDetailComponent } from '@component/docente-detail/docente-detail/docente-detail.component';
-import { TomaShowComponent } from '@component/toma-show/toma-show/toma-show.component';
-import { TomaDetailComponent } from '@component/toma-detail/toma-detail.component';
-import { AsignacionPlanillaDocenteAdminComponent } from '@component/asignacion-planilla-docente-admin/asignacion-planilla-docente-admin.component';
-import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin/planilla-docente-admin.component';
-import { AuthGuardService } from '@service/auth/auth-guard.service';
-import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
-import { ComisionShow2Component } from '@component/comision-show2/comision-show2.component';
-import { SedeShowComponent } from '@component/sede-show/sede-show.component';
-import { CentroEducativoAdminComponent } from '@component/centro-educativo-admin/centro-educativo-admin.component';
-import { CentroEducativoShowComponent } from '@component/centro-educativo-show/centro-educativo-show.component';
-import { CentroEducativoCantidadSedesComponent } from '@component/centro-educativo-cantidad-sedes/centro-educativo-cantidad-sedes.component';
-import { ComisionAdmin2Component } from '@component/comision-admin2/comision-admin.component';
-import { SedeShow2Component } from '@component/sede-show2/sede-show2.component';
-import { SedeShow3Component } from '@component/sede-show3/sede-show3.component';
-import { AsignaturaShowAdminComponent } from '@component/asignatura-show-admin/asignatura-show-admin.component';
-import { PersonaShowAdminRelComponent } from '@component/persona-show-admin-rel/persona-show-admin-rel.component';
-import { CalificacionShowAdminRelComponent } from '@component/calificacion-show-admin-rel/calificacion-show-admin-rel.component';
-import { OptionsComponent } from '@component/options/options.component';
-import { ComisionCensComponent } from '@component/comision-cens/comision-cens.component';
-import { SedeCensComponent } from '@component/sede-cens/sede-cens.component';
-import { ComisionRelacionadaAdminComponent } from '@component/comision-relacionada-admin/comision-relacionada-admin.component';
-import { CursoTomaPosesionComponent } from '@component/curso-toma-posesion/curso-toma-posesion/curso-toma-posesion.component';
-import { DesignacionShowComponent } from '@component/designacion-show/designacion-show.component';
-import { DesignacionAdminComponent } from '@component/designacion-admin/designacion-admin.component';
-import { ComisionShow3Component } from '@component/comision-show3/comision-show3.component';
-import { AlumnosAprobadosShowComponent } from '@component/alumnos-aprobados-show/alumnos-aprobados-show.component';
-import { TransferirAlumnoAdminComponent } from '@component/transferir-alumno-admin/transferir-alumno-admin.component';
-import { AlumnoAdminRelComponent } from '@component/alumno-admin-rel/alumno-admin-rel.component';
-import { AlumnoComisionShowComponent } from '@component/alumno-comision-show/alumno-comision-show.component';
-import { OptionsAdminComponent } from '@component/options-admin/options-admin.component';
-import { TransferirAlumnoComisionAdminComponent } from '@component/transferir-alumno-comision-admin/transferir-alumno-comision-admin.component';
-import { OptionsDirectionComponent } from '@component/options-direction/options-direction.component';
-import { TomaShowOptionsComponent } from '@component/toma-show-options/toma-show-options.component';
-import { ReferenteTomaShowComponent } from '@component/referente-toma-show/referente-toma-show.component';
-import { PersonaShowComponent } from '@component/persona-show/persona-show.component';
-import { AlumnoComisionTomaShowComponent } from '@component/alumno-comision-toma-show/alumno-comision-toma-show.component';
-import { PersonaAdminRelComponent } from '@component/persona-admin-rel/persona-admin-rel.component';
-import { AlumnoComisionAdminComponent } from '@component/alumno-comision-admin/alumno-comision-admin.component';
-import { CalificacionShowComponent } from '@component/calificacion-show/calificacion-show.component';
-import { CalificacionAdminComponent } from '@component/calificacion-admin/calificacion-admin.component';
-import { DetallePersonaShowComponent } from '@component/detalle-persona-show/detalle-persona-show.component';
-import { InscripcionAlumnoAdminRelComponent } from '@component/inscripcion-alumno/inscripcion-alumno/inscripcion-alumno.component';
-import { InscripcionRealizadaComponent } from '@component/inscripcion-realizada/inscripcion-realizada.component';
-import { DisposicionShowComponent } from '@component/disposicion-show/disposicion-show.component';
-import { CursoShowComponent } from '@component/curso-show/curso-show.component';
-import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
-import { CursoAdminComponent } from '@component/curso-admin/curso-admin.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -72,67 +14,7 @@ const routes: Routes = [
   { path: 'social-login', component: SocialLoginComponent, pathMatch: 'full' },
   { path: '',  component: HomeComponent, pathMatch: 'full' },
 
-  { path: 'alumno-show', component: AlumnoShowComponent, pathMatch: 'full' },
-  { path: 'asignacion-planilla-docente-admin', component: AsignacionPlanillaDocenteAdminComponent, pathMatch: 'full' },
-  { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
-  { path: 'comision-show', component: ComisionShowComponent, pathMatch: 'full' },
-  { path: 'comision-show2', component: ComisionShow2Component, pathMatch: 'full' },
-  { path: 'comision-horarios-admin', component: ComisionHorariosAdminComponent, pathMatch: 'full' },
-  { path: 'docente-detail', component: DocenteDetailComponent, pathMatch: 'full' },
-  { path: 'docente-show', component: DocenteShowComponent, pathMatch: 'full', canActivate : [AuthGuardService]  },
-  { path: 'lista-alumnos', component: ListaAlumnosComponent, pathMatch: 'full' },
-  { path: 'persona-admin', component: PersonaAdminComponent, pathMatch: 'full' },
-  { path: 'registro-docente', component: RdPersonaAdminComponent, pathMatch: 'full' },
-  { path: 'registro-abc', component: RabcPersonaAdminComponent, pathMatch: 'full' },
-  { path: 'toma-show', component: TomaShowComponent, pathMatch: 'full' },
-  { path: 'toma-posesion', component: TomaPosesionAdminComponent, pathMatch: 'full' },
-  { path: 'toma-posesion-realizada', component: TomaPosesionRealizadaComponent, pathMatch: 'full' },
-  { path: 'toma-detail', component: TomaDetailComponent, pathMatch: 'full' },
-  { path: 'planilla-docente-admin', component: PlanillaDocenteAdminComponent, pathMatch: 'full' },
-  { path: 'calendario-admin-array', component: CalendarioAdminArrayComponent, pathMatch: 'full' },
-  { path: 'alumno-comision-admin', component: AlumnoComisionAdminComponent, pathMatch: 'full' },
-  { path: 'sede-show', component: SedeShowComponent, pathMatch: 'full' },
-  { path: 'centro-educativo-admin', component: CentroEducativoAdminComponent, pathMatch: 'full' },
-  { path: 'centro-educativo-show', component: CentroEducativoShowComponent, pathMatch: 'full' },
-  { path: 'centro-educativo-cantidad-sedes', component: CentroEducativoCantidadSedesComponent, pathMatch: 'full' },
-  { path: 'comision-admin2', component: ComisionAdmin2Component, pathMatch: 'full' },
-  { path: 'sede-show-2', component: SedeShow2Component, pathMatch: 'full' },
-  { path: 'sede-show-3', component: SedeShow3Component, pathMatch: 'full' },
-  { path: 'asignatura-show-admin', component: AsignaturaShowAdminComponent, pathMatch: 'full' },
-  { path: 'persona-show-admin-rel', component: PersonaShowAdminRelComponent, pathMatch: 'full' },
-  { path: 'calificacion-show-admin-rel', component: CalificacionShowAdminRelComponent, pathMatch: 'full' },
-  { path: 'options', component: OptionsComponent, pathMatch: 'full' },
-  { path: 'comision-cens', component: ComisionCensComponent, pathMatch: 'full' },
-  { path: 'sede-cens', component: SedeCensComponent, pathMatch: 'full' },
-  { path: 'curso-toma-posesion', component: CursoTomaPosesionComponent, pathMatch: 'full' },
-  { path: 'comision-relacionada', component: ComisionRelacionadaAdminComponent, pathMatch: 'full' },
-  { path: 'designacion-show', component: DesignacionShowComponent, pathMatch: 'full' },
-  { path: 'designacion-admin', component: DesignacionAdminComponent, pathMatch: 'full' },
-  { path: 'comision-show-3', component: ComisionShow3Component, pathMatch: 'full' },
-  { path: 'alumnos-aprobados', component: AlumnosAprobadosShowComponent, pathMatch: 'full' },
-  { path: 'transferir-alumno', component: TransferirAlumnoAdminComponent, pathMatch: 'full' },
-  { path: 'alumno-admin-rel', component: AlumnoAdminRelComponent, pathMatch: 'full' },
-  { path: 'alumno-comision-show', component: AlumnoComisionShowComponent, pathMatch: 'full' },
-  { path: 'options-admin', component: OptionsAdminComponent, pathMatch: 'full' },
-  { path: 'transferir-alumno-comision', component: TransferirAlumnoComisionAdminComponent, pathMatch: 'full' },
-  { path: 'options-direction', component: OptionsDirectionComponent, pathMatch: 'full' },
-  { path: 'options-admin', component: OptionsAdminComponent, pathMatch: 'full' },
-  { path: 'toma-show-options', component: TomaShowOptionsComponent, pathMatch: 'full' },
-  { path: 'referente-toma', component: ReferenteTomaShowComponent, pathMatch: 'full' },
-  { path: 'alumno-comision-toma', component: AlumnoComisionTomaShowComponent, pathMatch: 'full' },
-  { path: 'persona-admin-rel', component: PersonaAdminRelComponent, pathMatch: 'full' },
-  { path: 'persona-show', component: PersonaShowComponent, pathMatch: 'full' },
-
-  { path: 'calificacion-show', component: CalificacionShowComponent, pathMatch: 'full' },
-  { path: 'calificacion-admin', component: CalificacionAdminComponent, pathMatch: 'full' },
-  { path: 'detalle-persona', component: DetallePersonaShowComponent, pathMatch: 'full' },
-  { path: 'inscripcion-alumno', component: InscripcionAlumnoAdminRelComponent, pathMatch: 'full' },
-  { path: 'inscripcion-realizada', component: InscripcionRealizadaComponent, pathMatch: 'full' },
-  { path: 'disposicion-show', component: DisposicionShowComponent, pathMatch: 'full' },
-  { path: 'curso-show', component: CursoShowComponent, pathMatch: 'full' },
-  { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
-  { path: 'curso-admin', component: CursoAdminComponent, pathMatch: 'full' },
-
+  { path: 'comision-show',  component: ComisionShowComponent, pathMatch: 'full' },
 
 ];
 

@@ -1,9 +1,0 @@
-<form fxLayout="row" fxLayoutGap="10px" fxLayout.xs="row" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-  <core-input-select [field]="plan" [entityName]="'plan'" [title]="'Plan'" fxFlex="49%" fxLayoutAlign="center center"></core-input-select>
-  <core-input-select-value [field]="anio" [fieldName]="'anio'" [entityName]="'planificacion'" [title]="'Año'" fxFlex="19%" fxLayoutAlign="center center"></core-input-select-value>
-  <core-input-select-value [field]="semestre" [fieldName]="'semestre'" [entityName]="'planificacion'" [title]="'Semestre'" fxFlex="19%" fxLayoutAlign="center center"></core-input-select-value>
-  <div fxFlex="9%">
-    <button mat-mini-fab *ngIf="field.pending" (click)="field.setValue(null)" [disabled]="field.pending" color="primary"><mat-icon>hourglass_empty</mat-icon></button>
-    <button mat-mini-fab *ngIf="!field.pending" (click)="field.setValue(null)" [disabled]="!field.value && !field.pending" color="primary"><mat-icon>clear</mat-icon></button>
-  </div>
-</form>
