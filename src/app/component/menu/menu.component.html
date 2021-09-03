@@ -1,53 +1,13 @@
 <mat-toolbar>
   <span>Fines 2</span>
   
-  <button mat-button [matMenuTriggerFor]="alumno" aria-label="icon-button with menu icon">
-    Alumno
+  <!-- <button mat-button [matMenuTriggerFor]="alumno" aria-label="icon-button with menu icon">
+    Comision
   </button>
   <mat-menu #alumno="matMenu">
-    <a mat-menu-item routerLink="/alumno-admin" routerLinkActive="active" title="Agregar Alumno">Nuevo</a>
-    <a mat-menu-item routerLink="/alumno-show" routerLinkActive="active" title="Ver Alumno">Buscar</a>
+    <a mat-menu-item routerLink="/comision-show" routerLinkActive="active" title="Ver Comision">Ver comisiones</a>
+  </mat-menu> -->
 
-  </mat-menu>
-
-  <button mat-button [matMenuTriggerFor]="docente" aria-label="icon-button with menu icon">
-    Docente
-  </button>
-  <mat-menu #docente="matMenu">
-    <a mat-menu-item routerLink="/docente-show" routerLinkActive="active" title="Ver Docente">Buscar</a>
-    <a mat-menu-item routerLink="/toma-show" routerLinkActive="active" title="Ver Tomas">Tomas de Posesión</a>
-  </mat-menu>
-
-
-  <button mat-button [matMenuTriggerFor]="info" aria-label="icon-button with menu icon">
-    Sede
-  </button>
-  <mat-menu #info="matMenu">
-    <a mat-menu-item routerLink="/comision-show" routerLinkActive="active" title="Consolidado" [queryParams]="comisionShowQueryParams">Consolidado</a>
-    <a mat-menu-item routerLink="/comision-show2" routerLinkActive="active" title="Comisiones" [queryParams]="comisionShowQueryParams">Comisiones</a>
-    <a mat-menu-item routerLink="/sede-show" routerLinkActive="active" title="Calendario">Sedes</a>
-    <a mat-menu-item routerLink="/sede-show-2" routerLinkActive="active" title="Sedes Activas">Sedes activas en determinado periodo</a>
-    <a mat-menu-item routerLink="/sede-show-3" routerLinkActive="active" title="Sedes Activas">Sedes no activas en determinado periodo</a>
-    <a mat-menu-item routerLink="/centro-educativo-show" routerLinkActive="active" title="Calendario">CENS</a>
-    <a mat-menu-item routerLink="/centro-educativo-cantidad-sedes" routerLinkActive="active" title="Centro Educativo Cantidad Sedes">Cantidad Sedes por CENS</a>
-    <a mat-menu-item routerLink="/calendario-admin-array" routerLinkActive="active" title="Calendario">Calendarios</a>
-    <a mat-menu-item routerLink="/sede-admin-2" routerLinkActive="active" title="Nueva Sede">Nueva Sede</a>
-    <a mat-menu-item routerLink="/centro-educativo-admin" routerLinkActive="active" title="Nuevo Centro Educativo">Nuevo CENS</a>
-  </mat-menu>
-
-
-  
-
-  <button *ngIf="view.includes('new-menu')" mat-button [matMenuTriggerFor]="nuevo" aria-label="icon-button with menu icon">
-    Nuevo
-  </button>
-  <mat-menu #nuevo="matMenu">
-    <a mat-menu-item routerLink="/comision-admin" routerLinkActive="active" title="Nueva Comision">Comision</a>
-    <a mat-menu-item routerLink="/sede-admin" routerLinkActive="active" title="Nueva Sede">Sede</a>
-    <a mat-menu-item routerLink="/registro-docente" routerLinkActive="active" title="Nueva Persona">Registro docente</a>
-    <a mat-menu-item routerLink="/persona-admin" routerLinkActive="active" title="Nueva Persona">Persona</a>
-  </mat-menu>
-  
   <span fxFlex="1 1 auto"></span>
 
   <!--a mat-menu-item routerLink="/logout" routerLinkActive="active" title="Logout"><mat-icon>logout</mat-icon></a-->

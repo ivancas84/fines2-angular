@@ -90,9 +90,15 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
           return this.dd.getColumnData(curso,"sede","sede",{numero_sede:"numero"})
         }
       ),
+      switchMap(
+        curso => {
+          return this.dd.getColumnData(curso,"calendario","calendario",{cal_anio:"anio",cal_semestre:"semestre"})
+        }
+      ),
       map(
         curso => { 
-          return (!curso)? null : curso["numero_sede"]+curso["division"]+"/"+curso["anio"]+curso["semestre"]; 
+          curso["periodo"] = curso["cal_anio"].substring(0,4) + "-"+curso["cal_semestre"]
+          return (!curso)? null : curso["numero_sede"]+curso["division"]+"/"+curso["anio"]+curso["semestre"]+" "+curso["periodo"];
         }
       )
     );
