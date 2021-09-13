@@ -50,6 +50,9 @@ export class AlumnoShowComponent extends ShowComponent {
     }),
     "per-apellidos": new ControlValueConfig({
       label:"Apellidos"
+    }),
+    "per-numero_documento": new ControlValueConfig({
+      label:"DNI"
     })
   })
 
