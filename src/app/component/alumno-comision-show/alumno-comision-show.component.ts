@@ -4,10 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FieldWidthOptions } from '@class/field-width-options';
-import { FormArrayConfig, FormStructureConfig } from '@class/reactive-form-config';
+import { FormArrayConfig, FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
-import { InputYearConfig } from '@component/input-year/input-year.component';
 import { ShowComponent } from '@component/show/show.component';
 import { TableDynamicConfig } from '@component/table/table-dynamic.component';
 import { DataDefinitionRelFieldsService } from '@service/data-definition/data-definition-rel-fields.service';
@@ -19,6 +18,7 @@ import { Location } from '@angular/common';
 import { InputTextConfig } from '@component/input-text/input-text.component';
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
 import { ControlBooleanConfig } from '@component/control-boolean/control-boolean.component';
+import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 
 @Component({
   selector: 'app-alumno-comision-show',
@@ -63,6 +63,8 @@ export class AlumnoComisionShowComponent extends ShowComponent {
     }),
     "activo": new ControlBooleanConfig({
       label:"Activo"
+    }),
+    "alumno": new FormControlConfig({
     })
   })
 
@@ -80,5 +82,43 @@ export class AlumnoComisionShowComponent extends ShowComponent {
     })
   }) 
 
+  
+
+  ngOnInit(){
+
+    this.config.optTitle.push(
+      {
+        config: new RouteIconConfig({
+          icon: "mode_edit", 
+          title:"Editar",
+          routerLink: "alumno-comision-show-admin",
+        }),
+        control:this.form
+      },
+    )
+
+    this.config.optColumn = [ //columna opciones
+      {  //boton eliminar 
+        config: new RouteIconConfig({
+          icon:"fitbit",
+          routerLink: "calificacion-show",
+          title: "Calificaciones",
+          params: { "alumno":"{{alumno}}" }
+
+        }),
+      }
+    ]
+
+    super.ngOnInit()
+  }
+
+
+  initParams(params: any){ 
+    this.params = params; 
+    this.config.optTitle[2].config.params = this.params
+  }
+
 }
+
+
 
