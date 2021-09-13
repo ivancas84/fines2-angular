@@ -70,6 +70,24 @@ export class ComisionShowComponent extends ShowComponent {
             title: "Transferir Alumnos Activos",
             fieldEvent: this.optField
            })
+        },
+        {
+          config:new EventIconConfig({
+            icon: "update",
+            action: "actualizar_plan_alumnos",
+            color: "",
+            title: "Actualizar plan de alumnos",
+            fieldEvent: this.optField
+           })
+        },
+        {
+          config:new EventIconConfig({
+            icon: "grade",
+            action: "generar_calificacion_alumnos",
+            color: "",
+            title: "Generar Calificación de alumnos",
+            fieldEvent: this.optField
+           })
         }
       ]
 
@@ -116,6 +134,24 @@ export class ComisionShowComponent extends ShowComponent {
     switch(data.action){
       case "transferir_alumnos_activos":
         var s = this.dd.post("transferir_alumnos_activos", "alumno_comision", data.control.value).subscribe(
+          response => {
+            this.response = response
+            this.submitted()   
+          }
+        )
+        this.subscriptions.add(s)
+      break;
+      case "actualizar_plan_alumnos":
+        var s = this.dd.post("actualizar_plan_alumnos", "actualizar_plan_alumnos", data.control.value).subscribe(
+          response => {
+            this.response = response
+            this.submitted()   
+          }
+        )
+        this.subscriptions.add(s)
+      break;
+      case "generar_calificacion_alumnos":
+        var s = this.dd.post("generar_calificacion_alumnos", "calificacion", data.control.value).subscribe(
           response => {
             this.response = response
             this.submitted()   

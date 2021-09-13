@@ -7,7 +7,6 @@ import { FieldWidthOptions } from '@class/field-width-options';
 import { FormArrayConfig, FormStructureConfig } from '@class/reactive-form-config';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
-import { InputYearConfig } from '@component/input-year/input-year.component';
 import { ShowComponent } from '@component/show/show.component';
 import { TableDynamicConfig } from '@component/table/table-dynamic.component';
 import { DataDefinitionRelFieldsService } from '@service/data-definition/data-definition-rel-fields.service';
@@ -16,9 +15,9 @@ import { FormConfigService } from '@service/form-config/form-config.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { Location } from '@angular/common';
-import { InputTextConfig } from '@component/input-text/input-text.component';
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
+import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 
 @Component({
   selector: 'app-alumno-show',
@@ -46,27 +45,82 @@ export class CalificacionShowComponent extends ShowComponent {
   readonly entityName: string = "calificacion";
 
   config: FormArrayConfig = new TableDynamicConfig({}, {
+    // "disposicion": new ControlLabelConfig({
+    //   label:"disposicion",
+    //   entityName:"disposicion"
+    // }),
+    "dis-asignatura": new ControlLabelConfig({
+      label:"Asignatura",
+      entityName:"asignatura"
+    }),
+    "dis_pla-plan": new ControlLabelConfig({
+      label:"Plan",
+      entityName:"plan"
+    }),
+    "dis_pla-anio": new ControlValueConfig({
+      label:"Año",
+    }),
+    "dis_pla-semestre": new ControlValueConfig({
+      label:"Semestre",
+    }),
+    "alumno": new ControlLabelConfig({
+      label:"alumno",
+      entityName:"alumno"
+    }),
     "nota_final": new ControlValueConfig({
       label:"Nota Final"
     }),
     "crec": new ControlValueConfig({
       label:"CREC"
     }),
-    "alumno": new ControlLabelConfig({
-      label:"alumno",
-      entityName:"alumno"
-    })
+    
   })
 
   searchConfig: FormStructureConfig = new FormStructureConfig({}, {
     "params":new FieldsetDynamicConfig({},{
       "alu-persona":new InputAutocompleteConfig({
-        label:"Buscar",
+        label:"Persona",
         entityName:"persona",
         width: new FieldWidthOptions()
       })
     })
   }) 
+
+
+  ngOnInit(){
+
+    this.config.optTitle.push(
+      {
+        config: new RouteIconConfig({
+          icon: "mode_edit", 
+          title:"Editar",
+          routerLink: "calificacion-show-admin",
+        }),
+        control:this.form
+      },
+    )
+
+    this.config.optTitle.push(
+      {
+        config: new RouteIconConfig({
+          icon: "list_alt", 
+          title:"Comisiones del alumno",
+          routerLink: "alumno-comision-show",
+        }),
+        control:this.form
+      },
+    )
+
+    super.ngOnInit()
+  }
+
+  initParams(params: any){ 
+    this.params = params; 
+    
+    this.config.optTitle[2].config.params = this.params
+    this.config.optTitle[3].config.params = this.params
+
+  }
 
 }
 

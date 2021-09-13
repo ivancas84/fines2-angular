@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FieldWidthOptions } from '@class/field-width-options';
-import { FormArrayConfig, FormStructureConfig } from '@class/reactive-form-config';
+import { FormArrayConfig, FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
 import { InputYearConfig } from '@component/input-year/input-year.component';
@@ -21,6 +21,8 @@ import { InputAutocompleteConfig } from '@component/input-autocomplete/input-aut
 import { ControlBooleanConfig } from '@component/control-boolean/control-boolean.component';
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { ControlDateConfig } from '@component/control-date/control-date.component';
+import { AbstractControlViewOption } from '@component/abstract-control-view/abstract-control-view.component';
+import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 
 @Component({
   selector: 'app-toma-show',
@@ -47,7 +49,24 @@ export class TomaShowComponent extends ShowComponent {
   
   readonly entityName: string = "toma";
 
-  config: FormArrayConfig = new TableDynamicConfig({}, {
+  config: FormArrayConfig = new TableDynamicConfig(
+    {
+      optColumn: [
+        {
+          config:new RouteIconConfig({
+            icon: "list",
+            routerLink: "alumno-comision-show",
+            title: "Lista de Alumnos",
+            params: { "comision":"{{cur-comision}}" }
+          })
+        }
+      ] //columna opciones
+    }, {
+    "cur-id": new ControlValueConfig({
+      label:"id curso"
+    }),
+    "cur-comision": new FormControlConfig({
+    }),
     "fecha_toma": new ControlDateConfig({
       label:"Fecha Toma"
     }),
@@ -91,6 +110,22 @@ export class TomaShowComponent extends ShowComponent {
       }),
     })
   }) 
+
+
+  
+  /**
+   * el control y el index se definen por cada fila, no deben ser completados
+   */
+  /**
+   {  //boton eliminar 
+      config: new EventIconConfig({
+        action:"remove",
+        color: "accent",
+        fieldEvent:this.optField,
+        icon:"delete"
+      }),
+    }
+   */
 
 }
 
