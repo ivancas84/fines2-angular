@@ -38,6 +38,8 @@ import { ReferentesParaDocenteComponent } from '@component/_referentes-para-doce
 import { DesignacionAdminShowComponent } from '@component/designacion-admin-show/designacion-admin-show.component';
 import { TomaShowComponent } from '@component/toma-show/toma-show.component';
 import { TomaShowAdminComponent } from '@component/toma-show-admin/toma-show-admin.component';
+import { AlumnoComisionShowAdminComponent } from '@component/alumno-comision-show-admin/alumno-comision-show-admin.component';
+import { CalificacionShowAdminComponent } from '@component/calificacion-show-admin/calificacion-show-admin.component';
 //import { MatTimepickerModule } from 'mat-timepicker';
 //import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 //import { GoogleLoginProvider } from 'angularx-social-login';
@@ -59,8 +61,10 @@ import { TomaShowAdminComponent } from '@component/toma-show-admin/toma-show-adm
     ComisionShowComponent,
     AlumnoShowComponent,
     CalificacionShowComponent,
+    CalificacionShowAdminComponent,
     ComisionRelacionadaShowAdminComponent,
     AlumnoComisionShowComponent,
+    AlumnoComisionShowAdminComponent,
     AlumnoComisionRelacionShowComponent,
     DesignacionShowComponent,
     DesignacionRelacionShowComponent,
@@ -68,7 +72,8 @@ import { TomaShowAdminComponent } from '@component/toma-show-admin/toma-show-adm
     ReferentesParaDocenteComponent,
     DesignacionAdminShowComponent,
     TomaShowComponent,
-    TomaShowAdminComponent
+    TomaShowAdminComponent,
+
 
   ],
   imports: [
