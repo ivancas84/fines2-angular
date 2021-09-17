@@ -19,6 +19,10 @@ import { TomaShowComponent } from '@component/toma-show/toma-show.component';
 import { TomaShowAdminComponent } from '@component/toma-show-admin/toma-show-admin.component';
 import { AlumnoComisionShowAdminComponent } from '@component/alumno-comision-show-admin/alumno-comision-show-admin.component';
 import { CalificacionShowAdminComponent } from '@component/calificacion-show-admin/calificacion-show-admin.component';
+import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
+import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
+import { CalendarioShowAdminComponent } from '@component/calendario-show-admin/calendario-show-admin.component';
+import { SedeShowComponent } from '@component/sede-show/sede-show.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -28,9 +32,12 @@ const routes: Routes = [
   { path: '',  component: HomeComponent, pathMatch: 'full' },
 
   { path: 'comision-show',  component: ComisionShowComponent, pathMatch: 'full' },
+  { path: 'comision-admin',  component: ComisionAdminComponent, pathMatch: 'full' },
+
   { path: 'alumno-comision-show',  component: AlumnoComisionShowComponent, pathMatch: 'full' },
   { path: 'alumno-comision-show-admin',  component: AlumnoComisionShowAdminComponent, pathMatch: 'full' },
   { path: 'alumno-show',  component: AlumnoShowComponent, pathMatch: 'full' },
+  { path: 'calendario-show-admin',  component: CalendarioShowAdminComponent, pathMatch: 'full' },
   { path: 'calificacion-show',  component: CalificacionShowComponent, pathMatch: 'full' },
   { path: 'calificacion-show-admin',  component: CalificacionShowAdminComponent, pathMatch: 'full' },
   { path: 'comision-relacionada-show-admin',  component: ComisionRelacionadaShowAdminComponent, pathMatch: 'full' },
@@ -40,8 +47,11 @@ const routes: Routes = [
   { path: 'alumnos-para-docente',  component: AlumnosParaDocenteComponent, pathMatch: 'full' },
   { path: 'referentes-para-docente',  component: ReferentesParaDocenteComponent, pathMatch: 'full' },
   { path: 'designacion-admin-show',  component: DesignacionAdminShowComponent, pathMatch: 'full' },
+  { path: 'sede-admin',  component: SedeAdminComponent, pathMatch: 'full' },
   { path: 'toma-show',  component: TomaShowComponent, pathMatch: 'full' },
   { path: 'toma-show-admin',  component: TomaShowAdminComponent, pathMatch: 'full' },
+  { path: 'sede-show',  component: SedeShowComponent, pathMatch: 'full' },
+
 
 
 ];

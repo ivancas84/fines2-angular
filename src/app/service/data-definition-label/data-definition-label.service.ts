@@ -23,6 +23,17 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
     }
   }
 
+  labelCalendarioRow (row: any): string {
+    if(!row) return null;
+    let ret = "";
+    if (row["anio"]) ret = Parser.dateFormat(row["anio"], 'Y');
+    if (row["semestre"]) ret = ret + "-"+row["semestre"];
+    if (row["descripcion"]) ret = ret + " "+row["descripcion"];
+
+    return ret.trim();
+  }
+
+
   labelCalendarioAsRow (row: any): string {
     if(!row) return null;
     let ret = "";

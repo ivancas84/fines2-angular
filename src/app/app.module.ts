@@ -40,6 +40,10 @@ import { TomaShowComponent } from '@component/toma-show/toma-show.component';
 import { TomaShowAdminComponent } from '@component/toma-show-admin/toma-show-admin.component';
 import { AlumnoComisionShowAdminComponent } from '@component/alumno-comision-show-admin/alumno-comision-show-admin.component';
 import { CalificacionShowAdminComponent } from '@component/calificacion-show-admin/calificacion-show-admin.component';
+import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
+import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
+import { CalendarioShowAdminComponent } from '@component/calendario-show-admin/calendario-show-admin.component';
+import { SedeShowComponent } from '@component/sede-show/sede-show.component';
 //import { MatTimepickerModule } from 'mat-timepicker';
 //import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 //import { GoogleLoginProvider } from 'angularx-social-login';
@@ -48,8 +52,6 @@ import { CalificacionShowAdminComponent } from '@component/calificacion-show-adm
 
 
 //import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
-
-
 
 
 @NgModule({
@@ -62,7 +64,9 @@ import { CalificacionShowAdminComponent } from '@component/calificacion-show-adm
     AlumnoShowComponent,
     CalificacionShowComponent,
     CalificacionShowAdminComponent,
+    ComisionAdminComponent,
     ComisionRelacionadaShowAdminComponent,
+
     AlumnoComisionShowComponent,
     AlumnoComisionShowAdminComponent,
     AlumnoComisionRelacionShowComponent,
@@ -73,8 +77,9 @@ import { CalificacionShowAdminComponent } from '@component/calificacion-show-adm
     DesignacionAdminShowComponent,
     TomaShowComponent,
     TomaShowAdminComponent,
-
-
+    SedeAdminComponent,
+    SedeShowComponent,
+    CalendarioShowAdminComponent
   ],
   imports: [
     BrowserModule,
