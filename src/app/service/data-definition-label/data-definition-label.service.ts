@@ -62,22 +62,22 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
     return this.dd.get("curso", id).pipe(
       switchMap(
         curso => {
-          return this.dd.getColumnData(curso,"asignatura","asignatura",{asignatura:"nombre"})
+          return this.dd.getConnection(curso,"asignatura","asignatura",{asignatura:"nombre"})
         }
       ),
       switchMap(
         curso => {
-          return this.dd.getColumnData(curso,"comision","comision",{division:"division",sede:"sede",planificacion:"planificacion"})
+          return this.dd.getConnection(curso,"comision","comision",{division:"division",sede:"sede",planificacion:"planificacion"})
         }
       ),
       switchMap(
         curso => {
-          return this.dd.getColumnData(curso,"planificacion","planificacion",{anio:"anio",semestre:"semestre"})
+          return this.dd.getConnection(curso,"planificacion","planificacion",{anio:"anio",semestre:"semestre"})
         }
       ),
       switchMap(
         curso => {
-          return this.dd.getColumnData(curso,"sede","sede",{numero_sede:"numero"})
+          return this.dd.getConnection(curso,"sede","sede",{numero_sede:"numero"})
         }
       ),
       map(
@@ -93,17 +93,17 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
     return this.dd.get("comision", id).pipe(
       switchMap(
         curso => {
-          return this.dd.getColumnData(curso,"planificacion","planificacion",{anio:"anio",semestre:"semestre"})
+          return this.dd.getConnection(curso,"planificacion","planificacion",{anio:"anio",semestre:"semestre"})
         }
       ),
       switchMap(
         curso => {
-          return this.dd.getColumnData(curso,"sede","sede",{numero_sede:"numero"})
+          return this.dd.getConnection(curso,"sede","sede",{numero_sede:"numero"})
         }
       ),
       switchMap(
         curso => {
-          return this.dd.getColumnData(curso,"calendario","calendario",{cal_anio:"anio",cal_semestre:"semestre"})
+          return this.dd.getConnection(curso,"calendario","calendario",{cal_anio:"anio",cal_semestre:"semestre"})
         }
       ),
       map(

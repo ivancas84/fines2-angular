@@ -20,7 +20,7 @@ import { InputDateConfig } from '@component/input-date/input-date.component';
 import { InputSelectParamConfig } from '@component/input-select-param/input-select-param.component';
 import { InputYearConfig } from '@component/input-year/input-year.component';
 import { EventIconConfig } from '@component/event-icon/event-icon.component';
-import { ControlValueConfig } from '@component/control-value/control-value.component';
+import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
 
 @Component({
   selector: 'app-toma-show',
@@ -65,13 +65,15 @@ export class TomaShowAdminComponent extends ShowAdminComponent {
       label:"Estado Contralor",
       options:["Pasar","Modificar","No pasar"], 
     }),
-    "curso": new ControlLabelConfig({
+    "curso": new InputAutocompleteConfig({
       label:"Curso",
       entityName:"curso"
     }),
-    "docente": new ControlLabelConfig({
+    "docente": new InputAutocompleteConfig({
       label:"Docente",
       entityName:"persona"
+    }),
+    "comentario": new InputTextConfig({
     }),
     
     // "activo": new ControlBooleanConfig({

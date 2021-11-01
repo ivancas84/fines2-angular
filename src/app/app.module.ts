@@ -44,6 +44,9 @@ import { ComisionAdminComponent } from '@component/comision-admin/comision-admin
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
 import { CalendarioShowAdminComponent } from '@component/calendario-show-admin/calendario-show-admin.component';
 import { SedeShowComponent } from '@component/sede-show/sede-show.component';
+import { DetallePersonaShowComponent } from '@component/detalle-persona-show/detalle-persona-show.component';
+import { DetallePersonaShowAdminComponent } from '@component/detalle-persona-show-admin/detalle-persona-show-admin.component';
+import { CertificadoAlumnoRegularComponent } from '@component/_certificado_alumno_regular/_certificado_alumno_regular.component';
 //import { MatTimepickerModule } from 'mat-timepicker';
 //import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 //import { GoogleLoginProvider } from 'angularx-social-login';
@@ -79,7 +82,10 @@ import { SedeShowComponent } from '@component/sede-show/sede-show.component';
     TomaShowAdminComponent,
     SedeAdminComponent,
     SedeShowComponent,
-    CalendarioShowAdminComponent
+    CalendarioShowAdminComponent,
+    DetallePersonaShowComponent,
+    DetallePersonaShowAdminComponent,
+    CertificadoAlumnoRegularComponent
   ],
   imports: [
     BrowserModule,

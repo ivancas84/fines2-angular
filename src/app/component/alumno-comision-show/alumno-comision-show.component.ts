@@ -19,6 +19,9 @@ import { InputTextConfig } from '@component/input-text/input-text.component';
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
 import { ControlBooleanConfig } from '@component/control-boolean/control-boolean.component';
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
+import { InputSelectCheckboxConfig } from '@component/input-select-checkbox/input-select-checkbox.component';
+import { LinkTextConfig } from '@component/link-text/link-text.component';
+import { InputCheckboxConfig } from '@component/input-checkbox/input-checkbox.component';
 
 @Component({
   selector: 'app-alumno-comision-show',
@@ -46,20 +49,32 @@ export class AlumnoComisionShowComponent extends ShowComponent {
   readonly entityName: string = "alumno_comision";
 
   config: FormArrayConfig = new TableDynamicConfig({}, {
-    "alu_per-nombres": new ControlValueConfig({
-      label:"Nombres"
-    }),
+    "alu-persona": new FormControlConfig(),
+    
     "alu_per-apellidos": new ControlValueConfig({
       label:"Apellidos"
+    }),
+    "alu_per-nombres": new ControlValueConfig({
+      label:"Nombres"
     }),
     "alu_per-numero_documento": new ControlValueConfig({
       label:"DNI"
     }),
+    // "alu_per-fecha_nacimiento": new ControlValueConfig({
+    //   label:"fecha nacimiento"
+    // }),
     "alu_per-telefono": new ControlValueConfig({
       label:"Teléfono"
     }),
     "alu_per-email": new ControlValueConfig({
       label:"email"
+    }),
+    "alu_per-fecha-nacimiento": new ControlValueConfig({
+    }),
+
+    "alu-adeuda_deudores": new ControlValueConfig({
+    }),
+    "alu-estado_inscripcion": new ControlValueConfig({
     }),
     "activo": new ControlBooleanConfig({
       label:"Activo"
@@ -74,10 +89,15 @@ export class AlumnoComisionShowComponent extends ShowComponent {
         label:"Buscar",
         width: new FieldWidthOptions()
       }),
+      "alu-adeuda_deudores.exists":new InputSelectCheckboxConfig({
+        label:"Adeuda Deudores",
+      }),
       "comision":new InputAutocompleteConfig({
         label:"Comisión",
         entityName:"comision",
         width: new FieldWidthOptions()
+      }),
+      "activo":new InputSelectCheckboxConfig({
       }),
     })
   }) 
@@ -98,13 +118,30 @@ export class AlumnoComisionShowComponent extends ShowComponent {
     )
 
     this.config.optColumn = [ //columna opciones
-      {  //boton eliminar 
+      {   
         config: new RouteIconConfig({
           icon:"fitbit",
           routerLink: "calificacion-show",
           title: "Calificaciones",
           params: { "alumno":"{{alumno}}" }
 
+        }),
+      },
+      {   
+        config: new RouteIconConfig({
+          icon:"list",
+          routerLink: "detalle-persona-show",
+          title: "Detalle",
+          params: { "persona":"{{alu-persona}}" }
+        }),
+      },
+      {   
+        config: new LinkTextConfig({
+          url: "https://planfines2.com.ar/users/alumno-admin-rel",
+          label: "Editar",
+          title: "Editar Alumno",
+          params: { "id":"{{alumno}}" },
+          target:"_blank"
         }),
       }
     ]

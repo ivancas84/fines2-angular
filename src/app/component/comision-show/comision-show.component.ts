@@ -22,6 +22,7 @@ import { InputSelectCheckboxConfig } from '@component/input-select-checkbox/inpu
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
+import { InputTextConfig } from '@component/input-text/input-text.component';
 
 @Component({
   selector: 'app-comision-show',
@@ -63,6 +64,15 @@ export class ComisionShowComponent extends ShowComponent {
            })
         },
         {
+          config:new RouteIconConfig({
+            icon: "school",
+            routerLink: "toma-show",
+            params: {"cur-comision":"{{id}}"},
+            color: "",
+            title: "Toma de posesión"
+           })
+        },
+        {
           config:new EventIconConfig({
             icon: "flight_takeoff",
             action: "transferir_alumnos_activos",
@@ -89,6 +99,7 @@ export class ComisionShowComponent extends ShowComponent {
             fieldEvent: this.optField
            })
         }
+        
       ]
 
     }, {
@@ -110,22 +121,22 @@ export class ComisionShowComponent extends ShowComponent {
     "params":new FieldsetDynamicConfig({title:"Opciones"},{
       "cal-anio":new InputYearConfig({
         label:"Año",
-        width: new FieldWidthOptions()
       }),
       "cal-semestre":new InputSelectParamConfig({
         label:"Semestre",
         options:["1","2"],
-        width: new FieldWidthOptions()
       }),
       "autorizada":new InputSelectCheckboxConfig({
         label:"Autorizada",
-        width: new FieldWidthOptions()
       }),
       "sed-centro_educativo":new InputSelectConfig({
         label:"Centro Educativo",
         entityName:"centro_educativo",
-        width: new FieldWidthOptions()
+      }),
+      "sed-numero":new InputTextConfig({
+        label:"Número Sede",
       })
+
     })
   }) 
 
