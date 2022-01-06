@@ -26,6 +26,9 @@ import { SedeShowComponent } from '@component/sede-show/sede-show.component';
 import { DetallePersonaShowComponent } from '@component/detalle-persona-show/detalle-persona-show.component';
 import { DetallePersonaShowAdminComponent } from '@component/detalle-persona-show-admin/detalle-persona-show-admin.component';
 import { CertificadoAlumnoRegularComponent } from '@component/_certificado_alumno_regular/_certificado_alumno_regular.component';
+import { LegajoComponent } from '@component/_legajo/_legajo';
+import { CalificacionesComponent } from '@component/_calificaciones/_calificaciones';
+import { TransferirAlumnoComponent } from '@component/_transferir_alumno/transferir-alumno.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -40,15 +43,17 @@ const routes: Routes = [
   { path: 'alumno-comision-show',  component: AlumnoComisionShowComponent, pathMatch: 'full' },
   { path: 'alumno-comision-show-admin',  component: AlumnoComisionShowAdminComponent, pathMatch: 'full' },
   { path: 'alumno-show',  component: AlumnoShowComponent, pathMatch: 'full' },
+  { path: 'alumno-comision-relacion-show',  component: AlumnoComisionRelacionShowComponent, pathMatch: 'full' },
   { path: 'calendario-show-admin',  component: CalendarioShowAdminComponent, pathMatch: 'full' },
   { path: 'calificacion-show',  component: CalificacionShowComponent, pathMatch: 'full' },
   { path: 'calificacion-show-admin',  component: CalificacionShowAdminComponent, pathMatch: 'full' },
+  { path: 'calificaciones',  component: CalificacionesComponent, pathMatch: 'full' },
   { path: 'comision-relacionada-show-admin',  component: ComisionRelacionadaShowAdminComponent, pathMatch: 'full' },
-  { path: 'alumno-comision-relacion-show',  component: AlumnoComisionRelacionShowComponent, pathMatch: 'full' },
   { path: 'designacion-show',  component: DesignacionShowComponent, pathMatch: 'full' },
   { path: 'designacion-relacion-show',  component: DesignacionRelacionShowComponent, pathMatch: 'full' },
   { path: 'detalle-persona-show',  component: DetallePersonaShowComponent, pathMatch: 'full' },
   { path: 'detalle-persona-show-admin',  component: DetallePersonaShowAdminComponent, pathMatch: 'full' },
+  { path: 'legajo',  component: LegajoComponent, pathMatch: 'full' },
   { path: 'alumnos-para-docente',  component: AlumnosParaDocenteComponent, pathMatch: 'full' },
   { path: 'referentes-para-docente',  component: ReferentesParaDocenteComponent, pathMatch: 'full' },
   { path: 'designacion-admin-show',  component: DesignacionAdminShowComponent, pathMatch: 'full' },
@@ -58,6 +63,7 @@ const routes: Routes = [
   { path: 'sede-show',  component: SedeShowComponent, pathMatch: 'full' },
   { path: 'certificado-alumno-regular',  component: CertificadoAlumnoRegularComponent, pathMatch: 'full' },
   
+  { path: 'transferir-alumno',  component: TransferirAlumnoComponent, pathMatch: 'full' },
 
 
 ];

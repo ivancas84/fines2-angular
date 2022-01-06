@@ -81,7 +81,7 @@ export class ReferentesParaDocenteComponent extends ShowComponent {
         ids => console.log(ids)
       ),
       switchMap(
-        ids => this.ddrf.getAllGroup(this.entityName, ids, this.config.controls)
+        ids => this.ddrf.getAllConfig(this.entityName, ids, this.config.controls)
       )
     )
   }

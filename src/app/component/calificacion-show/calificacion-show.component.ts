@@ -9,7 +9,7 @@ import { ControlValueConfig } from '@component/control-value/control-value.compo
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
 import { ShowComponent } from '@component/show/show.component';
 import { TableDynamicConfig } from '@component/table/table-dynamic.component';
-import { DataDefinitionRelFieldsService } from '@service/data-definition/data-definition-rel-fields.service';
+import { DataDefinitionFkAllService } from '@service/data-definition/data-definition-fk-all.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { FormConfigService } from '@service/form-config/form-config.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
@@ -30,7 +30,7 @@ export class CalificacionShowComponent extends ShowComponent {
     protected route: ActivatedRoute, 
     protected dialog: MatDialog,
     protected storage: SessionStorageService,
-    protected ddrf: DataDefinitionRelFieldsService,
+    protected ddrf: DataDefinitionFkAllService,
     protected fc: FormConfigService,
     protected router: Router, 
     protected snackBar: MatSnackBar,

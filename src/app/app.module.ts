@@ -47,6 +47,9 @@ import { SedeShowComponent } from '@component/sede-show/sede-show.component';
 import { DetallePersonaShowComponent } from '@component/detalle-persona-show/detalle-persona-show.component';
 import { DetallePersonaShowAdminComponent } from '@component/detalle-persona-show-admin/detalle-persona-show-admin.component';
 import { CertificadoAlumnoRegularComponent } from '@component/_certificado_alumno_regular/_certificado_alumno_regular.component';
+import { LegajoComponent } from '@component/_legajo/_legajo';
+import { CalificacionesComponent } from '@component/_calificaciones/_calificaciones';
+import { TransferirAlumnoComponent } from '@component/_transferir_alumno/transferir-alumno.component';
 //import { MatTimepickerModule } from 'mat-timepicker';
 //import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 //import { GoogleLoginProvider } from 'angularx-social-login';
@@ -85,7 +88,10 @@ import { CertificadoAlumnoRegularComponent } from '@component/_certificado_alumn
     CalendarioShowAdminComponent,
     DetallePersonaShowComponent,
     DetallePersonaShowAdminComponent,
-    CertificadoAlumnoRegularComponent
+    CertificadoAlumnoRegularComponent,
+    LegajoComponent,
+    CalificacionesComponent,
+    TransferirAlumnoComponent
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,7 @@ import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.comp
 import { InputYearConfig } from '@component/input-year/input-year.component';
 import { ShowComponent } from '@component/show/show.component';
 import { TableDynamicConfig } from '@component/table/table-dynamic.component';
-import { DataDefinitionRelFieldsService } from '@service/data-definition/data-definition-rel-fields.service';
+import { DataDefinitionFkAllService } from '@service/data-definition/data-definition-fk-all.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { FormConfigService } from '@service/form-config/form-config.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
@@ -35,7 +35,7 @@ export class TomaShowComponent extends ShowComponent {
     protected route: ActivatedRoute, 
     protected dialog: MatDialog,
     protected storage: SessionStorageService,
-    protected ddrf: DataDefinitionRelFieldsService,
+    protected ddrf: DataDefinitionFkAllService,
     protected fc: FormConfigService,
     protected router: Router, 
     protected snackBar: MatSnackBar,
@@ -135,7 +135,7 @@ export class TomaShowComponent extends ShowComponent {
   queryData(): Observable<any>{
     return this.dd.post("ids", this.entityName, this.display$.value).pipe(
       switchMap(
-        ids => this.ddrf.getAllGroup(this.entityName, ids, this.config.controls)
+        ids => this.ddrf.getAllConfig(this.entityName, ids, this.config.controls)
       ),
       switchMap(
         data =>  this.dd.postAllConnection(data,"planilla_cargada","id","id","toma",{"planilla_cargada":"planilla_cargada"})

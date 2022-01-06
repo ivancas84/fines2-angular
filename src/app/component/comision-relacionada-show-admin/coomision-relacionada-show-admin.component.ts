@@ -96,7 +96,6 @@ export class ComisionRelacionadaShowAdminComponent extends ShowComponent {
 
 
   ngOnInit(){
-    console.log(this.config)
     this.config.optColumn[0].config.fieldEvent = this.config.optField
     super.ngOnInit()
   }

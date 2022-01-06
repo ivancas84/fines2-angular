@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { FieldWidthOptions } from '@class/field-width-options';
-import { ConfigFormGroupFactory, FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
-import { AbstractControlViewOption } from '@component/abstract-control-view/abstract-control-view.component';
+import { FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
 import { AdminComponent } from '@component/admin/admin.component';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
-import { EventButtonConfig } from '@component/event-button/event-button.component';
 import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
@@ -125,6 +122,9 @@ export class ComisionAdminComponent extends AdminComponent {
         "asignatura": new  InputSelectConfig(
           {entityName:"asignatura"}
         ),
+        "horas_catedra": new  InputTextConfig({
+          type:"number"
+        }),
         "horario": new  ControlValueConfig(
           {readonly:true, disabled:true}
         ),

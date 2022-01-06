@@ -1,10 +1,10 @@
 <mat-toolbar>
   <span>Fines 2</span>
   
-  <button mat-button [matMenuTriggerFor]="alumno" aria-label="icon-button with menu icon">
+  <button mat-button [matMenuTriggerFor]="comision" aria-label="icon-button with menu icon">
     Comision
   </button>
-  <mat-menu #alumno="matMenu">
+  <mat-menu #comision="matMenu">
     <a mat-menu-item routerLink="/sede-show" routerLinkActive="active" title="Ver Sede">Ver sedes</a>
     <a mat-menu-item routerLink="/comision-show" routerLinkActive="active" title="Ver Comision" [queryParams]="comisionShowQueryParams">Ver comisiones</a>
   </mat-menu>
@@ -14,6 +14,15 @@
   </button>
   <mat-menu #toma="matMenu">
     <a mat-menu-item routerLink="/toma-show" routerLinkActive="active" title="Ver Tomas" [queryParams]="tomaShowQueryParams">Ver tomas 2021-1</a>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="alumno" aria-label="icon-button with menu icon">
+    Alumno
+  </button>
+  <mat-menu #alumno="matMenu">
+    <a mat-menu-item routerLink="/legajo" routerLinkActive="active" title="Legajo">Legajo</a>
+    <a mat-menu-item routerLink="/calificaciones" routerLinkActive="active" title="Calificaciones">Calificaciones</a>
+    <a mat-menu-item routerLink="/alumno-comision-show" routerLinkActive="active" title="Ver Alumno Comision" >Alumno comision</a>
   </mat-menu>
 
   <button mat-button [matMenuTriggerFor]="info" aria-label="icon-button with menu icon">

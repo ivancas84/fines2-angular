@@ -9,7 +9,7 @@ import { ControlValueConfig } from '@component/control-value/control-value.compo
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
 import { ShowComponent } from '@component/show/show.component';
 import { TableDynamicConfig } from '@component/table/table-dynamic.component';
-import { DataDefinitionRelFieldsService } from '@service/data-definition/data-definition-rel-fields.service';
+import { DataDefinitionFkAllService } from '@service/data-definition/data-definition-fk-all.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { FormConfigService } from '@service/form-config/form-config.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
@@ -22,6 +22,8 @@ import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 import { InputSelectCheckboxConfig } from '@component/input-select-checkbox/input-select-checkbox.component';
 import { LinkTextConfig } from '@component/link-text/link-text.component';
 import { InputCheckboxConfig } from '@component/input-checkbox/input-checkbox.component';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-alumno-comision-show',
@@ -34,7 +36,7 @@ export class AlumnoComisionShowComponent extends ShowComponent {
     protected route: ActivatedRoute, 
     protected dialog: MatDialog,
     protected storage: SessionStorageService,
-    protected ddrf: DataDefinitionRelFieldsService,
+    protected ddrf: DataDefinitionFkAllService,
     protected fc: FormConfigService,
     protected router: Router, 
     protected snackBar: MatSnackBar,
@@ -154,6 +156,17 @@ export class AlumnoComisionShowComponent extends ShowComponent {
     this.params = params; 
     this.config.optTitle[2].config.params = this.params
   }
+
+  // queryData(): Observable<any>{
+  //   return this.dd.post("ids", this.entityName, this.display$.value).pipe(
+  //     switchMap(
+  //       ids => this.ddrf.getAllConfig(this.entityName, ids, this.config.controls)
+  //     ),
+  //     switchMap(
+  //       data => 
+  //     )
+  //   )
+  // }
 
 }
 
