@@ -8,7 +8,7 @@ import { ComisionShowComponent } from '@component/comision-show/comision-show.co
 import { AlumnoShowComponent } from '@component/alumno-show/alumno-show.component';
 import { CalificacionShowComponent } from '@component/calificacion-show/calificacion-show.component';
 import { AlumnoComisionShowComponent } from '@component/alumno-comision-show/alumno-comision-show.component';
-import { ComisionRelacionadaShowAdminComponent } from '@component/comision-relacionada-show-admin/coomision-relacionada-show-admin.component';
+import { ComisionRelacionadaAdminArrayComponent } from '@component/comision-relacionada-show-admin/coomision-relacionada-show-admin.component';
 import { AlumnoComisionRelacionShowComponent } from '@component/alumno-comision-relacion-show/alumno-comision-relacion-show.component';
 import { DesignacionShowComponent } from '@component/designacion-show/designacion-show.component';
 import { DesignacionRelacionShowComponent } from '@component/designacion-relacion-show/designacion-relacion-show.component';
@@ -16,15 +16,15 @@ import { AlumnosParaDocenteComponent } from '@component/_alumnos-para-docente/_a
 import { ReferentesParaDocenteComponent } from '@component/_referentes-para-docente/_referentes-para-docente.component';
 import { DesignacionAdminShowComponent } from '@component/designacion-admin-show/designacion-admin-show.component';
 import { TomaShowComponent } from '@component/toma-show/toma-show.component';
-import { TomaShowAdminComponent } from '@component/toma-show-admin/toma-show-admin.component';
-import { AlumnoComisionShowAdminComponent } from '@component/alumno-comision-show-admin/alumno-comision-show-admin.component';
-import { CalificacionShowAdminComponent } from '@component/calificacion-show-admin/calificacion-show-admin.component';
+import { TomaAdminArrayComponent } from '@component/toma-show-admin/toma-show-admin.component';
+import { AlumnoComisionAdminArrayComponent } from '@component/alumno-comision-show-admin/alumno-comision-show-admin.component';
+import { CalificacionAdminArrayComponent } from '@component/calificacion-show-admin/calificacion-show-admin.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
-import { CalendarioShowAdminComponent } from '@component/calendario-show-admin/calendario-show-admin.component';
+import { CalendarioAdminArrayComponent } from '@component/calendario-show-admin/calendario-show-admin.component';
 import { SedeShowComponent } from '@component/sede-show/sede-show.component';
 import { DetallePersonaShowComponent } from '@component/detalle-persona-show/detalle-persona-show.component';
-import { DetallePersonaShowAdminComponent } from '@component/detalle-persona-show-admin/detalle-persona-show-admin.component';
+import { DetallePersonaAdminArrayComponent } from '@component/detalle-persona-show-admin/detalle-persona-show-admin.component';
 import { CertificadoAlumnoRegularComponent } from '@component/_certificado_alumno_regular/_certificado_alumno_regular.component';
 import { LegajoComponent } from '@component/_legajo/_legajo';
 import { CalificacionesComponent } from '@component/_calificaciones/_calificaciones';
@@ -41,25 +41,25 @@ const routes: Routes = [
   { path: 'comision-admin',  component: ComisionAdminComponent, pathMatch: 'full' },
 
   { path: 'alumno-comision-show',  component: AlumnoComisionShowComponent, pathMatch: 'full' },
-  { path: 'alumno-comision-show-admin',  component: AlumnoComisionShowAdminComponent, pathMatch: 'full' },
+  { path: 'alumno-comision-show-admin',  component: AlumnoComisionAdminArrayComponent, pathMatch: 'full' },
   { path: 'alumno-show',  component: AlumnoShowComponent, pathMatch: 'full' },
   { path: 'alumno-comision-relacion-show',  component: AlumnoComisionRelacionShowComponent, pathMatch: 'full' },
-  { path: 'calendario-show-admin',  component: CalendarioShowAdminComponent, pathMatch: 'full' },
+  { path: 'calendario-show-admin',  component: CalendarioAdminArrayComponent, pathMatch: 'full' },
   { path: 'calificacion-show',  component: CalificacionShowComponent, pathMatch: 'full' },
-  { path: 'calificacion-show-admin',  component: CalificacionShowAdminComponent, pathMatch: 'full' },
+  { path: 'calificacion-show-admin',  component: CalificacionAdminArrayComponent, pathMatch: 'full' },
   { path: 'calificaciones',  component: CalificacionesComponent, pathMatch: 'full' },
-  { path: 'comision-relacionada-show-admin',  component: ComisionRelacionadaShowAdminComponent, pathMatch: 'full' },
+  { path: 'comision-relacionada-show-admin',  component: ComisionRelacionadaAdminArrayComponent, pathMatch: 'full' },
   { path: 'designacion-show',  component: DesignacionShowComponent, pathMatch: 'full' },
   { path: 'designacion-relacion-show',  component: DesignacionRelacionShowComponent, pathMatch: 'full' },
   { path: 'detalle-persona-show',  component: DetallePersonaShowComponent, pathMatch: 'full' },
-  { path: 'detalle-persona-show-admin',  component: DetallePersonaShowAdminComponent, pathMatch: 'full' },
+  { path: 'detalle-persona-show-admin',  component: DetallePersonaAdminArrayComponent, pathMatch: 'full' },
   { path: 'legajo',  component: LegajoComponent, pathMatch: 'full' },
   { path: 'alumnos-para-docente',  component: AlumnosParaDocenteComponent, pathMatch: 'full' },
   { path: 'referentes-para-docente',  component: ReferentesParaDocenteComponent, pathMatch: 'full' },
   { path: 'designacion-admin-show',  component: DesignacionAdminShowComponent, pathMatch: 'full' },
   { path: 'sede-admin',  component: SedeAdminComponent, pathMatch: 'full' },
   { path: 'toma-show',  component: TomaShowComponent, pathMatch: 'full' },
-  { path: 'toma-show-admin',  component: TomaShowAdminComponent, pathMatch: 'full' },
+  { path: 'toma-show-admin',  component: TomaAdminArrayComponent, pathMatch: 'full' },
   { path: 'sede-show',  component: SedeShowComponent, pathMatch: 'full' },
   { path: 'certificado-alumno-regular',  component: CertificadoAlumnoRegularComponent, pathMatch: 'full' },
   

@@ -7,7 +7,7 @@ import { InputTextConfig } from '@component/input-text/input-text.component';
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
 import { DownloadConfig } from '@component/download/download.component';
 import { InputDateConfig } from '@component/input-date/input-date.component';
-import { ShowAdminComponent } from '@component/show/show-admin.component';
+import { AdminArrayComponent } from '@component/show/admin-array.component';
 import { InputUploadConfig } from '@component/input-upload/input-upload.component';
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 
@@ -15,7 +15,7 @@ import { RouteIconConfig } from '@component/route-icon/route-icon.component';
   selector: 'app-detalle-persona-show',
   templateUrl: '../../core/component/show/show.component.html',
 })
-export class DetallePersonaShowAdminComponent extends ShowAdminComponent {
+export class DetallePersonaAdminArrayComponent extends AdminArrayComponent {
 
   readonly entityName: string = "detalle_persona";
 

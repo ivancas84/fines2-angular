@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ConfigFormGroupFactory, FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
-import { AdminComponent } from '@component/admin/admin.component';
+import { AdminComponent } from '@component/detail/admin.component';
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
 import { InputSelectConfig } from '@component/input-select/input-select.component';
 import { InputTextConfig } from '@component/input-text/input-text.component';
@@ -9,7 +9,7 @@ import { TextareaConfig } from '@component/textarea/textarea.component';
 
 @Component({
   selector: 'app-comision-admin',
-  templateUrl: '../../core/component/admin/admin.component.html',
+  templateUrl: '../../core/component/detail/detail.component.html',
 })
 export class SedeAdminComponent extends AdminComponent {
   readonly entityName: string = "sede"; 

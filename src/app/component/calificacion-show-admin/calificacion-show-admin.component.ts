@@ -17,14 +17,14 @@ import { Location } from '@angular/common';
 import { InputTextConfig } from '@component/input-text/input-text.component';
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
-import { ShowAdminComponent } from '@component/show/show-admin.component';
+import { AdminArrayComponent } from '@component/show/admin-array.component';
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 
 @Component({
   selector: 'app-calificacion-show-admin',
   templateUrl: '../../core/component/show/show.component.html',
 })
-export class CalificacionShowAdminComponent extends ShowAdminComponent {
+export class CalificacionAdminArrayComponent extends AdminArrayComponent {
 
   constructor(
     protected dd: DataDefinitionToolService, 

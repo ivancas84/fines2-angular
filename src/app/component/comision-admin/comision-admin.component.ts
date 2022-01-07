@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
-import { AdminComponent } from '@component/admin/admin.component';
+import { AdminComponent } from '@component/detail/admin.component';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { EventIconConfig } from '@component/event-icon/event-icon.component';
@@ -17,7 +17,7 @@ import { map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-comision-admin',
-  templateUrl: '../../core/component/admin/admin.component.html',
+  templateUrl: '../../core/component/detail/detail.component.html',
 })
 export class ComisionAdminComponent extends AdminComponent {
   readonly entityName: string = "comision"; 

@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { FormStructureConfig } from '@class/reactive-form-config';
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
 import { Observable, of } from 'rxjs';
-import { AdminComponent } from '@component/admin/admin.component';
+import { AdminComponent } from '@component/detail/admin.component';
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
-import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { PDF_URL } from '@config/app.config';
 import { InputTextConfig } from '@component/input-text/input-text.component';
 import { InputSelectParamConfig } from '@component/input-select-param/input-select-param.component';
@@ -12,7 +11,7 @@ import { TextareaConfig } from '@component/textarea/textarea.component';
 
 @Component({
   selector: 'app-certificado-alumno-regular',
-  templateUrl: '../../core/component/admin/admin.component.html',
+  templateUrl: '../../core/component/detail/detail.component.html',
 })
 export class CertificadoAlumnoRegularComponent extends AdminComponent {
 

@@ -4,14 +4,15 @@ import { Observable } from 'rxjs';
 import { FormStructureConfig } from '@class/reactive-form-config';
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
+import { InputTextConfig } from '@component/input-text/input-text.component';
 
 @Component({
-  selector: 'app-transferir-alumno-admin',
+  selector: 'app-generar-horarios-comision',
   templateUrl: '../../core/component/detail/detail.component.html',
 })
-export class TransferirAlumnoComponent extends AdminComponent {
+export class GenerarHorariosComision extends AdminComponent {
 
-  readonly entityName: string = "alumno"
+  readonly entityName: string = "comision"
 
   persist(): Observable<any> {
     /**
@@ -19,22 +20,21 @@ export class TransferirAlumnoComponent extends AdminComponent {
      * Se define un metodo independiente para facilitar la redefinicion
      * @return "datos de respuesta (habitualmente array de logs)"
      */
-    return this.dd._post("transferir_alumno", this.entityName, this.serverData())
+    return this.dd._post("persist", "generar_horarios_comision", this.serverData())
   }
-
-  serverData() { 
-    return this.form.get("alumno").value 
-  }
-
 
   config: FormStructureConfig = new FormStructureConfig({},{
-    "alumno": new FieldsetDynamicConfig({}, {
+    "comision": new FieldsetDynamicConfig({}, {
       "id": new InputAutocompleteConfig(
         {entityName:"persona", required:true}
       ),
-      "persona": new InputAutocompleteConfig(
-        {entityName:"persona", required:true}
+    }),
+    "horarios": new FieldsetDynamicConfig({}, {
+      "dias": new InputTextConfig(
       ),
-    })
+      "hora":new InputTextConfig(
+      ),
+    }),
+    
   })
 }

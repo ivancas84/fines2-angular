@@ -29,7 +29,7 @@ import { AppCoreModule } from './core/app-core.module';
 import { AlumnoShowComponent } from '@component/alumno-show/alumno-show.component';
 import { CalificacionShowComponent } from '@component/calificacion-show/calificacion-show.component';
 import { AlumnoComisionShowComponent } from '@component/alumno-comision-show/alumno-comision-show.component';
-import { ComisionRelacionadaShowAdminComponent } from '@component/comision-relacionada-show-admin/coomision-relacionada-show-admin.component';
+import { ComisionRelacionadaAdminArrayComponent } from '@component/comision-relacionada-show-admin/coomision-relacionada-show-admin.component';
 import { AlumnoComisionRelacionShowComponent } from '@component/alumno-comision-relacion-show/alumno-comision-relacion-show.component';
 import { DesignacionShowComponent } from '@component/designacion-show/designacion-show.component';
 import { DesignacionRelacionShowComponent } from '@component/designacion-relacion-show/designacion-relacion-show.component';
@@ -37,15 +37,15 @@ import { AlumnosParaDocenteComponent } from '@component/_alumnos-para-docente/_a
 import { ReferentesParaDocenteComponent } from '@component/_referentes-para-docente/_referentes-para-docente.component';
 import { DesignacionAdminShowComponent } from '@component/designacion-admin-show/designacion-admin-show.component';
 import { TomaShowComponent } from '@component/toma-show/toma-show.component';
-import { TomaShowAdminComponent } from '@component/toma-show-admin/toma-show-admin.component';
-import { AlumnoComisionShowAdminComponent } from '@component/alumno-comision-show-admin/alumno-comision-show-admin.component';
-import { CalificacionShowAdminComponent } from '@component/calificacion-show-admin/calificacion-show-admin.component';
+import { TomaAdminArrayComponent } from '@component/toma-show-admin/toma-show-admin.component';
+import { AlumnoComisionAdminArrayComponent } from '@component/alumno-comision-show-admin/alumno-comision-show-admin.component';
+import { CalificacionAdminArrayComponent } from '@component/calificacion-show-admin/calificacion-show-admin.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
-import { CalendarioShowAdminComponent } from '@component/calendario-show-admin/calendario-show-admin.component';
+import { CalendarioAdminArrayComponent } from '@component/calendario-show-admin/calendario-show-admin.component';
 import { SedeShowComponent } from '@component/sede-show/sede-show.component';
 import { DetallePersonaShowComponent } from '@component/detalle-persona-show/detalle-persona-show.component';
-import { DetallePersonaShowAdminComponent } from '@component/detalle-persona-show-admin/detalle-persona-show-admin.component';
+import { DetallePersonaAdminArrayComponent } from '@component/detalle-persona-show-admin/detalle-persona-show-admin.component';
 import { CertificadoAlumnoRegularComponent } from '@component/_certificado_alumno_regular/_certificado_alumno_regular.component';
 import { LegajoComponent } from '@component/_legajo/_legajo';
 import { CalificacionesComponent } from '@component/_calificaciones/_calificaciones';
@@ -69,12 +69,12 @@ import { TransferirAlumnoComponent } from '@component/_transferir_alumno/transfe
     ComisionShowComponent,
     AlumnoShowComponent,
     CalificacionShowComponent,
-    CalificacionShowAdminComponent,
+    CalificacionAdminArrayComponent,
     ComisionAdminComponent,
-    ComisionRelacionadaShowAdminComponent,
+    ComisionRelacionadaAdminArrayComponent,
 
     AlumnoComisionShowComponent,
-    AlumnoComisionShowAdminComponent,
+    AlumnoComisionAdminArrayComponent,
     AlumnoComisionRelacionShowComponent,
     DesignacionShowComponent,
     DesignacionRelacionShowComponent,
@@ -82,12 +82,12 @@ import { TransferirAlumnoComponent } from '@component/_transferir_alumno/transfe
     ReferentesParaDocenteComponent,
     DesignacionAdminShowComponent,
     TomaShowComponent,
-    TomaShowAdminComponent,
+    TomaAdminArrayComponent,
     SedeAdminComponent,
     SedeShowComponent,
-    CalendarioShowAdminComponent,
+    CalendarioAdminArrayComponent,
     DetallePersonaShowComponent,
-    DetallePersonaShowAdminComponent,
+    DetallePersonaAdminArrayComponent,
     CertificadoAlumnoRegularComponent,
     LegajoComponent,
     CalificacionesComponent,

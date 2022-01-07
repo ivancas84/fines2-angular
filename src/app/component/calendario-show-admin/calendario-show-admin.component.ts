@@ -4,7 +4,7 @@ import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.comp
 import { TableDynamicConfig } from '@component/table/table-dynamic.component';
 import { InputSelectConfig } from '@component/input-select/input-select.component';
 import { InputTextConfig } from '@component/input-text/input-text.component';
-import { ShowAdminComponent } from '@component/show/show-admin.component';
+import { AdminArrayComponent } from '@component/show/admin-array.component';
 import { InputDateConfig } from '@component/input-date/input-date.component';
 import { InputYearConfig } from '@component/input-year/input-year.component';
 
@@ -12,7 +12,7 @@ import { InputYearConfig } from '@component/input-year/input-year.component';
   selector: 'app-calendario-show',
   templateUrl: '../../core/component/show/show.component.html',
 })
-export class CalendarioShowAdminComponent extends ShowAdminComponent {
+export class CalendarioAdminArrayComponent extends AdminArrayComponent {
 
   readonly entityName: string = "calendario";
 

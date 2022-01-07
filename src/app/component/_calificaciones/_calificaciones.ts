@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Display } from '@class/display';
 import { FormArrayConfig, FormStructureConfig } from '@class/reactive-form-config';
-import { AdminComponent } from '@component/admin/admin.component';
+import { AdminComponent } from '@component/detail/admin.component';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
@@ -38,9 +38,9 @@ import { ControlDateConfig } from '@component/control-date/control-date.componen
 
 @Component({
   selector: 'app-calificaciones-admin',
-  templateUrl: '../../core/component/admin/admin.component.html',
+  templateUrl: '../../core/component/detail/detail.component.html',
 })
-export class CalificacionesComponent  extends AdminComponent {
+export class CalificacionesComponent extends AdminComponent {
 
   DataDefinitionFkAllService
 

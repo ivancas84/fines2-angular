@@ -15,7 +15,7 @@ import { ValidatorsService } from '@service/validators/validators.service';
 import { Location } from '@angular/common';
 import { InputTextConfig } from '@component/input-text/input-text.component';
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
-import { ShowAdminComponent } from '@component/show/show-admin.component';
+import { AdminArrayComponent } from '@component/show/admin-array.component';
 import { InputDateConfig } from '@component/input-date/input-date.component';
 import { InputSelectParamConfig } from '@component/input-select-param/input-select-param.component';
 import { InputYearConfig } from '@component/input-year/input-year.component';
@@ -26,7 +26,7 @@ import { InputAutocompleteConfig } from '@component/input-autocomplete/input-aut
   selector: 'app-toma-show',
   templateUrl: '../../core/component/show/show.component.html',
 })
-export class TomaShowAdminComponent extends ShowAdminComponent {
+export class TomaAdminArrayComponent extends AdminArrayComponent {
 
   constructor(
     protected dd: DataDefinitionToolService, 

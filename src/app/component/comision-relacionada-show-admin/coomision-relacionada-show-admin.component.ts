@@ -13,7 +13,7 @@ import { EventIconConfig } from '@component/event-icon/event-icon.component';
   selector: 'app-comision-relacionada-show-ad',
   templateUrl: '../../core/component/show/show.component.html',
 })
-export class ComisionRelacionadaShowAdminComponent extends ShowComponent {
+export class ComisionRelacionadaAdminArrayComponent extends ShowComponent {
 
   readonly entityName: string = "comision_relacionada";
 

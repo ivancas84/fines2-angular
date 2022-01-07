@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { FormStructureConfig } from '@class/reactive-form-config';
-import { AdminComponent } from '@component/admin/admin.component';
+import { AdminComponent } from '@component/detail/admin.component';
 import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
@@ -20,9 +20,9 @@ import { TextareaConfig } from '@component/textarea/textarea.component';
 
 @Component({
   selector: 'app-legajo-admin',
-  templateUrl: '../../core/component/admin/admin.component.html',
+  templateUrl: '../../core/component/detail/detail.component.html',
 })
-export class LegajoComponent  extends AdminComponent {
+export class LegajoComponent extends AdminComponent {
 
   entityName: string = "alumno"
 
