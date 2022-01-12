@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { AdminComponent } from '@component/detail/admin.component';
 import { Observable } from 'rxjs';
-import { FormStructureConfig } from '@class/reactive-form-config';
+import { FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
 import { InputTextConfig } from '@component/input-text/input-text.component';
+import { InputSelectConfig } from '@component/input-select/input-select.component';
 
 @Component({
   selector: 'app-generar-horarios-comision',
@@ -25,15 +26,18 @@ export class GenerarHorariosComision extends AdminComponent {
 
   config: FormStructureConfig = new FormStructureConfig({},{
     "comision": new FieldsetDynamicConfig({}, {
-      "id": new InputAutocompleteConfig(
-        {entityName:"persona", required:true}
+      "id": new FormControlConfig(
       ),
     }),
     "horarios": new FieldsetDynamicConfig({}, {
-      "dias": new InputTextConfig(
-      ),
-      "hora":new InputTextConfig(
-      ),
+      "dias": new InputSelectConfig({
+        multiple:true,
+        entityName:"dia",
+      }),
+      "hora_inicio":new InputTextConfig({
+        type:"time",
+        disabled:true
+      }),
     }),
     
   })

@@ -50,6 +50,7 @@ import { CertificadoAlumnoRegularComponent } from '@component/_certificado_alumn
 import { LegajoComponent } from '@component/_legajo/_legajo';
 import { CalificacionesComponent } from '@component/_calificaciones/_calificaciones';
 import { TransferirAlumnoComponent } from '@component/_transferir_alumno/transferir-alumno.component';
+import { GenerarHorariosComision } from '@component/_generar_horarios_comision/generar_horarios_comision.component';
 //import { MatTimepickerModule } from 'mat-timepicker';
 //import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 //import { GoogleLoginProvider } from 'angularx-social-login';
@@ -91,7 +92,8 @@ import { TransferirAlumnoComponent } from '@component/_transferir_alumno/transfe
     CertificadoAlumnoRegularComponent,
     LegajoComponent,
     CalificacionesComponent,
-    TransferirAlumnoComponent
+    TransferirAlumnoComponent,
+    GenerarHorariosComision
   ],
   imports: [
     BrowserModule,

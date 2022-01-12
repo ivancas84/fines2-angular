@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FieldWidthOptions } from '@class/field-width-options';
-import { FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
+import { FormConfig, FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
 import { AdminComponent } from '@component/detail/admin.component';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
@@ -51,9 +51,7 @@ export class ComisionAdminComponent extends AdminComponent {
             )
         }
       ),
-      tap(
-        row =>{ console.log(row)}
-      )
+      
     )
     //return this.dd.unique(this.entityName, this.display$.value) 
     //return this.dd.post(this.queryApi, this.entityName, this.display$.value);
@@ -88,7 +86,7 @@ export class ComisionAdminComponent extends AdminComponent {
         }),
         "comision_siguiente": new InputAutocompleteConfig({
           label:"Comision Siguiente",
-          entityName:"comision_siguiente" ,
+          entityName:"comision" ,
           width:new FieldWidthOptions
         }),
         "calendario": new InputAutocompleteConfig({
@@ -119,15 +117,17 @@ export class ComisionAdminComponent extends AdminComponent {
       }
     ),
     "curso/comision": new TableDynamicConfig({title:"Cursos"}, {
+        //"id": new FormConfig(),
         "asignatura": new  InputSelectConfig(
           {entityName:"asignatura"}
         ),
         "horas_catedra": new  InputTextConfig({
           type:"number"
         }),
-        "horario": new  ControlValueConfig(
-          {readonly:true, disabled:true}
-        ),
+        "horario": new ControlValueConfig({
+          readonly:true,
+          disabled:true
+        }),
       }
     )
   })

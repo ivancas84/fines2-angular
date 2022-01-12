@@ -29,6 +29,7 @@ import { CertificadoAlumnoRegularComponent } from '@component/_certificado_alumn
 import { LegajoComponent } from '@component/_legajo/_legajo';
 import { CalificacionesComponent } from '@component/_calificaciones/_calificaciones';
 import { TransferirAlumnoComponent } from '@component/_transferir_alumno/transferir-alumno.component';
+import { GenerarHorariosComision } from '@component/_generar_horarios_comision/generar_horarios_comision.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -53,6 +54,7 @@ const routes: Routes = [
   { path: 'designacion-relacion-show',  component: DesignacionRelacionShowComponent, pathMatch: 'full' },
   { path: 'detalle-persona-show',  component: DetallePersonaShowComponent, pathMatch: 'full' },
   { path: 'detalle-persona-show-admin',  component: DetallePersonaAdminArrayComponent, pathMatch: 'full' },
+  { path: 'generar-horarios-comision',  component: GenerarHorariosComision, pathMatch: 'full' },
   { path: 'legajo',  component: LegajoComponent, pathMatch: 'full' },
   { path: 'alumnos-para-docente',  component: AlumnosParaDocenteComponent, pathMatch: 'full' },
   { path: 'referentes-para-docente',  component: ReferentesParaDocenteComponent, pathMatch: 'full' },
