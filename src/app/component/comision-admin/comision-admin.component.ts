@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FieldWidthOptions } from '@class/field-width-options';
-import { FormConfig, FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
+import { ConfigFormGroupFactory, FormConfig, FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
 import { AdminComponent } from '@component/detail/admin.component';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
@@ -56,6 +56,10 @@ export class ComisionAdminComponent extends AdminComponent {
     //return this.dd.unique(this.entityName, this.display$.value) 
     //return this.dd.post(this.queryApi, this.entityName, this.display$.value);
   }
+
+  form = this.fb.group({
+    "curso/comision":this.fb.array([])
+  }) 
   
   config: FormStructureConfig = new FormStructureConfig({
     title:"Comision"
@@ -143,6 +147,7 @@ export class ComisionAdminComponent extends AdminComponent {
         fieldEvent: this.optField
       })
     })
+    this.config.controls["curso/comision"].factory = new ConfigFormGroupFactory(this.config.controls["curso/comision"])
   }
 
   switchOptField(data: any){

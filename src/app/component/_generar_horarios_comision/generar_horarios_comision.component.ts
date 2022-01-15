@@ -6,6 +6,8 @@ import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.comp
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
 import { InputTextConfig } from '@component/input-text/input-text.component';
 import { InputSelectConfig } from '@component/input-select/input-select.component';
+import { TableDynamicConfig } from '@component/table/table-dynamic.component';
+import { ControlValueConfig } from '@component/control-value/control-value.component';
 
 @Component({
   selector: 'app-generar-horarios-comision',
@@ -25,10 +27,31 @@ export class GenerarHorariosComision extends AdminComponent {
   }
 
   config: FormStructureConfig = new FormStructureConfig({},{
-    "comision": new FieldsetDynamicConfig({}, {
-      "id": new FormControlConfig(
-      ),
+    "comision": new FieldsetDynamicConfig({
+      title:"Comisión Seleccionada"
+    }, {
+      
+      "id": new InputAutocompleteConfig({
+        label:"Comisión Seleccionada",
+        readonly:true,
+        entityName:"comision"
+      })
     }),
+
+    "curso/comision": new TableDynamicConfig({title:"Cursos"}, {
+      //"id": new FormConfig(),
+      "asignatura": new  InputSelectConfig(
+        {entityName:"asignatura"}
+      ),
+      "horas_catedra": new  InputTextConfig({
+        type:"number"
+      }),
+      "horario": new ControlValueConfig({
+        readonly:true,
+        disabled:true
+      }),
+    }),
+  
     "horarios": new FieldsetDynamicConfig({}, {
       "dias": new InputSelectConfig({
         multiple:true,

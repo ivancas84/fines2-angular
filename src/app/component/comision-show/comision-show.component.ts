@@ -138,10 +138,15 @@ export class ComisionShowComponent extends ShowComponent {
       "autorizada":new InputSelectCheckboxConfig({
         label:"Autorizada",
       }),
+      "modalidad":new InputSelectConfig({
+        entityName:"modalidad",
+      }),
+     
       "sed-centro_educativo":new InputSelectConfig({
         label:"Centro Educativo",
         entityName:"centro_educativo",
       }),
+
       "sed-numero":new InputTextConfig({
         label:"Número Sede",
       })
