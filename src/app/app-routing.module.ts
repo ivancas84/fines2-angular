@@ -14,9 +14,8 @@ import { DesignacionShowComponent } from '@component/designacion-show/designacio
 import { DesignacionRelacionShowComponent } from '@component/designacion-relacion-show/designacion-relacion-show.component';
 import { AlumnosParaDocenteComponent } from '@component/_alumnos-para-docente/_alumnos-para-docente.component';
 import { ReferentesParaDocenteComponent } from '@component/_referentes-para-docente/_referentes-para-docente.component';
-import { DesignacionAdminShowComponent } from '@component/designacion-admin-show/designacion-admin-show.component';
+import { DesignacionAdminArrayComponent } from '@component/designacion-admin-array/designacion-admin-array.component';
 import { TomaShowComponent } from '@component/toma-show/toma-show.component';
-import { TomaAdminArrayComponent } from '@component/toma-show-admin/toma-show-admin.component';
 import { AlumnoComisionAdminArrayComponent } from '@component/alumno-comision-show-admin/alumno-comision-show-admin.component';
 import { CalificacionAdminArrayComponent } from '@component/calificacion-show-admin/calificacion-show-admin.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
@@ -30,6 +29,8 @@ import { LegajoComponent } from '@component/_legajo/_legajo';
 import { CalificacionesComponent } from '@component/_calificaciones/_calificaciones';
 import { TransferirAlumnoComponent } from '@component/_transferir_alumno/transferir-alumno.component';
 import { GenerarHorariosComision } from '@component/_generar_horarios_comision/generar_horarios_comision.component';
+import { PersonaAdminComponent } from '@component/persona-admin/persona-admin.component';
+import { TomaAdminArrayComponent } from '@component/toma-admin-array/toma-admin-array.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -58,14 +59,15 @@ const routes: Routes = [
   { path: 'legajo',  component: LegajoComponent, pathMatch: 'full' },
   { path: 'alumnos-para-docente',  component: AlumnosParaDocenteComponent, pathMatch: 'full' },
   { path: 'referentes-para-docente',  component: ReferentesParaDocenteComponent, pathMatch: 'full' },
-  { path: 'designacion-admin-show',  component: DesignacionAdminShowComponent, pathMatch: 'full' },
+  { path: 'designacion-admin-array',  component: DesignacionAdminArrayComponent, pathMatch: 'full' },
   { path: 'sede-admin',  component: SedeAdminComponent, pathMatch: 'full' },
   { path: 'toma-show',  component: TomaShowComponent, pathMatch: 'full' },
-  { path: 'toma-show-admin',  component: TomaAdminArrayComponent, pathMatch: 'full' },
+  { path: 'toma-admin-array',  component: TomaAdminArrayComponent, pathMatch: 'full' },
   { path: 'sede-show',  component: SedeShowComponent, pathMatch: 'full' },
   { path: 'certificado-alumno-regular',  component: CertificadoAlumnoRegularComponent, pathMatch: 'full' },
   
   { path: 'transferir-alumno',  component: TransferirAlumnoComponent, pathMatch: 'full' },
+  { path: 'persona-admin',  component: PersonaAdminComponent, pathMatch: 'full' },
 
 
 ];

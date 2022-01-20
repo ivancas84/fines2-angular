@@ -35,9 +35,8 @@ import { DesignacionShowComponent } from '@component/designacion-show/designacio
 import { DesignacionRelacionShowComponent } from '@component/designacion-relacion-show/designacion-relacion-show.component';
 import { AlumnosParaDocenteComponent } from '@component/_alumnos-para-docente/_alumnos-para-docente.component';
 import { ReferentesParaDocenteComponent } from '@component/_referentes-para-docente/_referentes-para-docente.component';
-import { DesignacionAdminShowComponent } from '@component/designacion-admin-show/designacion-admin-show.component';
+import { DesignacionAdminArrayComponent } from '@component/designacion-admin-array/designacion-admin-array.component';
 import { TomaShowComponent } from '@component/toma-show/toma-show.component';
-import { TomaAdminArrayComponent } from '@component/toma-show-admin/toma-show-admin.component';
 import { AlumnoComisionAdminArrayComponent } from '@component/alumno-comision-show-admin/alumno-comision-show-admin.component';
 import { CalificacionAdminArrayComponent } from '@component/calificacion-show-admin/calificacion-show-admin.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
@@ -51,6 +50,8 @@ import { LegajoComponent } from '@component/_legajo/_legajo';
 import { CalificacionesComponent } from '@component/_calificaciones/_calificaciones';
 import { TransferirAlumnoComponent } from '@component/_transferir_alumno/transferir-alumno.component';
 import { GenerarHorariosComision } from '@component/_generar_horarios_comision/generar_horarios_comision.component';
+import { PersonaAdminComponent } from '@component/persona-admin/persona-admin.component';
+import { TomaAdminArrayComponent } from '@component/toma-admin-array/toma-admin-array.component';
 //import { MatTimepickerModule } from 'mat-timepicker';
 //import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 //import { GoogleLoginProvider } from 'angularx-social-login';
@@ -81,7 +82,7 @@ import { GenerarHorariosComision } from '@component/_generar_horarios_comision/g
     DesignacionRelacionShowComponent,
     AlumnosParaDocenteComponent,
     ReferentesParaDocenteComponent,
-    DesignacionAdminShowComponent,
+    DesignacionAdminArrayComponent,
     TomaShowComponent,
     TomaAdminArrayComponent,
     SedeAdminComponent,
@@ -93,7 +94,8 @@ import { GenerarHorariosComision } from '@component/_generar_horarios_comision/g
     LegajoComponent,
     CalificacionesComponent,
     TransferirAlumnoComponent,
-    GenerarHorariosComision
+    GenerarHorariosComision,
+    PersonaAdminComponent,
   ],
   imports: [
     BrowserModule,
