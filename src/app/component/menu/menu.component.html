@@ -5,8 +5,10 @@
     Comision
   </button>
   <mat-menu #comision="matMenu">
-    <a mat-menu-item routerLink="/sede-show" routerLinkActive="active" title="Ver Sede">Ver sedes</a>
     <a mat-menu-item routerLink="/comision-show" routerLinkActive="active" title="Ver Comision" [queryParams]="comisionShowQueryParams">Ver comisiones</a>
+    <a mat-menu-item routerLink="/comision-admin" routerLinkActive="active" title="Nueva Comision">Nueva Comisión</a>
+    <a mat-menu-item routerLink="/sede-show" routerLinkActive="active" title="Ver Sede">Ver sedes</a>
+    <a mat-menu-item routerLink="/sede-admin" routerLinkActive="active" title="Nueva Sede">Nueva sede</a>
   </mat-menu>
 
   <button mat-button [matMenuTriggerFor]="toma" aria-label="icon-button with menu icon">
@@ -14,6 +16,7 @@
   </button>
   <mat-menu #toma="matMenu">
     <a mat-menu-item routerLink="/toma-show" routerLinkActive="active" title="Ver Tomas" [queryParams]="tomaShowQueryParams">Ver tomas 2021-1</a>
+    <a mat-menu-item routerLink="/persona-admin" routerLinkActive="active" title="Nueva Persona">Nueva persona</a>
   </mat-menu>
 
   <button mat-button [matMenuTriggerFor]="alumno" aria-label="icon-button with menu icon">

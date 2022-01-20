@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FieldWidthOptions } from '@class/field-width-options';
-import { FormArrayConfig, FormStructureConfig } from '@class/reactive-form-config';
+import { ConfigFormGroupFactory, FormArrayConfig, FormConfig, FormGroupConfig, FormStructureConfig } from '@class/reactive-form-config';
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
 import { TableDynamicConfig } from '@component/table/table-dynamic.component';
 import { DataDefinitionFkAllService } from '@service/data-definition/data-definition-fk-all.service';
@@ -21,9 +21,35 @@ import { InputSelectParamConfig } from '@component/input-select-param/input-sele
 import { InputYearConfig } from '@component/input-year/input-year.component';
 import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
+import { Display } from '@class/display';
+import { prefixObj } from '@function/prefix-obj';
+import { RequiredValidatorMsg, UniqueValidatorMsg } from '@class/validator-msg';
+
+class TomaAdminArrayConfigFormGroupFactory extends ConfigFormGroupFactory{
+  /**
+   * Se define un factory local para asignar asyncValidators al atributo per-numero_documento
+   */
+  vs: ValidatorsService
+  
+  public constructor(config: FormGroupConfig, vs: ValidatorsService){
+    super(config)
+    this.vs = vs
+  }
+
+  initFormGroup(): FormGroup {
+    return new FormGroup({
+      "doc-numero_documento":new FormControl(null, {
+        validators:[Validators.required],
+        asyncValidators:[this.vs.unique("numero_documento", "persona", "doc-id")]
+      }),
+    });
+  }
+
+}
+
 
 @Component({
-  selector: 'app-toma-show',
+  selector: 'app-toma-admin-array',
   templateUrl: '../../core/component/show/show.component.html',
 })
 export class TomaAdminArrayComponent extends AdminArrayComponent {
@@ -47,6 +73,15 @@ export class TomaAdminArrayComponent extends AdminArrayComponent {
   
   readonly entityName: string = "toma";
 
+
+  initDisplay() {
+    var display = new Display();
+    display.setSize(10);
+    display.setParamsByQueryParams(this.params);
+    this.display$.next(display)
+  }
+
+
   config: FormArrayConfig = new TableDynamicConfig({}, {
     "fecha_toma": new InputDateConfig({
       label:"Fecha Toma"
@@ -63,16 +98,31 @@ export class TomaAdminArrayComponent extends AdminArrayComponent {
     }),
     "estado_contralor": new InputSelectParamConfig({
       label:"Estado Contralor",
-      options:["Pasar","Modificar","No pasar"], 
+      options:["Pasar","Modificar","No pasar"],
+      default:"Pasar" 
     }),
     "curso": new InputAutocompleteConfig({
       label:"Curso",
       entityName:"curso"
     }),
-    "docente": new InputAutocompleteConfig({
-      label:"Docente",
-      entityName:"persona"
+    // "docente": new InputAutocompleteConfig({
+    //   label:"Docente",
+    //   entityName:"persona"
+    // }),
+    "doc-id": new FormConfig,
+   
+    "doc-nombres": new InputTextConfig({
+      required:true,
+      validatorMsgs:[new RequiredValidatorMsg()]
+    }),    
+    "doc-apellidos": new InputTextConfig,
+    "doc-numero_documento": new InputTextConfig({
+      validatorMsgs:[new RequiredValidatorMsg(), new UniqueValidatorMsg()]
     }),
+    "doc-cuil": new InputTextConfig({
+      validatorMsgs:[new RequiredValidatorMsg(), new UniqueValidatorMsg()]
+    }),    
+    "doc-fecha_nacimiento": new InputDateConfig,
     "comentario": new InputTextConfig({
     }),
     
@@ -91,14 +141,21 @@ export class TomaAdminArrayComponent extends AdminArrayComponent {
         label:"Semestre",
         width: new FieldWidthOptions()
       }),
+      "docente":new InputAutocompleteConfig({
+        entityName:"persona"
+      }),
+      "cur-comision":new InputAutocompleteConfig,
+
     })
   }) 
 
   ngOnInit(){
+    this.config.factory = new TomaAdminArrayConfigFormGroupFactory(this.config, this.validators)
+
     super.ngOnInit()
 
     this.config.optColumn.push(
-      {  //boton eliminar 
+      {   
         config: new EventIconConfig({
           action:"email_confirmacion",
           fieldEvent:this.optField,
@@ -106,6 +163,17 @@ export class TomaAdminArrayComponent extends AdminArrayComponent {
         }),
       }
     ) 
+    this.config.optColumn.push( //columna opciones
+      {  
+        config: new EventIconConfig({
+          action:"actualizar_persona",
+          color: "primary",
+          title: "Actualizar Persona",
+          fieldEvent:this.optField,
+          icon:"update"
+        }),
+      }
+    )
     
   }
 
@@ -116,6 +184,15 @@ export class TomaAdminArrayComponent extends AdminArrayComponent {
         this.dd.post("email_confirmacion","email_confirmacion",{id:data.control.value.id}).subscribe(
           response=>{this.snackBar.open("Email de confirmación enviado")}
         ) 
+      break;
+      case "actualizar_persona":
+        this.dd.unique("persona", {"numero_documento":data.control.controls["doc-numero_documento"].value}).subscribe(
+          row => {
+            row = prefixObj(row, "doc-");
+            (data.control as FormGroup).patchValue(row);
+          }
+        )  
+      
       break;
       default: super.switchOptField(data)
 

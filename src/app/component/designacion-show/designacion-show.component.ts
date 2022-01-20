@@ -7,6 +7,7 @@ import { ShowComponent } from '@component/show/show.component';
 import { TableDynamicConfig } from '@component/table/table-dynamic.component';
 import { InputTextConfig } from '@component/input-text/input-text.component';
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
+import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
 
 @Component({
   selector: 'app-designacion-show',
@@ -34,10 +35,7 @@ export class DesignacionShowComponent extends ShowComponent {
 
   searchConfig: FormStructureConfig = new FormStructureConfig({}, {
     "params":new FieldsetDynamicConfig({title:"Opciones"},{
-      "per-search":new InputTextConfig({
-        label:"Buscar",
-        width: new FieldWidthOptions()
-      }),
+      "persona":new InputAutocompleteConfig(),
     })
   }) 
 
