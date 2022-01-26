@@ -20,8 +20,14 @@ export class LocalValidators {
      */
 
     return (control: AbstractControl): ValidationErrors | null => {
+      if(!control.get("cuil") || !control.get("numero_documento")) return null;
+      /**
+       * Los campos pueden crearse dinamicamente, por lo que debe verificarse si se encuentran definidos
+       */
+
       const cuil = control.get("cuil").value;
       const numeroDocumento = control.get("numero_documento").value;
+      
       if(cuil && numeroDocumento){
         const cuil_ = control.get("cuil").value.substring(2,10).replace(/^0+/, '');          
         const numeroDocumento_ = control.get("numero_documento").value.replace(/^0+/, '');
