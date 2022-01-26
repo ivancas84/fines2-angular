@@ -52,6 +52,7 @@ import { TransferirAlumnoComponent } from '@component/_transferir_alumno/transfe
 import { GenerarHorariosComision } from '@component/_generar_horarios_comision/generar_horarios_comision.component';
 import { PersonaAdminComponent } from '@component/persona-admin/persona-admin.component';
 import { TomaAdminArrayComponent } from '@component/toma-admin-array/toma-admin-array.component';
+import { InscripcionAlumnoComponent } from '@component/_inscripcion-alumno/_inscripcion-alumno';
 //import { MatTimepickerModule } from 'mat-timepicker';
 //import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 //import { GoogleLoginProvider } from 'angularx-social-login';
@@ -96,6 +97,7 @@ import { TomaAdminArrayComponent } from '@component/toma-admin-array/toma-admin-
     TransferirAlumnoComponent,
     GenerarHorariosComision,
     PersonaAdminComponent,
+    InscripcionAlumnoComponent,
   ],
   imports: [
     BrowserModule,

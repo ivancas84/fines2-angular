@@ -31,6 +31,7 @@ import { TransferirAlumnoComponent } from '@component/_transferir_alumno/transfe
 import { GenerarHorariosComision } from '@component/_generar_horarios_comision/generar_horarios_comision.component';
 import { PersonaAdminComponent } from '@component/persona-admin/persona-admin.component';
 import { TomaAdminArrayComponent } from '@component/toma-admin-array/toma-admin-array.component';
+import { InscripcionAlumnoComponent } from '@component/_inscripcion-alumno/_inscripcion-alumno';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -56,6 +57,8 @@ const routes: Routes = [
   { path: 'detalle-persona-show',  component: DetallePersonaShowComponent, pathMatch: 'full' },
   { path: 'detalle-persona-show-admin',  component: DetallePersonaAdminArrayComponent, pathMatch: 'full' },
   { path: 'generar-horarios-comision',  component: GenerarHorariosComision, pathMatch: 'full' },
+  { path: 'inscripcion-alumno',  component: InscripcionAlumnoComponent, pathMatch: 'full' },
+  
   { path: 'legajo',  component: LegajoComponent, pathMatch: 'full' },
   { path: 'alumnos-para-docente',  component: AlumnosParaDocenteComponent, pathMatch: 'full' },
   { path: 'referentes-para-docente',  component: ReferentesParaDocenteComponent, pathMatch: 'full' },
@@ -68,6 +71,7 @@ const routes: Routes = [
   
   { path: 'transferir-alumno',  component: TransferirAlumnoComponent, pathMatch: 'full' },
   { path: 'persona-admin',  component: PersonaAdminComponent, pathMatch: 'full' },
+
 
 
 ];
