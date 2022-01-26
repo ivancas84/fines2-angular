@@ -55,6 +55,8 @@ export class LegajoComponent extends AdminComponent {
         "lugar_nacimiento": new InputTextConfig({}),
         "telefono_verificado": new InputCheckboxConfig({}),
         "email_verificado": new InputCheckboxConfig({}),
+        "info_verificada": new InputCheckboxConfig({}),
+
       }),
       "alumno": new FieldsetDynamicConfig({
           title:"Datos de alumno"
