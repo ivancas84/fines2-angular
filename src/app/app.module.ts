@@ -37,7 +37,7 @@ import { AlumnosParaDocenteComponent } from '@component/_alumnos-para-docente/_a
 import { ReferentesParaDocenteComponent } from '@component/_referentes-para-docente/_referentes-para-docente.component';
 import { DesignacionAdminArrayComponent } from '@component/designacion-admin-array/designacion-admin-array.component';
 import { TomaShowComponent } from '@component/toma-show/toma-show.component';
-import { AlumnoComisionAdminArrayComponent } from '@component/alumno-comision-show-admin/alumno-comision-show-admin.component';
+import { AlumnoComisionAdminArrayComponent } from '@component/alumno-comision-admin-array/alumno-comision-admin-array.component';
 import { CalificacionAdminArrayComponent } from '@component/calificacion-show-admin/calificacion-show-admin.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';

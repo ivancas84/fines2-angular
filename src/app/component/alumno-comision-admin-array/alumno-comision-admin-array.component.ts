@@ -21,7 +21,7 @@ import { AdminArrayComponent } from '@component/show/admin-array.component';
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 
 @Component({
-  selector: 'app-alumno-comision-show-admin',
+  selector: 'app-alumno-comision-admin-array',
   templateUrl: '../../core/component/show/show.component.html',
 })
 export class AlumnoComisionAdminArrayComponent extends AdminArrayComponent {
