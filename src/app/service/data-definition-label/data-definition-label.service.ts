@@ -62,7 +62,7 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
     return this.dd.get("curso", id).pipe(
       switchMap(
         curso => {
-          return this.dd.getConnection(curso,"asignatura","asignatura",{asignatura:"nombre"})
+          return this.dd.getConnection(curso,"asignatura","asignatura",{asignatura:"codigo"})
         }
       ),
       switchMap(
@@ -77,12 +77,12 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
       ),
       switchMap(
         curso => {
-          return this.dd.getConnection(curso,"sede","sede",{numero_sede:"numero"})
+          return this.dd.getConnection(curso,"sede","sede",{numero_sede:"numero", nombre_sede:"nombre"})
         }
       ),
       map(
         curso => { 
-          return (!curso)? null : curso["numero_sede"]+curso["division"]+"/"+curso["anio"]+curso["semestre"]+" "+curso["asignatura"]; 
+          return (!curso)? null : curso["numero_sede"]+curso["division"]+"/"+curso["anio"]+curso["semestre"]+" "+curso["asignatura"]+ " "+curso["nombre_sede"]; 
         }
       )
     );

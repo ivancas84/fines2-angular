@@ -116,6 +116,9 @@ export class ComisionShowComponent extends ShowComponent {
       "sed-numero": new ControlValueConfig({
         label:"Número"
       }),
+      "sed-nombre": new ControlValueConfig({
+        label:"Nombre"
+      }),
       "division": new ControlValueConfig({
         label:"División"
       }),

@@ -125,7 +125,8 @@ export class TomaAdminArrayComponent extends AdminArrayComponent {
     "doc-fecha_nacimiento": new InputDateConfig,
     "comentario": new InputTextConfig({
     }),
-    
+    "doc-email": new InputTextConfig,
+    "doc-email_abc": new InputTextConfig,
     // "activo": new ControlBooleanConfig({
     //   label:"Activo"
     // })
