@@ -62,6 +62,9 @@ export class TomaShowComponent extends ShowComponent {
         }
       ] //columna opciones
     }, {
+    "id": new ControlValueConfig({
+      label:"id toma"
+    }),
     "cur-id": new ControlValueConfig({
       label:"id curso"
     }),

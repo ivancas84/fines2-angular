@@ -21,9 +21,6 @@ import { ControlBooleanConfig } from '@component/control-boolean/control-boolean
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 import { InputSelectCheckboxConfig } from '@component/input-select-checkbox/input-select-checkbox.component';
 import { LinkTextConfig } from '@component/link-text/link-text.component';
-import { InputCheckboxConfig } from '@component/input-checkbox/input-checkbox.component';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-alumno-comision-show',
