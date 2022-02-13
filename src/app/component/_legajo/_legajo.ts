@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { FormStructureConfig } from '@class/reactive-form-config';
+import { RequiredValidatorMsg, UniqueValidatorMsg } from '@class/validator-msg';
 import { AdminComponent } from '@component/detail/admin.component';
 import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
@@ -16,6 +17,8 @@ import { InputUploadConfig } from '@component/input-upload/input-upload.componen
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 import { TableDynamicConfig } from '@component/table/table-dynamic.component';
 import { TextareaConfig } from '@component/textarea/textarea.component';
+import { emptyUrl } from '@function/empty-url.function';
+import { prefixObj } from '@function/prefix-obj';
 
 
 @Component({
@@ -26,6 +29,18 @@ export class LegajoComponent extends AdminComponent {
 
   entityName: string = "alumno"
 
+  form: FormGroup = this.fb.group({
+    "per": this.fb.group({
+      "numero_documento":this.fb.control(null,{
+        validators:[Validators.required],
+        asyncValidators:[this.validators.unique("numero_documento", "persona")]
+      }),
+      "cuil":this.fb.control(null,{
+        asyncValidators:[this.validators.unique("cuil", "persona")]
+      })
+    })
+  }) 
+  
   config: FormStructureConfig = new FormStructureConfig(
     {},
     {
@@ -39,13 +54,26 @@ export class LegajoComponent extends AdminComponent {
               title: "Calificaciones",
               params: { "id":"{{id}}" }
             }),
-          }
+          },
+          {
+            config:new EventIconConfig({
+              action:"actualizar_persona",
+              color: "primary",
+              title: "Actualizar Persona",
+              fieldEvent:this.optField,
+              icon:"update"
+            }),
+          },
         ]
       },{
         "nombres": new InputTextConfig({}),
         "apellidos": new InputTextConfig({}),
-        "numero_documento": new InputTextConfig({}),
-        "cuil": new InputTextConfig({}),
+        "numero_documento": new InputTextConfig({
+          validatorMsgs:[new RequiredValidatorMsg(), new UniqueValidatorMsg()]
+        }),
+        "cuil": new InputTextConfig({
+          validatorMsgs:[new UniqueValidatorMsg()]
+        }),
         "genero": new InputSelectParamConfig({
           options:["Femenino","Masculino","Otro"]
         }),
@@ -119,10 +147,37 @@ export class LegajoComponent extends AdminComponent {
   ngOnInit(){
     super.ngOnInit()
     this.config.controls["per"].optTitle[0].control = this.form.controls["alumno"];
+    this.config.controls["per"].optTitle[1].control = this.form.controls["per"];
   }
 
 
+  switchOptField(data: any){
+    switch(data.action){
+      case "actualizar_persona":
+        if((data.control.controls["numero_documento"].hasError("notUnique"))) {
+          this.router.navigate(
+            ['/'+emptyUrl(this.router.url)], 
+            { queryParams: { persona: data.control.controls["numero_documento"].getError("notUnique") } }
+          );
+        } else if((data.control.controls["cuil"].hasError("notUnique"))) {
+          this.router.navigate(
+            ['/'+emptyUrl(this.router.url)], 
+            { queryParams: { persona: data.control.controls["cuil"].getError("notUnique") } }
+          );
+        }
+        break;
+
+      default:  
+        super.switchOptField(data)
+    }
+  }
   
+  reload(){
+    /**
+     * Recargar una vez persistido
+     */
+    this.router.navigateByUrl('/inscripcion-alumno-correcta', {replaceUrl: true});
+  }
   
 
 }

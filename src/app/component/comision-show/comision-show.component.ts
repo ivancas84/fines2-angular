@@ -3,7 +3,6 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FieldWidthOptions } from '@class/field-width-options';
 import { FormArrayConfig, FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
@@ -23,6 +22,8 @@ import { ControlLabelConfig } from '@component/control-label/control-label.compo
 import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 import { InputTextConfig } from '@component/input-text/input-text.component';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-comision-show',
@@ -125,7 +126,8 @@ export class ComisionShowComponent extends ShowComponent {
       "planificacion": new ControlLabelConfig({
         label:"Planificacion",
         entityName:"planificacion" 
-      })
+      }),
+      "cantidad_aprobados": new ControlValueConfig
     }
   )
 
@@ -154,6 +156,20 @@ export class ComisionShowComponent extends ShowComponent {
     })
   }) 
 
+
+  queryData(): Observable<any>{
+    return this.dd.post("ids", this.entityName, this.display$.value).pipe(
+      switchMap(
+        ids => this.ddrf.getAllConfig(this.entityName, ids, this.config.controls)
+      ),
+      switchMap(
+        data => {
+          return this.dd.postAllConnection(data, "info", "id", "comision","alumnos_aprobados_comision",{"cantidad_aprobados":"cantidad_aprobados"})
+        }
+      ),
+      
+    )
+  }
 
   switchOptField(data: any){
     switch(data.action){

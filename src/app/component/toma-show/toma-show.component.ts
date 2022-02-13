@@ -62,17 +62,17 @@ export class TomaShowComponent extends ShowComponent {
         }
       ] //columna opciones
     }, {
-    "id": new ControlValueConfig({
-      label:"id toma"
-    }),
+    // "id": new ControlValueConfig({
+    //   label:"id toma"
+    // }),
     "cur-id": new ControlValueConfig({
       label:"id curso"
     }),
-    "cur-ige": new ControlValueConfig({
-      label:"ige"
-    }),
-    "cur-comision": new ControlValueConfig({
-    }),
+    // "cur-ige": new ControlValueConfig({
+    //   label:"ige"
+    // }),
+    // "cur-comision": new ControlValueConfig({
+    // }),
     "fecha_toma": new ControlDateConfig({
     }),
     "estado": new ControlValueConfig({
@@ -87,14 +87,10 @@ export class TomaShowComponent extends ShowComponent {
     "docente": new ControlLabelConfig({
       entityName:"persona"
     }),
-    "doc-telefono": new ControlValueConfig({
-      label:"Telefono",
-    }),
-    "doc-email": new ControlValueConfig({
-      label:"Email",
-    }),
-    "planilla_cargada": new ControlBooleanConfig({
-    }),
+    "doc-telefono": new ControlValueConfig,
+    "doc-email": new ControlValueConfig,
+    "doc-email_abc": new ControlValueConfig,
+    "planilla_cargada": new ControlBooleanConfig
     // "activo": new ControlBooleanConfig({
     //   label:"Activo"
     // })

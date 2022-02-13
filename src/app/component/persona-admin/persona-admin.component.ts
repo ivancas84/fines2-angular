@@ -29,7 +29,6 @@ export class PersonaAdminComponent extends AdminComponent {
       "cuil":this.fb.control(
         null,
         {
-          validators:[Validators.required],
           asyncValidators:[this.validators.unique("cuil", "persona")]
         }
       ),

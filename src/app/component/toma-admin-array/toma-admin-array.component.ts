@@ -110,21 +110,21 @@ export class TomaAdminArrayComponent extends AdminArrayComponent {
     //   entityName:"persona"
     // }),
     "doc-id": new FormConfig,
-   
+    "doc-numero_documento": new InputTextConfig({
+      validatorMsgs:[new RequiredValidatorMsg(), new UniqueValidatorMsg()]
+    }),
     "doc-nombres": new InputTextConfig({
       required:true,
       validatorMsgs:[new RequiredValidatorMsg()]
     }),    
     "doc-apellidos": new InputTextConfig,
-    "doc-numero_documento": new InputTextConfig({
-      validatorMsgs:[new RequiredValidatorMsg(), new UniqueValidatorMsg()]
-    }),
     "doc-cuil": new InputTextConfig({
       validatorMsgs:[new RequiredValidatorMsg(), new UniqueValidatorMsg()]
     }),    
     "doc-fecha_nacimiento": new InputDateConfig,
     "comentario": new InputTextConfig({
     }),
+    "doc-telefono": new InputTextConfig,
     "doc-email": new InputTextConfig,
     "doc-email_abc": new InputTextConfig,
     // "activo": new ControlBooleanConfig({
@@ -179,7 +179,6 @@ export class TomaAdminArrayComponent extends AdminArrayComponent {
   }
 
   switchOptField(data: any){
-    console.log(data)
     switch(data.action){
       case "email_confirmacion": 
         this.dd.post("email_confirmacion","email_confirmacion",{id:data.control.value.id}).subscribe(

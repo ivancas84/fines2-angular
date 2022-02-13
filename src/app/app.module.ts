@@ -53,6 +53,8 @@ import { GenerarHorariosComision } from '@component/_generar_horarios_comision/g
 import { PersonaAdminComponent } from '@component/persona-admin/persona-admin.component';
 import { TomaAdminArrayComponent } from '@component/toma-admin-array/toma-admin-array.component';
 import { InscripcionAlumnoComponent } from '@component/_inscripcion-alumno/_inscripcion-alumno';
+import { InscripcionAlumnoCorrectaComponent } from '@component/_inscripcion-alumno-correcta/_inscripcion-alumno-correcta.component';
+import { CursosTomaPosesionComponent } from '@component/_cursos-toma-posesion/_cursos-toma-posesion.component';
 //import { MatTimepickerModule } from 'mat-timepicker';
 //import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 //import { GoogleLoginProvider } from 'angularx-social-login';
@@ -79,6 +81,7 @@ import { InscripcionAlumnoComponent } from '@component/_inscripcion-alumno/_insc
     AlumnoComisionShowComponent,
     AlumnoComisionAdminArrayComponent,
     AlumnoComisionRelacionShowComponent,
+    CursosTomaPosesionComponent,
     DesignacionShowComponent,
     DesignacionRelacionShowComponent,
     AlumnosParaDocenteComponent,
@@ -98,6 +101,7 @@ import { InscripcionAlumnoComponent } from '@component/_inscripcion-alumno/_insc
     GenerarHorariosComision,
     PersonaAdminComponent,
     InscripcionAlumnoComponent,
+    InscripcionAlumnoCorrectaComponent
   ],
   imports: [
     BrowserModule,

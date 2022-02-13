@@ -21,6 +21,9 @@ import { ControlBooleanConfig } from '@component/control-boolean/control-boolean
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 import { InputSelectCheckboxConfig } from '@component/input-select-checkbox/input-select-checkbox.component';
 import { LinkTextConfig } from '@component/link-text/link-text.component';
+import { iif, Observable, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { ControlDateConfig } from '@component/control-date/control-date.component';
 
 @Component({
   selector: 'app-alumno-comision-show',
@@ -48,35 +51,22 @@ export class AlumnoComisionShowComponent extends ShowComponent {
   readonly entityName: string = "alumno_comision";
 
   config: FormArrayConfig = new TableDynamicConfig({}, {
-    "alu-persona": new FormControlConfig(),
-    
-    "alu_per-apellidos": new ControlValueConfig({
-      label:"Apellidos"
-    }),
-    "alu_per-nombres": new ControlValueConfig({
-      label:"Nombres"
-    }),
+    "alu-persona": new FormControlConfig,
+    "alu_per-apellidos": new ControlValueConfig,
+    "alu_per-nombres": new ControlValueConfig,
     "alu_per-numero_documento": new ControlValueConfig({
       label:"DNI"
     }),
     // "alu_per-fecha_nacimiento": new ControlValueConfig({
     //   label:"fecha nacimiento"
     // }),
-    "alu_per-telefono": new ControlValueConfig({
-      label:"Teléfono"
-    }),
-    "alu_per-email": new ControlValueConfig({
-      label:"email"
-    }),
-    "alu_per-fecha-nacimiento": new ControlValueConfig({
-    }),
-
-    "alu-adeuda_deudores": new ControlValueConfig({
-    }),
-    "alu-estado_inscripcion": new ControlValueConfig({
-    }),
+    "alu_per-telefono": new ControlValueConfig,
+    "alu_per-email": new ControlValueConfig,
+    "alu_per-fecha_nacimiento": new ControlDateConfig,
+    "alu-adeuda_deudores": new ControlValueConfig,
+    "alu-estado_inscripcion": new ControlValueConfig,
+    "aprobadas": new ControlValueConfig,
     "activo": new ControlBooleanConfig({
-      label:"Activo"
     }),
     "alumno": new FormControlConfig({
     })
@@ -110,7 +100,7 @@ export class AlumnoComisionShowComponent extends ShowComponent {
         config: new RouteIconConfig({
           icon: "mode_edit", 
           title:"Editar",
-          routerLink: "alumno-comision-show-admin",
+          routerLink: "alumno-comision-admin-array",
         }),
         control:this.form
       },
@@ -148,6 +138,26 @@ export class AlumnoComisionShowComponent extends ShowComponent {
     super.ngOnInit()
   }
 
+  queryData(): Observable<any>{
+    return this.dd.post("ids", this.entityName, this.display$.value).pipe(
+      switchMap(
+        ids => this.ddrf.getAllConfig(this.entityName, ids, this.config.controls)
+      ),
+      switchMap(
+        data => {
+          if(!this.params.hasOwnProperty("comision") || !data.length) return of(data)
+          return this.dd._post("info","disposiciones_aprobadas_comision",this.params["comision"]).pipe(
+            map(
+              response => {                
+                return this.dd.assignResponse(data,response,"alumno","alumno",{"aprobadas":"cantidad"});
+              }
+            )
+          );  
+        }
+      ),
+      
+    )
+  }
 
   initParams(params: any){ 
     this.params = params; 

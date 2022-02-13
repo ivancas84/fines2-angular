@@ -32,6 +32,8 @@ import { GenerarHorariosComision } from '@component/_generar_horarios_comision/g
 import { PersonaAdminComponent } from '@component/persona-admin/persona-admin.component';
 import { TomaAdminArrayComponent } from '@component/toma-admin-array/toma-admin-array.component';
 import { InscripcionAlumnoComponent } from '@component/_inscripcion-alumno/_inscripcion-alumno';
+import { InscripcionAlumnoCorrectaComponent } from '@component/_inscripcion-alumno-correcta/_inscripcion-alumno-correcta.component';
+import { CursosTomaPosesionComponent } from '@component/_cursos-toma-posesion/_cursos-toma-posesion.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -44,7 +46,7 @@ const routes: Routes = [
   { path: 'comision-admin',  component: ComisionAdminComponent, pathMatch: 'full' },
 
   { path: 'alumno-comision-show',  component: AlumnoComisionShowComponent, pathMatch: 'full' },
-  { path: 'alumno-comision-show-admin',  component: AlumnoComisionAdminArrayComponent, pathMatch: 'full' },
+  { path: 'alumno-comision-admin-array',  component: AlumnoComisionAdminArrayComponent, pathMatch: 'full' },
   { path: 'alumno-show',  component: AlumnoShowComponent, pathMatch: 'full' },
   { path: 'alumno-comision-relacion-show',  component: AlumnoComisionRelacionShowComponent, pathMatch: 'full' },
   { path: 'calendario-show-admin',  component: CalendarioAdminArrayComponent, pathMatch: 'full' },
@@ -52,13 +54,16 @@ const routes: Routes = [
   { path: 'calificacion-show-admin',  component: CalificacionAdminArrayComponent, pathMatch: 'full' },
   { path: 'calificaciones',  component: CalificacionesComponent, pathMatch: 'full' },
   { path: 'comision-relacionada-show-admin',  component: ComisionRelacionadaAdminArrayComponent, pathMatch: 'full' },
+  { path: 'cursos-toma-posesion',  component: CursosTomaPosesionComponent, pathMatch: 'full' },
+  
   { path: 'designacion-show',  component: DesignacionShowComponent, pathMatch: 'full' },
   { path: 'designacion-relacion-show',  component: DesignacionRelacionShowComponent, pathMatch: 'full' },
   { path: 'detalle-persona-show',  component: DetallePersonaShowComponent, pathMatch: 'full' },
   { path: 'detalle-persona-show-admin',  component: DetallePersonaAdminArrayComponent, pathMatch: 'full' },
   { path: 'generar-horarios-comision',  component: GenerarHorariosComision, pathMatch: 'full' },
   { path: 'inscripcion-alumno',  component: InscripcionAlumnoComponent, pathMatch: 'full' },
-  
+  { path: 'inscripcion-alumno-correcta',  component: InscripcionAlumnoCorrectaComponent, pathMatch: 'full' },
+
   { path: 'legajo',  component: LegajoComponent, pathMatch: 'full' },
   { path: 'alumnos-para-docente',  component: AlumnosParaDocenteComponent, pathMatch: 'full' },
   { path: 'referentes-para-docente',  component: ReferentesParaDocenteComponent, pathMatch: 'full' },
