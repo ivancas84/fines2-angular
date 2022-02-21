@@ -41,7 +41,7 @@ import { AlumnoComisionAdminArrayComponent } from '@component/alumno-comision-ad
 import { CalificacionAdminArrayComponent } from '@component/calificacion-show-admin/calificacion-show-admin.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
-import { CalendarioAdminArrayComponent } from '@component/calendario-show-admin/calendario-show-admin.component';
+import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
 import { SedeShowComponent } from '@component/sede-show/sede-show.component';
 import { DetallePersonaShowComponent } from '@component/detalle-persona-show/detalle-persona-show.component';
 import { DetallePersonaAdminArrayComponent } from '@component/detalle-persona-show-admin/detalle-persona-show-admin.component';
@@ -55,6 +55,11 @@ import { TomaAdminArrayComponent } from '@component/toma-admin-array/toma-admin-
 import { InscripcionAlumnoComponent } from '@component/_inscripcion-alumno/_inscripcion-alumno';
 import { InscripcionAlumnoCorrectaComponent } from '@component/_inscripcion-alumno-correcta/_inscripcion-alumno-correcta.component';
 import { CursosTomaPosesionComponent } from '@component/_cursos-toma-posesion/_cursos-toma-posesion.component';
+import { TomaPosesionEmailAbcComponent } from '@component/_toma-posesion-email-abc/_toma-posesion-email-abc';
+import { ModalidadAdminArrayComponent } from '@component/modalidad-admin-array/modalidad-admin-array.component';
+import { HorarioAdminArrayComponent } from '@component/horario-admin-array/horario-admin-array.component';
+import { InscripcionDocenteComponent } from '@component/_inscripcion-docente/_inscripcion-docente';
+import { InscripcionDocenteCorrectaComponent } from '@component/_inscripcion-docente-correcta/_inscripcion-docente-correcta.component';
 //import { MatTimepickerModule } from 'mat-timepicker';
 //import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 //import { GoogleLoginProvider } from 'angularx-social-login';
@@ -96,12 +101,18 @@ import { CursosTomaPosesionComponent } from '@component/_cursos-toma-posesion/_c
     DetallePersonaAdminArrayComponent,
     CertificadoAlumnoRegularComponent,
     LegajoComponent,
+    ModalidadAdminArrayComponent,
     CalificacionesComponent,
     TransferirAlumnoComponent,
     GenerarHorariosComision,
     PersonaAdminComponent,
     InscripcionAlumnoComponent,
-    InscripcionAlumnoCorrectaComponent
+    InscripcionAlumnoCorrectaComponent,
+    InscripcionDocenteCorrectaComponent,
+    TomaPosesionEmailAbcComponent,
+    HorarioAdminArrayComponent,
+    InscripcionDocenteComponent,
+    
   ],
   imports: [
     BrowserModule,
