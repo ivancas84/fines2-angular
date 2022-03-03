@@ -1,29 +1,13 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormArrayConfig, FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
+import { FormArrayConfig, FormControlConfig } from '@class/reactive-form-config';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
-import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
-import { InputYearConfig } from '@component/input-year/input-year.component';
 import { ShowComponent } from '@component/show/show.component';
 import { TableDynamicConfig } from '@component/table/table-dynamic.component';
-import { DataDefinitionFkAllService } from '@service/data-definition/data-definition-fk-all.service';
-import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
-import { FormConfigService } from '@service/form-config/form-config.service';
-import { SessionStorageService } from '@service/storage/session-storage.service';
-import { ValidatorsService } from '@service/validators/validators.service';
-import { Location } from '@angular/common';
-import { InputSelectParamConfig } from '@component/input-select-param/input-select-param.component';
-import { InputSelectConfig } from '@component/input-select/input-select.component';
-import { InputSelectCheckboxConfig } from '@component/input-select-checkbox/input-select-checkbox.component';
-import { ControlLabelConfig } from '@component/control-label/control-label.component';
-import { EventIconConfig } from '@component/event-icon/event-icon.component';
-import { RouteIconConfig } from '@component/route-icon/route-icon.component';
-import { InputTextConfig } from '@component/input-text/input-text.component';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
+import { ControlLabelConfig } from '@component/control-label/control-label.component';
+import { Display } from '@class/display';
+import { RouteTextConfig } from '@component/route-text/route-text.component';
 
 @Component({
   selector: 'app-cursos-toma-posesion',
@@ -36,12 +20,13 @@ export class CursosTomaPosesionComponent extends ShowComponent {
   config: FormArrayConfig = new TableDynamicConfig(
     {
       title:"Seleccione un Curso para tomar posesión",
+ 
       optColumn: [
         {
-          config:new RouteIconConfig({
-            icon: "edit",
-            routerLink: "comision-admin",
-            params: {"id":"{{id}}"},
+          config:new RouteTextConfig({
+            text: "Toma Posesión",
+            routerLink: "toma-posesion-email-abc",
+            params: {"curso":"{{id}}"},
             color: "",
             title: "Administrar comisión"
            })
@@ -50,25 +35,62 @@ export class CursosTomaPosesionComponent extends ShowComponent {
 
     }, {
       "id": new FormControlConfig({}),
-      "com_sed-numero": new ControlValueConfig,
+      "com_sed-numero": new FormControlConfig,
+      "com-division": new FormControlConfig,
+      "com_pla-anio": new FormControlConfig,
+      "com_pla-semestre": new FormControlConfig,
       "com_sed-nombre": new ControlValueConfig,
+      "com_sed-domicilio": new ControlLabelConfig,
+      "numero": new ControlValueConfig,
+      "asi-nombre": new ControlValueConfig,
+      "horario": new ControlValueConfig,
     }
   )
 
 
-  // queryData(): Observable<any>{
-  //   return this.dd.post("ids", this.entityName, this.display$.value).pipe(
-  //     switchMap(
-  //       ids => this.ddrf.getAllConfig(this.entityName, ids, this.config.controls)
-  //     ),
-  //     switchMap(
-  //       data => {
-  //         return this.dd.postAllConnection(data, "info", "id", "comision","alumnos_aprobados_comision",{"cantidad_aprobados":"cantidad_aprobados"})
-  //       }
-  //     ),
-      
-  //   )
-  // }
+
+  initDisplay() {
+    /** 
+     * se ignora el atributo this.params y se asignan parametros manualmente
+     */
+    var display = new Display();
+    display.setSize(0);
+    display.setParamsByQueryParams(
+      {
+        "com_cal-anio":2022, 
+        "com_cal-semestre":1, 
+        "com-autorizada":true 
+      }
+    );
+    display.setOrder({
+      "com_sed-numero":"ASC",
+      "com-division":"ASC",
+    })
+    this.display$.next(display)
+  }
+
+
+  queryData(): Observable<any>{
+    return this.dd.post("ids", this.entityName, this.display$.value).pipe(
+      switchMap(
+        ids => this.ddrf.getAllConfig(this.entityName, ids, this.config.controls)
+      ),
+      switchMap(
+        data => {
+          return this.dd.postAllConnection(data, "info", "id", "curso","curso_horario",{"horario":"horario"})
+        }
+      ),
+      map(
+        data =>{
+          data.forEach(value => {
+            value["numero"] = value["com_sed-numero"] + value["com-division"] + "/" + value["com_pla-anio"] + value["com_pla-semestre"] 
+          })
+          return data;
+        }
+
+      )
+    )
+  }
 
   switchOptField(data: any){
     switch(data.action){

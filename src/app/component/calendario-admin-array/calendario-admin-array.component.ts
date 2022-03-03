@@ -7,6 +7,7 @@ import { InputTextConfig } from '@component/input-text/input-text.component';
 import { AdminArrayComponent } from '@component/show/admin-array.component';
 import { InputDateConfig } from '@component/input-date/input-date.component';
 import { InputYearConfig } from '@component/input-year/input-year.component';
+import { ControlValueConfig } from '@component/control-value/control-value.component';
 
 @Component({
   selector: 'app-calendario-show',
@@ -20,12 +21,12 @@ export class CalendarioAdminArrayComponent extends AdminArrayComponent {
     {
       title:"Calendario",
     }, {
-      "id": new FormControlConfig(),
-      "inicio": new InputDateConfig(),
-      "fin": new InputDateConfig(),
-      "anio": new InputYearConfig(),
-      "semestre": new InputTextConfig(),
-      "descripcion": new InputTextConfig()
+      "id": new ControlValueConfig,
+      "inicio": new InputDateConfig,
+      "fin": new InputDateConfig,
+      "anio": new InputYearConfig,
+      "semestre": new InputTextConfig,
+      "descripcion": new InputTextConfig
     }
   )
 

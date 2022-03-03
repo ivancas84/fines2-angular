@@ -2,25 +2,20 @@ import { Component } from '@angular/core';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
 import { EmailValidatorMsg, RequiredValidatorMsg, ValidatorMsg } from '@class/validator-msg';
-import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { AdminComponent } from '@component/detail/admin.component';
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
 import { InputDateConfig } from '@component/input-date/input-date.component';
 import { InputSelectParamConfig } from '@component/input-select-param/input-select-param.component';
-import { InputSelectConfig } from '@component/input-select/input-select.component';
 import { InputTextConfig } from '@component/input-text/input-text.component';
-import { InputUploadConfig } from '@component/input-upload/input-upload.component';
-import { TableDynamicConfig } from '@component/table/table-dynamic.component';
 import { LocalValidators } from '@service/local-validators.service';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-inscripcion-alumno',
+  selector: 'app-inscripcion-docente',
   templateUrl: '../../core/component/detail/detail.component.html',
 })
-export class InscripcionAlumnoComponent extends AdminComponent {
+export class InscripcionDocenteComponent extends AdminComponent {
   readonly entityName: string = "persona"; 
 
   
@@ -30,7 +25,7 @@ export class InscripcionAlumnoComponent extends AdminComponent {
     {
       "persona":this.fb.group(
         {
-          "email":this.fb.control(null, {
+          "email_abc":this.fb.control(null, {
             validators:ValidatorsService.email()
           }) 
         },
@@ -47,23 +42,20 @@ export class InscripcionAlumnoComponent extends AdminComponent {
   },{
     "persona": new FieldsetDynamicConfig(
       {
-        title:"Inscripción Alumno",
+        title:"Inscripción Docente",
         intro:`<p>Complete el siguiente formulario prestando atención a los 
-datos ingresados, serán posteriormente utilizados en los analíticos.</p>
+datos ingresados, serán posteriormente utilizados en para las planillas de 
+cobro.</p>
         <p>Sus <strong>nombres y apellidos</strong> deben estar completos, 
 como se encuentra en su DNI.</p>
         <p>Para obtener su <strong>número de CUIL</strong> ingrese a 
 <a href='https://www.anses.gob.ar/consulta/constancia-de-cuil'>Constancia de 
 CUIL</a>.
-        <p>El <strong>lugar de nacimiento</strong> debe coincidir con el de su partida de 
-nacimiento.<p
         `,
         validatorMsgs:[new ValidatorMsg({id:"cuilDni",message:"El cuil y el DNI no coinciden"})]
-        
-          
-
       }, {
-        "id": new FormControlConfig({}),
+        "curso": new FormControlConfig,
+        "id": new FormControlConfig,
         "nombres": new InputTextConfig({
           required:true,
           label:"Nombres COMPLETOS (debe coincidir con su DNI)",
@@ -110,13 +102,6 @@ nacimiento.<p
           required:true,
           validatorMsgs:[new RequiredValidatorMsg()]
         }),
-        "lugar_nacimiento": new InputTextConfig({
-          required:true,
-          validatorMsgs:[new RequiredValidatorMsg()],
-          width:new FieldWidthOptions({
-            gtSm: "75%" //screen and (min-width: 960px)
-          })
-        }),
         "telefono": new InputTextConfig({
           required:true,
           validatorMsgs:[new RequiredValidatorMsg()],
@@ -138,8 +123,6 @@ nacimiento.<p
     "dom": new FieldsetDynamicConfig(
       {
         title:"Domicilio",
-        intro:`<p>Ingrese su lugar de residencia para que podamos buscar una sede cerca de su domicilio.</p>
-        `,
       }, {
         "id": new FormControlConfig({}),
         "calle": new InputTextConfig({
@@ -160,19 +143,7 @@ nacimiento.<p
         }),
       }
     ),
-    "detalle_persona/persona": new TableDynamicConfig(
-      {
-        title:"Legajo",
-        intro:`Ingrese fotos de frente y dorso de DNI, Certificado de
-Estudios, Partida de Nacimiento y cualquier otra información que nos ayude a 
-definir su situación académica`
-      }, {
-      //"descripcion": new InputTextConfig,
-      "archivo": new InputUploadConfig(
-        {entityName:"asignatura"}
-      ),
-    }
-  )
+    
   })
 
   queryData(): Observable<any> {
@@ -180,14 +151,14 @@ definir su situación académica`
   }
 
   persist(): Observable<any> {
-    return this.dd._post("persist", "inscripcion_alumno", this.serverData())
+    return this.dd._post("persist", "inscripcion_docente", this.serverData())
   }
 
      /**
      * Recargar una vez persistido
      */
     reload(): any {
-      this.router.navigateByUrl('/inscripcion-alumno-correcta', {replaceUrl: true});
+      this.router.navigateByUrl('/inscripcion-docente-correcta', {replaceUrl: true});
     }
 }
 

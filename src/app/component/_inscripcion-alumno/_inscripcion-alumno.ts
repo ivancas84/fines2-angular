@@ -56,7 +56,7 @@ como se encuentra en su DNI.</p>
 <a href='https://www.anses.gob.ar/consulta/constancia-de-cuil'>Constancia de 
 CUIL</a>.
         <p>El <strong>lugar de nacimiento</strong> debe coincidir con el de su partida de 
-nacimiento.<p
+nacimiento.</p>
         `,
         validatorMsgs:[new ValidatorMsg({id:"cuilDni",message:"El cuil y el DNI no coinciden"})]
         

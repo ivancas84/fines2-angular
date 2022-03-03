@@ -93,6 +93,7 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
     return this.dd.get("comision", id).pipe(
       switchMap(
         curso => {
+          console.log(curso)
           return this.dd.getConnection(curso,"planificacion","planificacion",{anio:"anio",semestre:"semestre"})
         }
       ),

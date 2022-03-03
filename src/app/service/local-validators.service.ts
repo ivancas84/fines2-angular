@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
+import { ValidatorFn, ValidationErrors, AbstractControl, Validators } from '@angular/forms';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 
@@ -13,6 +13,10 @@ export class LocalValidators {
    */
 
   constructor(protected dd: DataDefinitionService, protected storage: SessionStorageService) {}
+
+  static emailAbc(): ValidatorFn {
+    return Validators.pattern("[A-Za-z0-9._%-]+@abc.gob.ar");
+  }
 
   static cuilDni(): ValidatorFn {
     /**
