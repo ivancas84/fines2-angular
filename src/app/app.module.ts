@@ -1,302 +1,118 @@
+import { registerLocaleData } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import localeEsAr from '@angular/common/locales/es-AR';
+registerLocaleData(localeEsAr, 'es-AR');
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialFileInputModule } from 'ngx-material-file-input';
-import { MatTimepickerModule } from 'mat-timepicker';
-import { CookieService } from 'ngx-cookie-service';
+//import { MatTimepickerModule } from 'mat-timepicker';
 
 import { AppMaterialModule } from './core/app-material.module';
 
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import { GoogleLoginProvider } from 'angularx-social-login';
-import { GOOGLE_CLIENT_ID } from './app.config';
+//import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+//import { GoogleLoginProvider } from 'angularx-social-login';
 
 //import { ClipboardModule } from '@angular/cdk/clipboard';
 
-import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
-import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+//import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 
-import { DataDefinitionService } from '@service/data-definition/data-definition.service';
-import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
-import { SessionStorageService } from '@service/storage/session-storage.service';
-import { ValidatorsService } from '@service/validators/validators.service';
-import { AuthService } from '@service/auth/auth.service';
 
-import { ToDatePipe } from '@pipe/to-date.pipe';
-import { ToTimePipe } from '@pipe/to-time.pipe';
-import { SiNoPipe } from '@pipe/si-no.pipe';
-import { StoragePipe } from '@pipe/storage.pipe';
-import { SummaryPipe } from '@pipe/summary.pipe';
-
-import { DataDefinitionLabelService } from '@service/data-definition-label/data-definition-label.service';
-
-import { LoginComponent } from '@component/login/login.component';
-import { LogoutComponent } from '@component/logout/logout.component';
-import { HomeComponent } from '@component/home/home.component';
-import { SocialLoginComponent } from '@component/social-login/social-login.component';
-
-//import { BackupComponent } from '@component/backup/backup.component';
-import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
-import { DialogConfirmComponent } from '@component/dialog-confirm/dialog-confirm.component';
-import { InputAutocompleteComponent } from '@component/input-autocomplete/input-autocomplete.component';
-import { InputDateComponent } from '@component/input-date/input-date.component';
-import { InputNumberComponent } from '@component/input-number/input-number.component';
-import { InputSelectCheckboxComponent } from '@component/input-select-checkbox/input-select-checkbox.component';
-import { InputSelectComponent } from '@component/input-select/input-select.component';
-import { InputSelectValueComponent } from '@component/input-select-value/input-select-value.component';
-import { InputSelectParamComponent } from '@component/input-select-param/input-select-param.component';
-//import { InputSelectLabelComponent } from '@component/input-select-label/input-select-label.component';
-import { InputSearchGoComponent } from '@component/input-search-go/input-search-go.component';
-import { InputTextComponent } from '@component/input-text/input-text.component';
-import { InputTextareaComponent } from '@component/input-textarea/input-textarea.component';
-import { InputTimepickerComponent } from '@component/input-timepicker/input-timepicker.component';
-import { InputCheckboxComponent } from '@component/input-checkbox/input-checkbox.component';
-//import { InputYmComponent } from '@component/input-ym/input-ym.component';
-import { InputYearComponent } from '@component/input-year/input-year.component';
 import { MenuComponent } from '@component/menu/menu.component';
-import { SearchAllComponent } from '@component/search-all/search-all.component';
-import { LabelComponent } from '@component/label/label.component';
-import { FieldLabelComponent } from '@component/field-label/field-label.component';
-import { FieldTreeLabelComponent } from '@component/field-tree-label/field-tree-label.component';
-import { FieldViewComponent } from '@component/field-view/field-view.component';
-
-import { CalendarioInputSelectComponent } from '@component/reusable/calendario-input-select/calendario-input-select.component';
-import { CalendarioLabelComponent } from '@component/reusable/calendario-label/calendario-label.component';
-import { CursoIgeLabelComponent } from '@component/reusable/curso-ige-label/curso-ige-label.component';
-import { CursoShortLabelComponent } from '@component/reusable/curso-short-label/curso-short-label.component';
-import { InputCursoShortSelectComponent } from '@component/reusable/input-curso-short-select/input-curso-short-select.component';
-import { PlanificacionInputPickerComponent } from '@component/reusable/planificacion-input-picker/planificacion-input-picker.component';
-
+import { ComisionShowComponent } from '@component/comision-show/comision-show.component';
+import { AppCoreModule } from './core/app-core.module';
 import { AlumnoShowComponent } from '@component/alumno-show/alumno-show.component';
-
-import { DocenteTableComponent } from '@component/docente-show/docente-table/docente-table.component';
-import { DocenteShowComponent } from '@component/docente-show/docente-show/docente-show.component';
-import { DocenteSearchComponent } from '@component/docente-show/docente-search/docente-search.component';
-
-import { RdPersonaAdminComponent } from '@component/registro-docente/persona-admin/persona-admin.component';
-import { RdPersonaFieldsetComponent } from '@component/registro-docente/persona-fieldset/persona-fieldset.component';
-import { RegistroRealizadoComponent } from '@component/registro-realizado/registro-realizado.component';
-
-import { SedeAdminComponent } from '@component/sede-admin/sede-admin/sede-admin.component';
-import { SedeFieldsetComponent } from '@component/sede-admin/sede-fieldset/sede-fieldset.component';
-
-import { RabcPersonaAdminComponent } from '@component/registro-abc/persona-admin/persona-admin.component';
-import { RabcPersonaFieldsetComponent } from '@component/registro-abc/persona-fieldset/persona-fieldset.component';
-import { TomaPosesionAdminComponent } from '@component/toma-posesion/toma-posesion-admin/toma-posesion-admin.component';
-import { TomaPosesionFieldsetComponent } from '@component/toma-posesion/toma-posesion-fieldset/toma-posesion-fieldset.component';
-import { TomaPosesionRealizadaComponent } from '@component/toma-posesion-realizada/toma-posesion-realizada.component';
-import { ComisionAdminComponent } from '@component/comision-admin/comision-admin/comision-admin.component';
-import { ComisionFieldsetComponent } from '@component/comision-admin/comision-fieldset/comision-fieldset.component';
-import { CaCursoTableComponent } from '@component/comision-admin/ca-curso-table/ca-curso-table.component';
-import { ComisionHorariosAdminComponent } from '@component/comision-horarios-admin/comision-horarios-admin/comision-horarios-admin.component';
-import { ComisionShowComponent } from '@component/comision-show/comision-show/comision-show.component';
-import { ComisionHorariosFieldsetComponent } from '@component/comision-horarios-admin/comision-horarios-fieldset/comision-horarios-fieldset.component';
-import { PersonaAdminComponent } from '@component/persona-admin/persona-admin/persona-admin.component';
-import { PersonaFieldsetComponent } from '@component/persona-admin/persona-fieldset/persona-fieldset.component';
-import { ComisionTableComponent } from '@component/comision-show/comision-table/comision-table.component';
-import { ComisionSearchComponent } from '@component/comision-show/comision-search/comision-search.component';
-import { ComisionSearchParamsComponent } from '@component/comision-show/comision-search-params/comision-search-params.component';
-import { ListaAlumnosComponent } from '@component/lista-alumnos/lista-alumnos.component';
-
-import { DocenteDetailComponent } from '@component/docente-detail/docente-detail/docente-detail.component';
-
-import { TomaShowComponent } from '@component/toma-show/toma-show/toma-show.component';
-import { TomaDetailComponent } from '@component/toma-detail/toma-detail.component';
-import { AsignacionPlanillaDocenteAdminComponent } from '@component/asignacion-planilla-docente-admin/asignacion-planilla-docente-admin.component';
-import { PlanillaDocenteAdminComponent } from '@component/planilla-docente-admin/planilla-docente-admin.component';
-import { FieldTreeComponent } from '@component/field-tree/field-tree.component';
-import { SearchDynamicComponent } from '@component/search/search-dynamic.component';
-import { MenuLoginComponent } from '@component/menu-login/menu-login.component';
-import { FieldViewAuxComponent } from '@component/field-view-aux/field-view-aux.component';
-import { InputPersistComponent } from '@component/input-persist/input-persist.component';
-import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
-import { ComisionShow2Component } from '@component/comision-show2/comision-show2.component';
-import { SedeShowComponent } from '@component/sede-show/sede-show.component';
-import { SedeAdmin2Component } from '@component/sede-admin2/sede-admin2.component';
-import { CentroEducativoAdminComponent } from '@component/centro-educativo-admin/centro-educativo-admin.component';
-import { CentroEducativoShowComponent } from '@component/centro-educativo-show/centro-educativo-show.component';
-import { CentroEducativoCantidadSedesComponent } from '@component/centro-educativo-cantidad-sedes/centro-educativo-cantidad-sedes.component';
-import { ComisionAdmin2Component } from '@component/comision-admin2/comision-admin.component';
-import { SedeShow2Component } from '@component/sede-show2/sede-show2.component';
-import { SedeShow3Component } from '@component/sede-show3/sede-show3.component';
-import { AsignaturaShowAdminComponent } from '@component/asignatura-show-admin/asignatura-show-admin.component';
-import { PersonaShowAdminRelComponent } from '@component/persona-show-admin-rel/persona-show-admin-rel.component';
-import { CalificacionShowAdminRelComponent } from '@component/calificacion-show-admin-rel/calificacion-show-admin-rel.component';
-import { OptionsComponent } from '@component/options/options.component';
-import { ComisionCensComponent } from '@component/comision-cens/comision-cens.component';
-import { SedeCensComponent } from '@component/sede-cens/sede-cens.component';
-import { ComisionRelacionadaAdminComponent } from '@component/comision-relacionada-admin/comision-relacionada-admin.component';
-import { CursoTomaPosesionComponent } from '@component/curso-toma-posesion/curso-toma-posesion/curso-toma-posesion.component';
-import { CursoTomaPosesionTableComponent } from '@component/curso-toma-posesion/curso-toma-posesion-table/curso-toma-posesion-table.component';
-import { DesignacionAdminComponent } from '@component/designacion-admin/designacion-admin.component';
-import { DesignacionShowComponent } from '@component/designacion-show/designacion-show.component';
-import { SearchParamsDynamicComponent } from '@component/search-params/search-params-dynamic.component';
-import { AlumnoSearchComponent } from '@component/alumno-show/alumno-search/alumno-search.component';
-import { ComisionShow3Component } from '@component/comision-show3/comision-show3.component';
-import { AlumnosAprobadosShowComponent } from '@component/alumnos-aprobados-show/alumnos-aprobados-show.component';
-import { TransferirAlumnoAdminComponent } from '@component/transferir-alumno-admin/transferir-alumno-admin.component';
-import { TableAdminDynamicComponent } from '@component/table-admin/table-admin-dynamic.component';
-import { AlumnoAdminRelComponent } from '@component/alumno-admin-rel/alumno-admin-rel.component';
-import { InputUploadComponent } from '@component/input-upload/input-upload.component';
-import { AlumnoComisionShowComponent } from '@component/alumno-comision-show/alumno-comision-show.component';
-import { OptionsAdminComponent } from '@component/options-admin/options-admin.component';
-import { TransferirAlumnoComisionAdminComponent } from '@component/transferir-alumno-comision-admin/transferir-alumno-comision-admin.component';
-import { OptionsDirectionComponent } from '@component/options-direction/options-direction.component';
-import { FieldsetArrayDynamicComponent } from '@component/fieldset-array/fieldset-array-dynamic.component';
-import { TableDynamicComponent } from '@component/table/table-dynamic.component';
-import { FieldsetDynamicComponent } from '@component/fieldset/fieldset-dynamic.component';
-import { CardDynamicComponent } from '@component/card/card-dynamic.component';
-import { OptComponent } from '@component/opt/opt.component';
-import { TomaShowOptionsComponent } from '@component/toma-show-options/toma-show-options.component';
-import { ReferenteTomaShowComponent } from '@component/referente-toma-show/referente-toma-show.component';
-import { AlumnoComisionTomaShowComponent } from '@component/alumno-comision-toma-show/alumno-comision-toma-show.component';
-import { PersonaAdminRelComponent } from '@component/persona-admin-rel/persona-admin-rel.component';
-import { PersonaShowComponent } from '@component/persona-show/persona-show.component';
-import { AlumnoComisionAdminComponent } from '@component/alumno-comision-admin/alumno-comision-admin.component';
 import { CalificacionShowComponent } from '@component/calificacion-show/calificacion-show.component';
-import { CalificacionAdminComponent } from '@component/calificacion-admin/calificacion-admin.component';
-import { DownloadComponent } from '@component/download/download.component';
-import { UmComponent } from '@component/um/um.component';
+import { AlumnoComisionShowComponent } from '@component/alumno-comision-show/alumno-comision-show.component';
+import { ComisionRelacionadaAdminArrayComponent } from '@component/comision-relacionada-show-admin/coomision-relacionada-show-admin.component';
+import { AlumnoComisionRelacionShowComponent } from '@component/alumno-comision-relacion-show/alumno-comision-relacion-show.component';
+import { DesignacionShowComponent } from '@component/designacion-show/designacion-show.component';
+import { DesignacionRelacionShowComponent } from '@component/designacion-relacion-show/designacion-relacion-show.component';
+import { AlumnosParaDocenteComponent } from '@component/_alumnos-para-docente/_alumnos-para-docente.component';
+import { ReferentesParaDocenteComponent } from '@component/_referentes-para-docente/_referentes-para-docente.component';
+import { DesignacionAdminArrayComponent } from '@component/designacion-admin-array/designacion-admin-array.component';
+import { TomaShowComponent } from '@component/toma-show/toma-show.component';
+import { AlumnoComisionAdminArrayComponent } from '@component/alumno-comision-admin-array/alumno-comision-admin-array.component';
+import { CalificacionAdminArrayComponent } from '@component/calificacion-show-admin/calificacion-show-admin.component';
+import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
+import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
+import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
+import { SedeShowComponent } from '@component/sede-show/sede-show.component';
 import { DetallePersonaShowComponent } from '@component/detalle-persona-show/detalle-persona-show.component';
-import { InscripcionAlumnoAdminRelComponent } from '@component/inscripcion-alumno/inscripcion-alumno/inscripcion-alumno.component';
-import { IaDetallePersonaFieldsetArrayComponent } from '@component/inscripcion-alumno/ia-detalle-persona-fieldset-array/ia-detalle-persona-fieldset-array.component';
-import { InscripcionRealizadaComponent } from '@component/inscripcion-realizada/inscripcion-realizada.component';
-import { DisposicionShowComponent } from '@component/disposicion-show/disposicion-show.component';
-import { CursoShowComponent } from '@component/curso-show/curso-show.component';
-import { DataDefinitionFkObjService } from '@service/data-definition/data-definition-fk-obj.service';
-import { DataDefinitionUmObjService } from '@service/data-definition/data-definition-um-obj.service';
-import { DataDefinitionRelFieldsService } from '@service/data-definition/data-definition-rel-fields.service';
-import { DataDefinitionStorageService } from '@service/data-definition/data-definition-storage-service';
+import { DetallePersonaAdminArrayComponent } from '@component/detalle-persona-show-admin/detalle-persona-show-admin.component';
+import { CertificadoAlumnoRegularComponent } from '@component/_certificado_alumno_regular/_certificado_alumno_regular.component';
+import { LegajoComponent } from '@component/_legajo/_legajo';
+import { CalificacionesComponent } from '@component/_calificaciones/_calificaciones';
+import { TransferirAlumnoComponent } from '@component/_transferir_alumno/transferir-alumno.component';
+import { GenerarHorariosComision } from '@component/_generar_horarios_comision/generar_horarios_comision.component';
+import { PersonaAdminComponent } from '@component/persona-admin/persona-admin.component';
+import { TomaAdminArrayComponent } from '@component/toma-admin-array/toma-admin-array.component';
+import { InscripcionAlumnoComponent } from '@component/_inscripcion-alumno/_inscripcion-alumno';
+import { InscripcionAlumnoCorrectaComponent } from '@component/_inscripcion-alumno-correcta/_inscripcion-alumno-correcta.component';
+import { CursosTomaPosesionComponent } from '@component/_cursos-toma-posesion/_cursos-toma-posesion.component';
+import { TomaPosesionEmailAbcComponent } from '@component/_toma-posesion-email-abc/_toma-posesion-email-abc';
+import { ModalidadAdminArrayComponent } from '@component/modalidad-admin-array/modalidad-admin-array.component';
+import { HorarioAdminArrayComponent } from '@component/horario-admin-array/horario-admin-array.component';
+import { InscripcionDocenteComponent } from '@component/_inscripcion-docente/_inscripcion-docente';
+import { InscripcionDocenteCorrectaComponent } from '@component/_inscripcion-docente-correcta/_inscripcion-docente-correcta.component';
+//import { MatTimepickerModule } from 'mat-timepicker';
+//import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+//import { GoogleLoginProvider } from 'angularx-social-login';
+
+//import { ClipboardModule } from '@angular/cdk/clipboard';
+
+
+//import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
 
-    ToDatePipe, 
-    ToTimePipe, 
-    SiNoPipe, 
-    SummaryPipe, 
-    StoragePipe,
-
-    LoginComponent,
-    SocialLoginComponent,
-    LogoutComponent,
-    HomeComponent,
-    //BackupComponent,
-
-    DialogAlertComponent,
-    DialogConfirmComponent,
-    FieldViewComponent,
-    FieldViewAuxComponent,
-    OptComponent,
-    InputAutocompleteComponent,
-    InputCheckboxComponent,
-    InputDateComponent,
-    InputNumberComponent,
-    InputSelectCheckboxComponent,
-    InputSelectComponent,
-    InputSelectValueComponent,
-    InputSelectParamComponent,
-    InputSearchGoComponent,
-    InputTextComponent,
-    InputTextareaComponent,
-    InputTimepickerComponent,
-    InputUploadComponent,
-    InputYearComponent,
-    InputPersistComponent,
-    //InputYmComponent,
     MenuComponent,
-    SearchAllComponent,
-    LabelComponent,
-    FieldLabelComponent,
-    FieldTreeLabelComponent,
-    FieldTreeComponent,
-    TableAdminDynamicComponent,
-    TableDynamicComponent,
-    CardDynamicComponent,
-    FieldsetDynamicComponent,
-    FieldsetArrayDynamicComponent,
-    SearchDynamicComponent,
-    SearchParamsDynamicComponent,
-    MenuLoginComponent,
-    UmComponent,
-    DownloadComponent,
-    //DynamicTableComponent,
 
-    CalendarioLabelComponent, CalendarioInputSelectComponent, PlanificacionInputPickerComponent,
-    CursoShortLabelComponent, InputCursoShortSelectComponent,
-    CursoIgeLabelComponent,
-
+    ComisionShowComponent,
     AlumnoShowComponent,
-    AsignacionPlanillaDocenteAdminComponent,
-    ComisionAdminComponent, ComisionFieldsetComponent, CaCursoTableComponent,
-    ComisionHorariosAdminComponent, ComisionHorariosFieldsetComponent,
-    ComisionShowComponent, ComisionTableComponent, ComisionSearchComponent, ComisionSearchParamsComponent,
-    DocenteTableComponent, DocenteShowComponent, DocenteSearchComponent,
-    DocenteDetailComponent,
-    PersonaAdminComponent, PersonaFieldsetComponent,
-    RdPersonaAdminComponent, RdPersonaFieldsetComponent,
-    RegistroRealizadoComponent,
-    RabcPersonaAdminComponent, RabcPersonaFieldsetComponent,
-    SedeAdminComponent, SedeFieldsetComponent,
-    TomaPosesionAdminComponent, TomaPosesionFieldsetComponent,
-    TomaPosesionRealizadaComponent,
-    TomaDetailComponent,
-
-    ListaAlumnosComponent,
-    TomaShowComponent,
-    PlanillaDocenteAdminComponent,
-    CalendarioAdminArrayComponent,
-    ComisionShow2Component,
-    AlumnoComisionAdminComponent,
-    SedeShowComponent,
-    SedeAdmin2Component,
-    CentroEducativoAdminComponent,
-    CentroEducativoShowComponent,
-    CentroEducativoCantidadSedesComponent,
-    ComisionAdmin2Component,
-    SedeShow2Component,
-    SedeShow3Component,
-    AsignaturaShowAdminComponent,
-    PersonaShowAdminRelComponent,
-    CalificacionShowAdminRelComponent,
-    OptionsComponent,
-    ComisionCensComponent,
-    SedeCensComponent,
-    CursoTomaPosesionComponent, CursoTomaPosesionTableComponent,
-    ComisionRelacionadaAdminComponent,
-    DesignacionAdminComponent,
-    DesignacionShowComponent,
-    AlumnoSearchComponent,
-    ComisionShow3Component,
-    AlumnosAprobadosShowComponent,
-    TransferirAlumnoAdminComponent,
-    AlumnoAdminRelComponent,
-    OptionsAdminComponent,
-    AlumnoComisionShowComponent,
-    TransferirAlumnoComisionAdminComponent,
-    OptionsDirectionComponent,
-    TomaShowOptionsComponent,
-    ReferenteTomaShowComponent,
-    AlumnoComisionTomaShowComponent,
-    PersonaAdminRelComponent,
-    PersonaShowComponent,
     CalificacionShowComponent,
-    CalificacionAdminComponent,
-    DetallePersonaShowComponent,
-    InscripcionAlumnoAdminRelComponent, IaDetallePersonaFieldsetArrayComponent,
-    InscripcionRealizadaComponent,
-    DisposicionShowComponent,
-    CursoShowComponent,
+    CalificacionAdminArrayComponent,
+    ComisionAdminComponent,
+    ComisionRelacionadaAdminArrayComponent,
 
+    AlumnoComisionShowComponent,
+    AlumnoComisionAdminArrayComponent,
+    AlumnoComisionRelacionShowComponent,
+    CursosTomaPosesionComponent,
+    DesignacionShowComponent,
+    DesignacionRelacionShowComponent,
+    AlumnosParaDocenteComponent,
+    ReferentesParaDocenteComponent,
+    DesignacionAdminArrayComponent,
+    TomaShowComponent,
+    TomaAdminArrayComponent,
+    SedeAdminComponent,
+    SedeShowComponent,
+    CalendarioAdminArrayComponent,
+    DetallePersonaShowComponent,
+    DetallePersonaAdminArrayComponent,
+    CertificadoAlumnoRegularComponent,
+    LegajoComponent,
+    ModalidadAdminArrayComponent,
+    CalificacionesComponent,
+    TransferirAlumnoComponent,
+    GenerarHorariosComision,
+    PersonaAdminComponent,
+    InscripcionAlumnoComponent,
+    InscripcionAlumnoCorrectaComponent,
+    InscripcionDocenteCorrectaComponent,
+    TomaPosesionEmailAbcComponent,
+    HorarioAdminArrayComponent,
+    InscripcionDocenteComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -304,46 +120,13 @@ import { DataDefinitionStorageService } from '@service/data-definition/data-defi
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
     FlexLayoutModule,
-    SocialLoginModule,
-    //ClipboardModule,
-
     AppMaterialModule,
-
+    AppCoreModule,
     MaterialFileInputModule,
-    MatTimepickerModule,
-    
+    //MatTimepickerModule
   ],
-  providers: [
-    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
-    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000, verticalPosition:"top", horizontalPosition:"right"}},
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
-    CookieService,
-    
-    AuthService,
-    DataDefinitionService, 
-    DataDefinitionToolService,
-    DataDefinitionFkObjService,
-    DataDefinitionUmObjService,
-    DataDefinitionRelFieldsService,
-    
-    SessionStorageService, 
-    ValidatorsService,
-    
-    DataDefinitionStorageService,
-    DataDefinitionLabelService, 
-
-
-    {provide: 'SocialAuthServiceConfig', useValue: { autoLogin: false,  providers: [
-      {
-        id: GoogleLoginProvider.PROVIDER_ID,
-        provider: new GoogleLoginProvider(GOOGLE_CLIENT_ID)
-      },
-    ]} as SocialAuthServiceConfig, }
-
-  ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

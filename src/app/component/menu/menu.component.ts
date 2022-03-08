@@ -17,15 +17,20 @@ export class MenuComponent implements OnInit {
   year: number;
   semester: number;
   comisionShowQueryParams:any = {}
+  tomaShowQueryParams:any = {}
+
+
   
   ngOnInit(): void {
     this.year = new Date().getFullYear();
     this.semester = getSemester();
+    this.tomaShowQueryParams = {
+      "cur_com_cal-anio":this.year,
+      "cur_com_cal-semestre":this.semester,
+    }
     this.comisionShowQueryParams = {
       "cal-anio":this.year,
       "cal-semestre":this.semester,
-      "sed-centro_educativo":1,
-      "modalidad":1,
       "autorizada":true
     } 
     var token = this.auth.getToken();

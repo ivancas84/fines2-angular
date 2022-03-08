@@ -86,13 +86,11 @@ export class _DataDefinitionLabelService {
     if(!row) return null;
 
     let ret = "";
-    if (row["inicio"]) ret = ret.trim() + " " + Parser.dateFormat(Parser.date(row["inicio"]), 'd/m/Y');
-
-    if (row["fin"]) ret = ret.trim() + " " + Parser.dateFormat(Parser.date(row["fin"]), 'd/m/Y');
-
     if (row["anio"]) ret = ret.trim() + " " + row["anio"];
 
     if (row["semestre"]) ret = ret.trim() + " " + row["semestre"];
+
+    if (row["descripcion"]) ret = ret.trim() + " " + row["descripcion"];
 
     return ret.trim();
   }

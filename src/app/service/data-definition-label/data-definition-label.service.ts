@@ -23,6 +23,17 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
     }
   }
 
+  labelCalendarioRow (row: any): string {
+    if(!row) return null;
+    let ret = "";
+    if (row["anio"]) ret = Parser.dateFormat(row["anio"], 'Y');
+    if (row["semestre"]) ret = ret + "-"+row["semestre"];
+    if (row["descripcion"]) ret = ret + " "+row["descripcion"];
+
+    return ret.trim();
+  }
+
+
   labelCalendarioAsRow (row: any): string {
     if(!row) return null;
     let ret = "";
@@ -51,27 +62,27 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
     return this.dd.get("curso", id).pipe(
       switchMap(
         curso => {
-          return this.dd.getColumnData(curso,"asignatura","asignatura",{asignatura:"nombre"})
+          return this.dd.getConnection(curso,"asignatura","asignatura",{asignatura:"codigo"})
         }
       ),
       switchMap(
         curso => {
-          return this.dd.getColumnData(curso,"comision","comision",{division:"division",sede:"sede",planificacion:"planificacion"})
+          return this.dd.getConnection(curso,"comision","comision",{division:"division",sede:"sede",planificacion:"planificacion"})
         }
       ),
       switchMap(
         curso => {
-          return this.dd.getColumnData(curso,"planificacion","planificacion",{anio:"anio",semestre:"semestre"})
+          return this.dd.getConnection(curso,"planificacion","planificacion",{anio:"anio",semestre:"semestre"})
         }
       ),
       switchMap(
         curso => {
-          return this.dd.getColumnData(curso,"sede","sede",{numero_sede:"numero"})
+          return this.dd.getConnection(curso,"sede","sede",{numero_sede:"numero", nombre_sede:"nombre"})
         }
       ),
       map(
         curso => { 
-          return (!curso)? null : curso["numero_sede"]+curso["division"]+"/"+curso["anio"]+curso["semestre"]+" "+curso["asignatura"]; 
+          return (!curso)? null : curso["numero_sede"]+curso["division"]+"/"+curso["anio"]+curso["semestre"]+" "+curso["asignatura"]+ " "+curso["nombre_sede"]; 
         }
       )
     );
@@ -82,17 +93,24 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
     return this.dd.get("comision", id).pipe(
       switchMap(
         curso => {
-          return this.dd.getColumnData(curso,"planificacion","planificacion",{anio:"anio",semestre:"semestre"})
+          console.log(curso)
+          return this.dd.getConnection(curso,"planificacion","planificacion",{anio:"anio",semestre:"semestre"})
         }
       ),
       switchMap(
         curso => {
-          return this.dd.getColumnData(curso,"sede","sede",{numero_sede:"numero"})
+          return this.dd.getConnection(curso,"sede","sede",{numero_sede:"numero"})
+        }
+      ),
+      switchMap(
+        curso => {
+          return this.dd.getConnection(curso,"calendario","calendario",{cal_anio:"anio",cal_semestre:"semestre"})
         }
       ),
       map(
         curso => { 
-          return (!curso)? null : curso["numero_sede"]+curso["division"]+"/"+curso["anio"]+curso["semestre"]; 
+          curso["periodo"] = curso["cal_anio"].substring(0,4) + "-"+curso["cal_semestre"]
+          return (!curso)? null : curso["numero_sede"]+curso["division"]+"/"+curso["anio"]+curso["semestre"]+" "+curso["periodo"];
         }
       )
     );

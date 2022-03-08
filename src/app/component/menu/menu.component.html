@@ -1,53 +1,46 @@
 <mat-toolbar>
   <span>Fines 2</span>
   
+  <button mat-button [matMenuTriggerFor]="comision" aria-label="icon-button with menu icon">
+    Comision
+  </button>
+  <mat-menu #comision="matMenu">
+    <a mat-menu-item routerLink="/comision-show" routerLinkActive="active" title="Ver Comision" [queryParams]="comisionShowQueryParams">Ver comisiones</a>
+    <a mat-menu-item routerLink="/comision-admin" routerLinkActive="active" title="Nueva Comision">Nueva Comisión</a>
+    <a mat-menu-item routerLink="/sede-show" routerLinkActive="active" title="Ver Sede">Ver sedes</a>
+    <a mat-menu-item routerLink="/sede-admin" routerLinkActive="active" title="Nueva Sede">Nueva sede</a>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="toma" aria-label="icon-button with menu icon">
+    Toma
+  </button>
+  <mat-menu #toma="matMenu">
+    <a mat-menu-item routerLink="/toma-show" routerLinkActive="active" title="Ver Tomas" [queryParams]="tomaShowQueryParams">Ver tomas 2021-1</a>
+    <a mat-menu-item routerLink="/persona-admin" routerLinkActive="active" title="Nueva Persona">Nueva persona</a>
+  </mat-menu>
+
   <button mat-button [matMenuTriggerFor]="alumno" aria-label="icon-button with menu icon">
     Alumno
   </button>
   <mat-menu #alumno="matMenu">
-    <a mat-menu-item routerLink="/alumno-admin" routerLinkActive="active" title="Agregar Alumno">Nuevo</a>
-    <a mat-menu-item routerLink="/alumno-show" routerLinkActive="active" title="Ver Alumno">Buscar</a>
-
+    <a mat-menu-item routerLink="/legajo" routerLinkActive="active" title="Legajo">Legajo</a>
+    <a mat-menu-item routerLink="/calificaciones" routerLinkActive="active" title="Calificaciones">Calificaciones</a>
+    <a mat-menu-item routerLink="/alumno-comision-show" routerLinkActive="active" title="Ver Alumno Comision" >Alumno comision</a>
+    <a mat-menu-item routerLink="/constancia" routerLinkActive="active" title="Constancia" >Constancia</a>
   </mat-menu>
-
-  <button mat-button [matMenuTriggerFor]="docente" aria-label="icon-button with menu icon">
-    Docente
-  </button>
-  <mat-menu #docente="matMenu">
-    <a mat-menu-item routerLink="/docente-show" routerLinkActive="active" title="Ver Docente">Buscar</a>
-    <a mat-menu-item routerLink="/toma-show" routerLinkActive="active" title="Ver Tomas">Tomas de Posesión</a>
-  </mat-menu>
-
 
   <button mat-button [matMenuTriggerFor]="info" aria-label="icon-button with menu icon">
-    Sede
+    Info
   </button>
   <mat-menu #info="matMenu">
-    <a mat-menu-item routerLink="/comision-show" routerLinkActive="active" title="Consolidado" [queryParams]="comisionShowQueryParams">Consolidado</a>
-    <a mat-menu-item routerLink="/comision-show2" routerLinkActive="active" title="Comisiones" [queryParams]="comisionShowQueryParams">Comisiones</a>
-    <a mat-menu-item routerLink="/sede-show" routerLinkActive="active" title="Calendario">Sedes</a>
-    <a mat-menu-item routerLink="/sede-show-2" routerLinkActive="active" title="Sedes Activas">Sedes activas en determinado periodo</a>
-    <a mat-menu-item routerLink="/sede-show-3" routerLinkActive="active" title="Sedes Activas">Sedes no activas en determinado periodo</a>
-    <a mat-menu-item routerLink="/centro-educativo-show" routerLinkActive="active" title="Calendario">CENS</a>
-    <a mat-menu-item routerLink="/centro-educativo-cantidad-sedes" routerLinkActive="active" title="Centro Educativo Cantidad Sedes">Cantidad Sedes por CENS</a>
-    <a mat-menu-item routerLink="/calendario-admin-array" routerLinkActive="active" title="Calendario">Calendarios</a>
-    <a mat-menu-item routerLink="/sede-admin-2" routerLinkActive="active" title="Nueva Sede">Nueva Sede</a>
-    <a mat-menu-item routerLink="/centro-educativo-admin" routerLinkActive="active" title="Nuevo Centro Educativo">Nuevo CENS</a>
+    <a mat-menu-item href="https://planfines2.com.ar/info/tabla_correspondencia/2021.pdf" routerLinkActive="active" title="Tabla Correspondencia 2021" target="_blank">Tabla correspondencia 2021</a>
+    <a mat-menu-item href="https://planfines2.com.ar/info/tabla_correspondencia/2018_CENS462.pdf" routerLinkActive="active" title="Tabla Correspondencia 2018" target="_blank">Tabla correspondencia 2018 462</a>
+    <a mat-menu-item href="https://planfines2.com.ar/info/tabla_correspondencia/2016_CENS456.pdf" routerLinkActive="active" title="Tabla Correspondencia 2016" target="_blank">Tabla correspondencia 2016 456</a>
+    <a mat-menu-item href="https://docs.google.com/spreadsheets/u/1/d/1teXob4Lzxdh4BNcZdwSkDsECBsLFSWlPFaZchWitgwg/edit?usp=drive_web&ouid=106952799090274904102" routerLinkActive="active" title="Archivo Alumnos" target="_blank">Archivo alumnos (docentes.cens462)</a>
+    <a mat-menu-item href="https://docs.google.com/spreadsheets/d/14mYsvF79n1DLxWR66vCL3wMHtQAP32BvBK3FhFU0wm4/edit#gid=2071370750" routerLinkActive="active" title="IGES 2021-2" target="_blank">IGES 2021-2 (docentes.cens462)</a>
+  
   </mat-menu>
 
-
-  
-
-  <button *ngIf="view.includes('new-menu')" mat-button [matMenuTriggerFor]="nuevo" aria-label="icon-button with menu icon">
-    Nuevo
-  </button>
-  <mat-menu #nuevo="matMenu">
-    <a mat-menu-item routerLink="/comision-admin" routerLinkActive="active" title="Nueva Comision">Comision</a>
-    <a mat-menu-item routerLink="/sede-admin" routerLinkActive="active" title="Nueva Sede">Sede</a>
-    <a mat-menu-item routerLink="/registro-docente" routerLinkActive="active" title="Nueva Persona">Registro docente</a>
-    <a mat-menu-item routerLink="/persona-admin" routerLinkActive="active" title="Nueva Persona">Persona</a>
-  </mat-menu>
-  
   <span fxFlex="1 1 auto"></span>
 
   <!--a mat-menu-item routerLink="/logout" routerLinkActive="active" title="Logout"><mat-icon>logout</mat-icon></a-->

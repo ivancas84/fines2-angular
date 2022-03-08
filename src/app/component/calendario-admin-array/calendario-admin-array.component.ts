@@ -1,55 +1,40 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AdminComponent } from '@component/admin/admin.component';
-import { DataDefinitionService } from '@service/data-definition/data-definition.service';
-import { ValidatorsService } from '@service/validators/validators.service';
-import { SessionStorageService } from '@service/storage/session-storage.service';
-import { FieldInputSelectParamOptions, FieldInputTextOptions, FieldInputAutocompleteOptions, FieldControlOptions, FieldHiddenOptions, FieldInputDateOptions, FieldInputYearOptions } from '@class/field-type-options';
-import { AdminArrayComponent } from '@component/admin-array/admin-array.component';
-import { FieldViewOptions } from '@class/field-view-options';
-import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
+import { FormArrayConfig, FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
+import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
+import { TableDynamicConfig } from '@component/table/table-dynamic.component';
+import { InputSelectConfig } from '@component/input-select/input-select.component';
+import { InputTextConfig } from '@component/input-text/input-text.component';
+import { AdminArrayComponent } from '@component/show/admin-array.component';
+import { InputDateConfig } from '@component/input-date/input-date.component';
+import { InputYearConfig } from '@component/input-year/input-year.component';
+import { ControlValueConfig } from '@component/control-value/control-value.component';
 
 @Component({
-  selector: 'app-calendario-admin',
-  templateUrl: '../../core/component/admin-array/admin-array.component.html',
+  selector: 'app-calendario-show',
+  templateUrl: '../../core/component/show/show.component.html',
 })
 export class CalendarioAdminArrayComponent extends AdminArrayComponent {
 
-  readonly entityName: string = "calendario"
-  title: string = "Calendario"
+  readonly entityName: string = "calendario";
 
-  fieldsViewOptions: FieldViewOptions[] = [
-    new FieldViewOptions({
-      field:"id",
-      label:"id",
-      type: new FieldHiddenOptions,
-    }),
-    new FieldViewOptions({
-      field:"inicio",
-      label:"Inicio",
-      type: new FieldInputDateOptions(),
-    }),
-    new FieldViewOptions({
-      field:"fin",
-      label:"Fin",
-      type: new FieldInputDateOptions(),
-    }),
-    new FieldViewOptions({
-      field:"anio",
-      label:"Anio",
-      type: new FieldInputYearOptions(),
-      control: new FieldControlOptions({validators: [this.validators.year(), Validators.required],})
-    }),
-    new FieldViewOptions({
-      field:"semestre",
-      label:"Semestre",
-      type: new FieldInputSelectParamOptions({options:[1,2]}),
-      control: new FieldControlOptions({validators: [Validators.required],})
-    }),
-  ];  
+  config: FormArrayConfig = new TableDynamicConfig(
+    {
+      title:"Calendario",
+    }, {
+      "id": new ControlValueConfig,
+      "inicio": new InputDateConfig,
+      "fin": new InputDateConfig,
+      "anio": new InputYearConfig,
+      "semestre": new InputTextConfig,
+      "descripcion": new InputTextConfig
+    }
+  )
+
+  searchConfig: FormStructureConfig = new FormStructureConfig({}, {
+    "params":new FieldsetDynamicConfig({title:"Opciones"},{
+      "anio": new InputYearConfig(),
+      "semestre": new InputTextConfig(),
+    })
+  }) 
 }
 

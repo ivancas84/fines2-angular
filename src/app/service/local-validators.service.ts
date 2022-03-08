@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
+import { ValidatorFn, ValidationErrors, AbstractControl, Validators } from '@angular/forms';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 
@@ -14,14 +14,24 @@ export class LocalValidators {
 
   constructor(protected dd: DataDefinitionService, protected storage: SessionStorageService) {}
 
+  static emailAbc(): ValidatorFn {
+    return Validators.pattern("[A-Za-z0-9._%-]+@abc.gob.ar");
+  }
+
   static cuilDni(): ValidatorFn {
     /**
      * Validar concordancia entre cuil y dni.
      */
 
     return (control: AbstractControl): ValidationErrors | null => {
+      if(!control.get("cuil") || !control.get("numero_documento")) return null;
+      /**
+       * Los campos pueden crearse dinamicamente, por lo que debe verificarse si se encuentran definidos
+       */
+
       const cuil = control.get("cuil").value;
       const numeroDocumento = control.get("numero_documento").value;
+      
       if(cuil && numeroDocumento){
         const cuil_ = control.get("cuil").value.substring(2,10).replace(/^0+/, '');          
         const numeroDocumento_ = control.get("numero_documento").value.replace(/^0+/, '');

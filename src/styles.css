@@ -13,3 +13,5 @@ table {
 
 mat-card {
   margin: 15px;}
+
+.highlightText { background: yellow; }

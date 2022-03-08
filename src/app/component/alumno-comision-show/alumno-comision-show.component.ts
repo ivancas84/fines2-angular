@@ -1,258 +1,181 @@
 import { Component } from '@angular/core';
-import { FieldViewOptions } from '@class/field-view-options';
-import { TypeLabelOptions, FieldInputCheckboxOptions, FieldInputSelectParamOptions, FieldInputAutocompleteOptions, FieldInputSelectOptions, FieldInputTextOptions, FieldDateOptions, FieldInputDateOptions, FieldInputSelectCheckboxOptions, UmOptions, DownloadOptions, FieldTextareaOptions, FieldYesNoOptions } from '@class/field-type-options';
-import { InputPersistOptions, RouterLinkOptions } from '@class/field-view-aux-options';
-import { FieldWidthOptions } from '@class/field-width-options';
-import { ShowRelDynamicComponent } from '@component/show/show-rel-dynamic.component';
-import { Observable, of } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
-import { Display } from '@class/display';
-import { arrayColumn } from '@function/array-column';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FieldWidthOptions } from '@class/field-width-options';
+import { FormArrayConfig, FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
+import { ControlValueConfig } from '@component/control-value/control-value.component';
+import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
+import { ShowComponent } from '@component/show/show.component';
+import { TableDynamicConfig } from '@component/table/table-dynamic.component';
+import { DataDefinitionFkAllService } from '@service/data-definition/data-definition-fk-all.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
+import { FormConfigService } from '@service/form-config/form-config.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
-import { DataDefinitionRelFieldsService } from '@service/data-definition/data-definition-rel-fields.service';
+import { ValidatorsService } from '@service/validators/validators.service';
+import { Location } from '@angular/common';
+import { InputTextConfig } from '@component/input-text/input-text.component';
+import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
+import { ControlBooleanConfig } from '@component/control-boolean/control-boolean.component';
+import { RouteIconConfig } from '@component/route-icon/route-icon.component';
+import { InputSelectCheckboxConfig } from '@component/input-select-checkbox/input-select-checkbox.component';
+import { LinkTextConfig } from '@component/link-text/link-text.component';
+import { iif, Observable, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { ControlDateConfig } from '@component/control-date/control-date.component';
 
 @Component({
   selector: 'app-alumno-comision-show',
-  templateUrl: '../../core/component/show/show-dynamic.component.html',
+  templateUrl: '../../core/component/show/show.component.html',
 })
-export class AlumnoComisionShowComponent extends ShowRelDynamicComponent {
+export class AlumnoComisionShowComponent extends ShowComponent {
 
+  constructor(
+    protected dd: DataDefinitionToolService, 
+    protected route: ActivatedRoute, 
+    protected dialog: MatDialog,
+    protected storage: SessionStorageService,
+    protected ddrf: DataDefinitionFkAllService,
+    protected fc: FormConfigService,
+    protected router: Router, 
+    protected snackBar: MatSnackBar,
+    protected location: Location, 
+    protected validators: ValidatorsService,
+    protected fb: FormBuilder
+
+  ) {
+    super(dd, route, dialog, storage, ddrf, fc, router, snackBar, location, validators, fb)
+  }
+  
   readonly entityName: string = "alumno_comision";
 
+  config: FormArrayConfig = new TableDynamicConfig({}, {
+    "alu-persona": new FormControlConfig,
+    "alu_per-apellidos": new ControlValueConfig,
+    "alu_per-nombres": new ControlValueConfig,
+    "alu_per-numero_documento": new ControlValueConfig({
+      label:"DNI"
+    }),
+    // "alu_per-fecha_nacimiento": new ControlValueConfig({
+    //   label:"fecha nacimiento"
+    // }),
+    "alu_per-telefono": new ControlValueConfig,
+    "alu_per-email": new ControlValueConfig,
+    "alu_per-fecha_nacimiento": new ControlDateConfig,
+    "alu-adeuda_deudores": new ControlValueConfig,
+    "alu-estado_inscripcion": new ControlValueConfig,
+    "aprobadas": new ControlValueConfig,
+    "activo": new ControlBooleanConfig({
+    }),
+    "alumno": new FormControlConfig({
+    })
+  })
+
+  searchConfig: FormStructureConfig = new FormStructureConfig({}, {
+    "params":new FieldsetDynamicConfig({title:"Opciones"},{
+      "alu_per-search":new InputTextConfig({
+        label:"Buscar",
+        width: new FieldWidthOptions()
+      }),
+      "alu-adeuda_deudores.exists":new InputSelectCheckboxConfig({
+        label:"Adeuda Deudores",
+      }),
+      "comision":new InputAutocompleteConfig({
+        label:"Comisión",
+        entityName:"comision",
+        width: new FieldWidthOptions()
+      }),
+      "activo":new InputSelectCheckboxConfig({
+      }),
+    })
+  }) 
+
+  
+
+  ngOnInit(){
+
+    this.config.optTitle.push(
+      {
+        config: new RouteIconConfig({
+          icon: "mode_edit", 
+          title:"Editar",
+          routerLink: "alumno-comision-admin-array",
+        }),
+        control:this.form
+      },
+    )
+
+    this.config.optColumn = [ //columna opciones
+      {   
+        config: new RouteIconConfig({
+          icon:"fitbit",
+          routerLink: "calificacion-show",
+          title: "Calificaciones",
+          params: { "alumno":"{{alumno}}" }
+
+        }),
+      },
+      {   
+        config: new RouteIconConfig({
+          icon:"list",
+          routerLink: "detalle-persona-show",
+          title: "Detalle",
+          params: { "persona":"{{alu-persona}}" }
+        }),
+      },
+      {   
+        config: new LinkTextConfig({
+          url: "https://planfines2.com.ar/users/alumno-admin-rel",
+          label: "Editar",
+          title: "Editar Alumno",
+          params: { "id":"{{alumno}}" },
+          target:"_blank"
+        }),
+      }
+    ]
+
+    super.ngOnInit()
+  }
+
   queryData(): Observable<any>{
-    return this.dd.post("ids", this.entityName, this.display).pipe(
+    return this.dd.post("ids", this.entityName, this.display$.value).pipe(
       switchMap(
-        ids => this.ddrf.getAllFvo(this.entityName, ids, this.fieldsViewOptions)
+        ids => this.ddrf.getAllConfig(this.entityName, ids, this.config.controls)
       ),
       switchMap(
-         data => this.legajoAlumno(data)
+        data => {
+          if(!this.params.hasOwnProperty("comision") || !data.length) return of(data)
+          return this.dd._post("info","disposiciones_aprobadas_comision",this.params["comision"]).pipe(
+            map(
+              response => {                
+                return this.dd.assignResponse(data,response,"alumno","alumno",{"aprobadas":"cantidad"});
+              }
+            )
+          );  
+        }
       ),
-      switchMap(
-        data => this.cantidadAsignaturasAprobadasAlumnosComision(data)
-      ),
-      switchMap(
-        data => this.ddrf.um(data, "alumno", "alumno", "disposicion_pendiente", ["dis_asi-nombre", "dis_pla-anio", "dis_pla-semestre"])
-      ),
-      tap(
-         data => console.log(data)
-      )
+      
     )
   }
 
-  legajoAlumno(data){
-    if(!data.length) return of([]);
-    var ids = arrayColumn(data, "alu-persona");
-    if(!ids.length) return of(data);
-    var display = new Display();
-    display.setSize(0);
-    display.addParam("persona",ids);
-    display.addParam("tipo","Legajo");
-    return this.dd.all("detalle_persona", display).pipe(
-      map(
-        response => {
-          for(var i = 0; i < data.length; i++) data[i]["_detalle_persona"] = []; //inicializar
-          if(!response.length) return data;
-          for(var j = 0; j < response.length; j++){
-            for(var i = 0; i < data.length; i++) { 
-              if(response[j]["persona"] == data[i]["alu-persona"]) 
-                data[i]["_detalle_persona"].push(response[j]);
-            }
-          }
-          return data;
-        }
-      )
-    );
+  initParams(params: any){ 
+    this.params = params; 
+    this.config.optTitle[2].config.params = this.params
   }
 
+  // queryData(): Observable<any>{
+  //   return this.dd.post("ids", this.entityName, this.display$.value).pipe(
+  //     switchMap(
+  //       ids => this.ddrf.getAllConfig(this.entityName, ids, this.config.controls)
+  //     ),
+  //     switchMap(
+  //       data => 
+  //     )
+  //   )
+  // }
 
-  cantidadAsignaturasAprobadasAlumnosComision(data){
-    
-    for(var i = 0; i < data.length; i++) this.dd.initFields(data[i],["cantidad"]);
-
-    if(!this.params.hasOwnProperty("com-id") || !this.params["com-id"] ) return of(data);
-
-    return this.dd._post("cantidad_asignaturas_aprobadas_alumnos_comision","alumno",this.params["com-id"]).pipe(
-      map(
-        response => {
-          if(!response.length) return data;
-          for(var i = 0; i < data.length; i++){
-            for(var j = 0; j < response.length; j++){
-              if(data[i]["alumno"] == response[j]["alumno"]) {
-                this.dd.assignFields(data[i],response[j],["cantidad_aprobada","cantidad_no_aprobada","_disposicion_no_aprobada"])
-                break;
-              }
-            }
-          }
-          return data;
-        }
-      )
-    );  
-  }
-
-
-  fieldsViewOptions: FieldViewOptions[] = [
-    new FieldViewOptions({
-      field:"alu_per-nombres",
-      label:"Nombres",
-      aux:new RouterLinkOptions({path: "alumno-admin-rel", params:{persona:"{{alu-persona}})"}}), 
-    }),
-    new FieldViewOptions({
-      field:"alu_per-apellidos",
-      label:"Apellidos",
-    }),
-    new FieldViewOptions({
-      field:"alu_per-numero_documento",
-      label:"Número Documento",
-    }),
-    new FieldViewOptions({
-      field:"activo",
-      label:"Activo",
-      //type: new FieldYesNoOptions(),
-      type: new FieldInputCheckboxOptions(),
-      aux:new InputPersistOptions({
-         params: {id:"{{id}}"},
-         entityName:"alumno_comision",
-         fieldName:"activo",
-      })
-    }),
-    new FieldViewOptions({
-      field:"alu-anio_ingreso",
-      label:"Año Ingreso",
-      // type: new FieldInputSelectParamOptions({options:['1','2','3','4','5','6','7','8','9']}),
-      // aux:new InputPersistOptions({
-      //   entityName:"alumno",
-      //   fieldName:"anio_ingreso",
-      //   params: {id:"{{alumno}}"},
-      // })
-    }),
-    new FieldViewOptions({
-      field:"alu-estado_inscripcion",
-      label:"Estado inscripcion",
-      // type: new FieldInputSelectParamOptions({options:['Correcto','Indeterminado','Caso Particular']}),
-      // aux:new InputPersistOptions({
-      //   entityName:"alumno",
-      //   fieldName:"estado_inscripcion",
-      //   params: {id:"{{alumno}}"},
-      // })
-    }),
-    new FieldViewOptions({
-      field:"alu-adeuda_legajo",
-      label:"Adeuda legajo",
-      // type: new FieldInputSelectParamOptions({options:['Completo','Incompleto']}),
-      // aux:new InputPersistOptions({
-      //   entityName:"alumno",
-      //   fieldName:"estado_legajo",
-      //   params: {id:"{{alumno}}"},
-      // })
-    }),
-    new FieldViewOptions({
-      field:"alu-adeuda_deudores",
-      label:"Adeuda Deudores",
-      // type: new FieldInputSelectParamOptions({options:['Completo','Incompleto']}),
-      // aux:new InputPersistOptions({
-      //   entityName:"alumno",
-      //   fieldName:"estado_legajo",
-      //   params: {id:"{{alumno}}"},
-      // })
-    }),
-    // new FieldViewOptions({
-    //   field:"alu-adeuda_mesa",
-    //   label:"Adeuda Mesa",
-    //   // type: new FieldInputSelectParamOptions({options:['Completo','Incompleto']}),
-    //   // aux:new InputPersistOptions({
-    //   //   entityName:"alumno",
-    //   //   fieldName:"estado_legajo",
-    //   //   params: {id:"{{alumno}}"},
-    //   // })
-    // }),
-    // new FieldViewOptions({
-    //   field:"alu-adeuda_egresar",
-    //   label:"Adeuda Egresar",
-    //   // type: new FieldInputSelectParamOptions({options:['Completo','Incompleto']}),
-    //   // aux:new InputPersistOptions({
-    //   //   entityName:"alumno",
-    //   //   fieldName:"estado_legajo",
-    //   //   params: {id:"{{alumno}}"},
-    //   // })
-    // }),
-    
-    new FieldViewOptions({
-      field:"comision",
-      label:"Comision",
-      type:new TypeLabelOptions({entityName: "comision"}),
-    }),
-    new FieldViewOptions({
-      field:"alu_per-email",
-      label:"Email",
-    }),
-    new FieldViewOptions({
-      field:"alu_per-telefono",
-      label:"Teléfono",
-      // type: new FieldInputTextOptions(),
-      // aux:new InputPersistOptions({
-      //    entityName:"persona",
-      //    fieldName:"telefono",
-      //    params: {id:"{{alu-persona}}"}//utilizar {{key}} para identificar valor del conjunto de datos
-      // })
-    }),
-    new FieldViewOptions({
-      field:"cantidad_aprobada",
-      label:"Asignaturas aprobadas",
-    }),
-    // new FieldViewOptions({
-    //   field:"_disposicion_pendiente",
-    //   label:"Pendiente",
-    //   type: new UmOptions({fields:[
-    //     new FieldViewOptions({field:"dis_asi-nombre"}),
-    //     new FieldViewOptions({field:"dis_pla-anio"}),
-    //     new FieldViewOptions({field:"dis_pla-semestre"}),
-
-    //   ]})
-    // }),
-    // // new FieldViewOptions({
-    //   field:"_detalle_persona",
-    //   label:"Legajo",
-    //   type: new UmOptions({fields:[
-    //     new FieldViewOptions({ field:"descripcion" }),
-    //     new FieldViewOptions({ field:"archivo", type:new DownloadOptions() }),
-    //   ]})
-    // }),
-    // new FieldViewOptions({
-    //   field:"_disposicion_no_aprobada",
-    //   label:"Asignaturas restantes",
-    //   type: new UmOptions({fields:[
-    //     new FieldViewOptions({ field:"asi_codigo" }),
-    //     new FieldViewOptions({ field:"pla_anio" }),
-    //     new FieldViewOptions({ field:"pla_semestre" }),
-    //   ]})
-    // })
-  ];  
-  fieldsViewOptionsSp: FieldViewOptions[] = [
-    new FieldViewOptions({
-      field:"alu_per-search",
-      label:"Buscar",
-      type: new FieldInputTextOptions(),
-      width: new FieldWidthOptions({sm:'100%',gtSm:'100%'}),
-    }),
-  
-    new FieldViewOptions({
-      field:"activo",
-      label:"Activo",
-      type: new FieldInputSelectCheckboxOptions(),
-    }),
-    new FieldViewOptions({
-      field:"alu-persona",
-      label:"Persona",
-      type: new FieldInputAutocompleteOptions({entityName:'persona'}),
-    }),
-    new FieldViewOptions({
-      field:"comision",
-      label:"Comision",
-      type: new FieldInputAutocompleteOptions({entityName:'comision'}),
-    }),
-  ];  
 }
+
+
 

@@ -4,10 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FieldWidthOptions } from '@class/field-width-options';
-import { FormArrayConfig, FormStructureConfig } from '@class/reactive-form-config';
+import { FormArrayConfig, FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
-import { ShowComponent } from '@component/show/show.component';
 import { TableDynamicConfig } from '@component/table/table-dynamic.component';
 import { DataDefinitionFkAllService } from '@service/data-definition/data-definition-fk-all.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
@@ -15,15 +14,17 @@ import { FormConfigService } from '@service/form-config/form-config.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { ValidatorsService } from '@service/validators/validators.service';
 import { Location } from '@angular/common';
+import { InputTextConfig } from '@component/input-text/input-text.component';
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
+import { AdminArrayComponent } from '@component/show/admin-array.component';
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 
 @Component({
-  selector: 'app-alumno-show',
+  selector: 'app-calificacion-show-admin',
   templateUrl: '../../core/component/show/show.component.html',
 })
-export class CalificacionShowComponent extends ShowComponent {
+export class CalificacionAdminArrayComponent extends AdminArrayComponent {
 
   constructor(
     protected dd: DataDefinitionToolService, 
@@ -44,33 +45,41 @@ export class CalificacionShowComponent extends ShowComponent {
   
   readonly entityName: string = "calificacion";
 
-  config: FormArrayConfig = new TableDynamicConfig({}, {
+  config: FormArrayConfig = new TableDynamicConfig({
+    optTitle: [] //opciones de titulo  
+  }, {
     // "disposicion": new ControlLabelConfig({
     //   label:"disposicion",
     //   entityName:"disposicion"
     // }),
-    "dis-asignatura": new ControlLabelConfig({
+    "id": new FormControlConfig(),
+    "dis-id": new FormControlConfig(),
+    "dis-asignatura": new InputAutocompleteConfig({
       label:"Asignatura",
       entityName:"asignatura"
     }),
-    "dis_pla-plan": new ControlLabelConfig({
+    "dis_pla-plan": new InputAutocompleteConfig({
       label:"Plan",
-      entityName:"plan"
+      entityName:"plan",
+      disabled:true,
     }),
     "dis_pla-anio": new ControlValueConfig({
       label:"Año",
+      disabled:true,
     }),
     "dis_pla-semestre": new ControlValueConfig({
       label:"Semestre",
+      disabled:true,
     }),
     "alumno": new ControlLabelConfig({
       label:"alumno",
-      entityName:"alumno"
+      entityName:"alumno",
+      disabled:true,
     }),
-    "nota_final": new ControlValueConfig({
+    "nota_final": new InputTextConfig({
       label:"Nota Final"
     }),
-    "crec": new ControlValueConfig({
+    "crec": new InputTextConfig({
       label:"CREC"
     }),
     
@@ -86,41 +95,26 @@ export class CalificacionShowComponent extends ShowComponent {
     })
   }) 
 
-
   ngOnInit(){
-
     this.config.optTitle.push(
       {
         config: new RouteIconConfig({
-          icon: "mode_edit", 
+          icon: "edit_off", 
           title:"Editar",
-          routerLink: "calificacion-show-admin",
+          routerLink: "calificacion-show",
         }),
         control:this.form
       },
     )
-
-    this.config.optTitle.push(
-      {
-        config: new RouteIconConfig({
-          icon: "list_alt", 
-          title:"Comisiones del alumno",
-          routerLink: "alumno-comision-show",
-        }),
-        control:this.form
-      },
-    )
-
+    
     super.ngOnInit()
   }
 
   initParams(params: any){ 
     this.params = params; 
-    
-    this.config.optTitle[2].config.params = this.params
-    this.config.optTitle[3].config.params = this.params
-
+    this.config.optTitle[0].config.params = this.params
   }
+
 
 }
 
