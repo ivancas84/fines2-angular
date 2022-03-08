@@ -79,7 +79,7 @@ const routes: Routes = [
   { path: 'toma-admin-array',  component: TomaAdminArrayComponent, pathMatch: 'full' },
   
   { path: 'sede-show',  component: SedeShowComponent, pathMatch: 'full' },
-  { path: 'certificado-alumno-regular',  component: CertificadoAlumnoRegularComponent, pathMatch: 'full' },
+  { path: 'constancia',  component: CertificadoAlumnoRegularComponent, pathMatch: 'full' },
   
   { path: 'transferir-alumno',  component: TransferirAlumnoComponent, pathMatch: 'full' },
   { path: 'persona-admin',  component: PersonaAdminComponent, pathMatch: 'full' },
