@@ -5,9 +5,9 @@ import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.comp
 import { ShowComponent } from '@component/show/show.component';
 import { TableDynamicConfig } from '@component/table/table-dynamic.component';
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
-import { AbstractControlViewOption } from '@component/abstract-control-view/abstract-control-view.component';
 import { EventButtonConfig } from '@component/event-button/event-button.component';
 import { EventIconConfig } from '@component/event-icon/event-icon.component';
+import { AbstractControlViewOption } from '@component/abstract-control-view2/abstract-control-view2.component';
 
 @Component({
   selector: 'app-comision-relacionada-show-ad',

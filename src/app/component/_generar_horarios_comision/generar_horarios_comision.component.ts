@@ -59,7 +59,6 @@ export class GenerarHorariosComision extends AdminComponent {
       }),
       "hora_inicio":new InputTextConfig({
         type:"time",
-        disabled:true
       }),
     }),
     
