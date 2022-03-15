@@ -2,8 +2,17 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "./dist/out-tsc",
+    "paths": {
+      "@class/*":["app/class/*", "app/core/class/*"],
+      "@component/*":["app/component/*", "app/core/component/*"],
+      "@service/*":["app/service/*", "app/core/service/*"],
+      "@function/*":["app/function/*", "app/core/function/*"],
+      "@pipe/*":["app/pipe/*", "app/core/pipe/*"],
+      "@directive/*":["app/directive/*", "app/core/directive/*"],
+      "@config/*":["app/*", "app/core/*"]
+    },
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
