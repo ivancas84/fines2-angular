@@ -1,5 +1,9 @@
+
+import { registerLocaleData } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import localeEsAr from '@angular/common/locales/es-AR';
+registerLocaleData(localeEsAr, 'es-AR');
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,10 +13,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppMaterialModule } from './core/app-material.module';
 import { AppCoreModule } from './core/app-core.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { AsignaturaArrayComponent } from '@component/asignatura-array/asignatura-array.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AsignaturaArrayComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,6 +29,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     FlexLayoutModule,
     AppMaterialModule,
     AppCoreModule,
+    
     MaterialFileInputModule,
   ],
   providers: [],
