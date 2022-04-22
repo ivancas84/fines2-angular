@@ -17,6 +17,7 @@ export class AsignaturaArrayComponent extends TableComponent {
 
   override config: FormArrayConfig = new FormArrayConfig({}, {
     "nombre": new ControlValueConfig,
+    "formacion": new ControlValueConfig,
   })
 
 
