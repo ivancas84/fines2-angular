@@ -1,0 +1,17 @@
+<mat-toolbar>
+  <span>Fines 2</span>
+  
+  <button mat-button [matMenuTriggerFor]="comision" aria-label="icon-button with menu icon">
+    Info
+  </button>
+  <mat-menu #comision="matMenu">
+    <a mat-menu-item routerLink="/asignatura-array" routerLinkActive="active" title="Ver Asignatura">Ver asignaturas</a>
+  </mat-menu>
+
+  <span fxFlex="1 1 auto"></span>
+
+  <!--a mat-menu-item routerLink="/logout" routerLinkActive="active" title="Logout"><mat-icon>logout</mat-icon></a-->
+
+</mat-toolbar>
+
+

@@ -14,11 +14,16 @@ import { AppMaterialModule } from './core/app-material.module';
 import { AppCoreModule } from './core/app-core.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { AsignaturaArrayComponent } from '@component/asignatura-array/asignatura-array.component';
+import { MenuComponent } from './menu/menu.component';
+import { ResumenComisionesComponent } from '@component/resumen-comisiones/resumen-comisiones.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AsignaturaArrayComponent,
+
+    AsignaturaArrayComponent, 
+    MenuComponent,
+    ResumenComisionesComponent
   ],
   imports: [
     BrowserModule,
