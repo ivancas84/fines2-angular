@@ -90,32 +90,6 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
   }
 
 
-  override labelComision(id: string): Observable<string> {
-    return this.dd.get("comision", id).pipe(
-      switchMap(
-        curso => {
-          console.log(curso)
-          return this.dd.getConnection(curso,"planificacion","planificacion",{anio:"anio",semestre:"semestre"})
-        }
-      ),
-      switchMap(
-        curso => {
-          return this.dd.getConnection(curso,"sede","sede",{numero_sede:"numero"})
-        }
-      ),
-      switchMap(
-        curso => {
-          return this.dd.getConnection(curso,"calendario","calendario",{cal_anio:"anio",cal_semestre:"semestre"})
-        }
-      ),
-      map(
-        curso => { 
-          curso["periodo"] = curso["cal_anio"].substring(0,4) + "-"+curso["cal_semestre"]
-          return (!curso)? "" : curso["numero_sede"]+curso["division"]+"/"+curso["anio"]+curso["semestre"]+" "+curso["periodo"];
-        }
-      )
-    );
-  }
 
   override labelDomicilioRow (row: any): string {
     if(!row) return "";

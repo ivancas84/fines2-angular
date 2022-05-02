@@ -15,7 +15,7 @@ export class AsignaturaArrayComponent extends TableComponent {
 
   override readonly entityName: string = "asignatura";
 
-  override config: FormArrayConfig = new FormArrayConfig({}, {
+  override config: FormArrayConfig = new FormArrayConfig({
     "nombre": new ControlValueConfig,
     "formacion": new ControlValueConfig,
   })

@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { SortDirection } from '@angular/material/sort';
 import { Display } from '@class/display';
-import { FormArrayConfig } from '@class/reactive-form-config';
+import { FormArrayConfig, FormControlConfig } from '@class/reactive-form-config';
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
-import { ArrayComponent } from '@component/structure/array.component';
+import { LinkTextConfig } from '@component/link-text/link-text.component';
 import { TableComponent } from '@component/structure/table.component';
-import { map, Observable, switchMap, tap } from 'rxjs';
+import { map, Observable, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-resumen-comisiones',
@@ -14,9 +13,9 @@ import { map, Observable, switchMap, tap } from 'rxjs';
   styles:[`
   .mat-card-content { overflow-x: auto; }
   .mat-table.mat-table { min-width: 500px; }
-  .highlight{
-      background: #42A948; /* green */
-    }
+  /*.highlight{
+      background: #42A948; 
+    }*/
   `],
 })
 export class ResumenComisionesComponent extends TableComponent {
@@ -24,16 +23,18 @@ export class ResumenComisionesComponent extends TableComponent {
   override readonly entityName: string = "curso";
 
 
+
   override initDisplay() {
     var display = new Display();
-    display.setParams({"com_cal-anio":"2022","com_cal-semestre":1,"com-autorizada":true})
+    display.setParams({"com_cal-anio":"2022","com_cal-semestre":1,"com-autorizada":true,"com-modalidad":1})
     display.setSize(100);
-    display.setOrder({"com_sed-numero":"asc", "com_sed-nombre":"asc"})
+    display.setOrder({"com_sed-numero":"asc", "com_sed-nombre":"asc","com_pla-anio":"asc","com_pla-semestre":"asc"})
     //display.setParamsByQueryParams(this.params);
     this.display$.next(display)
   }
 
-  override queryData(): Observable<any>{
+  override initData(): Observable<any>{
+    if(this.length === 0) return of([]); 
     return this.dd.post("ids", this.entityName, this.display$.value).pipe(
       switchMap(
         ids => this.dd.getAll("curso", ids)
@@ -45,7 +46,7 @@ export class ResumenComisionesComponent extends TableComponent {
         data => this.dd.getAllConnection(data, "sede", {"nombre":"nombre", "numero":"numero", "domicilio":"domicilio"}, "sede")
       ),
       switchMap(
-        data => this.dd.getAllConnection(data, "domicilio", {"calle":"calle", "entre":"entre", "dom_numero":"numero"}, "domicilio")
+        data => this.dd.getAllConnection(data, "domicilio", {"calle":"calle", "entre":"entre", "dom_numero":"numero","barrio":"barrio"}, "domicilio")
       ),
       switchMap(
         data =>   this.dd.postAllConnection(data, "info","curso_horario",{"horario":"horario"},"id","curso")
@@ -64,26 +65,45 @@ export class ResumenComisionesComponent extends TableComponent {
       ),
       map(
         data => {
+          var d: { [x: string]: string; }[] = []
           data.forEach((element: { [x: string]: string; }) => {
-            element["sede"] = element["numero"] + " " + element["nombre"]
-            element["comision"] =  element["numero"] + "/" + element["anio"] + element["semestre"]
+            element["sede"] =  element["nombre"] + " (" + element["numero"] + ")"
+            element["comision"] =  element["numero"] + element["division"] + "/" + element["anio"] + element["semestre"]
             element["tramo"] =  element["anio"] + "º" + element["semestre"] + "º " + element["orientacion"]
-            element["domicilio"] =  element["calle"] + " e/ " + element["entre"] + " nº " + element["dom_numero"]
+            element["domicilio"] =  element["calle"] + " e/ " + element["entre"] + " nº " + element["dom_numero"] + " " + element["barrio"]
+            if(!element["toma"]) d.push(element)
           })
-          return data;
+          return d;
         }
       ),
    
     )
   }
 
-  override config: FormArrayConfig = new FormArrayConfig({}, {
+  override config: FormArrayConfig = new FormArrayConfig({
+    "id": new FormControlConfig,
+    "ige": new ControlValueConfig,
     "sede": new ControlValueConfig,
+    "domicilio": new ControlValueConfig,
     "comision": new ControlValueConfig,
     "tramo": new ControlValueConfig,
     "asignatura": new ControlLabelConfig,
-    "docente": new ControlLabelConfig({entityName:"persona"}),
+
+    //"docente": new ControlLabelConfig({entityName:"persona"}),
+    "docente": new FormControlConfig,
   })
+
+
+  override initDisplayedColumns(){
+    super.initDisplayedColumns();
+    // this.displayedColumns.push("options");
+  }
+
+  override optColumn: FormControlConfig[] = [
+    new LinkTextConfig(
+      {label:'Editar ige', url:'curso-admin', params:{'id':'{{id}}'}}
+    ),
+  ]
 
 
 

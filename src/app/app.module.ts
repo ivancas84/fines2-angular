@@ -16,6 +16,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { AsignaturaArrayComponent } from '@component/asignatura-array/asignatura-array.component';
 import { MenuComponent } from './menu/menu.component';
 import { ResumenComisionesComponent } from '@component/resumen-comisiones/resumen-comisiones.component';
+import { CursoAdminComponent } from '@component/curso-admin/curso-admin.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ResumenComisionesComponent } from '@component/resumen-comisiones/resume
 
     AsignaturaArrayComponent, 
     MenuComponent,
-    ResumenComisionesComponent
+    ResumenComisionesComponent,
+    CursoAdminComponent,
   ],
   imports: [
     BrowserModule,
