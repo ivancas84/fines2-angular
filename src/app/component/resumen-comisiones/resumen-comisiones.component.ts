@@ -3,9 +3,9 @@ import { Display } from '@class/display';
 import { FormArrayConfig, FormControlConfig } from '@class/reactive-form-config';
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
-import { LinkTextConfig } from '@component/link-text/link-text.component';
 import { TableComponent } from '@component/structure/table.component';
 import { map, Observable, of, switchMap } from 'rxjs';
+import { ListaComisionesComponent } from './lista-comisiones.component';
 
 @Component({
   selector: 'app-resumen-comisiones',
@@ -13,16 +13,15 @@ import { map, Observable, of, switchMap } from 'rxjs';
   styles:[`
   .mat-card-content { overflow-x: auto; }
   .mat-table.mat-table { min-width: 500px; }
-  /*.highlight{
-      background: #42A948; 
-    }*/
+  /* .highlight{
+      background: #ff9999; 
+    } */
   `],
 })
-export class ResumenComisionesComponent extends TableComponent {
-
-  override readonly entityName: string = "curso";
-
-
+export class ResumenComisionesComponent extends ListaComisionesComponent {
+  /**
+   * Visualizar cursos que no tienen toma activa
+   */
 
   override initDisplay() {
     var display = new Display();
@@ -33,51 +32,16 @@ export class ResumenComisionesComponent extends TableComponent {
     this.display$.next(display)
   }
 
-  override initData(): Observable<any>{
-    if(this.length === 0) return of([]); 
-    return this.dd.post("ids", this.entityName, this.display$.value).pipe(
-      switchMap(
-        ids => this.dd.getAll("curso", ids)
-      ),
-      switchMap(
-        data => this.dd.getAllConnection(data, "comision", {"division":"division", "sede":"sede","planificacion":"planificacion"}, "comision")
-      ),
-      switchMap(
-        data => this.dd.getAllConnection(data, "sede", {"nombre":"nombre", "numero":"numero", "domicilio":"domicilio"}, "sede")
-      ),
-      switchMap(
-        data => this.dd.getAllConnection(data, "domicilio", {"calle":"calle", "entre":"entre", "dom_numero":"numero","barrio":"barrio"}, "domicilio")
-      ),
-      switchMap(
-        data =>   this.dd.postAllConnection(data, "info","curso_horario",{"horario":"horario"},"id","curso")
-      ),
-      switchMap(
-        data =>   this.dd.postAllConnection(data, "info","curso_toma_activa",{"toma":"toma_activa"},"id","curso")
-      ),
-      switchMap(
-        data =>   this.dd.getAllConnection(data, "toma",{"docente":"docente"},"toma")
-      ),
-      switchMap(
-        data =>   this.dd.getAllConnection(data, "planificacion", {"anio":"anio","semestre":"semestre","plan":"plan"},"planificacion")
-      ),
-      switchMap(
-        data =>   this.dd.getAllConnection(data, "plan", {"orientacion":"orientacion"},"plan")
-      ),
-      map(
-        data => {
-          var d: { [x: string]: string; }[] = []
-          data.forEach((element: { [x: string]: string; }) => {
-            element["sede"] =  element["nombre"] + " (" + element["numero"] + ")"
-            element["comision"] =  element["numero"] + element["division"] + "/" + element["anio"] + element["semestre"]
-            element["tramo"] =  element["anio"] + "º" + element["semestre"] + "º " + element["orientacion"]
-            element["domicilio"] =  element["calle"] + " e/ " + element["entre"] + " nº " + element["dom_numero"] + " " + element["barrio"]
-            if(!element["toma"]) d.push(element)
-          })
-          return d;
-        }
-      ),
-   
-    )
+  override formatData(data: { [x: string]: string; }[]): { [x: string]: string; }[]{
+    var d: { [x: string]: string; }[] = []
+    data.forEach((element: { [x: string]: string; }) => {
+      element["sede"] =  element["nombre"] + " (" + element["numero"] + ")"
+      element["comision"] =  element["numero"] + element["division"] + "/" + element["anio"] + element["semestre"]
+      element["tramo"] =  element["anio"] + "º" + element["semestre"] + "º " + element["orientacion"]
+      element["domicilio"] =  element["calle"] + " e/ " + element["entre"] + " nº " + element["dom_numero"] + " " + element["barrio"]
+      if(!element["toma"]) d.push(element)
+    })
+    return d;
   }
 
   override config: FormArrayConfig = new FormArrayConfig({
@@ -88,22 +52,18 @@ export class ResumenComisionesComponent extends TableComponent {
     "comision": new ControlValueConfig,
     "tramo": new ControlValueConfig,
     "asignatura": new ControlLabelConfig,
-
-    //"docente": new ControlLabelConfig({entityName:"persona"}),
-    "docente": new FormControlConfig,
+    "horario": new ControlValueConfig,
+    // "docente": new ControlLabelConfig({entityName:"persona"}),
+    "docente": new FormControlConfig(),
   })
 
 
-  override initDisplayedColumns(){
-    super.initDisplayedColumns();
-    // this.displayedColumns.push("options");
-  }
 
-  override optColumn: FormControlConfig[] = [
-    new LinkTextConfig(
-      {label:'Editar ige', url:'curso-admin', params:{'id':'{{id}}'}}
-    ),
-  ]
+  // override optColumn: FormControlConfig[] = [
+  //   new LinkTextConfig(
+  //     {label:'Editar ige', url:'curso-admin', params:{'id':'{{id}}'}}
+  //   ),
+  // ]
 
 
 

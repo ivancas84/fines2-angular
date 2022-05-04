@@ -17,15 +17,19 @@ import { AsignaturaArrayComponent } from '@component/asignatura-array/asignatura
 import { MenuComponent } from './menu/menu.component';
 import { ResumenComisionesComponent } from '@component/resumen-comisiones/resumen-comisiones.component';
 import { CursoAdminComponent } from '@component/curso-admin/curso-admin.component';
+import { ListaComisionesComponent } from '@component/resumen-comisiones/lista-comisiones.component';
+import { ResumenAlumnosComponent } from '@component/resumen-alumnos/resumen-alumnos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
 
-    AsignaturaArrayComponent, 
-    MenuComponent,
-    ResumenComisionesComponent,
+    AsignaturaArrayComponent,
     CursoAdminComponent,
+    ListaComisionesComponent,
+    MenuComponent,
+    ResumenAlumnosComponent,
+    ResumenComisionesComponent,
   ],
   imports: [
     BrowserModule,

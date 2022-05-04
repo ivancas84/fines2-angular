@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AsignaturaArrayComponent } from '@component/asignatura-array/asignatura-array.component';
 import { CursoAdminComponent } from '@component/curso-admin/curso-admin.component';
 import { HomeComponent } from '@component/home/home.component';
+import { ResumenAlumnosComponent } from '@component/resumen-alumnos/resumen-alumnos.component';
+import { ListaComisionesComponent } from '@component/resumen-comisiones/lista-comisiones.component';
 import { ResumenComisionesComponent } from '@component/resumen-comisiones/resumen-comisiones.component';
 
 const routes: Routes = [
@@ -11,6 +13,8 @@ const routes: Routes = [
   { path: 'curso-admin', component: CursoAdminComponent, pathMatch: 'full' },
 
   { path: 'resumen-comisiones', component: ResumenComisionesComponent, pathMatch: 'full' },
+  { path: 'lista-comisiones', component: ListaComisionesComponent, pathMatch: 'full' },
+  { path: 'resumen-alumnos', component: ResumenAlumnosComponent, pathMatch: 'full' },
 
 
 
