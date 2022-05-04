@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FieldWidthOptions } from '@class/field-width-options';
-import { FormGroupConfig } from '@class/reactive-form-config';
+import { FormGroupConfig, FormStructureConfig } from '@class/reactive-form-config';
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { InputTextConfig } from '@component/input-text/input-text.component';
 import { DetailComponent } from '@component/structure/detail.component';
 
 @Component({
-  selector: 'app-curso-admin',
-  templateUrl: './curso-admin.component.html',
+  selector: 'app-alumno-admin',
+  templateUrl: './alumno-admin.component.html',
 })
 export class CursoAdminComponent extends DetailComponent {
 

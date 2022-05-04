@@ -79,7 +79,7 @@ export class ListaComisionesComponent extends TableComponent {
   formatData(data: { [x: string]: string; }[]){
     data.forEach((element: { [x: string]: string; }) => {
       element["sede"] =  element["nombre"] + " (" + element["numero"] + ")"
-      // element["comision"] =  element["numero"] + element["division"] + "/" + element["anio"] + element["semestre"]
+      element["comision"] =  element["numero"] + element["division"] + "/" + element["anio"] + element["semestre"]
       element["tramo"] =  element["anio"] + "º" + element["semestre"] + "º " + element["orientacion"]
       element["domicilio"] =  element["calle"] + " e/ " + element["entre"] + " nº " + element["dom_numero"] + " " + element["barrio"]
     })
