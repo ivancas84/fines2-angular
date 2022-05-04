@@ -97,9 +97,9 @@ export class ResumenAlumnosComponent extends TableComponent {
 
   override setData(data: any[]){
     if (!this.length && data.length) this.length = data.length
-    this.formArray.clear();
-    for(var i = 0; i <data.length; i++) this.formArray.push(this.config.factory!.formGroup());
-    this.formArray.patchValue(data)
+    this.control.clear();
+    for(var i = 0; i <data.length; i++) this.control.push(this.config.factory!.formGroup());
+    this.control.patchValue(data)
     if(data.length) this.comisionControl.patchValue(data[0])
   }
 
