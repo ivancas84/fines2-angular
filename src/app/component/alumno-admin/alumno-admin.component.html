@@ -5,8 +5,11 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      Buscar alumno
+      Buscar alumno   
+      <core-event-icon [config]="{icon:'cached', action:'reset', color:'primary',fieldEvent:optField}"></core-event-icon>    
+      <core-event-icon [config]="{icon:'clear', action:'clear', color:'primary',fieldEvent:optField}"></core-event-icon>    
     </mat-card-title>
+ 
   </mat-card-header>
   <mat-card-content>
     <core-input-search-go fxFlex="auto" [entityName]="'alumno'"></core-input-search-go>    
@@ -31,6 +34,15 @@
                                             [control]="controlPersona"></core-abstract-control-form-group>
         </mat-card-content>
       </mat-card>
+
+      <mat-card>
+        <mat-card-content>
+          <core-abstract-control-view *ngFor="let o of optFooterPersona" 
+                                      [config]="o.config" 
+                                      [control]="o.control"></core-abstract-control-view>
+        </mat-card-content>
+      </mat-card>
+
       <mat-card>
         <mat-card-header>
           <mat-card-title>
@@ -42,7 +54,14 @@
                                             [control]="controlAlumno"></core-abstract-control-form-group>
         </mat-card-content>
       </mat-card>
-      
+    
+      <mat-card>
+        <mat-card-content>
+          <core-abstract-control-view *ngFor="let o of optFooterAlumno" 
+                                      [config]="o.config" 
+                                      [control]="o.control" ></core-abstract-control-view>
+        </mat-card-content>
+      </mat-card>
       <mat-card>
         <mat-card-header>
           <mat-card-title>
@@ -76,18 +95,28 @@
                           [control]="o.control" ></core-abstract-control-view>
         </mat-card-content>
       </mat-card>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            Calificaciones
+            <core-event-icon [config]="{icon:'article', action:'generar_calificaciones', color:'primary',fieldEvent:optField}"></core-event-icon>    
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <core-table-one [control]="controlCalificacion_"
+                          [config]="configCalificacion_"
+                          [optColumn]="optColumn"></core-table-one>
+
+          <core-abstract-control-view *ngFor="let o of optFooterCalificacion_" 
+                          [config]="o.config" 
+                          [control]="o.control" ></core-abstract-control-view>
+        </mat-card-content>
+      </mat-card>
     </ng-container> 
   </ng-container>
 
-  <mat-card>
-    <mat-card-content>
-      <core-event-button [config]="{text:'Aceptar',action:'submit',color:'primary',fieldEvent:optField}"></core-event-button>
-      <core-event-icon [config]="{icon:'cached', action:'reset', color:'primary',fieldEvent:optField}"></core-event-icon>    
-      <core-event-icon [config]="{icon:'clear', action:'clear', color:'primary',fieldEvent:optField}"></core-event-icon>    
-
-    </mat-card-content>
-  </mat-card>
-  
+ 
   
 </form>
 

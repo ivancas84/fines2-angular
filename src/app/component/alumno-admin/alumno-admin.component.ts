@@ -17,7 +17,6 @@ import { InputTextConfig } from '@component/input-text/input-text.component';
 import { InputUploadConfig } from '@component/input-upload/input-upload.component';
 import { StructureComponent } from '@component/structure/structure.component';
 import { TextareaConfig } from '@component/textarea/textarea.component';
-import { emptyUrl } from '@function/empty-url.function';
 import { isEmptyObject } from '@function/is-empty-object.function';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
@@ -28,7 +27,6 @@ import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { AbstractControlViewOption } from '@component/abstract-control-view/abstract-control-view.component';
 import { EventButtonConfig } from '@component/event-button/event-button.component';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
-
 
 @Component({
   selector: 'app-alumno-admin',
@@ -64,7 +62,8 @@ export class AlumnoAdminComponent extends StructureComponent {
   controlAlumno: FormGroup = new FormGroup({})
   controlDetallePersona: FormArray = new FormArray([])
   controlComision: FormArray = new FormArray([])
-  
+  controlCalificacion_: FormArray = new FormArray([])
+
   configPersona: FormGroupConfig = new FormGroupConfig({
     nombres: new InputTextConfig,
     apellidos: new InputTextConfig,
@@ -124,7 +123,15 @@ export class AlumnoAdminComponent extends StructureComponent {
 
   configComision: FormArrayConfig = new FormArrayConfig({
     comision: new InputAutocompleteConfig,
-    activo: new InputCheckboxConfig
+    activo: new InputCheckboxConfig,
+    alumno: new FormControlConfig
+  })
+
+  configCalificacion_: FormArrayConfig = new FormArrayConfig({
+    disposicion: new InputAutocompleteConfig,
+    nota_final: new InputTextConfig({type:"number"}),
+    crec: new InputTextConfig({type:"number"}),
+    alumno: new FormControlConfig
   })
 
   optColumn: FormControlConfig[] = [
@@ -134,7 +141,30 @@ export class AlumnoAdminComponent extends StructureComponent {
       fieldEvent:this.optField,
       icon:"delete"
     })
-  ]; //columna opciones para ambas tablas
+  ]; //columna opciones para todas las tablas
+
+
+  optFooterPersona: AbstractControlViewOption[] = [
+    {
+      config: new EventButtonConfig({
+        text: "Guardar Datos Persona", //texto del boton
+        action: "submit_persona", //accion del evento a realizar
+        color: "primary",
+        fieldEvent: this.optField
+      }),
+    }
+  ];
+
+  optFooterAlumno: AbstractControlViewOption[] = [
+    {
+      config: new EventButtonConfig({
+        text: "Guardar Datos Alumno", //texto del boton
+        action: "submit_alumno", //accion del evento a realizar
+        color: "primary",
+        fieldEvent: this.optField
+      }),
+    }
+  ];
 
   optFooterDetallePersona: AbstractControlViewOption[] = [
     {
@@ -159,12 +189,31 @@ export class AlumnoAdminComponent extends StructureComponent {
     {
       config: new EventIconConfig({
         icon: "add", //texto del boton
-        action: "add_comision", //accion del evento a realizar
+        action: "add_alumno_comision_", //accion del evento a realizar
         color: "primary",
         fieldEvent: this.optField
       }),
       control: this.controlComision
     },
+    {
+      config: new EventButtonConfig({
+        text: "Guardar Comisiones", //texto del boton
+        action: "submit_comision_", //accion del evento a realizar
+        color: "primary",
+        fieldEvent: this.optField
+      }),
+    }
+  ];
+
+  optFooterCalificacion_: AbstractControlViewOption[] = [
+    {
+      config: new EventButtonConfig({
+        text: "Guardar Calificaciones", //texto del boton
+        action: "submit_calificacion_", //accion del evento a realizar
+        color: "primary",
+        fieldEvent: this.optField
+      }),
+    }
   ];
 
   override ngOnInit(){
@@ -176,11 +225,14 @@ export class AlumnoAdminComponent extends StructureComponent {
     this.configDetallePersona.initAdmin()
     this.configComision.initFactory()
     this.configComision.initAdmin()
+    this.configCalificacion_.initFactory()
+    this.configCalificacion_.initAdmin()
 
     this.control.addControl("per",this.controlPersona)
     this.control.addControl("alumno",this.controlAlumno)
     this.control.addControl("per-detalle_persona/persona",this.controlDetallePersona)
     this.control.addControl("alumno_comision/alumno",this.controlComision)
+    this.control.addControl("calificacion/alumno",this.controlCalificacion_)
 
     super.ngOnInit()
   }
@@ -193,7 +245,8 @@ export class AlumnoAdminComponent extends StructureComponent {
         }
       ),
       map(
-        data => { 
+        (data: any) => { 
+          console.log(data)
           this.controlPersona.patchValue(this.configPersona.defaultValues())
           this.controlAlumno.patchValue(this.configAlumno.defaultValues())
           this.controlDetallePersona.clear();
@@ -201,6 +254,9 @@ export class AlumnoAdminComponent extends StructureComponent {
 
           this.controlComision.clear();
           for(var i = 0; i <data["alumno_comision/alumno"].length; i++) this.controlComision.push(this.configComision.factory!.formGroup());
+          
+          this.controlCalificacion_.clear();
+          for(var i = 0; i <data["calificacion/alumno"].length; i++) this.controlCalificacion_.push(this.configCalificacion_.factory!.formGroup());
           
           this.control.patchValue(data)
           return true;
@@ -210,12 +266,18 @@ export class AlumnoAdminComponent extends StructureComponent {
   }
 
   override initData(): Observable<any> {
-    var data = {"alumno":{}, "per":{}, "per-detalle_persona/persona":[], "alumno_comision/alumno":[], }
+    var data = {
+      "alumno":{}, 
+      "per":{}, 
+      "per-detalle_persona/persona":[], 
+      "alumno_comision/alumno":[], 
+      "calificacion/alumno":[], 
+    }
     if(isEmptyObject(this.params)) return of(data)
 
     return this.dd.unique("alumno", this.params).pipe(
       switchMap(
-        alumno => {
+        (alumno: any) => {
           if(isEmptyObject(alumno)) return of(data) 
           data["alumno"] = alumno
           return this.initPersona(data) 
@@ -227,7 +289,7 @@ export class AlumnoAdminComponent extends StructureComponent {
   initPersona(data: { [x: string]: any }): Observable<any>{
     return this.dd.get("persona", data["alumno"]["persona"]).pipe(
       switchMap(
-        persona => {
+        (persona: any) => {
           if(isEmptyObject(persona)) return of(data) 
           data["per"] = persona
           return this.initMultiple(data)
@@ -247,26 +309,49 @@ export class AlumnoAdminComponent extends StructureComponent {
     return combineLatest([
       this.dd.all("detalle_persona", display),
       this.dd.all("alumno_comision", display2),
-      
+      this.initCalificacion_(data),
     ]).pipe(
       map(
-        response => {
+        (response: any) => {
           var detalle_persona_ = response[0];
           var alumno_comision_ = response[1];
+          var calificacion_ = response[2];
 
           if(detalle_persona_.length) data["per-detalle_persona/persona"] = detalle_persona_ 
           if(alumno_comision_.length) data["alumno_comision/alumno"] = alumno_comision_
-          
+          if(calificacion_.length) data["calificacion/alumno"] = calificacion_
+
           return data
         }
       )
     )
   }
 
-  override persist(): Observable<any> {
-    return this.dd._post("persist_rel", "alumno", this.serverData())
-  }
+  initCalificacion_(data: { [x: string]: any }): Observable<any>{
+    if(!data["alumno"]["plan"] || !data["alumno"]["anio_ingreso"]) {
+      this.snackBar.open("No se pueden cargar las calificaciones, no se encuentra definido el plan o el año de ingreso del alumno", "X");
+      return of(data)
+    }
 
+    var display = new Display()
+    display.setParams({
+      "alumno":data["alumno"]["id"],
+      "cur_com_pla-plan": data["alumno"]["plan"]
+    })
+    display.addCondition(["cur_com_pla-anio",">=",data["alumno"]["anio_ingreso"]])
+    
+
+    return this.dd.all("calificacion", display).pipe(
+      switchMap(
+        data => this.dd.getAllConnection(data,"disposicion",{asignatura:"asignatura",planificacion:"planificacion"},"disposicion")
+      ),
+      switchMap(
+        data => this.dd.getAllConnection(data,"planificacion",{"anio":"anio","semestre":"semestre","plan":"plan"},"planificacion")
+      ),
+    )
+
+
+  }
 
   override initDisplay() {
     /**
@@ -284,7 +369,6 @@ export class AlumnoAdminComponent extends StructureComponent {
     return this.control.getRawValue()
   }
 
-
   override switchOptField(data: { action: string; [x: string]: any; }): void{
     switch(data.action){
       case "remove": 
@@ -294,16 +378,22 @@ export class AlumnoAdminComponent extends StructureComponent {
         if(!fg.get("id")!.value) fa.removeAt(index)
         else fg.get("_mode")!.setValue("delete");
       break;
-      case "add_comision":
+      case "add_alumno_comision_":
         var fg = this.configComision.factory!.formGroup();
+        fg.get("alumno")!.setValue((this.controlAlumno.get("id") as FormControl).value)
+        console.log(fg)
         this.controlComision.push(fg); 
+
       break;
       case "add_detalle_persona":
         var fg = this.configDetallePersona.factory!.formGroup();
         fg.get("persona")!.setValue((this.controlPersona.get("id") as FormControl).value)
-        console.log(this.controlAlumno);
-        console.log(fg);
         this.controlDetallePersona.push(fg); 
+      break;
+      case "add_calificacion_":
+        var fg = this.configCalificacion_.factory!.formGroup();
+        fg.get("alumno")!.setValue((this.controlAlumno.get("id") as FormControl).value)
+        this.controlCalificacion_.push(fg); 
       break;
       case "submit_detalle_persona":
         this.isSubmitted = true;
@@ -313,17 +403,113 @@ export class AlumnoAdminComponent extends StructureComponent {
           this.submitDetallePersona_();
         } 
       break;
+      case "submit_comision_":
+        this.isSubmitted = true;
+        if (!this.control.valid) {
+          this.cancelSubmit();
+        } else {
+          this.submitAlumnoComision_();
+        } 
+      break;
+      case "submit_calificacion_":
+        this.isSubmitted = true;
+        if (!this.controlCalificacion_.valid) {
+          this.cancelSubmit();
+        } else {
+          this.submitCalificacion_();
+        } 
+      break;
+      case "submit_persona":
+        this.isSubmitted = true;
+        if (!this.control.valid) {
+          this.cancelSubmit();
+        } else {
+          this.submitPersona();
+        } 
+      break;
+      case "submit_alumno":
+        this.isSubmitted = true;
+        if (!this.control.valid) {
+          this.cancelSubmit();
+        } else {
+          this.submitAlumno();
+        } 
+      break;
       default: super.switchOptField(data)  
     }
   }
 
   submitDetallePersona_() {
     var s = this.dd._post("persist_rows", "detalle_persona", this.controlDetallePersona.value).subscribe({
-      next: response => {
+      next: (response: any) => {
         this.response = response
         this.submitted()        
       },
-      error: error => { 
+      error: (error: any) => { 
+        this.dialog.open(DialogAlertComponent, {
+          data: {title: "Error", message: error.error}
+        });
+        this.isSubmitted = false;
+      }
+    });
+    this.subscriptions.add(s);
+  }
+
+  submitAlumnoComision_() {
+    var s = this.dd._post("persist_rows", "alumno_comision", this.controlComision.value).subscribe({
+      next: (response: any) => {
+        this.response = response
+        this.submitted()        
+      },
+      error: (error: any) => { 
+        this.dialog.open(DialogAlertComponent, {
+          data: {title: "Error", message: error.error}
+        });
+        this.isSubmitted = false;
+      }
+    });
+    this.subscriptions.add(s);
+  }
+
+  submitCalificacion_() {
+    var s = this.dd._post("persist_rows", "calificacion", this.controlCalificacion_.value).subscribe({
+      next: (response: any) => {
+        this.response = response
+        this.submitted()        
+      },
+      error: (error: any) => { 
+        this.dialog.open(DialogAlertComponent, {
+          data: {title: "Error", message: error.error}
+        });
+        this.isSubmitted = false;
+      }
+    });
+    this.subscriptions.add(s);
+  }
+
+  submitPersona() {
+    var s = this.dd._post("persist", "persona", this.controlPersona.value).subscribe({
+      next: (response: any) => {
+        this.response = response
+        this.submitted()        
+      },
+      error: (error: any) => { 
+        this.dialog.open(DialogAlertComponent, {
+          data: {title: "Error", message: error.error}
+        });
+        this.isSubmitted = false;
+      }
+    });
+    this.subscriptions.add(s);
+  }
+
+  submitAlumno() {
+    var s = this.dd._post("persist", "alumno", this.controlAlumno.value).subscribe({
+      next: (response: any) => {
+        this.response = response
+        this.submitted()        
+      },
+      error: (error: any) => { 
         this.dialog.open(DialogAlertComponent, {
           data: {title: "Error", message: error.error}
         });
