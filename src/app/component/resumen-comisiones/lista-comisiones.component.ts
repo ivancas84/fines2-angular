@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Display } from '@class/display';
 import { FormArrayConfig, FormControlConfig } from '@class/reactive-form-config';
+import { ControlDateConfig } from '@component/control-date/control-date.component';
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { LinkTextConfig } from '@component/link-text/link-text.component';
@@ -54,7 +55,7 @@ export class ListaComisionesComponent extends TableComponent {
         data =>   this.dd.postAllConnection(data, "info","curso_toma_activa",{"toma":"toma_activa"},"id","curso")
       ),
       switchMap(
-        data =>   this.dd.getAllConnection(data, "toma",{"docente":"docente"},"toma")
+        data =>   this.dd.getAllConnection(data, "toma",{"docente":"docente","fecha_toma":"fecha_toma"},"toma")
       ),
       switchMap(
         data =>   this.dd.getAllConnection(data, "planificacion", {"anio":"anio","semestre":"semestre","plan":"plan"},"planificacion")
@@ -88,6 +89,7 @@ export class ListaComisionesComponent extends TableComponent {
 
   override config: FormArrayConfig = new FormArrayConfig({
     "id": new FormControlConfig,
+    "fecha_toma": new ControlDateConfig(),
     //"ige": new ControlValueConfig,
     "sede": new ControlValueConfig,
     "domicilio": new ControlValueConfig,

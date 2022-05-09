@@ -19,11 +19,13 @@ import { ResumenComisionesComponent } from '@component/resumen-comisiones/resume
 import { CursoAdminComponent } from '@component/curso-admin/curso-admin.component';
 import { ListaComisionesComponent } from '@component/resumen-comisiones/lista-comisiones.component';
 import { ResumenAlumnosComponent } from '@component/resumen-alumnos/resumen-alumnos.component';
+import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
 
+    AlumnoAdminComponent,
     AsignaturaArrayComponent,
     CursoAdminComponent,
     ListaComisionesComponent,

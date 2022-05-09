@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Display } from '@class/display';
 import { FormArrayConfig, FormControlConfig } from '@class/reactive-form-config';
+import { ControlDateConfig } from '@component/control-date/control-date.component';
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { TableComponent } from '@component/structure/table.component';
