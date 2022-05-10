@@ -5,6 +5,7 @@ import { ControlDateConfig } from '@component/control-date/control-date.componen
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { LinkTextConfig } from '@component/link-text/link-text.component';
+import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 import { TableComponent } from '@component/structure/table.component';
 import { map, Observable, of, switchMap } from 'rxjs';
 
@@ -80,7 +81,7 @@ export class ListaComisionesComponent extends TableComponent {
   formatData(data: { [x: string]: string; }[]){
     data.forEach((element: { [x: string]: string; }) => {
       element["sede"] =  element["nombre"] + " (" + element["numero"] + ")"
-      element["comision"] =  element["numero"] + element["division"] + "/" + element["anio"] + element["semestre"]
+      element["comision_label"] =  element["numero"] + element["division"] + "/" + element["anio"] + element["semestre"]
       element["tramo"] =  element["anio"] + "º" + element["semestre"] + "º " + element["orientacion"]
       element["domicilio"] =  element["calle"] + " e/ " + element["entre"] + " nº " + element["dom_numero"] + " " + element["barrio"]
     })
@@ -93,12 +94,12 @@ export class ListaComisionesComponent extends TableComponent {
     //"ige": new ControlValueConfig,
     "sede": new ControlValueConfig,
     "domicilio": new ControlValueConfig,
-    "comision": new ControlValueConfig,
+    "comision": new FormControlConfig,
+    "comision_label": new ControlValueConfig,
     "tramo": new ControlValueConfig,
     "cantidad_alumnos": new ControlValueConfig,
     "asignatura": new ControlLabelConfig,
     "horario": new ControlValueConfig,
-    //"docente": new ControlLabelConfig({entityName:"persona"}),
     "docente": new ControlLabelConfig({entityName:"persona"}),
   })
 
@@ -108,8 +109,11 @@ export class ListaComisionesComponent extends TableComponent {
         // new LinkTextConfig(
         //   {label:'Editar ige', url:'curso-admin', params:{'id':'{{id}}'}}
         // ),
-        new LinkTextConfig(
-          {label:'Alumnos', url:'resumen-alumnos', params:{'comision':'{{comision}}'}}
+        new RouteIconConfig(
+          {icon: "person", routerLink:'resumen-alumnos', params:{'comision':'{{comision}}'}}
+        ),
+        new RouteIconConfig(
+          {icon: "person_outline", routerLink:'resumen-alumnos', params:{'comision':'{{comision}}', activo:'true'}}
         ),
       ]
 

@@ -8,6 +8,8 @@ import { ControlValueConfig } from '@component/control-value/control-value.compo
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
 import { InputTextConfig } from '@component/input-text/input-text.component';
+import { LinkTextConfig } from '@component/link-text/link-text.component';
+import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 import { TableComponent } from '@component/structure/table.component';
 import { Observable, switchMap, map } from 'rxjs';
 
@@ -39,6 +41,7 @@ export class ResumenAlumnosComponent extends TableComponent {
     "adeuda_legajo": new ControlValueConfig,
     "adeuda_deudores": new ControlValueConfig,
     "observaciones_alumno": new ControlValueConfig,
+    "alumno": new FormControlConfig()
   })
 
   comisionControl: FormGroup =  new FormGroup({})
@@ -117,11 +120,11 @@ export class ResumenAlumnosComponent extends TableComponent {
 
 
 
-  // override optColumn: FormControlConfig[] = [
-  //   new LinkTextConfig(
-  //     {label:'Editar ige', url:'curso-admin', params:{'id':'{{id}}'}}
-  //   ),
-  // ]
+  override optColumn: FormControlConfig[] = [
+    new RouteIconConfig(
+      {icon:'edit', routerLink:'alumno-admin', params:{'id':'{{alumno}}'}}
+    ),
+  ]
 
 
 

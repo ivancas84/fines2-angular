@@ -27,6 +27,8 @@ import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { AbstractControlViewOption } from '@component/abstract-control-view/abstract-control-view.component';
 import { EventButtonConfig } from '@component/event-button/event-button.component';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
+import { ControlLabelConfig } from '@component/control-label/control-label.component';
+import { ControlValueConfig } from '@component/control-value/control-value.component';
 
 @Component({
   selector: 'app-alumno-admin',
@@ -128,10 +130,12 @@ export class AlumnoAdminComponent extends StructureComponent {
   })
 
   configCalificacion_: FormArrayConfig = new FormArrayConfig({
-    disposicion: new InputAutocompleteConfig,
+    asignatura: new ControlLabelConfig(),
+    anio: new ControlValueConfig(),
+    semestre: new ControlValueConfig(),
     nota_final: new InputTextConfig({type:"number"}),
     crec: new InputTextConfig({type:"number"}),
-    alumno: new FormControlConfig
+    alumno: new FormControlConfig()
   })
 
   optColumn: FormControlConfig[] = [
@@ -257,7 +261,7 @@ export class AlumnoAdminComponent extends StructureComponent {
           
           this.controlCalificacion_.clear();
           for(var i = 0; i <data["calificacion/alumno"].length; i++) this.controlCalificacion_.push(this.configCalificacion_.factory!.formGroup());
-          
+          console.log(this.controlCalificacion_)
           this.control.patchValue(data)
           return true;
         }
@@ -286,7 +290,7 @@ export class AlumnoAdminComponent extends StructureComponent {
     )
   }
 
-  initPersona(data: { [x: string]: any }): Observable<any>{
+  initPersona(data: { [x: string]: any }): Observable<any> {
     return this.dd.get("persona", data["alumno"]["persona"]).pipe(
       switchMap(
         (persona: any) => {
@@ -298,7 +302,7 @@ export class AlumnoAdminComponent extends StructureComponent {
     )
   }
 
-  initMultiple(data: { [x: string]: any }): Observable<any>{
+  initMultiple(data: { [x: string]: any }): Observable<any> {
     var display = new Display()
     display.setParams({"persona":data["alumno"]["persona"]})
 
@@ -327,7 +331,7 @@ export class AlumnoAdminComponent extends StructureComponent {
     )
   }
 
-  initCalificacion_(data: { [x: string]: any }): Observable<any>{
+  initCalificacion_(data: { [x: string]: any }): Observable<any> {
     if(!data["alumno"]["plan"] || !data["alumno"]["anio_ingreso"]) {
       this.snackBar.open("No se pueden cargar las calificaciones, no se encuentra definido el plan o el año de ingreso del alumno", "X");
       return of(data)
@@ -336,9 +340,9 @@ export class AlumnoAdminComponent extends StructureComponent {
     var display = new Display()
     display.setParams({
       "alumno":data["alumno"]["id"],
-      "cur_com_pla-plan": data["alumno"]["plan"]
+      "dis_pla-plan": data["alumno"]["plan"]
     })
-    display.addCondition(["cur_com_pla-anio",">=",data["alumno"]["anio_ingreso"]])
+    display.addCondition(["dis_pla-anio",">=",data["alumno"]["anio_ingreso"]])
     
 
     return this.dd.all("calificacion", display).pipe(
@@ -369,7 +373,7 @@ export class AlumnoAdminComponent extends StructureComponent {
     return this.control.getRawValue()
   }
 
-  override switchOptField(data: { action: string; [x: string]: any; }): void{
+  override switchOptField(data: { action: string; [x: string]: any; }): void {
     switch(data.action){
       case "remove": 
         var index = data["index"]
@@ -381,7 +385,6 @@ export class AlumnoAdminComponent extends StructureComponent {
       case "add_alumno_comision_":
         var fg = this.configComision.factory!.formGroup();
         fg.get("alumno")!.setValue((this.controlAlumno.get("id") as FormControl).value)
-        console.log(fg)
         this.controlComision.push(fg); 
 
       break;
@@ -435,11 +438,14 @@ export class AlumnoAdminComponent extends StructureComponent {
           this.submitAlumno();
         } 
       break;
-      default: super.switchOptField(data)  
+      case "generar_calificacion_":
+        this.generarCalificacion_()        
+      break;
+      default: super.switchOptField(data)
     }
   }
 
-  submitDetallePersona_() {
+  protected submitDetallePersona_() {
     var s = this.dd._post("persist_rows", "detalle_persona", this.controlDetallePersona.value).subscribe({
       next: (response: any) => {
         this.response = response
@@ -455,7 +461,32 @@ export class AlumnoAdminComponent extends StructureComponent {
     this.subscriptions.add(s);
   }
 
-  submitAlumnoComision_() {
+  protected generarCalificacion_() {
+    var d = this.controlAlumno.value
+    this.isSubmitted = true;
+    if(isEmptyObject(d) || !d["id"] || !d["plan"] || !d["anio_ingreso"]) {
+      this.snackBar.open("No se pueden generar las calificaciones, no se encuentran definido correctamente el alumno", "X", {
+        duration:0
+      });
+      return;
+    }
+
+    var s = this.dd._post("generar_calificacion_alumno", "alumno",d["id"]).subscribe({
+      next: (response: any) => {
+        this.response = response
+        this.submitted()        
+      },
+      error: (error: any) => { 
+        this.dialog.open(DialogAlertComponent, {
+          data: {title: "Error", message: error.error}
+        });
+        this.isSubmitted = false;
+      }
+    });
+    this.subscriptions.add(s);
+  }
+
+  protected submitAlumnoComision_() {
     var s = this.dd._post("persist_rows", "alumno_comision", this.controlComision.value).subscribe({
       next: (response: any) => {
         this.response = response
@@ -471,7 +502,7 @@ export class AlumnoAdminComponent extends StructureComponent {
     this.subscriptions.add(s);
   }
 
-  submitCalificacion_() {
+  protected submitCalificacion_() {
     var s = this.dd._post("persist_rows", "calificacion", this.controlCalificacion_.value).subscribe({
       next: (response: any) => {
         this.response = response
@@ -487,7 +518,7 @@ export class AlumnoAdminComponent extends StructureComponent {
     this.subscriptions.add(s);
   }
 
-  submitPersona() {
+  protected submitPersona() {
     var s = this.dd._post("persist", "persona", this.controlPersona.value).subscribe({
       next: (response: any) => {
         this.response = response
@@ -503,7 +534,7 @@ export class AlumnoAdminComponent extends StructureComponent {
     this.subscriptions.add(s);
   }
 
-  submitAlumno() {
+  protected submitAlumno() {
     var s = this.dd._post("persist", "alumno", this.controlAlumno.value).subscribe({
       next: (response: any) => {
         this.response = response
@@ -518,7 +549,6 @@ export class AlumnoAdminComponent extends StructureComponent {
     });
     this.subscriptions.add(s);
   }
-
 }
 
 
