@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Display } from '@class/display';
 import { FormArrayConfig, FormControlConfig, FormGroupConfig } from '@class/reactive-form-config';
 import { ControlBooleanConfig } from '@component/control-boolean/control-boolean.component';
-import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
-import { InputTextConfig } from '@component/input-text/input-text.component';
-import { LinkTextConfig } from '@component/link-text/link-text.component';
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 import { TableComponent } from '@component/structure/table.component';
-import { Observable, switchMap, map } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-resumen-alumnos',

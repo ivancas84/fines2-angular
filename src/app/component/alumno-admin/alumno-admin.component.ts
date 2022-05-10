@@ -250,7 +250,6 @@ export class AlumnoAdminComponent extends StructureComponent {
       ),
       map(
         (data: any) => { 
-          console.log(data)
           this.controlPersona.patchValue(this.configPersona.defaultValues())
           this.controlAlumno.patchValue(this.configAlumno.defaultValues())
           this.controlDetallePersona.clear();
@@ -342,6 +341,7 @@ export class AlumnoAdminComponent extends StructureComponent {
       "alumno":data["alumno"]["id"],
       "dis_pla-plan": data["alumno"]["plan"]
     })
+    display.setOrder({"dis_pla-anio":"asc","dis_pla-semestre":"asc",})
     display.addCondition(["dis_pla-anio",">=",data["alumno"]["anio_ingreso"]])
     
 
