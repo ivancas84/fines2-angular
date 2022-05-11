@@ -20,12 +20,16 @@ import { CursoAdminComponent } from '@component/curso-admin/curso-admin.componen
 import { ListaComisionesComponent } from '@component/resumen-comisiones/lista-comisiones.component';
 import { ResumenAlumnosComponent } from '@component/resumen-alumnos/resumen-alumnos.component';
 import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.component';
+import { AlumnoCalificacionTableComponent } from '@component/alumno-admin/alumno-calificacion-table.component';
+import { AprobadoPipe } from '@pipe/aprobado.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AprobadoPipe,
 
     AlumnoAdminComponent,
+    AlumnoCalificacionTableComponent,
     AsignaturaArrayComponent,
     CursoAdminComponent,
     ListaComisionesComponent,
