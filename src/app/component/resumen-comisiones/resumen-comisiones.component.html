@@ -10,11 +10,11 @@
     <mat-progress-bar *ngIf="!load" 
                       mode="indeterminate"></mat-progress-bar>
 
-    <core-table-one [control]="control"
-                    [config]="config"
-                    [displayedColumns]="displayedColumns"
-                    [optColumn]="optColumn">
-    </core-table-one>
+    <app-table-resumen-comisiones [control]="control"
+                                  [config]="config"
+                                  [displayedColumns]="displayedColumns"
+                                  [optColumn]="optColumn"></app-table-resumen-comisiones>
+    
     
   </ng-container>
   <!-- <p>Debug Form value: {{ control.value | json }}</p>

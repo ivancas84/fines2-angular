@@ -22,6 +22,7 @@ import { ResumenAlumnosComponent } from '@component/resumen-alumnos/resumen-alum
 import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.component';
 import { AlumnoCalificacionTableComponent } from '@component/alumno-admin/alumno-calificacion-table.component';
 import { AprobadoPipe } from '@pipe/aprobado.pipe';
+import { TableResumenComisionesComponent } from '@component/resumen-comisiones/table-resumen-comisiones.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AprobadoPipe } from '@pipe/aprobado.pipe';
     MenuComponent,
     ResumenAlumnosComponent,
     ResumenComisionesComponent,
+    TableResumenComisionesComponent,
   ],
   imports: [
     BrowserModule,
