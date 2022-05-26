@@ -22,12 +22,14 @@ import { ResumenAlumnosComponent } from '@component/resumen-alumnos/resumen-alum
 import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.component';
 import { AlumnoCalificacionTableComponent } from '@component/alumno-admin/alumno-calificacion-table.component';
 import { AprobadoPipe } from '@pipe/aprobado.pipe';
+import { DesaprobadoPipe } from '@pipe/desaprobado.pipe';
 import { TableResumenComisionesComponent } from '@component/resumen-comisiones/table-resumen-comisiones.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AprobadoPipe,
+    DesaprobadoPipe,
 
     AlumnoAdminComponent,
     AlumnoCalificacionTableComponent,

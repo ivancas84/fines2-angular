@@ -40,7 +40,7 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr [ngClass]="{'highlight': row | aprobado}" [hidden]="row.controls.hasOwnProperty('_mode') && (row.controls['_mode'].value == 'delete')" mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+  <tr [ngClass]="{'highlight': row | desaprobado}" [hidden]="row.controls.hasOwnProperty('_mode') && (row.controls['_mode'].value == 'delete')" mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
   <tr mat-footer-row *matFooterRowDef="footerColumns; sticky:true"></tr>
 </table>
 
