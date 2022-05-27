@@ -2,22 +2,23 @@
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </ng-template>
 
-<form *ngIf="(loadParams$ | async); else loading" 
-      (ngSubmit)="onSubmit()" 
-      novalidate autocomplete="off">
-
+<ng-container *ngIf="(loadParams$ | async); else loading">
   <ng-container *ngIf="(loadDisplay$ | async); else loading">
     <mat-progress-bar *ngIf="!load" 
                       mode="indeterminate"></mat-progress-bar>
 
     <mat-card> 
-      <mat-card-title>
-        Datos comision
-      </mat-card-title>                 
-      <mat-card-content>                 
-        <core-abstract-control-form-group [config]="comisionConfig"
-                                          [control]="comisionControl"></core-abstract-control-form-group>
-      </mat-card-content>
+      <mat-card-header>
+
+        <mat-card-title>
+          Alumnos de la comision <core-control-label [config]="{entityName: 'comision'}" [control]="comisionIdControl"></core-control-label>
+        </mat-card-title>
+      </mat-card-header>
+      <core-abstract-control-view *ngFor="let o of optTitle" 
+              [config]="o.config" 
+              [control]="o.control" ></core-abstract-control-view> 
+                
+     
     </mat-card>
 
     <table mat-table 
@@ -86,4 +87,4 @@
   <!-- <p>Debug Form value: {{ form.value | json }}</p>
   <p>Debug Form status: {{ form.status | json }}</p> -->
 
-</form>
+</ng-container>

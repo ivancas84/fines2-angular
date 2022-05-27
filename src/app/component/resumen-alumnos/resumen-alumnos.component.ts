@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Display } from '@class/display';
 import { FormArrayConfig, FormControlConfig, FormGroupConfig } from '@class/reactive-form-config';
+import { AbstractControlViewOption } from '@component/abstract-control-view/abstract-control-view.component';
 import { ControlBooleanConfig } from '@component/control-boolean/control-boolean.component';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
-import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
+import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 import { TableComponent } from '@component/structure/table.component';
 import { Observable, switchMap } from 'rxjs';
@@ -21,7 +22,12 @@ import { Observable, switchMap } from 'rxjs';
     }
   `],
 })
+/**
+ * Resumen alumnos de una determinada comision.
+ * Se requiere el id de comision para generar el listado.
+ */
 export class ResumenAlumnosComponent extends TableComponent {
+  
   override readonly entityName: string = "alumno_comision";
 
 
@@ -41,15 +47,32 @@ export class ResumenAlumnosComponent extends TableComponent {
     "alumno": new FormControlConfig()
   })
 
-  comisionControl: FormGroup =  new FormGroup({})
-  comisionConfig: FormGroupConfig = new FormGroupConfig({
-    "sede": new InputAutocompleteConfig({readonly:true, disabled:true}),
-  })
 
-  override ngOnInit(){
-    this.comisionConfig.initControl(this.comisionControl)
-    super.ngOnInit()
-  }
+
+  comisionIdControl!: FormControl
+  
+
+
+  override optTitle: AbstractControlViewOption[] = [
+    {
+      config: new EventIconConfig({
+        icon: "123", //icono del boton
+        action: "update_anio_ingreso", //accion del evento a realizar
+        fieldEvent: this.optField,
+        title: "Actualizar año de Ingreso de todos los alumnos"
+      })
+    },
+    {
+      config: new EventIconConfig({
+        icon: "abc", //icono del boton
+        action: "update_plan", //accion del evento a realizar
+        fieldEvent: this.optField,
+        title: "Actualizar plan de todos los alumnos"
+      }),
+    }
+
+  ]; 
+
 
   override initParams(params: { [x: string]: any }){ 
     this.params = params; 
@@ -100,7 +123,7 @@ export class ResumenAlumnosComponent extends TableComponent {
     this.control.clear();
     for(var i = 0; i <data.length; i++) this.control.push(this.config.factory!.formGroup());
     this.control.patchValue(data)
-    if(data.length) this.comisionControl.patchValue(data[0])
+    this.comisionIdControl = new FormControl(this.params["comision"])
   }
 
   formatData(data: { [x: string]: string; }[]){
@@ -123,6 +146,35 @@ export class ResumenAlumnosComponent extends TableComponent {
     ),
   ]
 
+
+  override switchOptField($event: { action: any; index: any; }){
+    switch($event.action){
+      case "update_anio_ingreso": 
+        this.updateAlumnoComision("actualizar_anio_alumnos");
+        break;
+      case "update_plan": 
+        this.updateAlumnoComision("actualizar_plan_alumnos");
+        break;
+      default: super.switchOptField($event);
+    }
+  }
+
+
+  protected updateAlumnoComision(api:string){
+    var s =  this.dd._post(api,"alumno",this.params["comision"]).subscribe({
+      next: response => {
+        this.response = response
+        this.submitted()        
+      },
+      error: error => { 
+        this.dialog.open(DialogAlertComponent, {
+          data: {title: "Error", message: error.error}
+        });
+        this.isSubmitted = false;
+      }
+    });
+    this.subscriptions.add(s);
+  }
 
 
 

@@ -2,14 +2,19 @@
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </ng-template>
 
-<form *ngIf="(loadParams$ | async); else loading" 
-      (ngSubmit)="onSubmit()" 
-      novalidate autocomplete="off">
-
+<ng-container *ngIf="(loadParams$ | async); else loading">
   <ng-container *ngIf="(loadDisplay$ | async); else loading">
     <mat-progress-bar *ngIf="!load" 
                       mode="indeterminate"></mat-progress-bar>
+    <mat-card> 
+      <mat-card-header>
 
+        <mat-card-title>
+          Lista de cursos y docentes
+        </mat-card-title>
+      </mat-card-header>
+  
+    </mat-card>
     <app-table-resumen-comisiones [control]="control"
                                   [config]="config"
                                   [displayedColumns]="displayedColumns"
@@ -20,4 +25,4 @@
   <!-- <p>Debug Form value: {{ control.value | json }}</p>
   <p>Debug Form status: {{ control.status | json }}</p> -->
 
-</form>
+</ng-container>
