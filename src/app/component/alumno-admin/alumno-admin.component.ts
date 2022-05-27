@@ -220,6 +220,20 @@ export class AlumnoAdminComponent extends StructureComponent {
     }
   ];
 
+  /**
+   * Total de calificaciones consultadas
+   * 
+   * Se utiliza para verificar que se encuentren todas las calificaciones generadas.
+   */
+  totalCalificaciones: number = 0; 
+  
+  /**
+   * Total de asignaturas
+   * 
+   * Se utiliza para verificar que se encuentren todas las calificaciones generadas.
+   */
+  totalAsignaturas: number = 0; 
+
   override ngOnInit(){
     this.configPersona.initAdmin()
     this.configPersona.initControl(this.controlPersona)
@@ -259,9 +273,17 @@ export class AlumnoAdminComponent extends StructureComponent {
           for(var i = 0; i <data["alumno_comision/alumno"].length; i++) this.controlComision.push(this.configComision.factory!.formGroup());
           
           this.controlCalificacion_.clear();
-          for(var i = 0; i <data["calificacion/alumno"].length; i++) this.controlCalificacion_.push(this.configCalificacion_.factory!.formGroup());
-          console.log(this.controlCalificacion_)
+          this.totalCalificaciones = data["calificacion/alumno"].length;
+          for(var i = 0; i <this.totalCalificaciones; i++) this.controlCalificacion_.push(this.configCalificacion_.factory!.formGroup());
           this.control.patchValue(data)
+
+          if(this.controlAlumno.get("anio_ingreso")!.value) {
+            switch(parseInt(this.controlAlumno.get("anio_ingreso")!.value)) {
+              case 3: this.totalAsignaturas = 10; break;
+              case 2: this.totalAsignaturas = 20; break;
+              case 1: this.totalAsignaturas = 30; break;
+            }
+          }
           return true;
         }
       ),
