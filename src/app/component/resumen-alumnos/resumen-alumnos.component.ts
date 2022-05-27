@@ -9,7 +9,7 @@ import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.compo
 import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 import { TableComponent } from '@component/structure/table.component';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-resumen-alumnos',
@@ -44,6 +44,7 @@ export class ResumenAlumnosComponent extends TableComponent {
     "adeuda_legajo": new ControlValueConfig,
     "adeuda_deudores": new ControlValueConfig,
     "observaciones_alumno": new ControlValueConfig,
+    "cantidad_aprobada": new ControlValueConfig,
     "alumno": new FormControlConfig()
   })
 
@@ -108,12 +109,14 @@ export class ResumenAlumnosComponent extends TableComponent {
       switchMap(
         data => this.dd.getAllConnection(data, "comision", {"sede":"sede"}, "comision")
       ),
-      
-      // map(
-      //   data => {
-      //     return this.formatData(data)
-      //   }
-      // ),
+      switchMap(
+        data => this.dd.postAllConnection(data, "cantidad_asignaturas_aprobadas_alumnos", "alumno", {"cantidad_aprobada":"cantidad_aprobada"}, "alumno", "alumno" )
+      ),
+      tap(
+        data => {
+         console.log(data)
+        }
+      ),
    
     )
   }
