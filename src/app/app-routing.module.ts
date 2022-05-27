@@ -5,6 +5,7 @@ import { AsignaturaArrayComponent } from '@component/asignatura-array/asignatura
 import { CursoAdminComponent } from '@component/curso-admin/curso-admin.component';
 import { HomeComponent } from '@component/home/home.component';
 import { ResumenAlumnosComponent } from '@component/resumen-alumnos/resumen-alumnos.component';
+import { ListaComisionesDocentesSinContralorComponent } from '@component/resumen-comisiones/lista-comisiones-docentes-sin-contralor';
 import { ListaComisionesComponent } from '@component/resumen-comisiones/lista-comisiones.component';
 import { ResumenComisionesComponent } from '@component/resumen-comisiones/resumen-comisiones.component';
 
@@ -17,8 +18,7 @@ const routes: Routes = [
   { path: 'resumen-comisiones', component: ResumenComisionesComponent, pathMatch: 'full' },
   { path: 'lista-comisiones', component: ListaComisionesComponent, pathMatch: 'full' },
   { path: 'resumen-alumnos', component: ResumenAlumnosComponent, pathMatch: 'full' },
-
-
+  { path: 'lista-comisiones-docentes-sin-contralor', component: ListaComisionesDocentesSinContralorComponent, pathMatch: 'full' },
 
 ];
 @NgModule({

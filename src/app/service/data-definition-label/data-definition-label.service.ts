@@ -63,27 +63,27 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
     return this.dd.get("curso", id).pipe(
       switchMap(
         curso => {
-          return this.dd.getConnection(curso,"asignatura",{asignatura:"codigo"},"asignatura")
+          return this.dd.getConnection(curso,"asignatura",{codigo:"codigo"})
         }
       ),
       switchMap(
         curso => {
-          return this.dd.getConnection(curso,"comision",{division:"division",sede:"sede",planificacion:"planificacion"},"comision")
+          return this.dd.getConnection(curso,"comision",{division:"division",sede:"sede",planificacion:"planificacion"})
         }
       ),
       switchMap(
         curso => {
-          return this.dd.getConnection(curso,"planificacion",{anio:"anio",semestre:"semestre"},"planificacion")
+            return this.dd.getConnection(curso,"planificacion",{anio:"anio",semestre:"semestre"})
         }
       ),
       switchMap(
         curso => {
-          return this.dd.getConnection(curso,"sede",{numero_sede:"numero", nombre_sede:"nombre"},"sede")
+          return this.dd.getConnection(curso,"sede",{numero_sede:"numero", nombre_sede:"nombre"})
         }
       ),
       map(
         curso => { 
-          return (!curso)? "" : curso["numero_sede"]+curso["division"]+"/"+curso["anio"]+curso["semestre"]+" "+curso["asignatura"]+ " "+curso["nombre_sede"]; 
+          return (!curso)? "" : curso["numero_sede"]+curso["division"]+"/"+curso["anio"]+curso["semestre"]+" "+curso["codigo"]+ " ("+curso["horas_catedra"] + ")"; 
         }
       )
     );
@@ -98,6 +98,20 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
 
     if (row["entre"]) ret += " entre " + row["entre"];
 
+    return ret.trim();
+  }
+
+  override labelPersonaRow (row: any): string {
+    if(!row) return "";
+
+    let ret = "";
+    if (row["nombres"]) ret = ret.trim() + " " + row["nombres"];
+
+    if (row["apellidos"]) ret = ret.trim() + " " + row["apellidos"];
+
+    if (row["cuil"]) ret = ret.trim() + " " + row["cuil"];
+
+    if (!row["cuil"] && row["numero_documento"]) ret = ret.trim() + " " + row["numero_documento"];
     return ret.trim();
   }
   
