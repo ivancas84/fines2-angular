@@ -47,7 +47,7 @@ export class AlumnoAdminComponent extends StructureComponent {
     protected override route: ActivatedRoute, 
     protected validators: DdAsyncValidatorsService,
   ) { 
-    super(dialog,storage,dd,snackBar,router,location,route)
+    super(dd,storage,dialog,snackBar,router,route,location)
   }
   
   override control: FormGroup = new FormGroup({})

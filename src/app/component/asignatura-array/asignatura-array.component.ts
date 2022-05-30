@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormArrayConfig } from '@class/reactive-form-config';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
+import { EventButtonConfig } from '@component/event-button/event-button.component';
+import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { TableComponent } from '@component/structure/table.component';
 
 @Component({
@@ -19,6 +21,8 @@ export class AsignaturaArrayComponent extends TableComponent {
     "nombre": new ControlValueConfig,
     "formacion": new ControlValueConfig,
   })
+
+
 
 
 
