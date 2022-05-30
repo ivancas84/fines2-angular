@@ -70,7 +70,23 @@ export class ResumenAlumnosComponent extends TableComponent {
         fieldEvent: this.optField,
         title: "Actualizar plan de todos los alumnos"
       }),
-    }
+    },
+    {
+      config: new EventIconConfig({
+        icon: "content_copy", //icono del boton
+        action: "copy_content", //accion del evento a realizar
+        fieldEvent: this.optField,
+        title: "Copiar"
+      })
+    },
+    {
+      config: new EventIconConfig({
+        icon: "print", //icono del boton
+        action: "print_content", //accion del evento a realizar
+        fieldEvent: this.optField,
+        title: "Imprimir"
+      })
+    },
 
   ]; 
 
