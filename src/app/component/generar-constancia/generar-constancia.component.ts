@@ -8,6 +8,9 @@ import { TextareaConfig } from '@component/textarea/textarea.component';
 import { InputCheckboxConfig } from '@component/input-checkbox/input-checkbox.component';
 import { DetailComponent } from '@component/structure/detail.component';
 import { FormGroupConfig } from '@class/reactive-form-config';
+import { AbstractControlViewOption } from '@component/abstract-control-view/abstract-control-view.component';
+import { EventIconConfig } from '@component/event-icon/event-icon.component';
+import { EventButtonConfig } from '@component/event-button/event-button.component';
 
 @Component({
   selector: 'app-generar-constancia',
@@ -24,7 +27,13 @@ export class GenerarConstanciaComponent extends DetailComponent {
           required:true
         }),
         "certificado":new InputSelectParamConfig({
-          options:["certificado_alumno_regular","constancia_titulo_tramite", "constancia_pase","constancia_general_finalizo"],
+          options:[
+            "certificado_alumno_regular",
+            "constancia_titulo_tramite",
+            "constancia_pase",
+            "constancia_general_finalizo",
+            "matriz"
+          ],
           required:true
         }),
         "url":new InputTextConfig({
@@ -51,5 +60,18 @@ export class GenerarConstanciaComponent extends DetailComponent {
     else  url += "&firma=false"
     window.open(url, "_blank")
   }
+
+
+  override optFooter: AbstractControlViewOption[] = [
+
+    {
+      config: new EventButtonConfig({
+        text: "Generar", //texto del boton
+        action: "on", //accion del evento a realizar
+        color: "primary",
+        fieldEvent: this.optField
+      }),
+    }
+  ];
 }
 
