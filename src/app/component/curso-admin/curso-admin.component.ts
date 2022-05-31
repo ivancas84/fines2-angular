@@ -22,6 +22,7 @@ export class CursoAdminComponent extends DetailComponent {
   })
 
 
+  
 
 }
 

@@ -29,6 +29,8 @@ import { EventButtonConfig } from '@component/event-button/event-button.componen
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
+import { markAllAsDirty } from '@function/mark-all-as-dirty';
+import { logValidationErrors } from '@function/log-validation-errors';
 
 @Component({
   selector: 'app-alumno-admin',
@@ -50,7 +52,7 @@ export class AlumnoAdminComponent extends StructureComponent {
     super(dd,storage,dialog,snackBar,router,route,location)
   }
   
-  override control: FormGroup = new FormGroup({})
+  override control: FormGroup = new FormGroup({}, {updateOn:"blur"})
 
   controlPersona: FormGroup =  new FormGroup({
     "numero_documento":new FormControl(null,{
@@ -61,7 +63,9 @@ export class AlumnoAdminComponent extends StructureComponent {
       asyncValidators:[this.validators.unique("cuil", "persona")]
     })
   })
-  controlAlumno: FormGroup = new FormGroup({})
+  controlAlumno: FormGroup = new FormGroup({},
+    { asyncValidators: this.validators.uniqueMultiple("alumno", ["libro","folio"]) }  
+  )
   controlDetallePersona: FormArray = new FormArray([])
   controlComision: FormArray = new FormArray([])
   controlCalificacion_: FormArray = new FormArray([])
@@ -110,11 +114,14 @@ export class AlumnoAdminComponent extends StructureComponent {
     plan: new InputSelectConfig,
     adeuda_deudores: new InputTextConfig,
     adeuda_legajo: new InputTextConfig,
-    libro_folio: new InputCheckboxConfig,
+    libro: new InputTextConfig,
+    folio: new InputTextConfig,
     estado_inscripcion: new InputSelectParamConfig({
       options:["Correcto","Correcto incompleto", "Indeterminado","Caso particular","Titulado"]
     }),
     observaciones: new TextareaConfig,
+    comentarios: new TextareaConfig,
+
   })
 
   configDetallePersona: FormArrayConfig = new FormArrayConfig({
@@ -570,6 +577,15 @@ export class AlumnoAdminComponent extends StructureComponent {
       }
     });
     this.subscriptions.add(s);
+  }
+
+  override cancelSubmit(){
+    markAllAsDirty(this.control);
+    logValidationErrors(this.control);
+    this.dialog.open(DialogAlertComponent, {
+      data: {title: "Error", message: "El formulario posee errores."}
+    });
+    this.isSubmitted = false;
   }
 }
 
