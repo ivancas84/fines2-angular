@@ -52,10 +52,9 @@
         <mat-card-content>
           <core-abstract-control-form-group [config]="configAlumno"
                                             [control]="controlAlumno"></core-abstract-control-form-group>
-            <mat-error *ngIf="controlAlumno.errors?.['notUnique'] && (controlAlumno.touched || controlAlumno.dirty)"
-            >
-              La combinación libro/folio ya se encuentra utilizada
-        </mat-error>
+          <mat-error *ngIf="controlAlumno.errors?.['notUnique'] && (controlAlumno.touched || controlAlumno.dirty)">
+            La combinación libro/folio ya se encuentra utilizada <a routerLink="/alumno-admin" [queryParams]="{ id: controlAlumno.errors?.['notUnique'] }">Ver alumno</a>
+          </mat-error>
                                           
         </mat-card-content>
       </mat-card>

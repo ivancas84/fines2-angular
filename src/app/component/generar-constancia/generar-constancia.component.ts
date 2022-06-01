@@ -18,6 +18,8 @@ import { EventButtonConfig } from '@component/event-button/event-button.componen
 })
 export class GenerarConstanciaComponent extends DetailComponent {
 
+  override entityName: string = "generar_constancia"
+
   override inputSearchGo: boolean = false;
   
   override config: FormGroupConfig = new FormGroupConfig(
@@ -32,7 +34,7 @@ export class GenerarConstanciaComponent extends DetailComponent {
             "constancia_titulo_tramite",
             "constancia_pase",
             "constancia_general_finalizo",
-            "matriz"
+            "libro_matriz"
           ],
           required:true
         }),
@@ -67,7 +69,7 @@ export class GenerarConstanciaComponent extends DetailComponent {
     {
       config: new EventButtonConfig({
         text: "Generar", //texto del boton
-        action: "on", //accion del evento a realizar
+        action: "submit", //accion del evento a realizar
         color: "primary",
         fieldEvent: this.optField
       }),

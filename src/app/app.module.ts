@@ -25,6 +25,7 @@ import { AprobadoPipe } from '@pipe/aprobado.pipe';
 import { DesaprobadoPipe } from '@pipe/desaprobado.pipe';
 import { TableResumenComisionesComponent } from '@component/resumen-comisiones/table-resumen-comisiones.component';
 import { ListaComisionesDocentesSinContralorComponent } from '@component/resumen-comisiones/lista-comisiones-docentes-sin-contralor';
+import { GenerarConstanciaComponent } from '@component/generar-constancia/generar-constancia.component';
 
 @NgModule({
   declarations: [
@@ -36,12 +37,13 @@ import { ListaComisionesDocentesSinContralorComponent } from '@component/resumen
     AlumnoCalificacionTableComponent,
     AsignaturaArrayComponent,
     CursoAdminComponent,
+    GenerarConstanciaComponent,
     ListaComisionesComponent,
+    ListaComisionesDocentesSinContralorComponent,
     MenuComponent,
     ResumenAlumnosComponent,
     ResumenComisionesComponent,
     TableResumenComisionesComponent,
-    ListaComisionesDocentesSinContralorComponent,
   ],
   imports: [
     BrowserModule,

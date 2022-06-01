@@ -61,6 +61,9 @@ export class ListaComisionesComponent extends TableComponent {
         data =>   this.dd.getAllConnection(data, "toma",{"docente":"docente","fecha_toma":"fecha_toma"},"toma")
       ),
       switchMap(
+        data =>   this.dd.getAllConnection(data, "persona",{"telefono":"telefono"}, "docente")
+      ),
+      switchMap(
         data =>   this.dd.getAllConnection(data, "planificacion", {"anio":"anio","semestre":"semestre","plan":"plan"},"planificacion")
       ),
       switchMap(
@@ -103,6 +106,7 @@ export class ListaComisionesComponent extends TableComponent {
     "asignatura": new ControlLabelConfig,
     "horario": new ControlValueConfig,
     "docente": new ControlLabelConfig({entityName:"persona"}),
+    "telefono": new ControlValueConfig,
   })
 
 
