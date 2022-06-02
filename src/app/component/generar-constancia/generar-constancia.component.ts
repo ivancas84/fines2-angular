@@ -9,7 +9,6 @@ import { InputCheckboxConfig } from '@component/input-checkbox/input-checkbox.co
 import { DetailComponent } from '@component/structure/detail.component';
 import { FormGroupConfig } from '@class/reactive-form-config';
 import { AbstractControlViewOption } from '@component/abstract-control-view/abstract-control-view.component';
-import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { EventButtonConfig } from '@component/event-button/event-button.component';
 
 @Component({

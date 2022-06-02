@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { Display } from '@class/display';
 import { FormArrayConfig, FormControlConfig } from '@class/reactive-form-config';
 import { ControlDateConfig } from '@component/control-date/control-date.component';
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
+import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { LinkTextConfig } from '@component/link-text/link-text.component';
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 import { TableComponent } from '@component/structure/table.component';
@@ -58,7 +60,7 @@ export class ListaComisionesComponent extends TableComponent {
         data =>   this.dd.postAllConnection(data, "info","curso_toma_activa",{"toma":"toma_activa"},"id","curso")
       ),
       switchMap(
-        data =>   this.dd.getAllConnection(data, "toma",{"docente":"docente","fecha_toma":"fecha_toma"},"toma")
+        data =>   this.dd.getAllConnection(data, "toma",{"docente":"docente","fecha_toma":"fecha_toma"})
       ),
       switchMap(
         data =>   this.dd.getAllConnection(data, "persona",{"telefono":"telefono"}, "docente")
@@ -95,6 +97,7 @@ export class ListaComisionesComponent extends TableComponent {
 
   override config: FormArrayConfig = new FormArrayConfig({
     "id": new FormControlConfig,
+    "toma": new FormControlConfig,
     "fecha_toma": new ControlDateConfig(),
     //"ige": new ControlValueConfig,
     "sede": new ControlValueConfig,
@@ -121,7 +124,28 @@ export class ListaComisionesComponent extends TableComponent {
         new RouteIconConfig(
           {icon: "person_outline", routerLink:'resumen-alumnos', params:{'comision':'{{comision}}', activo:'true'}}
         ),
+        new EventIconConfig(
+          {icon: "assignment_turned_in", action:'generar_ticket', fieldEvent:this.optField}
+        ),
       ]
+
+      override switchOptField($event: { action: any; index?: any; control?: AbstractControl}){
+        switch($event.action){
+          case "generar_ticket": 
+            console.log($event.control!.value)
+            if(!$event.control!.value["toma"]) {
+              this.snackBar.open("No hay toma activa definida", "X")
+              return;
+            }
+
+            var s = this.dd._post("persist","generar_ticket_toma",$event.control!.value["toma"]).subscribe(
+              response => this.snackBar.open("Registro realizado", "X")
+            )
+            this.subscriptions.add(s)
+          break;
+          default: super.switchOptField($event);
+        }
+      }
 
 
 
