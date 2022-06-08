@@ -26,6 +26,7 @@ import { DesaprobadoPipe } from '@pipe/desaprobado.pipe';
 import { TableResumenComisionesComponent } from '@component/resumen-comisiones/table-resumen-comisiones.component';
 import { ListaComisionesDocentesSinContralorComponent } from '@component/resumen-comisiones/lista-comisiones-docentes-sin-contralor';
 import { GenerarConstanciaComponent } from '@component/generar-constancia/generar-constancia.component';
+import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { GenerarConstanciaComponent } from '@component/generar-constancia/genera
     AlumnoAdminComponent,
     AlumnoCalificacionTableComponent,
     AsignaturaArrayComponent,
+    ComisionAdminComponent,
     CursoAdminComponent,
     GenerarConstanciaComponent,
     ListaComisionesComponent,

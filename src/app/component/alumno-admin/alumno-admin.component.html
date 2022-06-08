@@ -37,9 +37,7 @@
 
       <mat-card>
         <mat-card-content>
-          <core-abstract-control-view *ngFor="let o of optFooterPersona" 
-                                      [config]="o.config" 
-                                      [control]="o.control"></core-abstract-control-view>
+          <core-event-button [config]="{disabled:(control.status == 'PENDING'), text: 'Guardar', action:'submit_alumno', fieldEvent:optField}"></core-event-button>
         </mat-card-content>
       </mat-card>
 
@@ -61,9 +59,7 @@
     
       <mat-card>
         <mat-card-content>
-          <core-abstract-control-view *ngFor="let o of optFooterAlumno" 
-                                      [config]="o.config" 
-                                      [control]="o.control" ></core-abstract-control-view>
+          <core-event-button [config]="{disabled:(control.status == 'PENDING'), text: 'Guardar', action:'submit_alumno', fieldEvent:optField}"></core-event-button>
         </mat-card-content>
       </mat-card>
       <mat-card>

@@ -39,18 +39,7 @@ import { logValidationErrors } from '@function/log-validation-errors';
 
 export class AlumnoAdminComponent extends StructureComponent {
 
-  constructor(
-    protected override dialog: MatDialog,
-    protected override storage: SessionStorageService,
-    protected override dd: DataDefinitionToolService, 
-    protected override snackBar: MatSnackBar,
-    protected override router: Router, 
-    protected override location: Location, 
-    protected override route: ActivatedRoute, 
-    protected validators: DdAsyncValidatorsService,
-  ) { 
-    super(dd,storage,dialog,snackBar,router,route,location)
-  }
+  
   
   override control: FormGroup = new FormGroup({}, {updateOn:"blur"})
 
@@ -241,6 +230,19 @@ export class AlumnoAdminComponent extends StructureComponent {
    */
   totalAsignaturas: number = 0; 
 
+  constructor(
+    protected override dialog: MatDialog,
+    protected override storage: SessionStorageService,
+    protected override dd: DataDefinitionToolService, 
+    protected override snackBar: MatSnackBar,
+    protected override router: Router, 
+    protected override location: Location, 
+    protected override route: ActivatedRoute, 
+    protected validators: DdAsyncValidatorsService,
+  ) { 
+    super(dd,storage,dialog,snackBar,router,route,location)
+  }
+  
   override ngOnInit(){
     this.configPersona.initAdmin()
     this.configPersona.initControl(this.controlPersona)

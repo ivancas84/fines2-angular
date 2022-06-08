@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.component';
 import { AsignaturaArrayComponent } from '@component/asignatura-array/asignatura-array.component';
+import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
 import { CursoAdminComponent } from '@component/curso-admin/curso-admin.component';
 import { GenerarConstanciaComponent } from '@component/generar-constancia/generar-constancia.component';
 import { HomeComponent } from '@component/home/home.component';
@@ -20,6 +21,8 @@ const routes: Routes = [
   { path: 'resumen-comisiones', component: ResumenComisionesComponent, pathMatch: 'full' },
   { path: 'lista-comisiones', component: ListaComisionesComponent, pathMatch: 'full' },
   { path: 'resumen-alumnos', component: ResumenAlumnosComponent, pathMatch: 'full' },
+  { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
+
   { path: 'lista-comisiones-docentes-sin-contralor', component: ListaComisionesDocentesSinContralorComponent, pathMatch: 'full' },
 
 ];
