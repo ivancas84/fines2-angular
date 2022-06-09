@@ -144,17 +144,6 @@ export class AlumnoAdminComponent extends StructureComponent {
   ]; //columna opciones para todas las tablas
 
 
-  optFooterPersona: AbstractControlViewOption[] = [
-    {
-      config: new EventButtonConfig({
-        text: "Guardar Datos Persona", //texto del boton
-        action: "submit_persona", //accion del evento a realizar
-        color: "primary",
-        fieldEvent: this.optField
-      }),
-    }
-  ];
-
   optFooterAlumno: AbstractControlViewOption[] = [
     {
       config: new EventButtonConfig({
