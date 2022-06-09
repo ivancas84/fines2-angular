@@ -32,19 +32,32 @@
           <mat-error *ngIf="controlComision.errors?.['notUnique'] && (controlComision.touched || controlComision.dirty)">
             La combinación sede-division-planificacion ya se encuentra utilizada <a routerLink="/comision-admin" [queryParams]="{ id: controlComision.errors?.['notUnique'] }">Ver comisión</a>
           </mat-error>
+
+          <core-event-button [config]="{disabled:(controlComision.status == 'PENDING'), text: 'Guardar Comisión', action:'submit_comision', fieldEvent:optField}"></core-event-button>
+
         </mat-card-content>
       </mat-card>
+
 
       <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            Cursos
+            <core-event-icon [config]="{disabled:(!controlComision.get('id')!.value), icon:'add_box', action:'crear_curso_', color:'primary',fieldEvent:optField, title: 'Crear Cursos'}"></core-event-icon>    
+          </mat-card-title>
+        </mat-card-header>
         <mat-card-content>
-          <core-event-button [config]="{disabled:(control.status == 'PENDING'), text: 'Guardar Comisión', action:'submit_comision', fieldEvent:optField}"></core-event-button>
+          <core-table-one [control]="controlCurso_"
+                          [config]="configCurso_"
+                          [optColumn]="optColumn"></core-table-one>
+
+          <core-event-button [config]="{disabled:(controlCurso_.status == 'PENDING'), text: 'Guardar Cursos', action:'submit_curso_', fieldEvent:optField}"></core-event-button>
+          <core-event-icon [config]="{disabled:(controlCurso_.status == 'PENDING'), icon: 'add', color:'primary', action:'add_curso_', fieldEvent:optField}"></core-event-icon>
         </mat-card-content>
       </mat-card>
+
     </ng-container> 
   </ng-container>
-
- 
-  
 </ng-container>
 
 
