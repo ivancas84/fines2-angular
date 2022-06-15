@@ -29,7 +29,7 @@ export class GenerarConstanciaComponent extends DetailComponent {
         }),
         "certificado":new InputSelectParamConfig({
           options:[
-            "certificado_alumno_regular",
+            "constancia_alumno_regular",
             "constancia_titulo_tramite",
             "constancia_pase",
             "constancia_general_finalizo",
