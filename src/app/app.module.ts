@@ -27,6 +27,9 @@ import { TableResumenComisionesComponent } from '@component/resumen-comisiones/t
 import { ListaComisionesDocentesSinContralorComponent } from '@component/resumen-comisiones/lista-comisiones-docentes-sin-contralor';
 import { GenerarConstanciaComponent } from '@component/generar-constancia/generar-constancia.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
+import { CalendarioAdminComponent } from '@component/calendario-admin/calendario-admin.component';
+import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
+import { ComisionAdminArrayComponent } from '@component/comision-admin/comision-admin-array.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { ComisionAdminComponent } from '@component/comision-admin/comision-admin
     AlumnoAdminComponent,
     AlumnoCalificacionTableComponent,
     AsignaturaArrayComponent,
+    CalendarioAdminComponent,
+    CalendarioAdminArrayComponent,
     ComisionAdminComponent,
+    ComisionAdminArrayComponent,
     CursoAdminComponent,
     GenerarConstanciaComponent,
     ListaComisionesComponent,

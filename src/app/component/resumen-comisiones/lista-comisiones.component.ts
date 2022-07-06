@@ -6,9 +6,12 @@ import { ControlDateConfig } from '@component/control-date/control-date.componen
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { EventIconConfig } from '@component/event-icon/event-icon.component';
+import { LinkIconConfig } from '@component/link-icon/link-icon.component';
 import { LinkTextConfig } from '@component/link-text/link-text.component';
+import { LinkValueConfig } from '@component/link-value/link-value.component';
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 import { TableComponent } from '@component/structure/table.component';
+import { PDF_URL } from '@config/app.config';
 import { map, Observable, of, switchMap } from 'rxjs';
 
 @Component({
@@ -126,6 +129,9 @@ export class ListaComisionesComponent extends TableComponent {
         ),
         new EventIconConfig(
           {icon: "assignment_turned_in", action:'generar_ticket', fieldEvent:this.optField}
+        ),
+        new LinkIconConfig(
+          {title: "Constancia docente", icon: "insert_drive_file", action:'generar_ticket', url:PDF_URL+"constancia_docente", target:"_blank", params:{id:"{{toma}}}"}}
         ),
       ]
 

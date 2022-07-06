@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AlumnoAdminComponent } from '@component/alumno-admin/alumno-admin.component';
 import { AsignaturaArrayComponent } from '@component/asignatura-array/asignatura-array.component';
+import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
+import { CalendarioAdminComponent } from '@component/calendario-admin/calendario-admin.component';
+import { ComisionAdminArrayComponent } from '@component/comision-admin/comision-admin-array.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
 import { CursoAdminComponent } from '@component/curso-admin/curso-admin.component';
 import { GenerarConstanciaComponent } from '@component/generar-constancia/generar-constancia.component';
@@ -21,7 +24,10 @@ const routes: Routes = [
   { path: 'resumen-comisiones', component: ResumenComisionesComponent, pathMatch: 'full' },
   { path: 'lista-comisiones', component: ListaComisionesComponent, pathMatch: 'full' },
   { path: 'resumen-alumnos', component: ResumenAlumnosComponent, pathMatch: 'full' },
+  { path: 'calendario-admin', component: CalendarioAdminComponent, pathMatch: 'full' },
+  { path: 'calendario-admin-array', component: CalendarioAdminArrayComponent, pathMatch: 'full' },
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
+  { path: 'comision-admin-array', component: ComisionAdminArrayComponent, pathMatch: 'full' },
 
   { path: 'lista-comisiones-docentes-sin-contralor', component: ListaComisionesDocentesSinContralorComponent, pathMatch: 'full' },
 
