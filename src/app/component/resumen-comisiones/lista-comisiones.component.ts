@@ -32,7 +32,7 @@ export class ListaComisionesComponent extends TableComponent {
   override initDisplay() {
     var display = new Display();
     display.setParams(
-      {"com_cal-anio":"2022","com_cal-semestre":1,"com-autorizada":true}
+      {"com_cal-anio":"2022","com_cal-semestre":2,"com-autorizada":true}
     )
     display.setSize(100);
     display.setOrder({"com_sed-numero":"asc", "com_sed-nombre":"asc","com_pla-anio":"asc","com_pla-semestre":"asc","comision":"asc"})
