@@ -30,6 +30,7 @@ import { ComisionAdminComponent } from '@component/comision-admin/comision-admin
 import { CalendarioAdminComponent } from '@component/calendario-admin/calendario-admin.component';
 import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
 import { ComisionAdminArrayComponent } from '@component/comision-admin/comision-admin-array.component';
+import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ComisionAdminArrayComponent } from '@component/comision-admin/comision-
     MenuComponent,
     ResumenAlumnosComponent,
     ResumenComisionesComponent,
+    SedeAdminComponent,
     TableResumenComisionesComponent,
   ],
   imports: [

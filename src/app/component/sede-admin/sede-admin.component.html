@@ -1,0 +1,59 @@
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Buscar Sede   
+      <core-event-icon [config]="{icon:'cached', action:'reset', color:'primary',fieldEvent:optField}"></core-event-icon>    
+      <core-event-icon [config]="{icon:'clear', action:'clear', color:'primary',fieldEvent:optField}"></core-event-icon>    
+    </mat-card-title>
+ 
+  </mat-card-header>
+  <mat-card-content>
+    <core-input-search-go fxFlex="auto" [entityName]="'sede'"></core-input-search-go>    
+  </mat-card-content>
+</mat-card>
+
+<ng-container *ngIf="(loadParams$ | async); else loading">
+
+  <ng-container *ngIf="(loadDisplay$ | async); else loading">
+    <ng-container *ngIf="(loadStorage$ | async); else loading">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            Datos principales
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <core-abstract-control-form-group [config]="configSede"
+                                            [control]="controlSede"></core-abstract-control-form-group>
+          <mat-error *ngIf="controlSede.errors?.['notUnique'] && (controlSede.touched || controlSede.dirty)">
+            La combinación numero-centro_educativo ya se encuentra utilizada <a routerLink="/sede-admin" [queryParams]="{ id: controlSede.errors?.['notUnique'] }">Ver Sede</a>
+          </mat-error>
+
+          <core-event-button [config]="{disabled:(controlSede.status == 'PENDING'), text: 'Guardar Sede', action:'submit_sede', fieldEvent:optField}"></core-event-button>
+
+        </mat-card-content>
+      </mat-card>
+
+
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            Comisiones
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <core-table-one [control]="controlComision_"
+                          [config]="configComision_"></core-table-one>
+
+        </mat-card-content>
+      </mat-card>
+
+    </ng-container> 
+  </ng-container>
+</ng-container>
+
+

@@ -13,6 +13,7 @@ import { ResumenAlumnosComponent } from '@component/resumen-alumnos/resumen-alum
 import { ListaComisionesDocentesSinContralorComponent } from '@component/resumen-comisiones/lista-comisiones-docentes-sin-contralor';
 import { ListaComisionesComponent } from '@component/resumen-comisiones/lista-comisiones.component';
 import { ResumenComisionesComponent } from '@component/resumen-comisiones/resumen-comisiones.component';
+import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'calendario-admin-array', component: CalendarioAdminArrayComponent, pathMatch: 'full' },
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
   { path: 'comision-admin-array', component: ComisionAdminArrayComponent, pathMatch: 'full' },
+  { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
 
   { path: 'lista-comisiones-docentes-sin-contralor', component: ListaComisionesDocentesSinContralorComponent, pathMatch: 'full' },
 
