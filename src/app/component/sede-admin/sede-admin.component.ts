@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
-import { FormArrayConfig, FormGroupConfig } from '@class/reactive-form-config';
+import { FormArrayConfig, FormControlConfig, FormGroupConfig } from '@class/reactive-form-config';
 import { RequiredValidatorMsg } from '@class/validator-msg';
 import { InputTextConfig } from '@component/input-text/input-text.component';
 import { StructureComponent } from '@component/structure/structure.component';
@@ -12,7 +12,7 @@ import { TextareaConfig } from '@component/textarea/textarea.component';
 import { isEmptyObject } from '@function/is-empty-object.function';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
-import { map, Observable, of, switchMap } from 'rxjs';
+import { map, Observable, of, startWith, switchMap } from 'rxjs';
 import { DdAsyncValidatorsService } from '@service/validators/dd-async-validators.service';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { logValidationErrors } from '@function/log-validation-errors';
@@ -46,6 +46,8 @@ export class SedeAdminComponent extends StructureComponent {
 
   override control: FormGroup = new FormGroup({}, {updateOn:"blur"})
 
+  switchDomicilio: FormControl = new FormControl(true)
+
   controlSede: FormGroup =new FormGroup({
     numero: new FormControl(null,{
       validators:[Validators.required],
@@ -70,6 +72,8 @@ export class SedeAdminComponent extends StructureComponent {
     }),
     centro_educativo: new InputSelectConfig,
     observaciones: new TextareaConfig,
+    domicilio: new FormControlConfig,
+
   })
 
   controlDomicilio: FormGroup =new FormGroup({
@@ -107,8 +111,6 @@ export class SedeAdminComponent extends StructureComponent {
     id: new ControlLabelConfig({entityName:"comision"}),
   })
 
-
-
   override ngOnInit(){
     this.configSede.initAdmin()
     this.configSede.initControl(this.controlSede)
@@ -121,6 +123,8 @@ export class SedeAdminComponent extends StructureComponent {
     this.control.addControl("sede",this.controlSede)
     this.control.addControl("domicilio",this.controlDomicilio)
     this.control.addControl("comision/sede",this.controlComision_)
+
+    
 
     super.ngOnInit()
   }
@@ -145,7 +149,6 @@ export class SedeAdminComponent extends StructureComponent {
       ),
       map(
         (data: any) => { 
-          console.log(data)
           this.controlSede.patchValue(this.configSede.defaultValues())
           this.controlDomicilio.patchValue(this.configDomicilio.defaultValues())
 
@@ -153,9 +156,25 @@ export class SedeAdminComponent extends StructureComponent {
           for(var i = 0; i <data["comision/sede"].length; i++) this.controlComision_.push(this.configComision_.factory!.formGroup());
 
           this.control.patchValue(data)
+
+          this.switchDomicilio.setValue(this.controlSede.get("domicilio")?.value != null)
+
+          this.switchDomicilio.valueChanges.subscribe(
+            value => {
+              if(value) {
+                this.controlDomicilio.enable()
+                this.controlSede.get("domicilio")?.setValue(this.controlDomicilio.get("id")?.value)
+              }
+              else {
+                this.controlDomicilio.disable()
+                this.controlSede.get("domicilio")?.setValue(null)
+              }
+            }
+          )
           return true;
         }
       ),
+      
     )
   }
 
@@ -176,7 +195,7 @@ export class SedeAdminComponent extends StructureComponent {
         (sede: any) => {
           if(isEmptyObject(sede)) return of(data)
           data["sede"] = sede
-          return this.dd.getConnectionObj(data, "domicilio", {calle:"calle", numero:"numero", localidad:"localidad", entre:"entre", piso:"piso", departamento:"departamento", barrio:"barrio"}, "sede")
+          return this.dd.getConnectionObj(data, "domicilio", {id:"id",calle:"calle", numero:"numero", localidad:"localidad", entre:"entre", piso:"piso", departamento:"departamento", barrio:"barrio"}, "sede")
         }
       ),
       switchMap(
@@ -205,12 +224,24 @@ export class SedeAdminComponent extends StructureComponent {
 
   override switchOptField(data: { action: string; [x: string]: any; }): void {
     switch(data.action){
+      case "switch_domicilio":
+        console.log(data);
+      break;
       case "submit_sede":
         this.isSubmitted = true;
         if (!this.control.valid) {
           this.cancelSubmit();
         } else {
           this.submitSede();
+        } 
+      break;
+
+      case "submit_domicilio":
+        this.isSubmitted = true;
+        if (!this.control.valid) {
+          this.cancelSubmit();
+        } else {
+          this.submitDomicilio();
         } 
       break;
 
@@ -237,13 +268,30 @@ export class SedeAdminComponent extends StructureComponent {
     }
   }
 
-
-
   protected submitSede() {
     var s = this.dd._post("persist", "sede", this.controlSede.value).subscribe({
       next: (response: any) => {
         this.response = response
         this.submitted()        
+      },
+      error: (error: any) => { 
+        this.dialog.open(DialogAlertComponent, {
+          data: {title: "Error", message: error.error}
+        });
+        this.isSubmitted = false;
+      }
+    });
+    this.subscriptions.add(s);
+  }
+
+  protected submitDomicilio() {
+    var s = this.dd._post("persist", "domicilio", this.controlDomicilio.value).subscribe({
+      next: (response: any) => {
+        this.response = response
+          this.snackBar.open("Registro realizado", "X");
+          this.storage.removeItemsContains(".");
+          if (this.response["detail"]) this.storage.removeItemsPersisted(this.response["detail"]);
+          this.controlSede.get("domicilio")?.setValue(response["id"])
       },
       error: (error: any) => { 
         this.dialog.open(DialogAlertComponent, {

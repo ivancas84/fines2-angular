@@ -89,10 +89,10 @@ export class ComisionAdminComponent extends StructureComponent {
     division: new InputTextConfig({
       validatorMsgs:[new RequiredValidatorMsg()]
     }),
-    planificacion: new InputAutocompleteConfig({
+    planificacion: new InputSelectConfig({
       validatorMsgs:[new RequiredValidatorMsg()]
     }),
-    modalidad: new InputTextConfig({
+    modalidad: new InputSelectConfig({
       validatorMsgs:[new RequiredValidatorMsg()]
     }),
     comision_siguiente: new InputAutocompleteConfig({
@@ -237,7 +237,8 @@ export class ComisionAdminComponent extends StructureComponent {
       break;
 
       case "crear_curso_":
-
+        var id = this.controlComision.get("id")?.value
+        this.crearCurso_()
       break;
 
       case "submit_curso_":
@@ -287,7 +288,12 @@ export class ComisionAdminComponent extends StructureComponent {
     this.subscriptions.add(s);
   }
 
-  protected generarCurso_(){
+  protected crearCurso_(){
+    if(!this.controlComision.get("id")?.value) {
+      this.snackBar.open("No se encuentra definido el id del curso", "X");
+      return;
+    }
+    
     var s = this.dd._post("persist", "crear_cursos_comision", this.controlComision.get("id")!.value).subscribe({
       next: (response: any) => {
         this.response = response
