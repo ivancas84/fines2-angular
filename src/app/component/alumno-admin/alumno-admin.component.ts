@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params, NavigationBehaviorOptions } from '@angular/router';
 import { Display } from '@class/display';
 import { FieldWidthOptions } from '@class/field-width-options';
 import { FormArrayConfig, FormControlConfig, FormGroupConfig } from '@class/reactive-form-config';
@@ -31,6 +31,7 @@ import { ControlLabelConfig } from '@component/control-label/control-label.compo
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { markAllAsDirty } from '@function/mark-all-as-dirty';
 import { logValidationErrors } from '@function/log-validation-errors';
+import { emptyUrl } from '@function/empty-url.function';
 
 @Component({
   selector: 'app-alumno-admin',
@@ -39,8 +40,6 @@ import { logValidationErrors } from '@function/log-validation-errors';
 
 export class AlumnoAdminComponent extends StructureComponent {
 
-  
-  
   override control: FormGroup = new FormGroup({}, {updateOn:"blur"})
 
   controlPersona: FormGroup =  new FormGroup({
@@ -110,7 +109,7 @@ export class AlumnoAdminComponent extends StructureComponent {
     }),
     observaciones: new TextareaConfig,
     comentarios: new TextareaConfig,
-
+    persona: new FormControlConfig
   })
 
   configDetallePersona: FormArrayConfig = new FormArrayConfig({
@@ -290,22 +289,27 @@ export class AlumnoAdminComponent extends StructureComponent {
 
   override initData(): Observable<any> {
     var data = {
-      "alumno":{}, 
+      "alumno":{
+        "id":null, //inicializamos campo id para facilitar comparacion
+        "persona":null, //inicializamos campo persona para facilitar comparacion
+      }, 
       "per":{}, 
       "per-detalle_persona/persona":[], 
       "alumno_comision/alumno":[], 
       "calificacion/alumno":[], 
     }
     if(isEmptyObject(this.params)) return of(data)
+    if(this.params.hasOwnProperty("persona")) data["alumno"]["persona"] = this.params["persona"];
 
     return this.dd.unique("alumno", this.params).pipe(
       switchMap(
         (alumno: any) => {
-          if(isEmptyObject(alumno)) return of(data) 
-          data["alumno"] = alumno
+          if (!isEmptyObject(alumno)) data["alumno"] = alumno
+          if (!data["alumno"]["persona"]) return of(data) 
           return this.initPersona(data) 
         }
       ),
+      
     )
   }
 
@@ -315,7 +319,52 @@ export class AlumnoAdminComponent extends StructureComponent {
         (persona: any) => {
           if(isEmptyObject(persona)) return of(data) 
           data["per"] = persona
-          return this.initMultiple(data)
+          return this.initDetallePersona_(data)
+        }
+      ),
+      switchMap(
+        (data: any) => {
+          return this.initMultipleAlumno_(data)
+        }
+      )
+    )
+  }
+
+  initDetallePersona_(data: { [x: string]: any }): Observable<any> {
+    if(!data["alumno"]["persona"]) return of(data)
+    var display = new Display()
+    display.setParams({"persona":data["alumno"]["persona"]})
+
+    return this.dd.all("detalle_persona", display).pipe(
+      map(
+        (dp_: any) => {
+          if(dp_.length) data["per-detalle_persona/persona"] = dp_ 
+          return data
+        }
+      )
+    );
+  }
+
+  initMultipleAlumno_(data: { [x: string]: any }): Observable<any> {
+    if(!data["alumno"]["id"]) return of(data)
+
+    var display = new Display()
+    display.setParams({"alumno":data["alumno"]["id"]})
+
+
+    return combineLatest([
+      this.dd.all("alumno_comision", display),
+      this.initCalificacion_(data),
+    ]).pipe(
+      map(
+        (response: any) => {
+          var alumno_comision_ = response[0];
+          var calificacion_ = response[1];
+
+          if(alumno_comision_.length) data["alumno_comision/alumno"] = alumno_comision_
+          if(calificacion_.length) data["calificacion/alumno"] = calificacion_
+
+          return data
         }
       )
     )
@@ -539,10 +588,16 @@ export class AlumnoAdminComponent extends StructureComponent {
   }
 
   protected submitPersona() {
+    console.log("submit_persona")
     var s = this.dd._post("persist", "persona", this.controlPersona.value).subscribe({
       next: (response: any) => {
         this.response = response
-        this.submitted()        
+        this.snackBar.open("Registro realizado", "X");
+        this.removeStorage();
+        this.storage.removeItemsPrefix(emptyUrl(this.router.url));
+        let route = emptyUrl(this.router.url);
+        console.log(route)
+        this.router.navigate(['/' + route], {queryParams: {persona: response["id"]}});
       },
       error: (error: any) => { 
         this.dialog.open(DialogAlertComponent, {

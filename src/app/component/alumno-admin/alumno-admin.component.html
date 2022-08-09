@@ -12,7 +12,9 @@
  
   </mat-card-header>
   <mat-card-content>
-    <core-input-search-go fxFlex="auto" [entityName]="'alumno'"></core-input-search-go>    
+    <core-input-search-go fxFlex="auto" 
+                          [entityName]="'persona'" 
+                          [fieldName]="'persona'"></core-input-search-go>    
   </mat-card-content>
 </mat-card>
 
@@ -37,7 +39,7 @@
 
       <mat-card>
         <mat-card-content>
-          <core-event-button [config]="{disabled:(control.status == 'PENDING'), text: 'Guardar', action:'submit_alumno', fieldEvent:optField}"></core-event-button>
+          <core-event-button [config]="{disabled:(control.status == 'PENDING'), text: 'Guardar', action:'submit_persona', fieldEvent:optField}"></core-event-button>
         </mat-card-content>
       </mat-card>
 
@@ -112,6 +114,9 @@
                           [control]="o.control" ></core-abstract-control-view>
         </mat-card-content>
       </mat-card>
+
+       <p>Debug Form value: {{ control.value | json }}</p>
+                <p>Debug Form status: {{ control.status | json }}</p>
     </ng-container> 
   </ng-container>
 
