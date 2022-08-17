@@ -8,6 +8,7 @@ import { EventButtonConfig } from '@component/event-button/event-button.componen
 import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { RouteTextConfig } from '@component/route-text/route-text.component';
 import { TableComponent } from '@component/structure/table.component';
+import { map, Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'core-table',
@@ -25,7 +26,6 @@ export class CursosTomaPosesionComponent extends TableComponent {
 
   override config: FormArrayConfig = new FormArrayConfig({
     "id": new FormControlConfig,
-    "com_sed-numero": new FormControlConfig,
     "com-division": new FormControlConfig,
     "com_pla-anio": new FormControlConfig,
     "com_pla-semestre": new FormControlConfig,
@@ -55,6 +55,43 @@ export class CursosTomaPosesionComponent extends TableComponent {
     display.setOrder({"com_sed-numero":"asc", "com_sed-nombre":"asc","com_pla-anio":"asc","com_pla-semestre":"asc","comision":"asc"})
     //display.setParamsByQueryParams(this.params);
     this.display$.next(display)
+  }
+
+  
+  override initData(): Observable<any>{
+    return this.dd.post("ids", this.entityName, this.display$.value).pipe(
+      switchMap(
+        ids => this.dd.getAll("curso", ids)
+      ),
+      switchMap(
+        data => {
+          return this.dd.postAllConnection(data, "info", "curso_horario", {"horario":"horario"}, "id", "curso")
+        }
+      ),
+      switchMap(
+        data => {
+          return this.dd.getAllConnection(data, "comision", {"horario":"horario"}, "comision", "curso")
+        }
+      ),
+      
+      switchMap(
+        data => {
+          return this.dd.postAllConnection(data, "info", "curso_horario", {"horario":"horario"}, "id", "curso")
+        }
+      ),
+      
+      
+
+      map(
+        data =>{
+          data.forEach(value => {
+            value["numero"] = value["com_sed-numero"] + value["com-division"] + "/" + value["com_pla-anio"] + value["com_pla-semestre"] 
+          })
+          return data;
+        }
+
+      )
+    )
   }
 
 
