@@ -22,8 +22,6 @@ import { Location } from '@angular/common';
 import { getControlName } from '@function/get-control-name';
 import { InputSelectValueConfig } from '@component/input-select-value/input-select-value.component';
 
-
-
 @Component({
   selector: 'app-sede-admin',
   templateUrl: './sede-admin.component.html',

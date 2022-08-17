@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { Display } from '@class/display';
 import { FormArrayConfig, FormControlConfig } from '@class/reactive-form-config';
-import { ControlDateConfig } from '@component/control-date/control-date.component';
 import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
-import { EventButtonConfig } from '@component/event-button/event-button.component';
-import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { RouteTextConfig } from '@component/route-text/route-text.component';
 import { TableComponent } from '@component/structure/table.component';
 import { map, Observable, switchMap } from 'rxjs';
@@ -26,14 +23,14 @@ export class CursosTomaPosesionComponent extends TableComponent {
 
   override config: FormArrayConfig = new FormArrayConfig({
     "id": new FormControlConfig,
-    "com-division": new FormControlConfig,
-    "com_pla-anio": new FormControlConfig,
-    "com_pla-semestre": new FormControlConfig,
-    "com_sed-nombre": new ControlValueConfig,
-    "com_sed-domicilio": new ControlLabelConfig,
-    "numero": new ControlValueConfig,
-    "asi-nombre": new ControlValueConfig,
+    "sede": new ControlValueConfig,
+    "comision_label": new ControlValueConfig,
+    "domicilio": new ControlValueConfig,
+    "nombre_asignatura": new ControlValueConfig,
+    "tramo": new ControlValueConfig,
     "horario": new ControlValueConfig,
+
+    //"asi-nombre": new ControlValueConfig,
   })
 
   override optColumn: FormControlConfig[] = [
@@ -64,34 +61,45 @@ export class CursosTomaPosesionComponent extends TableComponent {
         ids => this.dd.getAll("curso", ids)
       ),
       switchMap(
-        data => {
-          return this.dd.postAllConnection(data, "info", "curso_horario", {"horario":"horario"}, "id", "curso")
-        }
+        data => this.dd.getAllConnection(data, "asignatura", {"nombre_asignatura":"nombre"}, "asignatura")
       ),
       switchMap(
-        data => {
-          return this.dd.getAllConnection(data, "comision", {"horario":"horario"}, "comision", "curso")
-        }
+        data => this.dd.getAllConnection(data, "comision", {"division":"division", "sede":"sede","planificacion":"planificacion"}, "comision")
       ),
-      
       switchMap(
-        data => {
-          return this.dd.postAllConnection(data, "info", "curso_horario", {"horario":"horario"}, "id", "curso")
-        }
+        data => this.dd.getAllConnection(data, "sede", {"nombre":"nombre", "numero":"numero", "domicilio":"domicilio"}, "sede")
       ),
-      
-      
-
+      switchMap(
+        data => this.dd.getAllConnection(data, "domicilio", {"calle":"calle", "entre":"entre", "dom_numero":"numero","barrio":"barrio"}, "domicilio")
+      ),
+      switchMap(
+        data =>   this.dd.postAllConnection(data, "info","curso_horario",{"horario":"horario"},"id","curso")
+      ),
+      switchMap(
+        data =>   this.dd.postAllConnection(data, "info","curso_toma_activa",{"toma":"toma_activa"},"id","curso")
+      ),
+      switchMap(
+        data =>   this.dd.getAllConnection(data, "planificacion", {"anio":"anio","semestre":"semestre","plan":"plan"},"planificacion")
+      ),
+      switchMap(
+        data =>   this.dd.getAllConnection(data, "plan", {"orientacion":"orientacion"},"plan")
+      ),
       map(
-        data =>{
-          data.forEach(value => {
-            value["numero"] = value["com_sed-numero"] + value["com-division"] + "/" + value["com_pla-anio"] + value["com_pla-semestre"] 
-          })
-          return data;
+        data => {
+          return this.formatData(data)
         }
-
-      )
+      ),
     )
+  }
+
+  formatData(data: { [x: string]: string; }[]){
+    data.forEach((element: { [x: string]: string; }) => {
+      element["sede"] =  element["nombre"] + " (" + element["numero"] + ")"
+      element["comision_label"] =  element["numero"] + element["division"] + "/" + element["anio"] + element["semestre"]
+      element["tramo"] =  element["anio"] + "º" + element["semestre"] + "º " + element["orientacion"]
+      element["domicilio"] =  element["calle"] + " e/ " + element["entre"] + " nº " + element["dom_numero"] + " " + element["barrio"]
+    })
+    return data;
   }
 
 

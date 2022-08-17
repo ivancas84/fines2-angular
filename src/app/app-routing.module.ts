@@ -7,16 +7,20 @@ import { CalendarioAdminComponent } from '@component/calendario-admin/calendario
 import { ComisionAdminArrayComponent } from '@component/comision-admin/comision-admin-array.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
 import { CursoAdminComponent } from '@component/curso-admin/curso-admin.component';
+import { CursosTomaPosesionComponent } from '@component/cursos-toma-posesion/cursos-toma-posesion.component';
 import { GenerarConstanciaComponent } from '@component/generar-constancia/generar-constancia.component';
 import { HomeComponent } from '@component/home/home.component';
+import { InscripcionDocenteCorrectaComponent } from '@component/inscripcion-docente-correcta/inscripcion-docente-correcta.component';
+import { InscripcionDocenteComponent } from '@component/inscripcion-docente/inscripcion-docente.component';
 import { ResumenAlumnosComponent } from '@component/resumen-alumnos/resumen-alumnos.component';
 import { ListaComisionesDocentesSinContralorComponent } from '@component/resumen-comisiones/lista-comisiones-docentes-sin-contralor';
 import { ListaComisionesComponent } from '@component/resumen-comisiones/lista-comisiones.component';
 import { ResumenComisionesComponent } from '@component/resumen-comisiones/resumen-comisiones.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
+import { TomaPosesionEmailAbcComponent } from '@component/toma-posesion-email-abc/toma-posesion-email-abc.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: '', component: CursosTomaPosesionComponent, pathMatch: 'full' },
 
   { path: 'alumno-admin', component: AlumnoAdminComponent, pathMatch: 'full' },
   { path: 'asignatura-array', component: AsignaturaArrayComponent, pathMatch: 'full' },
@@ -29,9 +33,12 @@ const routes: Routes = [
   { path: 'calendario-admin-array', component: CalendarioAdminArrayComponent, pathMatch: 'full' },
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
   { path: 'comision-admin-array', component: ComisionAdminArrayComponent, pathMatch: 'full' },
+  { path: 'cursos-toma-posesion', component: CursosTomaPosesionComponent, pathMatch: 'full' },
+  { path: 'inscripcion-docente', component: InscripcionDocenteComponent, pathMatch: 'full' },
+  { path: 'inscripcion-docente-correcta', component: InscripcionDocenteCorrectaComponent, pathMatch: 'full' },
   { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
-
   { path: 'lista-comisiones-docentes-sin-contralor', component: ListaComisionesDocentesSinContralorComponent, pathMatch: 'full' },
+  { path: 'toma-posesion-email-abc', component: TomaPosesionEmailAbcComponent, pathMatch: 'full' },
 
 ];
 @NgModule({

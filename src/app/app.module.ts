@@ -31,6 +31,10 @@ import { CalendarioAdminComponent } from '@component/calendario-admin/calendario
 import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array/calendario-admin-array.component';
 import { ComisionAdminArrayComponent } from '@component/comision-admin/comision-admin-array.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
+import { CursosTomaPosesionComponent } from '@component/cursos-toma-posesion/cursos-toma-posesion.component';
+import { TomaPosesionEmailAbcComponent } from '@component/toma-posesion-email-abc/toma-posesion-email-abc.component';
+import { InscripcionDocenteComponent } from '@component/inscripcion-docente/inscripcion-docente.component';
+import { InscripcionDocenteCorrectaComponent } from '@component/inscripcion-docente-correcta/inscripcion-docente-correcta.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +50,10 @@ import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
     ComisionAdminComponent,
     ComisionAdminArrayComponent,
     CursoAdminComponent,
+    CursosTomaPosesionComponent,
     GenerarConstanciaComponent,
+    InscripcionDocenteComponent,
+    InscripcionDocenteCorrectaComponent,
     ListaComisionesComponent,
     ListaComisionesDocentesSinContralorComponent,
     MenuComponent,
@@ -54,6 +61,7 @@ import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
     ResumenComisionesComponent,
     SedeAdminComponent,
     TableResumenComisionesComponent,
+    TomaPosesionEmailAbcComponent,
   ],
   imports: [
     BrowserModule,
