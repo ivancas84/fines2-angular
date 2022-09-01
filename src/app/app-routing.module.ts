@@ -6,6 +6,7 @@ import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array
 import { CalendarioAdminComponent } from '@component/calendario-admin/calendario-admin.component';
 import { ComisionAdminArrayComponent } from '@component/comision-admin/comision-admin-array.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
+import { ComisionTableComponent } from '@component/comision-table/comision-table.component';
 import { CursoAdminComponent } from '@component/curso-admin/curso-admin.component';
 import { CursosTomaPosesionComponent } from '@component/cursos-toma-posesion/cursos-toma-posesion.component';
 import { EnlaceNoDisponibleComponent } from '@component/enlace-no-disponible/enlace-no-disponible.component';
@@ -23,20 +24,24 @@ import { TomaPosesionEmailAbcComponent } from '@component/toma-posesion-email-ab
 const routes: Routes = [
   { path: '', component: CursosTomaPosesionComponent, pathMatch: 'full' },
 
-  // { path: 'alumno-admin', component: AlumnoAdminComponent, pathMatch: 'full' },
-  // { path: 'asignatura-array', component: AsignaturaArrayComponent, pathMatch: 'full' },
-  // { path: 'curso-admin', component: CursoAdminComponent, pathMatch: 'full' },
-  // { path: 'generar-constancia', component: GenerarConstanciaComponent, pathMatch: 'full' },
-  // { path: 'resumen-comisiones', component: ResumenComisionesComponent, pathMatch: 'full' },
-  // { path: 'lista-comisiones', component: ListaComisionesComponent, pathMatch: 'full' },
-  // { path: 'resumen-alumnos', component: ResumenAlumnosComponent, pathMatch: 'full' },
-  // { path: 'calendario-admin', component: CalendarioAdminComponent, pathMatch: 'full' },
-  // { path: 'calendario-admin-array', component: CalendarioAdminArrayComponent, pathMatch: 'full' },
-  // { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
-  // { path: 'comision-admin-array', component: ComisionAdminArrayComponent, pathMatch: 'full' },
-  // { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
-  // { path: 'lista-comisiones-docentes-sin-contralor', component: ListaComisionesDocentesSinContralorComponent, pathMatch: 'full' },
+  { path: 'alumno-admin', component: AlumnoAdminComponent, pathMatch: 'full' },
+  { path: 'asignatura-array', component: AsignaturaArrayComponent, pathMatch: 'full' },
+  { path: 'curso-admin', component: CursoAdminComponent, pathMatch: 'full' },
+  { path: 'generar-constancia', component: GenerarConstanciaComponent, pathMatch: 'full' },
+  { path: 'resumen-comisiones', component: ResumenComisionesComponent, pathMatch: 'full' },
+  { path: 'lista-comisiones', component: ListaComisionesComponent, pathMatch: 'full' },
+  { path: 'resumen-alumnos', component: ResumenAlumnosComponent, pathMatch: 'full' },
+  { path: 'calendario-admin', component: CalendarioAdminComponent, pathMatch: 'full' },
+  { path: 'calendario-admin-array', component: CalendarioAdminArrayComponent, pathMatch: 'full' },
+  { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
+  { path: 'comision-admin-array', component: ComisionAdminArrayComponent, pathMatch: 'full' },
+  { path: 'comision-table', component: ComisionTableComponent, pathMatch: 'full' },
 
+  { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
+  { path: 'lista-comisiones-docentes-sin-contralor', component: ListaComisionesDocentesSinContralorComponent, pathMatch: 'full' },
+
+
+  
   { path: 'inscripcion-docente', component: InscripcionDocenteComponent, pathMatch: 'full' },
   { path: 'inscripcion-docente-correcta', component: InscripcionDocenteCorrectaComponent, pathMatch: 'full' },
   { path: 'cursos-toma-posesion', component: CursosTomaPosesionComponent, pathMatch: 'full' },

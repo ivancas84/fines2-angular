@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { Display } from '@class/display';
 import { FormArrayConfig, FormControlConfig, FormGroupConfig } from '@class/reactive-form-config';
 import { ControlDateConfig } from '@component/control-date/control-date.component';
@@ -10,16 +10,14 @@ import { InputSelectCheckboxConfig } from '@component/input-select-checkbox/inpu
 import { InputTextConfig } from '@component/input-text/input-text.component';
 import { InputYearConfig } from '@component/input-year/input-year.component';
 import { LinkIconConfig } from '@component/link-icon/link-icon.component';
-import { LinkTextConfig } from '@component/link-text/link-text.component';
-import { LinkValueConfig } from '@component/link-value/link-value.component';
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 import { TableComponent } from '@component/structure/table.component';
 import { PDF_URL } from '@config/app.config';
 import { map, Observable, of, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-lista-comisiones',
-  templateUrl: './resumen-comisiones.component.html',
+  selector: 'app-comision-table',
+  templateUrl: '../../core/component/structure/table.component.html',
   styles:[`
   .mat-card-content { overflow-x: auto; }
   .mat-table.mat-table { min-width: 500px; }
@@ -28,24 +26,32 @@ import { map, Observable, of, switchMap } from 'rxjs';
     }
   `],
 })
-export class ListaComisionesComponent extends TableComponent {
+export class ComisionTableComponent extends TableComponent {
 
-  override readonly entityName: string = "curso";
+  override readonly entityName: string = "comision";
+
+  
+  override config: FormArrayConfig = new FormArrayConfig({
+    "id": new FormControlConfig,
+    "sede": new ControlValueConfig,
+    "domicilio": new ControlValueConfig,
+    "comision_label": new ControlValueConfig,
+    "tramo": new ControlValueConfig,
+    "horario": new ControlValueConfig,
+  })
 
   override searchConfig: FormGroupConfig = new FormGroupConfig({
-    "com_cal-anio":new InputYearConfig,
-    "com_cal-semestre":new InputTextConfig({type:"number"}),
-    "com-autorizada":new InputSelectCheckboxConfig,
+    "cal-anio":new InputYearConfig,
+    "cal-semestre":new InputTextConfig({type:"number"}),
+    "autorizada":new InputSelectCheckboxConfig,
   }
-)
-
-
+) 
 
   override initDisplay() {
     var display = new Display();
     display.setParamsByQueryParams(this.params);
     display.setSize(0);
-    display.setOrder({"com_sed-numero":"asc", "com_sed-nombre":"asc","com_pla-anio":"asc","com_pla-semestre":"asc","comision":"asc"})
+    display.setOrder({"sed-numero":"asc", "sed-nombre":"asc","pla-anio":"asc","pla-semestre":"asc"})
     //display.setParamsByQueryParams(this.params);
     this.display$.next(display)
   }
@@ -55,10 +61,7 @@ export class ListaComisionesComponent extends TableComponent {
     console.log("test")
     return this.dd.post("ids", this.entityName, this.display$.value).pipe(
       switchMap(
-        ids => this.dd.getAll("curso", ids)
-      ),
-      switchMap(
-        data => this.dd.getAllConnection(data, "comision", {"division":"division", "sede":"sede","planificacion":"planificacion"}, "comision")
+        ids => this.dd.getAll("comision", ids)
       ),
       switchMap(
         data => this.dd.getAllConnection(data, "sede", {"nombre":"nombre", "numero":"numero", "domicilio":"domicilio"}, "sede")
@@ -67,16 +70,7 @@ export class ListaComisionesComponent extends TableComponent {
         data => this.dd.getAllConnection(data, "domicilio", {"calle":"calle", "entre":"entre", "dom_numero":"numero","barrio":"barrio"}, "domicilio")
       ),
       switchMap(
-        data =>   this.dd.postAllConnection(data, "info","curso_horario",{"horario":"horario"},"id","curso")
-      ),
-      switchMap(
-        data =>   this.dd.postAllConnection(data, "info","curso_toma_activa",{"toma":"toma_activa"},"id","curso")
-      ),
-      switchMap(
-        data =>   this.dd.getAllConnection(data, "toma",{"docente":"docente","fecha_toma":"fecha_toma"})
-      ),
-      switchMap(
-        data =>   this.dd.getAllConnection(data, "persona",{"telefono":"telefono"}, "docente")
+        data =>   this.dd.postAllConnection(data, "info","horarios_comision",{"dias":"dias_dias", "hora_inicio":"hora_inicio", "hora_fin":"hora_fin"},"id","comision")
       ),
       switchMap(
         data =>   this.dd.getAllConnection(data, "planificacion", {"anio":"anio","semestre":"semestre","plan":"plan"},"planificacion")
@@ -100,6 +94,7 @@ export class ListaComisionesComponent extends TableComponent {
 
   formatData(data: { [x: string]: string; }[]){
     data.forEach((element: { [x: string]: string; }) => {
+      element["horario"] =  element["dias"] + " " + element["hora_inicio"] + " a " + element["hora_fin"]
       element["sede"] =  element["nombre"] + " (" + element["numero"] + ")"
       element["comision_label"] =  element["numero"] + element["division"] + "/" + element["anio"] + element["semestre"]
       element["tramo"] =  element["anio"] + "º" + element["semestre"] + "º " + element["orientacion"]
@@ -108,22 +103,6 @@ export class ListaComisionesComponent extends TableComponent {
     return data;
   }
 
-  override config: FormArrayConfig = new FormArrayConfig({
-    "id": new FormControlConfig,
-    "toma": new FormControlConfig,
-    "fecha_toma": new ControlDateConfig(),
-    //"ige": new ControlValueConfig,
-    "sede": new ControlValueConfig,
-    "domicilio": new ControlValueConfig,
-    "comision": new FormControlConfig,
-    "comision_label": new ControlValueConfig,
-    "tramo": new ControlValueConfig,
-    "cantidad_alumnos": new ControlValueConfig,
-    "asignatura": new ControlLabelConfig,
-    "horario": new ControlValueConfig,
-    "docente": new ControlLabelConfig({entityName:"persona"}),
-    "telefono": new ControlValueConfig,
-  })
 
 
 
@@ -132,36 +111,14 @@ export class ListaComisionesComponent extends TableComponent {
         //   {label:'Editar ige', url:'curso-admin', params:{'id':'{{id}}'}}
         // ),
         new RouteIconConfig(
-          {icon: "person", routerLink:'resumen-alumnos', params:{'comision':'{{comision}}'}}
+          {icon: "person", routerLink:'resumen-alumnos', params:{'comision':'{{id}}'}}
         ),
         new RouteIconConfig(
-          {icon: "person_outline", routerLink:'resumen-alumnos', params:{'comision':'{{comision}}', activo:'true'}}
+          {icon: "person_outline", routerLink:'resumen-alumnos', params:{'comision':'{{id}}', activo:'true'}}
         ),
-        new EventIconConfig(
-          {icon: "assignment_turned_in", action:'generar_ticket', fieldEvent:this.optField}
-        ),
-        new LinkIconConfig(
-          {title: "Constancia docente", icon: "insert_drive_file", action:'generar_ticket', url:PDF_URL+"constancia_docente", target:"_blank", params:{id:"{{toma}}}"}}
-        ),
+  
       ]
 
-      override switchOptField($event: { action: any; index?: any; control?: AbstractControl}){
-        switch($event.action){
-          case "generar_ticket": 
-            console.log($event.control!.value)
-            if(!$event.control!.value["toma"]) {
-              this.snackBar.open("No hay toma activa definida", "X")
-              return;
-            }
-
-            var s = this.dd._post("persist","generar_ticket_toma",$event.control!.value["toma"]).subscribe(
-              response => this.snackBar.open("Registro realizado", "X")
-            )
-            this.subscriptions.add(s)
-          break;
-          default: super.switchOptField($event);
-        }
-      }
 
 
 

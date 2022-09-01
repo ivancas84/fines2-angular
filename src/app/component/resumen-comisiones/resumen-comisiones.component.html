@@ -15,6 +15,10 @@
       </mat-card-header>
   
     </mat-card>
+    <core-search  [display]="display$.value" 
+                    [config]="searchConfig"
+                    [control]="searchControl"></core-search>
+                    
     <app-table-resumen-comisiones [control]="control"
                                   [config]="config"
                                   [displayedColumns]="displayedColumns"

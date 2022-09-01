@@ -36,6 +36,7 @@ import { TomaPosesionEmailAbcComponent } from '@component/toma-posesion-email-ab
 import { InscripcionDocenteComponent } from '@component/inscripcion-docente/inscripcion-docente.component';
 import { InscripcionDocenteCorrectaComponent } from '@component/inscripcion-docente-correcta/inscripcion-docente-correcta.component';
 import { EnlaceNoDisponibleComponent } from '@component/enlace-no-disponible/enlace-no-disponible.component';
+import { ComisionTableComponent } from '@component/comision-table/comision-table.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { EnlaceNoDisponibleComponent } from '@component/enlace-no-disponible/enl
     SedeAdminComponent,
     TableResumenComisionesComponent,
     TomaPosesionEmailAbcComponent,
+    ComisionTableComponent,
   ],
   imports: [
     BrowserModule,
