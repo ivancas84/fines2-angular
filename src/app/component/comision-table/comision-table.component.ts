@@ -1,18 +1,12 @@
 import { Component } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
 import { Display } from '@class/display';
 import { FormArrayConfig, FormControlConfig, FormGroupConfig } from '@class/reactive-form-config';
-import { ControlDateConfig } from '@component/control-date/control-date.component';
-import { ControlLabelConfig } from '@component/control-label/control-label.component';
 import { ControlValueConfig } from '@component/control-value/control-value.component';
-import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { InputSelectCheckboxConfig } from '@component/input-select-checkbox/input-select-checkbox.component';
 import { InputTextConfig } from '@component/input-text/input-text.component';
 import { InputYearConfig } from '@component/input-year/input-year.component';
-import { LinkIconConfig } from '@component/link-icon/link-icon.component';
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 import { TableComponent } from '@component/structure/table.component';
-import { PDF_URL } from '@config/app.config';
 import { map, Observable, of, switchMap } from 'rxjs';
 
 @Component({
@@ -62,6 +56,9 @@ export class ComisionTableComponent extends TableComponent {
     return this.dd.post("ids", this.entityName, this.display$.value).pipe(
       switchMap(
         ids => this.dd.getAll("comision", ids)
+      ),
+      switchMap(
+        data => this.dd.getAllConnectionUm(data, "sede", "sede", "designacion")
       ),
       switchMap(
         data => this.dd.getAllConnection(data, "sede", {"nombre":"nombre", "numero":"numero", "domicilio":"domicilio"}, "sede")
