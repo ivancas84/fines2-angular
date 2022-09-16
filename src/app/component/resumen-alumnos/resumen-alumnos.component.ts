@@ -9,7 +9,7 @@ import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.compo
 import { EventIconConfig } from '@component/event-icon/event-icon.component';
 import { RouteIconConfig } from '@component/route-icon/route-icon.component';
 import { TableComponent } from '@component/structure/table.component';
-import { Observable, switchMap, tap } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-resumen-alumnos',
@@ -44,7 +44,7 @@ export class ResumenAlumnosComponent extends TableComponent {
     "adeuda_legajo": new ControlValueConfig,
     "adeuda_deudores": new ControlValueConfig,
     "observaciones_alumno": new ControlValueConfig,
-    "cantidad_aprobada": new ControlValueConfig,
+    "cantidades": new ControlValueConfig,
     "alumno": new FormControlConfig()
   })
 
@@ -126,14 +126,34 @@ export class ResumenAlumnosComponent extends TableComponent {
         data => this.dd.getAllConnection(data, "comision", {"sede":"sede"}, "comision")
       ),
       switchMap(
-        data => this.dd.postAllConnection(data, "cantidad_asignaturas_aprobadas_alumnos", "alumno", {"cantidad_aprobada":"cantidad_aprobada"}, "alumno", "alumno" )
+        data => this.dd.postAllConnection(
+          data, 
+          "cantidad_asignaturas_aprobadas_alumnos_tramo", 
+          "alumno", 
+          {
+            "cantidad_aprobadas_11":"cantidad_aprobadas_11",
+            "cantidad_aprobadas_12":"cantidad_aprobadas_12",
+            "cantidad_aprobadas_21":"cantidad_aprobadas_21",
+            "cantidad_aprobadas_22":"cantidad_aprobadas_22",
+            "cantidad_aprobadas_31":"cantidad_aprobadas_31",
+            "cantidad_aprobadas_32":"cantidad_aprobadas_32",
+            "cantidad_aprobadas":"cantidad_aprobadas"
+          }, 
+          "alumno", 
+          "alumno" 
+        )
       ),
-      tap(
+      map(
         data => {
-         console.log(data)
+         return this.formatData(data)
         }
       ),
    
+      tap(
+        data => {
+          console.log(data)
+        }
+      ),
     )
   }
 
@@ -147,6 +167,8 @@ export class ResumenAlumnosComponent extends TableComponent {
 
   formatData(data: { [x: string]: string; }[]){
     data.forEach((element: { [x: string]: string; }) => {
+      element["cantidades"] = ""
+      if(element["cantidad_aprobadas"]) element["cantidades"] = element["cantidad_aprobadas"] + " (" + element["cantidad_aprobadas_11"] + "-" + element["cantidad_aprobadas_12"] + "-" + element["cantidad_aprobadas_21"] + "-" + element["cantidad_aprobadas_22"] + "-" + element["cantidad_aprobadas_31"] + "-" + element["cantidad_aprobadas_32"] + ") ";
       // element["sede"] =  element["nombre"] + " (" + element["numero"] + ")"
       // // element["comision"] =  element["numero"] + element["division"] + "/" + element["anio"] + element["semestre"]
       // element["tramo"] =  element["anio"] + "º" + element["semestre"] + "º " + element["orientacion"]
