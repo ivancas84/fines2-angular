@@ -1,39 +1,42 @@
 import { Component } from '@angular/core';
-import { FormArrayConfig, FormStructureConfig } from '@class/reactive-form-config';
-import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
-import { TableDynamicConfig } from '@component/table/table-dynamic.component';
+import { FormArrayConfig, FormGroupConfig } from '@class/reactive-form-config';
+import { AbstractControlViewOption } from '@component/abstract-control-view/abstract-control-view.component';
+import { EventButtonConfig } from '@component/event-button/event-button.component';
+import { InputDateConfig } from '@component/input-date/input-date.component';
 import { InputTextConfig } from '@component/input-text/input-text.component';
-import { ControlLabelConfig } from '@component/control-label/control-label.component';
-import { AdminArrayComponent } from '@component/show/admin-array.component';
-import { InputAutocompleteConfig } from '@component/input-autocomplete/input-autocomplete.component';
-import { InputSelectConfig } from '@component/input-select/input-select.component';
-import { InputTimepicker2Component, InputTimepicker2Config } from '@component/input-timepicker2/input-timepicker2.component';
-
-
+import { InputYearConfig } from '@component/input-year/input-year.component';
+import { TableComponent } from '@component/structure/table.component';
 
 @Component({
-  selector: 'app-horario-admin-array',
-  templateUrl: '../../core/component/show/show.component.html',
+  selector: 'app-calendario-admin',
+  templateUrl: '../../core/component/structure/table.component.html',
 })
-export class HorarioAdminArrayComponent extends AdminArrayComponent {
 
-  entityName = "horario"
+export class CalendarioAdminArrayComponent extends TableComponent {
 
-  config: FormArrayConfig = new TableDynamicConfig({}, {
-    "curso": new InputAutocompleteConfig,
-    "dia": new InputSelectConfig,
-    "hora_inicio": new InputTimepicker2Config,
-    "hora_fin": new InputTimepicker2Config,
+  override entityName: string = "calendario";
+
+  override config: FormArrayConfig = new FormArrayConfig({
+    inicio: new InputDateConfig,
+    fin: new InputDateConfig,
+    anio: new InputYearConfig,
+    semestre: new InputTextConfig({type:"number"}),
+    descripcion: new InputTextConfig(),
   })
 
-  searchConfig: FormStructureConfig = new FormStructureConfig({}, {
-    "params":new FieldsetDynamicConfig({title:"Opciones"},{
-      "curso":new InputAutocompleteConfig,
-      "cur-comision":new InputAutocompleteConfig,
-
-    })
-  }) 
+  override optFooter: AbstractControlViewOption[] = [
+    {
+      config: new EventButtonConfig({
+        text: "Aceptar", //texto del boton
+        action: "submit", //accion del evento a realizar
+        color: "primary",
+        fieldEvent: this.optField
+      }),
+    },
+  ];
 
 }
 
+
+  
   

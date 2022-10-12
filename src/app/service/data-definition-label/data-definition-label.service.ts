@@ -10,21 +10,22 @@ import { switchMap, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class DataDefinitionLabelService extends _DataDefinitionLabelService{ 
-  constructor(protected dd: DataDefinitionToolService){ 
+  constructor(protected override dd: DataDefinitionToolService){ 
     super(dd) 
   }
 
-  label(entityName: string, id: string): Observable<string> {
-    if(!id) return of(null);
+  override label(entityName: string, id: string): Observable<string> {
+    if(!id) return of("");
     var l = super.label(entityName, id);
     if(l) return l;
     switch(entityName){
-      case "calendario_as": return this.labelCalendarioAs(id);  
+      case "calendario_as": return this.labelCalendarioAs(id);
+      default: return of("");  
     }
   }
 
-  labelCalendarioRow (row: any): string {
-    if(!row) return null;
+  override labelCalendarioRow (row: any): string {
+    if(!row) return "";
     let ret = "";
     if (row["anio"]) ret = Parser.dateFormat(row["anio"], 'Y');
     if (row["semestre"]) ret = ret + "-"+row["semestre"];
@@ -35,14 +36,14 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
 
 
   labelCalendarioAsRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
     let ret = "";
     if (row["anio"]) ret = Parser.dateFormat(row["anio"], 'Y');
     if (row["semestre"]) ret = ret + "-"+row["semestre"];
     return ret;
   }
 
-  labelCalendarioAs(id: string): Observable<any> {
+  labelCalendarioAs(id: string): Observable<string> {
     return this.dd.get("calendario", id).pipe(
       switchMap(
         row => {
@@ -53,76 +54,64 @@ export class DataDefinitionLabelService extends _DataDefinitionLabelService{
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelCurso(id: string): Observable<any> {
+  override labelCurso(id: string): Observable<string> {
     return this.dd.get("curso", id).pipe(
       switchMap(
         curso => {
-          return this.dd.getConnection(curso,"asignatura","asignatura",{asignatura:"codigo"})
+          return this.dd.getConnection(curso,"asignatura",{codigo:"codigo"})
         }
       ),
       switchMap(
         curso => {
-          return this.dd.getConnection(curso,"comision","comision",{division:"division",sede:"sede",planificacion:"planificacion"})
+          return this.dd.getConnection(curso,"comision",{division:"division",sede:"sede",planificacion:"planificacion"})
         }
       ),
       switchMap(
         curso => {
-          return this.dd.getConnection(curso,"planificacion","planificacion",{anio:"anio",semestre:"semestre"})
+            return this.dd.getConnection(curso,"planificacion",{anio:"anio",semestre:"semestre"})
         }
       ),
       switchMap(
         curso => {
-          return this.dd.getConnection(curso,"sede","sede",{numero_sede:"numero", nombre_sede:"nombre"})
+          return this.dd.getConnection(curso,"sede",{numero_sede:"numero", nombre_sede:"nombre"})
         }
       ),
       map(
         curso => { 
-          return (!curso)? null : curso["numero_sede"]+curso["division"]+"/"+curso["anio"]+curso["semestre"]+" "+curso["asignatura"]+ " "+curso["nombre_sede"]; 
+          return (!curso)? "" : curso["numero_sede"]+curso["division"]+"/"+curso["anio"]+curso["semestre"]+" "+curso["codigo"]+ " ("+curso["horas_catedra"] + ")"; 
         }
       )
     );
   }
 
 
-  labelComision(id: string): Observable<any> {
-    return this.dd.get("comision", id).pipe(
-      switchMap(
-        curso => {
-          console.log(curso)
-          return this.dd.getConnection(curso,"planificacion","planificacion",{anio:"anio",semestre:"semestre"})
-        }
-      ),
-      switchMap(
-        curso => {
-          return this.dd.getConnection(curso,"sede","sede",{numero_sede:"numero"})
-        }
-      ),
-      switchMap(
-        curso => {
-          return this.dd.getConnection(curso,"calendario","calendario",{cal_anio:"anio",cal_semestre:"semestre"})
-        }
-      ),
-      map(
-        curso => { 
-          curso["periodo"] = curso["cal_anio"].substring(0,4) + "-"+curso["cal_semestre"]
-          return (!curso)? null : curso["numero_sede"]+curso["division"]+"/"+curso["anio"]+curso["semestre"]+" "+curso["periodo"];
-        }
-      )
-    );
-  }
 
-  labelDomicilioRow (row: any): string {
-    if(!row) return null;
+  override labelDomicilioRow (row: any): string {
+    if(!row) return "";
 
     let ret = row["calle"] + " N° " + row["numero"];
 
     if (row["entre"]) ret += " entre " + row["entre"];
 
+    return ret.trim();
+  }
+
+  override labelPersonaRow (row: any): string {
+    if(!row) return "";
+
+    let ret = "";
+    if (row["nombres"]) ret = ret.trim() + " " + row["nombres"];
+
+    if (row["apellidos"]) ret = ret.trim() + " " + row["apellidos"];
+
+    if (row["cuil"]) ret = ret.trim() + " " + row["cuil"];
+
+    if (!row["cuil"] && row["numero_documento"]) ret = ret.trim() + " " + row["numero_documento"];
     return ret.trim();
   }
   

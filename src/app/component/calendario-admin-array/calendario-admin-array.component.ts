@@ -1,40 +1,42 @@
 import { Component } from '@angular/core';
-import { FormArrayConfig, FormControlConfig, FormStructureConfig } from '@class/reactive-form-config';
-import { FieldsetDynamicConfig } from '@component/fieldset/fieldset-dynamic.component';
-import { TableDynamicConfig } from '@component/table/table-dynamic.component';
-import { InputSelectConfig } from '@component/input-select/input-select.component';
-import { InputTextConfig } from '@component/input-text/input-text.component';
-import { AdminArrayComponent } from '@component/show/admin-array.component';
+import { FormArrayConfig, FormGroupConfig } from '@class/reactive-form-config';
+import { AbstractControlViewOption } from '@component/abstract-control-view/abstract-control-view.component';
+import { EventButtonConfig } from '@component/event-button/event-button.component';
 import { InputDateConfig } from '@component/input-date/input-date.component';
+import { InputTextConfig } from '@component/input-text/input-text.component';
 import { InputYearConfig } from '@component/input-year/input-year.component';
-import { ControlValueConfig } from '@component/control-value/control-value.component';
+import { TableComponent } from '@component/structure/table.component';
 
 @Component({
-  selector: 'app-calendario-show',
-  templateUrl: '../../core/component/show/show.component.html',
+  selector: 'app-calendario-admin',
+  templateUrl: '../../core/component/structure/table.component.html',
 })
-export class CalendarioAdminArrayComponent extends AdminArrayComponent {
 
-  readonly entityName: string = "calendario";
+export class CalendarioAdminArrayComponent extends TableComponent {
 
-  config: FormArrayConfig = new TableDynamicConfig(
+  override entityName: string = "calendario";
+
+  override config: FormArrayConfig = new FormArrayConfig({
+    inicio: new InputDateConfig,
+    fin: new InputDateConfig,
+    anio: new InputYearConfig,
+    semestre: new InputTextConfig({type:"number"}),
+    descripcion: new InputTextConfig(),
+  })
+
+  override optFooter: AbstractControlViewOption[] = [
     {
-      title:"Calendario",
-    }, {
-      "id": new ControlValueConfig,
-      "inicio": new InputDateConfig,
-      "fin": new InputDateConfig,
-      "anio": new InputYearConfig,
-      "semestre": new InputTextConfig,
-      "descripcion": new InputTextConfig
-    }
-  )
+      config: new EventButtonConfig({
+        text: "Aceptar", //texto del boton
+        action: "submit", //accion del evento a realizar
+        color: "primary",
+        fieldEvent: this.optField
+      }),
+    },
+  ];
 
-  searchConfig: FormStructureConfig = new FormStructureConfig({}, {
-    "params":new FieldsetDynamicConfig({title:"Opciones"},{
-      "anio": new InputYearConfig(),
-      "semestre": new InputTextConfig(),
-    })
-  }) 
 }
 
+
+  
+  

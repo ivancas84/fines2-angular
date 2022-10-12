@@ -3,7 +3,7 @@ import { DataDefinitionService } from '@service/data-definition/data-definition.
 import { of, Observable } from 'rxjs';
 import { arrayColumn } from '@function/array-column';
 import { Display } from '@class/display';
-import { map, first, switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({

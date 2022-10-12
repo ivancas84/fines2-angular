@@ -1,19 +1,41 @@
-/*
-  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
-  It is not intended to be used to perform a compilation.
-
-  To learn more about this file see: https://angular.io/config/solution-tsconfig.
-*/
-
-{ "compileOnSave": false, "compilerOptions": { "baseUrl": "./src/", 
-  
-  "paths": {
-    "@class/*":["app/class/*", "app/core/class/*",],
-    "@component/*":["app/component/*", "app/core/component/*"],
-    "@service/*":["app/service/*", "app/core/service/*"],
-    "@function/*":["app/function/*", "app/core/function/*"],
-    "@pipe/*":["app/pipe/*", "app/core/pipe/*"],
-    "@directive/*":["app/directive/*", "app/core/directive/*"],
-    "@config/*":["app/*", "app/core/*"]
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "outDir": "./dist/out-tsc",
+    "paths": {
+      "@class/*":["app/class/*", "app/core/class/*"],
+      "@component/*":["app/component/*", "app/core/component/*"],
+      "@service/*":["app/service/*", "app/core/service/*"],
+      "@function/*":["app/function/*", "app/core/function/*"],
+      "@pipe/*":["app/pipe/*", "app/core/pipe/*"],
+      "@directive/*":["app/directive/*", "app/core/directive/*"],
+      "@config/*":["app/*", "app/core/*"]
+    },
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2017",
+    "module": "es2020",
+    "lib": [
+      "es2020",
+      "dom"
+    ]
   },
-  "outDir": "./dist/out-tsc", "sourceMap": true, "declaration": false, "downlevelIteration": true, "experimentalDecorators": true, "module": "esnext", "moduleResolution": "node", "importHelpers": true, "target": "es2015", "typeRoots": [ "node_modules/@types" ], "lib": [ "es2018", "dom" ] }, "angularCompilerOptions": { "fullTemplateTypeCheck": true, "strictInjectionParameters": true } }
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

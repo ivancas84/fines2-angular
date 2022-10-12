@@ -46,17 +46,18 @@ export class _DataDefinitionLabelService {
       case "telefono": { return this.labelTelefono(id); }
       case "tipo_sede": { return this.labelTipoSede(id); }
       case "toma": { return this.labelToma(id); }
+      default: return of("");
     }
   }
   labelAlumnoRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     return ret.trim();
   }
 
   labelAlumnoComisionRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["id"]) ret = ret.trim() + " " + row["id"];
@@ -65,7 +66,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelAsignacionPlanillaDocenteRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["id"]) ret = ret.trim() + " " + row["id"];
@@ -74,7 +75,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelAsignaturaRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["nombre"]) ret = ret.trim() + " " + row["nombre"];
@@ -83,7 +84,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelCalendarioRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["anio"]) ret = ret.trim() + " " + row["anio"];
@@ -96,7 +97,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelCalificacionRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["id"]) ret = ret.trim() + " " + row["id"];
@@ -105,7 +106,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelCargoRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["descripcion"]) ret = ret.trim() + " " + row["descripcion"];
@@ -114,7 +115,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelCentroEducativoRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["nombre"]) ret = ret.trim() + " " + row["nombre"];
@@ -123,7 +124,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelComisionRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["division"]) ret = ret.trim() + " " + row["division"];
@@ -132,7 +133,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelComisionRelacionadaRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["id"]) ret = ret.trim() + " " + row["id"];
@@ -141,7 +142,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelContralorRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["id"]) ret = ret.trim() + " " + row["id"];
@@ -150,14 +151,14 @@ export class _DataDefinitionLabelService {
   }
 
   labelCursoRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     return ret.trim();
   }
 
   labelDesignacionRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["id"]) ret = ret.trim() + " " + row["id"];
@@ -166,7 +167,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelDetallePersonaRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["id"]) ret = ret.trim() + " " + row["id"];
@@ -175,7 +176,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelDiaRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["dia"]) ret = ret.trim() + " " + row["dia"];
@@ -184,14 +185,14 @@ export class _DataDefinitionLabelService {
   }
 
   labelDisposicionRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     return ret.trim();
   }
 
   labelDisposicionPendienteRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["id"]) ret = ret.trim() + " " + row["id"];
@@ -200,7 +201,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelDistribucionHorariaRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["id"]) ret = ret.trim() + " " + row["id"];
@@ -209,7 +210,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelDomicilioRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["calle"]) ret = ret.trim() + " " + row["calle"];
@@ -222,7 +223,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelEmailRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["id"]) ret = ret.trim() + " " + row["id"];
@@ -231,7 +232,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelFileRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["name"]) ret = ret.trim() + " " + row["name"];
@@ -240,7 +241,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelHorarioRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["id"]) ret = ret.trim() + " " + row["id"];
@@ -249,7 +250,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelModalidadRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["nombre"]) ret = ret.trim() + " " + row["nombre"];
@@ -258,7 +259,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelPersonaRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["nombres"]) ret = ret.trim() + " " + row["nombres"];
@@ -271,7 +272,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelPlanRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["orientacion"]) ret = ret.trim() + " " + row["orientacion"];
@@ -282,7 +283,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelPlanificacionRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["anio"]) ret = ret.trim() + " " + row["anio"];
@@ -293,7 +294,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelPlanillaDocenteRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["numero"]) ret = ret.trim() + " " + row["numero"];
@@ -302,7 +303,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelResolucionRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["numero"]) ret = ret.trim() + " " + row["numero"];
@@ -311,7 +312,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelSedeRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["numero"]) ret = ret.trim() + " " + row["numero"];
@@ -322,7 +323,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelTelefonoRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["id"]) ret = ret.trim() + " " + row["id"];
@@ -331,7 +332,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelTipoSedeRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["descripcion"]) ret = ret.trim() + " " + row["descripcion"];
@@ -340,7 +341,7 @@ export class _DataDefinitionLabelService {
   }
 
   labelTomaRow (row: any): string {
-    if(!row) return null;
+    if(!row) return "";
 
     let ret = "";
     if (row["id"]) ret = ret.trim() + " " + row["id"];
@@ -348,7 +349,7 @@ export class _DataDefinitionLabelService {
     return ret.trim();
   }
 
-  labelAlumno(id: string): Observable<any> {
+  labelAlumno(id: string): Observable<string> {
     return this.dd.get("alumno", id).pipe(
       switchMap(
         row => {
@@ -360,12 +361,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelAlumnoComision(id: string): Observable<any> {
+  labelAlumnoComision(id: string): Observable<string> {
     return this.dd.get("alumno_comision", id).pipe(
       switchMap(
         row => {
@@ -376,12 +377,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelAsignacionPlanillaDocente(id: string): Observable<any> {
+  labelAsignacionPlanillaDocente(id: string): Observable<string> {
     return this.dd.get("asignacion_planilla_docente", id).pipe(
       switchMap(
         row => {
@@ -392,12 +393,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelAsignatura(id: string): Observable<any> {
+  labelAsignatura(id: string): Observable<string> {
     return this.dd.get("asignatura", id).pipe(
       switchMap(
         row => {
@@ -408,12 +409,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelCalendario(id: string): Observable<any> {
+  labelCalendario(id: string): Observable<string> {
     return this.dd.get("calendario", id).pipe(
       switchMap(
         row => {
@@ -424,12 +425,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelCalificacion(id: string): Observable<any> {
+  labelCalificacion(id: string): Observable<string> {
     return this.dd.get("calificacion", id).pipe(
       switchMap(
         row => {
@@ -440,12 +441,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelCargo(id: string): Observable<any> {
+  labelCargo(id: string): Observable<string> {
     return this.dd.get("cargo", id).pipe(
       switchMap(
         row => {
@@ -456,12 +457,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelCentroEducativo(id: string): Observable<any> {
+  labelCentroEducativo(id: string): Observable<string> {
     return this.dd.get("centro_educativo", id).pipe(
       switchMap(
         row => {
@@ -472,12 +473,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelComision(id: string): Observable<any> {
+  labelComision(id: string): Observable<string> {
     return this.dd.get("comision", id).pipe(
       switchMap(
         row => {
@@ -491,12 +492,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelComisionRelacionada(id: string): Observable<any> {
+  labelComisionRelacionada(id: string): Observable<string> {
     return this.dd.get("comision_relacionada", id).pipe(
       switchMap(
         row => {
@@ -507,12 +508,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelContralor(id: string): Observable<any> {
+  labelContralor(id: string): Observable<string> {
     return this.dd.get("contralor", id).pipe(
       switchMap(
         row => {
@@ -523,12 +524,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelCurso(id: string): Observable<any> {
+  labelCurso(id: string): Observable<string> {
     return this.dd.get("curso", id).pipe(
       switchMap(
         row => {
@@ -541,12 +542,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelDesignacion(id: string): Observable<any> {
+  labelDesignacion(id: string): Observable<string> {
     return this.dd.get("designacion", id).pipe(
       switchMap(
         row => {
@@ -557,12 +558,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelDetallePersona(id: string): Observable<any> {
+  labelDetallePersona(id: string): Observable<string> {
     return this.dd.get("detalle_persona", id).pipe(
       switchMap(
         row => {
@@ -573,12 +574,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelDia(id: string): Observable<any> {
+  labelDia(id: string): Observable<string> {
     return this.dd.get("dia", id).pipe(
       switchMap(
         row => {
@@ -589,12 +590,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelDisposicion(id: string): Observable<any> {
+  labelDisposicion(id: string): Observable<string> {
     return this.dd.get("disposicion", id).pipe(
       switchMap(
         row => {
@@ -607,12 +608,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelDisposicionPendiente(id: string): Observable<any> {
+  labelDisposicionPendiente(id: string): Observable<string> {
     return this.dd.get("disposicion_pendiente", id).pipe(
       switchMap(
         row => {
@@ -623,12 +624,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelDistribucionHoraria(id: string): Observable<any> {
+  labelDistribucionHoraria(id: string): Observable<string> {
     return this.dd.get("distribucion_horaria", id).pipe(
       switchMap(
         row => {
@@ -639,12 +640,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelDomicilio(id: string): Observable<any> {
+  labelDomicilio(id: string): Observable<string> {
     return this.dd.get("domicilio", id).pipe(
       switchMap(
         row => {
@@ -655,12 +656,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelEmail(id: string): Observable<any> {
+  labelEmail(id: string): Observable<string> {
     return this.dd.get("email", id).pipe(
       switchMap(
         row => {
@@ -671,12 +672,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelFile(id: string): Observable<any> {
+  labelFile(id: string): Observable<string> {
     return this.dd.get("file", id).pipe(
       switchMap(
         row => {
@@ -687,12 +688,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelHorario(id: string): Observable<any> {
+  labelHorario(id: string): Observable<string> {
     return this.dd.get("horario", id).pipe(
       switchMap(
         row => {
@@ -703,12 +704,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelModalidad(id: string): Observable<any> {
+  labelModalidad(id: string): Observable<string> {
     return this.dd.get("modalidad", id).pipe(
       switchMap(
         row => {
@@ -719,12 +720,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelPersona(id: string): Observable<any> {
+  labelPersona(id: string): Observable<string> {
     return this.dd.get("persona", id).pipe(
       switchMap(
         row => {
@@ -735,12 +736,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelPlan(id: string): Observable<any> {
+  labelPlan(id: string): Observable<string> {
     return this.dd.get("plan", id).pipe(
       switchMap(
         row => {
@@ -751,12 +752,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelPlanificacion(id: string): Observable<any> {
+  labelPlanificacion(id: string): Observable<string> {
     return this.dd.get("planificacion", id).pipe(
       switchMap(
         row => {
@@ -768,12 +769,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelPlanillaDocente(id: string): Observable<any> {
+  labelPlanillaDocente(id: string): Observable<string> {
     return this.dd.get("planilla_docente", id).pipe(
       switchMap(
         row => {
@@ -784,12 +785,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelResolucion(id: string): Observable<any> {
+  labelResolucion(id: string): Observable<string> {
     return this.dd.get("resolucion", id).pipe(
       switchMap(
         row => {
@@ -800,12 +801,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelSede(id: string): Observable<any> {
+  labelSede(id: string): Observable<string> {
     return this.dd.get("sede", id).pipe(
       switchMap(
         row => {
@@ -816,12 +817,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelTelefono(id: string): Observable<any> {
+  labelTelefono(id: string): Observable<string> {
     return this.dd.get("telefono", id).pipe(
       switchMap(
         row => {
@@ -832,12 +833,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelTipoSede(id: string): Observable<any> {
+  labelTipoSede(id: string): Observable<string> {
     return this.dd.get("tipo_sede", id).pipe(
       switchMap(
         row => {
@@ -848,12 +849,12 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }
 
-  labelToma(id: string): Observable<any> {
+  labelToma(id: string): Observable<string> {
     return this.dd.get("toma", id).pipe(
       switchMap(
         row => {
@@ -864,7 +865,7 @@ export class _DataDefinitionLabelService {
         }
       ),
       map(
-        response => { return (!response)? null : response.join(" "); }
+        response => { return (!response)? "" : response.join(" "); }
       )
     );
   }

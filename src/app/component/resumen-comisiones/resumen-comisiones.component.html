@@ -1,0 +1,32 @@
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
+
+<ng-container *ngIf="(loadParams$ | async); else loading">
+  <ng-container *ngIf="(loadDisplay$ | async); else loading">
+    <mat-progress-bar *ngIf="!load" 
+                      mode="indeterminate"></mat-progress-bar>
+    <mat-card> 
+      <mat-card-header>
+
+        <mat-card-title>
+          Lista de cursos y docentes
+        </mat-card-title>
+      </mat-card-header>
+  
+    </mat-card>
+    <core-search  [display]="display$.value" 
+                    [config]="searchConfig"
+                    [control]="searchControl"></core-search>
+                    
+    <app-table-resumen-comisiones [control]="control"
+                                  [config]="config"
+                                  [displayedColumns]="displayedColumns"
+                                  [optColumn]="optColumn"></app-table-resumen-comisiones>
+    
+    
+  </ng-container>
+  <!-- <p>Debug Form value: {{ control.value | json }}</p>
+  <p>Debug Form status: {{ control.status | json }}</p> -->
+
+</ng-container>
