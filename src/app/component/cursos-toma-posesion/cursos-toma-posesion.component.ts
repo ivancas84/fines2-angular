@@ -46,10 +46,10 @@ export class CursosTomaPosesionComponent extends TableComponent {
   override initDisplay() {
     var display = new Display();
     display.setParams(
-      {"com_cal-anio":"2022","com_cal-semestre":2,"com-autorizada":true}
+      {"calendario-anio":"2022","calendario-semestre":2,"comision-autorizada":true}
     )
     display.setSize(0);
-    display.setOrder({"com_sed-numero":"asc", "com_sed-nombre":"asc","com_pla-anio":"asc","com_pla-semestre":"asc","comision":"asc"})
+    display.setOrder({"sede-numero":"asc", "sede-nombre":"asc","planificacion-anio":"asc","planificacion-semestre":"asc","comision":"asc"})
     //display.setParamsByQueryParams(this.params);
     this.display$.next(display)
   }
