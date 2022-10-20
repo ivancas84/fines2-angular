@@ -1,2 +1,7 @@
-<app-menu></app-menu>
-<router-outlet></router-outlet>
+
+<ng-container *ngIf="(loadSession$ | async);">
+
+  <app-menu></app-menu>
+  <router-outlet></router-outlet>
+
+</ng-container>

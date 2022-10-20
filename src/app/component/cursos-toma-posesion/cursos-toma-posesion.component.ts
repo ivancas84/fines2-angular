@@ -5,7 +5,7 @@ import { ControlLabelConfig } from '@component/control-label/control-label.compo
 import { ControlValueConfig } from '@component/control-value/control-value.component';
 import { RouteTextConfig } from '@component/route-text/route-text.component';
 import { TableComponent } from '@component/structure/table.component';
-import { map, Observable, switchMap } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'core-table',
@@ -56,6 +56,7 @@ export class CursosTomaPosesionComponent extends TableComponent {
 
   
   override initData(): Observable<any>{
+
     return this.dd.post("ids", this.entityName, this.display$.value).pipe(
       switchMap(
         ids => this.dd.getAll("curso", ids)
@@ -89,6 +90,16 @@ export class CursosTomaPosesionComponent extends TableComponent {
           return this.formatData(data)
         }
       ),
+      // switchMap(
+      //   data => {
+      //     return this.dd.entityFieldsGet("curso",["horas_catedra","asignatura-nombre","calendario-anio","domicilio_ce-calle","tipo_sede-descripcion"],"62c6e17268b60")
+      //   }
+      // ),
+      // tap(
+      //   data => {
+      //     console.log(data)
+      //   }
+      // )
     )
   }
 
