@@ -103,7 +103,7 @@ export class SedeAdminComponent extends StructureComponent {
     barrio: new InputTextConfig,
   })
 
-  controlComision_: FormArray = new FormArray([])
+  controlComision_: FormArray = new FormArray([new FormControl])
 
   configComision_: FormArrayConfig = new FormArrayConfig({
     id: new ControlLabelConfig({entityName:"comision"}),

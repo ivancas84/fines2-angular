@@ -54,9 +54,9 @@ export class AlumnoAdminComponent extends StructureComponent {
   controlAlumno: FormGroup = new FormGroup({},
     { asyncValidators: this.validators.uniqueMultiple("alumno", ["libro","folio"]) }  
   )
-  controlDetallePersona: FormArray = new FormArray([])
-  controlComision: FormArray = new FormArray([])
-  controlCalificacion_: FormArray = new FormArray([])
+  controlDetallePersona: FormArray = new FormArray([new FormControl])
+  controlComision: FormArray = new FormArray([new FormControl])
+  controlCalificacion_: FormArray = new FormArray([new FormControl])
 
   configPersona: FormGroupConfig = new FormGroupConfig({
     nombres: new InputTextConfig,

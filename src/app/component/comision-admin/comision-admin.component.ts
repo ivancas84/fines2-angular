@@ -108,7 +108,7 @@ export class ComisionAdminComponent extends StructureComponent {
     observaciones: new TextareaConfig,
   })
 
-  controlCurso_: FormArray = new FormArray([])
+  controlCurso_: FormArray = new FormArray([new FormControl])
 
   configCurso_: FormArrayConfig = new FormArrayConfig({
     comision: new FormControlConfig,
