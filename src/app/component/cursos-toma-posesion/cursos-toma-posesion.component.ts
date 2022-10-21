@@ -89,17 +89,7 @@ export class CursosTomaPosesionComponent extends TableComponent {
         data => {
           return this.formatData(data)
         }
-      ),
-      // switchMap(
-      //   data => {
-      //     return this.dd.entityFieldsGet("curso",["horas_catedra","asignatura-nombre","calendario-anio","domicilio_ce-calle","tipo_sede-descripcion"],"62c6e17268b60")
-      //   }
-      // ),
-      // tap(
-      //   data => {
-      //     console.log(data)
-      //   }
-      // )
+      )
     )
   }
 
