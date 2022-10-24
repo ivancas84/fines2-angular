@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -37,9 +37,10 @@ export class SedeAdminComponent extends StructureComponent {
     protected override router: Router, 
     protected override route: ActivatedRoute, 
     protected override location: Location, 
+    protected override fb: FormBuilder, 
     protected validators: DdAsyncValidatorsService,
   ) { 
-    super(dd, storage, dialog, snackBar, router, route, location)
+    super(dd, storage, dialog, snackBar, router, route, location, fb)
   }
 
   override control: FormGroup = new FormGroup({}, {updateOn:"blur"})

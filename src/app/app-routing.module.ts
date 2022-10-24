@@ -45,6 +45,7 @@ const routes: Routes = [
   { path: 'inscripcion-docente', component: InscripcionDocenteComponent, pathMatch: 'full' },
   { path: 'inscripcion-docente-correcta', component: InscripcionDocenteCorrectaComponent, pathMatch: 'full' },
   { path: 'cursos-toma-posesion', component: CursosTomaPosesionComponent, pathMatch: 'full' },
+
   { path: 'toma-posesion-email-abc', component: TomaPosesionEmailAbcComponent, pathMatch: 'full' },
   { path: 'alumnos-para-docente', component: EnlaceNoDisponibleComponent, pathMatch: 'full' },
   { path: 'referentes-para-docente', component: EnlaceNoDisponibleComponent, pathMatch: 'full' },

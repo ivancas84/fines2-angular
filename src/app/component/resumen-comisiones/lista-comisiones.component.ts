@@ -52,7 +52,6 @@ export class ListaComisionesComponent extends TableComponent {
 
   override initData(): Observable<any>{
     if(this.length === 0) return of([]); 
-    console.log("test")
     return this.dd.post("ids", this.entityName, this.display$.value).pipe(
       switchMap(
         ids => this.dd.getAll("curso", ids)

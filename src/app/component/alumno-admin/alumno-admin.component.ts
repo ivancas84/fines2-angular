@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute, Params, NavigationBehaviorOptions } from '@angular/router';
@@ -226,9 +226,10 @@ export class AlumnoAdminComponent extends StructureComponent {
     protected override router: Router, 
     protected override location: Location, 
     protected override route: ActivatedRoute, 
+    protected override fb: FormBuilder, 
     protected validators: DdAsyncValidatorsService,
   ) { 
-    super(dd,storage,dialog,snackBar,router,route,location)
+    super(dd,storage,dialog,snackBar,router,route,location, fb)
   }
   
   override ngOnInit(){
