@@ -12,6 +12,7 @@ import { CursosTomaPosesionComponent } from '@component/cursos-toma-posesion/cur
 import { EnlaceNoDisponibleComponent } from '@component/enlace-no-disponible/enlace-no-disponible.component';
 import { GenerarConstanciaComponent } from '@component/generar-constancia/generar-constancia.component';
 import { HomeComponent } from '@component/home/home.component';
+import { InfoCursosComponent } from '@component/info-cursos/info-cursos.component';
 import { InscripcionDocenteCorrectaComponent } from '@component/inscripcion-docente-correcta/inscripcion-docente-correcta.component';
 import { InscripcionDocenteComponent } from '@component/inscripcion-docente/inscripcion-docente.component';
 import { ResumenAlumnosComponent } from '@component/resumen-alumnos/resumen-alumnos.component';
@@ -39,8 +40,6 @@ const routes: Routes = [
 
   { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
   { path: 'lista-comisiones-docentes-sin-contralor', component: ListaComisionesDocentesSinContralorComponent, pathMatch: 'full' },
-
-
   
   { path: 'inscripcion-docente', component: InscripcionDocenteComponent, pathMatch: 'full' },
   { path: 'inscripcion-docente-correcta', component: InscripcionDocenteCorrectaComponent, pathMatch: 'full' },
@@ -49,6 +48,8 @@ const routes: Routes = [
   { path: 'toma-posesion-email-abc', component: TomaPosesionEmailAbcComponent, pathMatch: 'full' },
   { path: 'alumnos-para-docente', component: EnlaceNoDisponibleComponent, pathMatch: 'full' },
   { path: 'referentes-para-docente', component: EnlaceNoDisponibleComponent, pathMatch: 'full' },
+
+  { path: 'info-cursos', component: InfoCursosComponent, pathMatch: 'full' },
 
   
 ];

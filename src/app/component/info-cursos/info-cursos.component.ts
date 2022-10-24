@@ -1,17 +1,16 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTable } from '@angular/material/table';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { MatExpansionPanel } from '@angular/material/expansion';
 import { Display } from '@class/display';
-import { FormArrayConfig } from '@class/reactive-form-config';
-import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
-import { Array2Component } from '@component/structure/array2.component';
-import { StructureComponent } from '@component/structure/structure.component';
-import { TablePaginatorComponent } from '@component/structure/table-paginator.component';
-import { TableSortComponent } from '@component/structure/table-sort.component';
 import { arrayColumn } from '@function/array-column';
 import { arrayObjectsMerge } from '@function/array-objects-merge';
-import { catchError, debounceTime, map, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, debounceTime, map, Observable, of, Subscription, switchMap } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
+import { ComponentSearchService } from '@service/component/component-search-service';
+import { ComponentTableService } from '@service/component/component-table-service';
+import { MatTable } from '@angular/material/table';
+
 
 @Component({
   selector: 'core-table',
@@ -22,28 +21,67 @@ import { catchError, debounceTime, map, Observable, of, switchMap } from 'rxjs';
   .highlight{
       background: #ff9999; 
     }
+  .item { padding:0px 10px;  }
   `],
 })
-export class InfoCursosComponent extends TableSortComponent {
-  override entityName: string = "curso"
- 
-  override initDisplay() {
-    var display = new Display();
-    display.setParamsByQueryParams(this.params);
-    display.setSize(0);
-    display.setOrder({
-      "sede-numero":"asc", 
-      "sede-nombre":"asc",
-      "planificacion-anio":"asc",
-      "planificacion-semestre":"asc",
-      "comision":"asc"
-    })
-    //display.setParamsByQueryParams(this.params);
-    this.display$.next(display)
-  }
+export class InfoCursosComponent  implements AfterViewInit{
+  entityName: string = "curso"
   
-  override initData(): Observable<any>{
-    if(this.length === 0) return of([]); 
+  display$:BehaviorSubject<Display> = new BehaviorSubject(new Display)
+  /**
+   * Se define como BehaviorSubject para facilitar la definicion de metodos 
+   * avanzados, por ejemplo reload, clear, restart, etc.
+   */
+
+  loadParams$!: Observable<any> //carga de parametros
+  loadDisplay$!: Observable<any> //carga de display
+
+  protected subscriptions: Subscription = new Subscription() //suscripciones en el ts
+
+  /**
+   * Estructura principal para administrar un array de elementos
+   */
+  control: FormArray = this.fb.array([]);
+
+  length!: number; //longitud total de los datos a mostrar
+   
+  load: boolean = false; //Atributo auxiliar necesario para visualizar la barra de carga
+
+  @ViewChild(MatTable) table!: MatTable<any>;
+
+  displayedColumns: string[] = [
+    "toma_fecha_toma", 
+    "sede-label",
+    "domicilio-label",
+    "comision-label",
+    "tramo",
+    "cantidad_alumnos",
+    "asignatura-nombre",
+    "horario",
+    "toma_docente-label",
+    "toma_docente-telefono"
+  ]
+  
+  @Input() controlSearch: FormGroup = this.fb.group({
+    "search":this.fb.control(""),
+  });
+  @ViewChild(MatExpansionPanel) searchPanel!: MatExpansionPanel;
+  isSubmittedSearch: boolean = false;
+
+  constructor(
+    protected dd: DataDefinitionToolService,
+    protected route: ActivatedRoute, 
+    protected fb: FormBuilder,
+    protected searchService: ComponentSearchService,
+    protected tableService: ComponentTableService,
+  ) { }
+
+  ngAfterViewInit(): void {
+    var s = this.tableService.ngAfterViewInit(this.control, this.table)
+    this.subscriptions.add(s)
+  }
+ 
+  initData(): Observable<any>{
     return this.dd.post("ids", this.entityName, this.display$.value).pipe(
       switchMap(
         ids => this.dd.entityFieldsGetAll(this.entityName, ids, [
@@ -68,11 +106,15 @@ export class InfoCursosComponent extends TableSortComponent {
         response =>   {
           var ids = arrayColumn(response, "toma")
           return this.dd.entityFieldsGetAll("toma",ids, [
+            "id",
             "fecha_toma",
+            "docente-nombres",
+            "docente-apellidos",
+            "docente-numero_documento",
             "docente-telefono",
           ]).pipe(
             map(
-              data => arrayObjectsMerge(response, data, "toma", "id")
+              data => arrayObjectsMerge(response, data, "toma", "id", "toma_")
             )
           )
         }
@@ -95,6 +137,7 @@ export class InfoCursosComponent extends TableSortComponent {
             if(element["domicilio-entre"]) element["domicilio"] +=  " e/ " + element["domicilio-entre"]
             element["domicilio"] +=  " nº " + element["domicilio-numero"] 
             if(element["domicilio-barrio"]) element["domicilio"] +=  " " + element["domicilio-barrio"]
+            if(element["toma_docente-nombres"]) element["toma_docente-label"] = element["toma_docente-apellidos"] + ", " + element["toma_docente-nombres"] + " " + element["toma_docente-numero_documento"]
           })
           return data;
         }
@@ -102,23 +145,90 @@ export class InfoCursosComponent extends TableSortComponent {
     )
   }
 
-  override serverSortTranslate: { [index: string]: string[] } = {
-    "sede-label":["sede-nombre"],
-    "comision-label":["sede-numero","comision-division","planificacion-anio","planificacion-semestre"],
-    "tramo":["planificacion-anio","planificacion-semestre"]};
-
   formGroup(): FormGroup {
     return this.fb.group({
       "id":this.fb.control(""),
+      "toma":this.fb.control(""),
+      "comision":this.fb.control(""),
+      "toma_fecha_toma": this.fb.control(""),
       "sede-label":this.fb.control(""),
+      "domicilio-label":this.fb.control(""),
       "comision-label":this.fb.control(""),
       "tramo":this.fb.control(""),
+      "cantidad_alumnos":this.fb.control(""),
       "asignatura-nombre":this.fb.control(""),
-      "domicilio-label":this.fb.control(""),
       "horario":this.fb.control(""),
+      "toma_docente-label":this.fb.control(""),
+      "toma_docente-telefono":this.fb.control(""),
     })
   }
 
+  
+  ngOnInit(): void {
+    this.loadDisplay()
+    this.loadParams()
+    this.searchService.loadControl(this.controlSearch, this.display$.value)
+  }
+
+  loadParams(){
+    this.loadParams$ = this.route.queryParams.pipe(
+      map(
+        queryParams => { 
+          var display = new Display();
+          display.setParamsByQueryParams(queryParams);
+          display.setOrder({
+            "sede-numero":"asc", 
+            "sede-nombre":"asc",
+            "planificacion-anio":"asc",
+            "planificacion-semestre":"asc",
+            "comision":"asc"
+          })
+          //display.setParamsByQueryParams(this.params);
+          this.display$.next(display)
+          return true;
+        },
+      ),
+    )
+  }
+
+  loadDisplay(){
+    /**
+     * Se define un load independiente para el display, es util para reasignar
+     * valores directamente al display y reinicializar por ejemplo al limpiar
+     * o resetear el formulario
+     */
+     this.loadDisplay$ = this.display$.pipe(
+     switchMap(
+       () => {
+         this.load = false
+         return this.dd.post("count", this.entityName, this.display$.value);
+       }
+     ),
+     switchMap(
+       length => {
+        this.length = length
+        return (length === 0) ? of([]) : this.initData()
+      }
+     ),
+     map(
+       data => {
+         this.setData(data)
+         return this.load = true;
+       }
+     ),
+   )
+ }
+
+  setData(data: any[]){
+    if (!this.length && data.length) length = data.length
+    this.control.clear();
+    for(var i = 0; i <data.length; i++) this.control.push(this.formGroup());
+    this.control.patchValue(data)
+  }
+    
+  onSubmitSearch(): void {
+    this.searchService.onSubmit(this.controlSearch,this.display$.value, this.searchPanel,this.isSubmittedSearch)
+  }
   
 }
 

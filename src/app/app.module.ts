@@ -37,6 +37,7 @@ import { InscripcionDocenteComponent } from '@component/inscripcion-docente/insc
 import { InscripcionDocenteCorrectaComponent } from '@component/inscripcion-docente-correcta/inscripcion-docente-correcta.component';
 import { EnlaceNoDisponibleComponent } from '@component/enlace-no-disponible/enlace-no-disponible.component';
 import { ComisionTableComponent } from '@component/comision-table/comision-table.component';
+import { InfoCursosComponent } from '@component/info-cursos/info-cursos.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ComisionTableComponent } from '@component/comision-table/comision-table
     CursosTomaPosesionComponent,
     EnlaceNoDisponibleComponent,
     GenerarConstanciaComponent,
+    InfoCursosComponent,
     InscripcionDocenteComponent,
     InscripcionDocenteCorrectaComponent,
     ListaComisionesComponent,

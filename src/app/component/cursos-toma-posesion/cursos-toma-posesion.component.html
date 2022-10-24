@@ -9,17 +9,10 @@
           <mat-card-title>
             Seleccione Curso para Tomar Posesión
           </mat-card-title>
-          <!--core-abstract-control-view *ngFor="let o of optTitle" 
-              [config]="o.config" 
-              [control]="o.control" ></core-abstract-control-view--> 
       </mat-card-header>
       <mat-card-content>
       <mat-progress-bar *ngIf="!load" 
                         mode="indeterminate"></mat-progress-bar>
-
-      <!--core-search  [display]="display$.value" 
-                    [config]="searchConfig"
-                    [control]="searchControl"></core-search-->
 
       <div #mainContent>
         <table  mat-table
