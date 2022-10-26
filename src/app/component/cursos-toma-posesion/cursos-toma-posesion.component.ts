@@ -58,7 +58,7 @@ export class CursosTomaPosesionComponent implements AfterViewInit {
   ) { }
   
   ngAfterViewInit(): void {
-    var s = this.tableService.ngAfterViewInit(this.control, this.table)
+    var s = this.tableService.renderRowsOnValueChanges(this.control, this.table)
     this.subscriptions.add(s)
   }
 
