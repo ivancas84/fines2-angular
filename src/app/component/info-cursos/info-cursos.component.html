@@ -4,6 +4,8 @@
 
 <ng-container *ngIf="(loadParams$ | async); else loading">
   <ng-container *ngIf="(loadDisplay$ | async); else loading">
+    <ng-container *ngIf="(loadSearch$ | async); else loading">
+
     <mat-card>
       <mat-card-header>
           <mat-card-title>
@@ -19,125 +21,84 @@
           <mat-expansion-panel-header>
             <mat-panel-title>Opciones</mat-panel-title>
           </mat-expansion-panel-header>
-            <form [formGroup]="controlSearch" novalidate (ngSubmit)="onSubmitSearch()"> 
+         
+          <form [formGroup]="controlSearch" novalidate (ngSubmit)="onSubmitSearch()"> 
+             
               <div fxLayout="row wrap">
+                  <div class="item" 
+                      fxFlex.xs="100%" 
+                      fxFlex.sm="50%" 
+                      fxFlex.gt-sm="25%">
+                      <mat-form-field dateFormatYyyy> 
+                          <mat-label>Año</mat-label>
+                      
+                          <input matInput 
+                              [matDatepicker]="fieldPicker" 
+                              formControlName="calendario-anio" 
+                              placeholder="Ingrese año">
+
+                          <mat-datepicker-toggle matSuffix 
+                              [for]="fieldPicker"></mat-datepicker-toggle>
+                              
+                          <mat-datepicker-toggle matSuffix 
+                              (click)="fs.setNullGroupKey(controlSearch,'calendario-anio')">
+                              <mat-icon matDatepickerToggleIcon>clear</mat-icon></mat-datepicker-toggle>
+                          
+                          <mat-datepicker #fieldPicker
+                                  startView="multi-year"
+                                  (yearSelected)="fs.datePickerYearGroupKey(controlSearch,'calendario-anio',$event,fieldPicker)">
+                          </mat-datepicker>
+                      </mat-form-field>                    
+                  </div>
+
                 <div class="item" 
-                  fxFlex.xs="100%" 
-                  fxFlex.sm="50%" 
-                  fxFlex.gt-sm="25%">
-                    <mat-form-field> 
-                      <mat-label>Buscar</mat-label>
-                    
-                      <input matInput
-                             formControlName="search" 
-                             placeholder="Buscar un curso">
+                    fxFlex.xs="100%" 
+                    fxFlex.sm="50%" 
+                    fxFlex.gt-sm="25%">
+                    <mat-form-field>
+                      <mat-label>Semestre</mat-label>
+                     
+                      <mat-select formControlName="calendario-semestre">
+                        <mat-option [value]="null">--Seleccione--</mat-option>
+                        <mat-option [value]="'1'">1</mat-option>
+                        <mat-option [value]="'2'">2</mat-option>
+                    </mat-select>
+
+                    </mat-form-field>                    
+                </div>
+
+                <div class="item" 
+                    fxFlex.xs="100%" 
+                    fxFlex.sm="50%" 
+                    fxFlex.gt-sm="25%">
+                    <mat-form-field>
+                        <mat-label>Autorizada</mat-label>
+                      
+                        <mat-select formControlName="comision-autorizada">
+                            <mat-option [value]="null">--Seleccione--</mat-option>
+                            <mat-option [value]="'true'">Sí</mat-option>
+                            <mat-option [value]="'false'">No</mat-option>
+                        </mat-select>
+
+                        <mat-error *ngIf="control.hasError('required')">Debe completar valor</mat-error>
                     </mat-form-field>
-                 </div>
+                </div>
+
               </div>
-      
+
               <button mat-raised-button color="primary" type="submit">Buscar</button>&nbsp;
-            </form>
+          </form>
         </mat-expansion-panel>
       </mat-accordion>
-      
 
       <div #mainContent>
-        <table  mat-table
-            [dataSource]="control.controls" 
-            class="mat-elevation-z8">
-    
-          <ng-container matColumnDef="toma_fecha_toma" >
-              <th mat-header-cell *matHeaderCellDef> Fecha Toma </th>
-              <td mat-cell *matCellDef="let row; let i = index;">
-                {{row.controls['toma_fecha_toma'].value | toDate | date:"dd/MM/yyyy"}}
-              </td>
-          </ng-container>
-
-          <ng-container matColumnDef="sede-label" >
-              <th mat-header-cell *matHeaderCellDef > Sede </th>
-              <td mat-cell *matCellDef="let row; let i = index;">
-                {{row.controls['sede-label'].value}}
-              </td>
-          </ng-container>
-    
-          <ng-container matColumnDef="domicilio-label">
-            <th mat-header-cell *matHeaderCellDef > Domicilio </th>
-            <td mat-cell *matCellDef="let row; let i = index;">
-              {{row.controls['domicilio-label'].value}}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="comision-label">
-            <th mat-header-cell *matHeaderCellDef > Comision </th>
-            <td mat-cell *matCellDef="let row; let i = index;">
-              {{row.controls['comision-label'].value}}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="tramo">
-            <th mat-header-cell *matHeaderCellDef > Tramo </th>
-            <td mat-cell *matCellDef="let row; let i = index;">
-              {{row.controls['tramo'].value}}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="cantidad_alumnos">
-            <th mat-header-cell *matHeaderCellDef> Cantidad </th>
-            <td mat-cell *matCellDef="let row; let i = index;">
-              {{row.controls['cantidad_alumnos'].value}}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="asignatura-nombre">
-            <th mat-header-cell *matHeaderCellDef > Asignatura </th>
-            <td mat-cell *matCellDef="let row; let i = index;">
-              {{row.controls['asignatura-nombre'].value}}
-            </td>
-          </ng-container>
-
-          
-          <ng-container matColumnDef="toma_docente-label">
-            <th mat-header-cell *matHeaderCellDef > Docente </th>
-            <td mat-cell *matCellDef="let row; let i = index;">
-              {{row.controls['toma_docente-label'].value}}
-            </td>
-          </ng-container>
-          
-          <ng-container matColumnDef="toma_docente-telefono">
-            <th mat-header-cell *matHeaderCellDef > Telefono </th>
-            <td mat-cell *matCellDef="let row; let i = index;">
-              {{row.controls['toma_docente-telefono'].value}}
-            </td>
-          </ng-container>
-          
-
-          <ng-container matColumnDef="horario">
-            <th mat-header-cell *matHeaderCellDef> Horario </th>
-            <td mat-cell *matCellDef="let row; let i = index;">
-              {{row.controls['horario'].value}}
-            </td>
-          </ng-container>
-        
-          <ng-container matColumnDef="options">
-            <th mat-header-cell *matHeaderCellDef> Opciones </th>
-            <td mat-cell *matCellDef="let row; let i = index;">
-              <a [routerLink]="'/toma-posesion-email-abc'"
-                 [queryParams]="{'curso':row.controls['id'].value}"
-                 [title]="'Administrar Comision'">Toma de Posesión</a>
-            </td>
-            <td mat-footer-cell *matFooterCellDef></td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr [ngClass]="{'highlight': !row.controls['toma_docente-label'].value}"
-              mat-row 
-              *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
-        </table>
-      
+            <app-info-cursos-table [control]="control"></app-info-cursos-table>
       </div>
 
     </mat-card-content>
     </mat-card>
+    
+    </ng-container>
   </ng-container>
   <!-- <p>Debug Form value: {{ form.value | json }}</p>
   <p>Debug Form status: {{ form.status | json }}</p> -->

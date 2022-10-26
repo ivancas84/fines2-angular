@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { Display } from '@class/display';
@@ -10,6 +10,7 @@ import { DataDefinitionToolService } from '@service/data-definition/data-definit
 import { ComponentSearchService } from '@service/component/component-search-service';
 import { ComponentTableService } from '@service/component/component-table-service';
 import { MatTable } from '@angular/material/table';
+import { ComponentFormService } from '@service/component/component-form-service';
 
 
 @Component({
@@ -24,7 +25,7 @@ import { MatTable } from '@angular/material/table';
   .item { padding:0px 10px;  }
   `],
 })
-export class InfoCursosComponent  implements AfterViewInit{
+export class InfoCursosComponent implements OnInit {
   entityName: string = "curso"
   
   display$:BehaviorSubject<Display> = new BehaviorSubject(new Display)
@@ -35,6 +36,7 @@ export class InfoCursosComponent  implements AfterViewInit{
 
   loadParams$!: Observable<any> //carga de parametros
   loadDisplay$!: Observable<any> //carga de display
+  loadSearch$!: Observable<any> //carga de display
 
   protected subscriptions: Subscription = new Subscription() //suscripciones en el ts
 
@@ -47,24 +49,12 @@ export class InfoCursosComponent  implements AfterViewInit{
    
   load: boolean = false; //Atributo auxiliar necesario para visualizar la barra de carga
 
-  @ViewChild(MatTable) table!: MatTable<any>;
-
-  displayedColumns: string[] = [
-    "toma_fecha_toma", 
-    "sede-label",
-    "domicilio-label",
-    "comision-label",
-    "tramo",
-    "cantidad_alumnos",
-    "asignatura-nombre",
-    "horario",
-    "toma_docente-label",
-    "toma_docente-telefono"
-  ]
-  
   @Input() controlSearch: FormGroup = this.fb.group({
-    "search":this.fb.control(""),
+    "calendario-anio":this.fb.control(""),
+    "calendario-semestre":this.fb.control(""),
+    "comision-autorizada":this.fb.control(""),
   });
+
   @ViewChild(MatExpansionPanel) searchPanel!: MatExpansionPanel;
   isSubmittedSearch: boolean = false;
 
@@ -72,15 +62,11 @@ export class InfoCursosComponent  implements AfterViewInit{
     protected dd: DataDefinitionToolService,
     protected route: ActivatedRoute, 
     protected fb: FormBuilder,
-    protected searchService: ComponentSearchService,
-    protected tableService: ComponentTableService,
+    protected ss: ComponentSearchService,
+    public fs: ComponentFormService,
+
   ) { }
 
-  ngAfterViewInit(): void {
-    var s = this.tableService.ngAfterViewInit(this.control, this.table)
-    this.subscriptions.add(s)
-  }
- 
   initData(): Observable<any>{
     return this.dd.post("ids", this.entityName, this.display$.value).pipe(
       switchMap(
@@ -162,12 +148,11 @@ export class InfoCursosComponent  implements AfterViewInit{
       "toma_docente-telefono":this.fb.control(""),
     })
   }
-
   
   ngOnInit(): void {
     this.loadDisplay()
     this.loadParams()
-    this.searchService.loadControl(this.controlSearch, this.display$.value)
+    this.loadSearch$ = this.ss.loadControl(this.controlSearch, this.display$)
   }
 
   loadParams(){
@@ -227,7 +212,7 @@ export class InfoCursosComponent  implements AfterViewInit{
   }
     
   onSubmitSearch(): void {
-    this.searchService.onSubmit(this.controlSearch,this.display$.value, this.searchPanel,this.isSubmittedSearch)
+    this.ss.onSubmit(this.controlSearch,this.display$.value, this.searchPanel,this.isSubmittedSearch)
   }
   
 }
