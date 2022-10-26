@@ -19,7 +19,7 @@
       <mat-accordion>
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
-            <mat-panel-title>Opciones</mat-panel-title>
+            <mat-panel-title>Buscar</mat-panel-title>
           </mat-expansion-panel-header>
          
           <form [formGroup]="controlSearch" novalidate (ngSubmit)="onSubmitSearch()"> 
@@ -91,9 +91,7 @@
         </mat-expansion-panel>
       </mat-accordion>
 
-      <div #mainContent>
-            <app-info-cursos-table [control]="control"></app-info-cursos-table>
-      </div>
+      <app-info-cursos-table [control]="control"></app-info-cursos-table>
 
     </mat-card-content>
     </mat-card>

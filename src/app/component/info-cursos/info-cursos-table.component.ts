@@ -59,10 +59,14 @@ export class InfoCursosTableComponent implements AfterViewInit {
   }
 
   printContent(): void {
-    this.ts.copyContent(this.content, this.displayedColumns)
+    this.ts.printContent(this.content, this.displayedColumns)
   }
 
   ngOnDestroy () { this.subscriptions.unsubscribe() }
+
+  
+  
+
 
 }
 

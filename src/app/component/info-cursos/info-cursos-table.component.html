@@ -1,4 +1,20 @@
-<ng-container #mainContent>
+<mat-toolbar>
+    <mat-toolbar-row>
+        <button mat-mini-fab
+            title="Copiar"
+            color="primary"
+            (click)="copyContent()">
+            <mat-icon>file_copy</mat-icon>
+        </button>
+        <button mat-mini-fab
+            title="Imprimir"
+            color="primary"
+            (click)="printContent()">
+            <mat-icon>print</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+<div #mainContent>
 <table mat-table
     [dataSource]="control.controls" 
     class="mat-elevation-z8">
@@ -90,15 +106,5 @@
         mat-row 
         *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
 </table>
-</ng-container>
+</div>
 
-<mat-toolbar>
-    <mat-toolbar-row>
-        <button mat-mini-fab
-            title="Copiar"
-            color="primary"
-            (click)="copyContent()">
-            <mat-icon>file_copy</mat-icon>
-        </button>
-    </mat-toolbar-row>
-</mat-toolbar>

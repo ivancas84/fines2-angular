@@ -1,16 +1,15 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { Display } from '@class/display';
 import { arrayColumn } from '@function/array-column';
 import { arrayObjectsMerge } from '@function/array-objects-merge';
-import { BehaviorSubject, debounceTime, map, Observable, of, Subscription, switchMap } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, Subscription, switchMap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { ComponentSearchService } from '@service/component/component-search-service';
-import { ComponentTableService } from '@service/component/component-table-service';
-import { MatTable } from '@angular/material/table';
 import { ComponentFormService } from '@service/component/component-form-service';
+import { ComponentTableService } from '@service/component/component-table-service';
 
 
 @Component({
@@ -214,6 +213,7 @@ export class InfoCursosComponent implements OnInit {
   onSubmitSearch(): void {
     this.ss.onSubmit(this.controlSearch,this.display$.value, this.searchPanel,this.isSubmittedSearch)
   }
+  
   
 }
 
