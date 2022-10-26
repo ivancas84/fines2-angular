@@ -38,6 +38,7 @@ import { InscripcionDocenteCorrectaComponent } from '@component/inscripcion-doce
 import { EnlaceNoDisponibleComponent } from '@component/enlace-no-disponible/enlace-no-disponible.component';
 import { ComisionTableComponent } from '@component/comision-table/comision-table.component';
 import { InfoCursosComponent } from '@component/info-cursos/info-cursos.component';
+import { CursosTomaPosesionTableComponent } from '@component/cursos-toma-posesion/cursos-toma-posesion-table.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { InfoCursosComponent } from '@component/info-cursos/info-cursos.componen
     ComisionAdminArrayComponent,
     CursoAdminComponent,
     CursosTomaPosesionComponent,
+    CursosTomaPosesionTableComponent,
     EnlaceNoDisponibleComponent,
     GenerarConstanciaComponent,
     InfoCursosComponent,
