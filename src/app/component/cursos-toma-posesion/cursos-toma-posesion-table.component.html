@@ -1,4 +1,19 @@
-
+<mat-toolbar>
+    <mat-toolbar-row>
+        <button mat-mini-fab
+            title="Copiar"
+            color="primary"
+            (click)="copyContent()">
+            <mat-icon>file_copy</mat-icon>
+        </button>
+        <button mat-mini-fab
+            title="Imprimir"
+            color="primary"
+            (click)="printContent()">
+            <mat-icon>print</mat-icon>
+        </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
       <div #mainContent>
         

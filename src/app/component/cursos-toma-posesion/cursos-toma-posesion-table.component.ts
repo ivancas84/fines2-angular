@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
@@ -28,6 +28,17 @@ export class CursosTomaPosesionTableComponent implements AfterViewInit {
 
   @ViewChild(MatTable) table!: MatTable<any>;
 
+  @ViewChild("mainContent") content!: ElementRef;
+ 
+  copyContent(): void {
+    this.ts.copyContent(this.content, this.displayedColumns)
+  }
+ 
+  printContent(): void {
+    this.ts.printContent(this.content, this.displayedColumns)
+  }
+
+
   displayedColumns = ["sede","comision","domicilio","asignatura-nombre","tramo","horario","options"]
 
   serverSortTranslate: { [index: string]: string[] } = {
@@ -40,16 +51,16 @@ export class CursosTomaPosesionTableComponent implements AfterViewInit {
     protected route: ActivatedRoute, 
     protected fb: FormBuilder,
     protected searchService: ComponentSearchService,
-    protected tableService: ComponentTableService,
+    protected ts: ComponentTableService,
   ) { }
   
   ngAfterViewInit(): void {
-    var s = this.tableService.renderRowsOnValueChanges(this.control, this.table)
+    var s = this.ts.renderRowsOnValueChanges(this.control, this.table)
     this.subscriptions.add(s)
   }
 
   onChangeSort(sort: Sort): void {
-    this.tableService.onChangeSort(sort, this.length, this.display, this.control, this.serverSortTranslate)
+    this.ts.onChangeSort(sort, this.length, this.display, this.control, this.serverSortTranslate)
   }
 
   
