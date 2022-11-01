@@ -20,6 +20,7 @@ import { ListaComisionesDocentesSinContralorComponent } from '@component/resumen
 import { ListaComisionesComponent } from '@component/resumen-comisiones/lista-comisiones.component';
 import { ResumenComisionesComponent } from '@component/resumen-comisiones/resumen-comisiones.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
+import { SedeAdmin2Component } from '@component/sede-admin2/sede-admin2.component';
 import { TomaPosesionEmailAbcComponent } from '@component/toma-posesion-email-abc/toma-posesion-email-abc.component';
 
 const routes: Routes = [
@@ -39,6 +40,8 @@ const routes: Routes = [
   { path: 'comision-table', component: ComisionTableComponent, pathMatch: 'full' },
 
   { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
+  { path: 'sede-admin2', component: SedeAdmin2Component, pathMatch: 'full' },
+
   { path: 'lista-comisiones-docentes-sin-contralor', component: ListaComisionesDocentesSinContralorComponent, pathMatch: 'full' },
   
   { path: 'inscripcion-docente', component: InscripcionDocenteComponent, pathMatch: 'full' },

@@ -1,0 +1,89 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Datos principales
+    </mat-card-title>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <form [formGroup]="control" novalidate> 
+
+    <div fxLayout="row wrap">
+        <div 
+            class="fx-item" 
+            fxFlex.xs="100%" 
+            fxFlex.sm="50%" 
+            fxFlex.gt-sm="33%">
+
+            <mat-form-field>
+                <mat-label>Número</mat-label>
+                <input type="number" 
+                    matInput 
+                    formControlName="numero">
+                <mat-error>
+                  <ng-container *ngIf="control.get('numero')!.hasError('required')">Debe completar valor</ng-container>
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div 
+            class="fx-item" 
+            fxFlex.xs="100%" 
+            fxFlex.sm="50%" 
+            fxFlex.gt-sm="33%">
+            <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input matInput 
+                    formControlName="nombre">
+                <mat-error>
+                  <ng-container *ngIf="control.get('nombre')!.hasError('required')">">Debe completar valor</ng-container>
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div 
+            class="fx-item" 
+            fxFlex.xs="100%" 
+            fxFlex.sm="100%" 
+            fxFlex.gt-sm="34%">
+            <mat-form-field >
+              <mat-label>Centro Educativo</mat-label>
+              <mat-select formControlName="centro_educativo">
+                <mat-option [value]="null" >--Seleccione--</mat-option>
+                <mat-option *ngFor="let opt of (optionsCentroEducativo$ | async)" [value]="opt.id">
+                  {{opt["label"]}}
+                </mat-option>
+              </mat-select>
+
+              <mat-error>
+                <ng-container *ngIf="control.get('centro_educativo')!.hasError('required')">Debe completar valor</ng-container>
+              </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div 
+            class="fx-item" 
+            fxFlex.xs="100%" 
+            fxFlex.sm="100%" 
+            fxFlex.gt-sm="100%">
+            <mat-form-field>
+              <mat-label>Observaciones</mat-label>
+              <textarea matInput 
+                        formControlName="observaciones"></textarea>
+            </mat-form-field>
+        </div>
+
+    </div>
+
+    <button  
+  [disabled]="control.status == 'PENDING'"
+  type="button" 
+  mat-raised-button 
+  (click)="onSubmit.emit('sede')">Guardar Sede</button>
+
+
+
+
+    </form>
+  </mat-card-content>
+</mat-card>

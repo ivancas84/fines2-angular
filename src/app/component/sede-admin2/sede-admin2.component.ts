@@ -4,13 +4,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
+import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
+import { emptyUrl } from '@function/empty-url.function';
 import { isEmptyObject } from '@function/is-empty-object.function';
+import { markAllAsDirty } from '@function/mark-all-as-dirty';
 import { ComponentFormService } from '@service/component/component-form-service';
 import { ComponentLoadService } from '@service/component/component-load-service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { DdAsyncValidatorsService } from '@service/validators/dd-async-validators.service';
-import { BehaviorSubject, map, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, startWith, Subscription, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-sede-admin2',
@@ -26,10 +29,8 @@ export class SedeAdmin2Component implements OnInit {
     protected snackBar: MatSnackBar,
     protected router: Router, 
     protected route: ActivatedRoute, 
-    protected location: Location, 
     protected fb: FormBuilder, 
     protected validators: DdAsyncValidatorsService,
-    protected loadService: ComponentLoadService,
     protected formService: ComponentFormService,
   ) { }
 
@@ -74,6 +75,12 @@ export class SedeAdmin2Component implements OnInit {
       localidad:"La Plata"
   }
 
+
+  isSubmitted: boolean = false //Flag para habilitar/deshabilitar boton aceptar
+  protected subscriptions: Subscription = new Subscription() //suscripciones en el ts
+
+
+
   formGroupComision(): FormGroup {
     return this.fb.group({
       "id":this.fb.control(""),
@@ -81,17 +88,25 @@ export class SedeAdmin2Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadParams$ = this.loadService.loadParams2(this.display$, this.params)
+    this.loadParams()
     this.loadDisplay()
+    this.loadStorage$ = this.formService.loadStorage(this.control)
   }
 
-  initStorage(): Observable<any>{
-    /**
-     * Comportamiento habitual de inicializacion del storage
-     */
-    var storageValues = this.formService.initStorageValues()
-    if(!isEmptyObject(storageValues)) return of(storageValues)
-    else return this.initData();
+   /**
+   * @example this.loadParams$ = loadParams2(this.display$) 
+   */
+  loadParams(){
+    this.loadParams$ = this.route.queryParams.pipe(
+      map(
+        queryParams => { 
+          this.params = queryParams
+          var display = new Display().setSize(100).setParamsByQueryParams(queryParams);
+          this.display$.next(display)
+          return true;
+        },
+      ),
+    )
   }
 
   initData(): Observable<any> {
@@ -106,6 +121,7 @@ export class SedeAdmin2Component implements OnInit {
       switchMap(
         (sede) => {
           if(isEmptyObject(sede)) return of(data)
+          data["sede"] = sede
           return this.dd.getRelObject_({
             data:data, 
             entityName:"domicilio", 
@@ -125,8 +141,8 @@ export class SedeAdmin2Component implements OnInit {
 
   initMultiple(data: { [x: string]: any }): Observable<any> {
     var display = new Display()
-    display.setParams({"sede":data["sede"]["id"]})
-    display.setOrder({ "division":"ASC", "calendario-anio":"ASC", "calendario-semestre":"ASC"})
+      .setParams({"sede":data["sede"]["id"]})
+      .setOrder({ "division":"ASC", "calendario-anio":"ASC", "calendario-semestre":"ASC"})
     return this.dd.all("comision", display).pipe(
       map(
         (comision_: any) => {
@@ -141,7 +157,9 @@ export class SedeAdmin2Component implements OnInit {
     this.loadDisplay$ = this.display$.pipe(
       switchMap(
         () => {
-          return this.initStorage()
+          var storageValues = this.formService.initStorageValues()
+          if(!isEmptyObject(storageValues)) return of(storageValues)
+          else return this.initData();
         }
       ),
       map(
@@ -152,18 +170,64 @@ export class SedeAdmin2Component implements OnInit {
            * Se asigna inicialmente los valores por defecto, nada me garantiza
            * que el parametro "data" posea todos los valores definidos.
            */
-          if(!isEmptyObject(this.params)) this.control.controls["sede"].patchValue(this.params);
+          if(!isEmptyObject(this.params)) this.controlSede.patchValue(this.params);
 
-          var controlComision_ = this.control.controls["comision/sede"] as FormArray
-          controlComision_.clear();
-          for(var i = 0; i <data["comision/sede"].length; i++) controlComision_.push(this.formGroupComision());
+          this.controlComision_.clear();
+          for(var i = 0; i <data["comision/sede"].length; i++) this.controlComision_.push(this.formGroupComision());
 
           this.control.patchValue(data)
-
           return true;
         }
       ),
     )
   }
+
+  onSubmit(fieldset: string){
+    this.isSubmitted = true;
+    if (!this.control.valid) {
+      this.formService.cancelSubmit(this.control)
+      this.isSubmitted = false;
+    } else {
+      switch(fieldset){
+        case "sede": this.submitSede(); break;
+        case "domicilio": this.submitDomicilio(); break;
+      }
+    } 
+  }
+
+  protected submitSede() {
+    var s = this.dd._post("persist", "sede", this.controlSede.value).subscribe({
+      next: (response: any) => {
+        this.formService.submittedDisplay(response,this.display$)
+        this.isSubmitted = false;
+      },
+      error: (error: any) => { 
+        this.dialog.open(DialogAlertComponent, {
+          data: {title: "Error", message: error.error}
+        });
+        this.isSubmitted = false;
+      }
+    });
+    this.subscriptions.add(s);
+  }
+
+  protected submitDomicilio() {
+    var s = this.dd._post("persist", "domicilio", this.controlDomicilio.value).subscribe({
+      next: (response: any) => {
+          this.formService.submitted(response)
+          this.controlSede.get("domicilio")?.setValue(response["id"])
+          this.isSubmitted = false;
+      },
+      error: (error: any) => { 
+        this.dialog.open(DialogAlertComponent, {
+          data: {title: "Error", message: error.error}
+        });
+        this.isSubmitted = false;
+      }
+    });
+    this.subscriptions.add(s);
+  }
+  
+  ngOnDestroy () { this.subscriptions.unsubscribe() }
 
 }
