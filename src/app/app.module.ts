@@ -42,6 +42,7 @@ import { CursosTomaPosesionTableComponent } from '@component/cursos-toma-posesio
 import { InfoCursosTableComponent } from '@component/info-cursos/info-cursos-table.component';
 import { SedeAdmin2Component } from './component/sede-admin2/sede-admin2.component';
 import { SedeAdminFieldsetSedeComponent } from './component/sede-admin-fieldset-sede/sede-admin-fieldset-sede.component';
+import { SedeAdminFieldsetDomicilioComponent } from './component/sede-admin-fieldset-domicilio/sede-admin-fieldset-domicilio.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { SedeAdminFieldsetSedeComponent } from './component/sede-admin-fieldset-
     ComisionTableComponent,
     SedeAdmin2Component,
     SedeAdminFieldsetSedeComponent,
+    SedeAdminFieldsetDomicilioComponent,
   ],
   imports: [
     BrowserModule,

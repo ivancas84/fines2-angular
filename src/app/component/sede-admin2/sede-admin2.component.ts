@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -43,7 +43,7 @@ export class SedeAdmin2Component implements OnInit {
   params: { [x: string]: any } = {} //parametros del componente,
 
   controlSede:FormGroup = this.fb.group({
-    id:this.fb.control(null,{ validators:[Validators.required] }),
+    id:this.fb.control(null),
     numero:this.fb.control(null,{ validators:[Validators.required] }),
     nombre:this.fb.control(null,{ validators:[Validators.required] }),
     centro_educativo:this.fb.control(null,{ validators:[Validators.required] }),
@@ -52,7 +52,7 @@ export class SedeAdmin2Component implements OnInit {
   })
 
   controlDomicilio:FormGroup = this.fb.group({
-    id:this.fb.control(null,{ validators:[Validators.required] }),
+    id:this.fb.control(null),
     calle:this.fb.control(null,{ validators:[Validators.required] }),
     numero:this.fb.control(null,{ validators:[Validators.required] }),
     localidad:this.fb.control(null,{ validators:[Validators.required] }),
@@ -91,6 +91,8 @@ export class SedeAdmin2Component implements OnInit {
     this.loadParams()
     this.loadDisplay()
     this.loadStorage$ = this.formService.loadStorage(this.control)
+    //this.loadSwitchDomicilio()
+
   }
 
    /**
@@ -174,10 +176,11 @@ export class SedeAdmin2Component implements OnInit {
 
           this.controlComision_.clear();
           for(var i = 0; i <data["comision/sede"].length; i++) this.controlComision_.push(this.formGroupComision());
-
+          console.log(data);
           this.control.patchValue(data)
+
           return true;
-        }
+        },
       ),
     )
   }
@@ -229,5 +232,8 @@ export class SedeAdmin2Component implements OnInit {
   }
   
   ngOnDestroy () { this.subscriptions.unsubscribe() }
+
+
+  
 
 }

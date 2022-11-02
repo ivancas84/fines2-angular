@@ -194,7 +194,8 @@ export class SedeAdminComponent extends StructureComponent {
         (sede: any) => {
           if(isEmptyObject(sede)) return of(data)
           data["sede"] = sede
-          return this.dd.getRelObject(data, "domicilio", {id:"id",calle:"calle", numero:"numero", localidad:"localidad", entre:"entre", piso:"piso", departamento:"departamento", barrio:"barrio"}, "sede")
+          return of(null)
+          //return this.dd.getRelObject(data, "domicilio", {id:"id",calle:"calle", numero:"numero", localidad:"localidad", entre:"entre", piso:"piso", departamento:"departamento", barrio:"barrio"}, "sede")
         }
       ),
       switchMap(
