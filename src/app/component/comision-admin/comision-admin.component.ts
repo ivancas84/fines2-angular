@@ -210,7 +210,7 @@ export class ComisionAdminComponent extends StructureComponent {
     return combineLatest([
       this.dd.all("curso", display).pipe(
         switchMap(
-          curso_ => this.dd.postAllConnection(curso_, "info","curso_horario",{horario:"horario"},"id","curso")
+          curso_ => this.dd.postMergeAll({ data: curso_, method: "info", entityName: "curso_horario", fields: { horario: "horario" }, fieldNameData: "id", fieldNameResponse: "curso" })
         )
       )
     ]).pipe(

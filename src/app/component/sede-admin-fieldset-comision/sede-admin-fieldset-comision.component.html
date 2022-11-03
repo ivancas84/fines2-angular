@@ -1,0 +1,56 @@
+
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Comisiones
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        
+        <table mat-table
+    [dataSource]="control.controls"
+    class="mat-elevation-z8">
+ 
+    <ng-container matColumnDef="numero" >
+        <th mat-header-cell *matHeaderCellDef> Número </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+        {{row.controls['numero'].value}}
+        </td>
+    </ng-container>
+ 
+    <ng-container matColumnDef="tramo" >
+        <th mat-header-cell *matHeaderCellDef > Tramo </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+        {{row.controls['tramo'].value}}
+        </td>
+    </ng-container>
+ 
+    <ng-container matColumnDef="horario">
+    <th mat-header-cell *matHeaderCellDef > Horario </th>
+    <td mat-cell *matCellDef="let row; let i = index;">
+        {{row.controls['horario'].value}}
+    </td>
+    </ng-container>
+
+    <ng-container matColumnDef="calendario-anio">
+        <th mat-header-cell *matHeaderCellDef > Año </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            {{row.controls['calendario-anio'].value | toDate | date:"Y"}}
+        </td>
+        </ng-container>
+ 
+    <ng-container matColumnDef="calendario-semestre">
+        <th mat-header-cell *matHeaderCellDef > Semestre </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            {{row.controls['calendario-semestre'].value}}
+        </td>
+        </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+</table>
+ 
+
+</mat-card-content>
+</mat-card>
+

@@ -42,32 +42,32 @@ export class ListaComisionesDocentesSinContralorComponent extends TableComponent
         ids => this.dd.getAll("curso", ids)
       ),
       switchMap(
-        data => this.dd.getAllConnection(data, "comision", {"identificacion":"identificacion","division":"division", "sede":"sede","planificacion":"planificacion"}, "comision")
+        data => this.dd.getMergeAll({ data, entityName: "comision", fields: { "identificacion": "identificacion", "division": "division", "sede": "sede", "planificacion": "planificacion" }, fkName: "comision" })
       ),
       switchMap(
-        data => this.dd.getAllConnection(data, "sede", {"nombre":"nombre", "numero":"numero", "domicilio":"domicilio"}, "sede")
+        data => this.dd.getMergeAll({ data, entityName: "sede", fields: { "nombre": "nombre", "numero": "numero", "domicilio": "domicilio" }, fkName: "sede" })
       ),
       switchMap(
-        data => this.dd.getAllConnection(data, "domicilio", {"calle":"calle", "entre":"entre", "dom_numero":"numero","barrio":"barrio"}, "domicilio")
+        data => this.dd.getMergeAll({ data, entityName: "domicilio", fields: { "calle": "calle", "entre": "entre", "dom_numero": "numero", "barrio": "barrio" }, fkName: "domicilio" })
       ),
       switchMap(
-        data =>   this.dd.postAllConnection(data, "info","curso_horario",{"horario":"horario"},"id","curso")
+        data =>   this.dd.postMergeAll({ data, method: "info", entityName: "curso_horario", fields: { "horario": "horario" }, fieldNameData: "id", fieldNameResponse: "curso" })
       ),
       switchMap(
-        data =>   this.dd.postAllConnection(data, "info","curso_toma_activa",{"toma":"toma_activa"},"id","curso")
+        data =>   this.dd.postMergeAll({ data, method: "info", entityName: "curso_toma_activa", fields: { "toma": "toma_activa" }, fieldNameData: "id", fieldNameResponse: "curso" })
       ),
       switchMap(
         data =>   this.docentesNoPasados(data)
       ),
       switchMap(
-        data =>   this.dd.getAllConnection(data, "planificacion", {"anio":"anio","semestre":"semestre","plan":"plan"},"planificacion")
+        data =>   this.dd.getMergeAll({ data, entityName: "planificacion", fields: { "anio": "anio", "semestre": "semestre", "plan": "plan" }, fkName: "planificacion" })
       ),
       switchMap(
-        data =>   this.dd.getAllConnection(data, "plan", {"orientacion":"orientacion"},"plan")
+        data =>   this.dd.getMergeAll({ data, entityName: "plan", fields: { "orientacion": "orientacion" }, fkName: "plan" })
       ),
       switchMap(
         data =>   {
-           return this.dd.postAllConnection(data, "info", "cantidad_alumnos_activos_comision", {"cantidad_alumnos":"cantidad"}, "comision", "comision")
+           return this.dd.postMergeAll({ data, method: "info", entityName: "cantidad_alumnos_activos_comision", fields: { "cantidad_alumnos": "cantidad" }, fieldNameData: "comision", fieldNameResponse: "comision" })
         }
       ),
       map(

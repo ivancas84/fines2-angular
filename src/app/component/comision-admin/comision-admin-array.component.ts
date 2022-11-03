@@ -105,7 +105,7 @@ export class ComisionAdminArrayComponent extends TableComponent {
         ids => this.dd.getAll(this.entityName, ids)
       ),
       switchMap(
-        data => this.dd.postAllConnection(data,"cantidad_alumnos_activos_comision","comision",{"activos":"activos"},"id","comision")
+        data => this.dd.postMergeAll({ data, method: "cantidad_alumnos_activos_comision", entityName: "comision", fields: { "activos": "activos" }, fieldNameData: "id", fieldNameResponse: "comision" })
       ),
       tap(
         data=>console.log(data)

@@ -1,5 +1,5 @@
 
-import { registerLocaleData } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import localeEsAr from '@angular/common/locales/es-AR';
@@ -43,6 +43,7 @@ import { InfoCursosTableComponent } from '@component/info-cursos/info-cursos-tab
 import { SedeAdmin2Component } from './component/sede-admin2/sede-admin2.component';
 import { SedeAdminFieldsetSedeComponent } from './component/sede-admin-fieldset-sede/sede-admin-fieldset-sede.component';
 import { SedeAdminFieldsetDomicilioComponent } from './component/sede-admin-fieldset-domicilio/sede-admin-fieldset-domicilio.component';
+import { SedeAdminFieldsetComisionComponent } from './component/sede-admin-fieldset-comision/sede-admin-fieldset-comision.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { SedeAdminFieldsetDomicilioComponent } from './component/sede-admin-fiel
     SedeAdmin2Component,
     SedeAdminFieldsetSedeComponent,
     SedeAdminFieldsetDomicilioComponent,
+    SedeAdminFieldsetComisionComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,12 +88,13 @@ import { SedeAdminFieldsetDomicilioComponent } from './component/sede-admin-fiel
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    
     AppMaterialModule,
     AppCoreModule,
     
     MaterialFileInputModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

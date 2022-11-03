@@ -69,35 +69,39 @@ export class InfoCursosComponent implements OnInit {
   initData(): Observable<any>{
     return this.dd.post("ids", this.entityName, this.display$.value).pipe(
       switchMap(
-        ids => this.dd.entityFieldsGetAll(this.entityName, ids, [
-          "id",
-          "comision-division",
-          "sede-nombre",
-          "sede-numero",
-          "domicilio-calle",
-          "domicilio-entre",
-          "domicilio-numero",
-          "domicilio-barrio",
-          "asignatura-nombre",
-          "planificacion-anio",
-          "planificacion-semestre",
-          "plan-orientacion"
-        ])
+        ids => this.dd.entityFieldsGetAll({
+            entityName: this.entityName, ids, fields: [
+              "id",
+              "comision-division",
+              "sede-nombre",
+              "sede-numero",
+              "domicilio-calle",
+              "domicilio-entre",
+              "domicilio-numero",
+              "domicilio-barrio",
+              "asignatura-nombre",
+              "planificacion-anio",
+              "planificacion-semestre",
+              "plan-orientacion"
+            ]
+          })
       ),
       switchMap(
-        response =>   this.dd.postAllConnection(response, "info","curso_toma_activa",{"toma":"toma_activa"},"id","curso")
+        response =>   this.dd.postMergeAll({ data: response, method: "info", entityName: "curso_toma_activa", fields: { "toma": "toma_activa" }, fieldNameData: "id", fieldNameResponse: "curso" })
       ),
       switchMap(
         response =>   {
           var ids = arrayColumn(response, "toma")
-          return this.dd.entityFieldsGetAll("toma",ids, [
-            "id",
-            "fecha_toma",
-            "docente-nombres",
-            "docente-apellidos",
-            "docente-numero_documento",
-            "docente-telefono",
-          ]).pipe(
+          return this.dd.entityFieldsGetAll({
+              entityName: "toma", ids, fields: [
+                "id",
+                "fecha_toma",
+                "docente-nombres",
+                "docente-apellidos",
+                "docente-numero_documento",
+                "docente-telefono",
+              ]
+            }).pipe(
             map(
               data => arrayObjectsMerge(response, data, "toma", "id", "toma_")
             )
@@ -105,11 +109,11 @@ export class InfoCursosComponent implements OnInit {
         }
       ),
       switchMap(
-        response =>   this.dd.postAllConnection(response, "info","curso_horario",{"horario":"horario"},"id","curso")
+        response =>   this.dd.postMergeAll({ data: response, method: "info", entityName: "curso_horario", fields: { "horario": "horario" }, fieldNameData: "id", fieldNameResponse: "curso" })
       ),
       switchMap(
         data =>   {
-           return this.dd.postAllConnection(data, "info", "cantidad_alumnos_activos_comision", {"cantidad_alumnos":"cantidad"}, "comision", "comision")
+           return this.dd.postMergeAll({ data, method: "info", entityName: "cantidad_alumnos_activos_comision", fields: { "cantidad_alumnos": "cantidad" }, fieldNameData: "comision", fieldNameResponse: "comision" })
         }
       ),
       map(

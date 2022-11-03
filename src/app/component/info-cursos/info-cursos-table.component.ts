@@ -23,11 +23,7 @@ import { Subscription } from 'rxjs';
 })
 export class InfoCursosTableComponent implements AfterViewInit {
   protected subscriptions: Subscription = new Subscription() 
-
-  entityName: string = "curso"
-  
   @Input() control!: FormArray
-
   @ViewChild(MatTable) table!: MatTable<any>;
   @ViewChild("mainContent") content!: ElementRef;
 

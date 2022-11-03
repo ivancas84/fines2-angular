@@ -1,24 +1,24 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
-import { emptyUrl } from '@function/empty-url.function';
 import { isEmptyObject } from '@function/is-empty-object.function';
-import { markAllAsDirty } from '@function/mark-all-as-dirty';
+import { ToDatePipe } from '@pipe/to-date.pipe';
 import { ComponentFormService } from '@service/component/component-form-service';
-import { ComponentLoadService } from '@service/component/component-load-service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { DdAsyncValidatorsService } from '@service/validators/dd-async-validators.service';
-import { BehaviorSubject, map, Observable, of, startWith, Subscription, switchMap } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, Subscription, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-sede-admin2',
   templateUrl: './sede-admin2.component.html',
   styleUrls: ['./sede-admin2.component.css']
+  
 })
 export class SedeAdmin2Component implements OnInit {
 
@@ -67,7 +67,6 @@ export class SedeAdmin2Component implements OnInit {
   control: FormGroup = this.fb.group({
     sede: this.controlSede,
     domicilio: this.controlDomicilio,
-    "comision/sede":this.controlComision_
   }, {updateOn:"blur"})
 
   
@@ -79,11 +78,14 @@ export class SedeAdmin2Component implements OnInit {
   isSubmitted: boolean = false //Flag para habilitar/deshabilitar boton aceptar
   protected subscriptions: Subscription = new Subscription() //suscripciones en el ts
 
-
-
   formGroupComision(): FormGroup {
     return this.fb.group({
       "id":this.fb.control(""),
+      "numero":this.fb.control(""),
+      "tramo":this.fb.control(""),
+      "horario":this.fb.control(""),
+      "calendario-anio":this.fb.control(""),
+      "calendario-semestre":this.fb.control(""),
     })
   }
 
@@ -91,13 +93,8 @@ export class SedeAdmin2Component implements OnInit {
     this.loadParams()
     this.loadDisplay()
     this.loadStorage$ = this.formService.loadStorage(this.control)
-    //this.loadSwitchDomicilio()
-
   }
 
-   /**
-   * @example this.loadParams$ = loadParams2(this.display$) 
-   */
   loadParams(){
     this.loadParams$ = this.route.queryParams.pipe(
       map(
@@ -115,7 +112,6 @@ export class SedeAdmin2Component implements OnInit {
     var data = {
       "sede":{}, 
       "domicilio":{}, 
-      "comision/sede":[], 
     }
     if(isEmptyObject(this.params)) return of(data)
 
@@ -124,7 +120,7 @@ export class SedeAdmin2Component implements OnInit {
         (sede) => {
           if(isEmptyObject(sede)) return of(data)
           data["sede"] = sede
-          return this.dd.getRelObject_({
+          return this.dd.mergeObjectGet_({
             data:data, 
             entityName:"domicilio", 
             fields:["id","calle","numero","localidad","entre","piso","departamento","barrio"],
@@ -132,23 +128,47 @@ export class SedeAdmin2Component implements OnInit {
           }) 
         }
       ),
-      switchMap(
-        (data: any) => {
-          return this.initMultiple(data)
-        }
-
-      )
+      
     )
   }
 
-  initMultiple(data: { [x: string]: any }): Observable<any> {
+  initComision_(data: { [x: string]: any }): Observable<any> {
+    console.log(data)
+    data["comision/sede"] = [];
+
+    if(isEmptyObject(data["sede"])) return of(data);
+
     var display = new Display()
       .setParams({"sede":data["sede"]["id"]})
       .setOrder({ "division":"ASC", "calendario-anio":"ASC", "calendario-semestre":"ASC"})
-    return this.dd.all("comision", display).pipe(
+
+    return this.dd.post("ids", "comision", display).pipe(
+      switchMap(
+        (ids:string[]) => this.dd.entityFieldsGetAll({ 
+          entityName: "comision", 
+          ids:ids, 
+          fields:["id","planificacion-anio","planificacion-semestre","plan-orientacion","division","calendario-anio","calendario-semestre"]
+        }),
+      ),
+      switchMap(
+        (data:{[index:string]:any}[]) => this.dd.postMergeAll({ 
+          data, 
+          method: "info", 
+          entityName: "horarios_comision", 
+          fields: { "dias":"dias_dias", "hora_inicio":"hora_inicio","hora_fin":"hora_fin" }, 
+          fieldNameData: "id", fieldNameResponse: "comision" 
+        })
+      ),
       map(
         (comision_: any) => {
-          if(comision_.length) data["comision/sede"] = comision_
+          console.log(comision_)
+          comision_.forEach((element: { [x: string]: string; }) => {
+            element["numero"] = data["sede"]["numero"] + element["division"] + "/" + element["planificacion-anio"] + element["planificacion-semestre"]
+            element["tramo"] = element["plan-orientacion"] + " " + element["planificacion-anio"] + "°" + element["planificacion-semestre"] + "c"
+            if(element["dias"]) element["horario"] =  element["dias"] + " " + element["hora_inicio"] + " a " + element["hora_fin"]
+            
+          })
+          data["comision/sede"] = comision_
           return data
         }
       )
@@ -164,39 +184,65 @@ export class SedeAdmin2Component implements OnInit {
           else return this.initData();
         }
       ),
+      switchMap(
+        (data: any) => {
+          return this.initComision_(data)
+        }
+      ),
       map(
         data => { 
           // this.form.reset() comente el reset porque no se si aporta alguna funcionalidad
           this.controlDomicilio.patchValue(this.defaultValuesDomicilio)
+          this.controlDomicilio.patchValue(data["domicilio"])
+
           /**
            * Se asigna inicialmente los valores por defecto, nada me garantiza
            * que el parametro "data" posea todos los valores definidos.
            */
           if(!isEmptyObject(this.params)) this.controlSede.patchValue(this.params);
+          this.controlSede.patchValue(data["sede"])
 
           this.controlComision_.clear();
           for(var i = 0; i <data["comision/sede"].length; i++) this.controlComision_.push(this.formGroupComision());
-          console.log(data);
-          this.control.patchValue(data)
+          this.controlComision_.patchValue(data["comision/sede"])
 
           return true;
         },
       ),
+     
     )
   }
 
-  onSubmit(fieldset: string){
+  onSubmit(){
     this.isSubmitted = true;
     if (!this.control.valid) {
       this.formService.cancelSubmit(this.control)
       this.isSubmitted = false;
     } else {
-      switch(fieldset){
-        case "sede": this.submitSede(); break;
-        case "domicilio": this.submitDomicilio(); break;
+      var serverData:{[index:string]:any} = this.control.value
+
+      if(this.controlDomicilio.disabled && this.controlSede.get("domicilio")!.value) {
+        serverData["domicilio"] = {id:this.controlSede.get("domicilio")!.value, _mode:"delete"}  
+        this.controlSede.get("domicilio")!.setValue(null);
       }
+  
+      var s = this.dd._post("persist_rel", "sede", serverData).subscribe({
+        next: (response: any) => {
+          this.formService.submittedDisplay(response,this.display$)
+          this.isSubmitted = false;
+        },
+        error: (error: any) => { 
+          this.dialog.open(DialogAlertComponent, {
+            data: {title: "Error", message: error.error}
+          });
+          this.isSubmitted = false;
+        }
+      });
+      this.subscriptions.add(s);
     } 
   }
+
+
 
   protected submitSede() {
     var s = this.dd._post("persist", "sede", this.controlSede.value).subscribe({

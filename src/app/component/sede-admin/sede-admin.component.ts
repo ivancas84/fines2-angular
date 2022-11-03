@@ -195,7 +195,7 @@ export class SedeAdminComponent extends StructureComponent {
           if(isEmptyObject(sede)) return of(data)
           data["sede"] = sede
           return of(null)
-          //return this.dd.getRelObject(data, "domicilio", {id:"id",calle:"calle", numero:"numero", localidad:"localidad", entre:"entre", piso:"piso", departamento:"departamento", barrio:"barrio"}, "sede")
+          //return this.dd.mergeObjectGet(data, "domicilio", {id:"id",calle:"calle", numero:"numero", localidad:"localidad", entre:"entre", piso:"piso", departamento:"departamento", barrio:"barrio"}, "sede")
         }
       ),
       switchMap(

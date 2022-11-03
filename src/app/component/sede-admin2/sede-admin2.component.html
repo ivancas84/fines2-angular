@@ -14,12 +14,20 @@
 </mat-card>
 
 
-
 <ng-container *ngIf="(loadParams$ | async); else loading">
     <ng-container *ngIf="(loadDisplay$ | async); else loading">
       <ng-container *ngIf="(loadStorage$ | async); else loading">
-          <app-sede-admin-fieldset-sede [control]="controlSede" (onSubmit)=onSubmit($event)></app-sede-admin-fieldset-sede>
-          <app-sede-admin-fieldset-domicilio [control]="controlDomicilio" (onSubmit)=onSubmit($event)></app-sede-admin-fieldset-domicilio>
+          <app-sede-admin-fieldset-sede [control]="controlSede"></app-sede-admin-fieldset-sede>
+          <app-sede-admin-fieldset-domicilio [control]="controlDomicilio"></app-sede-admin-fieldset-domicilio>
+            <mat-card>
+                <mat-card-content>
+                    <button [disabled]="control.status == 'PENDING'"
+                            type="button" 
+                            mat-raised-button 
+                            (click)="onSubmit()">Guardar</button>
+                </mat-card-content>
+            </mat-card>
+          <app-sede-admin-fieldset-comision [control]="controlComision_"></app-sede-admin-fieldset-comision>
       </ng-container>
     </ng-container>
 </ng-container>

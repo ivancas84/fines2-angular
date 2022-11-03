@@ -13,7 +13,6 @@ import { Observable } from 'rxjs';
 export class SedeAdminFieldsetSedeComponent implements OnInit {
 
   @Input() control!: FormGroup //formulario
-  @Output() onSubmit: EventEmitter <string> = new EventEmitter <string>();
 
   optionsCentroEducativo$!: Observable<Array<any>>;
 

@@ -125,26 +125,28 @@ export class CursosTomaPosesionComponent implements AfterViewInit {
     if(this.length === 0) return of([]); 
     return this.dd.post("ids", this.entityName, this.display$.value).pipe(
       switchMap(
-        ids => this.dd.entityFieldsGetAll(this.entityName, ids, [
-          "id",
-          "asignatura-nombre",
-          "comision-division",
-          "sede-nombre",
-          "sede-numero",
-          "domicilio-calle",
-          "domicilio-entre",
-          "domicilio-numero",
-          "domicilio-barrio",
-          "planificacion-anio",
-          "planificacion-semestre",
-          "plan-orientacion"
-        ])
+        ids => this.dd.entityFieldsGetAll({
+            entityName: this.entityName, ids, fields: [
+              "id",
+              "asignatura-nombre",
+              "comision-division",
+              "sede-nombre",
+              "sede-numero",
+              "domicilio-calle",
+              "domicilio-entre",
+              "domicilio-numero",
+              "domicilio-barrio",
+              "planificacion-anio",
+              "planificacion-semestre",
+              "plan-orientacion"
+            ]
+          })
       ),
       switchMap(
-        data =>   this.dd.postAllConnection(data, "info","curso_horario",{"horario":"horario"},"id","curso")
+        data =>   this.dd.postMergeAll({ data, method: "info", entityName: "curso_horario", fields: { "horario": "horario" }, fieldNameData: "id", fieldNameResponse: "curso" })
       ),
       switchMap(
-        data =>   this.dd.postAllConnection(data, "info","curso_toma_activa",{"toma":"toma_activa"},"id","curso")
+        data =>   this.dd.postMergeAll({ data, method: "info", entityName: "curso_toma_activa", fields: { "toma": "toma_activa" }, fieldNameData: "id", fieldNameResponse: "curso" })
       ),
       map(
         data => {

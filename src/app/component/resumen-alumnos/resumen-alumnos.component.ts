@@ -117,31 +117,27 @@ export class ResumenAlumnosComponent extends TableComponent {
         ids => this.dd.getAll(this.entityName, ids)
       ),
       switchMap(
-        data => this.dd.getAllConnection(data, "alumno", {"anio_ingreso":"anio_ingreso", "estado_inscripcion":"estado_inscripcion", "adeuda_legajo":"adeuda_legajo", "adeuda_deudores":"adeuda_deudores","persona":"persona","observaciones_alumno":"observaciones"}, "alumno")
+        data => this.dd.getMergeAll({ data, entityName: "alumno", fields: { "anio_ingreso": "anio_ingreso", "estado_inscripcion": "estado_inscripcion", "adeuda_legajo": "adeuda_legajo", "adeuda_deudores": "adeuda_deudores", "persona": "persona", "observaciones_alumno": "observaciones" }, fkName: "alumno" })
       ),
       switchMap(
-        data => this.dd.getAllConnection(data, "persona", {"nombres":"nombres", "apellidos":"apellidos", "numero_documento":"numero_documento","telefono":"telefono"}, "persona")
+        data => this.dd.getMergeAll({ data, entityName: "persona", fields: { "nombres": "nombres", "apellidos": "apellidos", "numero_documento": "numero_documento", "telefono": "telefono" }, fkName: "persona" })
       ),
       switchMap(
-        data => this.dd.getAllConnection(data, "comision", {"sede":"sede"}, "comision")
+        data => this.dd.getMergeAll({ data, entityName: "comision", fields: { "sede": "sede" }, fkName: "comision" })
       ),
       switchMap(
-        data => this.dd.postAllConnection(
-          data, 
-          "cantidad_asignaturas_aprobadas_alumnos_tramo", 
-          "alumno", 
+        data => this.dd.postMergeAll(
           {
-            "cantidad_aprobadas_11":"cantidad_aprobadas_11",
-            "cantidad_aprobadas_12":"cantidad_aprobadas_12",
-            "cantidad_aprobadas_21":"cantidad_aprobadas_21",
-            "cantidad_aprobadas_22":"cantidad_aprobadas_22",
-            "cantidad_aprobadas_31":"cantidad_aprobadas_31",
-            "cantidad_aprobadas_32":"cantidad_aprobadas_32",
-            "cantidad_aprobadas":"cantidad_aprobadas"
-          }, 
-          "alumno", 
-          "alumno" 
-        )
+            data, method: "cantidad_asignaturas_aprobadas_alumnos_tramo", entityName: "alumno", fields: {
+              "cantidad_aprobadas_11": "cantidad_aprobadas_11",
+              "cantidad_aprobadas_12": "cantidad_aprobadas_12",
+              "cantidad_aprobadas_21": "cantidad_aprobadas_21",
+              "cantidad_aprobadas_22": "cantidad_aprobadas_22",
+              "cantidad_aprobadas_31": "cantidad_aprobadas_31",
+              "cantidad_aprobadas_32": "cantidad_aprobadas_32",
+              "cantidad_aprobadas": "cantidad_aprobadas"
+            }, fieldNameData: "alumno", fieldNameResponse: "alumno"
+          }        )
       ),
       map(
         data => {

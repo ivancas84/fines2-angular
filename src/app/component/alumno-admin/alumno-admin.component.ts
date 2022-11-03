@@ -417,10 +417,10 @@ export class AlumnoAdminComponent extends StructureComponent {
 
     return this.dd.all("calificacion", display).pipe(
       switchMap(
-        data => this.dd.getAllConnection(data,"disposicion",{asignatura:"asignatura",planificacion:"planificacion"},"disposicion")
+        data => this.dd.getMergeAll({ data, entityName: "disposicion", fields: { asignatura: "asignatura", planificacion: "planificacion" }, fkName: "disposicion" })
       ),
       switchMap(
-        data => this.dd.getAllConnection(data,"planificacion",{"anio":"anio","semestre":"semestre","plan":"plan"},"planificacion")
+        data => this.dd.getMergeAll({ data, entityName: "planificacion", fields: { "anio": "anio", "semestre": "semestre", "plan": "plan" }, fkName: "planificacion" })
       ),
     )
 
