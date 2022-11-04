@@ -44,6 +44,7 @@ import { SedeAdmin2Component } from './component/sede-admin2/sede-admin2.compone
 import { SedeAdminFieldsetSedeComponent } from './component/sede-admin-fieldset-sede/sede-admin-fieldset-sede.component';
 import { SedeAdminFieldsetDomicilioComponent } from './component/sede-admin-fieldset-domicilio/sede-admin-fieldset-domicilio.component';
 import { SedeAdminFieldsetComisionComponent } from './component/sede-admin-fieldset-comision/sede-admin-fieldset-comision.component';
+import { ComisionAdmin2Component } from './component/comision-admin2/comision-admin2.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { SedeAdminFieldsetComisionComponent } from './component/sede-admin-field
     SedeAdminFieldsetSedeComponent,
     SedeAdminFieldsetDomicilioComponent,
     SedeAdminFieldsetComisionComponent,
+    ComisionAdmin2Component,
   ],
   imports: [
     BrowserModule,
