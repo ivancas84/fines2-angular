@@ -1,0 +1,84 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Datos principales
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+   
+    <form [formGroup]="control" novalidate> 
+   
+      <div fxLayout="row wrap">
+          <div 
+              class="fx-item" 
+              fxFlex.xs="100%" 
+              fxFlex.sm="50%" 
+              fxFlex.gt-sm="50%">
+   
+              <mat-form-field  *ngIf="loadAutocompleteSede$ | async">
+                    <mat-label>Sede</mat-label>
+                    <input readonly="readonly" 
+                            *ngIf="this.labelSede" type="text" matInput value="{{labelSede}}">
+                    <input *ngIf="!labelSede" 
+                        type="text" 
+                        matInput 
+                        [formControl]="searchControlSede" 
+                        [matAutocomplete]="acSede">
+
+                    <button *ngIf="!control.get('sede')!.disabled" type="button" mat-icon-button matSuffix (click)="control.get('sede')!.setValue(null)">
+                      <mat-icon>clear</mat-icon>
+                    </button>
+                        
+                    <mat-autocomplete #acSede="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptionsSede$ | async" [value]="option">
+                            {{option["label"]}}
+                        </mat-option>
+                    </mat-autocomplete>
+
+                    <mat-error>
+                      <ng-container *ngIf="control.get('sede')!.hasError('required')">Debe completar valor</ng-container>
+                    </mat-error>
+                          
+              </mat-form-field>
+          </div>
+
+
+
+
+          <div 
+              class="fx-item" 
+              fxFlex.xs="100%" 
+              fxFlex.sm="50%" 
+              fxFlex.gt-sm="50%">
+   
+              <mat-form-field >
+                <mat-label>Planificación</mat-label>
+                <mat-select formControlName="planificacion">
+                  <mat-option [value]="null">--Seleccione--</mat-option>
+                  <mat-option *ngFor="let opt of (optionsPlanificacion$ | async)" [value]="opt.id">
+                    {{opt["label"]}}
+                  </mat-option>
+                </mat-select>
+               
+                <mat-error>
+                  <ng-container *ngIf="control.get('planificacion')!.hasError('required')">Debe completar valor</ng-container>
+                </mat-error>
+              </mat-form-field>
+          </div>
+   
+   
+      </div>
+   
+      <!-- <button  
+    [disabled]="control.status == 'PENDING'"
+    type="button" 
+    mat-raised-button 
+    (click)="onSubmit.emit('sede')">Guardar Sede</button> -->
+   
+      </form>
+   
+   
+    </mat-card-content>
+  </mat-card>
+   
+  

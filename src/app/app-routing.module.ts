@@ -6,6 +6,7 @@ import { CalendarioAdminArrayComponent } from '@component/calendario-admin-array
 import { CalendarioAdminComponent } from '@component/calendario-admin/calendario-admin.component';
 import { ComisionAdminArrayComponent } from '@component/comision-admin/comision-admin-array.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
+import { ComisionAdmin2Component } from '@component/comision-admin2/comision-admin2.component';
 import { ComisionTableComponent } from '@component/comision-table/comision-table.component';
 import { CursoAdminComponent } from '@component/curso-admin/curso-admin.component';
 import { CursosTomaPosesionComponent } from '@component/cursos-toma-posesion/cursos-toma-posesion.component';
@@ -20,7 +21,6 @@ import { ListaComisionesDocentesSinContralorComponent } from '@component/resumen
 import { ListaComisionesComponent } from '@component/resumen-comisiones/lista-comisiones.component';
 import { ResumenComisionesComponent } from '@component/resumen-comisiones/resumen-comisiones.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
-import { SedeAdmin2Component } from '@component/sede-admin2/sede-admin2.component';
 import { TomaPosesionEmailAbcComponent } from '@component/toma-posesion-email-abc/toma-posesion-email-abc.component';
 
 const routes: Routes = [
@@ -35,13 +35,11 @@ const routes: Routes = [
   { path: 'resumen-alumnos', component: ResumenAlumnosComponent, pathMatch: 'full' },
   { path: 'calendario-admin', component: CalendarioAdminComponent, pathMatch: 'full' },
   { path: 'calendario-admin-array', component: CalendarioAdminArrayComponent, pathMatch: 'full' },
-  { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
+  { path: 'comision-admin', component: ComisionAdmin2Component, pathMatch: 'full' },
   { path: 'comision-admin-array', component: ComisionAdminArrayComponent, pathMatch: 'full' },
   { path: 'comision-table', component: ComisionTableComponent, pathMatch: 'full' },
 
   { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
-  { path: 'sede-admin2', component: SedeAdmin2Component, pathMatch: 'full' },
-
   { path: 'lista-comisiones-docentes-sin-contralor', component: ListaComisionesDocentesSinContralorComponent, pathMatch: 'full' },
   
   { path: 'inscripcion-docente', component: InscripcionDocenteComponent, pathMatch: 'full' },

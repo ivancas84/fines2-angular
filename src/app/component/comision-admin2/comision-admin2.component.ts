@@ -57,6 +57,16 @@ export class ComisionAdmin2Component implements OnInit {
 
   controlCurso_:FormArray = this.fb.array([])
 
+  
+ defaultValuesComision: {[index:string]: any} = {
+    apertura:false,
+    autorizada:false,
+    publicada:false
+ }
+
+  
+  
+
   loadParams(){
     this.loadParams$ = this.route.queryParams.pipe(
       map(
@@ -79,25 +89,26 @@ export class ComisionAdmin2Component implements OnInit {
           else return this.initComision();
         }
       ),
-      // switchMap(
-      //   (data: any) => {
-      //     //return this.initCurso_(data)
-      //   }
-      // ),
+      switchMap(
+        (data: any) => {
+          return this.initCurso_(data)
+        }
+      ),
       map(
         data => { 
-          // this.form.reset() comente el reset porque no se si aporta alguna funcionalidad
-          // this.controlDomicilio.patchValue(this.defaultValuesDomicilio)
-          // /**
-          //  * Se asigna inicialmente los valores por defecto, nada me garantiza
-          //  * que el parametro "data" posea todos los valores definidos.
-          //  */
-          // if(!isEmptyObject(this.params)) this.controlSede.patchValue(this.params);
- 
-          // this.controlComision_.clear();
-          // for(var i = 0; i <data["comision/sede"].length; i++) this.controlComision_.push(this.formGroupComision());
-          // console.log(data);
-          // this.control.patchValue(data)
+          this.control.reset() //debe limpiarse el formulario, ya que los pathValue solo asignan valores existentes y el resto los dejan intactos
+      
+          /**
+           * Se asigna inicialmente los valores por defecto, nada me garantiza
+           * que el parametro "data" posea todos los valores definidos.
+           */
+          this.controlComision.patchValue(this.defaultValuesComision)
+          if(!isEmptyObject(this.params)) this.controlComision.patchValue(this.params);
+          this.controlComision.patchValue(data["comision"])
+
+          this.controlCurso_.clear();
+          for(var i = 0; i <data["curso/comision"].length; i++) this.controlCurso_.push(this.formGroupCurso());
+          this.controlCurso_.patchValue(data["curso/comision"])
  
           return true;
         },
@@ -112,31 +123,67 @@ export class ComisionAdmin2Component implements OnInit {
     if(isEmptyObject(this.params)) return of(data)
  
     return this.dd.unique("comision", this.params).pipe(
-      switchMap(
+      map(
         (comision) => {
           if(isEmptyObject(comision)) return of(data)
           data["comision"] = comision
-          return this.dd.mergeObjectGet_({
-            data:data, 
-            entityName:"comision", 
-            fields:["id","calle","numero","localidad","entre","piso","departamento","barrio"],
-            id:"sede"
-          }) 
+          return data
         }
       ),
-      // switchMap(
-      //   (data: any) => {
-      //     return this.initCurso_(data)
-      //   }
- 
-      // )
     )
   }
 
+  initCurso_(data: { [x: string]: any }): Observable<any> {
+    data["curso/comision"] = [];
 
+    if(isEmptyObject(data["comision"])) return of(data);
 
-  
-  ngOnInit(): void {
+    var display = new Display()
+      .setParams({"comision":data["comision"]["id"]})
+      .setOrder({ "asignatura-nombre":"ASC"})
+
+    return this.dd.post("ids", "curso", display).pipe(
+      switchMap(
+        (ids:string[]) => this.dd.entityFieldsGetAll({ 
+          entityName: "curso", 
+          ids:ids, 
+          fields:["id","asignatura-nombre","horas_catedra"]
+        }),
+      ),
+      switchMap(
+        (curso_:{[index:string]:any}[]) => this.dd.postMergeAll_({ 
+          data:curso_, 
+          method: "info", 
+          entityName: "curso_horario", 
+          fields: ["horario"], 
+          fieldNameData: "id", 
+          fieldNameResponse: "curso" 
+        })
+      ),
+      map(
+        curso_ => {
+          data["curso/comision"] = curso_
+          return data;
+        }
+      )
+    )
   }
+
+  formGroupCurso(): FormGroup {
+    return this.fb.group({
+      "id":this.fb.control(""),
+      "horas_catedra":this.fb.control(""),
+      "asignatura-nombre":this.fb.control(""),
+      "horario":this.fb.control(""),
+    })
+  }
+
+
+  ngOnInit(): void {
+    this.loadParams()
+    this.loadDisplay()
+    this.loadStorage$ = this.formService.loadStorage(this.control)
+  }
+
 
 }

@@ -40,18 +40,17 @@ import { ComisionTableComponent } from '@component/comision-table/comision-table
 import { InfoCursosComponent } from '@component/info-cursos/info-cursos.component';
 import { CursosTomaPosesionTableComponent } from '@component/cursos-toma-posesion/cursos-toma-posesion-table.component';
 import { InfoCursosTableComponent } from '@component/info-cursos/info-cursos-table.component';
-import { SedeAdmin2Component } from './component/sede-admin2/sede-admin2.component';
 import { SedeAdminFieldsetSedeComponent } from './component/sede-admin-fieldset-sede/sede-admin-fieldset-sede.component';
 import { SedeAdminFieldsetDomicilioComponent } from './component/sede-admin-fieldset-domicilio/sede-admin-fieldset-domicilio.component';
 import { SedeAdminFieldsetComisionComponent } from './component/sede-admin-fieldset-comision/sede-admin-fieldset-comision.component';
 import { ComisionAdmin2Component } from './component/comision-admin2/comision-admin2.component';
+import { ComisionAdminFieldsetComisionComponent } from './component/comision-admin-fieldset-comision/comision-admin-fieldset-comision.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AprobadoPipe,
     DesaprobadoPipe,
-
     AlumnoAdminComponent,
     AlumnoCalificacionTableComponent,
     AsignaturaArrayComponent,
@@ -77,11 +76,12 @@ import { ComisionAdmin2Component } from './component/comision-admin2/comision-ad
     TableResumenComisionesComponent,
     TomaPosesionEmailAbcComponent,
     ComisionTableComponent,
-    SedeAdmin2Component,
+    SedeAdminComponent,
     SedeAdminFieldsetSedeComponent,
     SedeAdminFieldsetDomicilioComponent,
     SedeAdminFieldsetComisionComponent,
     ComisionAdmin2Component,
+    ComisionAdminFieldsetComisionComponent,
   ],
   imports: [
     BrowserModule,

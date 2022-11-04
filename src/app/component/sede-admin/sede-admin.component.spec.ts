@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SedeAdmin2Component } from './sede-admin2.component';
+import {  } from './sede-admin.component';
 
-describe('SedeAdmin2Component', () => {
-  let component: SedeAdmin2Component;
-  let fixture: ComponentFixture<SedeAdmin2Component>;
+describe('', () => {
+  let component: ;
+  let fixture: ComponentFixture<>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SedeAdmin2Component ]
+      declarations: [  ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SedeAdmin2Component);
+    fixture = TestBed.createComponent();
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

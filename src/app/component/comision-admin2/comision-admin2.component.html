@@ -1,1 +1,18 @@
-<p>comision-admin2 works!</p>
+<ng-template #loading>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
+ 
+<ng-container *ngIf="(loadParams$ | async); else loading">
+    <ng-container *ngIf="(loadDisplay$ | async); else loading">
+      <ng-container *ngIf="(loadStorage$ | async); else loading">
+          <app-comision-admin-fieldset-comision [control]="controlComision"></app-comision-admin-fieldset-comision>
+ 
+          <!-- <button [disabled]="control.status == 'PENDING'"
+                type="button"
+                mat-raised-button
+                (click)="onSubmit()">Guardar</button> -->
+ 
+ 
+      </ng-container>
+    </ng-container>
+</ng-container>

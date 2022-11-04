@@ -1,76 +1,33 @@
 <ng-template #loading>
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </ng-template>
 
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      Buscar Sede   
-      <core-event-icon [config]="{icon:'cached', action:'reset', color:'primary',fieldEvent:optField}"></core-event-icon>    
-      <core-event-icon [config]="{icon:'clear', action:'clear', color:'primary',fieldEvent:optField}"></core-event-icon>    
-    </mat-card-title>
- 
-  </mat-card-header>
-  <mat-card-content>
-    <core-input-search-go fxFlex="auto" [entityName]="'sede'"></core-input-search-go>    
-  </mat-card-content>
+    <mat-card-header>
+        <mat-card-title>
+            Buscar Sede   
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <core-input-search-go fxFlex="auto" [entityName]="'sede'"></core-input-search-go>    
+    </mat-card-content>
 </mat-card>
 
+
 <ng-container *ngIf="(loadParams$ | async); else loading">
-
-  <ng-container *ngIf="(loadDisplay$ | async); else loading">
-    <ng-container *ngIf="(loadStorage$ | async); else loading">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            Datos principales
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <core-abstract-control-form-group [config]="configSede"
-                                            [control]="controlSede"></core-abstract-control-form-group>
-          <mat-error *ngIf="controlSede.errors?.['notUnique'] && (controlSede.touched || controlSede.dirty)">
-            La combinación numero-centro_educativo ya se encuentra utilizada <a routerLink="/sede-admin" [queryParams]="{ id: controlSede.errors?.['notUnique'] }">Ver Sede</a>
-          </mat-error>
-
-          <core-event-button [config]="{disabled:(controlSede.status == 'PENDING'), text: 'Guardar Sede', action:'submit_sede', fieldEvent:optField}"></core-event-button>
-
-        </mat-card-content>
-      </mat-card>
-
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            Domicilio
-            <mat-slide-toggle [formControl]="switchDomicilio"></mat-slide-toggle>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <core-abstract-control-form-group [config]="configDomicilio"
-                                            [control]="controlDomicilio"></core-abstract-control-form-group>
-          <core-event-button [config]="{disabled:(controlDomicilio.status == 'PENDING'), text: 'Guardar Domicilio', action:'submit_domicilio', fieldEvent:optField}"></core-event-button>
-
-        </mat-card-content>
-      </mat-card>
-
-
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            Comisiones
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <core-table-one [control]="controlComision_"
-                          [config]="configComision_"></core-table-one>
-
-        </mat-card-content>
-      </mat-card>
- <p>Debug Form value: {{ control.value | json }}</p>
-                <p>Debug Form status: {{ control.status | json }}</p>
-
-    </ng-container> 
-  </ng-container>
+    <ng-container *ngIf="(loadDisplay$ | async); else loading">
+      <ng-container *ngIf="(loadStorage$ | async); else loading">
+          <app-sede-admin-fieldset-sede [control]="controlSede"></app-sede-admin-fieldset-sede>
+          <app-sede-admin-fieldset-domicilio [control]="controlDomicilio"></app-sede-admin-fieldset-domicilio>
+            <mat-card>
+                <mat-card-content>
+                    <button [disabled]="control.status == 'PENDING'"
+                            type="button" 
+                            mat-raised-button 
+                            (click)="onSubmit()">Guardar</button>
+                </mat-card-content>
+            </mat-card>
+          <app-sede-admin-fieldset-comision [control]="controlComision_"></app-sede-admin-fieldset-comision>
+      </ng-container>
+    </ng-container>
 </ng-container>
-
-
