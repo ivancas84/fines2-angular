@@ -1,0 +1,53 @@
+<table mat-table
+    [dataSource]="control.controls"
+    class="mat-elevation-z8">
+ 
+    <ng-container matColumnDef="hora_inicio" >
+        <th mat-header-cell *matHeaderCellDef> Inicio </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            <mat-form-field>
+                <input  matInput
+                       type="time"
+                       [formControl]="row.controls['hora_inicio']">
+            </mat-form-field> 
+        </td>
+    </ng-container>
+ 
+    <ng-container matColumnDef="hora_fin" >
+        <th mat-header-cell *matHeaderCellDef > Fin </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            <mat-form-field>
+                <input  matInput
+                       type="time"
+                       [formControl]="row.controls['hora_fin']">
+            </mat-form-field> 
+           
+        </td>
+    </ng-container>
+ 
+    <ng-container matColumnDef="curso">
+    <th mat-header-cell *matHeaderCellDef > Curso </th>
+    <td mat-cell *matCellDef="let row; let i = index;">
+        {{row.controls['curso'].value}}
+    </td>
+    </ng-container>
+ 
+    <ng-container matColumnDef="dia">
+    <th mat-header-cell *matHeaderCellDef > Día </th>
+    <td mat-cell *matCellDef="let row; let i = index;">
+        {{row.controls['dia'].value}}
+    </td>
+    </ng-container>
+ 
+    <ng-container matColumnDef="options">
+    <th mat-header-cell *matHeaderCellDef> Opciones </th>
+    <td mat-cell *matCellDef="let row; let i = index;">
+
+    </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+ 
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+</table>

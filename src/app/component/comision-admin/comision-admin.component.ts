@@ -35,6 +35,7 @@ export class ComisionAdmin2Component implements OnInit {
   display$:BehaviorSubject<Display> = new BehaviorSubject(new Display) //presentacion
   params: { [x: string]: any } = {} //parametros del componente
 
+  idComision?:string
  
   controlComision:FormGroup = this.fb.group({
     id:this.fb.control(null),
@@ -99,8 +100,10 @@ export class ComisionAdmin2Component implements OnInit {
           this.controlComision.patchValue(this.defaultValuesComision)
           if(!isEmptyObject(this.params)) this.controlComision.patchValue(this.params);
           this.controlComision.patchValue(data["comision"])
-
+          
+          if(data["comision"].hasOwnProperty("id") && data["comision"]["id"]) this.idComision = data["comision"]["id"]
           this.controlCurso_.clear();
+          
           for(var i = 0; i <data["curso/comision"].length; i++) this.controlCurso_.push(this.formGroupCurso());
           this.controlCurso_.patchValue(data["curso/comision"])
  

@@ -17,6 +17,8 @@ export class ComisionAdminFieldsetCursoComponent implements AfterViewInit {
   ) { }
 
   @Input() control!: FormArray
+  @Input() idComision?: string
+
   protected subscriptions: Subscription = new Subscription() //suscripciones en el ts
  
   @ViewChild(MatTable) table!: MatTable<any>;

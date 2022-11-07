@@ -46,6 +46,8 @@ import { ComisionAdmin2Component } from './component/comision-admin/comision-adm
 import { ComisionAdminFieldsetComisionComponent } from './component/comision-admin-fieldset-comision/comision-admin-fieldset-comision.component';
 import { CursosTomaPosesionTableComponent } from '@component/cursos-toma-posesion-table/cursos-toma-posesion-table.component';
 import { ComisionAdminFieldsetCursoComponent } from './component/comision-admin-fieldset-curso/comision-admin-fieldset-curso.component';
+import { HorarioAdminArrayComponent } from './component/horario-admin-array/horario-admin-array.component';
+import { HorarioAdminArrayTableComponent } from './component/horario-admin-array-table/horario-admin-array-table.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +86,8 @@ import { ComisionAdminFieldsetCursoComponent } from './component/comision-admin-
     ComisionAdmin2Component,
     ComisionAdminFieldsetComisionComponent,
     ComisionAdminFieldsetCursoComponent,
+    HorarioAdminArrayComponent,
+    HorarioAdminArrayTableComponent,
   ],
   imports: [
     BrowserModule,

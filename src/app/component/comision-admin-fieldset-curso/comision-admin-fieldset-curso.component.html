@@ -6,6 +6,7 @@
         Lista de Cursos
       </mat-card-title>
 
+       <ng-container>
         <button mat-mini-fab
             title="Copiar"
             color="primary"
@@ -18,7 +19,13 @@
             (click)="printContent()">
             <mat-icon>print</mat-icon>
         </button>
-
+        <a mat-mini-fab
+            routerLink="/horario-admin-array"
+            [queryParams]="{'curso-comision':idComision}"
+            title="Horario de cursos"> <mat-icon>access_time</mat-icon> </a>
+        <a mat-mini-fab disabled="disabled"
+            title="Generar horarios"> <mat-icon>add_alarm</mat-icon> </a>
+        </ng-container>
     </mat-card-header>
     <mat-card-content>
         <div #mainContent>
