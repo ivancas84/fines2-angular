@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ComisionAdmin2Component } from './comision-admin2.component';
+import { ComisionAdmin2Component } from './comision-admin.component';
 
 describe('ComisionAdmin2Component', () => {
   let component: ComisionAdmin2Component;

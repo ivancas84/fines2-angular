@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
@@ -7,7 +7,7 @@ import { Display } from '@class/display';
 import { ComponentSearchService } from '@service/component/component-search-service';
 import { ComponentTableService } from '@service/component/component-table-service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
-import { BehaviorSubject, map, Observable, of, Subscription, switchMap } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cursos-toma-posesion-table',
@@ -18,16 +18,12 @@ import { BehaviorSubject, map, Observable, of, Subscription, switchMap } from 'r
   `],
 })
 export class CursosTomaPosesionTableComponent implements AfterViewInit {
-  entityName: string = "curso"
-
   @Input() control!: FormArray
   @Input() length!: number
   @Input() display!: Display
-
   protected subscriptions: Subscription = new Subscription() //suscripciones en el ts
 
   @ViewChild(MatTable) table!: MatTable<any>;
-
   @ViewChild("mainContent") content!: ElementRef;
  
   copyContent(): void {
@@ -37,7 +33,6 @@ export class CursosTomaPosesionTableComponent implements AfterViewInit {
   printContent(): void {
     this.ts.printContent(this.content, this.displayedColumns)
   }
-
 
   displayedColumns = ["sede","comision","domicilio","asignatura-nombre","tramo","horario","options"]
 

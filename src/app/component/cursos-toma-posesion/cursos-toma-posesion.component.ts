@@ -1,13 +1,9 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Sort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
-import { ComponentSearchService } from '@service/component/component-search-service';
-import { ComponentTableService } from '@service/component/component-table-service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
-import { BehaviorSubject, map, Observable, of, Subscription, switchMap } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'core-table',
@@ -17,50 +13,21 @@ import { BehaviorSubject, map, Observable, of, Subscription, switchMap } from 'r
   .mat-table.mat-table { min-width: 500px; }
   `],
 })
-export class CursosTomaPosesionComponent implements AfterViewInit {
-  entityName: string = "curso"
+export class CursosTomaPosesionComponent {
 
-  display$:BehaviorSubject<Display> = new BehaviorSubject(new Display)
-  /**
-   * Se define como BehaviorSubject para facilitar la definicion de metodos 
-   * avanzados, por ejemplo reload, clear, restart, etc.
-   */
-
+  display$:BehaviorSubject<Display> = new BehaviorSubject(new Display) //presentacion
   loadParams$!: Observable<any> //carga de parametros
   loadDisplay$!: Observable<any> //carga de display
-
-  protected subscriptions: Subscription = new Subscription() //suscripciones en el ts
-
-  /**
-   * Estructura principal para administrar un array de elementos
-   */
-  control: FormArray = this.fb.array([]);
-
+  control: FormArray = this.fb.array([]); //control con los valores de la tabla
   length!: number; //longitud total de los datos a mostrar
-   
   load: boolean = false; //Atributo auxiliar necesario para visualizar la barra de carga
  
-  @ViewChild(MatTable) table!: MatTable<any>;
-
-  displayedColumns = ["sede","comision","domicilio","asignatura-nombre","tramo","horario","options"]
-
-  serverSortTranslate: { [index: string]: string[] } = {
-    sede:["sede-nombre"],
-    comision:["sede-numero","comision-division","planificacion-anio","planificacion-semestre"],
-    tramo:["planificacion-anio","planificacion-semestre"]};
-
   constructor(
     protected dd: DataDefinitionToolService,
     protected route: ActivatedRoute, 
     protected fb: FormBuilder,
-    protected searchService: ComponentSearchService,
-    protected tableService: ComponentTableService,
   ) { }
   
-  ngAfterViewInit(): void {
-    var s = this.tableService.renderRowsOnValueChanges(this.control, this.table)
-    this.subscriptions.add(s)
-  }
 
   ngOnInit(): void {
     this.loadDisplay()
@@ -71,12 +38,17 @@ export class CursosTomaPosesionComponent implements AfterViewInit {
     this.loadParams$ = this.route.queryParams.pipe(
       map(
         queryParams => { 
-          var display = new Display();
-          display.setParams(
-            {"calendario-anio":"2022","calendario-semestre":2,"comision-autorizada":true}
-          )
-          display.setSize(0);
-          display.setOrder({"sede-numero":"asc", "sede-nombre":"asc","planificacion-anio":"asc","planificacion-semestre":"asc","comision":"asc"})
+          var display = new Display().setSize(0).setParams(
+            {"calendario-anio":"2022",
+            "calendario-semestre":2,
+            "comision-autorizada":true
+          }).setOrder({
+            "sede-numero":"asc", 
+            "sede-nombre":"asc",
+            "planificacion-anio":
+            "asc","planificacion-semestre":"asc",
+            "comision":"asc"
+          })
           //display.setParamsByQueryParams(this.params);
           this.display$.next(display)
         
@@ -96,7 +68,7 @@ export class CursosTomaPosesionComponent implements AfterViewInit {
      switchMap(
        () => {
          this.load = false
-         return this.dd.post("count", this.entityName, this.display$.value);
+         return this.dd.post("count", "curso", this.display$.value);
        }
      ),
      switchMap(
@@ -107,26 +79,22 @@ export class CursosTomaPosesionComponent implements AfterViewInit {
      ),
      map(
        data => {
-         this.setData(data)
-         return this.load = true;
+        if (!this.length && data.length) length = data.length
+        this.control.clear();
+        for(var i = 0; i <data.length; i++) this.control.push(this.formGroup());
+        this.control.patchValue(data)
+        return this.load = true;
        }
      ),
    )
- }
-
-  setData(data: any[]){
-    if (!this.length && data.length) length = data.length
-    this.control.clear();
-    for(var i = 0; i <data.length; i++) this.control.push(this.formGroup());
-    this.control.patchValue(data)
   }
 
   initData(): Observable<any>{
     if(this.length === 0) return of([]); 
-    return this.dd.post("ids", this.entityName, this.display$.value).pipe(
+    return this.dd.post("ids", "curso", this.display$.value).pipe(
       switchMap(
         ids => this.dd.entityFieldsGetAll({
-            entityName: this.entityName, ids, fields: [
+            entityName: "curso", ids, fields: [
               "id",
               "asignatura-nombre",
               "comision-division",
@@ -176,10 +144,6 @@ export class CursosTomaPosesionComponent implements AfterViewInit {
       "domicilio":this.fb.control(""),
       "horario":this.fb.control(""),
     })
-  }
-
-  onChangeSort(sort: Sort): void {
-    this.tableService.onChangeSort(sort, this.length, this.display$.value, this.control, this.serverSortTranslate)
   }
 
   
