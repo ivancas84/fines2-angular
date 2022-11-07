@@ -67,7 +67,7 @@ export class SedeAdminComponent implements OnInit {
   control: FormGroup = this.fb.group({
     sede: this.controlSede,
     domicilio: this.controlDomicilio,
-  }, {updateOn:"blur"})
+  })
 
   
   defaultValuesDomicilio: {[index:string]: any} = {

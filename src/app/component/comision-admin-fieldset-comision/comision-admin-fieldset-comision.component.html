@@ -6,14 +6,13 @@
     </mat-card-header>
     <mat-card-content>
    
-    <form [formGroup]="control" novalidate> 
    
-      <div fxLayout="row wrap">
+      <div fxLayout="row wrap" [formGroup]="control">
           <div 
               class="fx-item" 
               fxFlex.xs="100%" 
-              fxFlex.sm="50%" 
-              fxFlex.gt-sm="50%">
+              fxFlex.sm="100%" 
+              fxFlex.gt-sm="33%">
    
               <mat-form-field  *ngIf="loadAutocompleteSede$ | async">
                     <mat-label>Sede</mat-label>
@@ -44,12 +43,103 @@
 
 
 
+            <div 
+                class="fx-item" 
+                fxFlex.xs="100%" 
+                fxFlex.sm="100%" 
+                fxFlex.gt-sm="34%">
+     
+                <mat-form-field  *ngIf="loadAutocompleteCalendario$ | async">
+                      <mat-label>Calendario</mat-label>
+                      <input readonly="readonly" 
+                              *ngIf="this.labelCalendario" type="text" matInput value="{{labelCalendario}}">
+                      <input *ngIf="!labelCalendario" 
+                          type="text" 
+                          matInput 
+                          [formControl]="searchControlCalendario" 
+                          [matAutocomplete]="acCalendario">
+  
+                      <button *ngIf="!control.get('calendario')!.disabled" type="button" mat-icon-button matSuffix (click)="control.get('calendario')!.setValue(null)">
+                        <mat-icon>clear</mat-icon>
+                      </button>
+                          
+                      <mat-autocomplete #acCalendario="matAutocomplete">
+                          <mat-option *ngFor="let option of filteredOptionsCalendario$ | async" [value]="option">
+                              {{option["label"]}}
+                          </mat-option>
+                      </mat-autocomplete>
+  
+                      <mat-error>
+                        <ng-container *ngIf="control.get('calendario')!.hasError('required')">Debe completar valor</ng-container>
+                      </mat-error>
+                            
+                </mat-form-field>
+            </div>
+  
 
+
+            <div 
+            class="fx-item" 
+            fxFlex.xs="100%" 
+            fxFlex.sm="100%" 
+            fxFlex.gt-sm="33%">
+      
+                  
+              <mat-form-field  *ngIf="loadAutocompleteComisionSiguiente$ | async">
+                <mat-label>Comision Siguiente</mat-label>
+                <input readonly="readonly" 
+                        *ngIf="this.labelComisionSiguiente" type="text" matInput value="{{labelComisionSiguiente}}">
+                <input *ngIf="!labelComisionSiguiente" 
+                    type="text" 
+                    matInput 
+                    [formControl]="searchControlComisionSiguiente" 
+                    [matAutocomplete]="acComisionSiguiente">
+      
+                <button *ngIf="!control.get('comision_siguiente')!.disabled" type="button" mat-icon-button matSuffix (click)="control.get('comision_siguiente')!.setValue(null)">
+                  <mat-icon>clear</mat-icon>
+                </button>
+                    
+                <mat-autocomplete #acComisionSiguiente="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptionsComisionSiguiente$ | async" [value]="option">
+                        {{option["label"]}}
+                    </mat-option>
+                </mat-autocomplete>
+      
+                <mat-error>
+                  <ng-container *ngIf="control.get('comision_siguiente')!.hasError('required')">Debe completar valor</ng-container>
+                </mat-error>
+                      
+              </mat-form-field>
+      
+            </div>
+            
+
+
+          <div 
+            class="fx-item" 
+            fxFlex.xs="100%" 
+            fxFlex.sm="50%" 
+            fxFlex.gt-sm="25%">
+
+              <mat-form-field>
+                  <mat-label>División</mat-label>
+                
+                  <input matInput
+                        type="text"
+                        formControlName="division">
+                
+                  <mat-error>
+                    <ng-container *ngIf="control.get('division')!.hasError('required')">Debe completar valor</ng-container>
+                  </mat-error>
+                
+                </mat-form-field>
+            </div>
+            
           <div 
               class="fx-item" 
               fxFlex.xs="100%" 
               fxFlex.sm="50%" 
-              fxFlex.gt-sm="50%">
+              fxFlex.gt-sm="25%">
    
               <mat-form-field >
                 <mat-label>Planificación</mat-label>
@@ -65,7 +155,105 @@
                 </mat-error>
               </mat-form-field>
           </div>
-   
+  
+          
+
+
+          <div 
+          class="fx-item" 
+          fxFlex.xs="100%" 
+          fxFlex.sm="50%" 
+          fxFlex.gt-sm="25%">
+
+          <mat-form-field >
+            <mat-label>Modalidad</mat-label>
+            <mat-select formControlName="modalidad">
+              <mat-option [value]="null">--Seleccione--</mat-option>
+              <mat-option *ngFor="let opt of (optionsModalidad$ | async)" [value]="opt.id">
+                {{opt["label"]}}
+              </mat-option>
+            </mat-select>
+           
+            <mat-error>
+              <ng-container *ngIf="control.get('modalidad')!.hasError('required')">Debe completar valor</ng-container>
+            </mat-error>
+          </mat-form-field>
+      </div>
+
+
+
+      <div 
+          class="fx-item" 
+          fxFlex.xs="100%" 
+          fxFlex.sm="50%" 
+          fxFlex.gt-sm="25%">
+
+          <mat-form-field >
+            <mat-label>Turno</mat-label>
+            <mat-select formControlName="turno">
+              <mat-option [value]="null">--Seleccione--</mat-option>
+              <mat-option *ngFor="let opt of (optionsTurno$ | async)" [value]="opt">
+                {{opt["turno"]}}
+              </mat-option>
+            </mat-select>
+          
+            <mat-error>
+              <ng-container *ngIf="control.get('modalidad')!.hasError('required')">Debe completar valor</ng-container>
+            </mat-error>
+          </mat-form-field>
+      </div>
+
+      <div 
+      class="fx-item" 
+      fxFlex.xs="100%" 
+      fxFlex.sm="100%" 
+      fxFlex.gt-sm="100%">
+      <mat-form-field>
+        <mat-label>Observaciones</mat-label>
+        <textarea matInput 
+                  formControlName="observaciones"></textarea>
+      </mat-form-field>
+      </div>
+
+
+      <div 
+          class="fx-item" 
+          fxFlex.xs="100%" 
+          fxFlex.sm="33%" 
+          fxFlex.gt-sm="33%">
+          <mat-checkbox formControlName="autorizada">
+            Autorizada
+          </mat-checkbox>
+          
+      </div>
+
+
+
+      <div 
+          class="fx-item" 
+          fxFlex.xs="100%" 
+          fxFlex.sm="34%" 
+          fxFlex.gt-sm="34%">
+          <mat-checkbox formControlName="apertura">
+            Apertura
+          </mat-checkbox>
+          
+      </div>
+
+
+      <div 
+          class="fx-item" 
+          fxFlex.xs="100%" 
+          fxFlex.sm="33%" 
+          fxFlex.gt-sm="33%">
+          <mat-checkbox formControlName="publicada">
+            Publicada
+          </mat-checkbox>
+          
+      </div>
+
+
+
    
       </div>
    
@@ -75,10 +263,9 @@
     mat-raised-button 
     (click)="onSubmit.emit('sede')">Guardar Sede</button> -->
    
-      </form>
    
    
     </mat-card-content>
   </mat-card>
-   
+    
   

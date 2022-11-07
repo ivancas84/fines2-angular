@@ -3,11 +3,13 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
+import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { isEmptyObject } from '@function/is-empty-object.function';
+import { logValidationErrors } from '@function/log-validation-errors';
 import { ComponentFormService } from '@service/component/component-form-service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { DdAsyncValidatorsService } from '@service/validators/dd-async-validators.service';
-import { of } from 'rxjs';
+import { first, of, Subscription } from 'rxjs';
 import { Observable, BehaviorSubject, map, switchMap } from 'rxjs';
 
 @Component({
@@ -43,9 +45,9 @@ export class ComisionAdmin2Component implements OnInit {
     calendario:this.fb.control(null,{ validators:[Validators.required] }),
     comision_siguiente:this.fb.control(null),
     turno:this.fb.control(null),
-    autorizada:this.fb.control(null),
-    apertura:this.fb.control(null),
-    publicada:this.fb.control(null),
+    autorizada:this.fb.control(false),
+    apertura:this.fb.control(false),
+    publicada:this.fb.control(false),
     observaciones:this.fb.control(null),
   },{
     asyncValidators:[this.validators.uniqueMultiple("comision", ["sede", "division", "planificacion"])]
@@ -53,7 +55,7 @@ export class ComisionAdmin2Component implements OnInit {
 
   control: FormGroup = this.fb.group({
     comision: this.controlComision,
-  }, {updateOn:"blur"})
+  }, {updateOn:"submit"})
 
   controlCurso_:FormArray = this.fb.array([])
 
@@ -63,9 +65,6 @@ export class ComisionAdmin2Component implements OnInit {
     autorizada:false,
     publicada:false
  }
-
-  
-  
 
   loadParams(){
     this.loadParams$ = this.route.queryParams.pipe(
@@ -184,6 +183,45 @@ export class ComisionAdmin2Component implements OnInit {
     this.loadDisplay()
     this.loadStorage$ = this.formService.loadStorage(this.control)
   }
+
+
+
+
+  isSubmitted: boolean = false //Flag para habilitar/deshabilitar boton aceptar
+
+  onSubmit() {
+    this.isSubmitted = true;
+
+    if (this.control.pending) {
+      this.control.statusChanges.pipe(first()).subscribe(() => {
+        if (this.control.valid) this.submit()
+      });
+    } else this.submit();
+  }
+
+  submit(){
+    if (!this.control.valid) {
+      this.formService.cancelSubmit(this.controlComision)
+      this.isSubmitted = false;
+    } else {
+      this.dd._post("persist", "comision", this.controlComision.value).pipe(first()).subscribe({
+        next: (response: any) => {
+          this.formService.submittedDisplay(response,this.display$)
+          this.isSubmitted = false;
+        },
+        error: (error: any) => {
+          this.dialog.open(DialogAlertComponent, {
+            data: {title: "Error", message: error.error}
+          });
+          this.isSubmitted = false;
+        }
+      });
+    }
+  }
+
+
+
+
 
 
 }

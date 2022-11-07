@@ -5,14 +5,17 @@
 <ng-container *ngIf="(loadParams$ | async); else loading">
     <ng-container *ngIf="(loadDisplay$ | async); else loading">
       <ng-container *ngIf="(loadStorage$ | async); else loading">
+        <form [formGroup]="control" novalidate (ngSubmit)="onSubmit()">
           <app-comision-admin-fieldset-comision [control]="controlComision"></app-comision-admin-fieldset-comision>
  
-          <!-- <button [disabled]="control.status == 'PENDING'"
-                type="button"
-                mat-raised-button
-                (click)="onSubmit()">Guardar</button> -->
- 
- 
+          <mat-card>
+            <mat-card-content>
+                <button [disabled]="controlComision.status == 'PENDING'"
+                        type="submit"
+                        mat-raised-button>Guardar</button>
+            </mat-card-content>
+           </mat-card>
+        </form>
       </ng-container>
     </ng-container>
 </ng-container>
