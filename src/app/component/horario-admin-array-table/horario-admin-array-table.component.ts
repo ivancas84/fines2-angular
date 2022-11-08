@@ -4,6 +4,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { Display } from '@class/display';
+import { naturalCompare } from '@function/natural-compare';
 import { ComponentTableService } from '@service/component/component-table-service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { combineAll, combineLatest, map, Observable, Subscription, switchMap } from 'rxjs';
@@ -13,7 +14,7 @@ import { combineAll, combineLatest, map, Observable, Subscription, switchMap } f
   templateUrl: './horario-admin-array-table.component.html',
   styleUrls: ['./horario-admin-array-table.component.css'],
 })
-export class HorarioAdminArrayTableComponent implements OnInit, AfterViewInit {
+export class HorarioAdminArrayTableComponent implements AfterViewInit {
 
   constructor(
     protected dd: DataDefinitionToolService,
@@ -23,6 +24,8 @@ export class HorarioAdminArrayTableComponent implements OnInit, AfterViewInit {
 
   @Input() control!: FormArray
   @Input() idComision!: string
+  @Input() options: {[i:string]:{[i:string]:any}[]} = {}
+
   
   protected subscriptions: Subscription = new Subscription() //suscripciones en el ts
  
@@ -38,40 +41,33 @@ export class HorarioAdminArrayTableComponent implements OnInit, AfterViewInit {
   displayedColumns = ["curso","dia","hora_inicio","hora_fin"]
 
 
-
-  options$!: Observable<any>;
-  ngOnInit(): void {
-    var display = new Display().addParam("comision",this.idComision).setSize(0).addOrder("asignatura-nombre","ASC")
-
-    var curso = this.dd.post("ids","curso", display).pipe(
-      switchMap(
-        ids => this.dd.entityFieldsGetAll({
-          entityName:"curso",
-          ids:ids,
-          fields:["id","asignatura-nombre"]
-        })
-      )
-    )
-
-    var dia = this.dd.post("label_all","dia", new Display)
-
-
-    this.options$ = combineLatest([curso,dia]).pipe(
-      map(
-        response => {
-          return {
-            curso:response[0],
-            dia:response[1]
-          }
-        }
-      )
-    )
-  }
-
-
   onChangeSort(sort: Sort): void {
-    this.ts.onChangeSortLocal(sort, this.control)
+    if (!sort.active || sort.direction === '') return;
+    
+    const data = this.control.value;
+    
+    data.sort((a: { [x: string]: any; }, b: { [x: string]: any; }) => {  
+      return (sort.direction === 'asc') ? naturalCompare(this.sortValue(sort.active,a),this.sortValue(sort.active, b)) : naturalCompare(this.sortValue(sort.active,b),this.sortValue(sort.active, a))
+    });
+
+    this.control.patchValue(data)
   }
 
+  sortValue(fieldName:string, row:{[i:string]:any}): any{
+
+    switch(fieldName){
+      case "curso":
+        for(var i = 0; i < this.options["curso"].length; i++){
+          if(row[fieldName] == this.options["curso"][i]["id"]) return this.options["curso"][i]["asignatura-nombre"]
+        }
+      break;
+      case "dia":
+        for(var i = 0; i < this.options["dia"].length; i++){
+          if(row[fieldName] == this.options["dia"][i]["id"]) return this.options["dia"][i]["label"]
+        }
+      break;
+      default: return row[fieldName]
+    }
+  }
 
 }

@@ -4,17 +4,27 @@
    
   <ng-container *ngIf="(loadParams$ | async); else loading">
     <ng-container *ngIf="(loadDisplay$ | async); else loading">
-      <mat-card>
-        <mat-card-header>
-            <mat-card-title>
-              Horarios de Comisión
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-        <mat-progress-bar *ngIf="!load"
-                          mode="indeterminate"></mat-progress-bar>
-                <app-horario-admin-array-table [idComision]="idComision" [control]="control"></app-horario-admin-array-table>
-      </mat-card-content>
-      </mat-card>
+      <form [formGroup]="control" novalidate (ngSubmit)="onSubmit()">
+        <mat-card>
+          <mat-card-header>
+              <mat-card-title>
+                Horarios de Comisión <core-label [entityName]="'comision'" [id]="idComision"></core-label>
+              </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+          <mat-progress-bar *ngIf="!load"
+                            mode="indeterminate"></mat-progress-bar>
+                  <app-horario-admin-array-table [idComision]="idComision" [control]="controlHorario" [options]="options"></app-horario-admin-array-table>
+        </mat-card-content>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-content>
+              <button [disabled]="control.status == 'PENDING'"
+                      type="submit"
+                      mat-raised-button>Guardar</button>
+          </mat-card-content>
+        </mat-card>
+    </form>
     </ng-container>
   </ng-container>

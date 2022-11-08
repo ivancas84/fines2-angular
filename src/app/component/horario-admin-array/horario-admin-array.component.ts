@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
+import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
+import { ComponentFormService } from '@service/component/component-form-service';
 import { ComponentLoadService } from '@service/component/component-load-service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
-import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, first, map, Observable, ObservableNotification, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-horario-admin-array',
@@ -17,13 +20,17 @@ export class HorarioAdminArrayComponent implements OnInit {
     protected dd: DataDefinitionToolService,
     protected route: ActivatedRoute,
     protected fb: FormBuilder,
-    protected ls: ComponentLoadService
+    protected formService: ComponentFormService,
+    protected dialog: MatDialog,
   ) { }
 
   display$:BehaviorSubject<Display> = new BehaviorSubject(new Display) //presentacion
   loadParams$!: Observable<any> //carga de parametros
   loadDisplay$!: Observable<any> //carga de display
-  control: FormArray = this.fb.array([],{updateOn:"submit"});
+  controlHorario: FormArray = this.fb.array([]);
+  control: FormGroup = this.fb.group({
+    "horario": this.controlHorario
+  },{updateOn:"submit"})
   load: boolean = false; //Atributo auxiliar necesario para visualizar la barra de carga
   idComision!: string;
 
@@ -35,9 +42,38 @@ export class HorarioAdminArrayComponent implements OnInit {
           this.idComision = queryParams["curso-comision"];
           var display = new Display().setSize(0).setParamsByQueryParams(queryParams);
           this.display$.next(display)
-          return true;
         },
       ),
+      switchMap(
+        () => this.initOptions()
+      )
+    )
+  }
+
+  initOptions(): Observable<any> {
+    var display = new Display().addParam("comision",this.idComision).setSize(0).addOrder("asignatura-nombre","ASC")
+
+    var curso = this.dd.post("ids","curso", display).pipe(
+      switchMap(
+        ids => this.dd.entityFieldsGetAll({
+          entityName:"curso",
+          ids:ids,
+          fields:["id","asignatura-nombre"]
+        })
+      )
+    )
+
+    var dia = this.dd.post("label_all","dia", new Display)
+
+
+    return combineLatest([curso,dia]).pipe(
+      map(
+        response => {
+          this.options["curso"]=response[0]
+          this.options["dia"]=response[1]
+          return true
+        }
+      )
     )
   }
 
@@ -49,11 +85,11 @@ export class HorarioAdminArrayComponent implements OnInit {
 
   formGroup(data:{[index:string]:any}): FormGroup {
     var fb = this.fb.group({
-      "id":this.fb.control(""),
-      "hora_inicio":this.fb.control(""),
-      "hora_fin":this.fb.control(""),
-      "curso":this.fb.control(""),
-      "dia":this.fb.control(""),
+      "id":this.fb.control("",{validators:Validators.required}),
+      "hora_inicio":this.fb.control("",{validators:Validators.required}),
+      "hora_fin":this.fb.control("",{validators:Validators.required}),
+      "curso":this.fb.control("",{validators:Validators.required}),
+      "dia":this.fb.control("",{validators:Validators.required}),
     })
     if(data.hasOwnProperty("hora_inicio") && data["hora_inicio"].length>8) data["hora_inicio"] = new Date(data["hora_inicio"]).toTimeString().split(' ')[0];
     if(data.hasOwnProperty("hora_fin") && data["hora_fin"].length>8) data["hora_fin"] = new Date(data["hora_fin"]).toTimeString().split(' ')[0];
@@ -75,12 +111,52 @@ export class HorarioAdminArrayComponent implements OnInit {
      ),
      map(
        data => {
-        this.control.clear();
-        for(var i = 0; i <data.length; i++) this.control.push(this.formGroup(data[i]));
+        this.controlHorario.clear();
+        for(var i = 0; i <data.length; i++) this.controlHorario.push(this.formGroup(data[i]));
         return this.load = true;
        }
      ),
    )
   }
 
+
+
+
+  isSubmitted: boolean = false //Flag para habilitar/deshabilitar boton aceptar
+
+  onSubmit() {
+    this.isSubmitted = true;
+ 
+    if (this.control.pending) {
+      this.control.statusChanges.pipe(first()).subscribe(() => {
+        if (this.control.valid) this.submit()
+      });
+    } else this.submit();
+  }
+
+
+  submit(){
+    if (!this.control.valid) {
+      this.formService.cancelSubmit(this.control)
+      this.isSubmitted = false;
+    } else {
+      this.dd._post("persist_rows", "horario", this.controlHorario.value).pipe(first()).subscribe({
+        next: (response: any) => {
+          this.formService.submittedDisplay(response,this.display$)
+          this.isSubmitted = false;
+        },
+        error: (error: any) => {
+          this.dialog.open(DialogAlertComponent, {
+            data: {title: "Error", message: error.error}
+          });
+          this.isSubmitted = false;
+        }
+      });
+    }
+  }
+
+  options$!: Observable<any>;
+  options: {[i:string]:{[i:string]:any}[]} = {}
+
+  
 }

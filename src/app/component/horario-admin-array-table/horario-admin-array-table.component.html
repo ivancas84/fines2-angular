@@ -1,4 +1,4 @@
-<table *ngIf="options$ | async as options" mat-table
+<table mat-table
     [dataSource]="control.controls"
     class="mat-elevation-z8"
     matSort
@@ -9,31 +9,35 @@
       <th mat-header-cell *matHeaderCellDef width="25px"  mat-sort-header> Curso </th>
       <td mat-cell *matCellDef="let row; let i = index;">
         <mat-form-field >
-          <mat-select [formControl]="row.controls['curso']">
+          <mat-select [formControl]="row.controls['curso']" placeholder="Seleccione curso">
             <mat-option [value]="null">--Seleccione--</mat-option>
-            <mat-option *ngFor="let opt of options['curso']" [value]="opt.id">
+            <mat-option *ngFor="let opt of options['curso']" [value]="opt['id']">
               {{opt["asignatura-nombre"]}}
             </mat-option>
           </mat-select>
          
           <mat-error >
-            <span *ngIf="row.controls['curso'].hasError('required')">Debe seleccionar curso</span>
+            <span *ngIf="row.controls['curso'].hasError('required')">Debe seleccionar valor</span>
           </mat-error>
         </mat-form-field>
       </td>
       </ng-container>
    
       <ng-container matColumnDef="dia">
-      <th mat-header-cell *matHeaderCellDef width="100px"> Dia </th>
+      <th mat-header-cell *matHeaderCellDef width="100px" mat-sort-header> Dia </th>
       <td mat-cell *matCellDef="let row; let i = index;">
         <mat-form-field >
-        <mat-select [formControl]="row.controls['dia']">
-          <mat-option [value]="null">--Seleccione--</mat-option>
-          <mat-option *ngFor="let opt of options['dia']" [value]="opt.id">
-            {{opt["label"]}}
-          </mat-option>
-        </mat-select>
+          <mat-select [formControl]="row.controls['dia']" placeholder="Seleccione día">
+            <mat-option [value]="null">--Seleccione--</mat-option>
+            <mat-option *ngFor="let opt of options['dia']" [value]="opt['id']">
+              {{opt["label"]}}
+            </mat-option>
+          </mat-select>
+          <mat-error >
+            <span *ngIf="row.controls['dia'].hasError('required')">Debe seleccionar valor</span>
+          </mat-error>
         </mat-form-field>
+      
       </td>
       </ng-container>
  
@@ -43,8 +47,12 @@
         <td mat-cell *matCellDef="let row; let i = index;">
             <mat-form-field>
                 <input  matInput
-                       type="time"
-                       [formControl]="row.controls['hora_inicio']">
+                    type="time"
+                    [formControl]="row.controls['hora_inicio']"
+                    placeholder="Ingrese hora de inicio">
+                <mat-error >
+                  <span *ngIf="row.controls['hora_inicio'].hasError('required')">Debe ingresar valor</span>
+                </mat-error>
             </mat-form-field> 
         </td>
     </ng-container>
@@ -55,7 +63,11 @@
             <mat-form-field>
                 <input  matInput
                        type="time"
-                       [formControl]="row.controls['hora_fin']">
+                       [formControl]="row.controls['hora_fin']"
+                       placeholder="Ingrese hora de fin">
+                <mat-error >
+                  <span *ngIf="row.controls['hora_fin'].hasError('required')">Debe ingresar valor</span>
+                </mat-error>
             </mat-form-field> 
            
         </td>
@@ -74,5 +86,4 @@
     <tr mat-row
         *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
 </table>
- <p>Debug Form value: {{ control.value | json }}</p>
-  <p>Debug Form status: {{ control.status | json }}</p>
+ 
