@@ -86,6 +86,8 @@ export class SedeAdminComponent implements OnInit {
       "horario":this.fb.control(""),
       "calendario-anio":this.fb.control(""),
       "calendario-semestre":this.fb.control(""),
+      "apertura":this.fb.control(""),
+      "autorizada":this.fb.control(""),
     })
   }
 
@@ -147,7 +149,7 @@ export class SedeAdminComponent implements OnInit {
         (ids:string[]) => this.dd.entityFieldsGetAll({ 
           entityName: "comision", 
           ids:ids, 
-          fields:["id","planificacion-anio","planificacion-semestre","plan-orientacion","division","calendario-anio","calendario-semestre"]
+          fields:["id","apertura","autorizada","planificacion-anio","planificacion-semestre","plan-orientacion","division","calendario-anio","calendario-semestre"]
         }),
       ),
       switchMap(

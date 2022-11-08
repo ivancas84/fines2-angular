@@ -15,5 +15,8 @@ mat-card {
 
 .highlightText { background: yellow; }
 
+.highlightRed{
+  background: #ff9999; 
+}
 
 .fx-item { padding:0px 10px;  }

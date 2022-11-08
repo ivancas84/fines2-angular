@@ -15,13 +15,13 @@ import { GenerarConstanciaComponent } from '@component/generar-constancia/genera
 import { HomeComponent } from '@component/home/home.component';
 import { InfoCursosComponent } from '@component/info-cursos/info-cursos.component';
 import { InscripcionDocenteCorrectaComponent } from '@component/inscripcion-docente-correcta/inscripcion-docente-correcta.component';
-import { InscripcionDocenteComponent } from '@component/inscripcion-docente/inscripcion-docente.component';
-import { ResumenAlumnosComponent } from '@component/resumen-alumnos/resumen-alumnos.component';
-import { ListaComisionesDocentesSinContralorComponent } from '@component/resumen-comisiones/lista-comisiones-docentes-sin-contralor';
-import { ListaComisionesComponent } from '@component/resumen-comisiones/lista-comisiones.component';
-import { ResumenComisionesComponent } from '@component/resumen-comisiones/resumen-comisiones.component';
+import { InscripcionDocenteComponent } from '@component/_inscripcion-docente/inscripcion-docente.component';
+import { ResumenAlumnosComponent } from '@component/_resumen-alumnos/resumen-alumnos.component';
+import { ListaComisionesDocentesSinContralorComponent } from '@component/_resumen-comisiones/lista-comisiones-docentes-sin-contralor';
+import { ListaComisionesComponent } from '@component/_resumen-comisiones/lista-comisiones.component';
+import { ResumenComisionesComponent } from '@component/_resumen-comisiones/resumen-comisiones.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
-import { TomaPosesionEmailAbcComponent } from '@component/toma-posesion-email-abc/toma-posesion-email-abc.component';
+import { TomaPosesionEmailAbcComponent } from '@component/_toma-posesion-email-abc/toma-posesion-email-abc.component';
 import { HorarioAdminArrayComponent } from '@component/horario-admin-array/horario-admin-array.component';
 
 const routes: Routes = [

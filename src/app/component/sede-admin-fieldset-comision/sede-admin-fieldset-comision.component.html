@@ -44,10 +44,39 @@
         <td mat-cell *matCellDef="let row; let i = index;">
             {{row.controls['calendario-semestre'].value}}
         </td>
-        </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    </ng-container>
+
+    <ng-container matColumnDef="apertura">
+        <th mat-header-cell *matHeaderCellDef > Apertura </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            {{row.controls['apertura'].value | siNo}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="autorizada">
+        <th mat-header-cell *matHeaderCellDef > Autorizada </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            {{row.controls['autorizada'].value | siNo}}
+        </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef> Opciones </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            <a  mat-mini-fab
+                [routerLink]="'/comision-admin'"
+                [queryParams]="{'id':row.controls['id'].value}"
+                [title]="'Administrar Comision'"><mat-icon>edit</mat-icon></a>
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <tr mat-header-row 
+        *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row
-        *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+        *matRowDef="let row; columns: displayedColumns; let i = index"ç
+        [ngClass]="{'highlightRed': !row.controls['autorizada'].value}"></tr>
 </table>
  
 

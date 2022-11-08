@@ -15,16 +15,16 @@ import { AppCoreModule } from './core/app-core.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { AsignaturaArrayComponent } from '@component/_asignatura-array/asignatura-array.component';
 import { MenuComponent } from './menu/menu.component';
-import { ResumenComisionesComponent } from '@component/resumen-comisiones/resumen-comisiones.component';
+import { ResumenComisionesComponent } from '@component/_resumen-comisiones/resumen-comisiones.component';
 import { CursoAdminComponent } from '@component/_curso-admin/curso-admin.component';
-import { ListaComisionesComponent } from '@component/resumen-comisiones/lista-comisiones.component';
-import { ResumenAlumnosComponent } from '@component/resumen-alumnos/resumen-alumnos.component';
+import { ListaComisionesComponent } from '@component/_resumen-comisiones/lista-comisiones.component';
+import { ResumenAlumnosComponent } from '@component/_resumen-alumnos/resumen-alumnos.component';
 import { AlumnoAdminComponent } from '@component/_alumno-admin/alumno-admin.component';
 import { AlumnoCalificacionTableComponent } from '@component/_alumno-admin/alumno-calificacion-table.component';
 import { AprobadoPipe } from '@pipe/aprobado.pipe';
 import { DesaprobadoPipe } from '@pipe/desaprobado.pipe';
-import { TableResumenComisionesComponent } from '@component/resumen-comisiones/table-resumen-comisiones.component';
-import { ListaComisionesDocentesSinContralorComponent } from '@component/resumen-comisiones/lista-comisiones-docentes-sin-contralor';
+import { TableResumenComisionesComponent } from '@component/_resumen-comisiones/table-resumen-comisiones.component';
+import { ListaComisionesDocentesSinContralorComponent } from '@component/_resumen-comisiones/lista-comisiones-docentes-sin-contralor';
 import { GenerarConstanciaComponent } from '@component/generar-constancia/generar-constancia.component';
 import { ComisionAdminComponent } from '@component/_comision-admin/comision-admin.component';
 import { CalendarioAdminComponent } from '@component/_calendario-admin/calendario-admin.component';
@@ -32,13 +32,12 @@ import { CalendarioAdminArrayComponent } from '@component/_calendario-admin-arra
 import { ComisionAdminArrayComponent } from '@component/_comision-admin/comision-admin-array.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
 import { CursosTomaPosesionComponent } from '@component/cursos-toma-posesion/cursos-toma-posesion.component';
-import { TomaPosesionEmailAbcComponent } from '@component/toma-posesion-email-abc/toma-posesion-email-abc.component';
-import { InscripcionDocenteComponent } from '@component/inscripcion-docente/inscripcion-docente.component';
+import { TomaPosesionEmailAbcComponent } from '@component/_toma-posesion-email-abc/toma-posesion-email-abc.component';
+import { InscripcionDocenteComponent } from '@component/_inscripcion-docente/inscripcion-docente.component';
 import { InscripcionDocenteCorrectaComponent } from '@component/inscripcion-docente-correcta/inscripcion-docente-correcta.component';
 import { EnlaceNoDisponibleComponent } from '@component/enlace-no-disponible/enlace-no-disponible.component';
 import { ComisionTableComponent } from '@component/_comision-table/comision-table.component';
 import { InfoCursosComponent } from '@component/info-cursos/info-cursos.component';
-import { InfoCursosTableComponent } from '@component/info-cursos/info-cursos-table.component';
 import { SedeAdminFieldsetSedeComponent } from './component/sede-admin-fieldset-sede/sede-admin-fieldset-sede.component';
 import { SedeAdminFieldsetDomicilioComponent } from './component/sede-admin-fieldset-domicilio/sede-admin-fieldset-domicilio.component';
 import { SedeAdminFieldsetComisionComponent } from './component/sede-admin-fieldset-comision/sede-admin-fieldset-comision.component';
@@ -48,6 +47,8 @@ import { CursosTomaPosesionTableComponent } from '@component/cursos-toma-posesio
 import { ComisionAdminFieldsetCursoComponent } from './component/comision-admin-fieldset-curso/comision-admin-fieldset-curso.component';
 import { HorarioAdminArrayComponent } from './component/horario-admin-array/horario-admin-array.component';
 import { HorarioAdminArrayTableComponent } from './component/horario-admin-array-table/horario-admin-array-table.component';
+import { InfoCursosTableComponent } from '@component/info-cursos-table/info-cursos-table.component';
+import { ComisionArrayComponent } from './component/comision-array/comision-array.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { HorarioAdminArrayTableComponent } from './component/horario-admin-array
     ComisionAdminFieldsetCursoComponent,
     HorarioAdminArrayComponent,
     HorarioAdminArrayTableComponent,
+    ComisionArrayComponent,
   ],
   imports: [
     BrowserModule,

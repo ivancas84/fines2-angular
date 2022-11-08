@@ -19,7 +19,7 @@ export class SedeAdminFieldsetComisionComponent implements AfterViewInit {
   
   @ViewChild(MatTable) table!: MatTable<any>;
 
-  displayedColumns: string[] = ["numero","tramo","horario","calendario-anio","calendario-semestre"] //columnas a visualizar
+  displayedColumns: string[] = ["numero","tramo","horario","calendario-anio","calendario-semestre","apertura","autorizada","options"] //columnas a visualizar
 
   ngAfterViewInit(): void {
     var s = this.ts.renderRowsOnValueChanges(this.control, this.table)

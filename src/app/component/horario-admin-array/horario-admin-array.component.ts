@@ -84,7 +84,7 @@ export class HorarioAdminArrayComponent implements OnInit {
 
 
   formGroup(data:{[index:string]:any}): FormGroup {
-    var fb = this.fb.group({
+    var fg = this.fb.group({
       "id":this.fb.control("",{validators:Validators.required}),
       "hora_inicio":this.fb.control("",{validators:Validators.required}),
       "hora_fin":this.fb.control("",{validators:Validators.required}),
@@ -94,8 +94,8 @@ export class HorarioAdminArrayComponent implements OnInit {
     if(data.hasOwnProperty("hora_inicio") && data["hora_inicio"].length>8) data["hora_inicio"] = new Date(data["hora_inicio"]).toTimeString().split(' ')[0];
     if(data.hasOwnProperty("hora_fin") && data["hora_fin"].length>8) data["hora_fin"] = new Date(data["hora_fin"]).toTimeString().split(' ')[0];
 
-    fb.patchValue(data)
-    return fb;
+    fg.patchValue(data)
+    return fg;
   }
 
 
