@@ -25,12 +25,14 @@ export class HorarioAdminArrayComponent implements OnInit {
   loadDisplay$!: Observable<any> //carga de display
   control: FormArray = this.fb.array([],{updateOn:"submit"});
   load: boolean = false; //Atributo auxiliar necesario para visualizar la barra de carga
+  idComision!: string;
 
   loadParams(){
     this.loadParams$ = this.route.queryParams.pipe(
       map(
         queryParams => { 
           if(!queryParams.hasOwnProperty("curso-comision")) throw "No esta definido el identificador de comision"
+          this.idComision = queryParams["curso-comision"];
           var display = new Display().setSize(0).setParamsByQueryParams(queryParams);
           this.display$.next(display)
           return true;
