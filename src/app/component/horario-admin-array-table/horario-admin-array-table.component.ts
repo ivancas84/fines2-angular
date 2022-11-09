@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { Sort } from '@angular/material/sort';
@@ -38,7 +38,7 @@ export class HorarioAdminArrayTableComponent implements AfterViewInit {
 
   ngOnDestroy () { this.subscriptions.unsubscribe() }
 
-  displayedColumns = ["curso","dia","hora_inicio","hora_fin"]
+  displayedColumns = ["curso","dia","hora_inicio","hora_fin","options"]
 
 
   onChangeSort(sort: Sort): void {
@@ -69,5 +69,15 @@ export class HorarioAdminArrayTableComponent implements AfterViewInit {
       default: return row[fieldName]
     }
   }
+
+  remove(index: number){
+    var fg = this.control.controls[index]
+    if(!fg.get("id")!.value) this.control.removeAt(index)
+    else fg.get("_mode")!.setValue("delete");
+  }
+
+
+  @Output() add: EventEmitter <void> = new EventEmitter <void>();
+
 
 }

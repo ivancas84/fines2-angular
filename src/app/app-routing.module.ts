@@ -4,10 +4,6 @@ import { AlumnoAdminComponent } from '@component/_alumno-admin/alumno-admin.comp
 import { AsignaturaArrayComponent } from '@component/_asignatura-array/asignatura-array.component';
 import { CalendarioAdminArrayComponent } from '@component/_calendario-admin-array/calendario-admin-array.component';
 import { CalendarioAdminComponent } from '@component/_calendario-admin/calendario-admin.component';
-import { ComisionAdminArrayComponent } from '@component/_comision-admin/comision-admin-array.component';
-import { ComisionAdminComponent } from '@component/_comision-admin/comision-admin.component';
-import { ComisionAdmin2Component } from '@component/comision-admin/comision-admin.component';
-import { ComisionTableComponent } from '@component/_comision-table/comision-table.component';
 import { CursoAdminComponent } from '@component/_curso-admin/curso-admin.component';
 import { CursosTomaPosesionComponent } from '@component/cursos-toma-posesion/cursos-toma-posesion.component';
 import { EnlaceNoDisponibleComponent } from '@component/enlace-no-disponible/enlace-no-disponible.component';
@@ -24,6 +20,7 @@ import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
 import { TomaPosesionEmailAbcComponent } from '@component/_toma-posesion-email-abc/toma-posesion-email-abc.component';
 import { HorarioAdminArrayComponent } from '@component/horario-admin-array/horario-admin-array.component';
 import { ComisionArrayComponent } from '@component/comision-array/comision-array.component';
+import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
 
 const routes: Routes = [
   { path: '', component: CursosTomaPosesionComponent, pathMatch: 'full' },
@@ -37,10 +34,8 @@ const routes: Routes = [
   { path: 'resumen-alumnos', component: ResumenAlumnosComponent, pathMatch: 'full' },
   { path: 'calendario-admin', component: CalendarioAdminComponent, pathMatch: 'full' },
   { path: 'calendario-admin-array', component: CalendarioAdminArrayComponent, pathMatch: 'full' },
-  { path: 'comision-admin', component: ComisionAdmin2Component, pathMatch: 'full' },
-  { path: 'comision-admin-array', component: ComisionAdminArrayComponent, pathMatch: 'full' },
+  { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
   { path: 'comision-array', component: ComisionArrayComponent, pathMatch: 'full' },
-  { path: 'comision-table', component: ComisionTableComponent, pathMatch: 'full' },
   { path: 'horario-admin-array', component: HorarioAdminArrayComponent, pathMatch: 'full' },
 
   { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },

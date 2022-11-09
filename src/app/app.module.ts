@@ -25,22 +25,19 @@ import { DesaprobadoPipe } from '@pipe/desaprobado.pipe';
 import { TableResumenComisionesComponent } from '@component/_resumen-comisiones/table-resumen-comisiones.component';
 import { ListaComisionesDocentesSinContralorComponent } from '@component/_resumen-comisiones/lista-comisiones-docentes-sin-contralor';
 import { GenerarConstanciaComponent } from '@component/generar-constancia/generar-constancia.component';
-import { ComisionAdminComponent } from '@component/_comision-admin/comision-admin.component';
 import { CalendarioAdminComponent } from '@component/_calendario-admin/calendario-admin.component';
 import { CalendarioAdminArrayComponent } from '@component/_calendario-admin-array/calendario-admin-array.component';
-import { ComisionAdminArrayComponent } from '@component/_comision-admin/comision-admin-array.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
 import { CursosTomaPosesionComponent } from '@component/cursos-toma-posesion/cursos-toma-posesion.component';
 import { TomaPosesionEmailAbcComponent } from '@component/_toma-posesion-email-abc/toma-posesion-email-abc.component';
 import { InscripcionDocenteComponent } from '@component/_inscripcion-docente/inscripcion-docente.component';
 import { InscripcionDocenteCorrectaComponent } from '@component/inscripcion-docente-correcta/inscripcion-docente-correcta.component';
 import { EnlaceNoDisponibleComponent } from '@component/enlace-no-disponible/enlace-no-disponible.component';
-import { ComisionTableComponent } from '@component/_comision-table/comision-table.component';
 import { InfoCursosComponent } from '@component/info-cursos/info-cursos.component';
 import { SedeAdminFieldsetSedeComponent } from './component/sede-admin-fieldset-sede/sede-admin-fieldset-sede.component';
 import { SedeAdminFieldsetDomicilioComponent } from './component/sede-admin-fieldset-domicilio/sede-admin-fieldset-domicilio.component';
 import { SedeAdminFieldsetComisionComponent } from './component/sede-admin-fieldset-comision/sede-admin-fieldset-comision.component';
-import { ComisionAdmin2Component } from './component/comision-admin/comision-admin.component';
+import { ComisionAdminComponent } from './component/comision-admin/comision-admin.component';
 import { ComisionAdminFieldsetComisionComponent } from './component/comision-admin-fieldset-comision/comision-admin-fieldset-comision.component';
 import { CursosTomaPosesionTableComponent } from '@component/cursos-toma-posesion-table/cursos-toma-posesion-table.component';
 import { ComisionAdminFieldsetCursoComponent } from './component/comision-admin-fieldset-curso/comision-admin-fieldset-curso.component';
@@ -62,8 +59,6 @@ import { MenuComponent } from '@component/menu/menu.component';
     AsignaturaArrayComponent,
     CalendarioAdminComponent,
     CalendarioAdminArrayComponent,
-    ComisionAdminComponent,
-    ComisionAdminArrayComponent,
     CursoAdminComponent,
     CursosTomaPosesionComponent,
     CursosTomaPosesionTableComponent,
@@ -81,12 +76,11 @@ import { MenuComponent } from '@component/menu/menu.component';
     SedeAdminComponent,
     TableResumenComisionesComponent,
     TomaPosesionEmailAbcComponent,
-    ComisionTableComponent,
     SedeAdminComponent,
     SedeAdminFieldsetSedeComponent,
     SedeAdminFieldsetDomicilioComponent,
     SedeAdminFieldsetComisionComponent,
-    ComisionAdmin2Component,
+    ComisionAdminComponent,
     ComisionAdminFieldsetComisionComponent,
     ComisionAdminFieldsetCursoComponent,
     HorarioAdminArrayComponent,

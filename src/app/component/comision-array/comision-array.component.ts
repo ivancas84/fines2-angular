@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
+import { loadSearchControl } from '@function/component';
 import { ComponentLoadService } from '@service/component/component-load-service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { BehaviorSubject, map, Observable, of, switchMap } from 'rxjs';
@@ -26,11 +27,20 @@ export class ComisionArrayComponent implements OnInit {
   control: FormArray = this.fb.array([]);
   load: boolean = false; //Atributo auxiliar necesario para visualizar la barra de carga
   length!: number; //longitud total de los datos a mostrar
+  loadSearch$!: Observable<any> //carga de display
+
+  
+  controlSearch: FormGroup = this.fb.group({
+    "calendario-anio":this.fb.control(""),
+    "calendario-semestre":this.fb.control(""),
+    "autorizada":this.fb.control(""),
+  });
 
 
   ngOnInit(): void {
     this.loadDisplay()
     this.loadParams()
+    this.loadSearch$ = loadSearchControl(this.controlSearch, this.display$)
   }
 
   loadParams(){
@@ -112,7 +122,6 @@ export class ComisionArrayComponent implements OnInit {
       ),
       map(
         data => {
-          console.log(data)
           data.forEach((element: { [x: string]: string; }) => {
             element["sede"] =  element["sede-nombre"] + " (" + element["sede-numero"] + ")"
             element["label"] =  element["sede-numero"] + element["division"] + "/" + element["planificacion-anio"] + element["planificacion-semestre"]

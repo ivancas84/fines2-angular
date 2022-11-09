@@ -75,15 +75,32 @@
  
     
     <ng-container matColumnDef="options">
-    <th mat-header-cell *matHeaderCellDef> Opciones </th>
+    <th mat-header-cell *matHeaderCellDef  width="25px"> Opciones </th>
     <td mat-cell *matCellDef="let row; let i = index;">
-
+        <button type="button"
+        mat-mini-fab
+        title="Eliminar horario"
+        color="warn"
+        (click)="remove(i)">
+        <mat-icon>delete</mat-icon></button>
     </td>
     <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
  
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row
+        [hidden]="row.controls.hasOwnProperty('_mode') && (row.controls['_mode'].value == 'delete')"
         *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
 </table>
+
  
+<mat-toolbar>
+  <mat-toolbar-row>
+      <button  
+      type="button"
+      mat-mini-fab
+      color="accent"
+      title="Agregar curso"
+      (click)="add.emit()"><mat-icon>add</mat-icon></button>
+  </mat-toolbar-row>
+</mat-toolbar>

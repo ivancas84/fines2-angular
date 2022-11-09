@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
+import { logValidationErrors } from '@function/log-validation-errors';
 import { ComponentFormService } from '@service/component/component-form-service';
 import { ComponentLoadService } from '@service/component/component-load-service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
@@ -30,7 +31,7 @@ export class HorarioAdminArrayComponent implements OnInit {
   controlHorario: FormArray = this.fb.array([]);
   control: FormGroup = this.fb.group({
     "horario": this.controlHorario
-  },{updateOn:"submit"})
+  })
   load: boolean = false; //Atributo auxiliar necesario para visualizar la barra de carga
   idComision!: string;
 
@@ -85,11 +86,12 @@ export class HorarioAdminArrayComponent implements OnInit {
 
   formGroup(data:{[index:string]:any}): FormGroup {
     var fg = this.fb.group({
-      "id":this.fb.control("",{validators:Validators.required}),
+      "id":this.fb.control(""),
       "hora_inicio":this.fb.control("",{validators:Validators.required}),
       "hora_fin":this.fb.control("",{validators:Validators.required}),
       "curso":this.fb.control("",{validators:Validators.required}),
       "dia":this.fb.control("",{validators:Validators.required}),
+      "_mode":this.fb.control(""),
     })
     if(data.hasOwnProperty("hora_inicio") && data["hora_inicio"].length>8) data["hora_inicio"] = new Date(data["hora_inicio"]).toTimeString().split(' ')[0];
     if(data.hasOwnProperty("hora_fin") && data["hora_fin"].length>8) data["hora_fin"] = new Date(data["hora_fin"]).toTimeString().split(' ')[0];
@@ -99,24 +101,24 @@ export class HorarioAdminArrayComponent implements OnInit {
   }
 
 
-  loadDisplay(){
-    /**
-     * Se define un load independiente para el display, es util para reasignar
-     * valores directamente al display y reinicializar por ejemplo al limpiar
-     * o resetear el formulario
-     */
-     this.loadDisplay$ = this.display$.pipe(
-     switchMap(
-       () => this.dd.all("horario", this.display$.value)
-     ),
-     map(
-       data => {
-        this.controlHorario.clear();
-        for(var i = 0; i <data.length; i++) this.controlHorario.push(this.formGroup(data[i]));
-        return this.load = true;
-       }
-     ),
-   )
+  loadDisplay(): void {
+      /**
+       * Se define un load independiente para el display, es util para reasignar
+       * valores directamente al display y reinicializar por ejemplo al limpiar
+       * o resetear el formulario
+       */
+      this.loadDisplay$ = this.display$.pipe(
+          switchMap(
+              () => this.dd.all("horario", this.display$.value)
+          ),
+          map(
+              data => {
+                  this.controlHorario.clear();
+                  for(var i = 0; i <data.length; i++) this.controlHorario.push(this.formGroup(data[i]));
+                  return this.load = true;
+              }
+          ),
+      )
   }
 
 
@@ -138,6 +140,7 @@ export class HorarioAdminArrayComponent implements OnInit {
   submit(){
     if (!this.control.valid) {
       this.formService.cancelSubmit(this.control)
+      logValidationErrors(this.control);
       this.isSubmitted = false;
     } else {
       this.dd._post("persist_rows", "horario", this.controlHorario.value).pipe(first()).subscribe({
@@ -157,6 +160,12 @@ export class HorarioAdminArrayComponent implements OnInit {
 
   options$!: Observable<any>;
   options: {[i:string]:{[i:string]:any}[]} = {}
+
+
+
+  addHorario(){
+    this.controlHorario.push(this.formGroup({}))
+  }
 
   
 }

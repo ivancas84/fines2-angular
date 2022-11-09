@@ -4,6 +4,10 @@
  
 <ng-container *ngIf="(loadParams$ | async); else loading">
     <ng-container *ngIf="(loadDisplay$ | async); else loading">
+        <ng-container *ngIf="(loadSearch$ | async); else loading">
+
+        <app-comision-array-search [display]="display$.value" [control]="controlSearch"></app-comision-array-search>
+        
         <mat-card>
             <mat-card-header>
                 <mat-card-title>
@@ -20,6 +24,8 @@
                     [display]="display$.value"></app-comision-array-table>
             </mat-card-content>
         </mat-card>
+    </ng-container>
+
     </ng-container>
     <!-- <p>Debug Form value: {{ form.value | json }}</p>
     <p>Debug Form status: {{ form.status | json }}</p> -->

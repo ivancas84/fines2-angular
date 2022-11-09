@@ -14,7 +14,10 @@
           <mat-card-content>
           <mat-progress-bar *ngIf="!load"
                             mode="indeterminate"></mat-progress-bar>
-                  <app-horario-admin-array-table [idComision]="idComision" [control]="controlHorario" [options]="options"></app-horario-admin-array-table>
+                  <app-horario-admin-array-table [idComision]="idComision" 
+                      [control]="controlHorario" 
+                      (add)="addHorario()"
+                      [options]="options"></app-horario-admin-array-table>
         </mat-card-content>
         </mat-card>
 

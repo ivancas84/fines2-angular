@@ -4,12 +4,14 @@ import { MatExpansionPanel } from '@angular/material/expansion';
 import { Display } from '@class/display';
 import { arrayColumn } from '@function/array-column';
 import { arrayObjectsMerge } from '@function/array-objects-merge';
-import { BehaviorSubject, map, Observable, of, Subscription, switchMap } from 'rxjs';
+import { BehaviorSubject, first, map, Observable, of, Subscription, switchMap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { ComponentSearchService } from '@service/component/component-search-service';
-import { ComponentFormService } from '@service/component/component-form-service';
-import { ComponentTableService } from '@service/component/component-table-service';
+import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
+import { markAllAsTouched } from '@function/mark-all-as-touched';
+import { MatDialog } from '@angular/material/dialog';
+import { datePickerYearGroupKey, loadSearchControl } from '@function/component';
 
 
 @Component({
@@ -25,6 +27,9 @@ import { ComponentTableService } from '@service/component/component-table-servic
   `],
 })
 export class InfoCursosComponent implements OnInit {
+
+  datePickerYearGroupKey = datePickerYearGroupKey
+
   entityName: string = "curso"
   
   display$:BehaviorSubject<Display> = new BehaviorSubject(new Display)
@@ -61,9 +66,8 @@ export class InfoCursosComponent implements OnInit {
     protected dd: DataDefinitionToolService,
     protected route: ActivatedRoute, 
     protected fb: FormBuilder,
-    protected ss: ComponentSearchService,
-    public fs: ComponentFormService,
-
+    protected dialog: MatDialog, 
+    protected componentTools: ComponentSearchService,
   ) { }
 
   initData(): Observable<any>{
@@ -155,7 +159,7 @@ export class InfoCursosComponent implements OnInit {
   ngOnInit(): void {
     this.loadDisplay()
     this.loadParams()
-    this.loadSearch$ = this.ss.loadControl(this.controlSearch, this.display$)
+    this.loadSearch$ = loadSearchControl(this.controlSearch, this.display$)    
   }
 
   loadParams(){
@@ -214,8 +218,27 @@ export class InfoCursosComponent implements OnInit {
     this.control.patchValue(data)
   }
     
-  onSubmitSearch(): void {
-    this.ss.onSubmit(this.controlSearch,this.display$.value, this.searchPanel,this.isSubmittedSearch)
+
+  onSubmitSearch() {
+    this.isSubmittedSearch = true;
+ 
+    if (this.controlSearch.pending) {
+      this.controlSearch.statusChanges.pipe(first()).subscribe(() => {
+        if (this.controlSearch.valid) this.submitSearch()
+      });
+    } else this.submitSearch();
+  }
+
+  submitSearch(): void {
+    if (!this.control.valid) {
+      markAllAsTouched(this.controlSearch);
+      this.dialog.open(DialogAlertComponent, {
+        data: {title: "Error", message: "El formulario posee errores."}
+      });
+      this.isSubmittedSearch = false;
+    } else {
+      this.componentTools.searchAndNavigateByUrl(this.controlSearch.value, this.display$.value, this.searchPanel)
+    }
   }
   
   

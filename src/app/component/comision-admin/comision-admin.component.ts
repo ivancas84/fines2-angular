@@ -6,19 +6,18 @@ import { ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { isEmptyObject } from '@function/is-empty-object.function';
-import { logValidationErrors } from '@function/log-validation-errors';
 import { ComponentFormService } from '@service/component/component-form-service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { DdAsyncValidatorsService } from '@service/validators/dd-async-validators.service';
-import { first, of, Subscription } from 'rxjs';
+import { first, of } from 'rxjs';
 import { Observable, BehaviorSubject, map, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-comision-admin2',
+  selector: 'app-comision-admin',
   templateUrl: './comision-admin.component.html',
   styleUrls: ['./comision-admin.component.css']
 })
-export class ComisionAdmin2Component implements OnInit {
+export class ComisionAdminComponent implements OnInit {
 
   
   constructor(

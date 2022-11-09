@@ -25,14 +25,12 @@ export class MenuComponent implements OnInit {
     this.year = new Date().getFullYear();
     this.semester = getSemester();
     this.cursoQueryParams = {
-      "com_cal-anio":this.year,
-      "com_cal-semestre":this.semester,
-      "com-autorizada":true
+      "calendario-anio":this.year,
+      "calendario-semestre":this.semester,
     }
     this.comisionQueryParams = {
-      "cal-anio":this.year,
-      "cal-semestre":this.semester,
-      "autorizada":true
+      "calendario-anio":this.year,
+      "calendario-semestre":this.semester,
     } 
     // var token = this.auth.getToken();
     // this.view = (token && token.hasOwnProperty("view")) ? token["view"] : [];
