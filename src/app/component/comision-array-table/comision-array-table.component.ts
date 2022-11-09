@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 import { Display } from '@class/display';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './comision-array-table.component.html',
   styleUrls: ['./comision-array-table.component.css']
 })
-export class ComisionArrayTableComponent implements OnInit {
+export class ComisionArrayTableComponent implements AfterViewInit {
 
   constructor(
     protected ts: ComponentTableService,
@@ -34,7 +34,4 @@ export class ComisionArrayTableComponent implements OnInit {
   displayedColumns = ["label","sede","domicilio","tramo","horario","calendario","apertura","autorizada"]
 
   
-  ngOnInit(): void {
-  }
-
 }

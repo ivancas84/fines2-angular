@@ -48,7 +48,7 @@ export class InfoCursosComponent implements OnInit {
    
   load: boolean = false; //Atributo auxiliar necesario para visualizar la barra de carga
 
-  @Input() controlSearch: FormGroup = this.fb.group({
+  controlSearch: FormGroup = this.fb.group({
     "calendario-anio":this.fb.control(""),
     "calendario-semestre":this.fb.control(""),
     "comision-autorizada":this.fb.control(""),

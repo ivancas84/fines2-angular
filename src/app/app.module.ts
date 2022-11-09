@@ -50,6 +50,7 @@ import { HorarioAdminArrayTableComponent } from './component/horario-admin-array
 import { InfoCursosTableComponent } from '@component/info-cursos-table/info-cursos-table.component';
 import { ComisionArrayComponent } from './component/comision-array/comision-array.component';
 import { ComisionArrayTableComponent } from './component/comision-array-table/comision-array-table.component';
+import { ComisionArraySearchComponent } from './component/comision-array-search/comision-array-search.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { ComisionArrayTableComponent } from './component/comision-array-table/co
     HorarioAdminArrayTableComponent,
     ComisionArrayComponent,
     ComisionArrayTableComponent,
+    ComisionArraySearchComponent,
   ],
   imports: [
     BrowserModule,
