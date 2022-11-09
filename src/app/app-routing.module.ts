@@ -23,6 +23,7 @@ import { ResumenComisionesComponent } from '@component/_resumen-comisiones/resum
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
 import { TomaPosesionEmailAbcComponent } from '@component/_toma-posesion-email-abc/toma-posesion-email-abc.component';
 import { HorarioAdminArrayComponent } from '@component/horario-admin-array/horario-admin-array.component';
+import { ComisionArrayComponent } from '@component/comision-array/comision-array.component';
 
 const routes: Routes = [
   { path: '', component: CursosTomaPosesionComponent, pathMatch: 'full' },
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'calendario-admin-array', component: CalendarioAdminArrayComponent, pathMatch: 'full' },
   { path: 'comision-admin', component: ComisionAdmin2Component, pathMatch: 'full' },
   { path: 'comision-admin-array', component: ComisionAdminArrayComponent, pathMatch: 'full' },
+  { path: 'comision-array', component: ComisionArrayComponent, pathMatch: 'full' },
   { path: 'comision-table', component: ComisionTableComponent, pathMatch: 'full' },
   { path: 'horario-admin-array', component: HorarioAdminArrayComponent, pathMatch: 'full' },
 

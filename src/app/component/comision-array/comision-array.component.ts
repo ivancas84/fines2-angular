@@ -30,7 +30,19 @@ export class ComisionArrayComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadDisplay()
-    this.loadParams$ = this.ls.loadParams(this.display$)
+    this.loadParams()
+  }
+
+  loadParams(){
+    this.loadParams$ = this.route.queryParams.pipe(
+      map(
+        queryParams => { 
+          var display = new Display().setSize(100).setParamsByQueryParams(queryParams);
+          this.display$.next(display)
+          return true;
+        },
+      ),
+    )
   }
 
   loadDisplay(){
@@ -71,7 +83,9 @@ export class ComisionArrayComponent implements OnInit {
         ids => this.dd.entityFieldsGetAll({
             entityName: "comision", ids, fields: [
               "id",
-              "comision-division",
+              "division",
+              "autorizada",
+              "apertura",
               "sede-nombre",
               "sede-numero",
               "domicilio-calle",
@@ -80,20 +94,37 @@ export class ComisionArrayComponent implements OnInit {
               "domicilio-barrio",
               "planificacion-anio",
               "planificacion-semestre",
+              "calendario-anio",
+              "calendario-semestre",
               "plan-orientacion"
             ]
-          })
+          }),
+      ),
+      switchMap(
+        data => this.dd.postMergeAll_({
+          data:data, 
+          entityName:"horarios_comision", 
+          method:"info",
+          fields:["dias_dias","hora_inicio","hora_fin"], 
+          fieldNameData:"id",
+          fieldNameResponse:"comision"
+        }),
       ),
       map(
         data => {
+          console.log(data)
           data.forEach((element: { [x: string]: string; }) => {
             element["sede"] =  element["sede-nombre"] + " (" + element["sede-numero"] + ")"
-            element["label"] =  element["sede-numero"] + element["comision-division"] + "/" + element["planificacion-anio"] + element["planificacion-semestre"]
+            element["label"] =  element["sede-numero"] + element["division"] + "/" + element["planificacion-anio"] + element["planificacion-semestre"]
             element["tramo"] =  element["planificacion-anio"] + "º" + element["planificacion-semestre"] + "º " + element["plan-orientacion"]
             element["domicilio"] =  element["domicilio-calle"];
+            element["calendario"] =  new Date(element["calendario-anio"]).getFullYear() + "-" +element["calendario-semestre"];
+            
             if(element["domicilio-entre"]) element["domicilio"] +=  " e/ " + element["domicilio-entre"]
             element["domicilio"] +=  " nº " + element["domicilio-numero"]
             if(element["domicilio-barrio"]) element["domicilio"] +=  " " + element["domicilio-barrio"]
+            if(element["dias_dias"]) element["horario"] =   element["dias_dias"] + " " + element["hora_inicio"] + " a " + element["hora_fin"] 
+            
           })
           return data;
         }
@@ -110,6 +141,9 @@ export class ComisionArrayComponent implements OnInit {
       "tramo":this.fb.control(""),
       "domicilio":this.fb.control(""),
       "horario":this.fb.control(""),
+      "calendario":this.fb.control(""),
+      "autorizada":this.fb.control(""),
+      "apertura":this.fb.control(""),
     })
     fg.patchValue(data)
     return fg;

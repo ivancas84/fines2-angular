@@ -109,7 +109,7 @@ export class InfoCursosComponent implements OnInit {
         }
       ),
       switchMap(
-        response =>   this.dd.postMergeAll({ data: response, method: "info", entityName: "curso_horario", fields: { "horario": "horario" }, fieldNameData: "id", fieldNameResponse: "curso" })
+        response => this.dd.postMergeAll({ data: response, method: "info", entityName: "curso_horario", fields: { "horario": "horario" }, fieldNameData: "id", fieldNameResponse: "curso" })
       ),
       switchMap(
         data =>   {

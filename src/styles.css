@@ -2,21 +2,16 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-mat-form-field {
-  width: 100%;
-}
+mat-form-field { width: 100%; }
 
-table {
-  width: 100%;
-}
+table { width: 100%; }
 
-mat-card {
-  margin: 15px;}
+mat-card { margin: 15px; }
 
-.highlightText { background: yellow; }
+.highlightYellow { background: yellow; }
 
-.highlightRed{
-  background: #ff9999; 
-}
+.highlightRed{ background: #ff9999; }
+
+.highlightBlue{ background: #63c5da; }
 
 .fx-item { padding:0px 10px;  }

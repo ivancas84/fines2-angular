@@ -1,1 +1,27 @@
-<p>comision-array works!</p>
+<ng-template #loading>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
+ 
+<ng-container *ngIf="(loadParams$ | async); else loading">
+    <ng-container *ngIf="(loadDisplay$ | async); else loading">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                  Comisiones
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-progress-bar 
+                    *ngIf="!load"
+                    mode="indeterminate"></mat-progress-bar>
+                <app-comision-array-table 
+                    [control]="control" 
+                    [length]="length" 
+                    [display]="display$.value"></app-comision-array-table>
+            </mat-card-content>
+        </mat-card>
+    </ng-container>
+    <!-- <p>Debug Form value: {{ form.value | json }}</p>
+    <p>Debug Form status: {{ form.status | json }}</p> -->
+ 
+</ng-container>
