@@ -31,7 +31,7 @@ export class ComisionArrayTableComponent implements AfterViewInit {
     this.subscriptions.add(s)
   }
 
-  displayedColumns = ["label","sede","domicilio","tramo","horario","calendario","apertura","autorizada","options"]
+  displayedColumns = ["label","sede","domicilio","tramo","horario","calendario","modalidad-nombre","turno","apertura","autorizada","options"]
 
   
 }

@@ -44,6 +44,20 @@
       </td>
       </ng-container>
 
+      <ng-container matColumnDef="modalidad-nombre">
+        <th mat-header-cell *matHeaderCellDef > Modalidad </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            {{row.controls['modalidad-nombre'].value}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="turno">
+        <th mat-header-cell *matHeaderCellDef > Turno </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            {{row.controls['turno'].value}}
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="autorizada">
         <th mat-header-cell *matHeaderCellDef > Autorizada </th>
         <td mat-cell *matCellDef="let row; let i = index;"

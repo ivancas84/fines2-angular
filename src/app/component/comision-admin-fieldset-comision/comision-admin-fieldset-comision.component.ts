@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Display } from '@class/display';
+import { arrayColumn } from '@function/array-column';
 import { ComponentFormService } from '@service/component/component-form-service';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { Observable, map } from 'rxjs';
@@ -46,7 +47,11 @@ export class ComisionAdminFieldsetComisionComponent implements OnInit {
   optionsTurno$!: Observable<Array<any>>;
   initOptionsTurno(): void {
     var display = new Display().addField("turno").addOrder("turno","ASC").addParam("turno",true)
-    this.optionsTurno$ = this.dd.post("select","comision", display)
+    this.optionsTurno$ = this.dd.post("select","comision", display).pipe(
+      map(
+        rows => arrayColumn(rows,"turno")
+      )
+    )
   }
 
   loadAutocompleteSede$!: Observable<any>;

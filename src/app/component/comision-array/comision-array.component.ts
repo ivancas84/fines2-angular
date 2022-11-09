@@ -106,7 +106,9 @@ export class ComisionArrayComponent implements OnInit {
               "planificacion-semestre",
               "calendario-anio",
               "calendario-semestre",
-              "plan-orientacion"
+              "plan-orientacion",
+              "modalidad-nombre",
+              "turno"
             ]
           }),
       ),
@@ -153,6 +155,8 @@ export class ComisionArrayComponent implements OnInit {
       "calendario":this.fb.control(""),
       "autorizada":this.fb.control(""),
       "apertura":this.fb.control(""),
+      "modalidad-nombre":this.fb.control(""),
+      "turno":this.fb.control(""),
     })
     fg.patchValue(data)
     return fg;
