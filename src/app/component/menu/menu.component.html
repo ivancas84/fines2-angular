@@ -5,6 +5,7 @@
     Comisiones
   </button>
   <mat-menu #comision="matMenu">
+    <a mat-menu-item routerLink="/sede-admin" routerLinkActive="active" title="Nueva sede">Nueva sede</a>
     <a mat-menu-item routerLink="/comision-admin" routerLinkActive="active" title="Nueva comisión">Nueva comisión</a>
     <a mat-menu-item routerLink="/comision-table"  [queryParams]="comisionQueryParams"  routerLinkActive="active" title="Lista de Comisiones">Comisiones</a>
     <a mat-menu-item routerLink="/lista-comisiones"  [queryParams]="cursoQueryParams" routerLinkActive="active" title="Cursos y docente">Cursos</a>

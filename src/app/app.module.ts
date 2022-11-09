@@ -14,7 +14,6 @@ import { AppMaterialModule } from './core/app-material.module';
 import { AppCoreModule } from './core/app-core.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { AsignaturaArrayComponent } from '@component/_asignatura-array/asignatura-array.component';
-import { MenuComponent } from './menu/menu.component';
 import { ResumenComisionesComponent } from '@component/_resumen-comisiones/resumen-comisiones.component';
 import { CursoAdminComponent } from '@component/_curso-admin/curso-admin.component';
 import { ListaComisionesComponent } from '@component/_resumen-comisiones/lista-comisiones.component';
@@ -51,6 +50,7 @@ import { InfoCursosTableComponent } from '@component/info-cursos-table/info-curs
 import { ComisionArrayComponent } from './component/comision-array/comision-array.component';
 import { ComisionArrayTableComponent } from './component/comision-array-table/comision-array-table.component';
 import { ComisionArraySearchComponent } from './component/comision-array-search/comision-array-search.component';
+import { MenuComponent } from '@component/menu/menu.component';
 
 @NgModule({
   declarations: [

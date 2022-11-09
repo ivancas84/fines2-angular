@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
@@ -27,6 +28,7 @@ export class ComisionAdmin2Component implements OnInit {
     protected fb: FormBuilder,
     protected validators: DdAsyncValidatorsService,
     protected formService: ComponentFormService,
+    protected snackBar: MatSnackBar,
   ) { }
 
   loadParams$!: Observable<any> //carga de parametros
@@ -57,12 +59,12 @@ export class ComisionAdmin2Component implements OnInit {
 
   controlCurso_:FormArray = this.fb.array([])
 
-  
- defaultValuesComision: {[index:string]: any} = {
-    apertura:false,
-    autorizada:false,
-    publicada:false
- }
+    
+  defaultValuesComision: {[index:string]: any} = {
+      apertura:false,
+      autorizada:false,
+      publicada:false
+  }
 
   loadParams(){
     this.loadParams$ = this.route.queryParams.pipe(
@@ -196,18 +198,25 @@ export class ComisionAdmin2Component implements OnInit {
       "horas_catedra":this.fb.control(""),
       "asignatura-nombre":this.fb.control(""),
       "horario":this.fb.control(""),
+      "_mode":this.fb.control(""),
     })
   }
 
+  addCurso(){
+    this.controlCurso_.push(this.formGroupCurso())
+  }
+
+  removeCurso(index: number){
+    var fg = this.controlCurso_.controls[index]
+    if(!fg.get("id")!.value) this.controlCurso_.removeAt(index)
+    else fg.get("_mode")!.setValue("delete");
+  }
 
   ngOnInit(): void {
     this.loadParams()
     this.loadDisplay()
     this.loadStorage$ = this.formService.loadStorage(this.controlComision)
   }
-
-
-
 
   isSubmitted: boolean = false //Flag para habilitar/deshabilitar boton aceptar
 
@@ -222,6 +231,7 @@ export class ComisionAdmin2Component implements OnInit {
   }
 
   submit(){
+
     if (!this.controlComision.valid) {
       this.formService.cancelSubmit(this.controlComision)
       this.isSubmitted = false;
@@ -241,6 +251,10 @@ export class ComisionAdmin2Component implements OnInit {
     }
   }
 
+
+
+
+  
 
 
 

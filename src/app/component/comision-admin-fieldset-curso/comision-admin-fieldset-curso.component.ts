@@ -1,9 +1,13 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormArray } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
+import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
+import { ComponentFormService } from '@service/component/component-form-service';
 import { ComponentTableService } from '@service/component/component-table-service';
-import { Subscription } from 'rxjs';
+import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
+import { first, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-comision-admin-fieldset-curso',
@@ -14,6 +18,9 @@ export class ComisionAdminFieldsetCursoComponent implements AfterViewInit {
 
   constructor(
     protected ts: ComponentTableService,
+    protected dd: DataDefinitionToolService,
+    protected dialog: MatDialog,
+    protected formService: ComponentFormService,
   ) { }
 
   @Input() control!: FormArray
@@ -22,6 +29,9 @@ export class ComisionAdminFieldsetCursoComponent implements AfterViewInit {
   protected subscriptions: Subscription = new Subscription() //suscripciones en el ts
  
   @ViewChild(MatTable) table!: MatTable<any>;
+
+  @Output() addCurso: EventEmitter <void> = new EventEmitter <void>();
+
 
 
   ngAfterViewInit(): void {
@@ -46,6 +56,54 @@ export class ComisionAdminFieldsetCursoComponent implements AfterViewInit {
  
   printContent(): void {
     this.ts.printContent(this.content, this.displayedColumns)
+  }
+  
+  removeCurso(index: number){
+    var fg = this.control.controls[index]
+    if(!fg.get("id")!.value) this.control.removeAt(index)
+    else fg.get("_mode")!.setValue("delete");
+  }
+
+  
+  onCreateCursos(){
+        if(!this.idComision) {
+            this.dialog.open(DialogAlertComponent, {
+                data: {title: "Error", message: "No se pueden crear los cursos, no se encuentra el id definido."}
+            });
+            return
+        }
+
+        this.dd._post("persist", "crear_cursos_comision", this.idComision).pipe(first()).subscribe({
+            next: (response: any) => {
+                this.formService.submitted(response)     
+            },
+            error: (error: any) => { 
+                this.dialog.open(DialogAlertComponent, {
+                  data: {title: "Error", message: error.error}
+                });
+            }
+        });
+    }
+
+
+    onDeleteCursos(){
+      if(!this.idComision) {
+          this.dialog.open(DialogAlertComponent, {
+              data: {title: "Error", message: "No se pueden eliminar los cursos, no se encuentra el id definido."}
+          });
+          return
+      }
+
+      this.dd._post("persist", "eliminar_cursos_comision", this.idComision).pipe(first()).subscribe({
+          next: (response: any) => {
+              this.formService.submitted(response)     
+          },
+          error: (error: any) => { 
+              this.dialog.open(DialogAlertComponent, {
+                data: {title: "Error", message: error.error}
+              });
+          }
+      });
   }
 
 

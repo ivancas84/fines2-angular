@@ -5,7 +5,6 @@
       <mat-card-title>
         Lista de Cursos
       </mat-card-title>
-
        <ng-container>
         <button mat-mini-fab
             title="Copiar"
@@ -19,7 +18,22 @@
             (click)="printContent()">
             <mat-icon>print</mat-icon>
         </button>
+        <button  
+            [disabled]="!idComision"
+            type="button" 
+            mat-mini-fab
+            color="accent"
+            title="Eliminar cursos"
+            (click)="onDeleteCursos()"><mat-icon>delete</mat-icon></button>
+        <button  
+            [disabled]="!idComision"
+            type="button" 
+            mat-mini-fab
+            color="accent"
+            title="Crear cursos"
+            (click)="onCreateCursos()"><mat-icon>add</mat-icon></button>
         <a mat-mini-fab
+            color="warn"
             routerLink="/horario-admin-array"
             [queryParams]="{'curso-comision':idComision}"
             title="Horario de cursos"> <mat-icon>access_time</mat-icon> </a>
@@ -28,6 +42,7 @@
         </ng-container>
     </mat-card-header>
     <mat-card-content>
+        <p>Para regenerar los cursos debe eliminar los existentes.</p>
         <div #mainContent>
 
 
@@ -65,18 +80,22 @@
                 <ng-container matColumnDef="options">
                 <th mat-header-cell *matHeaderCellDef> Opciones </th>
                 <td mat-cell *matCellDef="let row; let i = index;">
-                    <!-- <a [routerLink]="'/toma-posesion-email-abc'"
-                        [queryParams]="{'curso':row.controls['id'].value}"
-                        [title]="'Administrar Comision'">Toma de Posesión</a> -->
+                    <button type="button"
+                        mat-mini-fab
+                        title="Eliminar curso"
+                        color="warn"
+                        (click)="removeCurso(i)">
+                        <mat-icon>delete</mat-icon></button>
                 </td>
                 <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
             
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row
+                    [hidden]="row.controls.hasOwnProperty('_mode') && (row.controls['_mode'].value == 'delete')"
                     *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
             </table>
-
+        
         </div>
     </mat-card-content>
 </mat-card>
