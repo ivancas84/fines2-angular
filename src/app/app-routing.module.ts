@@ -22,11 +22,13 @@ import { HorarioAdminArrayComponent } from '@component/horario-admin-array/horar
 import { ComisionArrayComponent } from '@component/comision-array/comision-array.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
 import { SedeArrayComponent } from '@component/sede-array/sede-array.component';
+import { AlumnoAdmin2Component } from '@component/alumno-admin2/alumno-admin2.component';
 
 const routes: Routes = [
   { path: '', component: CursosTomaPosesionComponent, pathMatch: 'full' },
 
   { path: 'alumno-admin', component: AlumnoAdminComponent, pathMatch: 'full' },
+  { path: 'alumno-admin2', component: AlumnoAdmin2Component, pathMatch: 'full' },
   { path: 'asignatura-array', component: AsignaturaArrayComponent, pathMatch: 'full' },
   { path: 'curso-admin', component: CursoAdminComponent, pathMatch: 'full' },
   { path: 'generar-constancia', component: GenerarConstanciaComponent, pathMatch: 'full' },

@@ -52,6 +52,12 @@ import { SedeAdminFieldsetDesignacionComponent } from './component/sede-admin-fi
 import { SedeArrayComponent } from './component/sede-array/sede-array.component';
 import { SedeArrayTableComponent } from './component/sede-array-table/sede-array-table.component';
 import { SedeArraySearchComponent } from './component/sede-array-search/sede-array-search.component';
+import { AlumnoAdmin2Component } from './component/alumno-admin2/alumno-admin2.component';
+import { AlumnoAdminFieldsetPersonaComponent } from './component/alumno-admin-fieldset-persona/alumno-admin-fieldset-persona.component';
+import { AlumnoAdminFieldsetAlumnoComponent } from './component/alumno-admin-fieldset-alumno/alumno-admin-fieldset-alumno.component';
+import { AlumnoAdminTableAlumnoComisionComponent } from './component/alumno-admin-table-alumno-comision/alumno-admin-table-alumno-comision.component';
+import { AlumnoAdminTableCalificacionComponent } from './component/alumno-admin-table-calificacion/alumno-admin-table-calificacion.component';
+import { AlumnoAdminTableDetallePersonaComponent } from './component/alumno-admin-table-detalle-persona/alumno-admin-table-detalle-persona.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +102,12 @@ import { SedeArraySearchComponent } from './component/sede-array-search/sede-arr
     SedeArrayComponent,
     SedeArrayTableComponent,
     SedeArraySearchComponent,
+    AlumnoAdmin2Component,
+    AlumnoAdminFieldsetPersonaComponent,
+    AlumnoAdminFieldsetAlumnoComponent,
+    AlumnoAdminTableAlumnoComisionComponent,
+    AlumnoAdminTableCalificacionComponent,
+    AlumnoAdminTableDetallePersonaComponent,
   ],
   imports: [
     BrowserModule,
