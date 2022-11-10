@@ -21,6 +21,7 @@ import { TomaPosesionEmailAbcComponent } from '@component/_toma-posesion-email-a
 import { HorarioAdminArrayComponent } from '@component/horario-admin-array/horario-admin-array.component';
 import { ComisionArrayComponent } from '@component/comision-array/comision-array.component';
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
+import { SedeArrayComponent } from '@component/sede-array/sede-array.component';
 
 const routes: Routes = [
   { path: '', component: CursosTomaPosesionComponent, pathMatch: 'full' },
@@ -39,6 +40,8 @@ const routes: Routes = [
   { path: 'horario-admin-array', component: HorarioAdminArrayComponent, pathMatch: 'full' },
 
   { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
+  { path: 'sede-array', component: SedeArrayComponent, pathMatch: 'full' },
+
   { path: 'lista-comisiones-docentes-sin-contralor', component: ListaComisionesDocentesSinContralorComponent, pathMatch: 'full' },
   
   { path: 'inscripcion-docente', component: InscripcionDocenteComponent, pathMatch: 'full' },

@@ -6,13 +6,13 @@ import { ComponentToolsService } from '@service/component-tools/component-tools.
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-sede-admin-fieldset-comision',
-  templateUrl: './sede-admin-fieldset-comision.component.html',
-  styleUrls: ['./sede-admin-fieldset-comision.component.css']
+  selector: 'app-sede-admin-fieldset-designacion',
+  templateUrl: './sede-admin-fieldset-designacion.component.html',
+  styleUrls: ['./sede-admin-fieldset-designacion.component.css']
 })
-export class SedeAdminFieldsetComisionComponent implements AfterViewInit {
-
-  constructor(public tools: ComponentToolsService) { }
+export class SedeAdminFieldsetDesignacionComponent implements AfterViewInit {
+  
+  constructor(public ts: ComponentToolsService) { }
 
   @Input() control!: FormArray
 
@@ -20,7 +20,7 @@ export class SedeAdminFieldsetComisionComponent implements AfterViewInit {
   
   @ViewChild(MatTable) table!: MatTable<any>;
 
-  displayedColumns: string[] = ["numero","tramo","horario","calendario-anio","calendario-semestre","apertura","autorizada","options"] //columnas a visualizar
+  displayedColumns: string[] = ["persona-apellidos","persona-nombres","persona-telefono","persona-email","cargo-descripcion"] //columnas a visualizar
 
   ngAfterViewInit(): void {
     var s = renderRowsOfTableOnValueChanges(this.control, this.table)
@@ -29,16 +29,16 @@ export class SedeAdminFieldsetComisionComponent implements AfterViewInit {
 
   ngOnDestroy () { this.subscriptions.unsubscribe() }
 
- 
-  
+
+
   @ViewChild("mainContent") content!: ElementRef;
  
   copyContent(): void {
-    this.tools.copyContent(this.content, this.displayedColumns)
+    this.ts.copyContent(this.content, this.displayedColumns)
   }
  
   printContent(): void {
-    this.tools.printContent(this.content, this.displayedColumns)
+    this.ts.printContent(this.content, this.displayedColumns)
   }
 
 

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Display } from '@class/display';
 import { arrayColumn } from '@function/array-column';
-import { ComponentFormService } from '@service/component/component-form-service';
+import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { Observable, map } from 'rxjs';
 
@@ -14,7 +14,7 @@ import { Observable, map } from 'rxjs';
 export class ComisionAdminFieldsetComisionComponent implements OnInit {
 
   constructor(
-    protected formService: ComponentFormService,
+    protected tools: ComponentToolsService,
     protected dd: DataDefinitionService
   ) { }
 
@@ -59,13 +59,13 @@ export class ComisionAdminFieldsetComisionComponent implements OnInit {
   filteredOptionsSede$!: Observable<Array<{ [key: string]: any; }>>;
   labelSede: string = "";
   initAutocompleteSede(): void {
-    this.filteredOptionsSede$ = this.formService.filteredOptionsAutocomplete({
+    this.filteredOptionsSede$ = this.tools.filteredOptionsAutocomplete({
       entityName:"sede",
       control:this.control.get("sede")!,
       searchControl:this.searchControlSede,
     })
 
-    this.loadAutocompleteSede$ = this.formService.labelAutocomplete({
+    this.loadAutocompleteSede$ = this.tools.labelAutocomplete({
       entityName:"sede",
       control:this.control.get("sede")!,
       searchControl:this.searchControlSede,
@@ -86,13 +86,13 @@ export class ComisionAdminFieldsetComisionComponent implements OnInit {
   filteredOptionsCalendario$!: Observable<Array<{ [key: string]: any; }>>;
   labelCalendario: string = "";
   initAutocompleteCalendario(): void {
-    this.filteredOptionsCalendario$ = this.formService.filteredOptionsAutocomplete({
+    this.filteredOptionsCalendario$ = this.tools.filteredOptionsAutocomplete({
       entityName:"calendario",
       control:this.control.get("calendario")!,
       searchControl:this.searchControlCalendario,
     })
 
-    this.loadAutocompleteCalendario$ = this.formService.labelAutocomplete({
+    this.loadAutocompleteCalendario$ = this.tools.labelAutocomplete({
       entityName:"calendario",
       control:this.control.get("calendario")!,
       searchControl:this.searchControlCalendario,
@@ -114,13 +114,13 @@ export class ComisionAdminFieldsetComisionComponent implements OnInit {
   filteredOptionsComisionSiguiente$!: Observable<Array<{ [key: string]: any; }>>;
   labelComisionSiguiente: string = "";
   initAutocompleteComisionSiguiente(): void {
-    this.filteredOptionsComisionSiguiente$ = this.formService.filteredOptionsAutocomplete({
+    this.filteredOptionsComisionSiguiente$ = this.tools.filteredOptionsAutocomplete({
       entityName:"comision",
       control:this.control.get("comision_siguiente")!,
       searchControl:this.searchControlComisionSiguiente,
     })
 
-    this.loadAutocompleteComisionSiguiente$ = this.formService.labelAutocomplete({
+    this.loadAutocompleteComisionSiguiente$ = this.tools.labelAutocomplete({
       entityName:"comision",
       control:this.control.get("comision_siguiente")!,
       searchControl:this.searchControlComisionSiguiente,

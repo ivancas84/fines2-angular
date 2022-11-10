@@ -48,6 +48,10 @@ import { ComisionArrayComponent } from './component/comision-array/comision-arra
 import { ComisionArrayTableComponent } from './component/comision-array-table/comision-array-table.component';
 import { ComisionArraySearchComponent } from './component/comision-array-search/comision-array-search.component';
 import { MenuComponent } from '@component/menu/menu.component';
+import { SedeAdminFieldsetDesignacionComponent } from './component/sede-admin-fieldset-designacion/sede-admin-fieldset-designacion.component';
+import { SedeArrayComponent } from './component/sede-array/sede-array.component';
+import { SedeArrayTableComponent } from './component/sede-array-table/sede-array-table.component';
+import { SedeArraySearchComponent } from './component/sede-array-search/sede-array-search.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +92,10 @@ import { MenuComponent } from '@component/menu/menu.component';
     ComisionArrayComponent,
     ComisionArrayTableComponent,
     ComisionArraySearchComponent,
+    SedeAdminFieldsetDesignacionComponent,
+    SedeArrayComponent,
+    SedeArrayTableComponent,
+    SedeArraySearchComponent,
   ],
   imports: [
     BrowserModule,

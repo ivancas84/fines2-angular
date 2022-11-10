@@ -1,0 +1,28 @@
+<ng-template #loading>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
+   
+<ng-container *ngIf="(loadParams$ | async); else loading">
+    <ng-container *ngIf="(loadDisplay$ | async); else loading">
+        <ng-container *ngIf="(loadSearch$ | async); else loading">
+            <app-sede-array-search [display]="display$.value" 
+                [control]="controlSearch"></app-sede-array-search>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>
+                    Sedes
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-progress-bar *ngIf="!load"
+                                mode="indeterminate"></mat-progress-bar>
+                    <app-sede-array-table [control]="control"
+                        [display]="display$.value" 
+                        [length]="length"></app-sede-array-table>
+                </mat-card-content>
+            </mat-card>
+
+        </ng-container>
+    </ng-container>
+</ng-container>
+  

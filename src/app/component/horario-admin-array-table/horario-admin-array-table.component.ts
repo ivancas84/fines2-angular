@@ -4,8 +4,9 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { Display } from '@class/display';
+import { renderRowsOfTableOnValueChanges } from '@function/component';
 import { naturalCompare } from '@function/natural-compare';
-import { ComponentTableService } from '@service/component/component-table-service';
+import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { combineAll, combineLatest, map, Observable, Subscription, switchMap } from 'rxjs';
 
@@ -18,7 +19,6 @@ export class HorarioAdminArrayTableComponent implements AfterViewInit {
 
   constructor(
     protected dd: DataDefinitionToolService,
-    protected ts: ComponentTableService,
   ) { }
 
 
@@ -32,7 +32,7 @@ export class HorarioAdminArrayTableComponent implements AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<any>;
 
   ngAfterViewInit(): void {
-    var s = this.ts.renderRowsOnValueChanges(this.control, this.table)
+    var s = renderRowsOfTableOnValueChanges(this.control, this.table)
     this.subscriptions.add(s)
   }
 

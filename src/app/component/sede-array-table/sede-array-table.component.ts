@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 import { Display } from '@class/display';
@@ -7,15 +7,11 @@ import { ComponentToolsService } from '@service/component-tools/component-tools.
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-comision-array-table',
-  templateUrl: './comision-array-table.component.html',
-  styleUrls: ['./comision-array-table.component.css']
+  selector: 'app-sede-array-table',
+  templateUrl: './sede-array-table.component.html',
+  styleUrls: ['./sede-array-table.component.css']
 })
-export class ComisionArrayTableComponent implements AfterViewInit {
-
-  constructor(
-    protected ts: ComponentToolsService,
-  ) { }
+export class SedeArrayTableComponent implements AfterViewInit {
 
   @Input() control!: FormArray
   protected subscriptions: Subscription = new Subscription() //suscripciones en el ts
@@ -32,7 +28,9 @@ export class ComisionArrayTableComponent implements AfterViewInit {
     this.subscriptions.add(s)
   }
 
-  displayedColumns = ["label","sede","domicilio","tramo","horario","calendario","modalidad-nombre","turno","apertura","autorizada","options"]
+  ngOnDestroy () { this.subscriptions.unsubscribe() }
 
-  
+  displayedColumns = ["numero","nombre","domicilio","centro_educativo-nombre","options"]
+
+
 }

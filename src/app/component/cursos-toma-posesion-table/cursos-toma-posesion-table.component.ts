@@ -4,8 +4,8 @@ import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
-import { ComponentSearchService } from '@service/component/component-search-service';
-import { ComponentTableService } from '@service/component/component-table-service';
+import { renderRowsOfTableOnValueChanges } from '@function/component';
+import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { Subscription } from 'rxjs';
 
@@ -27,11 +27,11 @@ export class CursosTomaPosesionTableComponent implements AfterViewInit {
   @ViewChild("mainContent") content!: ElementRef;
  
   copyContent(): void {
-    this.ts.copyContent(this.content, this.displayedColumns)
+    this.tools.copyContent(this.content, this.displayedColumns)
   }
  
   printContent(): void {
-    this.ts.printContent(this.content, this.displayedColumns)
+    this.tools.printContent(this.content, this.displayedColumns)
   }
 
   displayedColumns = ["sede","comision","domicilio","asignatura-nombre","tramo","horario","options"]
@@ -45,17 +45,16 @@ export class CursosTomaPosesionTableComponent implements AfterViewInit {
     protected dd: DataDefinitionToolService,
     protected route: ActivatedRoute, 
     protected fb: FormBuilder,
-    protected searchService: ComponentSearchService,
-    protected ts: ComponentTableService,
+    protected tools: ComponentToolsService,
   ) { }
   
   ngAfterViewInit(): void {
-    var s = this.ts.renderRowsOnValueChanges(this.control, this.table)
+    var s = renderRowsOfTableOnValueChanges(this.control, this.table)
     this.subscriptions.add(s)
   }
 
   onChangeSort(sort: Sort): void {
-    this.ts.onChangeSort(sort, this.length, this.display, this.control, this.serverSortTranslate)
+    this.tools.onChangeSort(sort, this.length, this.display, this.control, this.serverSortTranslate)
   }
 
   

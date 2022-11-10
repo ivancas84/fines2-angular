@@ -1,83 +1,97 @@
 
 <mat-card>
     <mat-card-header>
-      <mat-card-title>
-        Comisiones
-      </mat-card-title>
+        <mat-card-title>
+            Comisiones
+        </mat-card-title>
+        <button mat-mini-fab
+            title="Copiar"
+            color="primary"
+            (click)="copyContent()">
+            <mat-icon>file_copy</mat-icon>
+        </button>
+        <button mat-mini-fab
+            title="Imprimir"
+            color="primary"
+            (click)="printContent()">
+            <mat-icon>print</mat-icon>
+        </button>
     </mat-card-header>
     <mat-card-content>
-        
-        <table mat-table
+        <div #mainContent>
+
+            <table mat-table
     [dataSource]="control.controls"
     class="mat-elevation-z8">
  
-    <ng-container matColumnDef="numero" >
-        <th mat-header-cell *matHeaderCellDef> Número </th>
-        <td mat-cell *matCellDef="let row; let i = index;">
-        {{row.controls['numero'].value}}
-        </td>
-    </ng-container>
+                <ng-container matColumnDef="numero" >
+                    <th mat-header-cell *matHeaderCellDef> Número </th>
+                    <td mat-cell *matCellDef="let row; let i = index;">
+                    {{row.controls['numero'].value}}
+                    </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="tramo" >
+                    <th mat-header-cell *matHeaderCellDef > Tramo </th>
+                    <td mat-cell *matCellDef="let row; let i = index;">
+                    {{row.controls['tramo'].value}}
+                    </td>
+                </ng-container>
  
-    <ng-container matColumnDef="tramo" >
-        <th mat-header-cell *matHeaderCellDef > Tramo </th>
-        <td mat-cell *matCellDef="let row; let i = index;">
-        {{row.controls['tramo'].value}}
-        </td>
-    </ng-container>
+                <ng-container matColumnDef="horario">
+                <th mat-header-cell *matHeaderCellDef > Horario </th>
+                <td mat-cell *matCellDef="let row; let i = index;">
+                    {{row.controls['horario'].value}}
+                </td>
+                </ng-container>
+
+                <ng-container matColumnDef="calendario-anio">
+                    <th mat-header-cell *matHeaderCellDef > Año </th>
+                    <td mat-cell *matCellDef="let row; let i = index;">
+                        {{row.controls['calendario-anio'].value | toDate | date:"Y"}}
+                    </td>
+                </ng-container>
  
-    <ng-container matColumnDef="horario">
-    <th mat-header-cell *matHeaderCellDef > Horario </th>
-    <td mat-cell *matCellDef="let row; let i = index;">
-        {{row.controls['horario'].value}}
-    </td>
-    </ng-container>
+                <ng-container matColumnDef="calendario-semestre">
+                    <th mat-header-cell *matHeaderCellDef > Semestre </th>
+                    <td mat-cell *matCellDef="let row; let i = index;">
+                        {{row.controls['calendario-semestre'].value}}
+                    </td>
+                </ng-container>
 
-    <ng-container matColumnDef="calendario-anio">
-        <th mat-header-cell *matHeaderCellDef > Año </th>
-        <td mat-cell *matCellDef="let row; let i = index;">
-            {{row.controls['calendario-anio'].value | toDate | date:"Y"}}
-        </td>
-        </ng-container>
- 
-    <ng-container matColumnDef="calendario-semestre">
-        <th mat-header-cell *matHeaderCellDef > Semestre </th>
-        <td mat-cell *matCellDef="let row; let i = index;">
-            {{row.controls['calendario-semestre'].value}}
-        </td>
-    </ng-container>
+                <ng-container matColumnDef="apertura">
+                    <th mat-header-cell *matHeaderCellDef > Apertura </th>
+                    <td mat-cell *matCellDef="let row; let i = index;">
+                        {{row.controls['apertura'].value | siNo}}
+                    </td>
+                </ng-container>
 
-    <ng-container matColumnDef="apertura">
-        <th mat-header-cell *matHeaderCellDef > Apertura </th>
-        <td mat-cell *matCellDef="let row; let i = index;">
-            {{row.controls['apertura'].value | siNo}}
-        </td>
-    </ng-container>
-
-    <ng-container matColumnDef="autorizada">
-        <th mat-header-cell *matHeaderCellDef > Autorizada </th>
-        <td mat-cell *matCellDef="let row; let i = index;">
-            {{row.controls['autorizada'].value | siNo}}
-        </td>
-    </ng-container>
+                <ng-container matColumnDef="autorizada">
+                    <th mat-header-cell *matHeaderCellDef > Autorizada </th>
+                    <td mat-cell *matCellDef="let row; let i = index;">
+                        {{row.controls['autorizada'].value | siNo}}
+                    </td>
+                </ng-container>
 
 
-    <ng-container matColumnDef="options">
-        <th mat-header-cell *matHeaderCellDef> Opciones </th>
-        <td mat-cell *matCellDef="let row; let i = index;">
-            <a  mat-mini-fab
-                [routerLink]="'/comision-admin'"
-                [queryParams]="{'id':row.controls['id'].value}"
-                [title]="'Administrar Comision'"><mat-icon>edit</mat-icon></a>
-        </td>
-        <td mat-footer-cell *matFooterCellDef></td>
-    </ng-container>
+                <ng-container matColumnDef="options">
+                    <th mat-header-cell *matHeaderCellDef> Opciones </th>
+                    <td mat-cell *matCellDef="let row; let i = index;">
+                        <a  mat-mini-fab
+                            [routerLink]="'/comision-admin'"
+                            [queryParams]="{'id':row.controls['id'].value}"
+                            [title]="'Administrar Comision'"><mat-icon>edit</mat-icon></a>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
 
-    <tr mat-header-row 
-        *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row
-        *matRowDef="let row; columns: displayedColumns; let i = index"ç
-        [ngClass]="{'highlightRed': !row.controls['autorizada'].value}"></tr>
-</table>
+                <tr mat-header-row 
+                    *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row
+                    *matRowDef="let row; columns: displayedColumns; let i = index"ç
+                    [ngClass]="{'highlightRed': !row.controls['autorizada'].value}"></tr>
+            </table>
+        </div>
  
 
 </mat-card-content>

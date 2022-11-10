@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { isEmptyObject } from '@function/is-empty-object.function';
-import { ComponentFormService } from '@service/component/component-form-service';
+import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { DdAsyncValidatorsService } from '@service/validators/dd-async-validators.service';
 import { first, of } from 'rxjs';
@@ -26,7 +26,7 @@ export class ComisionAdminComponent implements OnInit {
     protected route: ActivatedRoute,
     protected fb: FormBuilder,
     protected validators: DdAsyncValidatorsService,
-    protected formService: ComponentFormService,
+    protected tools: ComponentToolsService,
     protected snackBar: MatSnackBar,
   ) { }
 
@@ -119,7 +119,7 @@ export class ComisionAdminComponent implements OnInit {
       "comision":{}, 
     }
 
-    var storageValues = this.formService.initStorageValues()
+    var storageValues = this.tools.initStorageValues()
     if(!isEmptyObject(storageValues)) {
       data["comision"] = storageValues
       return of(data)
@@ -214,7 +214,7 @@ export class ComisionAdminComponent implements OnInit {
   ngOnInit(): void {
     this.loadParams()
     this.loadDisplay()
-    this.loadStorage$ = this.formService.loadStorage(this.controlComision)
+    this.loadStorage$ = this.tools.loadStorage(this.controlComision)
   }
 
   isSubmitted: boolean = false //Flag para habilitar/deshabilitar boton aceptar
@@ -232,12 +232,12 @@ export class ComisionAdminComponent implements OnInit {
   submit(){
 
     if (!this.controlComision.valid) {
-      this.formService.cancelSubmit(this.controlComision)
+      this.tools.cancelSubmit(this.controlComision)
       this.isSubmitted = false;
     } else {
       this.dd._post("persist", "comision", this.controlComision.value).pipe(first()).subscribe({
         next: (response: any) => {
-          this.formService.submittedDisplay(response,this.display$)
+          this.tools.submittedDisplay(response,this.display$)
           this.isSubmitted = false;
         },
         error: (error: any) => {

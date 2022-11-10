@@ -7,11 +7,11 @@ import { arrayObjectsMerge } from '@function/array-objects-merge';
 import { BehaviorSubject, first, map, Observable, of, Subscription, switchMap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
-import { ComponentSearchService } from '@service/component/component-search-service';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { markAllAsTouched } from '@function/mark-all-as-touched';
 import { MatDialog } from '@angular/material/dialog';
 import { datePickerYearGroupKey, loadSearchControl } from '@function/component';
+import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 
 
 @Component({
@@ -67,7 +67,7 @@ export class InfoCursosComponent implements OnInit {
     protected route: ActivatedRoute, 
     protected fb: FormBuilder,
     protected dialog: MatDialog, 
-    protected componentTools: ComponentSearchService,
+    protected componentTools: ComponentToolsService,
   ) { }
 
   initData(): Observable<any>{

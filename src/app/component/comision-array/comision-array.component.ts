@@ -3,7 +3,6 @@ import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
 import { loadSearchControl } from '@function/component';
-import { ComponentLoadService } from '@service/component/component-load-service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { BehaviorSubject, map, Observable, of, switchMap } from 'rxjs';
 
@@ -18,7 +17,6 @@ export class ComisionArrayComponent implements OnInit {
     protected dd: DataDefinitionToolService,
     protected route: ActivatedRoute,
     protected fb: FormBuilder,
-    protected ls: ComponentLoadService,
   ) { }
 
   display$:BehaviorSubject<Display> = new BehaviorSubject(new Display) //presentacion

@@ -7,8 +7,7 @@ import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { datePickerYearGroupKey, setNullGroupKey } from '@function/component';
 import { markAllAsTouched } from '@function/mark-all-as-touched';
-import { ComponentFormService } from '@service/component/component-form-service';
-import { ComponentSearchService } from '@service/component/component-search-service';
+import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { first, map, Observable } from 'rxjs';
 
 @Component({
@@ -33,22 +32,21 @@ export class ComisionArraySearchComponent implements OnInit {
   labelSede: string = ""; //label para mostrar si hay inicializado un valor
 
   constructor(
-    protected componentTools: ComponentSearchService,
+    protected componentTools: ComponentToolsService,
     protected dialog: MatDialog,
     protected router: Router,
     protected fb: FormBuilder,
-    protected formService: ComponentFormService
   ) { }
 
 
   initAutocompleteSede(): void {
-    this.filteredOptionsSede$ = this.formService.filteredOptionsAutocomplete({
+    this.filteredOptionsSede$ = this.componentTools.filteredOptionsAutocomplete({
       entityName:"sede",
       control:this.control.get("sede")!,
       searchControl:this.searchControlSede,
     })
  
-    this.loadAutocompleteSede$ = this.formService.labelAutocomplete({
+    this.loadAutocompleteSede$ = this.componentTools.labelAutocomplete({
       entityName:"sede",
       control:this.control.get("sede")!,
       searchControl:this.searchControlSede,

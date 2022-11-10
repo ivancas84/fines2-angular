@@ -8,7 +8,7 @@ import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { isEmptyObject } from '@function/is-empty-object.function';
 import { ToDatePipe } from '@pipe/to-date.pipe';
-import { ComponentFormService } from '@service/component/component-form-service';
+import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
 import { DdAsyncValidatorsService } from '@service/validators/dd-async-validators.service';
@@ -31,7 +31,7 @@ export class SedeAdminComponent implements OnInit {
     protected route: ActivatedRoute, 
     protected fb: FormBuilder, 
     protected validators: DdAsyncValidatorsService,
-    protected formService: ComponentFormService,
+    protected tools: ComponentToolsService,
   ) { }
 
   loadParams$!: Observable<any> //carga de parametros
@@ -64,6 +64,9 @@ export class SedeAdminComponent implements OnInit {
 
   controlComision_:FormArray = this.fb.array([])
 
+  controlDesignacion_:FormArray = this.fb.array([])
+
+
   control: FormGroup = this.fb.group({
     sede: this.controlSede,
     domicilio: this.controlDomicilio,
@@ -78,8 +81,8 @@ export class SedeAdminComponent implements OnInit {
   isSubmitted: boolean = false //Flag para habilitar/deshabilitar boton aceptar
   protected subscriptions: Subscription = new Subscription() //suscripciones en el ts
 
-  formGroupComision(): FormGroup {
-    return this.fb.group({
+  formGroupComision(data:{[i:string]:any} = {}): FormGroup {
+    var fg = this.fb.group({
       "id":this.fb.control(""),
       "numero":this.fb.control(""),
       "tramo":this.fb.control(""),
@@ -89,12 +92,28 @@ export class SedeAdminComponent implements OnInit {
       "apertura":this.fb.control(""),
       "autorizada":this.fb.control(""),
     })
+    fg.patchValue(data)
+    return fg;
+  }
+
+
+  formGroupDesignacion(data:{[i:string]:any} = {}): FormGroup {
+    var fg = this.fb.group({
+      "id":this.fb.control(""),
+      "cargo-descripcion":this.fb.control(""),
+      "persona-nombres":this.fb.control(""),
+      "persona-apellidos":this.fb.control(""),
+      "persona-telefono":this.fb.control(""),
+      "persona-email":this.fb.control(""),
+    })
+    fg.patchValue(data)
+    return fg;
   }
 
   ngOnInit(): void {
     this.loadParams()
     this.loadDisplay()
-    this.loadStorage$ = this.formService.loadStorage(this.control)
+    this.loadStorage$ = this.tools.loadStorage(this.control)
   }
 
   loadParams(){
@@ -135,7 +154,6 @@ export class SedeAdminComponent implements OnInit {
   }
 
   initComision_(data: { [x: string]: any }): Observable<any> {
-    console.log(data)
     data["comision/sede"] = [];
 
     if(isEmptyObject(data["sede"])) return of(data);
@@ -177,22 +195,59 @@ export class SedeAdminComponent implements OnInit {
     )
   }
 
+
+  initDesignacion_(data: { [x: string]: any }): Observable<any> {
+    data["designacion/sede"] = [];
+
+    if(isEmptyObject(data["sede"])) return of(data);
+
+    var display = new Display()
+      .setParams({
+        sede:data["sede"]["id"],
+        hasta:false
+      })
+
+    return this.dd.post("ids", "designacion", display).pipe(
+      switchMap(
+        (ids:string[]) => this.dd.entityFieldsGetAll({ 
+          entityName: "designacion", 
+          ids:ids, 
+          fields:["id","cargo","persona-nombres","persona-apellidos","persona-email","persona-telefono","cargo-descripcion"]
+        }),
+      ),
+      map(
+        designacion_=>{
+          data["designacion/sede"] = designacion_
+          return data
+        }
+      )
+    )
+  }
+
   loadDisplay(){
     this.loadDisplay$ = this.display$.pipe(
       switchMap(
         () => {
-          var storageValues = this.formService.initStorageValues()
+          var storageValues = this.tools.initStorageValues()
           if(!isEmptyObject(storageValues)) return of(storageValues)
           else return this.initData();
         }
       ),
       switchMap(
         (data: any) => {
+          console.log(data)
+
           return this.initComision_(data)
+        }
+      ),
+      switchMap(
+        (data: any) => {
+          return this.initDesignacion_(data)
         }
       ),
       map(
         data => { 
+          console.log(data)
           /**
            * Se utiliza pathValue para asignar los datos
            * pathValue solo define los datos existentes y deja intactos los no existentes
@@ -201,19 +256,15 @@ export class SedeAdminComponent implements OnInit {
            */
           this.control.reset() //limpieza
 
-          this.controlDomicilio.patchValue(this.defaultValuesDomicilio) //defecto
-          this.controlDomicilio.patchValue(data["domicilio"]) //datos
+          this.controlDomicilio.patchValue({...this.defaultValuesDomicilio, ...data["domicilio"]}) //defecto
 
-          /**
-           * Se asigna inicialmente los valores por defecto, nada me garantiza
-           * que el parametro "data" posea todos los valores definidos.
-           */
-          if(!isEmptyObject(this.params)) this.controlSede.patchValue(this.params); //parametros
-          this.controlSede.patchValue(data["sede"]) //datos
+          if(!isEmptyObject(this.params)) this.controlSede.patchValue({...this.params, ...data["sede"]}); //parametros
 
           this.controlComision_.clear(); //limpieza
-          for(var i = 0; i <data["comision/sede"].length; i++) this.controlComision_.push(this.formGroupComision()); //inicializacion
-          this.controlComision_.patchValue(data["comision/sede"]) //datos
+          for(var i = 0; i <data["comision/sede"].length; i++) this.controlComision_.push(this.formGroupComision(data["comision/sede"][i])); //inicializacion
+
+          this.controlDesignacion_.clear(); //limpieza
+          for(var i = 0; i <data["designacion/sede"].length; i++) this.controlDesignacion_.push(this.formGroupDesignacion(data["designacion/sede"][i])); //inicializacion
 
           return true;
         },
@@ -225,7 +276,7 @@ export class SedeAdminComponent implements OnInit {
   onSubmit(){
     this.isSubmitted = true;
     if (!this.control.valid) {
-      this.formService.cancelSubmit(this.control)
+      this.tools.cancelSubmit(this.control)
       this.isSubmitted = false;
     } else {
       var serverData:{[index:string]:any} = this.control.value
@@ -237,7 +288,7 @@ export class SedeAdminComponent implements OnInit {
   
       var s = this.dd._post("persist_rel", "sede", serverData).subscribe({
         next: (response: any) => {
-          this.formService.submittedDisplay(response,this.display$)
+          this.tools.submittedDisplay(response,this.display$)
           this.isSubmitted = false;
         },
         error: (error: any) => { 
@@ -256,7 +307,7 @@ export class SedeAdminComponent implements OnInit {
   protected submitSede() {
     var s = this.dd._post("persist", "sede", this.controlSede.value).subscribe({
       next: (response: any) => {
-        this.formService.submittedDisplay(response,this.display$)
+        this.tools.submittedDisplay(response,this.display$)
         this.isSubmitted = false;
       },
       error: (error: any) => { 
@@ -272,7 +323,7 @@ export class SedeAdminComponent implements OnInit {
   protected submitDomicilio() {
     var s = this.dd._post("persist", "domicilio", this.controlDomicilio.value).subscribe({
       next: (response: any) => {
-          this.formService.submitted(response)
+          this.tools.submitted(response)
           this.controlSede.get("domicilio")?.setValue(response["id"])
           this.isSubmitted = false;
       },

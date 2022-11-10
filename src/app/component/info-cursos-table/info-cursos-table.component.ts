@@ -2,11 +2,10 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit,
 import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
-import { ComponentSearchService } from '@service/component/component-search-service';
-import { ComponentTableService } from '@service/component/component-table-service';
-import { ComponentFormService } from '@service/component/component-form-service';
 import { MatTable } from '@angular/material/table';
 import { Subscription } from 'rxjs';
+import { ComponentToolsService } from '@service/component-tools/component-tools.service';
+import { renderRowsOfTableOnValueChanges } from '@function/component';
 
 
 @Component({
@@ -42,20 +41,20 @@ export class InfoCursosTableComponent implements AfterViewInit {
   ]
 
   constructor(
-    protected ts: ComponentTableService,
+    protected tools: ComponentToolsService,
   ) { }
 
   ngAfterViewInit(): void {
-    var s = this.ts.renderRowsOnValueChanges(this.control, this.table)
+    var s = renderRowsOfTableOnValueChanges(this.control, this.table)
     this.subscriptions.add(s)
   }
 
   copyContent(): void {
-    this.ts.copyContent(this.content, this.displayedColumns)
+    this.tools.copyContent(this.content, this.displayedColumns)
   }
 
   printContent(): void {
-    this.ts.printContent(this.content, this.displayedColumns)
+    this.tools.printContent(this.content, this.displayedColumns)
   }
 
   ngOnDestroy () { this.subscriptions.unsubscribe() }

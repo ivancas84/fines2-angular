@@ -5,8 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { logValidationErrors } from '@function/log-validation-errors';
-import { ComponentFormService } from '@service/component/component-form-service';
-import { ComponentLoadService } from '@service/component/component-load-service';
+import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { BehaviorSubject, combineLatest, first, map, Observable, ObservableNotification, switchMap } from 'rxjs';
 
@@ -21,7 +20,7 @@ export class HorarioAdminArrayComponent implements OnInit {
     protected dd: DataDefinitionToolService,
     protected route: ActivatedRoute,
     protected fb: FormBuilder,
-    protected formService: ComponentFormService,
+    protected tools: ComponentToolsService,
     protected dialog: MatDialog,
   ) { }
 
@@ -139,13 +138,13 @@ export class HorarioAdminArrayComponent implements OnInit {
 
   submit(){
     if (!this.control.valid) {
-      this.formService.cancelSubmit(this.control)
+      this.tools.cancelSubmit(this.control)
       logValidationErrors(this.control);
       this.isSubmitted = false;
     } else {
       this.dd._post("persist_rows", "horario", this.controlHorario.value).pipe(first()).subscribe({
         next: (response: any) => {
-          this.formService.submittedDisplay(response,this.display$)
+          this.tools.submittedDisplay(response,this.display$)
           this.isSubmitted = false;
         },
         error: (error: any) => {

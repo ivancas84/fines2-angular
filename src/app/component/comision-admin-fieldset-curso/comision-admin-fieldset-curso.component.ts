@@ -5,8 +5,8 @@ import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
-import { ComponentFormService } from '@service/component/component-form-service';
-import { ComponentTableService } from '@service/component/component-table-service';
+import { onChangeSortLocal, renderRowsOfTableOnValueChanges } from '@function/component';
+import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { BehaviorSubject, first, Subscription } from 'rxjs';
 
@@ -18,10 +18,9 @@ import { BehaviorSubject, first, Subscription } from 'rxjs';
 export class ComisionAdminFieldsetCursoComponent implements AfterViewInit {
 
     constructor(
-        protected ts: ComponentTableService,
+        protected ts: ComponentToolsService,
         protected dd: DataDefinitionToolService,
         protected dialog: MatDialog,
-        protected formService: ComponentFormService,
     ) { }
 
     @Input() control!: FormArray
@@ -36,7 +35,7 @@ export class ComisionAdminFieldsetCursoComponent implements AfterViewInit {
     @ViewChild(MatTable) table!: MatTable<any>;
 
     ngAfterViewInit(): void {
-        var s = this.ts.renderRowsOnValueChanges(this.control, this.table)
+        var s = renderRowsOfTableOnValueChanges(this.control, this.table)
         this.subscriptions.add(s)
     }
 
@@ -45,7 +44,7 @@ export class ComisionAdminFieldsetCursoComponent implements AfterViewInit {
     displayedColumns = ["asignatura-nombre","horas_catedra","horario"]
 
     onChangeSort(sort: Sort): void {
-        this.ts.onChangeSortLocal(sort, this.control)
+        onChangeSortLocal(sort, this.control)
     }
     
     @ViewChild("mainContent") content!: ElementRef;
@@ -73,7 +72,7 @@ export class ComisionAdminFieldsetCursoComponent implements AfterViewInit {
 
         this.dd._post("persist", "crear_cursos_comision", this.idComision).pipe(first()).subscribe({
             next: (response: any) => {
-              this.formService.submittedDisplay(response,this.display$)
+              this.ts.submittedDisplay(response,this.display$)
             },
             error: (error: any) => { 
                 this.dialog.open(DialogAlertComponent, {
@@ -93,7 +92,7 @@ export class ComisionAdminFieldsetCursoComponent implements AfterViewInit {
 
         this.dd._post("persist", "eliminar_cursos_comision", this.idComision).pipe(first()).subscribe({
             next: (response: any) => {
-              this.formService.submittedDisplay(response,this.display$)
+              this.ts.submittedDisplay(response,this.display$)
             },
             error: (error: any) => { 
                 this.dialog.open(DialogAlertComponent, {
@@ -113,7 +112,7 @@ export class ComisionAdminFieldsetCursoComponent implements AfterViewInit {
 
         this.dd._post("persist", "eliminar_horarios_comision", this.idComision).pipe(first()).subscribe({
             next: (response: any) => {
-                this.formService.submittedDisplay(response,this.display$)
+                this.ts.submittedDisplay(response,this.display$)
             },
             error: (error: any) => { 
                 this.dialog.open(DialogAlertComponent, {
