@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { Router } from '@angular/router';
@@ -7,8 +7,9 @@ import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { datePickerYearGroupKey, setNullGroupKey } from '@function/component';
 import { markAllAsTouched } from '@function/mark-all-as-touched';
+import { ComponentFormService } from '@service/component/component-form-service';
 import { ComponentSearchService } from '@service/component/component-search-service';
-import { first } from 'rxjs';
+import { first, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-comision-array-search',
@@ -26,14 +27,44 @@ export class ComisionArraySearchComponent implements OnInit {
 
   @Input() control!: FormGroup
 
+  loadAutocompleteSede$!: Observable<any>; //inicializar
+  searchControlSede: FormControl = new FormControl(null); //control para busqueda, no interfiere con el control del fieldset principal
+  filteredOptionsSede$!: Observable<Array<{ [key: string]: any; }>>; //opciones de busqueda
+  labelSede: string = ""; //label para mostrar si hay inicializado un valor
+
   constructor(
     protected componentTools: ComponentSearchService,
     protected dialog: MatDialog,
     protected router: Router,
-    protected fb: FormBuilder
+    protected fb: FormBuilder,
+    protected formService: ComponentFormService
   ) { }
 
+
+  initAutocompleteSede(): void {
+    this.filteredOptionsSede$ = this.formService.filteredOptionsAutocomplete({
+      entityName:"sede",
+      control:this.control.get("sede")!,
+      searchControl:this.searchControlSede,
+    })
+ 
+    this.loadAutocompleteSede$ = this.formService.labelAutocomplete({
+      entityName:"sede",
+      control:this.control.get("sede")!,
+      searchControl:this.searchControlSede,
+    }).pipe(
+         map(
+           label => {
+             this.labelSede = label;
+             return true;
+           }
+         )
+       )
+  }
+
+
   ngOnInit(): void {
+    this.initAutocompleteSede()
   }
 
 

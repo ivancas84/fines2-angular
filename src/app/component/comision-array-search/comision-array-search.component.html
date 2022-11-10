@@ -7,10 +7,10 @@
       <form [formGroup]="control" novalidate (ngSubmit)="onSubmit()">
          
           <div fxLayout="row wrap">
-              <div class="item"
+              <div class="fx-item"
                   fxFlex.xs="100%"
-                  fxFlex.sm="50%"
-                  fxFlex.gt-sm="25%">
+                  fxFlex.sm="33%"
+                  fxFlex.gt-sm="33%">
                   <mat-form-field dateFormatYyyy>
                       <mat-label>Año</mat-label>
                  
@@ -33,10 +33,10 @@
                   </mat-form-field>                    
               </div>
 
-            <div class="item"
+            <div class="fx-item"
                 fxFlex.xs="100%"
-                fxFlex.sm="50%"
-                fxFlex.gt-sm="25%">
+                fxFlex.sm="34%"
+                fxFlex.gt-sm="34%">
                 <mat-form-field>
                   <mat-label>Semestre</mat-label>
                  
@@ -49,10 +49,10 @@
                 </mat-form-field>                    
             </div>
 
-            <div class="item"
+            <div class="fx-item"
                 fxFlex.xs="100%"
-                fxFlex.sm="50%"
-                fxFlex.gt-sm="25%">
+                fxFlex.sm="33%"
+                fxFlex.gt-sm="33%">
                 <mat-form-field>
                     <mat-label>Autorizada</mat-label>
                  
@@ -65,6 +65,55 @@
                     <mat-error *ngIf="control.hasError('required')">Debe completar valor</mat-error>
                 </mat-form-field>
             </div>
+
+            
+
+            <div class="fx-item"
+                fxFlex.xs="100%"
+                fxFlex.sm="50%"
+                fxFlex.gt-sm="50%">
+                <mat-form-field  *ngIf="loadAutocompleteSede$ | async">
+                  <mat-label>Sede</mat-label>
+                  <input readonly="readonly"
+                          *ngIf="this.labelSede" type="text" matInput value="{{labelSede}}">
+                  <input *ngIf="!labelSede"
+                      type="text"
+                      matInput
+                      [formControl]="searchControlSede"
+                      [matAutocomplete]="acSede">
+
+                  <button *ngIf="!control.get('sede')!.disabled" type="button" mat-icon-button matSuffix (click)="control.get('sede')!.setValue(null)">
+                    <mat-icon>clear</mat-icon>
+                  </button>
+                     
+                  <mat-autocomplete #acSede="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptionsSede$ | async" [value]="option">
+                          {{option["label"]}}
+                      </mat-option>
+                  </mat-autocomplete>
+
+                  <mat-error>
+                    <ng-container *ngIf="control.get('sede')!.hasError('required')">Debe completar valor</ng-container>
+                  </mat-error>
+                       
+              </mat-form-field>
+            </div>
+
+            <div class="fx-item"
+                fxFlex.xs="100%"
+                fxFlex.sm="50%"
+                fxFlex.gt-sm="50%">
+                <mat-form-field>
+                    <mat-label>Division</mat-label>
+                 
+                    <input type="text"
+                        matInput
+                        formControlName="division">
+
+                    <mat-error *ngIf="control.hasError('required')">Debe completar valor</mat-error>
+                </mat-form-field>
+            </div>
+            
 
           </div>
 

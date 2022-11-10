@@ -34,6 +34,8 @@ export class ComisionArrayComponent implements OnInit {
     "calendario-anio":this.fb.control(""),
     "calendario-semestre":this.fb.control(""),
     "autorizada":this.fb.control(""),
+    "sede":this.fb.control(""),
+    "division":this.fb.control(""),
   });
 
 
@@ -96,6 +98,7 @@ export class ComisionArrayComponent implements OnInit {
               "division",
               "autorizada",
               "apertura",
+              "sede-id",
               "sede-nombre",
               "sede-numero",
               "domicilio-calle",
@@ -148,6 +151,7 @@ export class ComisionArrayComponent implements OnInit {
     var fg = this.fb.group({
       "id":this.fb.control(""),
       "sede":this.fb.control(""),
+      "sede-id":this.fb.control(""),
       "label":this.fb.control(""),
       "tramo":this.fb.control(""),
       "domicilio":this.fb.control(""),
