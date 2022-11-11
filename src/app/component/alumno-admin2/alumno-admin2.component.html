@@ -4,23 +4,29 @@
  
 <ng-container *ngIf="(loadParams$ | async); else loading">
     <ng-container *ngIf="(loadDisplay$ | async); else loading">
-      <ng-container *ngIf="(loadStorage$ | async); else loading">
-        <mat-card>
-            <mat-card-header>
-              <mat-card-title>
-                Buscar alumno   
-              </mat-card-title>
-           
-            </mat-card-header>
-            <mat-card-content>
-              <core-input-search-go fxFlex="auto" 
-                                    [entityName]="'persona'" 
-                                    [fieldName]="'persona'"></core-input-search-go>    
-            </mat-card-content>
-          </mat-card>
-        <app-alumno-admin-fieldset-persona
-          [control]="controlPersona"
-          (onSubmit)="onSubmit($event)"></app-alumno-admin-fieldset-persona>
-      </ng-container>
+        <ng-container *ngIf="(loadStorage$ | async); else loading">
+            <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>
+                            Buscar alumno     
+                        </mat-card-title>
+                  
+                    </mat-card-header>
+                    <mat-card-content>
+                        <core-input-search-go fxFlex="auto" 
+                            [entityName]="'persona'" 
+                            [fieldName]="'persona'"></core-input-search-go>        
+                    </mat-card-content>
+                </mat-card>
+            <app-alumno-admin-fieldset-persona
+                [control]="controlPersona"
+                (onSubmit)="onSubmit($event)"></app-alumno-admin-fieldset-persona>
+
+
+            <app-alumno-admin-fieldset-alumno
+                [control]="controlAlumno"
+                (onSubmit)="onSubmit($event)"></app-alumno-admin-fieldset-alumno>
+
+        </ng-container>
     </ng-container>
 </ng-container>

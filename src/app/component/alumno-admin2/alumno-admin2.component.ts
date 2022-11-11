@@ -42,9 +42,9 @@ export class AlumnoAdmin2Component implements OnInit {
     controlAlumno:FormGroup = this.fb.group({
       id:this.fb.control(null),
       documentacion_inscripcion:this.fb.control(null),
-      anio_inscripcion:this.fb.control(null,{ validators:[Validators.required] }),
-      anio_inscripcion_completo:this.fb.control(null,{ validators:[Validators.required] }),
-      establecimiento_inscripcion:this.fb.control(null,{ validators:[Validators.required] }),
+      anio_inscripcion:this.fb.control(null),
+      anio_inscripcion_completo:this.fb.control(null),
+      establecimiento_inscripcion:this.fb.control(null,),
       resolucion_inscripcion:this.fb.control(null),
       anio_ingreso:this.fb.control(null),
       plan:this.fb.control(null),
@@ -59,6 +59,7 @@ export class AlumnoAdmin2Component implements OnInit {
       tiene_constancia:this.fb.control(null),
       tiene_certificado:this.fb.control(null),
       previas_completas:this.fb.control(null),
+      persona:{ validators:[Validators.required] }
     },{ asyncValidators: this.validators.uniqueMultiple("alumno", ["libro","folio"]) })
   
   
@@ -73,7 +74,7 @@ export class AlumnoAdmin2Component implements OnInit {
     control: FormGroup = this.fb.group({
       persona: this.controlPersona,
       alumno: this.controlAlumno,
-    }, {updateOn:"blur"})
+    })
 
     controlCalificacion_:FormArray = this.fb.array([], {updateOn:"submit"})
     controlDetallePersona_:FormArray = this.fb.array([], {updateOn:"submit"})
@@ -293,20 +294,25 @@ export class AlumnoAdmin2Component implements OnInit {
       } else {
         this.dd._post("persist", "persona", this.controlPersona.value).pipe(first()).subscribe({
           next: (response: any) => {
-            this.tools.submittedDisplay(response,this.display$)
+            this.tools.submitted(response)
+            if(response.hasOwnProperty("id")) {
+              this.controlPersona.get("id")?.setValue(response["id"])
+              this.controlAlumno.get("persona")?.setValue(response["id"])
+            }
           },
-          error: (error: any) => { 
-            this.dialog.open(DialogAlertComponent, {
-              data: {title: "Error", message: error.error}
-            });
-            this.isSubmitted = false;
-          }
+          error: (error: any) => this.tools.dialogError(error),
+          complete: () => this.isSubmitted = false
         });
     
       } 
     }
 
     submitAlumno(){
+      this.tools.persist("alumno",this.controlAlumno,this.display$).pipe(first()).subscribe({
+        error: (error: any) => this.tools.dialogError(error),
+        complete: () => this.isSubmitted = false
+      })
     }
   
+   
 }

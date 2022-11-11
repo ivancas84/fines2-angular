@@ -4,7 +4,6 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 mat-form-field { width: 100%; }
 
-table { width: 100%; }
 
 mat-card { margin: 15px; }
 
@@ -16,7 +15,9 @@ mat-card { margin: 15px; }
 
 .fx-item { padding:0px 10px;  }
 
-table, th, td {
+.table { width: 100%; }
+
+.table, .table th, .table td {
     border: 1px solid #ddd;
     border-collapse: collapse;
     /* text-align: center; */
@@ -25,11 +26,11 @@ table, th, td {
 
   }
 
-  /* tr:hover {background-color: rgb(136, 132, 132);} */
+/*.table tr:hover {background-color: rgb(136, 132, 132);} */
 
-  tr:nth-child(even) {background-color: #f2f2f2;}
+.table tr:nth-child(even) {background-color: #f2f2f2;}
 
-  /* th {
-    background-color: #04AA6D;
-    color: white;
-  } */
+/*.table th {
+  background-color: #04AA6D;
+  color: white;
+} */
