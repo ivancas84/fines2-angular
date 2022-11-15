@@ -60,7 +60,7 @@ export class AlumnoAdmin2Component implements OnInit {
       tiene_certificado:this.fb.control(null),
       previas_completas:this.fb.control(null),
       persona:{ validators:[Validators.required] }
-    },{ asyncValidators: this.validators.uniqueMultiple("alumno", ["libro","folio"]) })
+    },{updateOn:"submit", asyncValidators: this.validators.uniqueMultiple("alumno", ["libro","folio"]) })
   
   
     defaultValuesAlumno:{[i:string]:any} = {
@@ -198,7 +198,7 @@ export class AlumnoAdmin2Component implements OnInit {
         switchMap(
           data => {
             if (!data["alumno"]["persona"]) return of(data)
-            return this.dd.get("persona", data["alumno"]["persona"]).pipe(
+            return this.dd.get("persona", data["alumno"]["persona"]!).pipe(
               map(
                 (persona: any) => {
                   data["persona"] = persona
@@ -272,20 +272,12 @@ export class AlumnoAdmin2Component implements OnInit {
     onSubmit(fieldset: string) {
       this.isSubmitted = true;
    
-      if (this.control.pending) {
-        this.control.statusChanges.pipe(first()).subscribe(() => {
-          if (this.control.valid) this.submit(fieldset)
-        });
-      } else this.submit(fieldset);
+      switch(fieldset){
+        case "persona": this.submitPersona(); break;
+        case "alumno": this.submitAlumno(); break;
+      }
     }
   
-    submit(fieldset: string){
-        switch(fieldset){
-          case "persona": this.submitPersona(); break;
-          case "alumno": this.submitAlumno(); break;
-        }
-    }
-
     submitPersona(){
       if (!this.controlPersona.valid) {
         logValidationErrors(this.controlPersona)

@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Display } from '@class/display';
+import { onSubmit } from '@function/component';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
-import { Observable } from 'rxjs';
+import { filter, Observable, startWith, Subject, switchMap, take, tap } from 'rxjs';
 
 @Component({
   selector: 'app-alumno-admin-fieldset-alumno',
@@ -13,10 +14,10 @@ export class AlumnoAdminFieldsetAlumnoComponent implements OnInit {
  
   @Input() control!: FormGroup
   @Output() onSubmit: EventEmitter <string> = new EventEmitter <string>();
-
+  onSubmit$:Subject<any> = new Subject();
 
   constructor(
-    protected dd: DataDefinitionService
+    protected dd: DataDefinitionService,
   ) { }
 
   optionsResolucion$!: Observable<Array<any>>;
@@ -30,10 +31,9 @@ export class AlumnoAdminFieldsetAlumnoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.control.value)
     this.initOptionsResolucion()
     this.initOptionsPlan()
-
+    onSubmit(this.onSubmit$,this.control,this.onSubmit,"alumno")
   }
 
 }
