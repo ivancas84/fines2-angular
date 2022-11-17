@@ -25,6 +25,8 @@
                
                 <mat-error>
                   <ng-container *ngIf="row.controls['descripcion']!.hasError('required')">Debe completar valor</ng-container>
+                  <ng-container *ngIf="row.controls['persona']!.hasError('required')">No se encuentra la persona creada</ng-container>
+
                 </mat-error>
                
               </mat-form-field>
@@ -61,26 +63,22 @@
         *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
 </table>
 
-
-        <mat-toolbar>
-            <mat-toolbar-row>
-                <button  
+<mat-toolbar>
+        <mat-toolbar-row>
+            <button  
                 type="button"
                 mat-mini-fab
                 color="accent"
                 title="Agregar curso"
                 (click)="add.emit()"><mat-icon>add</mat-icon></button>
                 
-        <button  
-        [disabled]="control.status == 'PENDING'"
-        type="submit"
-        mat-raised-button>Guardar Legajo
-    </button>
-            </mat-toolbar-row>
-                      </mat-toolbar>
+            <button  
+                [disabled]="control.status == 'PENDING'"
+                type="submit"
+                mat-raised-button>Guardar Legajo</button>
+    </mat-toolbar-row>
+</mat-toolbar>
 </form> 
     </mat-card-content>
 </mat-card>
 
-<p>Debug Form value: {{ control.value | json }}</p>
-<p>Debug Form status: {{ control.status | json }}</p>

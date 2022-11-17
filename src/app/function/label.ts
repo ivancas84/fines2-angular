@@ -22,7 +22,16 @@ export function domicilioLabel(element: {[i:string]:any}, prefix:string=""): str
  * Genera un label en funcion de los datos de domicilio
  */
 export function comisionLabel(element: {[i:string]:any}, prefix:string=""): string{
-  return element["sede-numero"] + element[prefix+"division"] + "/" + element["planificacion-anio"] + element["planificacion-semestre"] + " " + element["calendario-anio"] + "-" + element["calendario-semestre"]
+  var c = comisionNumero(element, prefix)
+  if(element["calendario-anio"]) c += " " + new Date(element["calendario-anio"]).getFullYear() + "-" +element["calendario-semestre"];
+  return c;
+}
+
+/**
+ * Genera un label en funcion de los datos de domicilio
+ */
+ export function comisionNumero(element: {[i:string]:any}, prefix:string=""): string{
+  return element["sede-numero"] + element[prefix+"division"] + "/" + element["planificacion-anio"] + element["planificacion-semestre"]
 }
 
 
