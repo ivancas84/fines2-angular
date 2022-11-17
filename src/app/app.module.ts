@@ -58,6 +58,7 @@ import { AlumnoAdminFieldsetAlumnoComponent } from './component/alumno-admin-fie
 import { AlumnoAdminTableAlumnoComisionComponent } from './component/alumno-admin-table-alumno-comision/alumno-admin-table-alumno-comision.component';
 import { AlumnoAdminTableCalificacionComponent } from './component/alumno-admin-table-calificacion/alumno-admin-table-calificacion.component';
 import { AlumnoAdminTableDetallePersonaComponent } from './component/alumno-admin-table-detalle-persona/alumno-admin-table-detalle-persona.component';
+import { UploadDetallePersonaArchivoComponent } from './component/upload-detalle-persona-archivo/upload-detalle-persona-archivo.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +109,7 @@ import { AlumnoAdminTableDetallePersonaComponent } from './component/alumno-admi
     AlumnoAdminTableAlumnoComisionComponent,
     AlumnoAdminTableCalificacionComponent,
     AlumnoAdminTableDetallePersonaComponent,
+    UploadDetallePersonaArchivoComponent,
   ],
   imports: [
     BrowserModule,

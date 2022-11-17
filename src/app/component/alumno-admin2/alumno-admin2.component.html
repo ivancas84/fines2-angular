@@ -27,6 +27,14 @@
                 [control]="controlAlumno"
                 (onSubmit)="onSubmit($event)"></app-alumno-admin-fieldset-alumno>
 
+            <app-alumno-admin-table-alumno-comision
+                [control]="controlAlumnoComision_"></app-alumno-admin-table-alumno-comision>
+
+            <app-alumno-admin-table-detalle-persona 
+                [control]="controlDetallePersona_"
+                (onSubmit)="onSubmit($event)"
+                (add)="addDetallePersona()"></app-alumno-admin-table-detalle-persona>
+
         </ng-container>
     </ng-container>
 </ng-container>

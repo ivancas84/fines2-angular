@@ -25,3 +25,11 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+# Version 0.5
+
+* Adaptar a la versión 0.5 de SQLOrganize.
+* Eliminar componentes generales para administrar campos.
+* Eliminar servicio Label para definir etiquetas de entidades.
+* Eliminar componentes abstractos estructurales.
+* Posible nombre para la versión 1: DataOrganize.

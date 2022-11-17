@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { isEmptyObject } from '@function/is-empty-object.function';
+import { comisionLabel } from '@function/label';
 import { logValidationErrors } from '@function/log-validation-errors';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
@@ -149,7 +150,30 @@ export class AlumnoAdmin2Component implements OnInit {
       if(!data["alumno"]["id"]) return of(data)
       var display = new Display().setParams({"alumno":data["alumno"]["id"]})
   
-      return this.dd.all("alumno_comision", display).pipe(
+      return this.dd.post("ids","alumno_comision", display).pipe(
+        switchMap(
+          ids => this.dd.entityFieldsGetAll({
+            entityName:"alumno_comision",
+            ids,fields:[
+              "id",
+              "activo",
+              "alumno",
+              "comision-division",
+              "sede-numero",
+              "planificacion-anio",
+              "planificacion-semestre",
+              "calendario-anio",
+              "calendario-semestre"
+          ]})
+        ),
+        map(
+          data => {
+            data.forEach((element: { [x: string]: string; }) => {
+              element["comision-label"] = comisionLabel(element, "comision-")
+            })
+            return data;
+          }
+        ),
         map(
           (d_: any) => {
             if(d_.length) data["alumno_comision_"] = d_ 
@@ -214,9 +238,10 @@ export class AlumnoAdmin2Component implements OnInit {
     formGroupAlumnoComision(data:{[i:string]:any}={}): FormGroup {
       var fg = this.fb.group({
         "id":this.fb.control(""),
-        "comision":this.fb.control(""),
+        "comision-label":this.fb.control(""),
         "activo":this.fb.control(""),
         "alumno":this.fb.control(""),
+        "_mode":this.fb.control("id"),
       })
       fg.patchValue(data)
       return fg;
@@ -231,6 +256,7 @@ export class AlumnoAdmin2Component implements OnInit {
         "nota_final":this.fb.control(""),
         "crec":this.fb.control(""),
         "alumno":this.fb.control(""),
+        "_mode":this.fb.control("id"),
       })
       fg.patchValue(data)
       return fg;
@@ -238,11 +264,14 @@ export class AlumnoAdmin2Component implements OnInit {
 
     formGroupDetallePersona(data:{[i:string]:any}={}): FormGroup {
       var fg = this.fb.group({
-        "id":this.fb.control(""),
-        "descripcion":this.fb.control(""),
-        "archivo":this.fb.control(""),
-        "persona":this.fb.control(""),
+        "id":this.fb.control(null),
+        "descripcion":this.fb.control(null,{validators:Validators.required}),
+        "archivo":this.fb.control(null),
+        "persona":this.fb.control(null,{validators:Validators.required}),
+        "_mode":this.fb.control("id"),
       })
+
+  
       fg.patchValue(data)
       return fg;
     }
@@ -275,6 +304,8 @@ export class AlumnoAdmin2Component implements OnInit {
       switch(fieldset){
         case "persona": this.submitPersona(); break;
         case "alumno": this.submitAlumno(); break;
+        case "detalle_persona": this.submitDetallePersona(); break;
+
       }
     }
   
@@ -287,10 +318,8 @@ export class AlumnoAdmin2Component implements OnInit {
         this.dd._post("persist", "persona", this.controlPersona.value).pipe(first()).subscribe({
           next: (response: any) => {
             this.tools.submitted(response)
-            if(response.hasOwnProperty("id")) {
-              this.controlPersona.get("id")?.setValue(response["id"])
-              this.controlAlumno.get("persona")?.setValue(response["id"])
-            }
+            this.controlPersona.get("id")?.setValue(response["id"])
+            this.controlAlumno.get("persona")?.setValue(response["id"])
           },
           error: (error: any) => this.tools.dialogError(error),
           complete: () => this.isSubmitted = false
@@ -305,6 +334,61 @@ export class AlumnoAdmin2Component implements OnInit {
         complete: () => this.isSubmitted = false
       })
     }
+
+    submitDetallePersona(){
+      this.submitUm("detalle_persona", this.controlDetallePersona_)
+    }
+
+    submitAlumnoComision(){
+      this.submitUm("alumno_comision", this.controlDetallePersona_)
+    }
+
+    addDetallePersona(){
+      if(this.existePersona()) this.controlDetallePersona_.push(this.formGroupDetallePersona({persona:this.controlPersona.get("id")?.value}))
+    }
+
+    addAlumnoComision(){
+      if(this.existeAlumno()) this.controlAlumnoComision_.push(this.formGroupAlumnoComision({alumno:this.controlAlumno.get("id")?.value}))
+    }
+
+    
   
+    protected submitUm(fieldsetId: string, control: FormArray){
+      if (!control.valid) {
+        logValidationErrors(control)
+        this.tools.cancelSubmit(control)
+        this.isSubmitted = false;
+      } else {
+        this.dd._post("persist_rows", fieldsetId, control.value).pipe(first()).subscribe({
+          next: (response: any) => {
+            this.tools.submitted(response)
+          },
+          error: (error: any) => this.tools.dialogError(error),
+          complete: () => this.isSubmitted = false
+        });
+    
+      } 
+    }
+
+    protected existePersona(): boolean{
+      if(!this.controlPersona.get("id")?.value)  {
+        this.dialog.open(DialogAlertComponent, {
+          data: {title: "Error", message: "Debe registrar la persona para poder agregar un nuevo registro"}        
+        });
+        return false
+      }
+      return true
+    }
+
+    protected existeAlumno(): boolean{
+      if(!this.controlAlumno.get("id")?.value)  {
+        this.dialog.open(DialogAlertComponent, {
+          data: {title: "Error", message: "Debe registrar al alumno para poder agregar un nuevo registro"}        
+        });
+        return false
+      }
+      return true
+    }
+   
    
 }

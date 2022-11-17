@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Display } from '@class/display';
 import { onSubmit } from '@function/component';
+import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { filter, Observable, startWith, Subject, switchMap, take, tap } from 'rxjs';
 
@@ -18,6 +19,7 @@ export class AlumnoAdminFieldsetAlumnoComponent implements OnInit {
 
   constructor(
     protected dd: DataDefinitionService,
+    protected tools: ComponentToolsService
   ) { }
 
   optionsResolucion$!: Observable<Array<any>>;
