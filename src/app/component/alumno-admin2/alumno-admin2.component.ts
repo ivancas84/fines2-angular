@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
+import { emptyUrl } from '@function/empty-url.function';
 import { isEmptyObject } from '@function/is-empty-object.function';
 import { comisionLabel } from '@function/label';
 import { logValidationErrors } from '@function/log-validation-errors';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
+import { LocalStorageService } from '@service/storage/local-storage.service';
 import { DdAsyncValidatorsService } from '@service/validators/dd-async-validators.service';
 import { Observable, BehaviorSubject, map, switchMap, of, first } from 'rxjs';
 
@@ -63,6 +65,11 @@ export class AlumnoAdmin2Component implements OnInit {
       persona:{ validators:[Validators.required] }
     },{updateOn:"submit", asyncValidators: this.validators.uniqueMultiple("alumno", ["libro","folio"]) })
   
+    defaultValuesPersona:{[i:string]:any} = {
+      telefono_verificado:false,
+      email_verificado:false,
+      info_verificada:false,
+    }
   
     defaultValuesAlumno:{[i:string]:any} = {
       tiene_dni:false,
@@ -87,6 +94,7 @@ export class AlumnoAdmin2Component implements OnInit {
       this.loadParams$ = this.route.queryParams.pipe(
         map(
           queryParams => { 
+            console.log(queryParams)
             this.params = queryParams
             var display = new Display().setSize(100).setParamsByQueryParams(queryParams);
             this.display$.next(display)
@@ -112,8 +120,11 @@ export class AlumnoAdmin2Component implements OnInit {
         ),
         map(
           data => { 
+            this.controlAlumno.reset()
             this.controlAlumno.patchValue({...this.defaultValuesAlumno, ...this.params, ...data["alumno"]})
-            this.controlPersona.patchValue(data["persona"])
+            
+            this.controlPersona.reset()
+            this.controlPersona.patchValue({...this.defaultValuesPersona, ...data["persona"]})
    
             this.controlAlumnoComision_.clear();
             for(var i = 0; i <data["alumno_comision_"].length; i++) this.controlAlumnoComision_.push(this.formGroupAlumnoComision(data["alumno_comision_"][i]));
@@ -157,7 +168,9 @@ export class AlumnoAdmin2Component implements OnInit {
             ids,fields:[
               "id",
               "activo",
+              "estado",
               "alumno",
+              "comision",
               "comision-division",
               "sede-numero",
               "planificacion-anio",
@@ -238,6 +251,7 @@ export class AlumnoAdmin2Component implements OnInit {
     formGroupAlumnoComision(data:{[i:string]:any}={}): FormGroup {
       var fg = this.fb.group({
         "id":this.fb.control(""),
+        "comision":this.fb.control(""),
         "comision-label":this.fb.control(""),
         "activo":this.fb.control(""),
         "alumno":this.fb.control(""),
@@ -290,6 +304,8 @@ export class AlumnoAdmin2Component implements OnInit {
       protected fb: FormBuilder,
       protected validators: DdAsyncValidatorsService,
       protected tools: ComponentToolsService,
+      protected local: LocalStorageService,
+      protected router: Router, 
     ) { }
 
     loadParams$!: Observable<any> //carga de parametros
@@ -305,6 +321,8 @@ export class AlumnoAdmin2Component implements OnInit {
         case "persona": this.submitPersona(); break;
         case "alumno": this.submitAlumno(); break;
         case "detalle_persona": this.submitDetallePersona(); break;
+        case "alumno_comision": this.submitAlumnoComision(); break;
+
 
       }
     }
@@ -318,8 +336,8 @@ export class AlumnoAdmin2Component implements OnInit {
         this.dd._post("persist", "persona", this.controlPersona.value).pipe(first()).subscribe({
           next: (response: any) => {
             this.tools.submitted(response)
-            this.controlPersona.get("id")?.setValue(response["id"])
-            this.controlAlumno.get("persona")?.setValue(response["id"])
+            this.local.removeItemsPrefix(emptyUrl(this.router.url));
+            this.router.navigateByUrl('/' + emptyUrl(this.router.url) + '?persona=' + response["id"]);  
           },
           error: (error: any) => this.tools.dialogError(error),
           complete: () => this.isSubmitted = false
@@ -340,7 +358,7 @@ export class AlumnoAdmin2Component implements OnInit {
     }
 
     submitAlumnoComision(){
-      this.submitUm("alumno_comision", this.controlDetallePersona_)
+      this.submitUm("alumno_comision", this.controlAlumnoComision_)
     }
 
     addDetallePersona(){

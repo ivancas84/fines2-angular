@@ -59,6 +59,7 @@ import { AlumnoAdminTableAlumnoComisionComponent } from './component/alumno-admi
 import { AlumnoAdminTableCalificacionComponent } from './component/alumno-admin-table-calificacion/alumno-admin-table-calificacion.component';
 import { AlumnoAdminTableDetallePersonaComponent } from './component/alumno-admin-table-detalle-persona/alumno-admin-table-detalle-persona.component';
 import { UploadDetallePersonaArchivoComponent } from './component/upload-detalle-persona-archivo/upload-detalle-persona-archivo.component';
+import { AutocompleteComisionComponent } from './component/autocomplete-comision/autocomplete-comision.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { UploadDetallePersonaArchivoComponent } from './component/upload-detalle
     AlumnoAdminTableCalificacionComponent,
     AlumnoAdminTableDetallePersonaComponent,
     UploadDetallePersonaArchivoComponent,
+    AutocompleteComisionComponent,
   ],
   imports: [
     BrowserModule,
