@@ -1,1 +1,69 @@
-<p>alumno-admin-table-calificacion works!</p>
+<table mat-table
+    [dataSource]="control.controls"
+    class="table mat-elevation-z8">
+ 
+    <ng-container matColumnDef="asignatura-nombre" >
+        <th mat-header-cell *matHeaderCellDef> Asignatura </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            {{row.controls['asignatura-nombre'].value }}
+        </td>
+    </ng-container>
+ 
+    <ng-container matColumnDef="planificacion-anio" >
+        <th mat-header-cell *matHeaderCellDef> Año </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            {{row.controls['planificacion-anio'].value }}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="planificacion-semestre" >
+        <th mat-header-cell *matHeaderCellDef > Semestre </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            {{row.controls['planificacion-semestre'].value}}
+        </td>
+    </ng-container>
+
+ 
+    <ng-container matColumnDef="nota_final">
+        <th mat-header-cell *matHeaderCellDef> Nota Final </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            {{row.controls['nota_final'].value}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="crec">
+        <th mat-header-cell *matHeaderCellDef> CREC </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            {{row.controls['crec'].value}}
+        </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="fecha" >
+        <th mat-header-cell *matHeaderCellDef > Fecha </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            {{row.controls['fecha'].value}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="curso-label" >
+        <th mat-header-cell *matHeaderCellDef > Curso </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            {{row.controls['curso-label'].value}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+    <th mat-header-cell *matHeaderCellDef> Opciones </th>
+    <td mat-cell *matCellDef="let row; let i = index;">
+        <a [routerLink]="'/toma-posesion-email-abc'"
+            [queryParams]="{'curso':row.controls['id'].value}"
+            [title]="'Administrar Comision'">Toma de Posesión</a>
+    </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+ 
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+</table>
+ 

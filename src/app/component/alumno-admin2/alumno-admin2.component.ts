@@ -201,7 +201,35 @@ export class AlumnoAdmin2Component implements OnInit {
       if(!data["alumno"]["id"]) return of(data)
       var display = new Display().setParams({"alumno":data["alumno"]["id"]})
   
-      return this.dd.all("calificacion", display).pipe(
+      return this.dd.post("ids","calificacion", display).pipe(
+        switchMap(
+          ids => this.dd.entityFieldsGetAll({
+              entityName:"calificacion",
+              ids,
+              fields:["id","asignatura-nombre","planificacion-anio","planificacion-semestre","nota_final","crec","options"]
+            })
+        ),
+        switchMap(
+          data => {
+            return this.dd.postMergeAll_({
+              data,
+              method:"info",
+              entityName:"curso_toma_activa",
+              fields:["toma_activa"],
+              fieldNameData:"id",
+              fieldNameResponse:"curso"
+            })
+          }
+        ),
+        map(
+          data => {
+            console.log(data)
+            // data.forEach((element: { [x: string]: string; }) => {
+            //   element["curso-label"] = comisionLabel(element, "comision-")
+            // })
+            return data;
+          }
+        ),
         map(
           (d_: any) => {
             if(d_.length) data["calificacion_"] = d_ 
@@ -255,6 +283,7 @@ export class AlumnoAdmin2Component implements OnInit {
         "comision-label":this.fb.control(""),
         "activo":this.fb.control(""),
         "alumno":this.fb.control(""),
+        "estado":this.fb.control(""),
         "_mode":this.fb.control("id"),
       })
       fg.patchValue(data)
