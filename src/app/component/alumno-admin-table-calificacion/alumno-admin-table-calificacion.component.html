@@ -116,13 +116,6 @@
 <mat-toolbar>
         <mat-toolbar-row>
             <button  
-                type="button"
-                mat-mini-fab
-                color="accent"
-                title="Agregar calificaciones"
-                (click)="add.emit()"><mat-icon>add</mat-icon></button>
-                
-            <button  
                 [disabled]="control.status == 'PENDING'"
                 type="submit"
                 mat-raised-button>Guardar Calificaciones</button>
