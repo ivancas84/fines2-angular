@@ -20,22 +20,28 @@
                 </mat-card>
             <app-alumno-admin-fieldset-persona
                 [control]="controlPersona"
-                (onSubmit)="onSubmit($event)"></app-alumno-admin-fieldset-persona>
+                (onSubmit)="submitPersona()"></app-alumno-admin-fieldset-persona>
 
 
             <app-alumno-admin-fieldset-alumno
                 [control]="controlAlumno"
-                (onSubmit)="onSubmit($event)"></app-alumno-admin-fieldset-alumno>
+                (onSubmit)="submitAlumno()"></app-alumno-admin-fieldset-alumno>
 
             <app-alumno-admin-table-alumno-comision
                 [control]="controlAlumnoComision_"
-                (onSubmit)="onSubmit($event)"
+                (onSubmit)="submitAlumnoComision()"
                 (add)="addAlumnoComision()"></app-alumno-admin-table-alumno-comision>
 
             <app-alumno-admin-table-detalle-persona 
                 [control]="controlDetallePersona_"
-                (onSubmit)="onSubmit($event)"
+                (onSubmit)="submitDetallePersona()"
                 (add)="addDetallePersona()"></app-alumno-admin-table-detalle-persona>
+
+            <app-alumno-admin-table-calificacion
+                [control]="controlCalificacion_"
+                (onSubmit)="submitCalificacion()"
+                (add)="addCalificacion()"
+                [options]="options"></app-alumno-admin-table-calificacion>
 
         </ng-container>
     </ng-container>

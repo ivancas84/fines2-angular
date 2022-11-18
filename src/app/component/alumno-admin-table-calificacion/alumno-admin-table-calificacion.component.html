@@ -1,63 +1,108 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Calificaciones</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+
+<form [formGroup]="controlContainer" novalidate (ngSubmit)="onSubmit$.next(null)">
+
 <table mat-table
     [dataSource]="control.controls"
     class="table mat-elevation-z8">
  
-    <ng-container matColumnDef="asignatura-nombre" >
-        <th mat-header-cell *matHeaderCellDef> Asignatura </th>
+    <ng-container matColumnDef="disposicion" >
+        <th mat-header-cell *matHeaderCellDef> Disposicion </th>
         <td mat-cell *matCellDef="let row; let i = index;">
-            {{row.controls['asignatura-nombre'].value }}
+            <mat-form-field>
+                <mat-select [formControl]="row.controls['disposicion']">
+                    <mat-option [value]="null">--Seleccione--</mat-option>
+                    <mat-option *ngFor="let opt of options['disposicion']" [value]="opt['id']">
+                        {{opt["asignatura-nombre"]}} {{opt["planificacion-anio"]}} {{opt["planificacion-semestre"]}}
+                    </mat-option>
+                </mat-select>
+             
+                <mat-error>
+                    <span *ngIf="row.controls['disposicion']!.hasError('required')">Debe completar valor</span>
+                </mat-error>
+            </mat-form-field>
         </td>
     </ng-container>
  
-    <ng-container matColumnDef="planificacion-anio" >
-        <th mat-header-cell *matHeaderCellDef> Año </th>
-        <td mat-cell *matCellDef="let row; let i = index;">
-            {{row.controls['planificacion-anio'].value }}
-        </td>
-    </ng-container>
 
-    <ng-container matColumnDef="planificacion-semestre" >
-        <th mat-header-cell *matHeaderCellDef > Semestre </th>
-        <td mat-cell *matCellDef="let row; let i = index;">
-            {{row.controls['planificacion-semestre'].value}}
-        </td>
-    </ng-container>
 
  
     <ng-container matColumnDef="nota_final">
         <th mat-header-cell *matHeaderCellDef> Nota Final </th>
         <td mat-cell *matCellDef="let row; let i = index;">
-            {{row.controls['nota_final'].value}}
+            <mat-form-field>
+               
+                <input matInput
+                       readonly="readonly"
+                       type="text"
+                       [formControl]="row.controls['nota_final']"
+                       placeholder="Ingrese Nota"
+                >
+               
+              </mat-form-field>
+              
         </td>
     </ng-container>
 
     <ng-container matColumnDef="crec">
         <th mat-header-cell *matHeaderCellDef> CREC </th>
         <td mat-cell *matCellDef="let row; let i = index;">
-            {{row.controls['crec'].value}}
+            <mat-form-field>
+               
+                <input matInput
+                       readonly="readonly"
+                       type="text"
+                       [formControl]="row.controls['crec']"
+                       placeholder="Ingrese CREC"
+                >
+               
+              </mat-form-field>
         </td>
     </ng-container>
     
     <ng-container matColumnDef="fecha" >
         <th mat-header-cell *matHeaderCellDef > Fecha </th>
         <td mat-cell *matCellDef="let row; let i = index;">
-            {{row.controls['fecha'].value}}
+            <mat-form-field dateFormatYyyyMm>
+                <input matInput
+                    [matDatepicker]="fieldPicker"
+                    [formControl]="row.controls['fecha']"
+                    placeholder="Ingrese año">
+              
+                <mat-datepicker-toggle matSuffix
+                    [for]="fieldPicker"></mat-datepicker-toggle>
+                   
+                <mat-datepicker-toggle matSuffix
+                    (click)="row.controls['fecha'].setValue(null)">
+                    <mat-icon matDatepickerToggleIcon>clear</mat-icon>
+                </mat-datepicker-toggle>
+               
+                <mat-datepicker #fieldPicker
+                        startView="multi-year"
+                        (yearSelected)="datePickerYearGroupKey(row,'fecha',$event,fieldPicker)">
+                </mat-datepicker>
+              </mat-form-field>
         </td>
     </ng-container>
 
-    <ng-container matColumnDef="curso-label" >
+    <ng-container matColumnDef="docente-label" >
         <th mat-header-cell *matHeaderCellDef > Curso </th>
         <td mat-cell *matCellDef="let row; let i = index;">
-            {{row.controls['curso-label'].value}}
+            {{row.controls['docente-label'].value}}
         </td>
     </ng-container>
 
     <ng-container matColumnDef="options">
     <th mat-header-cell *matHeaderCellDef> Opciones </th>
     <td mat-cell *matCellDef="let row; let i = index;">
-        <a [routerLink]="'/toma-posesion-email-abc'"
+        <!-- <a [routerLink]="'/toma-posesion-email-abc'"
             [queryParams]="{'curso':row.controls['id'].value}"
-            [title]="'Administrar Comision'">Toma de Posesión</a>
+            [title]="'Administrar Comision'">Toma de Posesión</a> -->
     </td>
     <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
@@ -67,3 +112,24 @@
         *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
 </table>
  
+
+<mat-toolbar>
+        <mat-toolbar-row>
+            <button  
+                type="button"
+                mat-mini-fab
+                color="accent"
+                title="Agregar calificaciones"
+                (click)="add.emit()"><mat-icon>add</mat-icon></button>
+                
+            <button  
+                [disabled]="control.status == 'PENDING'"
+                type="submit"
+                mat-raised-button>Guardar Calificaciones</button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+</form> 
+    </mat-card-content>
+</mat-card>
+

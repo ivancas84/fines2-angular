@@ -12,7 +12,7 @@ import { ComponentToolsService } from '@service/component-tools/component-tools.
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { LocalStorageService } from '@service/storage/local-storage.service';
 import { DdAsyncValidatorsService } from '@service/validators/dd-async-validators.service';
-import { Observable, BehaviorSubject, map, switchMap, of, first } from 'rxjs';
+import { Observable, BehaviorSubject, map, switchMap, of, first, combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-alumno-admin2',
@@ -133,12 +133,76 @@ export class AlumnoAdmin2Component implements OnInit {
             for(var i = 0; i <data["detalle_persona_"].length; i++) this.controlDetallePersona_.push(this.formGroupDetallePersona(data["detalle_persona_"][i]));
 
             this.controlCalificacion_.clear();
-            for(var i = 0; i <data["calificacion_"].length; i++) this.controlCalificacion_.push(this.formGroupDetallePersona(data["calificacion_"][i]));
-   
-            return true;
+            for(var i = 0; i <data["calificacion_"].length; i++) this.controlCalificacion_.push(this.formGroupCalificacion(data["calificacion_"][i]));
           },
         ),
+        switchMap(
+          () => this.initOptions()
+        ),
+        map(
+          () => true
+        )
       )
+    }
+
+    initOptions(): Observable<any> {
+      if(!this.controlAlumno.get("plan")!.value) return of(this.options)
+
+      var display = new Display().addParam("plan-id",this.controlAlumno.get("plan")!.value).setSize(0)
+      var disposicion = this.dd.post("ids", "disposicion", display).pipe(
+        switchMap(
+          ids => this.dd.entityFieldsGetAll({
+            entityName:"disposicion",
+            ids:ids,
+            fields:["id","asignatura-nombre","planificacion-anio","planificacion-semestre"]
+          })
+        )
+      )
+
+      return combineLatest([disposicion]).pipe(
+        map(
+          response => {
+            this.options["disposicion"]=response[0]
+            console.log(this.options)
+            return true
+          }
+        )
+      )
+
+      // var plan = this.dd.post("ids", "plan", display).pipe(
+      //   switchMap(
+      //     ids => this.dd.entityFieldsGetAll({
+      //       entityName:"disposicion",
+      //       ids:ids,
+      //       fields:["id","asignatura-nombre",""]
+      //     })
+      //   )
+      // )
+      // var display = new Display().addParam("comision",this.idComision).setSize(0).addOrder("asignatura-nombre","ASC")
+ 
+      // var curso = this.dd.post("ids","curso", display).pipe(
+      //   switchMap(
+      //     ids => this.dd.entityFieldsGetAll({
+      //       entityName:"curso",
+      //       ids:ids,
+      //       fields:["id","asignatura-nombre"]
+      //     })
+      //   )
+      // )
+  
+      // var dia = this.dd.post("label_all","dia", new Display)
+  
+  
+      // return combineLatest([curso,dia]).pipe(
+      //   map(
+      //     response => {
+      //       this.options["curso"]=response[0]
+      //       this.options["dia"]=response[1]
+      //       return true
+      //     }
+      //   )
+      // )
+
     }
 
     initDetallePersona_(data: { [x: string]: any } = {}): Observable<any> {
@@ -206,7 +270,7 @@ export class AlumnoAdmin2Component implements OnInit {
           ids => this.dd.entityFieldsGetAll({
               entityName:"calificacion",
               ids,
-              fields:["id","asignatura-nombre","planificacion-anio","planificacion-semestre","nota_final","crec","options"]
+              fields:["id","disposicion","asignatura-nombre","planificacion-anio","planificacion-semestre","nota_final","crec"],
             })
         ),
         switchMap(
@@ -216,17 +280,34 @@ export class AlumnoAdmin2Component implements OnInit {
               method:"info",
               entityName:"curso_toma_activa",
               fields:["toma_activa"],
-              fieldNameData:"id",
+              fieldNameData:"curso",
               fieldNameResponse:"curso"
+            })
+          }
+        ),
+        switchMap(
+          data => {
+            return this.dd.entityFieldsMergeAll({
+              data,
+              entityName:"toma",
+              fields:[
+                "id",
+                "docente-id",
+                "docente-nombres",
+                "docente-apellidos",
+                "docente-numero_documento",
+              ],
+              fieldNameData:"toma_activa",
+              fieldNameResponse:"id",
+              prefix:"ta_"
             })
           }
         ),
         map(
           data => {
-            console.log(data)
-            // data.forEach((element: { [x: string]: string; }) => {
-            //   element["curso-label"] = comisionLabel(element, "comision-")
-            // })
+            data.forEach((element: { [x: string]: string; }) => {
+              element["docente-label"] = (element["toma_activa"]) ? element["ta_docente-nombres"] + " " + element["ta_docente-apellidos"] : ""
+            })
             return data;
           }
         ),
@@ -293,10 +374,13 @@ export class AlumnoAdmin2Component implements OnInit {
     formGroupCalificacion(data:{[i:string]:any}={}): FormGroup {
       var fg = this.fb.group({
         "id":this.fb.control(""),
-        "asignatura":this.fb.control(""),
-        "anio":this.fb.control(""),
-        "semestre":this.fb.control(""),
+        "disposicion":this.fb.control(""),
+        "asignatura-nombre":this.fb.control(""),
+        "docente-label":this.fb.control(""),
+        "planificacion-anio":this.fb.control(""),
+        "planificacion-semestre":this.fb.control(""),
         "nota_final":this.fb.control(""),
+        "fecha":this.fb.control(""),
         "crec":this.fb.control(""),
         "alumno":this.fb.control(""),
         "_mode":this.fb.control("id"),
@@ -343,18 +427,7 @@ export class AlumnoAdmin2Component implements OnInit {
     display$:BehaviorSubject<Display> = new BehaviorSubject(new Display) //presentacion
     params: { [x: string]: any } = {} //parametros del componente
   
-    onSubmit(fieldset: string) {
-      this.isSubmitted = true;
-   
-      switch(fieldset){
-        case "persona": this.submitPersona(); break;
-        case "alumno": this.submitAlumno(); break;
-        case "detalle_persona": this.submitDetallePersona(); break;
-        case "alumno_comision": this.submitAlumnoComision(); break;
 
-
-      }
-    }
   
     submitPersona(){
       if (!this.controlPersona.valid) {
@@ -389,6 +462,10 @@ export class AlumnoAdmin2Component implements OnInit {
     submitAlumnoComision(){
       this.submitUm("alumno_comision", this.controlAlumnoComision_)
     }
+      
+    submitCalificacion() {
+      this.submitUm("calificacion", this.controlCalificacion_)
+    }
 
     addDetallePersona(){
       if(this.existePersona()) this.controlDetallePersona_.push(this.formGroupDetallePersona({persona:this.controlPersona.get("id")?.value}))
@@ -398,7 +475,9 @@ export class AlumnoAdmin2Component implements OnInit {
       if(this.existeAlumno()) this.controlAlumnoComision_.push(this.formGroupAlumnoComision({alumno:this.controlAlumno.get("id")?.value}))
     }
 
-    
+    addCalificacion(){
+      if(this.existeAlumno()) this.controlCalificacion_.push(this.formGroupCalificacion({alumno:this.controlAlumno.get("id")?.value}))
+    }
   
     protected submitUm(fieldsetId: string, control: FormArray){
       if (!control.valid) {
@@ -436,6 +515,11 @@ export class AlumnoAdmin2Component implements OnInit {
       }
       return true
     }
+
+
+    options$!: Observable<any>;
+    options: {[i:string]:{[i:string]:any}[]} = {}
+  
    
    
 }
