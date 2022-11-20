@@ -28,7 +28,7 @@
                      
                       <mat-datepicker #fieldPicker
                               startView="multi-year"
-                              (yearSelected)="datePickerYearGroupKey(control,'calendario-anio',$event,fieldPicker)">
+                              (yearSelected)="chosenYearHandlerClose(control.get('calendario-anio')!,$event,fieldPicker)">
                       </mat-datepicker>
                   </mat-form-field>                    
               </div>

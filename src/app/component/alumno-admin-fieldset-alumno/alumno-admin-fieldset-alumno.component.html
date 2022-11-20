@@ -107,7 +107,12 @@
             fxFlex.xs="100%" 
             fxFlex.sm="50%" 
             fxFlex.gt-sm="25%">
-            <mat-form-field>
+            <mat-form-field
+                [ngClass]="{
+                    'highlightGreen':control.get('estado_inscripcion')!.value=='Correcto' || control.get('estado_inscripcion')!.value=='Titulado',
+                    'highlightYellow':control.get('estado_inscripcion')!.value=='Correcto incompleto',
+                    'highlightRed':control.get('estado_inscripcion')!.value=='Indeterminado' || control.get('estado_inscripcion')!.value=='Caso particular'
+                  }">
                 <mat-label>Estado Inscripción</mat-label>
             
                 <mat-select formControlName="estado_inscripcion">
@@ -127,13 +132,13 @@
                 fxFlex.xs="100%" 
                 fxFlex.sm="50%" 
                 fxFlex.gt-sm="25%">
-                <mat-form-field>
+                <mat-form-field
+                    [ngClass]="{'highlightRed':!control.get('plan')!.value}">
                     <mat-label>Plan</mat-label>
                 
                     <mat-select 
                         formControlName="plan"
                         placeholder="Indique plan de estudios de fines">
-                    >
                         <mat-option [value]="null">--Seleccione--</mat-option>
                         <mat-option *ngFor="let opt of (optionsPlan$ | async)" [value]="opt.id">
                             {{opt["label"]}}
@@ -147,7 +152,8 @@
                 fxFlex.xs="100%" 
                 fxFlex.sm="34%" 
                 fxFlex.gt-sm="17%">
-                <mat-form-field>
+                <mat-form-field 
+                    [ngClass]="{'highlightRed':!control.get('anio_ingreso')!.value}">
                     <mat-label>Año de Ingreso</mat-label>
                 
                     <mat-select 

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AlumnoAdminComponent } from '@component/_alumno-admin/alumno-admin.component';
 import { AsignaturaArrayComponent } from '@component/_asignatura-array/asignatura-array.component';
 import { CalendarioAdminArrayComponent } from '@component/_calendario-admin-array/calendario-admin-array.component';
 import { CalendarioAdminComponent } from '@component/_calendario-admin/calendario-admin.component';
@@ -27,7 +26,6 @@ import { AlumnoAdmin2Component } from '@component/alumno-admin2/alumno-admin2.co
 const routes: Routes = [
   { path: '', component: CursosTomaPosesionComponent, pathMatch: 'full' },
 
-  { path: 'alumno-admin', component: AlumnoAdminComponent, pathMatch: 'full' },
   { path: 'alumno-admin2', component: AlumnoAdmin2Component, pathMatch: 'full' },
   { path: 'asignatura-array', component: AsignaturaArrayComponent, pathMatch: 'full' },
   { path: 'curso-admin', component: CursoAdminComponent, pathMatch: 'full' },

@@ -45,7 +45,12 @@
                         formControlName="numero_documento">
                     <mat-error>
                         <ng-container *ngIf="control.get('numero_documento')!.hasError('required')">">Debe ingresar valor</ng-container>
-                        <ng-container *ngIf="control.get('numero_documento')!.hasError('notUnique')">">Ya existe una persona con ese DNI</ng-container>
+                        <ng-container *ngIf="control.get('numero_documento')!.hasError('notUnique')">"Ya existe una persona con ese DNI 
+                          <a 
+                              [routerLink]="'/alumno-admin2'"
+                              [queryParams]="{'persona':control.get('numero_documento')!.getError('notUnique')}"       
+                              title="Administrar Persona">--VER--</a>
+                        </ng-container>
                     </mat-error>
                 </mat-form-field>
             </div>

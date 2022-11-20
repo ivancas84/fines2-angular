@@ -1,8 +1,3 @@
-<mat-card>
-    <mat-card-header>
-      <mat-card-title>Calificaciones</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
 
 
 <form [formGroup]="controlContainer" novalidate (ngSubmit)="onSubmit$.next(null)">
@@ -14,18 +9,7 @@
     <ng-container matColumnDef="disposicion" >
         <th mat-header-cell *matHeaderCellDef> Disposicion </th>
         <td mat-cell *matCellDef="let row; let i = index;">
-            <mat-form-field>
-                <mat-select [formControl]="row.controls['disposicion']">
-                    <mat-option [value]="null">--Seleccione--</mat-option>
-                    <mat-option *ngFor="let opt of options['disposicion']" [value]="opt['id']">
-                        {{opt["asignatura-nombre"]}} {{opt["planificacion-anio"]}} {{opt["planificacion-semestre"]}}
-                    </mat-option>
-                </mat-select>
-             
-                <mat-error>
-                    <span *ngIf="row.controls['disposicion']!.hasError('required')">Debe completar valor</span>
-                </mat-error>
-            </mat-form-field>
+          {{row.controls['asignatura_dis-nombre'].value}} {{row.controls['planificacion_dis-anio'].value}}{{row.controls['planificacion_dis-semestre'].value}}
         </td>
     </ng-container>
  
@@ -34,11 +18,11 @@
  
     <ng-container matColumnDef="nota_final">
         <th mat-header-cell *matHeaderCellDef> Nota Final </th>
-        <td mat-cell *matCellDef="let row; let i = index;">
+        <td mat-cell *matCellDef="let row; let i = index;"
+            [ngClass]="{'highlightRed': row | desaprobado}">
             <mat-form-field>
                
                 <input matInput
-                       readonly="readonly"
                        type="text"
                        [formControl]="row.controls['nota_final']"
                        placeholder="Ingrese Nota"
@@ -51,11 +35,11 @@
 
     <ng-container matColumnDef="crec">
         <th mat-header-cell *matHeaderCellDef> CREC </th>
-        <td mat-cell *matCellDef="let row; let i = index;">
+        <td mat-cell *matCellDef="let row; let i = index;"
+            [ngClass]="{'highlightRed': row | desaprobado}">
             <mat-form-field>
                
                 <input matInput
-                       readonly="readonly"
                        type="text"
                        [formControl]="row.controls['crec']"
                        placeholder="Ingrese CREC"
@@ -72,7 +56,7 @@
                 <input matInput
                     [matDatepicker]="fieldPicker"
                     [formControl]="row.controls['fecha']"
-                    placeholder="Ingrese año">
+                    placeholder="Ingrese mes y año">
               
                 <mat-datepicker-toggle matSuffix
                     [for]="fieldPicker"></mat-datepicker-toggle>
@@ -84,7 +68,8 @@
                
                 <mat-datepicker #fieldPicker
                         startView="multi-year"
-                        (yearSelected)="datePickerYearGroupKey(row,'fecha',$event,fieldPicker)">
+                        (yearSelected)="chosenYearHandler(row.controls['fecha'],$event)"
+                        (monthSelected)="chosenMonthHandler(row.controls['fecha'],$event,fieldPicker)">
                 </mat-datepicker>
               </mat-form-field>
         </td>
@@ -123,6 +108,3 @@
 </mat-toolbar>
 
 </form> 
-    </mat-card-content>
-</mat-card>
-

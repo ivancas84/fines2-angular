@@ -9,5 +9,5 @@ import { AbstractAutocompleteComponent } from '@component/abstract-autocomplete/
 export class AutocompleteComisionComponent extends AbstractAutocompleteComponent {
 
   override entityName: string = "comision";
-
+  override title: string = "Comisión"
 }

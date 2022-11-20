@@ -37,12 +37,26 @@
                 (onSubmit)="submitDetallePersona()"
                 (add)="addDetallePersona()"></app-alumno-admin-table-detalle-persona>
 
-            <app-alumno-admin-table-calificacion
-                [control]="controlCalificacion_"
-                (onSubmit)="submitCalificacion()"
-                (add)="addCalificacion()"
-                [options]="options"></app-alumno-admin-table-calificacion>
-
+            <mat-card>
+                <mat-card-header>
+                  <mat-card-title>Calificaciones
+                      <button  
+                          type="button" 
+                          mat-raised-button 
+                          title="Generar calificaciones"
+                          (click)="generarCalificaciones()">Generar Calificaciones</button>
+                  </mat-card-title>
+                  <p>Mostrando {{totalCalificaciones}} de {{totalAsignaturas}}  calificaciones (aprobadas {{totalCalificacionesAprobadas}})</p>
+                </mat-card-header>
+                <mat-card-content>
+                  
+                  <app-alumno-admin-table-calificacion
+                      [control]="controlCalificacion_"
+                      (onSubmit)="submitCalificacion()"
+                      (add)="addCalificacion()"
+                      [options]="options"></app-alumno-admin-table-calificacion>
+                  </mat-card-content>
+              </mat-card>
         </ng-container>
     </ng-container>
 </ng-container>

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { emptyUrl } from '@function/empty-url.function';
 import { isEmptyObject } from '@function/is-empty-object.function';
-import { comisionLabel } from '@function/label';
+import { comisionLabel, comisionNumero } from '@function/label';
 import { logValidationErrors } from '@function/log-validation-errors';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
@@ -20,6 +21,18 @@ import { Observable, BehaviorSubject, map, switchMap, of, first, combineLatest }
   styleUrls: ['./alumno-admin2.component.css']
 })
 export class AlumnoAdmin2Component implements OnInit {
+
+  constructor(
+    protected dd: DataDefinitionToolService,
+    protected dialog: MatDialog,
+    protected route: ActivatedRoute,
+    protected fb: FormBuilder,
+    protected validators: DdAsyncValidatorsService,
+    protected tools: ComponentToolsService,
+    protected local: LocalStorageService,
+    protected router: Router, 
+    protected snackBar: MatSnackBar
+  ) { }
 
     controlPersona:FormGroup = this.fb.group({
       id:this.fb.control(null),
@@ -51,8 +64,8 @@ export class AlumnoAdmin2Component implements OnInit {
       resolucion_inscripcion:this.fb.control(null),
       anio_ingreso:this.fb.control(null),
       plan:this.fb.control(null),
-      adeuda_deudores:this.fb.control(null),
-      adeuda_legajo:this.fb.control(null),
+      adeuda_deudores:this.fb.control({value:null, disabled:true}),
+      adeuda_legajo:this.fb.control({value:null, disabled:true}),
       libro:this.fb.control(null),
       folio:this.fb.control(null),
       estado_inscripcion:this.fb.control(null),
@@ -94,7 +107,6 @@ export class AlumnoAdmin2Component implements OnInit {
       this.loadParams$ = this.route.queryParams.pipe(
         map(
           queryParams => { 
-            console.log(queryParams)
             this.params = queryParams
             var display = new Display().setSize(100).setParamsByQueryParams(queryParams);
             this.display$.next(display)
@@ -119,7 +131,8 @@ export class AlumnoAdmin2Component implements OnInit {
           (data: any) => this.initCalificacion_(data)
         ),
         map(
-          data => { 
+          data => {
+             
             this.controlAlumno.reset()
             this.controlAlumno.patchValue({...this.defaultValuesAlumno, ...this.params, ...data["alumno"]})
             
@@ -134,6 +147,22 @@ export class AlumnoAdmin2Component implements OnInit {
 
             this.controlCalificacion_.clear();
             for(var i = 0; i <data["calificacion_"].length; i++) this.controlCalificacion_.push(this.formGroupCalificacion(data["calificacion_"][i]));
+        
+            this.totalCalificaciones = data["calificacion_"].length;
+            
+
+            switch(parseInt(this.controlAlumno.get("anio_ingreso")!.value)) {
+              case 3: this.totalAsignaturas = 10; break;
+              case 2: this.totalAsignaturas = 20; break;
+              case 1: this.totalAsignaturas = 30; break;
+            }
+
+            this.totalCalificacionesAprobadas = 0;
+            for(var i = 0; i < data["calificacion_"].length; i++){
+              if(parseInt(data["calificacion_"][i]["nota_final"]) >= 7 
+              || parseInt(data["calificacion_"][i]["crec"]) >= 4) this.totalCalificacionesAprobadas++;
+            }
+            
           },
         ),
         switchMap(
@@ -163,7 +192,6 @@ export class AlumnoAdmin2Component implements OnInit {
         map(
           response => {
             this.options["disposicion"]=response[0]
-            console.log(this.options)
             return true
           }
         )
@@ -235,21 +263,7 @@ export class AlumnoAdmin2Component implements OnInit {
               "estado",
               "alumno",
               "comision",
-              "comision-division",
-              "sede-numero",
-              "planificacion-anio",
-              "planificacion-semestre",
-              "calendario-anio",
-              "calendario-semestre"
           ]})
-        ),
-        map(
-          data => {
-            data.forEach((element: { [x: string]: string; }) => {
-              element["comision-label"] = comisionLabel(element, "comision-")
-            })
-            return data;
-          }
         ),
         map(
           (d_: any) => {
@@ -262,15 +276,30 @@ export class AlumnoAdmin2Component implements OnInit {
 
     initCalificacion_(data: { [x: string]: any }): Observable<any> {
       data["calificacion_"] = []
-      if(!data["alumno"]["id"]) return of(data)
-      var display = new Display().setParams({"alumno":data["alumno"]["id"]})
+      if(!data["alumno"]["id"] || !data["alumno"]["plan"] || !data["alumno"]["anio_ingreso"]) return of(data)
+    
+      var display = new Display().setParams({
+        "alumno":data["alumno"]["id"],
+        "plan_alu-id":data["alumno"]["plan"],
+      }).setCondition(["planificacion_dis-anio",">=",data["alumno"]["anio_ingreso"]])
+
   
       return this.dd.post("ids","calificacion", display).pipe(
         switchMap(
           ids => this.dd.entityFieldsGetAll({
               entityName:"calificacion",
               ids,
-              fields:["id","disposicion","asignatura-nombre","planificacion-anio","planificacion-semestre","nota_final","crec"],
+              fields:["id",
+                "asignatura_dis-nombre",
+                "disposicion",
+                "nota_final",
+                "crec",
+                "planificacion_dis-anio",
+                "planificacion_dis-semestre",
+                "alumno",
+                "fecha",
+                "curso"
+              ],
             })
         ),
         switchMap(
@@ -296,6 +325,13 @@ export class AlumnoAdmin2Component implements OnInit {
                 "docente-nombres",
                 "docente-apellidos",
                 "docente-numero_documento",
+                "comision-division",
+                "sede-numero",
+                "calendario-fin",
+                "planificacion-anio",
+                "planificacion-semestre",
+                "asignatura-nombre",
+      
               ],
               fieldNameData:"toma_activa",
               fieldNameResponse:"id",
@@ -307,6 +343,14 @@ export class AlumnoAdmin2Component implements OnInit {
           data => {
             data.forEach((element: { [x: string]: string; }) => {
               element["docente-label"] = (element["toma_activa"]) ? element["ta_docente-nombres"] + " " + element["ta_docente-apellidos"] : ""
+              if(element["ta_sede-numero"]){
+                element["docente-label"] += " " + element["ta_sede-numero"] + element["ta_comision-division"] + "/" + element["ta_planificacion-anio"] + element["ta_planificacion-semestre"]
+                element["docente-label"] += " " + element["ta_asignatura-nombre"]
+              }
+              if((element["ta_calendario-fin"])) {
+                var d = new Date(element["ta_calendario-fin"])
+                element["docente-label"] += " " + d.getFullYear()+ "/"+(d.getMonth()+1)
+              }
             })
             return data;
           }
@@ -359,11 +403,10 @@ export class AlumnoAdmin2Component implements OnInit {
   
     formGroupAlumnoComision(data:{[i:string]:any}={}): FormGroup {
       var fg = this.fb.group({
-        "id":this.fb.control(""),
-        "comision":this.fb.control(""),
-        "comision-label":this.fb.control(""),
-        "activo":this.fb.control(""),
-        "alumno":this.fb.control(""),
+        "id":this.fb.control(null),
+        "comision":this.fb.control(null,{validators:Validators.required}),
+        "activo":this.fb.control(true),
+        "alumno":this.fb.control(null,{validators:Validators.required}),
         "estado":this.fb.control(""),
         "_mode":this.fb.control("id"),
       })
@@ -374,15 +417,15 @@ export class AlumnoAdmin2Component implements OnInit {
     formGroupCalificacion(data:{[i:string]:any}={}): FormGroup {
       var fg = this.fb.group({
         "id":this.fb.control(""),
-        "disposicion":this.fb.control(""),
-        "asignatura-nombre":this.fb.control(""),
+        "disposicion":this.fb.control("",{validators:Validators.required}),
+        "asignatura_dis-nombre":this.fb.control(""),
         "docente-label":this.fb.control(""),
-        "planificacion-anio":this.fb.control(""),
-        "planificacion-semestre":this.fb.control(""),
+        "planificacion_dis-anio":this.fb.control(""),
+        "planificacion_dis-semestre":this.fb.control(""),
         "nota_final":this.fb.control(""),
         "fecha":this.fb.control(""),
         "crec":this.fb.control(""),
-        "alumno":this.fb.control(""),
+        "alumno":this.fb.control("",{validators:Validators.required}),
         "_mode":this.fb.control("id"),
       })
       fg.patchValue(data)
@@ -410,16 +453,7 @@ export class AlumnoAdmin2Component implements OnInit {
       this.loadStorage$ = this.tools.loadStorage(this.control)
     }
 
-    constructor(
-      protected dd: DataDefinitionToolService,
-      protected dialog: MatDialog,
-      protected route: ActivatedRoute,
-      protected fb: FormBuilder,
-      protected validators: DdAsyncValidatorsService,
-      protected tools: ComponentToolsService,
-      protected local: LocalStorageService,
-      protected router: Router, 
-    ) { }
+
 
     loadParams$!: Observable<any> //carga de parametros
     loadDisplay$!: Observable<any> //carga de display
@@ -487,7 +521,7 @@ export class AlumnoAdmin2Component implements OnInit {
       } else {
         this.dd._post("persist_rows", fieldsetId, control.value).pipe(first()).subscribe({
           next: (response: any) => {
-            this.tools.submitted(response)
+            this.tools.submittedDisplay(response,this.display$)
           },
           error: (error: any) => this.tools.dialogError(error),
           complete: () => this.isSubmitted = false
@@ -519,7 +553,33 @@ export class AlumnoAdmin2Component implements OnInit {
 
     options$!: Observable<any>;
     options: {[i:string]:{[i:string]:any}[]} = {}
-  
+    totalCalificaciones: number = 0;
+    totalCalificacionesAprobadas: number = 0;
+    totalAsignaturas: number = 0;
    
+    public generarCalificaciones() {
+      var d = this.controlAlumno.value
+  
+      if(isEmptyObject(d) || !d["id"] || !d["plan"] || !d["anio_ingreso"]) {
+        this.snackBar.open("No se pueden generar las calificaciones, no se encuentran definido correctamente el alumno", "X", {
+          duration:0
+        });
+        return;
+      }
+  
+      this.dd._post("generar_calificacion_alumno", "alumno",d["id"]).pipe(first()).subscribe({
+        next: (response: any) => {
+          this.tools.submittedDisplay(response, this.display$)        
+        },
+        error: (error: any) => { 
+          this.dialog.open(DialogAlertComponent, {
+            data: {title: "Error", message: error.error}
+          });
+          this.isSubmitted = false;
+        }
+      });
+    }
+  
+  
    
 }

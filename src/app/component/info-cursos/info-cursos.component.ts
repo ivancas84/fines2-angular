@@ -10,7 +10,7 @@ import { DataDefinitionToolService } from '@service/data-definition/data-definit
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { markAllAsTouched } from '@function/mark-all-as-touched';
 import { MatDialog } from '@angular/material/dialog';
-import { datePickerYearGroupKey, loadSearchControl } from '@function/component';
+import { chosenYearHandlerClose, loadSearchControl } from '@function/component';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 
 
@@ -28,7 +28,7 @@ import { ComponentToolsService } from '@service/component-tools/component-tools.
 })
 export class InfoCursosComponent implements OnInit {
 
-  datePickerYearGroupKey = datePickerYearGroupKey
+  chosenYearHandlerClose = chosenYearHandlerClose
 
   entityName: string = "curso"
   

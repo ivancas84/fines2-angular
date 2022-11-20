@@ -18,8 +18,6 @@ import { ResumenComisionesComponent } from '@component/_resumen-comisiones/resum
 import { CursoAdminComponent } from '@component/_curso-admin/curso-admin.component';
 import { ListaComisionesComponent } from '@component/_resumen-comisiones/lista-comisiones.component';
 import { ResumenAlumnosComponent } from '@component/_resumen-alumnos/resumen-alumnos.component';
-import { AlumnoAdminComponent } from '@component/_alumno-admin/alumno-admin.component';
-import { AlumnoCalificacionTableComponent } from '@component/_alumno-admin/alumno-calificacion-table.component';
 import { AprobadoPipe } from '@pipe/aprobado.pipe';
 import { DesaprobadoPipe } from '@pipe/desaprobado.pipe';
 import { TableResumenComisionesComponent } from '@component/_resumen-comisiones/table-resumen-comisiones.component';
@@ -66,8 +64,6 @@ import { AutocompleteComisionComponent } from './component/autocomplete-comision
     AppComponent,
     AprobadoPipe,
     DesaprobadoPipe,
-    AlumnoAdminComponent,
-    AlumnoCalificacionTableComponent,
     AsignaturaArrayComponent,
     CalendarioAdminComponent,
     CalendarioAdminArrayComponent,

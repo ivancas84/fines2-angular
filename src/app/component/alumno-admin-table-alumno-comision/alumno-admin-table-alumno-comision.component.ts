@@ -11,7 +11,7 @@ import { Subject, Subscription } from 'rxjs';
 })
 export class AlumnoAdminTableAlumnoComisionComponent implements AfterViewInit, OnInit {
 
-  controlContainer: FormGroup = new FormGroup({},{updateOn:"submit"})
+  controlContainer: FormGroup = new FormGroup({})
   @Input() control!: FormArray
   protected subscriptions: Subscription = new Subscription() //suscripciones en el ts
  
@@ -33,7 +33,8 @@ export class AlumnoAdminTableAlumnoComisionComponent implements AfterViewInit, O
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(){
+    this.controlContainer.addControl("control",this.control)
     onSubmit(this.onSubmit$,this.control,this.onSubmit,"alumno_comision")
   }
 

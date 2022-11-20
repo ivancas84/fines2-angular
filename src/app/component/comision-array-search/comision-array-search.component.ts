@@ -5,7 +5,7 @@ import { MatExpansionPanel } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
-import { datePickerYearGroupKey, setNullGroupKey } from '@function/component';
+import { chosenYearHandlerClose, setNullGroupKey } from '@function/component';
 import { markAllAsTouched } from '@function/mark-all-as-touched';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { first, map, Observable } from 'rxjs';
@@ -17,7 +17,7 @@ import { first, map, Observable } from 'rxjs';
 })
 export class ComisionArraySearchComponent implements OnInit {
 
-  datePickerYearGroupKey = datePickerYearGroupKey
+  chosenYearHandlerClose = chosenYearHandlerClose
 
   isSubmitted: boolean = false;
   @Input() display!: Display

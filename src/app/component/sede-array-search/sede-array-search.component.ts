@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
-import { datePickerYearGroupKey } from '@function/component';
+import { chosenYearHandlerClose } from '@function/component';
 import { markAllAsTouched } from '@function/mark-all-as-touched';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { first } from 'rxjs';
@@ -24,7 +24,7 @@ export class SedeArraySearchComponent {
     @Input() control!: FormGroup
     @Input() display!: Display
     
-    datePickerYearGroupKey = datePickerYearGroupKey
+    chosenYearHandlerClose = chosenYearHandlerClose
 
     isSubmitted: boolean = false;
  

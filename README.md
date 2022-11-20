@@ -29,7 +29,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # Version 0.5
 
 * Adaptar a la versión 0.5 de SQLOrganize.
-* Eliminar componentes generales para administrar campos.
-* Eliminar servicio Label para definir etiquetas de entidades.
-* Eliminar componentes abstractos estructurales.
-* Posible nombre para la versión 1: DataOrganize.
+* Nuevos campos de tabla alumno: tiene_dni, tiene_constancia, tiene_certificado, previas_completas, tiene_partida.
+* Nuevos campos de tabla alumno_comision: estado.
