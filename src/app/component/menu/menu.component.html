@@ -18,8 +18,17 @@
     <a mat-menu-item routerLink="/alumno-admin2" routerLinkActive="active" title="Nuevo Alumno 2">Nuevo Alumno 2</a>
     <a mat-menu-item routerLink="/alumno-admin" routerLinkActive="active" title="Nuevo Alumno">Nuevo Alumno</a>
     <a mat-menu-item routerLink="/generar-constancia" routerLinkActive="active" title="Generar Constancia">Generar Constancia</a>
-
+      
   </mat-menu>
+
+  
+  <button mat-button [matMenuTriggerFor]="administracion" aria-label="icon-button with menu icon">
+    Administración
+  </button>
+  <mat-menu #administracion="matMenu">
+    <a mat-menu-item routerLink="/asignatura-array" routerLinkActive="active" title="Lista de asignaturas">Asignaturas</a>
+  </mat-menu>
+    
     <a mat-menu-item routerLink="/cursos-toma-posesion" routerLinkActive="active" title="Toma de Posesión">Toma de Posesión</a>
   
   <span fxFlex="1 1 auto"></span>

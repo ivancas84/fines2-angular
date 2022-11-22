@@ -1,0 +1,58 @@
+<table mat-table
+    [dataSource]="control.controls"
+    class="table mat-elevation-z8"
+    matSort
+    matSortDisableClear
+    (matSortChange)="onChangeSort($event)"
+    [matSortActive]="'inicio'"
+    [matSortDirection]="'desc'">
+ 
+    <ng-container matColumnDef="inicio" >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Inicio </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+        {{row.controls['inicio'].value}}
+        </td>
+    </ng-container>
+ 
+    <ng-container matColumnDef="fin" >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fin </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+        {{row.controls['fin'].value}}
+        </td>
+    </ng-container>
+ 
+    <ng-container matColumnDef="anio">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Año </th>
+    <td mat-cell *matCellDef="let row; let i = index;">
+        {{row.controls['anio'].value}}
+    </td>
+    </ng-container>
+ 
+    <ng-container matColumnDef="semestre">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Semestre </th>
+    <td mat-cell *matCellDef="let row; let i = index;">
+        {{row.controls['semestre'].value}}
+    </td>
+    </ng-container>
+ 
+    <ng-container matColumnDef="descripcion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
+      <td mat-cell *matCellDef="let row; let i = index;">
+          {{row.controls['descripcion'].value}}
+      </td>
+      </ng-container>
+
+    <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef> Opciones </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            <!-- <a [routerLink]="'/toma-posesion-email-abc'"
+                [queryParams]="{'curso':row.controls['id'].value}"
+                [title]="'Administrar Comision'">Toma de Posesión</a> -->
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+ 
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+</table>

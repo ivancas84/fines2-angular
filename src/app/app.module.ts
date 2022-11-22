@@ -58,6 +58,10 @@ import { AlumnoAdminTableCalificacionComponent } from './component/alumno-admin-
 import { AlumnoAdminTableDetallePersonaComponent } from './component/alumno-admin-table-detalle-persona/alumno-admin-table-detalle-persona.component';
 import { UploadDetallePersonaArchivoComponent } from './component/upload-detalle-persona-archivo/upload-detalle-persona-archivo.component';
 import { AutocompleteComisionComponent } from './component/autocomplete-comision/autocomplete-comision.component';
+import { AsignaturaArray2Component } from './component/asignatura-array2/asignatura-array2.component';
+import { CalendarioArray2Component } from './component/calendario-array2/calendario-array2.component';
+import { AsignaturaArrayTableComponent } from './component/asignatura-array-table/asignatura-array-table.component';
+import { CalendarioArrayTableComponent } from './component/calendario-array-table/calendario-array-table.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +112,10 @@ import { AutocompleteComisionComponent } from './component/autocomplete-comision
     AlumnoAdminTableDetallePersonaComponent,
     UploadDetallePersonaArchivoComponent,
     AutocompleteComisionComponent,
+    AsignaturaArray2Component,
+    CalendarioArray2Component,
+    AsignaturaArrayTableComponent,
+    CalendarioArrayTableComponent,
   ],
   imports: [
     BrowserModule,

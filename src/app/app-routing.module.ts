@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AsignaturaArrayComponent } from '@component/_asignatura-array/asignatura-array.component';
 import { CalendarioAdminArrayComponent } from '@component/_calendario-admin-array/calendario-admin-array.component';
 import { CalendarioAdminComponent } from '@component/_calendario-admin/calendario-admin.component';
 import { CursoAdminComponent } from '@component/_curso-admin/curso-admin.component';
@@ -22,12 +21,13 @@ import { ComisionArrayComponent } from '@component/comision-array/comision-array
 import { ComisionAdminComponent } from '@component/comision-admin/comision-admin.component';
 import { SedeArrayComponent } from '@component/sede-array/sede-array.component';
 import { AlumnoAdmin2Component } from '@component/alumno-admin2/alumno-admin2.component';
+import { AsignaturaArray2Component } from '@component/asignatura-array2/asignatura-array2.component';
 
 const routes: Routes = [
   { path: '', component: CursosTomaPosesionComponent, pathMatch: 'full' },
 
   { path: 'alumno-admin2', component: AlumnoAdmin2Component, pathMatch: 'full' },
-  { path: 'asignatura-array', component: AsignaturaArrayComponent, pathMatch: 'full' },
+  { path: 'asignatura-array', component: AsignaturaArray2Component, pathMatch: 'full' },
   { path: 'curso-admin', component: CursoAdminComponent, pathMatch: 'full' },
   { path: 'generar-constancia', component: GenerarConstanciaComponent, pathMatch: 'full' },
   { path: 'resumen-comisiones', component: ResumenComisionesComponent, pathMatch: 'full' },
