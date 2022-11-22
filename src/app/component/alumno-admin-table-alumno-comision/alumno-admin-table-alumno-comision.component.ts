@@ -29,7 +29,7 @@ export class AlumnoAdminTableAlumnoComisionComponent implements AfterViewInit, O
 
   ngOnDestroy () { this.subscriptions.unsubscribe() }
 
-  displayedColumns = ["comision","estado","activo","options"]
+  displayedColumns = ["comision","estado","options"]
 
   constructor() { }
 
