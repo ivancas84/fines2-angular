@@ -5,7 +5,6 @@ import { CalendarioAdminComponent } from '@component/_calendario-admin/calendari
 import { CursoAdminComponent } from '@component/_curso-admin/curso-admin.component';
 import { CursosTomaPosesionComponent } from '@component/cursos-toma-posesion/cursos-toma-posesion.component';
 import { EnlaceNoDisponibleComponent } from '@component/enlace-no-disponible/enlace-no-disponible.component';
-import { GenerarConstanciaComponent } from '@component/generar-constancia/generar-constancia.component';
 import { HomeComponent } from '@component/home/home.component';
 import { InfoCursosComponent } from '@component/info-cursos/info-cursos.component';
 import { InscripcionDocenteCorrectaComponent } from '@component/inscripcion-docente-correcta/inscripcion-docente-correcta.component';
@@ -22,6 +21,7 @@ import { ComisionAdminComponent } from '@component/comision-admin/comision-admin
 import { SedeArrayComponent } from '@component/sede-array/sede-array.component';
 import { AlumnoAdmin2Component } from '@component/alumno-admin2/alumno-admin2.component';
 import { AsignaturaArray2Component } from '@component/asignatura-array2/asignatura-array2.component';
+import { GenerarConstanciaComponent } from '@component/generar-constancia/generar-constancia.component';
 
 const routes: Routes = [
   { path: '', component: CursosTomaPosesionComponent, pathMatch: 'full' },

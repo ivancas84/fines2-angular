@@ -1,0 +1,115 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Generar Constancia
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+
+<form [formGroup]="control" novalidate (ngSubmit)="onSubmit()">
+
+    <div fxLayout="row wrap">
+        <div 
+            class="fx-item" 
+            fxFlex.xs="100%" 
+            fxFlex.sm="50%" 
+            fxFlex.gt-sm="25%">
+ 
+            <app-autocomplete-alumno [control]="this.control.get('id')!"></app-autocomplete-alumno>
+          
+        </div> 
+
+
+        <div 
+            class="fx-item" 
+            fxFlex.xs="100%" 
+            fxFlex.sm="50%" 
+            fxFlex.gt-sm="25%">
+ 
+
+            <mat-form-field>
+                <mat-label>Certificado</mat-label>
+             
+                <mat-select formControlName="certificado">
+                    <mat-option [value]="null">--Seleccione--</mat-option>
+                    <mat-option value="constancia_alumno_regular">Constancia de Alumno Regular</mat-option>
+                    <mat-option value="constancia_titulo_tramite">Constancia de Título en Trámite</mat-option>
+                    <mat-option value="constancia_pase">Constancia de Pase</mat-option>
+                    <mat-option value="constancia_general_finalizo">Constancia General de Finalización</mat-option>
+                    <mat-option value="libro_matriz">Libro Matriz</mat-option>
+                </mat-select>
+             
+                <mat-error>
+                    <span *ngIf="control.get('certificado')!.hasError('required')">Debe completar valor</span>
+                </mat-error>
+            </mat-form-field>
+          
+        </div>
+ 
+
+
+        <div 
+            class="fx-item" 
+            fxFlex.xs="100%" 
+            fxFlex.sm="50%" 
+            fxFlex.gt-sm="25%">
+
+
+            <mat-form-field>
+                <mat-label>URL</mat-label>
+            
+                <input matInput
+                        type="text"
+                        formControlName="url"
+                        placeholder="Ingrese URL"
+                >
+            
+                <mat-error>
+                    <span *ngIf="control.get('url')!.hasError('required')">Debe completar valor</span>
+                </mat-error>
+            </mat-form-field>
+        
+        </div>
+
+        <div 
+            class="fx-item" 
+            fxFlex.xs="100%" 
+            fxFlex.sm="50%" 
+            fxFlex.gt-sm="25%">
+
+
+            <mat-checkbox formControlName="firma">
+                Firma
+            </mat-checkbox>
+        
+        </div>
+
+
+        <div 
+            class="fx-item" 
+            fxFlex.xs="100%" 
+            fxFlex.sm="100%" 
+            fxFlex.gt-sm="100%">
+
+
+            <mat-form-field>
+                <mat-label>Observaciones</mat-label>
+                <textarea matInput 
+                        formControlName="observaciones"
+                        placeholder="Ingrese Observaciones"></textarea>
+            </mat-form-field>
+            
+        
+        </div>
+
+    </div>
+
+ 
+    <button  
+  [disabled]="control.status == 'PENDING'"
+  type="submit" 
+  mat-raised-button>Generar</button>
+
+
+</form>

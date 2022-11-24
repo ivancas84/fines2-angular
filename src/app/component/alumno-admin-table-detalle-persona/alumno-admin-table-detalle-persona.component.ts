@@ -18,10 +18,7 @@ export class AlumnoAdminTableDetallePersonaComponent implements AfterViewInit, O
   protected subscriptions: Subscription = new Subscription() //suscripciones en el ts
   controlContainer: FormGroup = new FormGroup({},{updateOn:"submit"})
   @Output() add: EventEmitter <void> = new EventEmitter <void>();
-
   @ViewChild(MatTable) table!: MatTable<any>;
-  @ViewChild("mainContent") content!: ElementRef;
-
   @Output() onSubmit: EventEmitter <string> = new EventEmitter <string>();
   onSubmit$:Subject<any> = new Subject();
   
