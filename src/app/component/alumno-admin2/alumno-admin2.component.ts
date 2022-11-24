@@ -280,7 +280,7 @@ export class AlumnoAdmin2Component implements OnInit {
     
       var display = new Display().setParams({
         "alumno":data["alumno"]["id"],
-        "plan_alu-id":data["alumno"]["plan"],
+        "plan_pla-id":data["alumno"]["plan"],
       }).setCondition(["planificacion_dis-anio",">=",data["alumno"]["anio_ingreso"]])
 
   

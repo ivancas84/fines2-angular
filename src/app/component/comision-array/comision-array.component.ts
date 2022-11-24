@@ -26,7 +26,6 @@ export class ComisionArrayComponent implements OnInit {
   load: boolean = false; //Atributo auxiliar necesario para visualizar la barra de carga
   length!: number; //longitud total de los datos a mostrar
   loadSearch$!: Observable<any> //carga de display
-
   
   controlSearch: FormGroup = this.fb.group({
     "calendario-anio":this.fb.control(""),
@@ -76,6 +75,8 @@ export class ComisionArrayComponent implements OnInit {
      ),
      map(
        data => {
+        this.aperturas = 0
+        this.autorizadas = 0 
         if (!this.length && data.length) length = data.length
         this.control.clear();
         for(var i = 0; i <data.length; i++) this.control.push(this.formGroup(data[i]));
@@ -145,6 +146,9 @@ export class ComisionArrayComponent implements OnInit {
   }
 
 
+  aperturas:number = 0
+  autorizadas:number= 0
+
   formGroup(data:{[index:string]:any}): FormGroup {
     var fg = this.fb.group({
       "id":this.fb.control(""),
@@ -161,6 +165,9 @@ export class ComisionArrayComponent implements OnInit {
       "turno":this.fb.control(""),
     })
     fg.patchValue(data)
+    if(data["apertura"]) this.aperturas++
+    if(data["autorizada"]) this.autorizadas++
+
     return fg;
   }
 
