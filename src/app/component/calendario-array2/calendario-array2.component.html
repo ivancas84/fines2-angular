@@ -12,9 +12,18 @@
             <mat-card-subtitle>Mostrando {{length}} registros</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-            <mat-progress-bar *ngIf="!load"
-                mode="indeterminate"></mat-progress-bar>
-                <!-- <app-calendario-array-table [data]="data"></app-calendario-array-table> -->
+          
+            <mat-progress-bar 
+                *ngIf="!load"
+                mode="indeterminate">
+            </mat-progress-bar>
+            
+            <app-calendario-array-table 
+                [data]="data"
+                [length]="length" 
+                [display]="display$.value">
+            </app-calendario-array-table>
+
         </mat-card-content>
     </mat-card>
 </ng-container>

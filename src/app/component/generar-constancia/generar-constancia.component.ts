@@ -28,7 +28,6 @@ export class GenerarConstanciaComponent {
   display$:BehaviorSubject<Display> = new BehaviorSubject(new Display) //presentacion
   params: { [x: string]: any } = {} //parametros del componente
   isSubmitted: boolean = false //Flag para habilitar/deshabilitar boton aceptar
-  onSubmit$:Subject<any> = new Subject();
 
   control: FormGroup = this.fb.group({
     id:this.fb.control(null, {validators:Validators.required}),
@@ -41,7 +40,7 @@ export class GenerarConstanciaComponent {
 
 
 
-  protected onSubmit(){
+  onSubmit(){
     if(this.control.valid){
 
       var url = PDF_URL+this.control.get("certificado")!.value

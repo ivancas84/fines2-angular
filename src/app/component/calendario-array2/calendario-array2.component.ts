@@ -25,7 +25,7 @@ export class CalendarioArray2Component implements OnInit {
   loadDisplay$!: Observable<any> //carga de display
   load: boolean = false; //Atributo auxiliar necesario para visualizar la barra de carga
 
-  data: {[i:string]:any} = []
+  data: {[i:string]:any}[] = []
   control: FormArray = this.fb.array([]);
 
   length!: number; //longitud total de los datos a mostrar

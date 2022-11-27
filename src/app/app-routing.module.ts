@@ -22,6 +22,7 @@ import { SedeArrayComponent } from '@component/sede-array/sede-array.component';
 import { AlumnoAdmin2Component } from '@component/alumno-admin2/alumno-admin2.component';
 import { AsignaturaArray2Component } from '@component/asignatura-array2/asignatura-array2.component';
 import { GenerarConstanciaComponent } from '@component/generar-constancia/generar-constancia.component';
+import { CalendarioArray2Component } from '@component/calendario-array2/calendario-array2.component';
 
 const routes: Routes = [
   { path: '', component: CursosTomaPosesionComponent, pathMatch: 'full' },
@@ -35,6 +36,8 @@ const routes: Routes = [
   { path: 'resumen-alumnos', component: ResumenAlumnosComponent, pathMatch: 'full' },
   { path: 'calendario-admin', component: CalendarioAdminComponent, pathMatch: 'full' },
   { path: 'calendario-admin-array', component: CalendarioAdminArrayComponent, pathMatch: 'full' },
+  { path: 'calendario-array', component: CalendarioArray2Component, pathMatch: 'full' },
+
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
   { path: 'comision-array', component: ComisionArrayComponent, pathMatch: 'full' },
   { path: 'horario-admin-array', component: HorarioAdminArrayComponent, pathMatch: 'full' },

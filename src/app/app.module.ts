@@ -13,7 +13,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppMaterialModule } from './core/app-material.module';
 import { AppCoreModule } from './core/app-core.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
-import { AsignaturaArrayComponent } from '@component/_asignatura-array/asignatura-array.component';
 import { ResumenComisionesComponent } from '@component/_resumen-comisiones/resumen-comisiones.component';
 import { CursoAdminComponent } from '@component/_curso-admin/curso-admin.component';
 import { ListaComisionesComponent } from '@component/_resumen-comisiones/lista-comisiones.component';
@@ -69,7 +68,6 @@ import { AutocompleteAlumnoComponent } from './component/autocomplete-alumno/aut
     AppComponent,
     AprobadoPipe,
     DesaprobadoPipe,
-    AsignaturaArrayComponent,
     CalendarioAdminComponent,
     CalendarioAdminArrayComponent,
     CursoAdminComponent,

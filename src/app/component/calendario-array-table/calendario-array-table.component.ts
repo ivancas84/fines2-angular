@@ -1,9 +1,12 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormArray } from '@angular/forms';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { Display } from '@class/display';
 import { renderRowsOfTableOnValueChanges, onChangeSortLocal } from '@function/component';
+import { naturalCompare } from '@function/natural-compare';
+import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,9 +14,9 @@ import { Subscription } from 'rxjs';
   templateUrl: './calendario-array-table.component.html',
   styleUrls: ['./calendario-array-table.component.css']
 })
-export class CalendarioArrayTableComponent implements OnInit {
+export class CalendarioArrayTableComponent implements OnChanges {
 
-  @Input() control!: FormArray
+  @Input() data!: {[index:string]:any}[]
   protected subscriptions: Subscription = new Subscription() //suscripciones en el ts
  
   @ViewChild(MatTable) table!: MatTable<any>;
@@ -25,20 +28,38 @@ export class CalendarioArrayTableComponent implements OnInit {
 
   displayedColumns = ["inicio","fin","anio","semestre","descripcion"]
 
-  constructor() { }
+  @ViewChild(MatPaginator) paginator?: MatPaginator; //referencia al paginador
+  pageSizeOptions: number[] =[10, 25, 50, 100] 
+
+  
+  constructor(protected tools: ComponentToolsService) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.hasOwnProperty("data") && this.table) this.table.renderRows()
+  }
 
   ngOnInit(): void {
   }
 
-  ngAfterViewInit(): void {
-    var s = renderRowsOfTableOnValueChanges(this.control, this.table)
-    this.subscriptions.add(s)
-  }
-
   ngOnDestroy () { this.subscriptions.unsubscribe() }
 
+
   onChangeSort(sort: Sort): void {
-    onChangeSortLocal(sort, this.control)
+    if(this.paginator) this.paginator.pageIndex = 0;
+
+    if(this.tools.serverSort(sort,this.length, this.display, this.data)) return;
+
+    if (!sort.active || sort.direction === '') return;
+    
+    this.data.sort((a: { [x: string]: any; }, b: { [x: string]: any; }) => {    
+      return (sort.direction === 'asc') ? naturalCompare(a[sort.active],b[sort.active]) : naturalCompare(b[sort.active],a[sort.active])
+    });
+
+    this.table.renderRows()
   }
 
+  onChangePage($event: PageEvent){
+    this.tools.onChangePage($event, this.display)
+  }
+ 
 }

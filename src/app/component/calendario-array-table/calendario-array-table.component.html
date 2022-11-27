@@ -1,49 +1,49 @@
 <table mat-table
-    [dataSource]="control.controls"
+    [dataSource]="data"
     class="table mat-elevation-z8"
     matSort
     matSortDisableClear
     (matSortChange)="onChangeSort($event)"
-    [matSortActive]="'inicio'"
+    [matSortActive]="'anio'"
     [matSortDirection]="'desc'">
  
     <ng-container matColumnDef="inicio" >
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Inicio </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header > Inicio </th>
         <td mat-cell *matCellDef="let row; let i = index;">
-        {{row.controls['inicio'].value}}
+        {{row['inicio'] | toDate | date:"dd/MM/yyyy"}}
         </td>
     </ng-container>
  
     <ng-container matColumnDef="fin" >
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Fin </th>
         <td mat-cell *matCellDef="let row; let i = index;">
-        {{row.controls['fin'].value}}
+        {{row['fin'] | toDate | date:"dd/MM/yyyy"}}
         </td>
     </ng-container>
  
     <ng-container matColumnDef="anio">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Año </th>
     <td mat-cell *matCellDef="let row; let i = index;">
-        {{row.controls['anio'].value}}
+        {{row['anio'] | toDate | date:"yyyy" }}
     </td>
     </ng-container>
  
     <ng-container matColumnDef="semestre">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Semestre </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header > Semestre </th>
     <td mat-cell *matCellDef="let row; let i = index;">
-        {{row.controls['semestre'].value}}
+        {{row['semestre']}}
     </td>
     </ng-container>
  
     <ng-container matColumnDef="descripcion">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
       <td mat-cell *matCellDef="let row; let i = index;">
-          {{row.controls['descripcion'].value}}
+          {{row['descripcion']}}
       </td>
       </ng-container>
 
     <ng-container matColumnDef="options">
-        <th mat-header-cell *matHeaderCellDef> Opciones </th>
+        <th mat-header-cell *matHeaderCellDef > Opciones </th>
         <td mat-cell *matCellDef="let row; let i = index;">
             <!-- <a [routerLink]="'/toma-posesion-email-abc'"
                 [queryParams]="{'curso':row.controls['id'].value}"
@@ -56,3 +56,16 @@
     <tr mat-row
         *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
 </table>
+
+<mat-toolbar>
+  <mat-toolbar-row>
+    <mat-paginator *ngIf="length && display"
+                  [length]="length"
+                  [pageSize]="display.getSize()"
+                  [pageIndex]="display.getPage()-1"
+                  (page)="onChangePage($event)"
+                  [pageSizeOptions]="pageSizeOptions"
+                  showFirstLastButtons>
+    </mat-paginator>
+  </mat-toolbar-row>
+</mat-toolbar>
