@@ -21,8 +21,6 @@ import { AprobadoPipe } from '@pipe/aprobado.pipe';
 import { DesaprobadoPipe } from '@pipe/desaprobado.pipe';
 import { TableResumenComisionesComponent } from '@component/_resumen-comisiones/table-resumen-comisiones.component';
 import { ListaComisionesDocentesSinContralorComponent } from '@component/_resumen-comisiones/lista-comisiones-docentes-sin-contralor';
-import { CalendarioAdminComponent } from '@component/_calendario-admin/calendario-admin.component';
-import { CalendarioAdminArrayComponent } from '@component/_calendario-admin-array/calendario-admin-array.component';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
 import { CursosTomaPosesionComponent } from '@component/cursos-toma-posesion/cursos-toma-posesion.component';
 import { TomaPosesionEmailAbcComponent } from '@component/_toma-posesion-email-abc/toma-posesion-email-abc.component';
@@ -62,6 +60,7 @@ import { AsignaturaArrayTableComponent } from './component/asignatura-array-tabl
 import { CalendarioArrayTableComponent } from './component/calendario-array-table/calendario-array-table.component';
 import { GenerarConstanciaComponent } from '@component/generar-constancia/generar-constancia.component';
 import { AutocompleteAlumnoComponent } from './component/autocomplete-alumno/autocomplete-alumno.component';
+import { CalendarioAdminComponent } from '@component/calendario-admin/calendario-admin.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +68,6 @@ import { AutocompleteAlumnoComponent } from './component/autocomplete-alumno/aut
     AprobadoPipe,
     DesaprobadoPipe,
     CalendarioAdminComponent,
-    CalendarioAdminArrayComponent,
     CursoAdminComponent,
     CursosTomaPosesionComponent,
     CursosTomaPosesionTableComponent,

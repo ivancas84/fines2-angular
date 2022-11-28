@@ -1,0 +1,144 @@
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
+
+<ng-container *ngIf="(loadParams$ | async); else loading">
+  <ng-container *ngIf="(loadDisplay$ | async); else loading">
+    <ng-container *ngIf="(loadStorage$ | async); else loading">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>
+                Calendario
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+           
+            <form [formGroup]="control" novalidate (ngSubmit)="onSubmit()"> 
+           
+              <div fxLayout="row wrap">
+                
+                <div 
+                    class="fx-item" 
+                    fxFlex.xs="100%" 
+                    fxFlex.sm="100%" 
+                    fxFlex.gt-sm="100%">
+                    <mat-form-field>
+                      <mat-label>Descripcion</mat-label>
+                      <input matInput
+                            formControlName="descripcion"
+                            placeholder="Ingrese Descripción"
+                      >
+                    </mat-form-field>
+                </div>
+
+
+                  <div 
+                      class="fx-item" 
+                      fxFlex.xs="100%" 
+                      fxFlex.sm="50%" 
+                      fxFlex.gt-sm="25%">
+           
+                      <mat-form-field dateFormatYyyy>
+                        <mat-label>Año</mat-label>
+                      
+                        <input matInput
+                          [matDatepicker]="fieldPicker"
+                          formControlName="anio"
+                          placeholder="Ingrese año">
+                      
+                        <mat-datepicker-toggle matSuffix
+                          [for]="fieldPicker"></mat-datepicker-toggle>
+                         
+                        <mat-datepicker-toggle matSuffix
+                          (click)="control.controls['anio'].setValue(null)">
+                          <mat-icon matDatepickerToggleIcon>clear</mat-icon>
+                        </mat-datepicker-toggle>
+                       
+                        <mat-datepicker #fieldPicker
+                            startView="multi-year"
+                            (yearSelected)="chosenYearHandlerClose(control.controls['anio'],$event,fieldPicker)">
+                        </mat-datepicker>
+                        <mat-error>
+                          <ng-container *ngIf="control.get('anio')!.hasError('required')">">Debe completar valor</ng-container>
+                        </mat-error>
+                      </mat-form-field>
+
+
+                  </div>
+           
+                  <div 
+                      class="fx-item" 
+                      fxFlex.xs="100%" 
+                      fxFlex.sm="50%" 
+                      fxFlex.gt-sm="25%">
+                      <mat-form-field>
+                        <mat-label>Semestre</mat-label>
+                     
+                        <mat-select formControlName="semestre">
+                            <mat-option [value]="null">--Seleccione--</mat-option>
+                            <mat-option [value]="1">1</mat-option>
+                            <mat-option [value]="2">2</mat-option>
+                        </mat-select>
+                     
+                        <mat-error>
+                            <span *ngIf="control.get('semestre')!.hasError('required')">Debe completar valor</span>
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+           
+                  <div 
+                      class="fx-item" 
+                      fxFlex.xs="100%" 
+                      fxFlex.sm="50%" 
+                      fxFlex.gt-sm="25%">
+                      <mat-form-field dateFormatDdMmYyyy>
+                        <mat-label>Inicio</mat-label>
+                        <input matInput
+                               [matDatepicker]="fieldPickerInicio"
+                               formControlName="inicio"
+                               placeholder="Ingrese Inicio"
+                        >
+                        <mat-datepicker-toggle matSuffix [for]="fieldPickerInicio"></mat-datepicker-toggle>
+                        <mat-datepicker-toggle matSuffix (click)="control.get('inicio')!.setValue(null)">
+                          <mat-icon matDatepickerToggleIcon>clear</mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #fieldPickerInicio></mat-datepicker>
+                      </mat-form-field>
+                  </div>
+           
+                  <div 
+                      class="fx-item" 
+                      fxFlex.xs="100%" 
+                      fxFlex.sm="50%" 
+                      fxFlex.gt-sm="25%">
+                      <mat-form-field dateFormatDdMmYyyy>
+                        <mat-label>Fin</mat-label>
+                        <input matInput
+                               [matDatepicker]="fieldPickerFin"
+                               formControlName="fin"
+                               placeholder="Ingrese Inicio"
+                        >
+                        <mat-datepicker-toggle matSuffix [for]="fieldPickerFin"></mat-datepicker-toggle>
+                        <mat-datepicker-toggle matSuffix (click)="control.get('fin')!.setValue(null)">
+                          <mat-icon matDatepickerToggleIcon>clear</mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #fieldPickerFin></mat-datepicker>
+                      </mat-form-field>
+                  </div>
+           
+              </div>
+           
+              <button  
+            [disabled]="control.status == 'PENDING'"
+            type="submit" 
+            mat-raised-button>Guardar Sede</button>
+           
+              </form>
+           
+           
+            </mat-card-content>
+          </mat-card>
+           
+    </ng-container>
+  </ng-container>
+</ng-container>
