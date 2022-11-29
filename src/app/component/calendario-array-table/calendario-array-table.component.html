@@ -45,9 +45,11 @@
     <ng-container matColumnDef="options">
         <th mat-header-cell *matHeaderCellDef > Opciones </th>
         <td mat-cell *matCellDef="let row; let i = index;">
-            <!-- <a [routerLink]="'/toma-posesion-email-abc'"
-                [queryParams]="{'curso':row.controls['id'].value}"
-                [title]="'Administrar Comision'">Toma de Posesión</a> -->
+            <a 
+            mat-mini-fab 
+                [routerLink]="'/calendario-admin'"
+                [queryParams]="{'id':row['id']}"
+                [title]="'Editar Calendario'"> <mat-icon>edit</mat-icon></a>
         </td>
         <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>

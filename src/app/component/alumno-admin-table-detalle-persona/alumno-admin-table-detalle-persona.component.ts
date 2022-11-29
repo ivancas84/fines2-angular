@@ -39,7 +39,7 @@ export class AlumnoAdminTableDetallePersonaComponent implements AfterViewInit, O
 
   ngOnInit(){
     this.controlContainer.addControl("control",this.control)
-    onSubmit(this.onSubmit$,this.control,this.onSubmit,"detalle_persona")
+    onSubmit(this.onSubmit$,this.control).subscribe((validationSuccessful) => this.onSubmit.emit("detalle_persona"));
   }
 
   remove(index: number){

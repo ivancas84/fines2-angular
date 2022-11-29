@@ -34,7 +34,7 @@ export class AlumnoAdminTableCalificacionComponent implements AfterViewInit, OnI
 
   ngOnInit(){
     this.controlContainer.addControl("control",this.control)
-    onSubmit(this.onSubmit$,this.control,this.onSubmit,"detalle_persona")
+    onSubmit(this.onSubmit$,this.control).subscribe((validationSuccessful) => this.onSubmit.emit("calificacion"));
   }
 
   remove(index: number){

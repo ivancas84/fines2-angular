@@ -282,6 +282,7 @@ export class AlumnoAdmin2Component implements OnInit {
         "alumno":data["alumno"]["id"],
         "plan_pla-id":data["alumno"]["plan"],
       }).setCondition(["planificacion_dis-anio",">=",data["alumno"]["anio_ingreso"]])
+      .setOrder({"planificacion_dis-anio":"ASC","planificacion_dis-semestre":"ASC","asignatura_dis-nombre":"ASC"})
 
   
       return this.dd.post("ids","calificacion", display).pipe(
@@ -378,7 +379,13 @@ export class AlumnoAdmin2Component implements OnInit {
       if(isEmptyObject(this.params)) return of(data)
       if(this.params.hasOwnProperty("persona")) data["alumno"]["persona"] = this.params["persona"];
 
-      return this.dd.unique("alumno", this.params).pipe(
+      return this.dd.post("unique_id", "alumno", this.params).pipe(
+        switchMap(
+          id => {
+            if(!id) return of({})
+            return this.dd.get("alumno",id)
+          }
+        ),
         map(
           (alumno: any) => {
             if (!isEmptyObject(alumno)) data["alumno"] = alumno

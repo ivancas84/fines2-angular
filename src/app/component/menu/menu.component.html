@@ -2,35 +2,33 @@
   <span>Fines 2: CENS 462</span>
   
   <button mat-button [matMenuTriggerFor]="comision" aria-label="icon-button with menu icon">
-    Comisiones
+    Datos
   </button>
   <mat-menu #comision="matMenu">
     <a mat-menu-item routerLink="/sede-array" [queryParams]="comisionQueryParams"  routerLinkActive="active" title="Ver Sedes">Sedes</a>
     <a mat-menu-item routerLink="/comision-array"  [queryParams]="comisionQueryParams"  routerLinkActive="active" title="Lista de Comisiones">Comisiones</a>
-    <a mat-menu-item routerLink="/sede-admin" routerLinkActive="active" title="Nueva sede">Nueva sede</a>
-    <a mat-menu-item routerLink="/comision-admin" routerLinkActive="active" title="Nueva comisión">Nueva comisión</a>
+    <a mat-menu-item routerLink="/alumno-array"  [queryParams]="comisionQueryParams"  routerLinkActive="active" title="Lista de Alumnos">Alumnos</a>
+    <a mat-menu-item routerLink="/calendario-array" routerLinkActive="active" title="Lista de calendarios">Calendario</a>
+    <a mat-menu-item routerLink="/asignatura-array" routerLinkActive="active" title="Lista de asignaturas">Asignaturas</a>
+
   </mat-menu>
 
   <button mat-button [matMenuTriggerFor]="alumno" aria-label="icon-button with menu icon">
-    Alumno
+    Administración
   </button>
   <mat-menu #alumno="matMenu">
-    <a mat-menu-item routerLink="/alumno-admin2" routerLinkActive="active" title="Nuevo Alumno 2">Nuevo Alumno</a>
+    <a mat-menu-item routerLink="/alumno-admin2" routerLinkActive="active" title="Buscar Alumno">Buscar Alumno</a>
     <a mat-menu-item routerLink="/generar-constancia" routerLinkActive="active" title="Generar Constancia">Generar Constancia</a>
-      
   </mat-menu>
 
   
   <button mat-button [matMenuTriggerFor]="administracion" aria-label="icon-button with menu icon">
-    Administración
+    Informes
   </button>
   <mat-menu #administracion="matMenu">
-    <a mat-menu-item routerLink="/asignatura-array" routerLinkActive="active" title="Lista de asignaturas">Asignaturas</a>
-    <a mat-menu-item routerLink="/calendario-array" routerLinkActive="active" title="Lista de calendarios">Calendario</a>
-
+    <a mat-menu-item routerLink="/alumno-admin2" routerLinkActive="active" title="Buscar Alumno">Buscar Alumno</a>
   </mat-menu>
     
-    <a mat-menu-item routerLink="/cursos-toma-posesion" routerLinkActive="active" title="Toma de Posesión">Toma de Posesión</a>
   
   <span fxFlex="1 1 auto"></span>
 

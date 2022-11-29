@@ -35,7 +35,7 @@ export class AlumnoAdminTableAlumnoComisionComponent implements AfterViewInit, O
 
   ngOnInit(){
     this.controlContainer.addControl("control",this.control)
-    onSubmit(this.onSubmit$,this.control,this.onSubmit,"alumno_comision")
+    onSubmit(this.onSubmit$,this.control).subscribe((validationSuccessful) => this.onSubmit.emit("alumno_comision"));
   }
 
   remove(index: number){

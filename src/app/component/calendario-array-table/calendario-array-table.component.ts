@@ -26,7 +26,7 @@ export class CalendarioArrayTableComponent implements OnChanges {
 
   @ViewChild("mainContent") content!: ElementRef;
 
-  displayedColumns = ["inicio","fin","anio","semestre","descripcion"]
+  displayedColumns = ["inicio","fin","anio","semestre","descripcion", "options"]
 
   @ViewChild(MatPaginator) paginator?: MatPaginator; //referencia al paginador
   pageSizeOptions: number[] =[10, 25, 50, 100] 

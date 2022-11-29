@@ -136,7 +136,13 @@ export class SedeAdminComponent implements OnInit {
     }
     if(isEmptyObject(this.params)) return of(data)
 
-    return this.dd.unique("sede", this.params).pipe(
+    return this.dd.post("unique_id", "sede", this.params).pipe(
+      switchMap(
+        id => {
+          if(!id) return of({})
+          return this.dd.get("sede",id)
+        }
+      ),
       switchMap(
         (sede) => {
           if(isEmptyObject(sede)) return of(data)

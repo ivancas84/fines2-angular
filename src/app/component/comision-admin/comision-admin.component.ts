@@ -127,7 +127,13 @@ export class ComisionAdminComponent implements OnInit {
     
     if(isEmptyObject(this.params)) return of(data)
  
-    return this.dd.unique("comision", this.params).pipe(
+    return this.dd.post("unique_id", "comision", this.params).pipe(
+      switchMap(
+        id => {
+          if(!id) return of({})
+          return this.dd.get("comision",id)
+        }
+      ),
       map(
         (comision) => {
           if(isEmptyObject(comision)) return data

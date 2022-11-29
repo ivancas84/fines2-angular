@@ -35,7 +35,7 @@ export class AlumnoAdminFieldsetAlumnoComponent implements OnInit {
   ngOnInit(): void {
     this.initOptionsResolucion()
     this.initOptionsPlan()
-    onSubmit(this.onSubmit$,this.control,this.onSubmit,"alumno")
+    onSubmit(this.onSubmit$,this.control).subscribe((validationSuccessful) => this.onSubmit.emit("alumno"));
   }
 
 }
