@@ -5,9 +5,11 @@
     Datos
   </button>
   <mat-menu #comision="matMenu">
-    <a mat-menu-item routerLink="/sede-array" [queryParams]="comisionQueryParams"  routerLinkActive="active" title="Ver Sedes">Sedes</a>
-    <a mat-menu-item routerLink="/comision-array"  [queryParams]="comisionQueryParams"  routerLinkActive="active" title="Lista de Comisiones">Comisiones</a>
     <a mat-menu-item routerLink="/alumno-array"  [queryParams]="comisionQueryParams"  routerLinkActive="active" title="Lista de Alumnos">Alumnos</a>
+    <a mat-menu-item routerLink="/curso-array"  [queryParams]="comisionQueryParams"  routerLinkActive="active" title="Lista de Cursos">Cursos</a>
+    <a mat-menu-item routerLink="/comision-array"  [queryParams]="comisionQueryParams"  routerLinkActive="active" title="Lista de Comisiones">Comisiones</a>
+    <a mat-menu-item routerLink="/sede-array" [queryParams]="comisionQueryParams"  routerLinkActive="active" title="Ver Sedes">Sedes</a>
+    
     <a mat-menu-item routerLink="/calendario-array" routerLinkActive="active" title="Lista de calendarios">Calendario</a>
     <a mat-menu-item routerLink="/asignatura-array" routerLinkActive="active" title="Lista de asignaturas">Asignaturas</a>
 

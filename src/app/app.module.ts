@@ -61,6 +61,8 @@ import { CalendarioArrayTableComponent } from './component/calendario-array-tabl
 import { GenerarConstanciaComponent } from '@component/generar-constancia/generar-constancia.component';
 import { AutocompleteAlumnoComponent } from './component/autocomplete-alumno/autocomplete-alumno.component';
 import { CalendarioAdminComponent } from '@component/calendario-admin/calendario-admin.component';
+import { CursoArrayComponent } from './component/curso-array/curso-array.component';
+import { CursoArrayTableComponent } from './component/curso-array-table/curso-array-table.component';
 
 @NgModule({
   declarations: [
@@ -114,6 +116,8 @@ import { CalendarioAdminComponent } from '@component/calendario-admin/calendario
     AsignaturaArrayTableComponent,
     CalendarioArrayTableComponent,
     AutocompleteAlumnoComponent,
+    CursoArrayComponent,
+    CursoArrayTableComponent,
   ],
   imports: [
     BrowserModule,

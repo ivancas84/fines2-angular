@@ -1,0 +1,26 @@
+<ng-template #loading>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
+ 
+<ng-container *ngIf="(loadParams$ | async); else loading">
+    <ng-container *ngIf="(loadDisplay$ | async); else loading">
+        <ng-container *ngIf="(loadSearch$ | async); else loading">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>
+                        Lista de Cursos
+                    </mat-card-title>
+                    <mat-card-subtitle>Mostrando {{length}} registros</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-progress-bar *ngIf="!load"
+                        mode="indeterminate"></mat-progress-bar>
+                        <app-curso-array-table 
+                            [data]="data" 
+                            [display]="display$.value"
+                            [length]="length"></app-curso-array-table>
+                </mat-card-content>
+            </mat-card>
+        </ng-container>
+    </ng-container>
+</ng-container>

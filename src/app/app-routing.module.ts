@@ -22,6 +22,7 @@ import { AsignaturaArray2Component } from '@component/asignatura-array2/asignatu
 import { GenerarConstanciaComponent } from '@component/generar-constancia/generar-constancia.component';
 import { CalendarioArray2Component } from '@component/calendario-array2/calendario-array2.component';
 import { CalendarioAdminComponent } from '@component/calendario-admin/calendario-admin.component';
+import { CursoArrayComponent } from '@component/curso-array/curso-array.component';
 
 const routes: Routes = [
   { path: '', component: CursosTomaPosesionComponent, pathMatch: 'full' },
@@ -38,6 +39,8 @@ const routes: Routes = [
 
   { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
   { path: 'comision-array', component: ComisionArrayComponent, pathMatch: 'full' },
+  { path: 'curso-array', component: CursoArrayComponent, pathMatch: 'full' },
+
   { path: 'horario-admin-array', component: HorarioAdminArrayComponent, pathMatch: 'full' },
 
   { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },

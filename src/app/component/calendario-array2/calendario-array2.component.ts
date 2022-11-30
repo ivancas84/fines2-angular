@@ -26,8 +26,6 @@ export class CalendarioArray2Component implements OnInit {
   load: boolean = false; //Atributo auxiliar necesario para visualizar la barra de carga
 
   data: {[i:string]:any}[] = []
-  control: FormArray = this.fb.array([]);
-
   length!: number; //longitud total de los datos a mostrar
 
   ngOnInit(): void {
