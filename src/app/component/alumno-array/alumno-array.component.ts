@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
+import { acronym } from '@function/acronym';
 import { arrayColumn } from '@function/array-column';
 import { isEmptyObject } from '@function/is-empty-object.function';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
-import { BehaviorSubject, map, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-alumno-array',
@@ -33,11 +34,12 @@ export class AlumnoArrayComponent implements OnInit {
   length!: number; //longitud total de los datos a mostrar
 
   ngOnInit(): void {
-    this.loadParams$ = this.tools.loadParams(this.display$)
     this.loadParams()
+    this.loadDisplay()
+
   }
 
-  protected loadParams(){
+  protected loadParams() {
     this.loadParams$ = this.route.queryParams.pipe(
       map(
         queryParams => {
@@ -46,7 +48,6 @@ export class AlumnoArrayComponent implements OnInit {
           .setSize(0)
           .setParamsByQueryParams(queryParams)
           .addParam("comision-autorizada",true)
-          .setFields_(["alumno"])
  
           if(!display.getParam("calendario-anio") && !display.getParam("calendario-semestre")) {
             this.dialog.open(DialogAlertComponent, {
@@ -55,6 +56,9 @@ export class AlumnoArrayComponent implements OnInit {
             return false
           }
           if(isEmptyObject(display.getOrder())) display.setOrder({
+            "sede-numero":"ASC",
+            "comision-division":"ASC",
+            "planificacion-tramo":"ASC",
             "persona-apellidos":"ASC",
             "persona-nombres":"ASC",
             "persona-numero_documento":"ASC",
@@ -71,79 +75,119 @@ export class AlumnoArrayComponent implements OnInit {
 
   
   loadDisplay(){
-    /**
-     * Se define un load independiente para el display, es util para reasignar
-     * valores directamente al display y reinicializar por ejemplo al limpiar
-     * o resetear el formulario
-     */
+      /**
+       * Se define un load independiente para el display, es util para reasignar
+       * valores directamente al display y reinicializar por ejemplo al limpiar
+       * o resetear el formulario
+       */
       this.loadDisplay$ = this.display$.pipe(
           switchMap(
             () => {
               this.load = false
-              return this.dd.post("count", "curso", this.display$.value);
+              return this.dd.post("ids", "alumno_comision", this.display$.value)
             }
           ),
           switchMap(
-            length => {
-              this.length = length
-              return (length === 0) ? of([]) : this.initData()
+            idAlumnoComision_ => {
+              this.length = idAlumnoComision_.length
+              return (this.length === 0) ? of([]) : this.initData(idAlumnoComision_)
             }
           ),
           map(
             data => {
-              this.setData(data)
+              if (!this.length && data.length) length = data.length
+              this.control.clear();
+              for(var i = 0; i <data.length; i++) this.control.push(this.formGroup(data[i]));
               return this.load = true;
             }
           ),
       )
   }
 
-  protected initData(): Observable<any>{
-    return this.dd.post("select", "alumno_comision", this.display$.value).pipe(
-      map(
-        alumno_comision_ => arrayColumn(alumno_comision_,"alumno")
-      ),
-      switchMap(
-        ids => this.dd.entityFieldsGetAll({
-            entityName: "alumno", ids, fields: [
+  protected initData(ids:string[]): Observable<any>{
+    return this.dd.entityFieldsGetAll({
+            entityName: "alumno_comision", ids, fields: [
               "id",
+              "estado",
               "persona-apellidos",
               "persona-nombres",
               "persona-numero_documento",
               "persona-telefono",
               "persona-email",
-              "estado_inscripcion",
-              "observaciones",
-              "tramo_ingreso",
-              "domicilio-numero",
-              "domicilio-barrio",
-              "planificacion-anio",
-              "planificacion-semestre",
-              "plan-orientacion"
+              "alumno-id",
+              "alumno-estado_inscripcion",
+              "alumno-observaciones",
+              "alumno-tramo_ingreso",
+              "alumno-tiene_dni",
+              "alumno-tiene_constancia",
+              "alumno-tiene_certificado",
+              "alumno-previas_completas",
+              "alumno-tiene_partida",
+              "alumno-observaciones",
+              "comision-division",
+              "sede-numero",
+              "planificacion-tramo",
+              "plan-orientacion",
             ]
-          })
-      ),
+    }).pipe(
       switchMap(
-        data =>   this.dd.postMergeAll({ data, method: "info", entityName: "curso_horario", fields: { "horario": "horario" }, fieldNameData: "id", fieldNameResponse: "curso" })
-      ),
-      switchMap(
-        data =>   this.dd.postMergeAll({ data, method: "info", entityName: "curso_toma_activa", fields: { "toma": "toma_activa" }, fieldNameData: "id", fieldNameResponse: "curso" })
+        data =>  this.dd.postMergeAll_({
+          data, 
+          method: "cantidad_asignaturas_aprobadas_alumnos_tramo", 
+          entityName: "alumno", 
+          fields: [
+            "cantidad_aprobadas_11",
+            "cantidad_aprobadas_12",
+            "cantidad_aprobadas_21",
+            "cantidad_aprobadas_22",
+            "cantidad_aprobadas_31",
+            "cantidad_aprobadas_32",
+            "cantidad_aprobadas"
+          ], fieldNameData: "alumno-id", fieldNameResponse: "alumno" })
       ),
       map(
         data => {
           data.forEach((element: { [x: string]: string; }) => {
-            element["sede"] =  element["sede-nombre"] + " (" + element["sede-numero"] + ")"
-            element["comision"] =  element["sede-numero"] + element["comision-division"] + "/" + element["planificacion-anio"] + element["planificacion-semestre"]
-            element["tramo"] =  element["planificacion-anio"] + "º" + element["planificacion-semestre"] + "º " + element["plan-orientacion"]
-            element["domicilio"] =  element["domicilio-calle"];
-            if(element["domicilio-entre"]) element["domicilio"] +=  " e/ " + element["domicilio-entre"]
-            element["domicilio"] +=  " nº " + element["domicilio-numero"]
-            if(element["domicilio-barrio"]) element["domicilio"] +=  " " + element["domicilio-barrio"]
+            element["comision-label"] =  element["sede-numero"] + element["comision-division"] + "/" + element["planificacion-tramo"] + " " + acronym(element["plan-orientacion"] )
           })
           return data;
         }
       )
     )
+  }
+
+
+  formGroup(data:{[index:string]:any}): FormGroup {
+    var fb = this.fb.group({
+      "id":this.fb.control("",{validators:Validators.required}),
+      "estado":this.fb.control("",{validators:Validators.required}),
+      "persona-apellidos":this.fb.control("",{validators:Validators.required}),
+      "persona-nombres":this.fb.control("",{validators:Validators.required}),
+      "persona-numero_documento":this.fb.control("",{validators:Validators.required}),
+      "persona-telefono":this.fb.control("",{validators:Validators.required}),
+      "persona-email":this.fb.control("",{validators:Validators.required}),
+      "alumno-id":this.fb.control("",{validators:Validators.required}),
+      "alumno-estado_inscripcion":this.fb.control("",{validators:Validators.required}),
+      "alumno-observaciones":this.fb.control("",{validators:Validators.required}),
+      "alumno-tramo_ingreso":this.fb.control("",{validators:Validators.required}),
+      "alumno-tiene_dni":this.fb.control("",{validators:Validators.required}),
+      "alumno-tiene_constancia":this.fb.control("",{validators:Validators.required}),
+      "alumno-tiene_certificado":this.fb.control("",{validators:Validators.required}),
+      "alumno-previas_completas":this.fb.control("",{validators:Validators.required}),
+      "alumno-tiene_partida":this.fb.control("",{validators:Validators.required}),
+      "estado_inscripcion":this.fb.control("",{validators:Validators.required}),
+      "tramo_ingreso":this.fb.control("",{validators:Validators.required}),
+      "cantidad_aprobadas_11":this.fb.control("",{validators:Validators.required}),
+      "cantidad_aprobadas_12":this.fb.control("",{validators:Validators.required}),
+      "cantidad_aprobadas_21":this.fb.control("",{validators:Validators.required}),
+      "cantidad_aprobadas_22":this.fb.control("",{validators:Validators.required}),
+      "cantidad_aprobadas_31":this.fb.control("",{validators:Validators.required}),
+      "cantidad_aprobadas_32":this.fb.control("",{validators:Validators.required}),
+      "comision-label":this.fb.control("",{validators:Validators.required}),
+      "planificacion-tramo":this.fb.control("",{validators:Validators.required}),
+    })
+    fb.patchValue(data)
+    return fb;
   }
 
 

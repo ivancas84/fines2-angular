@@ -23,11 +23,14 @@ import { GenerarConstanciaComponent } from '@component/generar-constancia/genera
 import { CalendarioArray2Component } from '@component/calendario-array2/calendario-array2.component';
 import { CalendarioAdminComponent } from '@component/calendario-admin/calendario-admin.component';
 import { CursoArrayComponent } from '@component/curso-array/curso-array.component';
+import { AlumnoArrayComponent } from '@component/alumno-array/alumno-array.component';
 
 const routes: Routes = [
   { path: '', component: CursosTomaPosesionComponent, pathMatch: 'full' },
 
   { path: 'alumno-admin2', component: AlumnoAdmin2Component, pathMatch: 'full' },
+  { path: 'alumno-array', component: AlumnoArrayComponent, pathMatch: 'full' },
+
   { path: 'asignatura-array', component: AsignaturaArray2Component, pathMatch: 'full' },
   { path: 'curso-admin', component: CursoAdminComponent, pathMatch: 'full' },
   { path: 'generar-constancia', component: GenerarConstanciaComponent, pathMatch: 'full' },
