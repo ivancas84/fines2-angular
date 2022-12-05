@@ -63,6 +63,8 @@ import { AutocompleteAlumnoComponent } from './component/autocomplete-alumno/aut
 import { CalendarioAdminComponent } from '@component/calendario-admin/calendario-admin.component';
 import { CursoArrayComponent } from './component/curso-array/curso-array.component';
 import { CursoArrayTableComponent } from './component/curso-array-table/curso-array-table.component';
+import { AlumnoArrayComponent } from './component/alumno-array/alumno-array.component';
+import { AlumnoArrayTableComponent } from './component/alumno-array-table/alumno-array-table.component';
 
 @NgModule({
   declarations: [
@@ -118,6 +120,8 @@ import { CursoArrayTableComponent } from './component/curso-array-table/curso-ar
     AutocompleteAlumnoComponent,
     CursoArrayComponent,
     CursoArrayTableComponent,
+    AlumnoArrayComponent,
+    AlumnoArrayTableComponent,
   ],
   imports: [
     BrowserModule,
