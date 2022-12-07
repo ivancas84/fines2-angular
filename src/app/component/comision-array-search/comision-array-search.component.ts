@@ -5,10 +5,10 @@ import { MatExpansionPanel } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
-import { chosenYearHandlerClose, setNullGroupKey } from '@function/component';
+import { chosenYearHandlerClose, onSubmit, setNullGroupKey } from '@function/component';
 import { markAllAsTouched } from '@function/mark-all-as-touched';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
-import { first, map, Observable } from 'rxjs';
+import { first, map, Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-comision-array-search',
@@ -21,18 +21,17 @@ export class ComisionArraySearchComponent implements OnInit {
 
   isSubmitted: boolean = false;
   @Input() display!: Display
- 
   @ViewChild(MatExpansionPanel) searchPanel!: MatExpansionPanel;
-
   @Input() control!: FormGroup
 
   loadAutocompleteSede$!: Observable<any>; //inicializar
   searchControlSede: FormControl = new FormControl(null); //control para busqueda, no interfiere con el control del fieldset principal
   filteredOptionsSede$!: Observable<Array<{ [key: string]: any; }>>; //opciones de busqueda
   labelSede: string = ""; //label para mostrar si hay inicializado un valor
+  onSubmit$:Subject<any> = new Subject();
 
   constructor(
-    protected componentTools: ComponentToolsService,
+    protected tools: ComponentToolsService,
     protected dialog: MatDialog,
     protected router: Router,
     protected fb: FormBuilder,
@@ -40,13 +39,13 @@ export class ComisionArraySearchComponent implements OnInit {
 
 
   initAutocompleteSede(): void {
-    this.filteredOptionsSede$ = this.componentTools.filteredOptionsAutocomplete({
+    this.filteredOptionsSede$ = this.tools.filteredOptionsAutocomplete({
       entityName:"sede",
       control:this.control.get("sede")!,
       searchControl:this.searchControlSede,
     })
  
-    this.loadAutocompleteSede$ = this.componentTools.labelAutocomplete({
+    this.loadAutocompleteSede$ = this.tools.labelAutocomplete({
       entityName:"sede",
       control:this.control.get("sede")!,
       searchControl:this.searchControlSede,
@@ -63,18 +62,12 @@ export class ComisionArraySearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.initAutocompleteSede()
+    onSubmit(this.onSubmit$,this.control).subscribe(
+      (validationSuccessful) => this.submit()
+    );
+
   }
 
-
-  onSubmit() {
-    this.isSubmitted = true;
- 
-    if (this.control.pending) {
-      this.control.statusChanges.pipe(first()).subscribe(() => {
-        if (this.control.valid) this.submit()
-      });
-    } else this.submit();
-  }
 
   submit(): void {
     if (!this.control.valid) {
@@ -84,7 +77,7 @@ export class ComisionArraySearchComponent implements OnInit {
       });
       this.isSubmitted = false;
     } else {
-      this.componentTools.searchAndNavigateByUrl(this.control.value, this.display, this.searchPanel)
+      this.tools.searchAndNavigateByUrl(this.control.value, this.display, this.searchPanel)
     }
   }
 }

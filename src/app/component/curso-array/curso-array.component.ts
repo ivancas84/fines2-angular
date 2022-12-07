@@ -44,6 +44,7 @@ export class CursoArrayComponent implements OnInit {
     "calendario-anio":this.fb.control(""),
     "calendario-semestre":this.fb.control(""),
     "comision-autorizada":this.fb.control(""),
+    "comision-id":this.fb.control(""),
   });
 
   
@@ -53,9 +54,12 @@ export class CursoArrayComponent implements OnInit {
         queryParams => {
 
           var display = new Display().setSize(0).setParamsByQueryParams(queryParams).addParam("comision-autorizada",true)
-          if(!display.getParam("calendario-anio") || !display.getParam("calendario-semestre")) {
+          if(
+            (!display.getParam("calendario-anio") || !display.getParam("calendario-semestre")) 
+            && !display.getParam("comision-id")
+          ) {
             this.dialog.open(DialogAlertComponent, {
-              data: {title: "Error", message: "Debe indicarse el año y semestre en la búsqueda"}
+              data: {title: "Error", message: "Debe indicarse el año y semestre, o la comisión en la búsqueda"}
             });
             return false
           }
@@ -139,7 +143,6 @@ export class CursoArrayComponent implements OnInit {
       ),
       map(
         data => {
-          console.log(data)
           data.forEach((element: { [x: string]: string; }) => {
             element["ta_docente-nombre"] = ""
             if(element["ta_docente-nombres"]) element["ta_docente-nombre"] =  element["ta_docente-nombres"] + " " + element["ta_docente-apellidos"] + " " + element["ta_docente-telefono"]

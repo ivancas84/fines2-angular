@@ -1,0 +1,67 @@
+<mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Buscar</mat-panel-title>
+      </mat-expansion-panel-header>
+     
+<form [formGroup]="control" novalidate (ngSubmit)="onSubmit$.next(null)">
+ 
+         
+          <div fxLayout="row wrap">
+              <div class="item"
+                  fxFlex.xs="100%"
+                  fxFlex.sm="50%"
+                  fxFlex.gt-sm="25%"> 
+                  <mat-form-field dateFormatYyyy>
+                      <mat-label>Año</mat-label>
+                 
+                      <input matInput
+                          [matDatepicker]="fieldPicker"
+                          formControlName="calendario-anio"
+                          placeholder="Ingrese año">
+ 
+                      <mat-datepicker-toggle matSuffix
+                          [for]="fieldPicker"></mat-datepicker-toggle>
+                         
+                      <mat-datepicker-toggle matSuffix
+                          (click)="control.get('calendario-anio')!.setValue(null)">
+                          <mat-icon matDatepickerToggleIcon>clear</mat-icon></mat-datepicker-toggle>
+                     
+                      <mat-datepicker #fieldPicker
+                              startView="multi-year"
+                              (yearSelected)="chosenYearHandlerClose
+(control.get('calendario-anio')!,$event,fieldPicker)">
+                      </mat-datepicker>
+                  </mat-form-field>                    
+              </div>
+ 
+            <div class="item"
+                fxFlex.xs="100%"
+                fxFlex.sm="50%"
+                fxFlex.gt-sm="25%">
+                <mat-form-field>
+                  <mat-label>Semestre</mat-label>
+                 
+                  <mat-select formControlName="calendario-semestre">
+                    <mat-option [value]="null">--Seleccione--</mat-option>
+                    <mat-option [value]="'1'">1</mat-option>
+                    <mat-option [value]="'2'">2</mat-option>
+                </mat-select>
+ 
+                </mat-form-field>                    
+            </div>
+ 
+            <div class="item"
+                fxFlex.xs="100%"
+                fxFlex.sm="50%"
+                fxFlex.gt-sm="25%">
+                <app-autocomplete-comision 
+                    [control]="control.get('comision-id')!"></app-autocomplete-comision>
+            </div>
+ 
+          </div>
+ 
+          <button mat-raised-button color="primary" type="submit">Buscar</button>&nbsp;
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>

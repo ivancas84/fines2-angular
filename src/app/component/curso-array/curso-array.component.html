@@ -4,7 +4,10 @@
  
 <ng-container *ngIf="(loadParams$ | async); else loading">
     <ng-container *ngIf="(loadDisplay$ | async); else loading">
-        <ng-container *ngIf="(loadSearch$ | async); else loading">
+        <ng-container *ngIf="(loadSearch$ | async); else loading">             
+            <app-curso-array-search 
+                [display]="display$.value" 
+                [control]="controlSearch"></app-curso-array-search>
             <mat-card>
                 <mat-card-header>
                     <mat-card-title>

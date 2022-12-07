@@ -4,8 +4,8 @@
         <mat-panel-title>Buscar</mat-panel-title>
       </mat-expansion-panel-header>
      
-      <form [formGroup]="control" novalidate (ngSubmit)="onSubmit()">
-         
+      <form [formGroup]="control" novalidate (ngSubmit)="onSubmit$.next(null)">
+                 
           <div fxLayout="row wrap">
               <div class="fx-item"
                   fxFlex.xs="100%"
