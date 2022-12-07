@@ -65,6 +65,7 @@ import { CursoArrayComponent } from './component/curso-array/curso-array.compone
 import { CursoArrayTableComponent } from './component/curso-array-table/curso-array-table.component';
 import { AlumnoArrayComponent } from './component/alumno-array/alumno-array.component';
 import { AlumnoArrayTableComponent } from './component/alumno-array-table/alumno-array-table.component';
+import { AlumnoArraySearchComponent } from '@component/alumno-array-search/alumno-array-search.component';
 
 @NgModule({
   declarations: [
@@ -122,6 +123,7 @@ import { AlumnoArrayTableComponent } from './component/alumno-array-table/alumno
     CursoArrayTableComponent,
     AlumnoArrayComponent,
     AlumnoArrayTableComponent,
+    AlumnoArraySearchComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Sort } from '@angular/material/sort';
 import { ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
-import { onChangeSortLocal } from '@function/component';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { BehaviorSubject, map, Observable, of, switchMap } from 'rxjs';

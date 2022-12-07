@@ -5,7 +5,7 @@ import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
-import { onChangeSortLocal, renderRowsOfTableOnValueChanges } from '@function/component';
+import { onChangeSortLocalControl, renderRowsOfTableOnValueChanges } from '@function/component';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { BehaviorSubject, first, Subscription } from 'rxjs';
@@ -44,7 +44,7 @@ export class ComisionAdminFieldsetCursoComponent implements AfterViewInit {
     displayedColumns = ["asignatura-nombre","horas_catedra","horario"]
 
     onChangeSort(sort: Sort): void {
-        onChangeSortLocal(sort, this.control)
+        onChangeSortLocalControl(sort, this.control)
     }
     
     @ViewChild("mainContent") content!: ElementRef;

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { acronym } from '@function/acronym';
-import { arrayColumn } from '@function/array-column';
+import { loadSearchControl } from '@function/component';
 import { isEmptyObject } from '@function/is-empty-object.function';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
@@ -32,11 +32,20 @@ export class AlumnoArrayComponent implements OnInit {
   load: boolean = false; //Atributo auxiliar necesario para visualizar la barra de carga
   control: FormArray = this.fb.array([]);
   length!: number; //longitud total de los datos a mostrar
+  loadSearch$!: Observable<any> //carga de search
+
+  controlSearch: FormGroup = this.fb.group({
+    "calendario-anio":this.fb.control(""),
+    "calendario-semestre":this.fb.control(""),
+    "comision-id":this.fb.control(""),
+    "estado":this.fb.control(""),
+  });
+
 
   ngOnInit(): void {
     this.loadParams()
     this.loadDisplay()
-
+    this.loadSearch$ = loadSearchControl(this.controlSearch, this.display$)
   }
 
   protected loadParams() {
@@ -49,9 +58,15 @@ export class AlumnoArrayComponent implements OnInit {
           .setParamsByQueryParams(queryParams)
           .addParam("comision-autorizada",true)
  
-          if(!display.getParam("calendario-anio") && !display.getParam("calendario-semestre")) {
+          if(
+            (
+              !display.getParam("calendario-anio") 
+              || !display.getParam("calendario-semestre")
+            )
+            && !display.getParam("comision-id")
+          ) {
             this.dialog.open(DialogAlertComponent, {
-              data: {title: "Error", message: "Debe indicarse el año y semestre en la búsqueda"}
+              data: {title: "Error", message: "Debe indicarse el año y semestre, o la comisión en la búsqueda"}
             });
             return false
           }
@@ -189,6 +204,9 @@ export class AlumnoArrayComponent implements OnInit {
     fb.patchValue(data)
     return fb;
   }
+
+
+
 
 
 

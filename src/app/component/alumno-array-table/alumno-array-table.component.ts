@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormArray } from '@angular/forms';
+import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { Display } from '@class/display';
-import { renderRowsOfTableOnValueChanges } from '@function/component';
+import { onChangeSortLocalControl, renderRowsOfTableOnValueChanges } from '@function/component';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -25,6 +26,7 @@ export class AlumnoArrayTableComponent implements AfterViewInit {
   @ViewChild("mainContent") content!: ElementRef;
 
   displayedColumns = [
+    "index",
     "persona-apellidos",
     "persona-nombres",
     "persona-numero_documento",
@@ -55,5 +57,8 @@ export class AlumnoArrayTableComponent implements AfterViewInit {
 
   ngOnDestroy () { this.subscriptions.unsubscribe() }
 
+  onChangeSort(sort: Sort): void {
+    onChangeSortLocalControl(sort, this.control)
+}
 
 }

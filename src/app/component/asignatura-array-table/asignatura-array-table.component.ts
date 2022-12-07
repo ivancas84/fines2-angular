@@ -3,7 +3,7 @@ import { FormArray } from '@angular/forms';
 import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { Display } from '@class/display';
-import { onChangeSortLocal, renderRowsOfTableOnValueChanges } from '@function/component';
+import { onChangeSortLocalControl, renderRowsOfTableOnValueChanges } from '@function/component';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -38,7 +38,7 @@ export class AsignaturaArrayTableComponent implements OnInit {
   ngOnDestroy () { this.subscriptions.unsubscribe() }
 
   onChangeSort(sort: Sort): void {
-    onChangeSortLocal(sort, this.control)
+    onChangeSortLocalControl(sort, this.control)
   }
 
 }

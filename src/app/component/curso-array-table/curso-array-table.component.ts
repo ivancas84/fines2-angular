@@ -3,7 +3,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { Display } from '@class/display';
-import { onChangeSortData, onChangeSortLocal } from '@function/component';
+import { onChangeSortData } from '@function/component';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { Subscription } from 'rxjs';
 
