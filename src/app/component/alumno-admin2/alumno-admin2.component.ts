@@ -63,6 +63,7 @@ export class AlumnoAdmin2Component implements OnInit {
       establecimiento_inscripcion:this.fb.control(null,),
       resolucion_inscripcion:this.fb.control(null),
       anio_ingreso:this.fb.control(null),
+      semestre_ingreso:this.fb.control(null),
       plan:this.fb.control(null),
       adeuda_deudores:this.fb.control({value:null, disabled:true}),
       adeuda_legajo:this.fb.control({value:null, disabled:true}),
@@ -90,6 +91,7 @@ export class AlumnoAdmin2Component implements OnInit {
       tiene_constancia:false,
       tiene_certificado:false,
       previas_completas:false,
+      semestre_ingreso:"1"
     }
 
     control: FormGroup = this.fb.group({

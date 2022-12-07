@@ -167,6 +167,26 @@
                 </mat-form-field>
             </div>    
 
+
+            <div 
+                class="fx-item" 
+                fxFlex.xs="100%" 
+                fxFlex.sm="34%" 
+                fxFlex.gt-sm="17%">
+                <mat-form-field 
+                    [ngClass]="{'highlightRed':!control.get('semestre_ingreso')!.value}">
+                    <mat-label>Año de Ingreso</mat-label>
+                
+                    <mat-select 
+                        formControlName="semestre_ingreso"
+                        placeholder="A qué semestre ingreso en fines?">
+                        <mat-option [value]="null">--Seleccione--</mat-option>
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="2">2</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>    
+
             <div 
                 class="fx-item" 
                 fxFlex.xs="50%" 
