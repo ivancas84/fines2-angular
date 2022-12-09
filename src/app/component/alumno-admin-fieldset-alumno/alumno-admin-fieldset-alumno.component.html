@@ -109,8 +109,7 @@
             fxFlex.gt-sm="25%">
             <mat-form-field
                 [ngClass]="{
-                    'highlightGreen':control.get('estado_inscripcion')!.value=='Correcto' || control.get('estado_inscripcion')!.value=='Titulado',
-                    'highlightYellow':control.get('estado_inscripcion')!.value=='Correcto incompleto',
+                    'highlightGreen':control.get('estado_inscripcion')!.value=='Correcto',
                     'highlightRed':control.get('estado_inscripcion')!.value=='Indeterminado' || control.get('estado_inscripcion')!.value=='Caso particular'
                   }">
                 <mat-label>Estado Inscripción</mat-label>
@@ -118,7 +117,6 @@
                 <mat-select formControlName="estado_inscripcion">
                     <mat-option [value]="null">--Seleccione--</mat-option>
                     <mat-option value="Correcto">Correcto</mat-option>
-                    <mat-option value="Correcto incompleto">Correcto incompleto</mat-option>
                     <mat-option value="Indeterminado">Indeterminado</mat-option>
                     <mat-option value="Caso particular">Caso particular</mat-option>
                     <mat-option value="Titulado">Titulado</mat-option>

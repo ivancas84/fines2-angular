@@ -13,18 +13,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppMaterialModule } from './core/app-material.module';
 import { AppCoreModule } from './core/app-core.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
-import { ResumenComisionesComponent } from '@component/_resumen-comisiones/resumen-comisiones.component';
-import { CursoAdminComponent } from '@component/_curso-admin/curso-admin.component';
-import { ListaComisionesComponent } from '@component/_resumen-comisiones/lista-comisiones.component';
-import { ResumenAlumnosComponent } from '@component/_resumen-alumnos/resumen-alumnos.component';
 import { AprobadoPipe } from '@pipe/aprobado.pipe';
 import { DesaprobadoPipe } from '@pipe/desaprobado.pipe';
-import { TableResumenComisionesComponent } from '@component/_resumen-comisiones/table-resumen-comisiones.component';
-import { ListaComisionesDocentesSinContralorComponent } from '@component/_resumen-comisiones/lista-comisiones-docentes-sin-contralor';
 import { SedeAdminComponent } from '@component/sede-admin/sede-admin.component';
 import { CursosTomaPosesionComponent } from '@component/cursos-toma-posesion/cursos-toma-posesion.component';
-import { TomaPosesionEmailAbcComponent } from '@component/_toma-posesion-email-abc/toma-posesion-email-abc.component';
-import { InscripcionDocenteComponent } from '@component/_inscripcion-docente/inscripcion-docente.component';
 import { InscripcionDocenteCorrectaComponent } from '@component/inscripcion-docente-correcta/inscripcion-docente-correcta.component';
 import { EnlaceNoDisponibleComponent } from '@component/enlace-no-disponible/enlace-no-disponible.component';
 import { InfoCursosComponent } from '@component/info-cursos/info-cursos.component';
@@ -67,6 +59,8 @@ import { AlumnoArrayComponent } from './component/alumno-array/alumno-array.comp
 import { AlumnoArrayTableComponent } from './component/alumno-array-table/alumno-array-table.component';
 import { AlumnoArraySearchComponent } from '@component/alumno-array-search/alumno-array-search.component';
 import { CursoArraySearchComponent } from './component/curso-array-search/curso-array-search.component';
+import { TomaPosesionEmailComponent } from './component/toma-posesion-email/toma-posesion-email.component';
+import { InscripcionDocenteComponent } from '@component/inscripcion-docente/inscripcion-docente.component';
 
 @NgModule({
   declarations: [
@@ -74,23 +68,16 @@ import { CursoArraySearchComponent } from './component/curso-array-search/curso-
     AprobadoPipe,
     DesaprobadoPipe,
     CalendarioAdminComponent,
-    CursoAdminComponent,
     CursosTomaPosesionComponent,
     CursosTomaPosesionTableComponent,
     EnlaceNoDisponibleComponent,
     GenerarConstanciaComponent,
     InfoCursosComponent,
     InfoCursosTableComponent,
-    InscripcionDocenteComponent,
     InscripcionDocenteCorrectaComponent,
-    ListaComisionesComponent,
-    ListaComisionesDocentesSinContralorComponent,
+    InscripcionDocenteComponent,
     MenuComponent,
-    ResumenAlumnosComponent,
-    ResumenComisionesComponent,
     SedeAdminComponent,
-    TableResumenComisionesComponent,
-    TomaPosesionEmailAbcComponent,
     SedeAdminComponent,
     SedeAdminFieldsetSedeComponent,
     SedeAdminFieldsetDomicilioComponent,
@@ -126,6 +113,7 @@ import { CursoArraySearchComponent } from './component/curso-array-search/curso-
     AlumnoArrayTableComponent,
     AlumnoArraySearchComponent,
     CursoArraySearchComponent,
+    TomaPosesionEmailComponent,
   ],
   imports: [
     BrowserModule,

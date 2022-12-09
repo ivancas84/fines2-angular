@@ -38,6 +38,8 @@ export class AlumnoArrayTableComponent implements AfterViewInit {
     "alumno-tiene_constancia",
     "alumno-tiene_certificado",
     "alumno-previas_completas",
+    "alumno-tiene_dni",
+    "alumno-tiene_partida",
     "cantidad_aprobadas_11",
     "cantidad_aprobadas_12",
     "cantidad_aprobadas_21",

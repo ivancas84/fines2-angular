@@ -151,7 +151,7 @@
     
 
     <ng-container matColumnDef="alumno-tiene_constancia" >
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Constancia </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cons </th>
         <td mat-cell *matCellDef="let row; let i = index;"
             [ngClass]="{
                 'highlightGreen': row.controls['alumno-tiene_constancia'].value && !row.controls['alumno-tiene_certificado'].value,
@@ -163,7 +163,7 @@
     </ng-container>
 
     <ng-container matColumnDef="alumno-previas_completas" >
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Previas </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Prev </th>
         <td mat-cell *matCellDef="let row; let i = index;"
             [ngClass]="{
                 'highlightGreen': row.controls['alumno-previas_completas'].value,
@@ -175,7 +175,7 @@
 
 
     <ng-container matColumnDef="alumno-tiene_certificado" >
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Certificado </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cert </th>
         <td mat-cell *matCellDef="let row; let i = index;"
             [ngClass]="{
                 'highlightGreen': row.controls['alumno-tiene_certificado'].value,
@@ -185,9 +185,30 @@
         </td>
     </ng-container>
 
+    <ng-container matColumnDef="alumno-tiene_dni" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Dni </th>
+      <td mat-cell *matCellDef="let row; let i = index;"
+          [ngClass]="{
+              'highlightGreen': row.controls['alumno-tiene_dni'].value,
+              'highlightYellow': !row.controls['alumno-tiene_dni'].value
+          }">
+          {{row.controls['alumno-tiene_dni'].value | siNo}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="alumno-tiene_partida" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Part </th>
+      <td mat-cell *matCellDef="let row; let i = index;"
+          [ngClass]="{
+              'highlightGreen': row.controls['alumno-tiene_partida'].value,
+              'highlightYellow': !row.controls['alumno-tiene_partida'].value
+          }">
+          {{row.controls['alumno-tiene_partida'].value | siNo}}
+      </td>
+    </ng-container>
 
     <ng-container matColumnDef="comision-label" >
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Çomisión </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Comisión </th>
         <td mat-cell *matCellDef="let row; let i = index;">
             {{row.controls['comision-label'].value}}
         </td>
