@@ -4,6 +4,7 @@ import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { Display } from '@class/display';
 import { onChangeSortLocalControl, renderRowsOfTableOnValueChanges } from '@function/component';
+import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,7 +14,9 @@ import { Subscription } from 'rxjs';
 })
 export class AlumnoArrayTableComponent implements AfterViewInit {
 
-  constructor() { }
+  constructor(
+    protected tools: ComponentToolsService
+  ) { }
 
   @Input() control!: FormArray
 
@@ -61,6 +64,15 @@ export class AlumnoArrayTableComponent implements AfterViewInit {
 
   onChangeSort(sort: Sort): void {
     onChangeSortLocalControl(sort, this.control)
-}
+  }
+
+  copyContent(): void {
+    this.tools.copyContent(this.content, this.displayedColumns)
+  }
+ 
+  printContent(): void {
+    this.tools.printContent(this.content, this.displayedColumns)
+  }
+
 
 }

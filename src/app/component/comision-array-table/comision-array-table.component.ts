@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 export class ComisionArrayTableComponent implements AfterViewInit {
 
   constructor(
-    protected ts: ComponentToolsService,
+    protected tools: ComponentToolsService,
   ) { }
 
   @Input() control!: FormArray
@@ -34,5 +34,12 @@ export class ComisionArrayTableComponent implements AfterViewInit {
 
   displayedColumns = ["label","sede","domicilio","tramo","horario","calendario","modalidad-nombre","turno","apertura","autorizada","options"]
 
-  
+  copyContent(): void {
+    this.tools.copyContent(this.content, this.displayedColumns)
+  }
+ 
+  printContent(): void {
+    this.tools.printContent(this.content, this.displayedColumns)
+  }
+
 }

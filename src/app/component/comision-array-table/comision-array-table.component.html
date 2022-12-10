@@ -1,3 +1,26 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+      <button mat-mini-fab
+          title="Copiar"
+          color="primary"
+          (click)="copyContent()">
+          <mat-icon>file_copy</mat-icon>
+      </button>
+      <button mat-mini-fab
+          title="Imprimir"
+          color="primary"
+          (click)="printContent()">
+          <mat-icon>print</mat-icon>
+      </button>
+      <a mat-mini-fab  
+          [routerLink]="'/comision-admin'"
+          color="accent"
+          title="Nueva Comisión"> <mat-icon>add</mat-icon> </a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div #mainContent>
+
 <table mat-table
     [dataSource]="control.controls"
     class="table mat-elevation-z8">
@@ -110,3 +133,5 @@
     <tr mat-row
         *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
 </table>
+
+</div>

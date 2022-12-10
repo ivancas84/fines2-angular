@@ -7,7 +7,6 @@ import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { emptyUrl } from '@function/empty-url.function';
 import { isEmptyObject } from '@function/is-empty-object.function';
-import { comisionLabel, comisionNumero } from '@function/label';
 import { logValidationErrors } from '@function/log-validation-errors';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
@@ -16,11 +15,11 @@ import { DdAsyncValidatorsService } from '@service/validators/dd-async-validator
 import { Observable, BehaviorSubject, map, switchMap, of, first, combineLatest } from 'rxjs';
 
 @Component({
-  selector: 'app-alumno-admin2',
-  templateUrl: './alumno-admin2.component.html',
-  styleUrls: ['./alumno-admin2.component.css']
+  selector: 'app-alumno-admin',
+  templateUrl: './alumno-admin.component.html',
+  styleUrls: ['./alumno-admin.component.css']
 })
-export class AlumnoAdmin2Component implements OnInit {
+export class AlumnoAdminComponent implements OnInit {
 
   constructor(
     protected dd: DataDefinitionToolService,

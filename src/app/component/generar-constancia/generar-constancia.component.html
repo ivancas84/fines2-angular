@@ -16,7 +16,10 @@
             fxFlex.sm="50%" 
             fxFlex.gt-sm="25%">
  
-            <app-autocomplete-alumno [control]="this.control.get('id')!"></app-autocomplete-alumno>
+            <app-autocomplete 
+                entityName="alumno" 
+                title="alumno" 
+                [control]="this.control.get('id')!"></app-autocomplete>
           
         </div> 
 

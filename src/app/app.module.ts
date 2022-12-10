@@ -38,20 +38,18 @@ import { SedeAdminFieldsetDesignacionComponent } from './component/sede-admin-fi
 import { SedeArrayComponent } from './component/sede-array/sede-array.component';
 import { SedeArrayTableComponent } from './component/sede-array-table/sede-array-table.component';
 import { SedeArraySearchComponent } from './component/sede-array-search/sede-array-search.component';
-import { AlumnoAdmin2Component } from './component/alumno-admin2/alumno-admin2.component';
+import { AlumnoAdminComponent } from './component/alumno-admin/alumno-admin.component';
 import { AlumnoAdminFieldsetPersonaComponent } from './component/alumno-admin-fieldset-persona/alumno-admin-fieldset-persona.component';
 import { AlumnoAdminFieldsetAlumnoComponent } from './component/alumno-admin-fieldset-alumno/alumno-admin-fieldset-alumno.component';
 import { AlumnoAdminTableAlumnoComisionComponent } from './component/alumno-admin-table-alumno-comision/alumno-admin-table-alumno-comision.component';
 import { AlumnoAdminTableCalificacionComponent } from './component/alumno-admin-table-calificacion/alumno-admin-table-calificacion.component';
 import { AlumnoAdminTableDetallePersonaComponent } from './component/alumno-admin-table-detalle-persona/alumno-admin-table-detalle-persona.component';
 import { UploadDetallePersonaArchivoComponent } from './component/upload-detalle-persona-archivo/upload-detalle-persona-archivo.component';
-import { AutocompleteComisionComponent } from './component/autocomplete-comision/autocomplete-comision.component';
 import { AsignaturaArray2Component } from './component/asignatura-array2/asignatura-array2.component';
 import { CalendarioArray2Component } from './component/calendario-array2/calendario-array2.component';
 import { AsignaturaArrayTableComponent } from './component/asignatura-array-table/asignatura-array-table.component';
 import { CalendarioArrayTableComponent } from './component/calendario-array-table/calendario-array-table.component';
 import { GenerarConstanciaComponent } from '@component/generar-constancia/generar-constancia.component';
-import { AutocompleteAlumnoComponent } from './component/autocomplete-alumno/autocomplete-alumno.component';
 import { CalendarioAdminComponent } from '@component/calendario-admin/calendario-admin.component';
 import { CursoArrayComponent } from './component/curso-array/curso-array.component';
 import { CursoArrayTableComponent } from './component/curso-array-table/curso-array-table.component';
@@ -94,19 +92,17 @@ import { InscripcionDocenteComponent } from '@component/inscripcion-docente/insc
     SedeArrayComponent,
     SedeArrayTableComponent,
     SedeArraySearchComponent,
-    AlumnoAdmin2Component,
+    AlumnoAdminComponent,
     AlumnoAdminFieldsetPersonaComponent,
     AlumnoAdminFieldsetAlumnoComponent,
     AlumnoAdminTableAlumnoComisionComponent,
     AlumnoAdminTableCalificacionComponent,
     AlumnoAdminTableDetallePersonaComponent,
     UploadDetallePersonaArchivoComponent,
-    AutocompleteComisionComponent,
     AsignaturaArray2Component,
     CalendarioArray2Component,
     AsignaturaArrayTableComponent,
     CalendarioArrayTableComponent,
-    AutocompleteAlumnoComponent,
     CursoArrayComponent,
     CursoArrayTableComponent,
     AlumnoArrayComponent,

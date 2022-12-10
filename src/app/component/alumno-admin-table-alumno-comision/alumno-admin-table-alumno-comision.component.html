@@ -14,7 +14,10 @@
     <ng-container matColumnDef="comision" >
         <th mat-header-cell *matHeaderCellDef> Comision </th>
         <td mat-cell *matCellDef="let row; let i = index;">
-            <app-autocomplete-comision [control]="row.controls['comision']"></app-autocomplete-comision>
+            <app-autocomplete 
+                entityName="comision" 
+                title="Comisión" 
+                [control]="row.controls['comision']"></app-autocomplete>
         </td>
     </ng-container>
 

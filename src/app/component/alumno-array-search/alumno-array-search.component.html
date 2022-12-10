@@ -75,7 +75,10 @@
                     fxFlex.xs="100%"
                     fxFlex.sm="50%"
                     fxFlex.gt-sm="25%">
-                    <app-autocomplete-comision [control]="control.get('comision-id')!"></app-autocomplete-comision>
+                    <app-autocomplete 
+                        [control]="control.get('comision-id')!"
+                        entityName="comision"
+                        title="Comisión"></app-autocomplete>
                 </div>
     
             </div>

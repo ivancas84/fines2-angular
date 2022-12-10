@@ -1,3 +1,26 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+      <button mat-mini-fab
+          title="Copiar"
+          color="primary"
+          (click)="copyContent()">
+          <mat-icon>file_copy</mat-icon>
+      </button>
+      <button mat-mini-fab
+          title="Imprimir"
+          color="primary"
+          (click)="printContent()">
+          <mat-icon>print</mat-icon>
+      </button>
+      <a mat-mini-fab  
+          [routerLink]="'/alumno-admin'"
+          color="accent"
+          title="Nuevo Alumno"> <mat-icon>add</mat-icon> </a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div #mainContent>
+
 <table mat-table
     [dataSource]="control.controls"
     class="table mat-elevation-z8"
@@ -246,7 +269,7 @@
     <ng-container matColumnDef="options">
     <th mat-header-cell *matHeaderCellDef> Opciones </th>
     <td mat-cell *matCellDef="let row; let i = index;">
-        <a [routerLink]="'/alumno-admin2'"
+        <a [routerLink]="'/alumno-admin'"
             [queryParams]="{'id':row.controls['alumno-id'].value}"
             [title]="'Administrar Alumno'"><mat-icon>edit</mat-icon></a>
     </td>
@@ -257,3 +280,5 @@
     <tr mat-row
         *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
 </table>
+
+</div>
