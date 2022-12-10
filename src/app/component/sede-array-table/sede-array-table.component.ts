@@ -1,9 +1,8 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 import { Display } from '@class/display';
 import { renderRowsOfTableOnValueChanges } from '@function/component';
-import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { Subscription } from 'rxjs';
 
 @Component({

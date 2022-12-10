@@ -1,14 +1,11 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormArray } from '@angular/forms';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { Display } from '@class/display';
 import { renderRowsOfTableOnValueChanges } from '@function/component';
 import { naturalCompare } from '@function/natural-compare';
-import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
-import { combineAll, combineLatest, map, Observable, Subscription, switchMap } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-horario-admin-array-table',

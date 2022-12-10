@@ -5,7 +5,6 @@ import { Display } from '@class/display';
 import { arrayColumn } from '@function/array-column';
 import { loadSearchControl } from '@function/component';
 import { domicilioLabel } from '@function/label';
-import { fastClone } from '@function/fast-clone';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { BehaviorSubject, Observable, map, switchMap, of, tap } from 'rxjs';
 

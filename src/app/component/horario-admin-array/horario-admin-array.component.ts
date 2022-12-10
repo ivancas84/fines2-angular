@@ -7,7 +7,7 @@ import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.compo
 import { logValidationErrors } from '@function/log-validation-errors';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
-import { BehaviorSubject, combineLatest, first, map, Observable, ObservableNotification, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, first, map, Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-horario-admin-array',

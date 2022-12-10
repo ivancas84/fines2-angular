@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { onSubmit } from '@function/component';
-import { comisionLabel, domicilioLabel } from '@function/label';
+import { domicilioLabel } from '@function/label';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { DdAsyncValidatorsService } from '@service/validators/dd-async-validators.service';
-import { Observable, BehaviorSubject, map, of, switchMap, first, Subject } from 'rxjs';
+import { Observable, map, first, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-toma-posesion-email',

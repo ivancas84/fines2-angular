@@ -5,10 +5,10 @@ import { MatExpansionPanel } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
-import { chosenYearHandlerClose, onSubmit, setNullGroupKey } from '@function/component';
+import { chosenYearHandlerClose, onSubmit } from '@function/component';
 import { markAllAsTouched } from '@function/mark-all-as-touched';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
-import { first, map, Observable, Subject } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-comision-array-search',

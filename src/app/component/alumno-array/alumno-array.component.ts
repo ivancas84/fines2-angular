@@ -9,7 +9,7 @@ import { loadSearchControl } from '@function/component';
 import { isEmptyObject } from '@function/is-empty-object.function';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
-import { BehaviorSubject, map, Observable, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-alumno-array',

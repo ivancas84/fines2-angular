@@ -1,7 +1,5 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { FormArray } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';

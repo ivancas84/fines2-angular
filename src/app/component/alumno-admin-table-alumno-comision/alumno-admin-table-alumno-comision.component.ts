@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
-import { onSubmit, renderRowsOfTableOnValueChanges } from '@function/component';
+import { onSubmit } from '@function/component/onSubmit';
+import { renderRowsOfTableOnValueChanges } from '@function/component';
 import { Subject, Subscription } from 'rxjs';
 
 @Component({

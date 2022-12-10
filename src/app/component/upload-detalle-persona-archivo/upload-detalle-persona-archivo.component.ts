@@ -1,11 +1,9 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { UPLOAD_URL } from '@config/app.config';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
-import { Observable, startWith, switchMap, map, first, of } from 'rxjs';
+import { Observable, startWith, switchMap, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-upload-detalle-persona-archivo',

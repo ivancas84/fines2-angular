@@ -10,7 +10,7 @@ import { logValidationErrors } from '@function/log-validation-errors';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { DdAsyncValidatorsService } from '@service/validators/dd-async-validators.service';
-import { Observable, BehaviorSubject, map, of, switchMap, filter, startWith, Subject, take, tap, first } from 'rxjs';
+import { Observable, BehaviorSubject, map, of, switchMap, Subject, first } from 'rxjs';
 
 @Component({
   selector: 'app-calendario-admin',

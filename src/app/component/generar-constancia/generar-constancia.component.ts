@@ -7,7 +7,7 @@ import { PDF_URL } from '@config/app.config';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { DdAsyncValidatorsService } from '@service/validators/dd-async-validators.service';
-import { BehaviorSubject, Subject, filter, startWith, switchMap, take, tap } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-generar-constancia',
