@@ -59,6 +59,8 @@ import { AlumnoArraySearchComponent } from '@component/alumno-array-search/alumn
 import { CursoArraySearchComponent } from './component/curso-array-search/curso-array-search.component';
 import { TomaPosesionEmailComponent } from './component/toma-posesion-email/toma-posesion-email.component';
 import { InscripcionDocenteComponent } from '@component/inscripcion-docente/inscripcion-docente.component';
+import { DocenteAdminComponent } from './component/docente-admin/docente-admin.component';
+import { DocenteAdminFieldsetPersonaComponent } from './component/docente-admin-fieldset-persona/docente-admin-fieldset-persona.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +112,8 @@ import { InscripcionDocenteComponent } from '@component/inscripcion-docente/insc
     AlumnoArraySearchComponent,
     CursoArraySearchComponent,
     TomaPosesionEmailComponent,
+    DocenteAdminComponent,
+    DocenteAdminFieldsetPersonaComponent,
   ],
   imports: [
     BrowserModule,

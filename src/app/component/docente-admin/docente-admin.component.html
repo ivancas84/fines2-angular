@@ -1,0 +1,11 @@
+<ng-template #loading>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
+
+<ng-container *ngIf="(loadParams$ | async); else loading">
+    <ng-container *ngIf="(loadDisplay$ | async); else loading">
+          <ng-container *ngIf="(loadStorage$ | async); else loading">
+              <!-- <app-sede-admin-fieldset-sede [control]="controlSede" ></app-sede-admin-fieldset-sede> -->
+          </ng-container>
+    </ng-container>
+</ng-container>
