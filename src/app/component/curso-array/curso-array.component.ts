@@ -145,7 +145,7 @@ export class CursoArrayComponent implements OnInit {
         data => {
           data.forEach((element: { [x: string]: string; }) => {
             element["ta_docente-nombre"] = ""
-            if(element["ta_docente-nombres"]) element["ta_docente-nombre"] =  element["ta_docente-nombres"] + " " + element["ta_docente-apellidos"] + " " + element["ta_docente-telefono"]
+            if(element["ta_docente-nombres"]) element["ta_docente-nombre"] =  element["ta_docente-nombres"] + " " + element["ta_docente-apellidos"] + " " + element["ta_docente-numero_documento"]
             element["sede-label"] =  element["sede-nombre"] + " (" + element["sede-numero"] + ")"
             element["comision-label"] =  element["sede-numero"] + element["comision-division"] + "/" + element["planificacion-anio"] + element["planificacion-semestre"]
             element["planificacion-label"] =  element["planificacion-anio"] + "º" + element["planificacion-semestre"] + "º " + element["plan-orientacion"]
