@@ -4,6 +4,7 @@ import { MatTable } from '@angular/material/table';
 import { Display } from '@class/display';
 import { renderRowsOfTableOnValueChanges } from '@function/component';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
+import { DataDefinitionService } from '@service/data-definition/data-definition.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,6 +16,7 @@ export class ComisionArrayTableComponent implements AfterViewInit {
 
   constructor(
     protected tools: ComponentToolsService,
+    protected dd: DataDefinitionService,
   ) { }
 
   @Input() control!: FormArray
@@ -40,6 +42,14 @@ export class ComisionArrayTableComponent implements AfterViewInit {
  
   printContent(): void {
     this.tools.printContent(this.content, this.displayedColumns)
+  }
+
+  asignarPlan(index:number): void {
+    this.dd._post("persist","actualizar_plan_alumnos_comision",this.control.controls[index].get("id")!.value)
+  }
+
+  asignarAnio(index:number): void {
+    this.dd._post("persist","actualizar_anio_alumnos_comision",this.control.controls[index].get("id")!.value)
   }
 
 }
