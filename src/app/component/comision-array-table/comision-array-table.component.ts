@@ -45,7 +45,8 @@ export class ComisionArrayTableComponent implements AfterViewInit {
   }
 
   asignarPlan(index:number): void {
-    this.dd._post("persist","actualizar_plan_alumnos_comision",this.control.controls[index].get("id")!.value)
+    console.log(this.control.controls[index].get("id")!.value)
+    // this.dd._post("persist","actualizar_plan_alumnos_comision",this.control.controls[index].get("id")!.value)
   }
 
   asignarAnio(index:number): void {
