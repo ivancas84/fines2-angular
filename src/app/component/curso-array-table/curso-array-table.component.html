@@ -104,6 +104,17 @@
         </td>
     </ng-container>
 
+    <ng-container matColumnDef="cantidad_calificaciones" >
+        <th mat-header-cell *matHeaderCellDef> Alumnos Evaluados </th>
+        <td mat-cell *matCellDef="let row; let i = index;"
+            [ngClass]="{
+                'highlightGreen': row['cantidad_calificaciones'] > 0,
+                'highlightRed': row['cantidad_calificaciones'] <= 0
+            }">
+            {{row['cantidad_calificaciones']}}
+        </td>
+    </ng-container>
+
     
     <ng-container matColumnDef="options">
     <th mat-header-cell *matHeaderCellDef> Opciones </th>

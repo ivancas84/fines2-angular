@@ -34,7 +34,15 @@ export class CursoArrayTableComponent implements OnInit {
 
   }
 
-  displayedColumns = ["comision-label","asignatura-nombre","ta_docente-nombre","ta_docente-telefono","id", "sede-label","domicilio-label","planificacion-label","horario","cantidad_alumnos_activos", "ta_docente-email","options"]
+  displayedColumns = [
+    "sede-label",
+    "domicilio-label",
+    "planificacion-label",
+    "horario",
+    "comision-label",
+    "cantidad_alumnos_activos",
+    "cantidad_calificaciones",
+    "asignatura-nombre","ta_docente-nombre","ta_docente-telefono",  "ta_docente-email","options"]
 
   @ViewChild(MatPaginator) paginator?: MatPaginator; //referencia al paginador
   pageSizeOptions: number[] =[10, 25, 50, 100] 

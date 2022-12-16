@@ -100,6 +100,7 @@ export class CursoArrayComponent implements OnInit {
       ),
       map(
         data => {
+          console.log(data)
           this.data = data
           return this.load = true;
         }
@@ -137,6 +138,9 @@ export class CursoArrayComponent implements OnInit {
       ),
       switchMap(
         data =>   this.dd.postMergeAll({ data, method: "info", entityName: "cantidad_alumnos_activos_comision", fields: { "cantidad_alumnos_activos": "cantidad" }, fieldNameData: "comision-id", fieldNameResponse: "comision" })
+      ),
+      switchMap(
+        data =>   this.dd.postMergeAll_({ data, method: "info", entityName: "cantidad_calificaciones_cargadas_cursos", fields: ["cantidad_calificaciones"], fieldNameData: "id", fieldNameResponse: "curso" })
       ),
       switchMap(
         data =>   this.dd.entityFieldsMergeAll({data, entityName: "toma", fields: ["docente-email","docente-nombres","docente-apellidos","docente-telefono","docente-numero_documento"] , fieldNameData:"toma", fieldNameResponse:"id", prefix: "ta_" })
