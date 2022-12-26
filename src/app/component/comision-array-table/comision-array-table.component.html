@@ -124,7 +124,7 @@
 
         <a 
             mat-mini-fab 
-            color="warn"
+            color="primary"
             [routerLink]="'/alumno-array'"
             [queryParams]="{
                 'comision-id':row.controls['id']!.value,
@@ -139,6 +139,11 @@
             (click)="asignarPlanAnio(i)">
             <mat-icon>assignment_late</mat-icon>
         </button>
+        <a 
+            mat-mini-fab 
+            color="warn"
+            [href]="SCRIPT_URL + 'asignaturas_aprobadas_alumnos?comision=' + row.controls['id']!.value"
+            title="Matriz"> <mat-icon>dashboard</mat-icon> </a>
         
         
     </td> 
