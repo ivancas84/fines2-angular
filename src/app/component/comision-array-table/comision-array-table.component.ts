@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular
 import { FormArray } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 import { Display } from '@class/display';
+import { SCRIPT_URL } from '@config/app.config';
 import { renderRowsOfTableOnValueChanges } from '@function/component';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionService } from '@service/data-definition/data-definition.service';
@@ -13,6 +14,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./comision-array-table.component.css']
 })
 export class ComisionArrayTableComponent implements AfterViewInit {
+
+  SCRIPT_URL = SCRIPT_URL;
+
 
   constructor(
     protected tools: ComponentToolsService,
