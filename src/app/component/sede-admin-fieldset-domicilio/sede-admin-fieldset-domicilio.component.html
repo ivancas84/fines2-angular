@@ -15,7 +15,7 @@
           class="fx-item" 
           fxFlex.xs="100%" 
           fxFlex.sm="50%" 
-          fxFlex.gt-sm="33%">
+          fxFlex.gt-sm="25%">
           <mat-form-field>
             <mat-label>Calle</mat-label>
            
@@ -32,8 +32,8 @@
       <div 
           class="fx-item" 
           fxFlex.xs="100%" 
-          fxFlex.sm="50%" 
-          fxFlex.gt-sm="33%">
+          fxFlex.sm="25%" 
+          fxFlex.gt-sm="25%">
 
           <mat-form-field>
             <mat-label>Número</mat-label>
@@ -52,8 +52,66 @@
       <div 
           class="fx-item" 
           fxFlex.xs="100%" 
+          fxFlex.sm="34%" 
+          fxFlex.gt-sm="17%">
+
+          <mat-form-field>
+              <mat-label>Entre</mat-label>
+            
+              <input matInput
+                  type="text"
+                  formControlName="entre">
+            
+              <mat-error>
+                  <ng-container *ngIf="control.get('entre')!.hasError('required')">Debe completar valor</ng-container>
+              </mat-error>
+          </mat-form-field>
+      </div>
+
+      <div 
+          class="fx-item" 
+          fxFlex.xs="100%" 
+          fxFlex.sm="33%" 
+          fxFlex.gt-sm="16%">
+
+          <mat-form-field>
+              <mat-label>Piso</mat-label>
+            
+              <input matInput
+                  type="text"
+                  formControlName="piso">
+            
+              <mat-error>
+                  <ng-container *ngIf="control.get('piso')!.hasError('required')">Debe completar valor</ng-container>
+              </mat-error>
+          </mat-form-field>
+      </div>
+
+
+      <div 
+          class="fx-item" 
+          fxFlex.xs="100%" 
           fxFlex.sm="50%" 
-          fxFlex.gt-sm="33%">
+          fxFlex.gt-sm="17%">
+
+          <mat-form-field>
+            <mat-label>Departamento</mat-label>
+          
+            <input matInput
+                type="text"
+                formControlName="departamento">
+          
+            <mat-error>
+              <ng-container *ngIf="control.get('departamento')!.hasError('required')">Debe completar valor</ng-container>
+            </mat-error>
+          </mat-form-field>
+      </div>
+
+      <div 
+          class="fx-item" 
+          fxFlex.xs="100%" 
+          fxFlex.sm="50%" 
+          fxFlex.gt-sm="50%">
 
           <mat-form-field>
             <mat-label>Localidad</mat-label>
@@ -67,6 +125,29 @@
             </mat-error>
           </mat-form-field>
       </div>
+
+
+      <div 
+      class="fx-item" 
+      fxFlex.xs="100%" 
+      fxFlex.sm="50%" 
+      fxFlex.gt-sm="50%">
+
+      <mat-form-field>
+        <mat-label>Barrio</mat-label>
+       
+        <input matInput
+            type="text"
+            formControlName="barrio">
+       
+        <mat-error>
+          <ng-container *ngIf="control.get('barrio')!.hasError('required')">Debe completar valor</ng-container>
+        </mat-error>
+      </mat-form-field>
+  </div>
+
+
+    
   </div>
 
 </form>
