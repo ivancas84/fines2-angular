@@ -148,7 +148,7 @@ export class AlumnoArrayComponent implements OnInit {
       switchMap(
         data =>  this.dd.postMergeAll_({
           data, 
-          method: "cantidad_asignaturas_aprobadas_alumnos_tramo", 
+          method: "cantidad_asignaturas_aprobadas_tramo", 
           entityName: "alumno", 
           fields: [
             "cantidad_aprobadas_11",

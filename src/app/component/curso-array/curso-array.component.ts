@@ -131,16 +131,16 @@ export class CursoArrayComponent implements OnInit {
           })
       ),
       switchMap(
-        data =>   this.dd.postMergeAll({ data, method: "info", entityName: "curso_horario", fields: { "horario": "horario" }, fieldNameData: "id", fieldNameResponse: "curso" })
+        data =>   this.dd.postMergeAll({ data, method: "horario", entityName: "curso", fields: { "horario": "horario" }, fieldNameData: "id", fieldNameResponse: "curso" })
       ),
       switchMap(
-        data =>   this.dd.postMergeAll({ data, method: "info", entityName: "curso_toma_activa", fields: { "toma": "toma_activa" }, fieldNameData: "id", fieldNameResponse: "curso" })
+        data =>   this.dd.postMergeAll({ data, method: "toma_activa", entityName: "curso", fields: { "toma": "toma_activa" }, fieldNameData: "id", fieldNameResponse: "curso" })
       ),
       switchMap(
-        data =>   this.dd.postMergeAll({ data, method: "info", entityName: "cantidad_alumnos_activos_comision", fields: { "cantidad_alumnos_activos": "cantidad" }, fieldNameData: "comision-id", fieldNameResponse: "comision" })
+        data =>   this.dd.postMergeAll({ data, method: "cantidad_alumnos_activos", entityName: "comision", fields: { "cantidad_alumnos_activos": "cantidad" }, fieldNameData: "comision-id", fieldNameResponse: "comision" })
       ),
       switchMap(
-        data =>   this.dd.postMergeAll_({ data, method: "info", entityName: "cantidad_calificaciones_cargadas_cursos", fields: ["cantidad_calificaciones"], fieldNameData: "id", fieldNameResponse: "curso" })
+        data =>   this.dd.postMergeAll_({ data, method: "cantidad_calificaciones_cargadas", entityName: "curso", fields: ["cantidad_calificaciones"], fieldNameData: "id", fieldNameResponse: "curso" })
       ),
       switchMap(
         data =>   this.dd.entityFieldsMergeAll({data, entityName: "toma", fields: ["docente-email","docente-nombres","docente-apellidos","docente-telefono","docente-numero_documento"] , fieldNameData:"toma", fieldNameResponse:"id", prefix: "ta_" })

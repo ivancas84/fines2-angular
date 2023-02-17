@@ -117,8 +117,8 @@ export class ComisionArrayComponent implements OnInit {
       switchMap(
         data => this.dd.postMergeAll_({
           data:data, 
-          entityName:"horarios_comision", 
-          method:"info",
+          entityName:"comision", 
+          method:"horarios",
           fields:["dias_dias","hora_inicio","hora_fin"], 
           fieldNameData:"id",
           fieldNameResponse:"comision"

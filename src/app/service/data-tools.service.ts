@@ -69,7 +69,7 @@ export class DataToolsService {
     var display = new Display();
     display.setSize(0);
     display.addParam("curso",ids);
-    return this.dd.post("info","curso_horario",ids).pipe(
+    return this.dd.post("horario","curso",ids).pipe(
       map(
         cursoHorario => {
           for(var j = 0; j < cursos.length; j++){

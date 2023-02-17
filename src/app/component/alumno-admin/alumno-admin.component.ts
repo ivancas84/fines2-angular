@@ -308,8 +308,8 @@ export class AlumnoAdminComponent implements OnInit {
           data => {
             return this.dd.postMergeAll_({
               data,
-              method:"info",
-              entityName:"curso_toma_activa",
+              method:"toma_activa",
+              entityName:"curso",
               fields:["toma_activa"],
               fieldNameData:"curso",
               fieldNameResponse:"curso"

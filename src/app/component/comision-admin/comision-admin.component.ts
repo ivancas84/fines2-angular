@@ -181,8 +181,8 @@ export class ComisionAdminComponent implements OnInit {
       switchMap(
         (curso_:{[index:string]:any}[]) => this.dd.postMergeAll_({ 
           data:curso_, 
-          method: "info", 
-          entityName: "curso_horario", 
+          method: "horario", 
+          entityName: "curso", 
           fields: ["horario"], 
           fieldNameData: "id", 
           fieldNameResponse: "curso" 

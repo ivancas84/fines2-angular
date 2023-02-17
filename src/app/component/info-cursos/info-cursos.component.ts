@@ -91,7 +91,7 @@ export class InfoCursosComponent implements OnInit {
           })
       ),
       switchMap(
-        response =>   this.dd.postMergeAll({ data: response, method: "info", entityName: "curso_toma_activa", fields: { "toma": "toma_activa" }, fieldNameData: "id", fieldNameResponse: "curso" })
+        response =>   this.dd.postMergeAll({ data: response, method: "toma_activa", entityName: "curso", fields: { "toma": "toma_activa" }, fieldNameData: "id", fieldNameResponse: "curso" })
       ),
       switchMap(
         response =>   {
@@ -113,11 +113,11 @@ export class InfoCursosComponent implements OnInit {
         }
       ),
       switchMap(
-        response => this.dd.postMergeAll({ data: response, method: "info", entityName: "curso_horario", fields: { "horario": "horario" }, fieldNameData: "id", fieldNameResponse: "curso" })
+        response => this.dd.postMergeAll({ data: response, method: "horario", entityName: "curso", fields: { "horario": "horario" }, fieldNameData: "id", fieldNameResponse: "curso" })
       ),
       switchMap(
         data =>   {
-           return this.dd.postMergeAll({ data, method: "info", entityName: "cantidad_alumnos_activos_comision", fields: { "cantidad_alumnos": "cantidad" }, fieldNameData: "comision", fieldNameResponse: "comision" })
+           return this.dd.postMergeAll({ data, method: "cantidad_alumnos_activos", entityName: "comision", fields: { "cantidad_alumnos": "cantidad" }, fieldNameData: "comision", fieldNameResponse: "comision" })
         }
       ),
       map(

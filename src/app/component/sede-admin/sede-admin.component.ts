@@ -179,8 +179,8 @@ export class SedeAdminComponent implements OnInit {
       switchMap(
         (data:{[index:string]:any}[]) => this.dd.postMergeAll({ 
           data, 
-          method: "info", 
-          entityName: "horarios_comision", 
+          method: "horarios", 
+          entityName: "comision", 
           fields: { "dias":"dias_dias", "hora_inicio":"hora_inicio","hora_fin":"hora_fin" }, 
           fieldNameData: "id", fieldNameResponse: "comision" 
         })

@@ -70,7 +70,7 @@ export class ComisionAdminFieldsetCursoComponent implements AfterViewInit {
             return
         }
 
-        this.dd._post("persist", "crear_cursos_comision", this.idComision).pipe(first()).subscribe({
+        this.dd._post("crear_cursos", "comision", this.idComision).pipe(first()).subscribe({
             next: (response: any) => {
               this.ts.submittedDisplay(response,this.display$)
             },
@@ -90,7 +90,7 @@ export class ComisionAdminFieldsetCursoComponent implements AfterViewInit {
             return
         }
 
-        this.dd._post("persist", "eliminar_cursos_comision", this.idComision).pipe(first()).subscribe({
+        this.dd._post("eliminar_cursos", "comision", this.idComision).pipe(first()).subscribe({
             next: (response: any) => {
               this.ts.submittedDisplay(response,this.display$)
             },

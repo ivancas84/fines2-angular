@@ -49,7 +49,7 @@ export class ComisionArrayTableComponent implements AfterViewInit {
   }
 
   asignarPlanAnio(index:number): void {
-    this.dd._post("persist","actualizar_plan_anio_alumnos_comision",this.control.controls[index].get("id")!.value).subscribe({
+    this.dd._post("actualizar_plan_anio_alumnos","comision",this.control.controls[index].get("id")!.value).subscribe({
       next: (response: any) => {
         this.tools.submitted(response)
       },
