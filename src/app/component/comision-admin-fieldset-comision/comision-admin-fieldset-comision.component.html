@@ -11,7 +11,7 @@
               class="fx-item" 
               fxFlex.xs="100%" 
               fxFlex.sm="100%" 
-              fxFlex.gt-sm="33%">
+              fxFlex.gt-sm="25%">
    
               <mat-form-field  *ngIf="loadAutocompleteSede$ | async">
                     <mat-label>Sede</mat-label>
@@ -45,8 +45,8 @@
             <div 
                 class="fx-item" 
                 fxFlex.xs="100%" 
-                fxFlex.sm="100%" 
-                fxFlex.gt-sm="34%">
+                fxFlex.sm="50%" 
+                fxFlex.gt-sm="25%">
      
                 <mat-form-field  *ngIf="loadAutocompleteCalendario$ | async">
                       <mat-label>Calendario</mat-label>
@@ -75,13 +75,27 @@
                 </mat-form-field>
             </div>
   
-
+            <div 
+                class="fx-item" 
+                fxFlex.xs="100%" 
+                fxFlex.sm="50%" 
+                fxFlex.gt-sm="25%">
+ 
+                <mat-form-field>
+                        <mat-label>Identificación</mat-label>
+                      
+                        <input matInput
+                              type="text"
+                              formControlName="identificacion">
+                      
+                </mat-form-field>
+            </div>
 
             <div 
             class="fx-item" 
             fxFlex.xs="100%" 
-            fxFlex.sm="100%" 
-            fxFlex.gt-sm="33%">
+            fxFlex.sm="50%" 
+            fxFlex.gt-sm="25%">
       
                   
               <mat-form-field  *ngIf="loadAutocompleteComisionSiguiente$ | async">

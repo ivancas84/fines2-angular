@@ -50,6 +50,7 @@ export class ComisionAdminComponent implements OnInit {
     autorizada:this.fb.control(false),
     apertura:this.fb.control(false),
     publicada:this.fb.control(false),
+    identificacion:this.fb.control(null),
     observaciones:this.fb.control(null),
   },{
     asyncValidators:[this.validators.uniqueMultiple("comision", ["sede", "division", "planificacion"])]
