@@ -173,6 +173,7 @@ export class ComisionArrayComponent implements OnInit {
       "apertura":this.fb.control(""),
       "modalidad-nombre":this.fb.control(""),
       "turno":this.fb.control(""),
+      "referentes":this.fb.control("")
     })
     fg.patchValue(data)
     if(data["apertura"]) this.aperturas++

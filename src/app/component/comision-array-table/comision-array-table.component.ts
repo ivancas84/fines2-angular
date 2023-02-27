@@ -38,7 +38,7 @@ export class ComisionArrayTableComponent implements AfterViewInit {
     this.subscriptions.add(s)
   }
 
-  displayedColumns = ["id", "label","sede","domicilio","tramo","horario","calendario","modalidad-nombre","turno","apertura","autorizada","options"]
+  displayedColumns = ["id", "label","sede","domicilio","tramo","horario","calendario","modalidad-nombre","turno","referentes","apertura","autorizada","options"]
 
   copyContent(): void {
     this.tools.copyContent(this.content, this.displayedColumns)

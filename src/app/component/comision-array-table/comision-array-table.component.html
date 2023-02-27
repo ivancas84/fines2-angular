@@ -90,6 +90,13 @@
         </td>
       </ng-container>
 
+      <ng-container matColumnDef="referentes">
+        <th mat-header-cell *matHeaderCellDef > Referentes </th>
+        <td mat-cell *matCellDef="let row; let i = index;">
+            {{row.controls['referentes'].value}}
+        </td>
+      </ng-container>
+      
       <ng-container matColumnDef="autorizada">
         <th mat-header-cell *matHeaderCellDef > Autorizada </th>
         <td mat-cell *matCellDef="let row; let i = index;"
