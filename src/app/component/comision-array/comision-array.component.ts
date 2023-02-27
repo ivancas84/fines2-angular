@@ -87,67 +87,77 @@ export class ComisionArrayComponent implements OnInit {
   }
 
 
-  initData(): Observable<any>{
-    if(this.length === 0) return of([]);
-    return this.dd.post("ids", "comision", this.display$.value).pipe(
-      switchMap(
-        ids => this.dd.entityFieldsGetAll({
-            entityName: "comision", ids, fields: [
-              "id",
-              "division",
-              "autorizada",
-              "apertura",
-              "sede-id",
-              "sede-nombre",
-              "sede-numero",
-              "domicilio-calle",
-              "domicilio-entre",
-              "domicilio-numero",
-              "domicilio-barrio",
-              "planificacion-anio",
-              "planificacion-semestre",
-              "calendario-anio",
-              "calendario-semestre",
-              "plan-orientacion",
-              "modalidad-nombre",
-              "turno"
-            ]
-          }),
-      ),
-      switchMap(
-        data => this.dd.postMergeAll_({
-          data:data, 
-          entityName:"comision", 
-          method:"horarios",
-          fields:["dias_dias","hora_inicio","hora_fin"], 
-          fieldNameData:"id",
-          fieldNameResponse:"comision"
-        }),
-      ),
-      map(
-        data => {
-          data.forEach((element: { [x: string]: string; }) => {
-            element["sede"] =  element["sede-nombre"] + " (" + element["sede-numero"] + ")"
-            element["label"] =  element["sede-numero"] + element["division"] + "/" + element["planificacion-anio"] + element["planificacion-semestre"]
-            element["tramo"] =  element["planificacion-anio"] + "º" + element["planificacion-semestre"] + "º " + element["plan-orientacion"]
-            element["domicilio"] =  element["domicilio-calle"];
-            element["calendario"] =  new Date(element["calendario-anio"]).getFullYear() + "-" +element["calendario-semestre"];
-            
-            if(element["domicilio-entre"]) element["domicilio"] +=  " e/ " + element["domicilio-entre"]
-            element["domicilio"] +=  " nº " + element["domicilio-numero"]
-            if(element["domicilio-barrio"]) element["domicilio"] +=  " " + element["domicilio-barrio"]
-            if(element["dias_dias"]) element["horario"] =   element["dias_dias"] + " " + element["hora_inicio"] + " a " + element["hora_fin"] 
-            
-          })
-          return data;
-        }
-      )
-    )
-  }
+    initData(): Observable<any>{
+        if(this.length === 0) return of([]);
+        return this.dd.post("ids", "comision", this.display$.value).pipe(
+            switchMap(
+                ids => this.dd.entityFieldsGetAll({
+                    entityName: "comision", ids, fields: [
+                    "id",
+                    "division",
+                    "autorizada",
+                    "apertura",
+                    "sede-id",
+                    "sede-nombre",
+                    "sede-numero",
+                    "domicilio-calle",
+                    "domicilio-entre",
+                    "domicilio-numero",
+                    "domicilio-barrio",
+                    "planificacion-anio",
+                    "planificacion-semestre",
+                    "calendario-anio",
+                    "calendario-semestre",
+                    "plan-orientacion",
+                    "modalidad-nombre",
+                    "turno"
+                    ]
+                }),
+            ),
+            switchMap(
+                data => this.dd.postMergeAll_({
+                data:data, 
+                entityName:"comision", 
+                method:"horarios",
+                fields:["dias_dias","hora_inicio","hora_fin"], 
+                fieldNameData:"id",
+                fieldNameResponse:"comision"
+                }),
+            ),
+            switchMap(
+                data => this.dd.postMergeAll_({
+                data:data, 
+                entityName:"sede", 
+                method:"referentes",
+                fields:["sede","referentes"], 
+                fieldNameData:"sede-id",
+                fieldNameResponse:"sede"
+                }),
+            ),
+            map(
+                data => {
+                    console.log(data)
+                    data.forEach((element: { [x: string]: string; }) => {
+                        element["sede"] =  element["sede-nombre"] + " (" + element["sede-numero"] + ")"
+                        element["label"] =  element["sede-numero"] + element["division"] + "/" + element["planificacion-anio"] + element["planificacion-semestre"]
+                        element["tramo"] =  element["planificacion-anio"] + "º" + element["planificacion-semestre"] + "º " + element["plan-orientacion"]
+                        element["domicilio"] =  element["domicilio-calle"];
+                        element["calendario"] =  new Date(element["calendario-anio"]).getFullYear() + "-" +element["calendario-semestre"];
+                        
+                        if(element["domicilio-entre"]) element["domicilio"] +=  " e/ " + element["domicilio-entre"]
+                        element["domicilio"] +=  " nº " + element["domicilio-numero"]
+                        if(element["domicilio-barrio"]) element["domicilio"] +=  " " + element["domicilio-barrio"]
+                        if(element["dias_dias"]) element["horario"] =   element["dias_dias"] + " " + element["hora_inicio"] + " a " + element["hora_fin"] 
+                        
+                    })
+                    return data;
+                }
+            )
+        )
+    }
 
-
-  aperturas:number = 0
-  autorizadas:number= 0
+    aperturas:number = 0
+    autorizadas:number= 0
 
   formGroup(data:{[index:string]:any}): FormGroup {
     var fg = this.fb.group({
