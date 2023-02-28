@@ -79,7 +79,7 @@
           <ng-container matColumnDef="options">
             <th mat-header-cell *matHeaderCellDef> Opciones </th>
             <td mat-cell *matCellDef="let row; let i = index;">
-              <a [routerLink]="'/toma-posesion-email-abc'"
+              <a [routerLink]="'/inscripcion-docente'"
                  [queryParams]="{'curso':row.controls['id'].value}"
                  [title]="'Administrar Comision'">Toma de Posesión</a>
             </td>

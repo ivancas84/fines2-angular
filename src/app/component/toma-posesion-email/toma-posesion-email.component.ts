@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { onSubmit } from '@function/component';
 import { domicilioLabel } from '@function/label';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { DdAsyncValidatorsService } from '@service/validators/dd-async-validators.service';
-import { Observable, map, first, Subject } from 'rxjs';
+import { Observable, map, first, Subject, BehaviorSubject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-toma-posesion-email',
@@ -36,6 +37,7 @@ export class TomaPosesionEmailComponent implements OnInit {
   params: { [x: string]: any } = {} //parametros del componente
   loadParams$!: Observable<any> //carga de parametros
   loadDisplay$!: Observable<any> //carga de display
+  display$:BehaviorSubject<Display> = new BehaviorSubject(new Display) //presentacion
   isSubmitted: boolean = false //Flag para habilitar/deshabilitar boton aceptar
   onSubmit$:Subject<any> = new Subject();
 
@@ -46,32 +48,35 @@ export class TomaPosesionEmailComponent implements OnInit {
 
   data!: {[i:string]:any}
 
-  loadDisplay(){
-    this.loadDisplay$ = this.dd.entityFieldsGet({entityName:"curso", id:this.params["curso"], fields:[
-      "id",
-      "comision-division",
-      "asignatura-nombre",
-      "sede-numero",
-      "sede-nombre",
-      "planificacion-anio",
-      "planificacion-semestre",
-      "plan-orientacion",
-      "domicilio-calle",
-      "domicilio-entre",
-      "domicilio-numero",
-      "domicilio-barrio",
-      "domicilio-localidad",
-    ]}).pipe(
-      map(
-        data => {
-          data["domicilio-label"] = domicilioLabel(data)
-          data["comision-numero"] = data["sede-numero"] + data["comision-division"] + "/" + data["planificacion-anio"] + data["planificacion-semestre"]
-          this.data = data
-          
-        }
-      )
-    )
-  }
+    loadDisplay(){
+        this.loadDisplay$ = this.display$.pipe(
+            switchMap(
+                () => this.dd.entityFieldsGet({entityName:"curso", id:this.params["curso"], fields:[
+                    "id",
+                    "comision-division",
+                    "asignatura-nombre",
+                    "sede-numero",
+                    "sede-nombre",
+                    "planificacion-anio",
+                    "planificacion-semestre",
+                    "plan-orientacion",
+                    "domicilio-calle",
+                    "domicilio-entre",
+                    "domicilio-numero",
+                    "domicilio-barrio",
+                    "domicilio-localidad",
+                ]}).pipe(
+                    map(
+                        data => {
+                            data["domicilio-label"] = domicilioLabel(data)
+                            data["comision-numero"] = data["sede-numero"] + data["comision-division"] + "/" + data["planificacion-anio"] + data["planificacion-semestre"]
+                            this.data = data
+                        }
+                    )
+                )
+            ),
+        )
+    }
 
   loadParams(){
     this.loadParams$ = this.route.queryParams.pipe(map(
@@ -84,6 +89,8 @@ export class TomaPosesionEmailComponent implements OnInit {
               });
               return false
             }
+            var display = new Display().setSize(100).setParamsByQueryParams(queryParams);
+            this.display$.next(display)
             return true;
         },
     ))

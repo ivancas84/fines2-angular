@@ -39,8 +39,8 @@ export class CursosTomaPosesionComponent {
       map(
         queryParams => { 
           var display = new Display().setSize(0).setParams(
-            {"calendario-anio":"2022",
-            "calendario-semestre":2,
+            {"calendario-anio":"2023",
+            "calendario-semestre":1,
             "comision-autorizada":true
           }).setOrder({
             "sede-numero":"asc", 
