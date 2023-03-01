@@ -3,52 +3,52 @@
 </ng-template>
 
 <ng-container *ngIf="(loadParams$ | async); else loading">
-  <ng-container *ngIf="(loadDisplay$ | async); else loading">
     <mat-card>
-      <mat-card-header>
-        <mat-card-title>
-          Toma de posesión {{data['asignatura-nombre']}} {{data['comision-label']}} - {{data['sede-nombre']}} 
-        </mat-card-title>
-        <mat-card-subtitle>
-          Verifique los datos ingresados, serán utilizados posteriormente para realizar la toma de posesión.
-        </mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
+        <mat-card-header>
+            <mat-card-title>
+                Toma de posesión {{data['asignatura-nombre']}} {{data['comision-label']}} - {{data['sede-nombre']}} 
+            </mat-card-title>
+            <mat-card-subtitle>
+                Verifique los datos ingresados, serán utilizados posteriormente para realizar la toma de posesión.
+            </mat-card-subtitle>
+        </mat-card-header>
+        
+        <mat-card-content>
      
-      <form [formGroup]="control" novalidate (ngSubmit)="onSubmit$.next(null)"> 
-        <div fxLayout="row wrap">
-            <div 
-                class="fx-item" 
-                fxFlex.xs="100%" 
-                fxFlex.sm="50%" 
-                fxFlex.gt-sm="33%">
+            <form [formGroup]="control" novalidate (ngSubmit)="onSubmit$.next(null)"> 
+                <div fxLayout="row wrap">
+                    <div 
+                        class="fx-item" 
+                        fxFlex.xs="100%" 
+                        fxFlex.sm="50%" 
+                        fxFlex.gt-sm="33%">
+            
+                        <mat-form-field>
+                            <mat-label>DNI</mat-label>
+                            <input type="number" 
+                                matInput 
+                                formControlName="numero_documento">
+                            <mat-error>
+                              <ng-container *ngIf="control.get('numero_documento')!.hasError('required')">Debe completar valor</ng-container>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
      
-                <mat-form-field>
-                    <mat-label>DNI</mat-label>
-                    <input type="number" 
-                        matInput 
-                        formControlName="numero_documento">
-                    <mat-error>
-                      <ng-container *ngIf="control.get('numero_documento')!.hasError('required')">Debe completar valor</ng-container>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-     
-            <div 
-                class="fx-item" 
-                fxFlex.xs="100%" 
-                fxFlex.sm="50%" 
-                fxFlex.gt-sm="33%">
-                <mat-form-field>
-                    <mat-label>Nombres</mat-label>
-                    <input matInput 
-                        formControlName="nombres">
-                    <mat-error>
-                      <ng-container *ngIf="control.get('nombres')!.hasError('required')">">Debe completar valor</ng-container>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-        </div>
+                    <div 
+                        class="fx-item" 
+                        fxFlex.xs="100%" 
+                        fxFlex.sm="50%" 
+                        fxFlex.gt-sm="33%">
+                        <mat-form-field>
+                            <mat-label>Nombres</mat-label>
+                            <input matInput 
+                                formControlName="nombres">
+                            <mat-error>
+                              <ng-container *ngIf="control.get('nombres')!.hasError('required')">">Debe completar valor</ng-container>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
      
         <button  
           [disabled]="control.status == 'PENDING'"
@@ -63,5 +63,4 @@
     
 
 
-  </ng-container>
 </ng-container>

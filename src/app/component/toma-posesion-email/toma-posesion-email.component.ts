@@ -9,7 +9,7 @@ import { domicilioLabel } from '@function/label';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { DdAsyncValidatorsService } from '@service/validators/dd-async-validators.service';
-import { Observable, map, first, Subject, BehaviorSubject, switchMap } from 'rxjs';
+import { Observable, map, first, Subject, BehaviorSubject, switchMap, of } from 'rxjs';
 
 @Component({
   selector: 'app-toma-posesion-email',
@@ -18,96 +18,93 @@ import { Observable, map, first, Subject, BehaviorSubject, switchMap } from 'rxj
 })
 export class TomaPosesionEmailComponent implements OnInit {
 
-  constructor(
-    protected dd: DataDefinitionToolService,
-    protected dialog: MatDialog,
-    protected route: ActivatedRoute,
-    protected fb: FormBuilder,
-    protected validators: DdAsyncValidatorsService,
-    protected tools: ComponentToolsService,
-    protected router: Router, 
-  ) { }
-  
-  ngOnInit(): void {
-    this.loadParams();
-    this.loadDisplay();
-    onSubmit(this.onSubmit$,this.control).subscribe((validationSuccessful) => this.submit());
-  }
+    constructor(
+        protected dd: DataDefinitionToolService,
+        protected dialog: MatDialog,
+        protected route: ActivatedRoute,
+        protected fb: FormBuilder,
+        protected validators: DdAsyncValidatorsService,
+        protected tools: ComponentToolsService,
+        protected router: Router, 
+    ) { }
+    
+    ngOnInit(): void {
+        this.loadParams();
+        onSubmit(this.onSubmit$,this.control).subscribe((validationSuccessful) => this.submit());
+    }
 
-  params: { [x: string]: any } = {} //parametros del componente
-  loadParams$!: Observable<any> //carga de parametros
-  loadDisplay$!: Observable<any> //carga de display
-  display$:BehaviorSubject<Display> = new BehaviorSubject(new Display) //presentacion
-  isSubmitted: boolean = false //Flag para habilitar/deshabilitar boton aceptar
-  onSubmit$:Subject<any> = new Subject();
+    params: { [x: string]: any } = {} //parametros del componente
+    loadParams$!: Observable<any> //carga de parametros
+    isSubmitted: boolean = false //Flag para habilitar/deshabilitar boton aceptar
+    onSubmit$:Subject<any> = new Subject();
 
-  control: FormGroup = this.fb.group({
-    email:this.fb.control(null,{ validators:[Validators.required] }),
-    curso: this.fb.control(null,{ validators:[Validators.required] }),
-  })
+    control: FormGroup = this.fb.group({
+        email:this.fb.control(null,{ validators:[Validators.required] }),
+        curso: this.fb.control(null,{ validators:[Validators.required] }),
+    })
 
-  data!: {[i:string]:any}
+    data!: {[i:string]:any}
 
     loadDisplay(){
-        this.loadDisplay$ = this.display$.pipe(
-            switchMap(
-                () => this.dd.entityFieldsGet({entityName:"curso", id:this.params["curso"], fields:[
-                    "id",
-                    "comision-division",
-                    "asignatura-nombre",
-                    "sede-numero",
-                    "sede-nombre",
-                    "planificacion-anio",
-                    "planificacion-semestre",
-                    "plan-orientacion",
-                    "domicilio-calle",
-                    "domicilio-entre",
-                    "domicilio-numero",
-                    "domicilio-barrio",
-                    "domicilio-localidad",
-                ]}).pipe(
-                    map(
-                        data => {
-                            data["domicilio-label"] = domicilioLabel(data)
-                            data["comision-numero"] = data["sede-numero"] + data["comision-division"] + "/" + data["planificacion-anio"] + data["planificacion-semestre"]
-                            this.data = data
-                        }
-                    )
-                )
-            ),
+        return this.dd.entityFieldsGet({entityName:"curso", id:this.params["curso"], fields:[
+            "id",
+            "comision-division",
+            "asignatura-nombre",
+            "sede-numero",
+            "sede-nombre",
+            "planificacion-anio",
+            "planificacion-semestre",
+            "plan-orientacion",
+            "domicilio-calle",
+            "domicilio-entre",
+            "domicilio-numero",
+            "domicilio-barrio",
+            "domicilio-localidad",
+        ]}).pipe(
+            map(
+                data => {
+                    data["domicilio-label"] = domicilioLabel(data)
+                    data["comision-numero"] = data["sede-numero"] + data["comision-division"] + "/" + data["planificacion-anio"] + data["planificacion-semestre"]
+                    this.data = data
+                }
+            )
         )
     }
 
-  loadParams(){
-    this.loadParams$ = this.route.queryParams.pipe(map(
-        queryParams => {
-            this.params = queryParams
-            if(!queryParams.hasOwnProperty("curso") || !queryParams["curso"]) {
-              this.control.get("curso")!.setValue(this.params["curso"])
-              this.dialog.open(DialogAlertComponent, {
-                data: {title: "Error", message: "No está definido el curso"}
-              });
-              return false
-            }
-            var display = new Display().setSize(100).setParamsByQueryParams(queryParams);
-            this.display$.next(display)
-            return true;
-        },
-    ))
-  }
+    loadParams(){
+        this.loadParams$ = this.route.queryParams.pipe(
+            switchMap(
+                queryParams => {
+                    this.params = queryParams
+                    if(!queryParams.hasOwnProperty("curso") || !queryParams["curso"]) {
+                      this.dialog.open(DialogAlertComponent, {
+                        data: {title: "Error", message: "No está definido el curso"}
+                      });
+                      return of(false)
+                    }
+                    this.control.get("curso")!.setValue(this.params["curso"])
+                    
+            
+                    return this.loadDisplay()
+                }
+            ), map(
+              () => true
+            )
+        )
+    }
 
-  submit(){
-    return this.dd._post("persist", "toma_posesion", this.control.value).pipe(first()).subscribe(
-      response => {
-        if(!response){
-          this.router.navigate(['/inscripcion-docente'], { 
-              queryParams : this.control.value 
-          });
-        } else {
-          this.router.navigateByUrl('/inscripcion-docente-correcta', {replaceUrl: true});
-        }
-      }
-    )
-  }
+    submit(){
+        return this.dd._post("inscripcion_email", "toma", this.control.value).pipe(first()).subscribe(
+            response => {
+                if(!response){
+                    this.router.navigate(['/inscripcion-docente'], { 
+                        queryParams : this.control.value 
+                    });
+                } else {
+                    this.router.navigateByUrl('/inscripcion-docente-correcta', {replaceUrl: true});
+                }
+            }
+        )
+    }
 
 }

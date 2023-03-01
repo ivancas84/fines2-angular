@@ -34,10 +34,5 @@ export function comisionLabel(element: {[i:string]:any}, prefix:string=""): stri
   return element["sede-numero"] + element[prefix+"division"] + "/" + element["planificacion-anio"] + element["planificacion-semestre"]
 }
 
-export function cursoTomaActiva(element: {[i:string]:any}, prefix:string=""): string{
-  var c = comisionNumero(element, prefix)
-  if(element["calendario-anio"]) c += " " + new Date(element["calendario-anio"]).getFullYear() + "-" +element["calendario-semestre"];
-  return c;
-}
 
 

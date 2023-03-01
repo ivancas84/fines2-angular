@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,7 +6,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Display } from '@class/display';
 import { DialogAlertComponent } from '@component/dialog-alert/dialog-alert.component';
 import { isEmptyObject } from '@function/is-empty-object.function';
-import { ToDatePipe } from '@pipe/to-date.pipe';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { SessionStorageService } from '@service/storage/session-storage.service';
@@ -40,7 +38,7 @@ export class SedeAdminComponent implements OnInit {
   load: boolean = false; //Atributo auxiliar necesario para visualizar la barra de carga
   display$:BehaviorSubject<Display> = new BehaviorSubject(new Display) //presentacion
   storageValues: any = null //valores del storage
-  params: { [x: string]: any } = {} //parametros del componente,
+  params: { [x: string]: any } = {} //parametros del componente
 
   controlSede:FormGroup = this.fb.group({
     id:this.fb.control(null),

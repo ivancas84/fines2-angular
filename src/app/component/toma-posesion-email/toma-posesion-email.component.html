@@ -3,7 +3,6 @@
 </ng-template>
 
 <ng-container *ngIf="(loadParams$ | async); else loading">
-    <ng-container *ngIf="(loadDisplay$ | async); else loading">
 
         <mat-card>
           <mat-card-header>
@@ -43,11 +42,13 @@
               type="submit" 
               mat-raised-button>Aceptar</button>
          
+
+              <p>Debug Form value: {{ control.value | json }}</p>
+<p>Debug Form status: {{ control.status | json }}</p>
+
             </form>
          
          
           </mat-card-content>
         </mat-card>
-        
-  </ng-container>
 </ng-container>

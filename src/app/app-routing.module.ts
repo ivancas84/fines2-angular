@@ -17,6 +17,7 @@ import { CalendarioAdminComponent } from '@component/calendario-admin/calendario
 import { CursoArrayComponent } from '@component/curso-array/curso-array.component';
 import { AlumnoArrayComponent } from '@component/alumno-array/alumno-array.component';
 import { InscripcionDocenteComponent } from '@component/inscripcion-docente/inscripcion-docente.component';
+import { TomaPosesionEmailComponent } from '@component/toma-posesion-email/toma-posesion-email.component';
 
 const routes: Routes = [
   { path: '', component: CursosTomaPosesionComponent, pathMatch: 'full' },
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'inscripcion-docente', component: InscripcionDocenteComponent, pathMatch: 'full' },
   { path: 'inscripcion-docente-correcta', component: InscripcionDocenteCorrectaComponent, pathMatch: 'full' },
   { path: 'cursos-toma-posesion', component: CursosTomaPosesionComponent, pathMatch: 'full' },
+  { path: 'toma-posesion-email', component: TomaPosesionEmailComponent, pathMatch: 'full' },
 
   { path: 'alumnos-para-docente', component: EnlaceNoDisponibleComponent, pathMatch: 'full' },
   { path: 'referentes-para-docente', component: EnlaceNoDisponibleComponent, pathMatch: 'full' },
