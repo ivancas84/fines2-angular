@@ -82,7 +82,9 @@ export class InscripcionDocenteComponent implements OnInit {
               });
               return of(false)
             }          
-            this.control.get("curso")!.setValue(this.params["curso"])            
+            this.control.get("curso")!.setValue(this.params["curso"])   
+            this.control.get("email")!.setValue(this.params["email"])            
+         
             if(!queryParams.hasOwnProperty("email") || !queryParams["email"]) this.control.get("email")!.setValue(this.params["email"]) 
 
             return this.loadDisplay();
@@ -121,10 +123,9 @@ export class InscripcionDocenteComponent implements OnInit {
   }
 
   submit(){
-      console.log(this.control.value);
-      return;   
+    console.log("estoy");
     this.isSubmitted = true;
-        this.dd._post("persist", "inscripcion_docente", this.control.value).pipe(first()).subscribe({
+        this.dd._post("inscripcion_docente", "toma", this.control.value).pipe(first()).subscribe({
           next: () => {
             this.router.navigateByUrl('/inscripcion-docente-correcta', {replaceUrl: true});
             this.isSubmitted = false;

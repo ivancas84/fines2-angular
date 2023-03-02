@@ -1,6 +1,10 @@
 <mat-toolbar>
   <span>Fines 2: CENS 462</span>
-  
+
+  <button mat-button aria-label="icon-button with menu icon">
+    <a mat-menu-item routerLink="/" routerLinkActive="active" title="Toma de Posesión">Toma de Posesión</a>
+  </button>
+<!--   
   <button mat-button [matMenuTriggerFor]="comision" aria-label="icon-button with menu icon">
     Datos
   </button>
@@ -21,7 +25,7 @@
   <mat-menu #alumno="matMenu">
     <a mat-menu-item routerLink="/alumno-admin" routerLinkActive="active" title="Buscar Alumno">Buscar Alumno</a>
     <a mat-menu-item routerLink="/generar-constancia" routerLinkActive="active" title="Generar Constancia">Generar Constancia</a>
-  </mat-menu>
+  </mat-menu> -->
 
 <!--   
   <button mat-button [matMenuTriggerFor]="administracion" aria-l  abel="icon-button with menu icon">
