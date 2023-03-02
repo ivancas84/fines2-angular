@@ -9,7 +9,7 @@
                 Toma de posesión {{data['asignatura-nombre']}} {{data['comision-label']}} - {{data['sede-nombre']}} 
             </mat-card-title>
             <mat-card-subtitle>
-                Verifique los datos ingresados, serán utilizados posteriormente para realizar la toma de posesión.
+                Verifique los datos ingresados, serán utilizados posteriormente para cargar las planillas de liquidación de haberes.
             </mat-card-subtitle>
         </mat-card-header>
         
@@ -17,6 +17,38 @@
      
             <form [formGroup]="control" novalidate (ngSubmit)="onSubmit$.next(null)"> 
                 <div fxLayout="row wrap">
+                    
+     
+                    <div 
+                        class="fx-item" 
+                        fxFlex.xs="100%" 
+                        fxFlex.sm="50%" 
+                        fxFlex.gt-sm="50%">
+                        <mat-form-field>
+                            <mat-label>Nombres COMPLETOS (debe coincidir con su DNI)</mat-label>
+                            <input matInput 
+                                formControlName="nombres">
+                            <mat-error>
+                              <ng-container *ngIf="control.get('nombres')!.hasError('required')">">Debe completar valor</ng-container>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div 
+                        class="fx-item" 
+                        fxFlex.xs="100%" 
+                        fxFlex.sm="50%" 
+                        fxFlex.gt-sm="50%">
+                        <mat-form-field>
+                            <mat-label>Apellidos COMPLETOS (debe coincidir con su DNI)</mat-label>
+                            <input matInput 
+                                formControlName="apellidos">
+                            <mat-error>
+                              <ng-container *ngIf="control.get('apellidos')!.hasError('required')">">Debe completar valor</ng-container>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
                     <div 
                         class="fx-item" 
                         fxFlex.xs="100%" 
@@ -24,7 +56,7 @@
                         fxFlex.gt-sm="33%">
             
                         <mat-form-field>
-                            <mat-label>DNI</mat-label>
+                            <mat-label>DNI (sin puntos)</mat-label>
                             <input type="number" 
                                 matInput 
                                 formControlName="numero_documento">
@@ -33,30 +65,131 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-     
+
+                        <div 
+                            class="fx-item" 
+                            fxFlex.xs="100%" 
+                            fxFlex.sm="50%" 
+                            fxFlex.gt-sm="34%">
+                
+                            <mat-form-field>
+                                <mat-label>CUIL (sin guiones)</mat-label>
+                                <input type="number" 
+                                    matInput 
+                                    formControlName="cuil">
+                                <mat-error>
+                                <ng-container *ngIf="control.get('cuil')!.hasError('required')">Debe completar valor</ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+
                     <div 
                         class="fx-item" 
                         fxFlex.xs="100%" 
                         fxFlex.sm="50%" 
                         fxFlex.gt-sm="33%">
+        
                         <mat-form-field>
-                            <mat-label>Nombres</mat-label>
-                            <input matInput 
-                                formControlName="nombres">
+                            <mat-label>Género</mat-label>
+                        
+                            <mat-select formControlName="genero">
+                                <mat-option [value]="null">--Seleccione--</mat-option>
+                                <mat-option value="Femenino">Femenino</mat-option>
+                                <mat-option value="Masculino">Masculino</mat-option>
+                                <mat-option value="Otro">No binario / Otro</mat-option>
+
+                            </mat-select>
+                        
+                        
                             <mat-error>
-                              <ng-container *ngIf="control.get('nombres')!.hasError('required')">">Debe completar valor</ng-container>
+                                <span *ngIf="control.get('genero')!.hasError('required')">Debe completar valor</span>
                             </mat-error>
                         </mat-form-field>
                     </div>
+
+                    <div 
+                        class="fx-item" 
+                        fxFlex.xs="100%" 
+                        fxFlex.sm="50%" 
+                        fxFlex.gt-sm="34%">
+            
+                        <mat-form-field>
+                            <mat-label>Móvil (incluir código de area sin 0)</mat-label>
+                            <input type="number" 
+                                matInput 
+                                formControlName="telefono">
+                            <mat-error>
+                              <ng-container *ngIf="control.get('telefono')!.hasError('required')">Debe completar valor</ng-container>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    
+                    <div 
+                        class="fx-item" 
+                        fxFlex.xs="100%" 
+                        fxFlex.sm="50%" 
+                        fxFlex.gt-sm="33%">
+        
+                        <mat-form-field dateFormatDdMmYyyy>
+                            <mat-label>Fecha de Nacimiento</mat-label>
+                            <input matInput
+                                   [matDatepicker]="fieldPickerFechaNacimiento"
+                                   formControlName="fecha_nacimiento"
+                                   placeholder="Ingrese Fecha de Nacimiento"
+                            >
+                            <mat-datepicker-toggle matSuffix [for]="fieldPickerFechaNacimiento"></mat-datepicker-toggle>
+                            <mat-datepicker-toggle matSuffix (click)="control.get('fecha_nacimiento')!.setValue(null)">
+                              <mat-icon matDatepickerToggleIcon>clear</mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #fieldPickerFechaNacimiento></mat-datepicker>
+                            <mat-error>
+                              <span *ngIf="control.get('fecha_nacimiento')!.hasError('required')">Debe ingresar valor</span>
+                            </mat-error>  
+                          </mat-form-field>
+                          
+                    </div>
+
+                    <div 
+                        class="fx-item" 
+                        fxFlex.xs="100%" 
+                        fxFlex.sm="50%" 
+                        fxFlex.gt-sm="33%">
+        
+                        <mat-form-field>
+                            <mat-label>Email</mat-label>
+                            <input type="email" 
+                                matInput 
+                                formControlName="email">
+                            <mat-error>
+                            <ng-container *ngIf="control.get('email')!.hasError('required')">Debe completar valor</ng-container>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+
+
+
                 </div>
      
+                <div>              
+                    <mat-error *ngIf="control.errors?.['cuilDni'] && (control.touched || control.dirty)">
+                        El cuil y el DNI no coinciden 
+                    </mat-error>
+                </div>
+
         <button  
           [disabled]="control.status == 'PENDING'"
           type="submit" 
           mat-raised-button>Aceptar</button>
      
+
+          <p>Debug Form value: {{ control.value | json }}</p>
+<p>Debug Form status: {{ control.status | json }}</p>
         </form>
      
+
      
       </mat-card-content>
     </mat-card>

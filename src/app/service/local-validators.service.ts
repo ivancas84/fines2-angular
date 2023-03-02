@@ -29,12 +29,12 @@ export class LocalValidators {
        * Los campos pueden crearse dinamicamente, por lo que debe verificarse si se encuentran definidos
        */
 
-      const cuil = (control.get("cuil") as FormControl).value;
-      const numeroDocumento = (control.get("numero_documento") as FormControl).value;
+      const cuil = String((control.get("cuil") as FormControl).value);
+      const numeroDocumento = String((control.get("numero_documento") as FormControl).value);
       
       if(cuil && numeroDocumento){
-        const cuil_ = (control.get("cuil") as FormControl).value.substring(2,10).replace(/^0+/, '');          
-        const numeroDocumento_ = (control.get("numero_documento") as FormControl).value.replace(/^0+/, '');
+        const cuil_ = cuil.substring(2,10).replace(/^0+/, '');          
+        const numeroDocumento_ = numeroDocumento.replace(/^0+/, '');
         if(cuil_ != numeroDocumento_) {
           return {cuilDni:true}
         }

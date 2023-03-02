@@ -7,6 +7,7 @@ import { onSubmit } from '@function/component';
 import { domicilioLabel } from '@function/label';
 import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
+import { LocalValidators } from '@service/local-validators.service';
 import { DdAsyncValidatorsService } from '@service/validators/dd-async-validators.service';
 import { Observable, map, Subject, first, switchMap, of } from 'rxjs';
 
@@ -25,7 +26,25 @@ export class InscripcionDocenteComponent implements OnInit {
     protected validators: DdAsyncValidatorsService,
     protected tools: ComponentToolsService,
     protected router: Router
-  ) { }
+  ) { 
+
+    /**
+     * asyncValidators is @deprecated
+     * @todo See https://stackoverflow.com/questions/65155217/formbuilder-group-is-deprecated to change!
+     */
+    this.control = this.fb.group({
+        id:this.fb.control(null),
+        curso:this.fb.control(null,{ validators:[Validators.required] }),
+        email:this.fb.control(null,{ validators:[Validators.required] }),
+        nombres:this.fb.control(null,{ validators:[Validators.required] }),
+        apellidos:this.fb.control(null,{ validators:[Validators.required] }),
+        numero_documento:this.fb.control(null,{ validators:[Validators.required] }),
+        cuil:this.fb.control(null,{ validators:[Validators.required] }),
+        genero:this.fb.control(null,{ validators:[Validators.required] }),
+        fecha_nacimiento:this.fb.control(null,{ validators:[Validators.required] }),
+        telefono:this.fb.control(null,{ validators:[Validators.required] }),
+    }, { validators: LocalValidators.cuilDni() })
+  }
 
   loadParams$!: Observable<any> //carga de parametros
   params: { [x: string]: any } = {} //parametros del componente
@@ -44,7 +63,8 @@ export class InscripcionDocenteComponent implements OnInit {
       genero:this.fb.control(null,{ validators:[Validators.required] }),
       fecha_nacimiento:this.fb.control(null,{ validators:[Validators.required] }),
       telefono:this.fb.control(null,{ validators:[Validators.required] }),
-  })
+  },{ asyncValidators: LocalValidators.cuilDni() })
+
 
   ngOnInit(): void {
       this.loadParams()
@@ -101,6 +121,8 @@ export class InscripcionDocenteComponent implements OnInit {
   }
 
   submit(){
+      console.log(this.control.value);
+      return;   
     this.isSubmitted = true;
         this.dd._post("persist", "inscripcion_docente", this.control.value).pipe(first()).subscribe({
           next: () => {
