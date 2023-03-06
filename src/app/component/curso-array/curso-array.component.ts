@@ -113,7 +113,7 @@ export class CursoArrayComponent implements OnInit {
     return this.dd.post("ids", "curso", this.display$.value).pipe(
       switchMap(
         ids => this.dd.entityFieldsGetAll({
-            entityName: "curso", ids, fields: [
+            entity_name: "curso", ids, fields: [
               "id",
               "asignatura-nombre",
               "comision-id",
@@ -131,19 +131,19 @@ export class CursoArrayComponent implements OnInit {
           })
       ),
       switchMap(
-        data =>   this.dd.postMergeAll({ data, method: "horario", entityName: "curso", fields: { "horario": "horario" }, fieldNameData: "id", fieldNameResponse: "curso" })
+        data =>   this.dd.postMergeAll({ data, method: "horario", entity_name: "curso", fields: { "horario": "horario" }, field_nameData: "id", field_nameResponse: "curso" })
       ),
       switchMap(
-        data =>   this.dd.postMergeAll({ data, method: "toma_activa", entityName: "curso", fields: { "toma": "toma_activa" }, fieldNameData: "id", fieldNameResponse: "curso" })
+        data =>   this.dd.postMergeAll({ data, method: "toma_activa", entity_name: "curso", fields: { "toma": "toma_activa" }, field_nameData: "id", field_nameResponse: "curso" })
       ),
       switchMap(
-        data =>   this.dd.postMergeAll({ data, method: "cantidad_alumnos_activos", entityName: "comision", fields: { "cantidad_alumnos_activos": "cantidad" }, fieldNameData: "comision-id", fieldNameResponse: "comision" })
+        data =>   this.dd.postMergeAll({ data, method: "cantidad_alumnos_activos", entity_name: "comision", fields: { "cantidad_alumnos_activos": "cantidad" }, field_nameData: "comision-id", field_nameResponse: "comision" })
       ),
       switchMap(
-        data =>   this.dd.postMergeAll_({ data, method: "cantidad_calificaciones_cargadas", entityName: "curso", fields: ["cantidad_calificaciones"], fieldNameData: "id", fieldNameResponse: "curso" })
+        data =>   this.dd.postMergeAll_({ data, method: "cantidad_calificaciones_cargadas", entity_name: "curso", fields: ["cantidad_calificaciones"], field_nameData: "id", field_nameResponse: "curso" })
       ),
       switchMap(
-        data =>   this.dd.entityFieldsMergeAll({data, entityName: "toma", fields: ["docente-email","docente-nombres","docente-apellidos","docente-telefono","docente-numero_documento"] , fieldNameData:"toma", fieldNameResponse:"id", prefix: "ta_" })
+        data =>   this.dd.entityFieldsMergeAll({data, entity_name: "toma", fields: ["docente-email","docente-nombres","docente-apellidos","docente-telefono","docente-numero_documento"] , field_nameData:"toma", field_nameResponse:"id", prefix: "ta_" })
       ),
       map(
         data => {

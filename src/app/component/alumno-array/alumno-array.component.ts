@@ -121,7 +121,7 @@ export class AlumnoArrayComponent implements OnInit {
 
   protected initData(ids:string[]): Observable<any>{
     return this.dd.entityFieldsGetAll({
-            entityName: "alumno_comision", ids, fields: [
+            entity_name: "alumno_comision", ids, fields: [
               "id",
               "estado",
               "persona-apellidos",
@@ -149,7 +149,7 @@ export class AlumnoArrayComponent implements OnInit {
         data =>  this.dd.postMergeAll_({
           data, 
           method: "cantidad_asignaturas_aprobadas_tramo", 
-          entityName: "alumno", 
+          entity_name: "alumno", 
           fields: [
             "cantidad_aprobadas_11",
             "cantidad_aprobadas_12",
@@ -158,7 +158,7 @@ export class AlumnoArrayComponent implements OnInit {
             "cantidad_aprobadas_31",
             "cantidad_aprobadas_32",
             "cantidad_aprobadas"
-          ], fieldNameData: "alumno-id", fieldNameResponse: "alumno" })
+          ], field_nameData: "alumno-id", field_nameResponse: "alumno" })
       ),
       map(
         data => {

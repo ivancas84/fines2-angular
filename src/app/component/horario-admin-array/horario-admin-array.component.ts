@@ -56,7 +56,7 @@ export class HorarioAdminArrayComponent implements OnInit {
     var curso = this.dd.post("ids","curso", display).pipe(
       switchMap(
         ids => this.dd.entityFieldsGetAll({
-          entityName:"curso",
+          entity_name:"curso",
           ids:ids,
           fields:["id","asignatura-nombre"]
         })

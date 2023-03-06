@@ -83,7 +83,7 @@ export class AsignaturaArray2Component implements OnInit {
     return this.dd.post("ids", "asignatura", this.display$.value).pipe(
       switchMap(
         ids => this.dd.entityFieldsGetAll({
-            entityName: "asignatura", ids, fields: [
+            entity_name: "asignatura", ids, fields: [
               "id",
               "nombre",
               "formacion",

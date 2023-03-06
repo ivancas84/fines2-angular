@@ -50,20 +50,20 @@ export class HorarioAdminArrayTableComponent implements AfterViewInit {
     this.control.patchValue(data)
   }
 
-  sortValue(fieldName:string, row:{[i:string]:any}): any{
+  sortValue(field_name:string, row:{[i:string]:any}): any{
 
-    switch(fieldName){
+    switch(field_name){
       case "curso":
         for(var i = 0; i < this.options["curso"].length; i++){
-          if(row[fieldName] == this.options["curso"][i]["id"]) return this.options["curso"][i]["asignatura-nombre"]
+          if(row[field_name] == this.options["curso"][i]["id"]) return this.options["curso"][i]["asignatura-nombre"]
         }
       break;
       case "dia":
         for(var i = 0; i < this.options["dia"].length; i++){
-          if(row[fieldName] == this.options["dia"][i]["id"]) return this.options["dia"][i]["label"]
+          if(row[field_name] == this.options["dia"][i]["id"]) return this.options["dia"][i]["label"]
         }
       break;
-      default: return row[fieldName]
+      default: return row[field_name]
     }
   }
 

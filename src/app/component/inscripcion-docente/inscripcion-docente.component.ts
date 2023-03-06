@@ -95,7 +95,7 @@ export class InscripcionDocenteComponent implements OnInit {
   }
 
   loadDisplay(){
-    return this.dd.entityFieldsGet({entityName:"curso", id:this.params["curso"], fields:[
+    return this.dd.entityFieldsGet({entity_name:"curso", id:this.params["curso"], fields:[
       "id",
       "comision-division",
       "asignatura-nombre",

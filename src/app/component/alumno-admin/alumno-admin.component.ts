@@ -182,7 +182,7 @@ export class AlumnoAdminComponent implements OnInit {
       var disposicion = this.dd.post("ids", "disposicion", display).pipe(
         switchMap(
           ids => this.dd.entityFieldsGetAll({
-            entityName:"disposicion",
+            entity_name:"disposicion",
             ids:ids,
             fields:["id","asignatura-nombre","planificacion-anio","planificacion-semestre"]
           })
@@ -201,7 +201,7 @@ export class AlumnoAdminComponent implements OnInit {
       // var plan = this.dd.post("ids", "plan", display).pipe(
       //   switchMap(
       //     ids => this.dd.entityFieldsGetAll({
-      //       entityName:"disposicion",
+      //       entity_name:"disposicion",
       //       ids:ids,
       //       fields:["id","asignatura-nombre",""]
       //     })
@@ -212,7 +212,7 @@ export class AlumnoAdminComponent implements OnInit {
       // var curso = this.dd.post("ids","curso", display).pipe(
       //   switchMap(
       //     ids => this.dd.entityFieldsGetAll({
-      //       entityName:"curso",
+      //       entity_name:"curso",
       //       ids:ids,
       //       fields:["id","asignatura-nombre"]
       //     })
@@ -257,7 +257,7 @@ export class AlumnoAdminComponent implements OnInit {
       return this.dd.post("ids","alumno_comision", display).pipe(
         switchMap(
           ids => this.dd.entityFieldsGetAll({
-            entityName:"alumno_comision",
+            entity_name:"alumno_comision",
             ids,fields:[
               "id",
               "activo",
@@ -289,7 +289,7 @@ export class AlumnoAdminComponent implements OnInit {
       return this.dd.post("ids","calificacion", display).pipe(
         switchMap(
           ids => this.dd.entityFieldsGetAll({
-              entityName:"calificacion",
+              entity_name:"calificacion",
               ids,
               fields:["id",
                 "asignatura_dis-nombre",
@@ -309,10 +309,10 @@ export class AlumnoAdminComponent implements OnInit {
             return this.dd.postMergeAll_({
               data,
               method:"toma_activa",
-              entityName:"curso",
+              entity_name:"curso",
               fields:["toma_activa"],
-              fieldNameData:"curso",
-              fieldNameResponse:"curso"
+              field_nameData:"curso",
+              field_nameResponse:"curso"
             })
           }
         ),
@@ -320,7 +320,7 @@ export class AlumnoAdminComponent implements OnInit {
           data => {
             return this.dd.entityFieldsMergeAll({
               data,
-              entityName:"toma",
+              entity_name:"toma",
               fields:[
                 "id",
                 "docente-id",
@@ -335,8 +335,8 @@ export class AlumnoAdminComponent implements OnInit {
                 "asignatura-nombre",
       
               ],
-              fieldNameData:"toma_activa",
-              fieldNameResponse:"id",
+              field_nameData:"toma_activa",
+              field_nameResponse:"id",
               prefix:"ta_"
             })
           }

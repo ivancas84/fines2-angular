@@ -40,13 +40,13 @@ export class ComisionArraySearchComponent implements OnInit {
 
   initAutocompleteSede(): void {
     this.filteredOptionsSede$ = this.tools.filteredOptionsAutocomplete({
-      entityName:"sede",
+      entity_name:"sede",
       control:this.control.get("sede")!,
       searchControl:this.searchControlSede,
     })
  
     this.loadAutocompleteSede$ = this.tools.labelAutocomplete({
-      entityName:"sede",
+      entity_name:"sede",
       control:this.control.get("sede")!,
       searchControl:this.searchControlSede,
     }).pipe(
