@@ -92,7 +92,7 @@ export class ComisionArrayComponent implements OnInit {
         return this.dd.post("ids", "comision", this.display$.value).pipe(
             switchMap(
                 ids => this.dd.entityFieldsGetAll({
-                    entityName: "comision", ids, fields: [
+                    entity_name: "comision", ids, fields: [
                     "id",
                     "division",
                     "autorizada",
@@ -117,21 +117,21 @@ export class ComisionArrayComponent implements OnInit {
             switchMap(
                 data => this.dd.postMergeAll_({
                 data:data, 
-                entityName:"comision", 
+                entity_name:"comision", 
                 method:"horarios",
                 fields:["dias_dias","hora_inicio","hora_fin"], 
-                fieldNameData:"id",
-                fieldNameResponse:"comision"
+                field_nameData:"id",
+                field_nameResponse:"comision"
                 }),
             ),
             switchMap(
                 data => this.dd.postMergeAll_({
                 data:data, 
-                entityName:"sede", 
+                entity_name:"sede", 
                 method:"referentes",
                 fields:["sede","referentes"], 
-                fieldNameData:"sede-id",
-                fieldNameResponse:"sede"
+                field_nameData:"sede-id",
+                field_nameResponse:"sede"
                 }),
             ),
             map(

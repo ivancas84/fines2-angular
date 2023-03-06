@@ -174,7 +174,7 @@ export class ComisionAdminComponent implements OnInit {
     return this.dd.post("ids", "curso", display).pipe(
       switchMap(
         (ids:string[]) => this.dd.entityFieldsGetAll({ 
-          entityName: "curso", 
+          entity_name: "curso", 
           ids:ids, 
           fields:["id","asignatura-nombre","horas_catedra"]
         }),
@@ -183,10 +183,10 @@ export class ComisionAdminComponent implements OnInit {
         (curso_:{[index:string]:any}[]) => this.dd.postMergeAll_({ 
           data:curso_, 
           method: "horario", 
-          entityName: "curso", 
+          entity_name: "curso", 
           fields: ["horario"], 
-          fieldNameData: "id", 
-          fieldNameResponse: "curso" 
+          field_nameData: "id", 
+          field_nameResponse: "curso" 
         })
       ),
       map(

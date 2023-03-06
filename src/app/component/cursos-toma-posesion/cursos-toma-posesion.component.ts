@@ -94,7 +94,7 @@ export class CursosTomaPosesionComponent {
     return this.dd.post("ids", "curso", this.display$.value).pipe(
       switchMap(
         ids => this.dd.entityFieldsGetAll({
-            entityName: "curso", ids, fields: [
+            entity_name: "curso", ids, fields: [
               "id",
               "asignatura-nombre",
               "comision-division",
@@ -111,10 +111,10 @@ export class CursosTomaPosesionComponent {
           })
       ),
       switchMap(
-        data =>   this.dd.postMergeAll({ data, method: "horario", entityName: "curso", fields: { "horario": "horario" }, fieldNameData: "id", fieldNameResponse: "curso" })
+        data =>   this.dd.postMergeAll({ data, method: "horario", entity_name: "curso", fields: { "horario": "horario" }, field_nameData: "id", field_nameResponse: "curso" })
       ),
       switchMap(
-        data =>   this.dd.postMergeAll({ data, method: "toma_activa", entityName: "curso", fields: { "toma": "toma_activa" }, fieldNameData: "id", fieldNameResponse: "curso" })
+        data =>   this.dd.postMergeAll({ data, method: "toma_activa", entity_name: "curso", fields: { "toma": "toma_activa" }, field_nameData: "id", field_nameResponse: "curso" })
       ),
       map(
         data => {

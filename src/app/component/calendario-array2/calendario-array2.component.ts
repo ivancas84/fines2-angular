@@ -81,7 +81,7 @@ export class CalendarioArray2Component implements OnInit {
     return this.dd.post("ids", "calendario", this.display$.value).pipe(
       switchMap(
         ids => this.dd.entityFieldsGetAll({
-            entityName: "calendario", ids, fields: [
+            entity_name: "calendario", ids, fields: [
               "id",
               "inicio",
               "fin",

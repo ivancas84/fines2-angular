@@ -60,13 +60,13 @@ export class ComisionAdminFieldsetComisionComponent implements OnInit {
   labelSede: string = "";
   initAutocompleteSede(): void {
     this.filteredOptionsSede$ = this.tools.filteredOptionsAutocomplete({
-      entityName:"sede",
+      entity_name:"sede",
       control:this.control.get("sede")!,
       searchControl:this.searchControlSede,
     })
 
     this.loadAutocompleteSede$ = this.tools.labelAutocomplete({
-      entityName:"sede",
+      entity_name:"sede",
       control:this.control.get("sede")!,
       searchControl:this.searchControlSede,
     }).pipe(
@@ -87,13 +87,13 @@ export class ComisionAdminFieldsetComisionComponent implements OnInit {
   labelCalendario: string = "";
   initAutocompleteCalendario(): void {
     this.filteredOptionsCalendario$ = this.tools.filteredOptionsAutocomplete({
-      entityName:"calendario",
+      entity_name:"calendario",
       control:this.control.get("calendario")!,
       searchControl:this.searchControlCalendario,
     })
 
     this.loadAutocompleteCalendario$ = this.tools.labelAutocomplete({
-      entityName:"calendario",
+      entity_name:"calendario",
       control:this.control.get("calendario")!,
       searchControl:this.searchControlCalendario,
     }).pipe(
@@ -115,13 +115,13 @@ export class ComisionAdminFieldsetComisionComponent implements OnInit {
   labelComisionSiguiente: string = "";
   initAutocompleteComisionSiguiente(): void {
     this.filteredOptionsComisionSiguiente$ = this.tools.filteredOptionsAutocomplete({
-      entityName:"comision",
+      entity_name:"comision",
       control:this.control.get("comision_siguiente")!,
       searchControl:this.searchControlComisionSiguiente,
     })
 
     this.loadAutocompleteComisionSiguiente$ = this.tools.labelAutocomplete({
-      entityName:"comision",
+      entity_name:"comision",
       control:this.control.get("comision_siguiente")!,
       searchControl:this.searchControlComisionSiguiente,
     }).pipe(

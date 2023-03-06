@@ -109,7 +109,7 @@ export class SedeArrayComponent implements OnInit {
   
       switchMap(
         ids => this.dd.entityFieldsGetAll({
-            entityName: "sede", ids, fields: [
+            entity_name: "sede", ids, fields: [
               "id",
               "numero",
               "nombre",

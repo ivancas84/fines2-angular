@@ -147,7 +147,7 @@ export class SedeAdminComponent implements OnInit {
           data["sede"] = sede
           return this.dd.mergeObjectGet_({
             data:data, 
-            entityName:"domicilio", 
+            entity_name:"domicilio", 
             fields:["id","calle","numero","localidad","entre","piso","departamento","barrio"],
             id:"sede"
           }) 
@@ -169,7 +169,7 @@ export class SedeAdminComponent implements OnInit {
     return this.dd.post("ids", "comision", display).pipe(
       switchMap(
         (ids:string[]) => this.dd.entityFieldsGetAll({ 
-          entityName: "comision", 
+          entity_name: "comision", 
           ids:ids, 
           fields:["id","apertura","autorizada","planificacion-anio","planificacion-semestre","plan-orientacion","division","calendario-anio","calendario-semestre"]
         }),
@@ -178,9 +178,9 @@ export class SedeAdminComponent implements OnInit {
         (data:{[index:string]:any}[]) => this.dd.postMergeAll({ 
           data, 
           method: "horarios", 
-          entityName: "comision", 
+          entity_name: "comision", 
           fields: { "dias":"dias_dias", "hora_inicio":"hora_inicio","hora_fin":"hora_fin" }, 
-          fieldNameData: "id", fieldNameResponse: "comision" 
+          field_nameData: "id", field_nameResponse: "comision" 
         })
       ),
       map(
@@ -214,7 +214,7 @@ export class SedeAdminComponent implements OnInit {
     return this.dd.post("ids", "designacion", display).pipe(
       switchMap(
         (ids:string[]) => this.dd.entityFieldsGetAll({ 
-          entityName: "designacion", 
+          entity_name: "designacion", 
           ids:ids, 
           fields:["id","cargo","persona-nombres","persona-apellidos","persona-email","persona-telefono","cargo-descripcion"]
         }),

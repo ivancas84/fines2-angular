@@ -30,7 +30,7 @@ export class InfoCursosComponent implements OnInit {
 
   chosenYearHandlerClose = chosenYearHandlerClose
 
-  entityName: string = "curso"
+  entity_name: string = "curso"
   
   display$:BehaviorSubject<Display> = new BehaviorSubject(new Display)
   /**
@@ -71,10 +71,10 @@ export class InfoCursosComponent implements OnInit {
   ) { }
 
   initData(): Observable<any>{
-    return this.dd.post("ids", this.entityName, this.display$.value).pipe(
+    return this.dd.post("ids", this.entity_name, this.display$.value).pipe(
       switchMap(
         ids => this.dd.entityFieldsGetAll({
-            entityName: this.entityName, ids, fields: [
+            entity_name: this.entity_name, ids, fields: [
               "id",
               "comision-division",
               "sede-nombre",
@@ -91,13 +91,13 @@ export class InfoCursosComponent implements OnInit {
           })
       ),
       switchMap(
-        response =>   this.dd.postMergeAll({ data: response, method: "toma_activa", entityName: "curso", fields: { "toma": "toma_activa" }, fieldNameData: "id", fieldNameResponse: "curso" })
+        response =>   this.dd.postMergeAll({ data: response, method: "toma_activa", entity_name: "curso", fields: { "toma": "toma_activa" }, field_nameData: "id", field_nameResponse: "curso" })
       ),
       switchMap(
         response =>   {
           var ids = arrayColumn(response, "toma")
           return this.dd.entityFieldsGetAll({
-              entityName: "toma", ids, fields: [
+              entity_name: "toma", ids, fields: [
                 "id",
                 "fecha_toma",
                 "docente-nombres",
@@ -113,11 +113,11 @@ export class InfoCursosComponent implements OnInit {
         }
       ),
       switchMap(
-        response => this.dd.postMergeAll({ data: response, method: "horario", entityName: "curso", fields: { "horario": "horario" }, fieldNameData: "id", fieldNameResponse: "curso" })
+        response => this.dd.postMergeAll({ data: response, method: "horario", entity_name: "curso", fields: { "horario": "horario" }, field_nameData: "id", field_nameResponse: "curso" })
       ),
       switchMap(
         data =>   {
-           return this.dd.postMergeAll({ data, method: "cantidad_alumnos_activos", entityName: "comision", fields: { "cantidad_alumnos": "cantidad" }, fieldNameData: "comision", fieldNameResponse: "comision" })
+           return this.dd.postMergeAll({ data, method: "cantidad_alumnos_activos", entity_name: "comision", fields: { "cantidad_alumnos": "cantidad" }, field_nameData: "comision", field_nameResponse: "comision" })
         }
       ),
       map(
@@ -193,7 +193,7 @@ export class InfoCursosComponent implements OnInit {
      switchMap(
        () => {
          this.load = false
-         return this.dd.post("count", this.entityName, this.display$.value);
+         return this.dd.post("count", this.entity_name, this.display$.value);
        }
      ),
      switchMap(
