@@ -22,32 +22,32 @@ import { TomaPosesionEmailComponent } from '@component/toma-posesion-email/toma-
 const routes: Routes = [
   { path: '', component: CursosTomaPosesionComponent, pathMatch: 'full' },
 
-  // { path: 'alumno-admin', component: AlumnoAdminComponent, pathMatch: 'full' },
-  // { path: 'alumno-array', component: AlumnoArrayComponent, pathMatch: 'full' },
+  { path: 'alumno-admin', component: AlumnoAdminComponent, pathMatch: 'full' },
+  { path: 'alumno-array', component: AlumnoArrayComponent, pathMatch: 'full' },
 
-  // { path: 'asignatura-array', component: AsignaturaArray2Component, pathMatch: 'full' },
-  // { path: 'generar-constancia', component: GenerarConstanciaComponent, pathMatch: 'full' },
-  // { path: 'calendario-admin', component: CalendarioAdminComponent, pathMatch: 'full' },
-  // { path: 'calendario-array', component: CalendarioArray2Component, pathMatch: 'full' },
+  { path: 'asignatura-array', component: AsignaturaArray2Component, pathMatch: 'full' },
+  { path: 'generar-constancia', component: GenerarConstanciaComponent, pathMatch: 'full' },
+  { path: 'calendario-admin', component: CalendarioAdminComponent, pathMatch: 'full' },
+  { path: 'calendario-array', component: CalendarioArray2Component, pathMatch: 'full' },
 
-  // { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
-  // { path: 'comision-array', component: ComisionArrayComponent, pathMatch: 'full' },
-  // { path: 'curso-array', component: CursoArrayComponent, pathMatch: 'full' },
+  { path: 'comision-admin', component: ComisionAdminComponent, pathMatch: 'full' },
+  { path: 'comision-array', component: ComisionArrayComponent, pathMatch: 'full' },
+  { path: 'curso-array', component: CursoArrayComponent, pathMatch: 'full' },
 
-  // { path: 'horario-admin-array', component: HorarioAdminArrayComponent, pathMatch: 'full' },
+  { path: 'horario-admin-array', component: HorarioAdminArrayComponent, pathMatch: 'full' },
 
-  // { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
-  // { path: 'sede-array', component: SedeArrayComponent, pathMatch: 'full' },
+  { path: 'sede-admin', component: SedeAdminComponent, pathMatch: 'full' },
+  { path: 'sede-array', component: SedeArrayComponent, pathMatch: 'full' },
 
   { path: 'inscripcion-docente', component: InscripcionDocenteComponent, pathMatch: 'full' },
   { path: 'inscripcion-docente-correcta', component: InscripcionDocenteCorrectaComponent, pathMatch: 'full' },
   { path: 'cursos-toma-posesion', component: CursosTomaPosesionComponent, pathMatch: 'full' },
   { path: 'toma-posesion-email', component: TomaPosesionEmailComponent, pathMatch: 'full' },
 
-  // { path: 'alumnos-para-docente', component: EnlaceNoDisponibleComponent, pathMatch: 'full' },
-  // { path: 'referentes-para-docente', component: EnlaceNoDisponibleComponent, pathMatch: 'full' },
+  { path: 'alumnos-para-docente', component: EnlaceNoDisponibleComponent, pathMatch: 'full' },
+  { path: 'referentes-para-docente', component: EnlaceNoDisponibleComponent, pathMatch: 'full' },
 
-  // { path: 'info-cursos', component: InfoCursosComponent, pathMatch: 'full' },
+  { path: 'info-cursos', component: InfoCursosComponent, pathMatch: 'full' },
 
   
 ];
