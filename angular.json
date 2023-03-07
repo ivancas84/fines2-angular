@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref": "/docente/",
+            "baseHref": "/users5/",
             "outputPath": "dist/fines2-angular",
             "index": "src/index.html",
             "main": "src/main.ts",
