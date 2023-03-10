@@ -75,6 +75,7 @@ export class AlumnoAdminComponent implements OnInit {
       tiene_constancia:this.fb.control(null),
       tiene_certificado:this.fb.control(null),
       previas_completas:this.fb.control(null),
+      confirmado_direccion:this.fb.control(null),
       persona:{ validators:[Validators.required] }
     },{updateOn:"submit", asyncValidators: this.validators.uniqueMultiple("alumno", ["libro","folio"]) })
   
@@ -575,7 +576,7 @@ export class AlumnoAdminComponent implements OnInit {
         return;
       }
   
-      this.dd._post("generar_calificacion_alumno", "alumno",d["id"]).pipe(first()).subscribe({
+      this.dd._post("generar_calificacion", "alumno",d["id"]).pipe(first()).subscribe({
         next: (response: any) => {
           this.tools.submittedDisplay(response, this.display$)        
         },

@@ -147,9 +147,9 @@
 
             <div 
                 class="fx-item" 
-                fxFlex.xs="100%" 
-                fxFlex.sm="34%" 
-                fxFlex.gt-sm="17%">
+                fxFlex.xs="50%" 
+                fxFlex.sm="50%" 
+                fxFlex.gt-sm="12%">
                 <mat-form-field 
                     [ngClass]="{'highlightRed':!control.get('anio_ingreso')!.value}">
                     <mat-label>Año de Ingreso</mat-label>
@@ -168,9 +168,9 @@
 
             <div 
                 class="fx-item" 
-                fxFlex.xs="100%" 
-                fxFlex.sm="34%" 
-                fxFlex.gt-sm="17%">
+                fxFlex.xs="50%" 
+                fxFlex.sm="50%" 
+                fxFlex.gt-sm="12%">
                 <mat-form-field 
                     [ngClass]="{'highlightRed':!control.get('semestre_ingreso')!.value}">
                     <mat-label>Semestre de Ingreso</mat-label>
@@ -179,17 +179,17 @@
                         formControlName="semestre_ingreso"
                         placeholder="A qué semestre ingreso en fines?">
                         <mat-option [value]="null">--Seleccione--</mat-option>
-                        <mat-option value="1">1</mat-option>
-                        <mat-option value="2">2</mat-option>
+                        <mat-option [value]="1">1</mat-option>
+                        <mat-option [value]="2">2</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>    
 
             <div 
                 class="fx-item" 
-                fxFlex.xs="50%" 
-                fxFlex.sm="33%" 
-                fxFlex.gt-sm="17%">
+                fxFlex.xs="100%" 
+                fxFlex.sm="50%" 
+                fxFlex.gt-sm="13%">
                 <mat-form-field>
                     <mat-label>Libro</mat-label>
                     <input matInput
@@ -202,9 +202,9 @@
 
             <div 
                 class="fx-item" 
-                fxFlex.xs="50%" 
-                fxFlex.sm="33%" 
-                fxFlex.gt-sm="16%">
+                fxFlex.xs="100%" 
+                fxFlex.sm="50%" 
+                fxFlex.gt-sm="13%">
                 <mat-form-field>
                     <mat-label>Folio</mat-label>
                     <input matInput
@@ -270,7 +270,7 @@
                 class="fx-item" 
                 fxFlex.xs="100%" 
                 fxFlex.sm="33%" 
-                fxFlex.gt-sm="20%">
+                fxFlex.gt-sm="17%">
                 <mat-checkbox formControlName="tiene_constancia">
                     Tiene Constancia
                 </mat-checkbox>
@@ -280,7 +280,7 @@
                 class="fx-item" 
                 fxFlex.xs="100%" 
                 fxFlex.sm="34%" 
-                fxFlex.gt-sm="20%">
+                fxFlex.gt-sm="16%">
                 <mat-checkbox formControlName="tiene_certificado">
                     Tiene Certificado
                 </mat-checkbox>
@@ -290,7 +290,7 @@
                 class="fx-item" 
                 fxFlex.xs="100%" 
                 fxFlex.sm="33%" 
-                fxFlex.gt-sm="20%">
+                fxFlex.gt-sm="17%">
                 <mat-checkbox formControlName="previas_completas">
                     Previas completas
                 </mat-checkbox>
@@ -299,8 +299,8 @@
             <div 
                 class="fx-item" 
                 fxFlex.xs="100%" 
-                fxFlex.sm="50%" 
-                fxFlex.gt-sm="20%">
+                fxFlex.sm="33%" 
+                fxFlex.gt-sm="17%">
                 <mat-checkbox formControlName="tiene_dni">
                     Tiene DNI
                 </mat-checkbox>
@@ -309,12 +309,22 @@
             <div 
                 class="fx-item" 
                 fxFlex.xs="100%" 
-                fxFlex.sm="50%" 
-                fxFlex.gt-sm="20%">
+                fxFlex.sm="34%" 
+                fxFlex.gt-sm="16%">
                 <mat-checkbox formControlName="tiene_partida">
                     Tiene Partida
                 </mat-checkbox>
-            </div>    
+            </div>
+            
+            <div 
+                class="fx-item" 
+                fxFlex.xs="100%" 
+                fxFlex.sm="33%" 
+                fxFlex.gt-sm="`7%">
+                <mat-checkbox formControlName="confirmado_direccion">
+                    Confirmado Dirección
+                </mat-checkbox>
+            </div>
         </div>
    
         <button  
