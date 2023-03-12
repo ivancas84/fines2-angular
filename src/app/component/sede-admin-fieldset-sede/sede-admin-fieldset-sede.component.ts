@@ -2,6 +2,7 @@ import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Display } from '@class/display';
+import { ComponentToolsService } from '@service/component-tools/component-tools.service';
 import { DataDefinitionToolService } from '@service/data-definition/data-definition-tool.service';
 import { Observable } from 'rxjs';
 
@@ -18,6 +19,7 @@ export class SedeAdminFieldsetSedeComponent implements OnInit {
 
   constructor(
     protected dd: DataDefinitionToolService,
+    protected tools: ComponentToolsService,
   ) { }
   
   ngOnInit(): void {
