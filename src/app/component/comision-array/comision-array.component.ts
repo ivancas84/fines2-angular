@@ -114,6 +114,7 @@ export class ComisionArrayComponent implements OnInit {
                     ]
                 }),
             ),
+            
             switchMap(
                 data => this.dd.postMergeAll_({
                 data:data, 

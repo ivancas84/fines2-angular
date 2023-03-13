@@ -33,7 +33,9 @@ export class ComisionAdminFieldsetComisionComponent implements OnInit {
  
   optionsPlanificacion$!: Observable<Array<any>>;
   initOptionsPlanificacion(): void {
-    var display = new Display().addCondition(["plan-distribucion_horaria","=~","713"]).addOrder("plan-orientacion","ASC")
+    var display = new Display().addCondition([
+        ["plan-distribucion_horaria","=~","3 d"],
+    ]).addOrder("plan-orientacion","ASC")
     this.optionsPlanificacion$ = this.dd.post("label_all","planificacion", display)
   }
 
