@@ -110,7 +110,7 @@ export class ComisionAdminFieldsetCursoComponent implements AfterViewInit {
             return
         }
 
-        this.dd._post("persist", "eliminar_horarios_comision", this.idComision).pipe(first()).subscribe({
+        this.dd._post("eliminar_horarios", "comision", this.idComision).pipe(first()).subscribe({
             next: (response: any) => {
                 this.ts.submittedDisplay(response,this.display$)
             },
