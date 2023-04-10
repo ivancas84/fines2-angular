@@ -240,7 +240,7 @@
     <ng-container matColumnDef="alumno-observaciones" >
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Observaciones </th>
         <td [title]="row.controls['alumno-observaciones'].value" mat-cell *matCellDef="let row; let i = index;">
-            {{row.controls['alumno-observaciones'].value | summary:25}} 
+            {{row.controls['alumno-observaciones'].value}} 
         </td>
     </ng-container>
 
